@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essenzielle Komplexität erfassen – Robert Blust</title>
+<style>
+  :root{
+    --paper:#0f1013; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
+    --line:#282a30; --paper2:#191b20;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  .deck{
+    position:fixed; inset:0;
+    background:radial-gradient(130% 85% at 50% 0%, #17191f 0%, var(--paper) 62%);
+  }
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5vmin 10vmin;
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  .slide.active .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active .rise:nth-child(1){animation-delay:.05s}
+  .slide.active .rise:nth-child(2){animation-delay:.14s}
+  .slide.active .rise:nth-child(3){animation-delay:.24s}
+  .slide.active .rise:nth-child(4){animation-delay:.34s}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6vmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--cobalt); margin-bottom:3.2vmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--muted)}
+  .kicker::after{content:""; flex:0 0 8vmin; height:2px; background:var(--cobalt); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,6.6vmin,5.6rem); max-width:21ch;
+  }
+  h1 em{font-style:normal; color:var(--cobalt)}
+  .sub{
+    margin-top:3.4vmin; font-size:clamp(1.25rem,3.1vmin,2.5rem);
+    color:var(--muted); max-width:36ch; line-height:1.4; font-weight:400;
+  }
+  .note{
+    margin-top:4.4vmin; font-size:clamp(1.05rem,2.3vmin,1.7rem); color:var(--ink);
+    padding-left:1.4vmin; border-left:3px solid var(--cobalt); max-width:44ch; line-height:1.45;
+  }
+
+  /* then / now split */
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6vmin; margin-top:3vmin; max-width:60ch}
+  .col h4{
+    font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:2vmin;
+    padding-bottom:1.2vmin; border-bottom:2px solid var(--line);
+  }
+  .col.now h4{color:var(--cobalt); border-color:var(--cobalt)}
+  .col p{font-size:clamp(1.4rem,3.3vmin,2.35rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1.05rem,2.2vmin,1.5rem); color:var(--muted); font-weight:400; margin-top:1.4vmin; line-height:1.4}
+  .verdict{margin-top:4vmin; font-size:clamp(1.25rem,2.9vmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--cobalt)}
+
+  /* mental model – split: breadth left, example diagram right */
+  .split{display:grid; grid-template-columns:0.8fr 1.2fr; gap:5vmin; align-items:center; margin-top:2.4vmin; max-width:80ch}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8vmin}
+  .blist li{border-top:2px solid var(--line); padding-top:1.2vmin}
+  .blist b{display:block; font-size:clamp(1.25rem,2.7vmin,1.9rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85vmin,1.35rem); color:var(--muted)}
+  .diagram svg{width:100%; height:auto; display:block}
+  .caption{margin-top:1.6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.82rem,1.6vmin,1.15rem); color:var(--muted); letter-spacing:.02em}
+  .caption b{color:var(--cobalt); font-weight:600}
+  .stamp{
+    margin-top:3.4vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
+    color:var(--muted); letter-spacing:.02em;
+  }
+  .stamp b{color:var(--cobalt); font-weight:600}
+
+  /* breadth grid (mental model overview) */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:2.4vmin 5vmin; margin-top:4.4vmin; max-width:56ch}
+  .cell{border-top:2px solid var(--line); padding-top:1.4vmin}
+  .cell b{display:block; font-size:clamp(1.15rem,2.5vmin,1.8rem); font-weight:600}
+  .cell span{font-size:clamp(.9rem,1.7vmin,1.2rem); color:var(--muted)}
+
+  /* finance example – diagram + glossary */
+  .split.even{grid-template-columns:1.05fr 1fr; gap:6vmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5vmin; margin:0}
+  .glossary div{border-top:2px solid var(--line); padding-top:1.1vmin}
+  .glossary dt{font-family:"IBM Plex Mono",monospace; color:var(--cobalt); font-weight:600; font-size:clamp(1.1rem,2.2vmin,1.55rem)}
+  .glossary dd{color:var(--muted); font-size:clamp(1rem,1.9vmin,1.4rem); line-height:1.34; margin:.3vmin 0 0}
+
+  /* nutzen – validation checks */
+  .checks{display:flex; flex-direction:column; margin-top:4vmin; max-width:58ch}
+  .check{display:flex; gap:1.4vmin; align-items:baseline; border-top:2px solid var(--line); padding:1.9vmin 0; font-size:clamp(1.15rem,2.6vmin,1.85rem); line-height:1.3}
+  .check::before{content:"✓"; color:var(--cobalt); font-weight:700; flex:0 0 auto}
+  .check b{font-weight:600}
+  .check i{font-style:normal; color:var(--cobalt); font-weight:600}
+  .check span{color:var(--muted)}
+
+  .big-punch{font-size:clamp(2.3rem,7.2vmin,5.8rem)}
+
+  /* title slide */
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,9.5vmin,7.2rem); max-width:18ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2vmin; max-width:42ch; font-size:clamp(1.3rem,3.4vmin,2.6rem); color:var(--muted)}
+  .title-slide .byline{margin-top:6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.85rem,1.8vmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--muted)}
+
+  /* comic accents – hand-drawn journey panels as a consistent side motif */
+  .comic-r{position:absolute; right:5.5vmin; top:50%; transform:translateY(-52%);
+    width:clamp(180px,25vmin,320px); border:3px solid #2f3238; border-radius:0;
+    box-shadow:8px 8px 0 rgba(122,160,255,.22); overflow:hidden; background:#fff}
+  .comic-r img{display:block; width:100%}
+  .has-comic h1{max-width:15ch}
+  .has-comic .big-punch{max-width:14ch}
+  .has-comic .sub{max-width:23ch}
+  .has-comic .note{max-width:31ch}
+  .has-comic .checks{max-width:38ch}
+  .has-comic .blist{max-width:26ch}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--cobalt); width:0; transition:width .35s ease; z-index:5}
+  .counter{position:fixed; right:4vmin; bottom:3.4vmin; font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--muted); letter-spacing:.1em; z-index:5}
+  .counter b{color:var(--ink)}
+  .name{position:fixed; left:4vmin; bottom:3.2vmin; font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; z-index:5}
+  .hint{position:fixed; top:3vmin; right:4vmin; font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:var(--muted); letter-spacing:.1em; z-index:5; opacity:.7}
+  .langind{position:fixed; top:3vmin; left:4vmin; font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.15em; color:var(--muted); z-index:5}
+  .langind .on{color:var(--cobalt); font-weight:700}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:#17181c; color:#f1ede4; border-top:2px solid var(--cobalt); padding:3vmin 4vmin 4vmin; transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:52vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:#9db0ff; margin-bottom:1.4vmin}
+  .notes p{font-size:clamp(.95rem,2vmin,1.3rem); line-height:1.5; max-width:82ch}
+  .notes em{font-style:italic; color:#9a9dab}   /* Instruktionen (Regie) gedämpft kursiv; Sprechtext normal/hell */
+  .notes .time{float:right; color:#9db0ff; font-family:"IBM Plex Mono",monospace}
+  .notes small{display:block; margin-top:1.6vmin; color:#b7b0a2; opacity:.7; font-family:"IBM Plex Mono",monospace; letter-spacing:.1em}
+  /* notes open: top-align the active slide; JS scales it to fit the space above the panel (no scroll, nothing hidden) */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4vmin 10vmin; transform-origin:top center}
+  .deck.notes-open .comic-r{position:static; transform:none; width:min(40vmin,230px); margin:2.4vmin 0 0; box-shadow:6px 6px 0 rgba(122,160,255,.22)}  /* comic flows under the text so it scales with the content */
+  .deck.notes-open .split{align-items:start; margin-top:1.6vmin}
+
+  /* mobile / portrait: stack content and comic, one column, scrollable */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .slide{justify-content:flex-start; overflow-y:auto; padding:14vmin 7vw 10vh}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    .has-comic h1, .has-comic .big-punch, .has-comic .sub, .has-comic .note,
+    .has-comic .checks, .has-comic .blist{max-width:100%}
+    /* comic into the flow, on its own line under the text */
+    .comic-r{position:static; transform:none; width:min(78%,320px); margin:6vw 0 0; box-shadow:6px 6px 0 rgba(122,160,255,.22)}
+    /* two-column blocks stack */
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .checks{max-width:100%}
+    .kicker{margin-bottom:5vw}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 0 · Titel -->
+  <section class="slide title-slide"
+    data-notes="<em>Der Titel liegt an, während ich begrüsse und mich kurz vorstelle. Ich nenne meinen Namen und das Thema, dann gehe ich mit → zur ersten Folie.</em>"
+    data-notes-en="<em>The title stays up while I greet and briefly introduce myself. I say my name and the topic, then go to the first slide with →.</em>"
+    data-time="">
+    <div class="kicker rise" data-n="00" data-en="Robert Blust's through-line">Der rote Faden von Robert Blust</div>
+    <h1 class="rise" data-en="Essential <em>complexity</em>.">Essenzielle <em>Komplexität</em>.</h1>
+    <p class="sub rise" data-en="On the model that outlives the tools – from business architecture to code.">Vom Modell, das die Werkzeuge überdauert – von der Business-Architektur bis zum Code.</p>
+    <p class="byline rise" data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</p>
+  </section>
+
+  <!-- 1 · Roter Faden -->
+  <section class="slide has-comic"
+    data-notes="<em>Persönlicher Einstieg – wer ich bin, mein roter Faden.</em> Drei Bereiche prägen meine Laufbahn: Softwareentwicklung, Methodik und IT-/Enterprise-Architektur; mal lag mein Fokus mehr auf dem einen, mal auf dem anderen – so kenne ich alle drei. Mein Ziel ist immer die durchgängige Spur: von der Business-Architektur bis zur Entwicklung, mit voller Traceability. <em>Diese Spannung lasse ich offen – das Ziel war lange teuer und schwer zu erreichen. Die Auflösung (UML/SysML/DSL nötig, Code ≠ Realität → mit KI möglich) spare ich mir bewusst für Slide 3/7/8 auf. Hier verrate ich die Pointe noch NICHT.</em>"
+    data-notes-en="<em>Personal opener – who I am, my through-line.</em> Three areas shaped my career: software development, methodology, and IT / enterprise architecture; at times my focus leaned one way, at times the other – so I know all three. My goal is always the same continuous trace: from business architecture down to implementation, with full traceability. <em>I keep the tension open – the goal was long expensive and hard to reach. I deliberately save the resolution (UML/SysML/DSL were needed, code ≠ reality → with AI it becomes possible) for slides 3/7/8. I do NOT give away the punchline here.</em>"
+    data-time="1:00">
+    <div class="kicker rise" data-n="01" data-en="My through-line">Mein roter Faden</div>
+    <h1 class="rise" data-en="From <em>business architecture</em> to <em>code</em> – end-to-end traceability.">Von der <em>Business-Architektur</em> bis zum <em>Code</em> – durchgängige Traceability.</h1>
+    <p class="sub rise" data-en="Three areas shaped my career: software development, methodology, and IT / enterprise architecture. I know all three.">Drei Bereiche prägen meine Laufbahn: Softwareentwicklung, Methodik und IT-/Enterprise-Architektur. Ich kenne alle drei.</p>
+    <p class="note rise" data-en="The goal is always end-to-end continuity – from the business domain to implementation. Only the path there was long expensive and hard.">Das Ziel ist immer die Durchgängigkeit von der Fachlichkeit bis zur Umsetzung – nur war der Weg dorthin lange teuer und schwer.</p>
+    <div class="comic-r rise"><img src="comic-1.png" alt="Comic: We need a detailed map"></div>
+  </section>
+
+  <!-- 2 · Der Anspruch -->
+  <section class="slide has-comic"
+    data-notes="<em>Mein eigentlicher Anspruch – der Kern des Vortrags.</em> „Ein gutes Modell beschreibt ein Problem in seiner essenziellen Komplexität – nicht mehr, nicht weniger.“ Das Wesentliche erfassen, das Unwichtige weglassen – das ist die eigentliche Kunst. <em>Persönlich betonen:</em> Das ist mein Anspruch an jedes Modell, seit rund 15 Jahren."
+    data-notes-en="<em>My real standard – the core of the talk.</em> “A good model captures a problem in its essential complexity – no more, no less.” Capture the essential, leave out the unimportant – that is the real craft. <em>Make it personal:</em> This has been my standard for every model, for about 15 years."
+    data-time="1:10">
+    <div class="kicker rise" data-n="02" data-en="The standard">Der Anspruch</div>
+    <h1 class="rise" data-en="A model captures a problem in its <em>essential complexity</em> – no more.">Ein Modell beschreibt ein Problem in seiner <em>essenziellen Komplexität</em> – nicht mehr.</h1>
+    <p class="sub rise" data-en="Capture the essential, leave out the unimportant. That is the real craft.">Das Wesentliche erfassen, das Unwichtige weglassen. Das ist die eigentliche Kunst.</p>
+    <p class="note rise" data-en="My standard for every model, for about 15 years.">Seit rund 15 Jahren mein Anspruch an jedes Modell.</p>
+    <div class="comic-r rise"><img src="comic-2.png" alt="Comic: To document everything, we must begin the journey"></div>
+  </section>
+
+  <!-- 3 · Früher schwer, heute einfacher -->
+  <section class="slide"
+    data-notes="<em>Mein Dreh- und Angelpunkt.</em> Früher war es schwer, ein Problem in essenzieller Komplexität zu beschreiben – man brauchte UML, SysML oder eine eigene DSL. Mächtig, aber schwer, spezialisiert, teuer. <em>Ich betone, dass ich das real gemacht habe – kanonische Datenmodelle bei der UBS, eigene DSLs bei 3AP und LIKE MAGIC.</em> Heute: KI versteht natürliche Sprache. Mit dem richtigen Meta-Modell beschreibe ich die Fakten als Markdown – und erreiche dieselbe Präzision mit viel weniger Reibung. <em>Kurze Pause vor „dieselbe Klarheit, weniger Reibung“.</em>"
+    data-notes-en="<em>My pivot.</em> It used to be hard to describe a problem in its essential complexity – you needed UML, SysML or your own DSL. Powerful, but hard, specialized, expensive. <em>I stress that I did this for real – canonical data models at UBS, custom DSLs at 3AP and LIKE MAGIC.</em> Today: AI understands natural language. With the right meta-model I describe the facts as Markdown – and reach the same precision with far less friction. <em>Short pause before “same clarity, less friction.”</em>"
+    data-time="1:35">
+    <div class="kicker rise" data-n="03" data-en="Once hard – now easier">Früher schwer – heute einfacher</div>
+    <div class="thennow rise">
+      <div class="col then">
+        <h4 data-en="Before">Früher</h4>
+        <p data-en="UML · SysML · your own DSL">UML · SysML · eigene DSL</p>
+        <p class="small" data-en="Powerful – but hard, specialized, expensive. Few can read it.">Mächtig – aber schwer, spezialisiert, teuer. Nur wenige können es lesen.</p>
+      </div>
+      <div class="col now">
+        <h4 data-en="Today">Heute</h4>
+        <p data-en="AI understands natural language.">KI versteht natürliche Sprache.</p>
+        <p class="small" data-en="With the right meta-model: the facts as Markdown – cheap to create and maintain, readable for everyone.">Mit dem richtigen Meta-Modell: die Fakten als Markdown – günstig zu erstellen und zu pflegen, lesbar für alle.</p>
+      </div>
+    </div>
+    <p class="verdict rise" data-en="Same clarity – <em>far less friction.</em>">Dieselbe Klarheit – <em>viel weniger Reibung.</em></p>
+  </section>
+
+  <!-- 4 · Mein Ansatz -->
+  <section class="slide has-comic"
+    data-notes="<em>Überblick – ich zeige die Breite, ohne zu dozieren.</em> „Genau das habe ich bei LIKE MAGIC gebaut: unser Geschäftswissen als lebende Wissensbasis – die Fakten als Markdown, strukturiert durch ein Meta-Modell.“ <em>Ich benenne die vier Bereiche kurz</em> (Domänen und Begriffe · Rollen/Teams/Prozesse · Architektur-Entscheide und Regeln · KPIs) <em>und betone: versioniert wie Code, maschinenlesbar, EINE Quelle der Wahrheit. Kurz halten – das konkrete Beispiel kommt gleich.</em>"
+    data-notes-en="<em>Overview – I show the breadth, I don't lecture.</em> “This is exactly what I built at LIKE MAGIC: our business knowledge as a living knowledge base – the facts as Markdown, structured by a meta-model.” <em>I briefly name the four areas</em> (domains and terms · roles/teams/processes · architecture decisions and rules · KPIs) <em>and emphasize: versioned like code, machine-readable, ONE source of truth. Keep it short – the concrete example comes next.</em>"
+    data-time="0:45">
+    <div class="kicker rise" data-n="04" data-en="My approach">Mein Ansatz</div>
+    <h1 class="rise" data-en="The <em>Mental Model</em>.">Das <em>Mental Model</em>.</h1>
+    <p class="sub rise" data-en="A structured knowledge base – I call it the Mental Model.">Eine strukturierte Wissensbasis – ich nenne sie das Mental Model.</p>
+    <ul class="blist rise">
+      <li data-en="<b>Domains &amp; terms</b><span>Booking · Finance · Door Access · Task</span>"><b>Domänen &amp; Begriffe</b><span>Booking · Finance · Door Access · Task</span></li>
+      <li data-en="<b>How we work</b><span>Roles · teams · processes with gates</span>"><b>Wie wir arbeiten</b><span>Rollen · Teams · Prozesse mit Gates</span></li>
+      <li data-en="<b>Why this way</b><span>Architecture decisions · rules</span>"><b>Warum so</b><span>Architektur-Entscheide · Regeln</span></li>
+      <li data-en="<b>How we measure</b><span>KPIs</span>"><b>Woran wir messen</b><span>KPIs</span></li>
+    </ul>
+    <p class="stamp rise" data-en="Facts as Markdown &nbsp;·&nbsp; structured by a meta-model &nbsp;·&nbsp; <b>machine-readable</b>">Fakten als Markdown &nbsp;·&nbsp; strukturiert durch ein Meta-Modell &nbsp;·&nbsp; <b>maschinenlesbar</b></p>
+    <div class="comic-r rise"><img src="comic-3.png" alt="Comic: Each fact is a building block – structured knowledge"></div>
+  </section>
+
+  <!-- 5 · Beispiel: Domäne Finance -->
+  <section class="slide"
+    data-notes="<em>Ich mache es konkret</em> – ein echtes Modell aus einem meiner Projekte: die Domäne Finance. <em>Ich lese nicht alle Begriffe vor – ich greife EINEN heraus:</em> Folio – das Finanzkonto einer Reservation, hängt an Debitor, sammelt OrderItems und Payments, mündet in eine PdfInvoice. <em>Meine Pointe:</em> jeder Begriff auf einen Satz gebracht – nicht mehr, nicht weniger. <em>Payment/Debitor/Invoice sprechen das Payment-Publikum direkt an.</em>"
+    data-notes-en="<em>I make it concrete</em> – a real model from one of my projects: the Finance domain. <em>I don't read out every term – I grab ONE:</em> Folio – the financial account of a reservation, attached to a Debitor, collecting OrderItems and Payments, ending in a PdfInvoice. <em>My point:</em> every term in a single sentence – no more, no less. <em>Payment/Debitor/Invoice speak directly to a payments audience.</em>"
+    data-time="1:15">
+    <div class="kicker rise" data-n="05" data-en="An example – the Finance domain">Ein Beispiel – Domäne Finance</div>
+    <div class="split even rise">
+      <div class="diagram">
+        <svg viewBox="0 0 500 300" role="img" aria-label="Finance domain: Folio with Debitor, OrderItem, Payment, PdfInvoice">
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="#9a9384"/>
+            </marker>
+          </defs>
+          <g stroke="#9a9384" stroke-width="1.6" marker-end="url(#ah)">
+            <line x1="150" y1="150" x2="326" y2="42"/>
+            <line x1="150" y1="150" x2="326" y2="110"/>
+            <line x1="150" y1="150" x2="326" y2="178"/>
+            <line x1="150" y1="150" x2="326" y2="246"/>
+          </g>
+          <g font-family="'IBM Plex Mono',monospace" font-size="11" fill="#9a9384" text-anchor="middle">
+            <text x="248" y="90">many</text>
+            <text x="242" y="124">many</text>
+            <text x="242" y="171">one</text>
+            <text x="238" y="205">maybe one</text>
+          </g>
+          <g>
+            <rect x="20" y="123" width="130" height="54" rx="7" fill="rgba(122,160,255,.16)" stroke="#7aa0ff" stroke-width="2.2"/>
+            <text x="85" y="156" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="600" fill="#7aa0ff">Folio</text>
+          </g>
+          <g font-family="'IBM Plex Mono',monospace" font-size="14.5" fill="#f1ede4" text-anchor="middle">
+            <rect x="330" y="20"  width="150" height="44" rx="7" fill="#191b20" stroke="#4a4d55" stroke-width="1.5"/>
+            <text x="405" y="47">Payment</text>
+            <rect x="330" y="88"  width="150" height="44" rx="7" fill="#191b20" stroke="#4a4d55" stroke-width="1.5"/>
+            <text x="405" y="115">OrderItem</text>
+            <rect x="330" y="156" width="150" height="44" rx="7" fill="#191b20" stroke="#4a4d55" stroke-width="1.5"/>
+            <text x="405" y="183">Debitor</text>
+            <rect x="330" y="224" width="150" height="44" rx="7" fill="#191b20" stroke="#4a4d55" stroke-width="1.5"/>
+            <text x="405" y="251">PdfInvoice</text>
+          </g>
+        </svg>
+        <p class="caption" data-en="Real model from a project of mine – <b>Markdown + Mermaid</b>">Echtes Modell aus einem Projekt von mir – <b>Markdown + Mermaid</b></p>
+      </div>
+      <dl class="glossary">
+        <div><dt>Folio</dt><dd data-en="Financial account of a reservation – bundles all line items of a stay.">Finanzkonto einer Reservation – bündelt alle Positionen eines Aufenthalts.</dd></div>
+        <div><dt>OrderItem</dt><dd data-en="A single line item on the folio.">Eine einzelne Buchungsposition auf dem Folio.</dd></div>
+        <div><dt>Payment</dt><dd data-en="Payment that settles order items fully or partly.">Zahlung, die Order-Items ganz oder teilweise begleicht.</dd></div>
+        <div><dt>Debitor</dt><dd data-en="Who owes the bill – person or company.">Wer die Rechnung schuldet – Person oder Firma.</dd></div>
+        <div><dt>PdfInvoice</dt><dd data-en="The finalized invoice at check-out.">Die finalisierte Rechnung beim Check-out.</dd></div>
+      </dl>
+    </div>
+    <p class="stamp rise" data-en="Every term in one sentence – <b>no more, no less.</b>">Jeder Begriff auf einen Satz gebracht – <b>nicht mehr, nicht weniger.</b></p>
+  </section>
+
+  <!-- 6 · Der Nutzen -->
+  <section class="slide has-comic"
+    data-notes="<em>Der eigentliche Nutzen – das überzeugt Entwickler.</em> Weil es EINE Referenz gibt, lassen sich die Bereiche gegeneinander validieren: Requirements verwenden nur Begriffe aus dem Glossar – eine Sprache, keine Synonyme. Die Implementierung prüfe ich gegen Glossar UND Architektur-Entscheide (ADRs). Und: neue Begriffe müssen erst ins Glossar, sonst kein Merge – so bleibt die Sprache sauber. <em>Mein Kernsatz:</em> Widersprüche fallen auf, weil es eine Referenz gibt – Konsistenz über den ganzen Lebenszyklus. <em>Überleitung: genau diese Prüfung kann heute die KI übernehmen.</em>"
+    data-notes-en="<em>The real payoff – this convinces developers.</em> Because there is ONE reference, the areas can be validated against each other: requirements use only terms from the glossary – one language, no synonyms. I check the implementation against glossary AND architecture decisions (ADRs). And: new terms must land in the glossary first, otherwise no merge – that keeps the language clean. <em>My key line:</em> contradictions surface because there is a reference – consistency across the whole lifecycle. <em>Bridge: this very check can now be done by AI.</em>"
+    data-time="1:10">
+    <div class="kicker rise" data-n="06" data-en="The payoff">Der Nutzen</div>
+    <h1 class="rise" data-en="One model that <em>everything</em> can be measured against.">Ein Modell, an dem sich <em>alles messen</em> lässt.</h1>
+    <div class="checks rise">
+      <div class="check"><span data-en="<b>Requirements</b> use only terms from the <i>glossary</i> – one language, no synonyms."><b>Requirements</b> verwenden nur Begriffe aus dem <i>Glossar</i> – eine Sprache, keine Synonyme.</span></div>
+      <div class="check"><span data-en="<b>Implementation</b> validated against <i>glossary + ADRs</i>."><b>Implementierung</b> validiert gegen <i>Glossar + ADRs</i>.</span></div>
+      <div class="check"><span data-en="<b>New terms</b> must land in the <i>glossary</i> first – otherwise no merge."><b>Neue Begriffe</b> müssen erst ins <i>Glossar</i> – sonst kein Merge.</span></div>
+    </div>
+    <p class="stamp rise" data-en="Not documentation but an artifact to validate against – so that <b>change gets cheaper and safer.</b>">Keine Dokumentation, sondern ein Artefakt zum Validieren – damit <b>Änderungen günstiger und sicherer werden.</b></p>
+    <div class="comic-r rise"><img src="comic-5.png" alt="Comic: Shared across all platforms"></div>
+  </section>
+
+  <!-- 7 · Warum es jetzt zählt -->
+  <section class="slide has-comic"
+    data-notes="<em>Meine Pointe – kurze Pause davor. EIN Punkt, klar:</em> „Ein Modell wie dieses gibt der KI den richtigen Kontext – es verkleinert den Raum, in dem sie raten muss.“ <em>Wichtig: nicht „ohne Halluzinationen“ behaupten – Kontext reduziert das Raten, eliminiert es nicht.</em> Je sauberer die Struktur, desto besser der Kontext. In der Praxis nutze ich das Mental Model als Kontextschicht für KI-Assistenten. <em>Meine These:</em> Nicht die KI ersetzt die Fachleute – sie macht ihr explizites Wissen wertvoller denn je. <em>Optional, nur auf Nachfrage: derselbe Effekt via RAG (der KI die relevanten Fakten mitgeben). Auto-Validierung spreche ich hier NICHT an – die gehört auf Slide 6.</em>"
+    data-notes-en="<em>My punchline – short pause before it. ONE point, clearly:</em> “A model like this gives AI the right context – it shrinks the space where it has to guess.” <em>Important: don't claim “without hallucinations” – context reduces the guessing, it doesn't eliminate it.</em> The cleaner the structure, the better the context. In practice I use the Mental Model as a context layer for AI assistants. <em>My thesis:</em> AI does not replace the experts – it makes their explicit knowledge more valuable than ever. <em>Optional, only if engineers ask: the same effect via RAG (giving AI the relevant facts). I do NOT raise auto-validation here – that belongs on slide 6.</em>"
+    data-time="1:00">
+    <div class="kicker rise" data-n="07" data-en="Why it matters now">Warum es jetzt zählt</div>
+    <h1 class="big-punch rise" data-en="The right context makes AI <em>far more reliable</em>.">Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.</h1>
+    <p class="note rise" data-en="A model like this gives AI the right context: it does not eliminate hallucinations – but it shrinks the space where AI has to guess, moving it from guessing to grounded reasoning. The cleaner the structure, the better the context. In practice: the Mental Model as a context layer for AI assistants.">Ein Modell wie dieses gibt der KI den richtigen Kontext: Es eliminiert Halluzinationen nicht – aber es verkleinert den Raum, in dem sie raten muss, und verschiebt sie von Raten zu fundiertem Arbeiten. Je sauberer die Struktur, desto besser der Kontext. In der Praxis: das Mental Model als Kontextschicht für KI-Assistenten.</p>
+    <div class="comic-r rise"><img src="comic-4.png" alt="Comic: Consistent projection"></div>
+  </section>
+
+  <!-- 8 · Wohin es geht -->
+  <section class="slide"
+    data-notes="<em>Ich zoome auf die Branche raus.</em> Jahrelang galt Vormodellieren als zu teuer und zu langsam – Agile verzichtete bewusst darauf. Mit KI ist das Erfassen von Spezifikationen schnell und bezahlbar geworden. Also dreht das Pendel zurück: Spec-Driven Development wird wieder machbar. <em>Kurz und selbstbewusst:</em> Was ich seit 15 Jahren mache, wird gerade zur Industrierichtung."
+    data-notes-en="<em>I zoom out to the industry.</em> For years upfront modeling was seen as too expensive and too slow – agile deliberately dropped it. With AI, capturing specifications has become fast and affordable. So the pendulum swings back: spec-driven development becomes feasible again. <em>Short and confident:</em> what I have done for 15 years is becoming the industry direction."
+    data-time="0:45">
+    <div class="kicker rise" data-n="08" data-en="Where it is heading">Wohin es geht</div>
+    <h1 class="rise" data-en="The pendulum swings – back to <em>spec-driven development</em>.">Das Pendel dreht – zurück zu <em>Spec-Driven Development</em>.</h1>
+    <p class="sub rise" data-en="From “no big design up front” to spec-first – because AI makes specifications fast and affordable.">Von „no big design up front“ zu spec-first – weil KI Spezifikationen schnell und bezahlbar macht.</p>
+    <p class="note rise" data-en="For years upfront modeling was too expensive, so agile deliberately dropped it. That math has changed.">Jahrelang war Vormodellieren zu teuer, also verzichtete Agile bewusst darauf. Diese Rechnung hat sich geändert.</p>
+  </section>
+
+  <!-- 9 · Takeaway -->
+  <section class="slide has-comic"
+    data-notes="<em>Mein Takeaway.</em> „Der Anspruch bleibt derselbe wie vor 15 Jahren – die essenzielle Komplexität erfassen, nicht mehr. Neu ist: der Weg dorthin steht heute allen offen, und das Ergebnis zahlt doppelt – für Menschen und für KI.“ <em>Bodenständiger Schluss:</em> „Deshalb baue ich bis heute so – nah am Code, aber mit dem Modell im Kopf. Danke.“ <em>Optional: Gerne zeige ich das Mental Model gleich im Detail.</em>"
+    data-notes-en="<em>My takeaway.</em> “The standard stays the same as 15 years ago – capture essential complexity, no more. What is new: the path there is now open to everyone, and the result pays off twice – for people and for AI.” <em>Grounded close:</em> “That is how I still build today – close to the code, but with the model in mind. Thank you.” <em>Optional: happy to show the Mental Model in detail right away.</em>"
+    data-time="0:55">
+    <div class="kicker rise" data-n="09" data-en="Takeaway">Takeaway</div>
+    <h1 class="rise" data-en="Tools come and go – <em>the model stays</em>.">Werkzeuge kommen und gehen – <em>das Modell bleibt</em>.</h1>
+    <p class="sub rise" data-en="The standard stays: capture essential complexity. Only now the path is open to everyone.">Der Anspruch bleibt: die essenzielle Komplexität erfassen. Nur steht der Weg heute allen offen.</p>
+    <p class="note rise" data-en="That is how I still build today: close to the code, but with the model in mind. Thank you.">Deshalb baue ich bis heute so: nah am Code, aber mit dem Modell im Kopf. Danke.</p>
+    <div class="comic-r rise"><img src="comic-6.png" alt="Comic: The horizon is within reach, one consistent step at a time"></div>
+  </section>
+
+</div>
+
+<div class="langind mono"><span id="lde">DE</span> · <span id="len">EN</span></div>
+<div class="hint mono" id="hint">← →  blättern · N  Notizen · L  Sprache · F  Vollbild</div>
+<div class="name">Robert Blust</div>
+<div class="counter mono"><b id="cur">1</b> / <span id="tot">9</span></div>
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <small id="notesclose">N schliesst die Notizen</small>
+</div>
+
+<script>
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0, notesOpen = false, lang = 'de';
+  var bar = document.getElementById('bar'), cur = document.getElementById('cur');
+  var notes = document.getElementById('notes'), ntext = document.getElementById('ntext'), ntime = document.getElementById('ntime');
+  document.getElementById('tot').textContent = slides.length;
+
+  // capture the German inner HTML so we can switch back
+  var i18n = Array.prototype.slice.call(document.querySelectorAll('[data-en]'));
+  i18n.forEach(function(el){ el.setAttribute('data-de', el.innerHTML); });
+
+  var UI = {
+    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen' },
+    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes' }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute('data-' + lang); });
+    document.getElementById('hint').textContent = UI[lang].hint;
+    document.getElementById('noteslabel').textContent = UI[lang].label;
+    document.getElementById('notesclose').textContent = UI[lang].close;
+    document.getElementById('lde').classList.toggle('on', lang === 'de');
+    document.getElementById('len').classList.toggle('on', lang === 'en');
+    document.documentElement.lang = lang;
+    render();
+  }
+
+  function fitNotes(){
+    var s = slides[i];
+    s.style.transform = '';                               // reset before measuring
+    if(!notesOpen) return;
+    var avail = window.innerHeight - notes.offsetHeight - 20;   // usable height above the panel
+    var need  = s.scrollHeight;                            // full content height (top-aligned)
+    if(need > avail){ s.style.transform = 'scale(' + Math.max(0.5, avail/need) + ')'; }
+  }
+
+  function render(){
+    slides.forEach(function(s,n){ if(n!==i) s.style.transform=''; s.classList.toggle('active', n===i); });
+    bar.style.width = ((i+1)/slides.length*100) + '%';
+    cur.textContent = i+1;
+    if(notesOpen){
+      var d = slides[i].dataset;
+      ntext.innerHTML = (lang === 'en' && d.notesEn) ? d.notesEn : d.notes;
+      ntime.textContent = d.time || '';
+    }
+    fitNotes();
+  }
+  window.addEventListener('resize', fitNotes);
+  function go(n){ i = Math.max(0, Math.min(slides.length-1, n)); render(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ go(i+1); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ go(i-1); e.preventDefault(); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(slides.length-1); }
+    else if(e.key==='n'||e.key==='N'){ notesOpen=!notesOpen; notes.classList.toggle('show',notesOpen); document.getElementById('deck').classList.toggle('notes-open',notesOpen); render(); }
+    else if(e.key==='l'||e.key==='L'){ lang = (lang==='de') ? 'en' : 'de'; applyLang(); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); } else { document.exitFullscreen(); } }
+  });
+  document.getElementById('deck').addEventListener('click', function(e){
+    if(e.clientX > window.innerWidth/2){ go(i+1); } else { go(i-1); }
+  });
+  applyLang();
+</script>
+</body>
+</html>
