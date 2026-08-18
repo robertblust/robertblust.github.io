@@ -1,0 +1,15 @@
+{
+  "name": "essential-complexity",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A 10-minute talk: capturing a problem in its essential complexity — and how AI makes the path there easier.",
+  "scripts": {
+    "pdf": "node export-pdf.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.49.1"
+  }
+}
