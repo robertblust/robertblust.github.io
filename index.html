@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Das Mental Model – Robert Blust</title>
+<title>The Mental Model – Robert Blust</title>
 <style>
   :root{
     --paper:#0f1013; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
@@ -171,7 +171,7 @@
     <div class="kicker mono" data-n="00" data-en="A concept explained by Robert Blust">Ein Konzept erklärt von Robert Blust</div>
     <h1 data-en="The Mental Model.">Das Mental Model.</h1>
     <p class="sub" data-en="The brain for company management and agentic AI.">Das Gehirn für Unternehmensführung und agentische KI.</p>
-    <div class="byline mono"><span data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</span></div>
+    <p class="byline rise" data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</p>
   </section>
 
   <!-- 01 · Der Haken -->
@@ -371,13 +371,14 @@
   i18n.forEach(function(el){ el.setAttribute('data-de', el.innerHTML); });
 
   var UI = {
-    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen' },
-    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes' }
+    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen', title:'Das Mental Model – Robert Blust' },
+    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes', title:'The Mental Model – Robert Blust' }
   };
 
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute('data-' + lang); });
     document.getElementById('hint').textContent = UI[lang].hint;
+    document.title = UI[lang].title;
     document.getElementById('noteslabel').textContent = UI[lang].label;
     document.getElementById('notesclose').textContent = UI[lang].close;
     document.getElementById('lde').classList.toggle('on', lang === 'de');
