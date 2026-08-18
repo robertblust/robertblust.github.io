@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Das Mental Model – Robert Blust</title>
+<style>
+  :root{
+    --paper:#0f1013; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
+    --line:#282a30; --paper2:#191b20;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  .deck{
+    position:fixed; inset:0;
+    background:radial-gradient(130% 85% at 50% 0%, #17191f 0%, var(--paper) 62%);
+  }
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5vmin 10vmin;
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  .slide.active .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active .rise:nth-child(1){animation-delay:.05s}
+  .slide.active .rise:nth-child(2){animation-delay:.14s}
+  .slide.active .rise:nth-child(3){animation-delay:.24s}
+  .slide.active .rise:nth-child(4){animation-delay:.34s}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6vmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--cobalt); margin-bottom:3.2vmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--muted)}
+  .kicker::after{content:""; flex:0 0 8vmin; height:2px; background:var(--cobalt); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,6.6vmin,5.6rem); max-width:21ch;
+  }
+  h1 em{font-style:normal; color:var(--cobalt)}
+  .sub{
+    margin-top:3.4vmin; font-size:clamp(1.25rem,3.1vmin,2.5rem);
+    color:var(--muted); max-width:36ch; line-height:1.4; font-weight:400;
+  }
+  .note{
+    margin-top:4.4vmin; font-size:clamp(1.05rem,2.3vmin,1.7rem); color:var(--ink);
+    padding-left:1.4vmin; border-left:3px solid var(--cobalt); max-width:44ch; line-height:1.45;
+  }
+
+  /* people / agents split */
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6vmin; margin-top:3vmin; max-width:60ch}
+  .col h4{
+    font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:2vmin;
+    padding-bottom:1.2vmin; border-bottom:2px solid var(--line);
+  }
+  .col.now h4{color:var(--cobalt); border-color:var(--cobalt)}
+  .col p{font-size:clamp(1.25rem,2.9vmin,2rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1rem,2.1vmin,1.45rem); color:var(--muted); font-weight:400; margin-top:1.4vmin; line-height:1.4}
+  .verdict{margin-top:4vmin; font-size:clamp(1.25rem,2.9vmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--cobalt)}
+
+  /* breadth left, example diagram right */
+  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:5vmin; align-items:center; margin-top:2.4vmin; max-width:82ch}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8vmin}
+  .blist li{border-top:2px solid var(--line); padding-top:1.2vmin}
+  .blist b{display:block; font-size:clamp(1.2rem,2.6vmin,1.85rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85vmin,1.35rem); color:var(--muted)}
+  .diagram svg{width:100%; height:auto; display:block}
+  .caption{margin-top:1.6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.82rem,1.6vmin,1.15rem); color:var(--muted); letter-spacing:.02em}
+  .caption b{color:var(--cobalt); font-weight:600}
+  .stamp{
+    margin-top:3.4vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
+    color:var(--muted); letter-spacing:.02em;
+  }
+  .stamp b{color:var(--cobalt); font-weight:600}
+
+  /* breadth grid (domains overview) */
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4vmin 5vmin; margin-top:4.4vmin; max-width:74ch}
+  .cell{border-top:2px solid var(--line); padding-top:1.4vmin}
+  .cell b{display:block; font-size:clamp(1.1rem,2.3vmin,1.65rem); font-weight:600}
+  .cell span{font-size:clamp(.88rem,1.6vmin,1.15rem); color:var(--muted)}
+
+  /* example – diagram + list */
+  .split.even{grid-template-columns:1fr 1.05fr; gap:6vmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5vmin; margin:0}
+  .glossary div{border-top:2px solid var(--line); padding-top:1.1vmin}
+  .glossary dt{font-family:"IBM Plex Mono",monospace; color:var(--cobalt); font-weight:600; font-size:clamp(1.05rem,2.1vmin,1.5rem)}
+  .glossary dd{color:var(--muted); font-size:clamp(1rem,1.9vmin,1.4rem); line-height:1.34; margin:.3vmin 0 0}
+
+  .big-punch{font-size:clamp(2.3rem,7.2vmin,5.8rem)}
+
+  /* title slide */
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,9.5vmin,7.2rem); max-width:18ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2vmin; max-width:42ch; font-size:clamp(1.3rem,3.4vmin,2.6rem); color:var(--muted)}
+  .title-slide .byline{margin-top:6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.85rem,1.8vmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--muted)}
+
+  /* SVG diagram tokens */
+  .node{fill:var(--paper2); stroke:var(--cobalt); stroke-width:1.5}
+  .node.center{fill:#1c2130; stroke-width:2.2}
+  .edge{stroke:var(--line); stroke-width:1.5}
+  .edge.live{stroke:var(--cobalt); stroke-width:1.5; opacity:.7}
+  .nlabel{fill:var(--ink); font-family:"IBM Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  .nlabel.c{fill:var(--cobalt); font-weight:700; font-size:14px}
+  .flowbox{fill:var(--paper2); stroke:var(--line); stroke-width:1.5}
+  .flowbox.hot{stroke:var(--cobalt)}
+  .flowlabel{fill:var(--ink); font-family:"IBM Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
+  .gate{fill:#1c2130; stroke:var(--cobalt); stroke-width:2}
+  .arrow{stroke:var(--cobalt); stroke-width:1.6; marker-end:url(#ah)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--cobalt); width:0; transition:width .35s ease; z-index:5}
+  .counter{position:fixed; right:4vmin; bottom:3.4vmin; font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--muted); letter-spacing:.1em; z-index:5}
+  .counter b{color:var(--ink)}
+  .name{position:fixed; left:4vmin; bottom:3.2vmin; font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; z-index:5}
+  .hint{position:fixed; top:3vmin; right:4vmin; font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:var(--muted); letter-spacing:.1em; z-index:5; opacity:.7}
+  .langind{position:fixed; top:3vmin; left:4vmin; font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.15em; color:var(--muted); z-index:5}
+  .langind .on{color:var(--cobalt); font-weight:700}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:#17181c; color:#f1ede4; border-top:2px solid var(--cobalt); padding:3vmin 4vmin 4vmin; transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:52vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:#9db0ff; margin-bottom:1.4vmin}
+  .notes p{font-size:clamp(.95rem,2vmin,1.3rem); line-height:1.5; max-width:82ch}
+  .notes em{font-style:italic; color:#9a9dab}   /* Regie-Instruktionen gedämpft kursiv; Sprechtext normal/hell */
+  .notes .time{float:right; color:#9db0ff; font-family:"IBM Plex Mono",monospace}
+  .notes small{display:block; margin-top:1.6vmin; color:#b7b0a2; opacity:.7; font-family:"IBM Plex Mono",monospace; letter-spacing:.1em}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4vmin 10vmin; transform-origin:top center}
+  .deck.notes-open .split{align-items:start; margin-top:1.6vmin}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .slide{justify-content:flex-start; overflow-y:auto; padding:14vmin 7vw 10vh}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .kicker{margin-bottom:5vw}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7aa0ff"></path>
+  </marker>
+</defs></svg>
+
+<div class="deck" id="deck">
+
+  <!-- 00 · Titel -->
+  <section class="slide title-slide"
+    data-time="0:00"
+    data-notes="<em>Der Titel liegt an, während ich begrüsse und mich kurz vorstelle. Ich nenne meinen Namen und das Thema, dann gehe ich mit → zur ersten Folie.</em>"
+    data-notes-en="<em>The title stays up while I greet and briefly introduce myself. I say my name and the topic, then move to the first slide with →.</em>">
+    <div class="kicker mono" data-n="00" data-en="The through-line by Robert Blust">Der rote Faden von Robert Blust</div>
+    <h1 data-en="The Mental Model.">Das Mental Model.</h1>
+    <p class="sub" data-en="The brain for company management and agentic AI.">Das Gehirn für Unternehmensführung und agentische KI.</p>
+    <div class="byline mono"><span data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</span></div>
+  </section>
+
+  <!-- 01 · Der Haken -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em>Persönlicher Einstieg.</em> Jede Firma läuft auf Wissen: Vision, Strategie, wie wir arbeiten, wer was verantwortet, was wir messen, welche Regeln gelten. Nur liegt dieses Wissen überall verstreut – in Köpfen, Confluence-Seiten, Sheets, Tickets. <em>Meine Aufhänger-Frage – kurze Pause danach:</em> Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?"
+    data-notes-en="<em>Personal opener.</em> Every company runs on knowledge: vision, strategy, how we work, who owns what, what we measure, which rules apply. But that knowledge is scattered everywhere – in heads, Confluence pages, sheets, tickets. <em>My hook question – short pause after it:</em> Neither people nor AI can rely on it. What if all of that were a graph a machine could read?">
+    <div class="kicker mono" data-n="01" data-en="The hook">Der Haken</div>
+    <h1 data-en="A company's knowledge lives everywhere – and nowhere.">Das Wissen einer Firma lebt überall – und nirgends.</h1>
+    <p class="sub" data-en="Vision, strategy, processes, roles, KPIs, rules – scattered across heads, documents and tools.">Vision, Strategie, Prozesse, Rollen, KPIs, Regeln – verstreut über Köpfe, Dokumente und Tools.</p>
+    <p class="note" data-en="Neither people nor AI can rely on it. What if all of it were a graph a machine could read?">Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?</p>
+  </section>
+
+  <!-- 02 · Die Idee -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em>Die Kernidee – ruhig und bestimmt.</em> Genau dafür baue ich das Mental Model: eine strukturierte Wissensbasis, das Gehirn der Firma. Die Fakten als Markdown, strukturiert durch ein Meta-Modell, versioniert wie Code. <em>Wichtig zu betonen:</em> Es ist keine neue Dokumentation, die verstaubt – sondern eine maschinenlesbare Projektion des Betriebssystems der Firma, synchron gehalten aus den echten Systemen (Confluence, Sheets, Tickets)."
+    data-notes-en="<em>The core idea – calm and firm.</em> This is exactly what I build the Mental Model for: a structured knowledge base, the brain of the company. The facts as Markdown, structured by a meta-model, versioned like code. <em>Worth stressing:</em> it is not new documentation that goes stale – it is a machine-readable projection of the company's operating system, kept in sync with the real systems (Confluence, sheets, tickets).">
+    <div class="kicker mono" data-n="02" data-en="The idea">Die Idee</div>
+    <h1 data-en="One structured knowledge base – the <em>brain</em> of the company.">Eine strukturierte Wissensbasis – das <em>Gehirn</em> der Firma.</h1>
+    <p class="sub" data-en="I call it the Mental Model: the facts as Markdown, structured by a meta-model.">Ich nenne es das Mental Model: die Fakten als Markdown, strukturiert durch ein Meta-Modell.</p>
+    <p class="stamp" data-en="Not new documentation but a machine-readable <b>projection of the company's operating system</b> – versioned like code, synced from the real systems.">Keine neue Dokumentation, sondern eine maschinenlesbare <b>Projektion des Betriebssystems der Firma</b> – versioniert wie Code, synchron aus den echten Systemen.</p>
+  </section>
+
+  <!-- 03 · Die Breite -->
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em>Ich zeige die Breite – ohne alles vorzulesen.</em> Im Modell steckt alles, was eine Firma ausmacht: Rollen und Teams (wer was tut), Prozesse mit Gates (wie Arbeit fliesst), Strategie und Ziele (wohin wir investieren), KPIs (was wir messen), Regeln (was wir durchsetzen), Features (was wir bauen), Begriffe (was wir definieren), Architektur-Entscheide (was wir entschieden haben) und Werte (was wir glauben). <em>Kurz halten – ein Satz genügt:</em> versioniert wie Code, maschinenlesbar, EINE Quelle der Wahrheit."
+    data-notes-en="<em>I show the breadth – without reading everything out.</em> The model holds everything that makes a company: roles and teams (who does what), processes with gates (how work flows), strategy and objectives (where we invest), KPIs (what we measure), rules (what we enforce), features (what we build), concepts (what we define), architecture decisions (what we decided) and values (what we believe). <em>Keep it short – one line is enough:</em> versioned like code, machine-readable, ONE source of truth.">
+    <div class="kicker mono" data-n="03" data-en="The breadth">Die Breite</div>
+    <h1 data-en="Everything that makes a company – in one place.">Alles, was eine Firma ausmacht – an einem Ort.</h1>
+    <div class="grid rise">
+      <div class="cell"><b data-en="Roles &amp; Teams">Rollen &amp; Teams</b><span data-en="who does what">wer was tut</span></div>
+      <div class="cell"><b data-en="Processes &amp; Gates">Prozesse &amp; Gates</b><span data-en="how work flows">wie Arbeit fliesst</span></div>
+      <div class="cell"><b data-en="Strategy &amp; Objectives">Strategie &amp; Ziele</b><span data-en="where we invest">wohin wir investieren</span></div>
+      <div class="cell"><b data-en="KPIs">KPIs</b><span data-en="what we measure">was wir messen</span></div>
+      <div class="cell"><b data-en="Rules">Regeln</b><span data-en="what we enforce">was wir durchsetzen</span></div>
+      <div class="cell"><b data-en="Features">Features</b><span data-en="what we build">was wir bauen</span></div>
+      <div class="cell"><b data-en="Concepts">Begriffe</b><span data-en="what we define">was wir definieren</span></div>
+      <div class="cell"><b data-en="Architecture decisions">Architektur-Entscheide</b><span data-en="what we decided">was wir entschieden haben</span></div>
+      <div class="cell"><b data-en="Values">Werte</b><span data-en="what we believe">was wir glauben</span></div>
+    </div>
+    <p class="stamp rise" data-en="Versioned like code, machine-readable, <b>ONE source of truth.</b>">Versioniert wie Code, maschinenlesbar, <b>EINE Quelle der Wahrheit.</b></p>
+  </section>
+
+  <!-- 04 · Der Graph -->
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em>Der entscheidende Kniff.</em> All diese Bereiche stehen nicht nebeneinander – sie verweisen aufeinander. Dateinamen sind die kanonischen IDs, und Referenzen sind exakte Namen, keine Links. <em>Meine Pointe:</em> Es gibt keine toten Links, weil bei jeder Änderung Konsistenz-Checks laufen – eine Person ohne Rolle, eine Regel ohne Owner, ein Feature ohne Parent fällt sofort auf. So bleibt aus vielen Dateien ein zusammenhängender, widerspruchsfreier Graph."
+    data-notes-en="<em>The decisive trick.</em> All these areas don't just sit side by side – they cross-reference each other. Filenames are the canonical IDs, and references are exact names, not links. <em>My point:</em> there are no dead links, because consistency checks run on every change – a person without a role, a rule without an owner, a feature without a parent surfaces immediately. That turns many files into one connected, contradiction-free graph.">
+    <div class="kicker mono" data-n="04" data-en="The graph">Der Graph</div>
+    <h1 data-en="Everything cross-references – <em>no dead links</em>.">Alles verweist aufeinander – <em>keine toten Links</em>.</h1>
+    <div class="split rise">
+      <div class="diagram">
+        <svg viewBox="0 0 520 340" role="img" aria-label="Knowledge graph">
+          <line class="edge" x1="260" y1="170" x2="260" y2="52"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="112"></line>
+          <line class="edge" x1="260" y1="170" x2="412" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="260" y2="288"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="228"></line>
+          <line class="edge" x1="260" y1="170" x2="108" y2="112"></line>
+          <line class="edge live" x1="260" y1="52" x2="412" y2="228"></line>
+          <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
+          <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
+          <rect class="node" x="212" y="30" width="96" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="51" data-en="Person">Person</text>
+          <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="111" data-en="Process">Prozess</text>
+          <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
+          <text class="nlabel" x="412" y="227" data-en="KPI">KPI</text>
+          <rect class="node" x="210" y="266" width="100" height="40" rx="0"></rect>
+          <text class="nlabel" x="260" y="287" data-en="Rule">Regel</text>
+          <rect class="node" x="58" y="206" width="100" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="227" data-en="Feature">Feature</text>
+          <rect class="node" x="56" y="90" width="104" height="40" rx="0"></rect>
+          <text class="nlabel" x="108" y="111" data-en="Role">Rolle</text>
+          <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
+          <text class="nlabel c" x="260" y="170">Mental Model</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-en="Filenames are IDs">Dateinamen sind IDs</b><span data-en="the canonical name of every entry">der kanonische Name jedes Eintrags</span></li>
+        <li><b data-en="Exact-name references">Exakte Namensreferenzen</b><span data-en="no markdown links that rot">keine Markdown-Links, die verrotten</span></li>
+        <li><b data-en="Validated on every change">Bei jeder Änderung validiert</b><span data-en="a contradiction surfaces immediately">ein Widerspruch fällt sofort auf</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 · Ein Beispiel: Prozess-Gate -->
+  <section class="slide"
+    data-time="1:20"
+    data-notes="<em>Ich mache es konkret.</em> Nehmen wir einen Prozessschritt mit einem Gate – der Übergang von Konzept zu Umsetzung. Im Modell steht: wer verantwortlich ist (die Produktleitung), welche Kriterien das Gate hat, und die Regeln dahinter. <em>Meine Pointe:</em> Das ist Governance nicht als Folie, sondern als Daten – ein Score für technische Schulden, eine Regel „ab +2 kommt Aufräumarbeit in den Scope“, und Kill-Kriterien. Genau darüber kann eine Maschine nachdenken."
+    data-notes-en="<em>I make it concrete.</em> Take a process step with a gate – the transition from concept to delivery. The model records who is accountable (product leadership), what the gate criteria are, and the rules behind them. <em>My point:</em> this is governance not as a slide but as data – a technical-debt score, a rule 'above +2, cleanup work enters scope', and kill criteria. Exactly the kind of thing a machine can reason over.">
+    <div class="kicker mono" data-n="05" data-en="An example">Ein Beispiel</div>
+    <h1 data-en="Governance a machine can <em>reason over</em>.">Governance, über die eine Maschine <em>nachdenken</em> kann.</h1>
+    <div class="split even rise">
+      <div class="diagram">
+        <svg viewBox="0 0 300 300" role="img" aria-label="Concept to delivery gate">
+          <rect class="flowbox" x="70" y="20" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="43" data-en="Concept">Konzept</text>
+          <line class="arrow" x1="150" y1="66" x2="150" y2="104"></line>
+          <polygon class="gate" points="150,110 214,150 150,190 86,150"></polygon>
+          <text class="flowlabel" x="150" y="150" style="fill:#7aa0ff;font-weight:700">Gate</text>
+          <line class="arrow" x1="150" y1="190" x2="150" y2="228"></line>
+          <rect class="flowbox hot" x="70" y="232" width="160" height="46"></rect>
+          <text class="flowlabel" x="150" y="255" data-en="Delivery">Umsetzung</text>
+        </svg>
+      </div>
+      <ul class="blist">
+        <li><b data-en="Owner">Owner</b><span data-en="Head of Product · gate sign-off">Produktleitung · Gate-Freigabe</span></li>
+        <li><b data-en="Gate criterion">Gate-Kriterium</b><span data-en="Tech-Debt Impact Score (−3 … +3)">Tech-Debt-Impact-Score (−3 … +3)</span></li>
+        <li><b data-en="Rule">Regel</b><span data-en="score &gt; +2 → cleanup enters scope">Score &gt; +2 → Cleanup in den Scope</span></li>
+        <li><b data-en="Kill criterion">Kill-Kriterium</b><span data-en="adoption &lt; X% → deprecate">Adoption &lt; X % → deprecate</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 06 · Regeln, Metriken, Entscheide -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em>Ich zeige die Tiefe an drei kurzen Beispielen – nicht vorlesen, herausgreifen.</em> Eine Regel: Deployments laufen dev zu test zu prod, Owner ist das Engineering. Ein KPI: Lead Time for Changes – je tiefer, desto besser, mit klarem Owner. Ein Architektur-Entscheid: JSONB wird nur für kontextuelle Daten genutzt, nicht darauf abgefragt – und die verworfene Alternative, Queries im JSONB, steht ehrlich dabei. <em>Mein Kernsatz:</em> jede Regel, jede Kennzahl, jeder Entscheid ist benannt, begründet und gehört jemandem."
+    data-notes-en="<em>I show the depth with three short examples – don't read them out, pick them up.</em> A rule: deployments go dev to test to prod, owned by Engineering. A KPI: Lead Time for Changes – lower is better, with a clear owner. An architecture decision: JSONB is used only for contextual data, never queried on – and the rejected alternative, querying inside JSONB, is recorded honestly next to it. <em>My key line:</em> every rule, metric and decision is named, justified and owned.">
+    <div class="kicker mono" data-n="06" data-en="Rules, metrics, decisions">Regeln, Metriken, Entscheide</div>
+    <h1 data-en="Rules, metrics and decisions – structured and owned.">Regeln, Metriken und Entscheide – strukturiert und mit Owner.</h1>
+    <dl class="glossary rise">
+      <div><dt data-en="Rule">Regel</dt><dd data-en="“Deployments follow dev → test → prod.” — Owner: Engineering.">„Deployments folgen dev → test → prod.“ — Owner: Engineering.</dd></div>
+      <div><dt data-en="KPI">KPI</dt><dd data-en="“Lead Time for Changes” — lower is better. — Owner: Engineering.">„Lead Time for Changes“ — je tiefer, desto besser. — Owner: Engineering.</dd></div>
+      <div><dt data-en="Architecture decision">Architektur-Entscheid</dt><dd data-en="“JSONB only for contextual data — never queried on.” — rejected: querying inside JSONB.">„JSONB nur für kontextuelle Daten — nicht darauf abfragen.“ — verworfen: Queries im JSONB.</dd></div>
+    </dl>
+    <p class="stamp rise" data-en="Every rule, metric and decision: <b>named, justified, owned.</b>">Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b></p>
+  </section>
+
+  <!-- 07 · Zwei Zielgruppen, eine Quelle -->
+  <section class="slide"
+    data-time="1:15"
+    data-notes="<em>Jetzt der Kern – warum das doppelt zahlt.</em> Dasselbe Modell bedient zwei Zielgruppen. Menschen bekommen Onboarding nach Rolle, Entscheidungsunterstützung – „wer verantwortet das Deployment?“ – und gemeinsame Ausrichtung. Agenten bekommen eine Kontextschicht plus Zugriff über MCP-Tools und handeln innerhalb der Leitplanken: Vision, Strategie, Prozess, Regeln. <em>Meine Pointe – kurze Pause:</em> eine Quelle, zwei Zielgruppen, kein Auseinanderdriften."
+    data-notes-en="<em>Now the core – why it pays off twice.</em> The same model serves two audiences. People get role-based onboarding, decision support – 'who owns the deployment?' – and shared alignment. Agents get a context layer plus access through MCP tools, and act within the guardrails: vision, strategy, process, rules. <em>My point – short pause:</em> one source, two audiences, no drift.">
+    <div class="kicker mono" data-n="07" data-en="Two audiences, one source">Zwei Zielgruppen, eine Quelle</div>
+    <h1 data-en="The same model – for people <em>and</em> agents.">Dasselbe Modell – für Menschen <em>und</em> Agenten.</h1>
+    <div class="thennow rise">
+      <div class="col">
+        <h4 data-en="For people">Für Menschen</h4>
+        <p data-en="Onboarding by role, decisions, alignment.">Onboarding nach Rolle, Entscheidungen, Ausrichtung.</p>
+        <p class="small" data-en="“Who owns the deployment?” — answered from one source.">„Wer verantwortet das Deployment?“ — beantwortet aus einer Quelle.</p>
+      </div>
+      <div class="col now">
+        <h4 data-en="For agents">Für Agenten</h4>
+        <p data-en="A context layer plus MCP tools.">Eine Kontextschicht plus MCP-Tools.</p>
+        <p class="small" data-en="Agents act inside vision, strategy, process and rules.">Agenten handeln innerhalb von Vision, Strategie, Prozess und Regeln.</p>
+      </div>
+    </div>
+    <p class="verdict rise" data-en="One source – <em>two audiences, no drift.</em>">Eine Quelle – <em>zwei Zielgruppen, kein Auseinanderdriften.</em></p>
+  </section>
+
+  <!-- 08 · Warum es zählt -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em>Meine Pointe – kurze Pause davor. EIN Punkt, klar:</em> Der richtige Kontext macht KI deutlich verlässlicher. Ohne Kontext kennt eine KI weder eure Entscheide noch eure Regeln – sie rät. <em>Wichtig: nicht „ohne Halluzinationen“ behaupten.</em> Das Mental Model verkleinert den Raum, in dem sie raten muss, und hält Agenten innerhalb der Leitplanken – Vision, Strategie, Prozess, Regeln. <em>Und immer betonen:</em> mit menschlicher Kontrolle; KI-Kommentare sind Input, nicht Urteil."
+    data-notes-en="<em>My punchline – short pause before it. ONE point, clearly:</em> the right context makes AI far more reliable. Without context an AI knows neither your decisions nor your rules – it guesses. <em>Important: don't claim 'without hallucinations'.</em> The Mental Model shrinks the space where it has to guess and keeps agents inside the guardrails – vision, strategy, process, rules. <em>And always stress:</em> with human oversight; AI comments are input, not verdict.">
+    <div class="kicker mono" data-n="08" data-en="Why it matters">Warum es zählt</div>
+    <h1 class="big-punch" data-en="The right context makes AI <em>far more reliable</em>.">Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.</h1>
+    <p class="note" data-en="Without context, AI knows neither your decisions nor your rules – it guesses. The Mental Model shrinks that space and keeps agents inside the guardrails. Always with human oversight.">Ohne Kontext kennt KI weder eure Entscheide noch eure Regeln – sie rät. Das Mental Model verkleinert diesen Raum und hält Agenten innerhalb der Leitplanken. Immer mit menschlicher Kontrolle.</p>
+  </section>
+
+  <!-- 09 · Takeaway -->
+  <section class="slide"
+    data-time="0:55"
+    data-notes="<em>Mein Takeaway – bodenständig.</em> Das Wissen einer Firma, explizit gemacht und strukturiert, zahlt doppelt: Menschen richten sich schneller aus, und Agenten haben endlich ein Gehirn, mit dem sie arbeiten können. <em>Schlusssatz:</em> Struktur ist der Hebel – je sauberer das Modell, desto besser führen Menschen und desto verlässlicher handeln Agenten. Danke."
+    data-notes-en="<em>My takeaway – grounded.</em> A company's knowledge, made explicit and structured, pays off twice: people align faster, and agents finally have a brain to work with. <em>Closing line:</em> structure is the lever – the cleaner the model, the better people lead and the more reliably agents act. Thank you.">
+    <div class="kicker mono" data-n="09" data-en="Takeaway">Takeaway</div>
+    <h1 data-en="Explicit knowledge pays off twice – for people and for agents.">Explizites Wissen zahlt doppelt – für Menschen und für Agenten.</h1>
+    <p class="sub" data-en="Structure is the lever. The cleaner the model, the better people lead and the more reliably agents act.">Struktur ist der Hebel. Je sauberer das Modell, desto besser führen Menschen und desto verlässlicher handeln Agenten.</p>
+  </section>
+
+</div>
+
+<div class="langind mono"><span id="lde">DE</span> · <span id="len">EN</span></div>
+<div class="hint mono" id="hint">← →  blättern · N  Notizen · L  Sprache · F  Vollbild</div>
+<div class="name">Robert Blust</div>
+<div class="counter mono"><b id="cur">1</b> / <span id="tot">10</span></div>
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <small id="notesclose">N schliesst die Notizen</small>
+</div>
+
+<script>
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0, notesOpen = false, lang = 'de';
+  var bar = document.getElementById('bar'), cur = document.getElementById('cur');
+  var notes = document.getElementById('notes'), ntext = document.getElementById('ntext'), ntime = document.getElementById('ntime');
+  document.getElementById('tot').textContent = slides.length;
+
+  var i18n = Array.prototype.slice.call(document.querySelectorAll('[data-en]'));
+  i18n.forEach(function(el){ el.setAttribute('data-de', el.innerHTML); });
+
+  var UI = {
+    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen' },
+    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes' }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute('data-' + lang); });
+    document.getElementById('hint').textContent = UI[lang].hint;
+    document.getElementById('noteslabel').textContent = UI[lang].label;
+    document.getElementById('notesclose').textContent = UI[lang].close;
+    document.getElementById('lde').classList.toggle('on', lang === 'de');
+    document.getElementById('len').classList.toggle('on', lang === 'en');
+    document.documentElement.lang = lang;
+    render();
+  }
+
+  function fitNotes(){
+    var s = slides[i];
+    s.style.transform = '';
+    if(!notesOpen) return;
+    var avail = window.innerHeight - notes.offsetHeight - 20;
+    var need  = s.scrollHeight;
+    if(need > avail){ s.style.transform = 'scale(' + Math.max(0.5, avail/need) + ')'; }
+  }
+
+  function render(){
+    slides.forEach(function(s,n){ if(n!==i) s.style.transform=''; s.classList.toggle('active', n===i); });
+    bar.style.width = ((i+1)/slides.length*100) + '%';
+    cur.textContent = i+1;
+    if(notesOpen){
+      var d = slides[i].dataset;
+      ntext.innerHTML = (lang === 'en' && d.notesEn) ? d.notesEn : d.notes;
+      ntime.textContent = d.time || '';
+    }
+    fitNotes();
+  }
+  window.addEventListener('resize', fitNotes);
+  function go(n){ i = Math.max(0, Math.min(slides.length-1, n)); render(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ go(i+1); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ go(i-1); e.preventDefault(); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(slides.length-1); }
+    else if(e.key==='n'||e.key==='N'){ notesOpen=!notesOpen; notes.classList.toggle('show',notesOpen); document.getElementById('deck').classList.toggle('notes-open',notesOpen); render(); }
+    else if(e.key==='l'||e.key==='L'){ lang = (lang==='de') ? 'en' : 'de'; applyLang(); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); } else { document.exitFullscreen(); } }
+  });
+  document.getElementById('deck').addEventListener('click', function(e){
+    if(e.clientX > window.innerWidth/2){ go(i+1); } else { go(i-1); }
+  });
+  applyLang();
+</script>
+</body>
+</html>
