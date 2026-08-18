@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Essenzielle Komplexität erfassen – Robert Blust</title>
+<title>Essential Complexity – Robert Blust</title>
 <style>
   :root{
     --paper:#0f1013; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
@@ -374,13 +374,14 @@
   i18n.forEach(function(el){ el.setAttribute('data-de', el.innerHTML); });
 
   var UI = {
-    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen' },
-    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes' }
+    de:{ hint:'← →  blättern · N  Notizen · L  Sprache · F  Vollbild', label:'Sprecher-Notiz', close:'N schliesst die Notizen', title:'Essenzielle Komplexität erfassen – Robert Blust' },
+    en:{ hint:'← →  navigate · N  notes · L  language · F  fullscreen', label:'Speaker note', close:'N closes the notes', title:'Essential Complexity – Robert Blust' }
   };
 
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute('data-' + lang); });
     document.getElementById('hint').textContent = UI[lang].hint;
+    document.title = UI[lang].title;
     document.getElementById('noteslabel').textContent = UI[lang].label;
     document.getElementById('notesclose').textContent = UI[lang].close;
     document.getElementById('lde').classList.toggle('on', lang === 'de');
