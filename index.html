@@ -292,14 +292,14 @@
   <!-- 06 · Regeln, Metriken, Entscheide -->
   <section class="slide"
     data-time="1:10"
-    data-notes="<em>Ich zeige die Tiefe an drei kurzen Beispielen – nicht vorlesen, herausgreifen.</em> Eine Regel: Deployments laufen dev zu test zu prod, Owner ist das Engineering. Ein KPI: Lead Time for Changes – je tiefer, desto besser, mit klarem Owner. Ein Architektur-Entscheid: JSONB wird nur für kontextuelle Daten genutzt, nicht darauf abgefragt – und die verworfene Alternative, Queries im JSONB, steht ehrlich dabei. <em>Mein Kernsatz:</em> jede Regel, jede Kennzahl, jeder Entscheid ist benannt, begründet und gehört jemandem."
-    data-notes-en="<em>I show the depth with three short examples – don't read them out, pick them up.</em> A rule: deployments go dev to test to prod, owned by Engineering. A KPI: Lead Time for Changes – lower is better, with a clear owner. An architecture decision: JSONB is used only for contextual data, never queried on – and the rejected alternative, querying inside JSONB, is recorded honestly next to it. <em>My key line:</em> every rule, metric and decision is named, justified and owned.">
+    data-notes="<em>Ich zeige die Tiefe an drei kurzen Beispielen – nicht vorlesen, herausgreifen.</em> Eine Regel: Deployments laufen dev zu test zu prod, Owner ist das Engineering. Ein KPI: Lead Time for Changes – je tiefer, desto besser, mit klarem Owner. Ein Architektur-Entscheid: JSONB wird nur für kontextuelle Daten genutzt – und die verworfene Alternative, darauf abzufragen, steht ehrlich dabei. <em>Mein Kernsatz:</em> jede Regel, jede Kennzahl, jeder Entscheid ist benannt, begründet und gehört jemandem."
+    data-notes-en="<em>I show the depth with three short examples – don't read them out, pick them up.</em> A rule: deployments go dev to test to prod, owned by Engineering. A KPI: Lead Time for Changes – lower is better, with a clear owner. An architecture decision: JSONB is used only for contextual data – and the rejected alternative, querying on it, is recorded honestly next to it. <em>My key line:</em> every rule, metric and decision is named, justified and owned.">
     <div class="kicker mono" data-n="06" data-en="Rules, metrics, decisions">Regeln, Metriken, Entscheide</div>
     <h1 data-en="Rules, metrics and decisions – structured and owned.">Regeln, Metriken und Entscheide – strukturiert und mit Owner.</h1>
     <dl class="glossary rise">
       <div><dt data-en="Rule">Regel</dt><dd data-en="“Deployments follow dev → test → prod.” — Owner: Engineering.">„Deployments folgen dev → test → prod.“ — Owner: Engineering.</dd></div>
       <div><dt data-en="KPI">KPI</dt><dd data-en="“Lead Time for Changes” — lower is better. — Owner: Engineering.">„Lead Time for Changes“ — je tiefer, desto besser. — Owner: Engineering.</dd></div>
-      <div><dt data-en="Architecture decision">Architektur-Entscheid</dt><dd data-en="“JSONB only for contextual data — never queried on.” — rejected: querying inside JSONB.">„JSONB nur für kontextuelle Daten — nicht darauf abfragen.“ — verworfen: Queries im JSONB.</dd></div>
+      <div><dt data-en="Architecture decision">Architektur-Entscheid</dt><dd data-en="“JSONB only for contextual data.” — rejected: querying on it.">„JSONB nur für kontextuelle Daten.“ — verworfen: darauf abfragen.</dd></div>
     </dl>
     <p class="stamp rise" data-en="Every rule, metric and decision: <b>named, justified, owned.</b>">Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b></p>
   </section>
