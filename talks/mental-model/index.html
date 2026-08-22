@@ -902,14 +902,11 @@
     labelPlay();
   }
 
-  /* Optimistic: if a clip exists we never need a voice installed. Checked lazily so the
-     deck makes no network request until someone actually presses play. */
-  var clipsSeen = null;
-  function hasClips(){
-    if (clipsSeen !== null) return clipsSeen;
-    clipsSeen = true;                       // assume yes; clip.onerror handles the truth
-    return clipsSeen;
-  }
+  /* This deck has no recorded clips and never will, so the browser voice is the only
+     narration path — unlike the reference deck, where assuming a clip exists is correct.
+     Saying so here is what makes the no-voice message reachable. */
+  var clipsSeen = false;
+  function hasClips(){ return clipsSeen; }
 
   function toggleNarration(){ playing ? stopNarration() : startNarration(); }
 
