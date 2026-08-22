@@ -9,15 +9,16 @@ Same approach as the companion talk [essential-complexity](https://blust.ch/talk
 
 ## View
 
-**Live:** https://robertblust.github.io/mental-model/
+**Live:** https://blust.ch/talks/mental-model/
 
 A self-contained HTML deck (dark theme, bilingual DE/EN).
 
 ### Controls
-- **← →** – navigate
-- **N** – speaker notes on/off
-- **L** – switch language (DE/EN)
-- **F** – fullscreen
+A transport bar along the bottom edge: back to start, previous, play/pause, next,
+fullscreen, then a DE/EN toggle and speaker notes. Swipe left or right on touch. Arrow,
+space, page and Home/End keys still drive the deck too — for a presenter remote — but
+they're not shown anywhere; the buttons are the interface. Play uses the browser's own
+voice — there are no recorded clips.
 
 ## Contents
 - `index.html` – the presentation deck (fully self-contained; inline SVG diagrams, no external assets)
