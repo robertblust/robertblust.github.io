@@ -9,7 +9,8 @@ const PAGES = [
   { path: "/", title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/"],
     contains: ["deciding well", "The Mental Model", "Essential Complexity"] },
-  { path: "/talks/mental-model/", title: /Mental Model/, lang: "en" },
+  { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
+    transport: true, zeroBased: true, sourceLang: true },
   { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en" },
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
@@ -45,6 +46,30 @@ const CHECKS = {
       if (!text.includes(s)) return `body text is missing ${JSON.stringify(s)}`;
     return null;
   },
+  async transport(page) {
+    const missing = await page.evaluate(() =>
+      ["tFirst","tPrev","tPlay","tNext","tFull","tNotes","langDe","langEn","chrome"]
+        .filter(id => !document.getElementById(id)));
+    if (missing.length) return "missing controls: " + missing.join(", ");
+    const unnamed = await page.evaluate(() =>
+      [...document.querySelectorAll(".tbtn")].filter(b => !b.getAttribute("aria-label")).length);
+    if (unnamed) return `${unnamed} control(s) without an accessible name`;
+    return null;
+  },
+  async zeroBased(page) {
+    const [cur, kicker] = await page.evaluate(() => [
+      document.getElementById("cur").textContent.trim(),
+      document.querySelector(".slide.active .kicker").dataset.n,
+    ]);
+    return cur === kicker ? null : `counter says ${cur}, kicker says ${kicker}`;
+  },
+  async sourceLang(page, spec) {
+    // lang before JS runs — the static attribute must describe the German markup
+    const res = await fetch(spec.absolute);
+    const html = await res.text();
+    const m = html.match(/<html lang="([a-z]+)"/);
+    return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
+  },
 };
 
 const browser = await chromium.launch();
@@ -55,6 +80,7 @@ for (const spec of PAGES) {
   const jsErrors = [];
   page.on("pageerror", e => jsErrors.push(String(e)));
   const problems = [];
+  spec.absolute = BASE + spec.path;
   try {
     const res = await page.goto(BASE + spec.path, { waitUntil: "networkidle" });
     if (!res || !res.ok()) problems.push(`HTTP ${res ? res.status() : "no response"}`);
