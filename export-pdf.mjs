@@ -22,7 +22,7 @@ for (const deck of decks) {
   // the decks have no keyboard shortcuts any more — click the transport's language toggle
   await page.click("#langDe");
   await page.waitForTimeout(300);
-  await page.addStyleTag({ content: `.chrome,.bar,.notes{display:none!important}` });
+  await page.addStyleTag({ content: `.chrome,.bar,.notes{display:none!important}\n     /* a still image should not be waiting out a transition it does not want */\n     .slide.active > *{animation:none!important}` });
 
   const count = await page.evaluate(() => document.querySelectorAll(".slide").length);
   const pdf = await PDFDocument.create();

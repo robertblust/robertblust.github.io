@@ -14,7 +14,9 @@ const W = 1200, H = 630, RENDER_H = 675, BAND_Y = Math.round((RENDER_H - H) / 2)
 const root = path.dirname(fileURLToPath(import.meta.url));
 
 // a share card advertising a progress bar and a play button that do nothing inside a PNG
-const HIDE = `.chrome,.bar,.notes,.langind,.hint{display:none!important}`;
+const HIDE = `.chrome,.bar,.notes,.langind,.hint{display:none!important}
+  /* a still image should not be waiting out a transition it does not want */
+  .slide.active > *{animation:none!important}`;
 
 const cards = [
   { dir: ".", titleSlide: false },

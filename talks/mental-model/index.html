@@ -53,11 +53,24 @@
     opacity:0; transition:opacity .35s ease;
   }
   .slide.active{display:flex; opacity:1}
-  .slide.active .rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
-  .slide.active .rise:nth-child(1){animation-delay:.05s}
-  .slide.active .rise:nth-child(2){animation-delay:.14s}
-  .slide.active .rise:nth-child(3){animation-delay:.24s}
-  .slide.active .rise:nth-child(4){animation-delay:.34s}
+  /* Every direct child of the active slide rises, in order. This used to require a
+     hand-applied .rise class, which meant a slide animated only if someone remembered —
+     one deck had it on all fifty-five children, another on nine, a third on two. The rule
+     now applies itself, so a new slide cannot be forgotten.
+     The stagger ran out at four children while slides carry up to six, and the fifth and
+     sixth inherited animation-delay:0 — firing before the first four rather than after.
+     Hence steps to six and a catch-all beyond. */
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
   @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
 
   .kicker{
@@ -327,7 +340,7 @@
     <div class="kicker mono" data-n="00" data-en="A concept explained by Robert Blust">Ein Konzept erklärt von Robert Blust</div>
     <h1 data-en="The Mental Model.">Das Mental Model.</h1>
     <p class="sub" data-en="The brain for company management and agentic AI.">Das Gehirn für Unternehmensführung und agentische KI.</p>
-    <p class="byline rise" data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</p>
+    <p class="byline" data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</p>
   </section>
 
   <!-- 01 · Der Haken -->
@@ -359,7 +372,7 @@
     data-notes-en="<em class='cue'>I show the breadth – without reading everything out.</em> The model holds everything that makes a company: roles and teams (who does what), processes with gates (how work flows), strategy and objectives (where we invest), KPIs (what we measure), rules (what we enforce), features (what we build), concepts (what we define), architecture decisions (what we decided) and values (what we believe). <em class='cue'>Keep it short – one line is enough:</em> versioned like code, machine-readable, ONE source of truth.">
     <div class="kicker mono" data-n="03" data-en="The breadth">Die Breite</div>
     <h1 data-en="Everything that makes a company – in one place.">Alles, was eine Firma ausmacht – an einem Ort.</h1>
-    <div class="grid rise">
+    <div class="grid">
       <div class="cell"><b data-en="Roles &amp; Teams">Rollen &amp; Teams</b><span data-en="who does what">wer was tut</span></div>
       <div class="cell"><b data-en="Processes &amp; Gates">Prozesse &amp; Gates</b><span data-en="how work flows">wie Arbeit fliesst</span></div>
       <div class="cell"><b data-en="Strategy &amp; Objectives">Strategie &amp; Ziele</b><span data-en="where we invest">wohin wir investieren</span></div>
@@ -370,7 +383,7 @@
       <div class="cell"><b data-en="Architecture decisions">Architektur-Entscheide</b><span data-en="what we decided">was wir entschieden haben</span></div>
       <div class="cell"><b data-en="Values">Werte</b><span data-en="what we believe">was wir glauben</span></div>
     </div>
-    <p class="stamp rise" data-en="Versioned like code, machine-readable, <b>ONE source of truth.</b>">Versioniert wie Code, maschinenlesbar, <b>EINE Quelle der Wahrheit.</b></p>
+    <p class="stamp" data-en="Versioned like code, machine-readable, <b>ONE source of truth.</b>">Versioniert wie Code, maschinenlesbar, <b>EINE Quelle der Wahrheit.</b></p>
   </section>
 
   <!-- 04 · Der Graph -->
@@ -380,7 +393,7 @@
     data-notes-en="<em class='cue'>The decisive trick.</em> All these areas don't just sit side by side – they cross-reference each other. Filenames are the canonical IDs, and references are exact names, not links. <em class='cue'>My point:</em> there are no dead links, because consistency checks run on every change – a person without a role, a rule without an owner, a feature without a parent surfaces immediately. That turns many files into one connected, contradiction-free graph.">
     <div class="kicker mono" data-n="04" data-en="The graph">Der Graph</div>
     <h1 data-en="Everything cross-references – <em>no dead links</em>.">Alles verweist aufeinander – <em>keine toten Links</em>.</h1>
-    <div class="split rise">
+    <div class="split">
       <div class="diagram">
         <svg viewBox="0 0 520 340" role="img" aria-label="Knowledge graph">
           <line class="edge" x1="260" y1="170" x2="260" y2="52"></line>
@@ -423,7 +436,7 @@
     data-notes-en="<em class='cue'>I make it concrete.</em> Take a process step with a gate – the transition from concept to delivery. The model records who is accountable (product leadership), what the gate criteria are, and the rules behind them. <em class='cue'>My point:</em> this is governance not as a slide but as data – a technical-debt score, a rule 'above +2, cleanup work enters scope', and kill criteria. Exactly the kind of thing a machine can reason over.">
     <div class="kicker mono" data-n="05" data-en="An example">Ein Beispiel</div>
     <h1 data-en="Governance a machine can <em>reason over</em>.">Governance, über die eine Maschine <em>nachdenken</em> kann.</h1>
-    <div class="split even rise">
+    <div class="split even">
       <div class="diagram">
         <svg viewBox="0 0 300 300" role="img" aria-label="Concept to delivery gate">
           <rect class="flowbox" x="70" y="20" width="160" height="46"></rect>
@@ -452,12 +465,12 @@
     data-notes-en="<em class='cue'>I show the depth with three short examples – don't read them out, pick them up.</em> A rule: deployments go dev to test to prod, owned by Engineering. A KPI: Lead Time for Changes – lower is better, with a clear owner. An architecture decision: JSONB is used only for contextual data – and the rejected alternative, querying on it, is recorded honestly next to it. <em class='cue'>My key line:</em> every rule, metric and decision is named, justified and owned.">
     <div class="kicker mono" data-n="06" data-en="Rules, metrics, decisions">Regeln, Metriken, Entscheide</div>
     <h1 data-en="Rules, metrics and decisions – structured and owned.">Regeln, Metriken und Entscheide – strukturiert und mit Owner.</h1>
-    <dl class="glossary rise">
+    <dl class="glossary">
       <div><dt data-en="Rule">Regel</dt><dd data-en="“Deployments follow dev → test → prod.” — Owner: Engineering.">„Deployments folgen dev → test → prod.“ — Owner: Engineering.</dd></div>
       <div><dt data-en="KPI">KPI</dt><dd data-en="“Lead Time for Changes” — lower is better. — Owner: Engineering.">„Lead Time for Changes“ — je tiefer, desto besser. — Owner: Engineering.</dd></div>
       <div><dt data-en="Architecture decision">Architektur-Entscheid</dt><dd data-en="“JSONB only for contextual data.” — rejected: querying on it.">„JSONB nur für kontextuelle Daten.“ — verworfen: darauf abfragen.</dd></div>
     </dl>
-    <p class="stamp rise" data-en="Every rule, metric and decision: <b>named, justified, owned.</b>">Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b></p>
+    <p class="stamp" data-en="Every rule, metric and decision: <b>named, justified, owned.</b>">Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b></p>
   </section>
 
   <!-- 07 · Zwei Zielgruppen, eine Quelle -->
@@ -467,7 +480,7 @@
     data-notes-en="<em class='cue'>Now the core – why it pays off twice.</em> The same model serves two audiences. People get role-based onboarding, decision support – 'who owns the deployment?' – and shared alignment. Agents get a context layer plus access through MCP tools, and act within the guardrails: vision, strategy, process, rules. <em class='cue'>My point – short pause:</em> one source, two audiences, no drift.">
     <div class="kicker mono" data-n="07" data-en="Two audiences, one source">Zwei Zielgruppen, eine Quelle</div>
     <h1 data-en="The same model – for people <em>and</em> agents.">Dasselbe Modell – für Menschen <em>und</em> Agenten.</h1>
-    <div class="thennow rise">
+    <div class="thennow">
       <div class="col">
         <h4 data-en="For people">Für Menschen</h4>
         <p data-en="Onboarding by role, decisions, alignment.">Onboarding nach Rolle, Entscheidungen, Ausrichtung.</p>
@@ -479,7 +492,7 @@
         <p class="small" data-en="Agents act inside vision, strategy, process and rules.">Agenten handeln innerhalb von Vision, Strategie, Prozess und Regeln.</p>
       </div>
     </div>
-    <p class="verdict rise" data-en="One source – <em>two audiences, no drift.</em>">Eine Quelle – <em>zwei Zielgruppen, kein Auseinanderdriften.</em></p>
+    <p class="verdict" data-en="One source – <em>two audiences, no drift.</em>">Eine Quelle – <em>zwei Zielgruppen, kein Auseinanderdriften.</em></p>
   </section>
 
   <!-- 08 · Warum es zählt -->
