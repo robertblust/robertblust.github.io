@@ -11,6 +11,9 @@ const PAGES = [
     contains: ["deciding well", "The Mental Model", "Essential Complexity"] },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en" },
   { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en" },
+  { path: "/talks/", title: /Talks/, lang: "en",
+    contains: ["The Mental Model", "Essential Complexity",
+               "machine-readable knowledge base", "essential complexity"] },
 ];
 
 const CHECKS = {

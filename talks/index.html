@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://blust.ch/talks/">
+<title>Robert Blust — Talks</title>
+<meta name="description" content="Two ten-minute talks, in German and English, on describing a problem precisely before building it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Robert Blust">
+<meta property="og:url" content="https://blust.ch/talks/">
+<meta property="og:title" content="Robert Blust — Talks">
+<meta property="og:description" content="Two ten-minute talks, in German and English, on describing a problem precisely before building it.">
+<meta property="og:image" content="https://blust.ch/talks/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Robert Blust — talks.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --paper:#0f1013; --paper2:#191b20; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
+    --line:#282a30;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:var(--paper); color:var(--ink); min-height:100vh;
+    background-image:radial-gradient(130% 70% at 50% 0%, #17191f 0%, var(--paper) 62%);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  /* same rhythm as the deck and the profile page: full-bleed, vmin padding */
+  .wrap{padding:11vmin 10vmin 9vmin}
+
+  /* the same lockup the profile page opens with, styled as a way back to it */
+  .brand{display:inline-block; text-decoration:none; margin-bottom:5vmin; color:var(--ink)}
+  .brand b{font-weight:600; letter-spacing:-.01em; font-size:clamp(1.05rem,2.3vmin,1.5rem)}
+  .brand:hover, .brand:focus-visible{color:var(--cobalt)}
+
+  h1{font-weight:600; line-height:1.15; letter-spacing:-.01em; font-size:clamp(1.9rem,4.6vmin,3.6rem); max-width:22ch}
+  h1 em{font-style:normal; color:var(--cobalt)}
+  .lede{margin-top:2.6vmin; font-size:clamp(1.05rem,2.2vmin,1.4rem); color:var(--muted); max-width:52ch; line-height:1.5}
+
+  .talks{margin-top:8vmin}
+  .talk{
+    display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem 3vmin; align-items:baseline;
+    border-top:2px solid var(--line); padding:3.4vmin 0;
+    text-decoration:none; color:inherit; transition:border-color .2s ease;
+  }
+  .talk:last-child{border-bottom:2px solid var(--line)}
+  .talk:hover{border-color:var(--cobalt)}
+  .talk:hover .t{color:var(--cobalt)}
+  .num{font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:clamp(.9rem,1.7vmin,1.25rem)}
+  .t{font-size:clamp(1.4rem,3.4vmin,2.4rem); font-weight:600; line-height:1.2; transition:color .2s ease}
+  .d{grid-column:2; margin-top:1.2vmin; color:var(--muted); font-size:clamp(1rem,2.1vmin,1.45rem); line-height:1.45; max-width:62ch}
+  .meta{
+    font-family:"IBM Plex Mono",monospace; font-size:clamp(.78rem,1.5vmin,1.05rem);
+    color:var(--muted); letter-spacing:.1em; white-space:nowrap; text-align:right;
+  }
+  .meta b{color:var(--ink); font-weight:600}
+
+  .foot{margin-top:8vmin; display:flex; flex-wrap:wrap; gap:.9rem 3vmin;
+        font-family:"IBM Plex Mono",monospace; font-size:clamp(.72rem,1.4vmin,.95rem);
+        letter-spacing:.1em; color:var(--muted)}
+  .foot a{color:var(--cobalt); text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  @media (max-width:860px), (max-aspect-ratio:4/5){
+    .wrap{padding:16vmin 7vw 10vh}
+    h1{font-size:clamp(1.6rem,7.5vw,2.6rem); max-width:100%}
+    .lede{font-size:clamp(1rem,4.4vw,1.3rem); max-width:100%}
+    .talk{grid-template-columns:auto 1fr; gap:.6rem 1.2rem}
+    .meta{grid-column:2; text-align:left; margin-top:.6rem}
+    .d{grid-column:2; max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <a class="brand" href="/"><b>Robert Blust</b></a>
+  <h1>Deciding well, in <em>two talks</em>.</h1>
+  <p class="lede">Both run about ten minutes, live in German and English, and argue the same
+    point from different angles: describe the problem precisely, and the harder half of the
+    work is already done.</p>
+
+  <div class="talks">
+    <a class="talk" href="mental-model/">
+      <span class="num mono">01</span>
+      <span class="t">The Mental Model</span>
+      <span class="meta mono"><b>10 min</b><br>DE · EN</span>
+      <span class="d">A structured, machine-readable knowledge base that acts as the brain of a
+        company: one source of truth for vision, strategy, processes, roles, KPIs, rules and
+        decisions, serving both human company management and agentic AI.</span>
+    </a>
+    <a class="talk" href="essential-complexity/">
+      <span class="num mono">02</span>
+      <span class="t">Essential Complexity</span>
+      <span class="meta mono"><b>10 min</b><br>DE · EN</span>
+      <span class="d">Describing a problem in its essential complexity — no more, no less. The
+        standard has not changed in fifteen years; what changed is the cost. With AI and the right
+        meta-model you reach the same clarity with far less friction.</span>
+    </a>
+  </div>
+
+  <div class="foot">
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+  </div>
+</main>
+
+</body>
+</html>
