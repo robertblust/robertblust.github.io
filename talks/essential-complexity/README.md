@@ -24,7 +24,6 @@ voice — there are no recorded clips.
 - `comic-1..6.png` – hand-drawn journey panels used as a side motif
 - `export-pdf.mjs` – renders a 16:9 PDF fallback, one page per slide
 - `essential-complexity.pdf` – the exported PDF fallback
-- `essential-complexity.md` – speaker script / outline
 
 ## Build the PDF fallback
 ```bash
