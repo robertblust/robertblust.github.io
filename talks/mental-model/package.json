@@ -1,0 +1,15 @@
+{
+  "name": "mental-model",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A 10-minute talk: the Mental Model as the brain for company management and agentic AI.",
+  "scripts": {
+    "pdf": "node export-pdf.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.49.1"
+  }
+}
