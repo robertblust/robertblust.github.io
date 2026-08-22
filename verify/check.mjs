@@ -8,14 +8,16 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const PAGES = [
   { path: "/", title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/"],
-    contains: ["deciding well", "The Mental Model", "Essential Complexity"], card: true },
+    contains: ["deciding well", "The Mental Model", "Essential Complexity"], card: true,
+    internalLinks: true },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true },
+    transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
   { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true },
+    transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
-               "machine-readable knowledge base", "essential complexity"], card: true },
+               "machine-readable knowledge base", "essential complexity"], card: true,
+    internalLinks: true },
 ];
 
 const CHECKS = {
@@ -70,6 +72,16 @@ const CHECKS = {
     const html = await res.text();
     const m = html.match(/<html lang="([a-z]+)"/);
     return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
+  },
+  async internalLinks(page) {
+    // `links` above only inspects a[href^='http'], which is why a root-absolute
+    // internal link (broken under file://) survived nine reviews. Any link that
+    // isn't external, an anchor, or a special scheme must be relative, not "/...".
+    const bad = await page.evaluate(() =>
+      [...document.querySelectorAll("a[href]")]
+        .map(a => a.getAttribute("href"))
+        .filter(h => h && !/^(https?:|mailto:|tel:|#)/i.test(h) && h.startsWith("/")));
+    return bad.length ? `root-absolute internal link(s), break file://: ${bad.join(", ")}` : null;
   },
   async card(page, spec) {
     const img = await page.evaluate(() =>
