@@ -6,7 +6,9 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", title: /Robert Blust/, lang: "en" },
+  { path: "/", title: /Robert Blust/, lang: "en",
+    links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/"],
+    contains: ["deciding well", "The Mental Model", "Essential Complexity"] },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en" },
   { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en" },
 ];
@@ -21,6 +23,24 @@ const CHECKS = {
   async lang(page, spec) {
     const l = await page.evaluate(() => document.documentElement.lang);
     return l === spec.lang ? null : `lang=${l}, expected ${spec.lang}`;
+  },
+  async links(page, spec) {
+    const found = await page.evaluate(() =>
+      [...document.querySelectorAll("a[href^='http']")].map(a =>
+        ({ href: a.href, target: a.target, rel: a.rel })));
+    for (const want of spec.links) {
+      const hit = found.find(l => l.href === want);
+      if (!hit) return `missing outbound link ${want}`;
+      if (hit.target !== "_blank" || !hit.rel.includes("noopener"))
+        return `${want} must open in a new tab with rel=noopener`;
+    }
+    return null;
+  },
+  async contains(page, spec) {
+    const text = await page.evaluate(() => document.body.innerText);
+    for (const s of spec.contains)
+      if (!text.includes(s)) return `body text is missing ${JSON.stringify(s)}`;
+    return null;
   },
 };
 

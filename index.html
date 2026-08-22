@@ -4,7 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Robert Blust</title>
+<link rel="canonical" href="https://blust.ch/">
+<title>Robert Blust — Software Engineer &amp; Architect</title>
+<meta name="description" content="The constraint has moved from building fast to deciding well. Twenty-five years of platforms, and the talks that argue the point.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Robert Blust">
+<meta property="og:url" content="https://blust.ch/">
+<meta property="og:title" content="Robert Blust — Software Engineer &amp; Architect">
+<meta property="og:description" content="The constraint has moved from building fast to deciding well. Twenty-five years of platforms, and the talks that argue the point.">
+<meta property="og:image" content="https://blust.ch/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Robert Blust — Software Engineer and Architect.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0f1013; --paper2:#191b20; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
+    --line:#282a30;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:var(--paper); color:var(--ink); min-height:100vh;
+    background-image:radial-gradient(130% 70% at 50% 0%, #17191f 0%, var(--paper) 62%);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  /* same rhythm as the decks: full-bleed, vmin padding — not a centred column */
+  .wrap{padding:11vmin 10vmin 9vmin}
+
+  /* name lockup replaces the deck's brand mark — the monogram already lives in the favicon */
+  .lockup{margin-bottom:5vmin}
+  .name{font-weight:600; letter-spacing:-.01em; color:var(--ink);
+        font-size:clamp(1.05rem,2.3vmin,1.5rem)}
+  .role{margin-top:.6vmin; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+        font-size:clamp(.72rem,1.4vmin,.95rem)}
+
+  h1{font-weight:600; line-height:1.38; letter-spacing:-.005em; color:var(--ink);
+     font-size:clamp(1.5rem,3.4vmin,2.5rem); max-width:42ch}
+
+  .talks{margin-top:8vmin}
+  .talks h2{font-family:"IBM Plex Mono",monospace; letter-spacing:.14em; text-transform:uppercase;
+            color:var(--muted); margin-bottom:1.6vmin; font-size:clamp(.78rem,1.5vmin,1rem)}
+  .talk{
+    display:grid; grid-template-columns:1fr auto; gap:1.2rem 3vmin; align-items:baseline;
+    border-top:2px solid var(--line); padding:3.4vmin 0;
+    text-decoration:none; color:inherit; transition:border-color .2s ease;
+  }
+  .talk:last-of-type{border-bottom:2px solid var(--line)}
+  .talk:hover{border-color:var(--cobalt)}
+  .talk:hover .t{color:var(--cobalt)}
+  .t{font-size:clamp(1.3rem,3vmin,2rem); font-weight:600; line-height:1.2; transition:color .2s ease}
+  .meta{
+    font-family:"IBM Plex Mono",monospace; font-size:clamp(.78rem,1.5vmin,1.05rem);
+    color:var(--muted); letter-spacing:.1em; white-space:nowrap; text-align:right;
+  }
+  .meta b{color:var(--ink); font-weight:600}
+  .more{display:inline-block; margin-top:2.6vmin; color:var(--cobalt); text-decoration:none;
+        letter-spacing:.08em; font-size:clamp(.8rem,1.5vmin,1rem)}
+  .more:hover{text-decoration:underline}
+
+  .foot{margin-top:8vmin; display:flex; flex-wrap:wrap; gap:.9rem 3vmin;
+        font-family:"IBM Plex Mono",monospace; font-size:clamp(.72rem,1.4vmin,.95rem);
+        letter-spacing:.1em; color:var(--muted)}
+  .foot a{color:var(--cobalt); text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  @media (max-width:860px), (max-aspect-ratio:4/5){
+    .wrap{padding:16vmin 7vw 10vh}
+    h1{font-size:clamp(1.3rem,6vw,2rem); max-width:100%}
+    .talk{grid-template-columns:1fr; gap:.6rem 1.2rem}
+    .meta{grid-column:1; text-align:left; margin-top:.2rem}
+  }
+</style>
 </head>
-<body></body>
+<body>
+
+<main class="wrap">
+  <div class="lockup">
+    <div class="name">Robert Blust</div>
+    <div class="role mono">Software Engineer &amp; Architect</div>
+  </div>
+
+  <h1>My work keeps returning to one idea: the constraint has moved from building fast to deciding well, which makes describing a domain precisely matter more than coding it quickly. Over twenty-five years of platforms behind that — sixteen at UBS, then co-founding 3AP and LIKE MAGIC.</h1>
+
+  <section class="talks">
+    <h2>Talks</h2>
+    <a class="talk" href="talks/mental-model/">
+      <span class="t">The Mental Model</span>
+      <span class="meta mono"><b>10 min</b> · DE · EN</span>
+    </a>
+    <a class="talk" href="talks/essential-complexity/">
+      <span class="t">Essential Complexity</span>
+      <span class="meta mono"><b>10 min</b> · DE · EN</span>
+    </a>
+    <a class="more mono" href="talks/">All talks →</a>
+  </section>
+
+  <div class="foot">
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+  </div>
+</main>
+
+</body>
 </html>
