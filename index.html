@@ -19,6 +19,9 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+  /* Structure and type are guestgraph.io's, deliberately — the two pages are siblings and
+     should stay maintainable side by side. What is absent here is absent on purpose: no
+     .split and no .figure, because this page has no diagram to balance its text against. */
   :root{
     --paper:#0f1013; --paper2:#191b20; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
     --line:#282a30;
@@ -26,87 +29,117 @@
   *{box-sizing:border-box; margin:0; padding:0}
   body{
     font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background:var(--paper); color:var(--ink); min-height:100vh;
-    background-image:radial-gradient(130% 70% at 50% 0%, #17191f 0%, var(--paper) 62%);
+    background:var(--paper); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, #17191f 0%, var(--paper) 60%);
     -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
   }
-  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
-  /* same rhythm as the decks: full-bleed, vmin padding — not a centred column */
-  .wrap{padding:11vmin 10vmin 9vmin}
+  a{color:inherit}
 
-  /* name lockup replaces the deck's brand mark — the monogram already lives in the favicon */
-  .lockup{margin-bottom:5vmin}
-  .name{font-weight:600; letter-spacing:-.01em; color:var(--ink);
-        font-size:clamp(1.05rem,2.3vmin,1.5rem)}
-  .role{margin-top:.6vmin; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
-        font-size:clamp(.72rem,1.4vmin,.95rem)}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
 
-  h1{font-weight:600; line-height:1.38; letter-spacing:-.005em; color:var(--ink);
-     font-size:clamp(1.5rem,3.4vmin,2.5rem); max-width:42ch}
+  header{padding:2rem 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--cobalt)}
+  nav{display:flex; gap:1.9rem; font-family:"IBM Plex Mono", ui-monospace, monospace;
+      font-size:.8rem; letter-spacing:.1em; text-transform:uppercase}
+  nav a{color:var(--muted); text-decoration:none; padding-bottom:.2rem;
+        border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--cobalt)}
 
-  .talks{margin-top:8vmin}
-  .talks h2{font-family:"IBM Plex Mono",monospace; letter-spacing:.14em; text-transform:uppercase;
-            color:var(--muted); margin-bottom:1.6vmin; font-size:clamp(.78rem,1.5vmin,1rem)}
-  .talk{
-    display:grid; grid-template-columns:1fr auto; gap:1.2rem 3vmin; align-items:baseline;
-    border-top:2px solid var(--line); padding:3.4vmin 0;
-    text-decoration:none; color:inherit; transition:border-color .2s ease;
+  main{flex:1; display:flex; align-items:center; padding:2vh 0 5vh}
+
+  .title h1{font-weight:600; letter-spacing:-.03em; line-height:1.02;
+            font-size:clamp(3rem,8vw,6.2rem)}
+  .title h1 span{color:var(--cobalt)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.15rem,2.1vw,1.62rem); color:var(--muted);
+           max-width:34ch; line-height:1.38}
+
+  /* where guestgraph.io has .split, this page has one column */
+  .pitch{margin-top:clamp(2.5rem,5vh,4.6rem)}
+  h2{font-weight:600; letter-spacing:-.025em; line-height:1.06;
+     font-size:clamp(1.9rem,3.7vw,3rem)}
+  h2 em{font-style:normal; color:var(--cobalt)}
+  .lede{margin-top:1.5rem; font-size:clamp(1rem,1.35vw,1.18rem); color:var(--muted);
+        max-width:52ch}
+  .lede a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line);
+          transition:color .18s ease, border-color .18s ease}
+  .lede a:hover, .lede a:focus-visible{color:var(--cobalt); border-color:var(--cobalt)}
+
+  .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
+  .btn{
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.85rem; letter-spacing:.06em;
+    text-decoration:none; padding:.9rem 1.25rem; border-radius:7px; border:1.5px solid var(--line);
+    color:var(--ink); background:var(--paper2);
+    transition:border-color .18s ease, color .18s ease, background-color .18s ease;
   }
-  .talk:last-of-type{border-bottom:2px solid var(--line)}
-  .talk:hover{border-color:var(--cobalt)}
-  .talk:hover .t{color:var(--cobalt)}
-  .t{font-size:clamp(1.3rem,3vmin,2rem); font-weight:600; line-height:1.2; transition:color .2s ease}
-  .meta{
-    font-family:"IBM Plex Mono",monospace; font-size:clamp(.78rem,1.5vmin,1.05rem);
-    color:var(--muted); letter-spacing:.1em; white-space:nowrap; text-align:right;
+  .btn:hover, .btn:focus-visible{border-color:var(--cobalt); color:var(--cobalt)}
+  .btn.primary{border-color:var(--cobalt); color:var(--cobalt)}
+  .btn.primary:hover, .btn.primary:focus-visible{background:#1b2233}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.76rem;
+         letter-spacing:.08em; color:var(--muted)}
+  footer a{color:var(--cobalt); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+
+  :focus-visible{outline:2px solid var(--cobalt); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    .tagline{max-width:100%}
+    .lede{max-width:100%}
+    nav{gap:1.4rem}
+    main{padding:1vh 0 4vh}
   }
-  .meta b{color:var(--ink); font-weight:600}
-  .more{display:inline-block; margin-top:2.6vmin; color:var(--cobalt); text-decoration:none;
-        letter-spacing:.08em; font-size:clamp(.8rem,1.5vmin,1rem)}
-  .more:hover{text-decoration:underline}
-
-  .foot{margin-top:8vmin; display:flex; flex-wrap:wrap; gap:.9rem 3vmin;
-        font-family:"IBM Plex Mono",monospace; font-size:clamp(.72rem,1.4vmin,.95rem);
-        letter-spacing:.1em; color:var(--muted)}
-  .foot a{color:var(--cobalt); text-decoration:none}
-  .foot a:hover{text-decoration:underline}
-
-  @media (max-width:860px), (max-aspect-ratio:4/5){
-    .wrap{padding:16vmin 7vw 10vh}
-    h1{font-size:clamp(1.3rem,6vw,2rem); max-width:100%}
-    .talk{grid-template-columns:1fr; gap:.6rem 1.2rem}
-    .meta{grid-column:1; text-align:left; margin-top:.2rem}
+  @media (prefers-reduced-motion:reduce){
+    .btn, .lede a, nav a{transition:none}
   }
 </style>
 </head>
 <body>
 
-<main class="wrap">
-  <div class="lockup">
-    <div class="name">Robert Blust</div>
-    <div class="role mono">Software Engineer &amp; Architect</div>
-  </div>
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="./"><b>Robert <span>Blust</span></b></a>
+      <nav>
+        <a href="talks/">Talks</a>
+      </nav>
+    </div>
+  </header>
+</div>
 
-  <h1>My work keeps returning to one idea: the constraint has moved from building fast to deciding well, which makes describing a domain precisely matter more than coding it quickly. Over twenty-five years of platforms behind that — sixteen at UBS, then co-founding 3AP and LIKE MAGIC.</h1>
+<main>
+  <div class="shell">
+    <div class="title">
+      <h1>Robert <span>Blust</span>.</h1>
+      <p class="tagline">Software Engineer &amp; Architect</p>
+    </div>
 
-  <section class="talks">
-    <h2>Talks</h2>
-    <a class="talk" href="talks/mental-model/">
-      <span class="t">The Mental Model</span>
-      <span class="meta mono"><b>10 min</b> · DE · EN</span>
-    </a>
-    <a class="talk" href="talks/essential-complexity/">
-      <span class="t">Essential Complexity</span>
-      <span class="meta mono"><b>10 min</b> · DE · EN</span>
-    </a>
-    <a class="more mono" href="talks/">All talks →</a>
-  </section>
-
-  <div class="foot">
-    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
-    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+    <div class="pitch">
+      <h2>Building fast is solved.<br><em>Deciding well</em> is not.</h2>
+      <p class="lede">
+        My work keeps returning to one idea: the constraint has moved from building fast to
+        deciding well, which makes describing a domain precisely matter more than coding it
+        quickly. Over twenty-five years of platforms behind that — sixteen at UBS, then
+        co-founding <a target="_blank" rel="noopener" href="https://3ap.ch">3AP</a> and
+        <a target="_blank" rel="noopener" href="https://likemagic.tech">LIKE MAGIC</a>.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="talks/">See the talks</a>
+      </div>
+    </div>
   </div>
 </main>
+
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+  </footer>
+</div>
 
 </body>
 </html>

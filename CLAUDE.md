@@ -34,14 +34,14 @@ check that catches a page that parses fine and renders wrong.
 
 ## Adding or editing a talk
 
-**A talk lives in two files, not one.** `talks/index.html` carries the descriptions —
-that is the page whose job is to explain what each talk is about. The root `index.html`
-carries a one-line teaser (title, length, language, link) in the same paragraph as the
-thesis. That split is deliberate: the profile page stays a single scroll, not a second
-copy of the talks index. It also means the two pages can and do list the same talks —
-that duplication is intentional, not drift. The teaser line in the root `index.html` is
-one line and it is the edit that gets forgotten; when a talk changes, check both files
-before calling it done.
+**A talk lives in one file.** `talks/index.html` is the only page that names a talk;
+the root `index.html` links to `/talks/` and lists nothing. It used to carry a teaser
+copy of the list, which meant every new talk was two edits and the second was the one
+that got forgotten. That teaser is gone, and this note exists so nobody helpfully adds
+it back.
+
+The root page's nav and its one button both point at `talks/` and neither needs
+touching when the talks change.
 
 ## No external assets, anywhere
 
