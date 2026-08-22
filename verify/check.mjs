@@ -137,11 +137,12 @@ await browser.close();
     if (missing.length || extra.length) {
       console.log(`✗ /sitemap.xml  missing: ${missing} unexpected: ${extra}`); failures++;
     } else {
+      let unreachable = 0;
       for (const u of locs) {
         const r = await fetch(u.replace("https://blust.ch", BASE));
-        if (!r.ok) { console.log(`✗ sitemap URL ${u} → ${r.status}`); failures++; }
+        if (!r.ok) { console.log(`✗ sitemap URL ${u} → ${r.status}`); failures++; unreachable++; }
       }
-      console.log("✓ /sitemap.xml  " + locs.length + " urls, all reachable");
+      if (!unreachable) console.log("✓ /sitemap.xml  " + locs.length + " urls, all reachable");
     }
   }
   const rb = await fetch(BASE + "/robots.txt");
