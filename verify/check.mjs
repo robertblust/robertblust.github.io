@@ -10,6 +10,7 @@ const PAGES = [
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     contains: ["deciding well", "Robert Blust", "3AP", "LIKE MAGIC"], card: true,
+    newTab: ["talks/"],
     internalLinks: true },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
@@ -73,6 +74,18 @@ const CHECKS = {
     const html = await res.text();
     const m = html.match(/<html lang="([a-z]+)"/);
     return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
+  },
+  // every link the landing page offers to the talks must open in a new tab. The links
+  // check above only inspects absolute http hrefs, so a relative one slips past it —
+  // which is exactly how this would regress unnoticed.
+  async newTab(page, spec) {
+    const bad = await page.evaluate(hrefs =>
+      [...document.querySelectorAll("a[href]")]
+        .filter(a => hrefs.includes(a.getAttribute("href")))
+        .filter(a => a.target !== "_blank" || !a.rel.includes("noopener"))
+        .map(a => `${a.getAttribute("href")} [target=${a.target || "none"} rel=${a.rel || "none"}]`),
+      spec.newTab);
+    return bad.length ? "must open in a new tab with rel=noopener: " + bad.join(", ") : null;
   },
   async internalLinks(page) {
     // `links` above only inspects a[href^='http'], which is why a root-absolute

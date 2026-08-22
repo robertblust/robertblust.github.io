@@ -112,6 +112,19 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 - **Never `eval` an extraction from the shell profile.** A bare `export` with no match
   prints the whole environment.
 
+## Every link off the landing page opens in a new tab — including the talks
+
+`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and obviously
+belong in a new tab. Less obviously, so do the two links to `talks/` — the nav item and
+the button. Opening a same-site link in a new tab is normally the wrong instinct, because
+it takes the back button away from the reader. It is deliberate here for the same reason
+guestgraph.io does it with its own talk link: someone who opens a ten-minute talk has not
+finished with the page that sent them, and a deck that swallows the tab it was opened from
+is a deck they have to navigate back out of.
+
+The `links` check in `verify/check.mjs` only inspects absolute `http` hrefs, so a relative
+`talks/` link slips straight past it. That is what the separate `newTab` check is for.
+
 ## Notes live inside HTML attributes, and that bites three specific ways
 
 Speaker notes are `data-notes` / `data-notes-en` attribute values, so anything that ends
