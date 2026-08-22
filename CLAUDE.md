@@ -1,0 +1,111 @@
+# blust.ch — working conventions
+
+Robert Blust's profile page and two talks, self-contained, no build step. What the pages
+are, the URL map and the commands live in `README.md`; this file is about the ways this
+site breaks silently.
+
+## Build & verify
+
+```bash
+npm install && npx playwright install chromium
+npm run serve      # → localhost:8000, all four pages
+npm run verify      # Playwright DOM assertions — the tests
+npm run og           # four 1200×630 share cards
+npm run pdf            # both decks' PDFs
+```
+
+**Verify by rendering, never by reading the diff.** A passing `npm run verify` after any
+change to `index.html`, `talks/index.html`, or a deck is not optional — it is the only
+check that catches a page that parses fine and renders wrong.
+
+## Repository and DNS — get these wrong and there is no error message
+
+- **The repository name is forced.** GitHub only serves a user site at the domain root
+  from a repository named exactly `robertblust.github.io`. Renaming it, or forking under
+  another name, loses `blust.ch` — Pages falls back to `<user>.github.io/<repo>/`, which
+  is a different site at a different URL, silently.
+- **At Hostpoint, only `A`, `AAAA` and the `www` record belong to this site.** `MX` and
+  `TXT` are the domain's live mail. Touching them while pointing DNS at GitHub Pages
+  stops incoming mail with no error and no bounce anyone would notice — the failure
+  shows up as mail that never arrived, days later, from someone who gave up asking.
+- **Decks are self-contained single files that work from `file://`.** No bundler, no
+  shared JS, no CDN. A change that only works when served breaks the one thing a deck is
+  for: opening it cold, on someone else's machine, with no server running.
+
+## Adding or editing a talk
+
+**A talk lives in two files, not one.** `talks/index.html` carries the descriptions —
+that is the page whose job is to explain what each talk is about. The root `index.html`
+carries a one-line teaser (title, length, language, link) in the same paragraph as the
+thesis. That split is deliberate: the profile page stays a single scroll, not a second
+copy of the talks index. It also means the two pages can and do list the same talks —
+that duplication is intentional, not drift. The teaser line in the root `index.html` is
+one line and it is the edit that gets forgotten; when a talk changes, check both files
+before calling it done.
+
+## No external assets, anywhere
+
+Not a style preference. The brief for this site is durability, and a Google Fonts link
+would be the one third-party dependency an otherwise self-contained site has — it also
+sends every visitor's IP to Google from a site carrying no privacy policy, which German
+courts have held to be a GDPR breach on its own. All four pages fall back to the system
+sans stack. If a design pass ever wants a webfont, that is the conversation to have
+first, not a `<link>` to add and forgive later.
+
+## The decks have no recorded audio — `clipsSeen` must stay `false`
+
+Both decks set `clipsSeen = false`. The reference deck this code was adapted from
+(`guestgraph/talks`) sets it `true` because it ships an `audio/` directory, so its
+no-voice branch is unreachable and easy to leave broken without noticing. These two
+decks have no `audio/` and never will — narration here is browser speech synthesis or
+nothing. Flip that flag to `true` without adding audio and a visitor with no installed
+voices gets a play button that lights up, produces silence, and never shows the message
+that exists specifically to explain why.
+
+## Notes live inside HTML attributes, and that bites three specific ways
+
+Speaker notes are `data-notes` / `data-notes-en` attribute values, so anything that ends
+the attribute swallows the rest of the tag with it:
+
+- **Nested markup uses single quotes** — `<em class='cue'>`, never `class="cue"`.
+- **German quotes must be typographic**, `„…“` (U+201E/U+201C). One straight ASCII `"`
+  inside a note ends the attribute early and dumps the rest of the note onto the slide.
+- **Never put an HTML comment inside a start tag.** The parser reads it as part of the
+  tag's attributes; `data-notes` and everything after is lost. Comments go above the tag.
+
+## `<em class='cue'>` is a stage direction; bare `<em>` is spoken
+
+Both decks originally used bare `<em>` for everything in the notes. Turning on narration
+turned every stage direction — *pause here*, *lean in*, *make it personal* — into
+something the synthesized voice read aloud along with the actual content. `class='cue'`
+marks a direction as silent; anything without it is spoken. Where a direction and spoken
+content shared one span, the fix was to split the span, not to pick a side — marking the
+whole thing drops the content, leaving it bare narrates the instruction.
+
+## `lang` describes the source markup, not what a visitor sees
+
+Each deck's `<html lang>` is `de`, because the deck's content is German markup with
+English carried in `data-en` — `applyLang()` swaps it in on load. The two are not the
+same claim: a crawler that runs JavaScript sees English delivered under `lang="en"`; one
+that does not sees German under `lang="de"`. Setting the static attribute to `en` would
+make the German source lie about its own language before any script has run.
+
+## Slide numbers are zero-based everywhere the viewer can see them
+
+The kicker on the slide, the counter in the transport bar, and (for the reference deck
+this pattern comes from) the audio filename all agree on the same zero-based number.
+`npm run verify`'s `zeroBased` check exists because these two numbers drift independently
+the moment one of them is hand-edited.
+
+## `guestgraph/talks` is the reference copy for deck features
+
+The intro deck there is where the transport bar, the language toggle, and the narration
+scaffolding were worked out first. Duplication across these decks and that one is
+deliberate, not an oversight to fix later — a shared runtime between repositories would
+break the rule directly above it: a deck is one file that works from `file://`. Port a
+fix by hand; do not link the two.
+
+## Process
+
+- Commits happen when the user asks; suggest a message, don't auto-commit.
+- Never mention closed-source predecessor projects — here, in docs, or in commits.
