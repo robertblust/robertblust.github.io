@@ -82,6 +82,24 @@ marks a direction as silent; anything without it is spoken. Where a direction an
 content shared one span, the fix was to split the span, not to pick a side — marking the
 whole thing drops the content, leaving it bare narrates the instruction.
 
+## Stripping a cue can leave a lowercase start or a verbless fragment — leave it
+
+`spokenText()` deletes `em.cue` elements outright before reading the rest of the note
+aloud. Two artifacts follow from that, and both are harmless, not bugs to fix:
+
+- The sentence that follows a removed cue can end up starting lowercase (German nouns
+  aside, this shows up more in English notes). A synthesized voice renders lowercase
+  identically to capitalized, so nothing is heard wrong.
+- Removing a cue mid-sentence can leave a verbless fragment behind it — see
+  `essential-complexity` slide 3, where stripping *"Ich betone, dass ich das real
+  gemacht habe:"* leaves "kanonische Datenmodelle bei der UBS, eigene DSLs bei 3AP und
+  LIKE MAGIC." with no verb of its own.
+
+Both are harmless in practice because `spokenText()` always prepends the slide title
+before the note body — the title supplies the lead-in a stripped cue would otherwise
+have provided. Do not "fix" either symptom by inventing connecting words the author
+never wrote; that changes what is said, not just how it parses.
+
 ## `lang` describes the source markup, not what a visitor sees
 
 Each deck's `<html lang>` is `de`, because the deck's content is German markup with
