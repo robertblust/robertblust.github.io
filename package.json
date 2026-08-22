@@ -1,0 +1,17 @@
+{
+  "name": "blust-ch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "blust.ch — Robert Blust: profile page and talks.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "verify": "node verify/check.mjs",
+    "pdf": "node export-pdf.mjs",
+    "og": "node export-og.mjs"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.49.1"
+  }
+}
