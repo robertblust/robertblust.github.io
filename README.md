@@ -24,7 +24,7 @@ works from `file://` as well as a local server.
 
 ```bash
 npm install && npx playwright install chromium
-npm run serve      # python3 -m http.server 8000 — audio/JS autoplay needs a server, not file://
+npm run serve      # python3 -m http.server 8000
 npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
 npm run og           # regenerate the four 1200×630 og:image share cards
 npm run pdf            # regenerate both decks' PDF fallbacks
