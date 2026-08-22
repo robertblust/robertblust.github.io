@@ -19,6 +19,9 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+  /* Shell, header, brand, nav and footer are the profile page's, deliberately: these two
+     are the site's only prose pages and a visitor moving between them should not feel a
+     seam. What differs below that line is the talk list, which only this page carries. */
   :root{
     --paper:#0f1013; --paper2:#191b20; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
     --line:#282a30;
@@ -26,90 +29,132 @@
   *{box-sizing:border-box; margin:0; padding:0}
   body{
     font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background:var(--paper); color:var(--ink); min-height:100vh;
-    background-image:radial-gradient(130% 70% at 50% 0%, #17191f 0%, var(--paper) 62%);
+    background:var(--paper); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, #17191f 0%, var(--paper) 60%);
     -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
   }
+  a{color:inherit}
   .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
-  /* same rhythm as the deck and the profile page: full-bleed, vmin padding */
-  .wrap{padding:11vmin 10vmin 9vmin}
 
-  /* the same lockup the profile page opens with, styled as a way back to it */
-  .brand{display:inline-block; text-decoration:none; margin-bottom:5vmin; color:var(--ink)}
-  .brand b{font-weight:600; letter-spacing:-.01em; font-size:clamp(1.05rem,2.3vmin,1.5rem)}
-  .brand:hover, .brand:focus-visible{color:var(--cobalt)}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
 
-  h1{font-weight:600; line-height:1.15; letter-spacing:-.01em; font-size:clamp(1.9rem,4.6vmin,3.6rem); max-width:22ch}
+  header{padding:2rem 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; flex:0 0 auto}
+  /* the mark is favicon.svg inlined, not linked: this site takes no external assets, and
+     the decks have to open from file://. Its colours come from the tokens rather than the
+     favicon's hard-coded hexes, so the two stay in step through a palette change. */
+  .brand .plate{fill:var(--paper2); stroke:var(--line); stroke-width:1.5}
+  .brand .rb{fill:var(--cobalt)}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--cobalt)}
+  nav{display:flex; gap:1.9rem; font-family:"IBM Plex Mono", ui-monospace, monospace;
+      font-size:.8rem; letter-spacing:.1em; text-transform:uppercase}
+  nav a{color:var(--muted); text-decoration:none; padding-bottom:.2rem;
+        border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--cobalt)}
+  /* the bar is the same component on both pages, so this page says which one you are on
+     rather than dropping the item and leaving the header subtly different */
+  nav a[aria-current="page"]{color:var(--ink); border-color:var(--cobalt)}
+
+  main{flex:1; padding:2vh 0 5vh}
+
+  h1{font-weight:600; letter-spacing:-.02em; line-height:1.08;
+     font-size:clamp(2rem,4.4vw,3.4rem); max-width:22ch}
   h1 em{font-style:normal; color:var(--cobalt)}
-  .lede{margin-top:2.6vmin; font-size:clamp(1.05rem,2.2vmin,1.4rem); color:var(--muted); max-width:52ch; line-height:1.5}
+  .lede{margin-top:1.5rem; font-size:clamp(1.02rem,1.5vw,1.22rem); color:var(--muted);
+        max-width:52ch}
 
-  .talks{margin-top:8vmin}
+  .talks{margin-top:clamp(3rem,6vh,5rem)}
   .talk{
-    display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem 3vmin; align-items:baseline;
-    border-top:2px solid var(--line); padding:3.4vmin 0;
+    display:grid; grid-template-columns:auto 1fr auto; gap:1rem 2.5rem; align-items:baseline;
+    border-top:2px solid var(--line); padding:clamp(1.6rem,3vh,2.4rem) 0;
     text-decoration:none; color:inherit; transition:border-color .2s ease;
   }
   .talk:last-child{border-bottom:2px solid var(--line)}
-  .talk:hover{border-color:var(--cobalt)}
-  .talk:hover .t{color:var(--cobalt)}
-  .num{font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:clamp(.9rem,1.7vmin,1.25rem)}
-  .t{font-size:clamp(1.4rem,3.4vmin,2.4rem); font-weight:600; line-height:1.2; transition:color .2s ease}
-  .d{grid-column:2; margin-top:1.2vmin; color:var(--muted); font-size:clamp(1rem,2.1vmin,1.45rem); line-height:1.45; max-width:62ch}
+  .talk:hover, .talk:focus-visible{border-color:var(--cobalt)}
+  .talk:hover .t, .talk:focus-visible .t{color:var(--cobalt)}
+  .num{font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:.95rem}
+  .t{font-size:clamp(1.3rem,2.6vw,2rem); font-weight:600; line-height:1.2;
+     letter-spacing:-.015em; transition:color .2s ease}
+  .d{grid-column:2; margin-top:.7rem; color:var(--muted);
+     font-size:clamp(1rem,1.35vw,1.15rem); line-height:1.5; max-width:62ch}
   .meta{
-    font-family:"IBM Plex Mono",monospace; font-size:clamp(.78rem,1.5vmin,1.05rem);
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem;
     color:var(--muted); letter-spacing:.1em; white-space:nowrap; text-align:right;
   }
   .meta b{color:var(--ink); font-weight:600}
 
-  .foot{margin-top:8vmin; display:flex; flex-wrap:wrap; gap:.9rem 3vmin;
-        font-family:"IBM Plex Mono",monospace; font-size:clamp(.72rem,1.4vmin,.95rem);
-        letter-spacing:.1em; color:var(--muted)}
-  .foot a{color:var(--cobalt); text-decoration:none}
-  .foot a:hover{text-decoration:underline}
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.76rem;
+         letter-spacing:.08em; color:var(--muted)}
+  footer a{color:var(--cobalt); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
 
-  @media (max-width:860px), (max-aspect-ratio:4/5){
-    .wrap{padding:16vmin 7vw 10vh}
-    h1{font-size:clamp(1.6rem,7.5vw,2.6rem); max-width:100%}
-    .lede{font-size:clamp(1rem,4.4vw,1.3rem); max-width:100%}
+  :focus-visible{outline:2px solid var(--cobalt); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    .lede{max-width:100%}
+    nav{gap:1.4rem}
+    main{padding:1vh 0 4vh}
     .talk{grid-template-columns:auto 1fr; gap:.6rem 1.2rem}
     .meta{grid-column:2; text-align:left; margin-top:.6rem}
     .d{grid-column:2; max-width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .talk, .t, nav a{transition:none}
   }
 </style>
 </head>
 <body>
 
-<main class="wrap">
-  <a class="brand" href="../"><b>Robert Blust</b></a>
-  <h1>Talks on <em>deciding well</em>.</h1>
-  <p class="lede">Each runs about ten minutes, in German and English, and argues the same
-    point from a different angle: describe the problem precisely, and the harder half of
-    the work is already done.</p>
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
+      <nav>
+        <a href="./" aria-current="page">Talks</a>
+      </nav>
+    </div>
+  </header>
+</div>
 
-  <div class="talks">
-    <a class="talk" href="mental-model/">
-      <span class="num mono">01</span>
-      <span class="t">The Mental Model</span>
-      <span class="meta mono"><b>10 min</b><br>DE · EN</span>
-      <span class="d">A structured, machine-readable knowledge base that acts as the brain of a
-        company: one source of truth for vision, strategy, processes, roles, KPIs, rules and
-        decisions, serving both human company management and agentic AI.</span>
-    </a>
-    <a class="talk" href="essential-complexity/">
-      <span class="num mono">02</span>
-      <span class="t">Essential Complexity</span>
-      <span class="meta mono"><b>10 min</b><br>DE · EN</span>
-      <span class="d">Describing a problem in its essential complexity — no more, no less. The
-        standard has not changed in fifteen years; what changed is the cost. With AI and the right
-        meta-model you reach the same clarity with far less friction.</span>
-    </a>
-  </div>
+<main>
+  <div class="shell">
+    <h1>Talks on <em>deciding well</em>.</h1>
+    <p class="lede">Each runs about ten minutes, in German and English, and argues the same
+      point from a different angle: describe the problem precisely, and the harder half of
+      the work is already done.</p>
 
-  <div class="foot">
-    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
-    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+    <div class="talks">
+      <a class="talk" target="_blank" rel="noopener" href="mental-model/">
+        <span class="num mono">01</span>
+        <span class="t">The Mental Model</span>
+        <span class="meta mono"><b>10 min</b><br>DE · EN</span>
+        <span class="d">A structured, machine-readable knowledge base that acts as the brain of a
+          company: one source of truth for vision, strategy, processes, roles, KPIs, rules and
+          decisions, serving both human company management and agentic AI.</span>
+      </a>
+      <a class="talk" target="_blank" rel="noopener" href="essential-complexity/">
+        <span class="num mono">02</span>
+        <span class="t">Essential Complexity</span>
+        <span class="meta mono"><b>10 min</b><br>DE · EN</span>
+        <span class="d">Describing a problem in its essential complexity — no more, no less. The
+          standard has not changed in fifteen years; what changed is the cost. With AI and the right
+          meta-model you reach the same clarity with far less friction.</span>
+      </a>
+    </div>
   </div>
 </main>
+
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+  </footer>
+</div>
 
 </body>
 </html>

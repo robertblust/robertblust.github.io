@@ -112,18 +112,33 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 - **Never `eval` an extraction from the shell profile.** A bare `export` with no match
   prints the whole environment.
 
-## Every link off the landing page opens in a new tab — including the talks
+## A deck opens in a new tab; moving between the two pages does not
 
-`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and obviously
-belong in a new tab. Less obviously, so do the two links to `talks/` — the nav item and
-the button. Opening a same-site link in a new tab is normally the wrong instinct, because
-it takes the back button away from the reader. It is deliberate here for the same reason
-guestgraph.io does it with its own talk link: someone who opens a ten-minute talk has not
-finished with the page that sent them, and a deck that swallows the tab it was opened from
-is a deck they have to navigate back out of.
+`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and belong in a
+new tab. So does a deck: someone who opens a ten-minute talk has not finished with the
+page that sent them, and a deck that swallows the tab it was opened from is a deck they
+have to navigate back out of. The two deck links on `talks/index.html` therefore carry
+`target="_blank" rel="noopener"`.
 
-The `links` check in `verify/check.mjs` only inspects absolute `http` hrefs, so a relative
-`talks/` link slips straight past it. That is what the separate `newTab` check is for.
+The links to `talks/` do not, and used to. The rule above was once written to cover them —
+the nav item and the button on the profile page — but `talks/` is an index, not a deck:
+a short list page you read and leave. Nothing about it is worth taking the back button
+away for, and the argument that justifies the exception simply does not reach it. Same
+site, same tab.
+
+Both halves are invisible to the `links` check in `verify/check.mjs`, which only inspects
+absolute `http` hrefs — a relative `talks/` or `mental-model/` slips straight past it.
+That blind spot is what the separate `newTab` and `sameTab` checks exist to cover, and it
+is why flipping one of these rules means editing a check, not just an `href`.
+
+## The brand lockup is a mark plus a wordmark, and the mark is inlined
+
+Both pages open with the `rb` mark left of **Robert Blust**, the same shape guestgraph.io
+uses. The mark is `favicon.svg` reproduced as inline SVG rather than `<img src=...>`,
+because a linked asset renders as a broken box under `file://` — see *No external assets*
+above. It draws its colours from the CSS tokens instead of the favicon's hard-coded hexes,
+so a palette change moves both together; the favicon keeps its own hexes because it has to
+stand alone. `verify/check.mjs` asserts the inline mark on both pages.
 
 ## Notes live inside HTML attributes, and that bites three specific ways
 

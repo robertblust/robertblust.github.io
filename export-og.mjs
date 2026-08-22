@@ -13,7 +13,10 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const W = 1200, H = 630, RENDER_H = 675, BAND_Y = Math.round((RENDER_H - H) / 2);
 const root = path.dirname(fileURLToPath(import.meta.url));
 
-// a share card advertising a progress bar and a play button that do nothing inside a PNG
+// a share card advertising a progress bar and a play button that do nothing inside a PNG.
+// `.bar` is two different things by the same name: a deck's transport bar and the header
+// bar on the profile and talks pages. Hiding both is what a card wants, but the overlap is
+// accidental — rename either one and the other's rule here stops applying, silently.
 const HIDE = `.chrome,.bar,.notes,.langind,.hint{display:none!important}
   /* a still image should not be waiting out a transition it does not want */
   .slide.active > *{animation:none!important}`;

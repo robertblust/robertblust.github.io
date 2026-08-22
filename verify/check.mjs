@@ -10,7 +10,7 @@ const PAGES = [
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     contains: ["deciding well", "Robert Blust", "3AP", "LIKE MAGIC"], card: true,
-    newTab: ["talks/"],
+    sameTab: ["talks/"], brandMark: true,
     internalLinks: true },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
@@ -19,6 +19,7 @@ const PAGES = [
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
+    newTab: ["mental-model/", "essential-complexity/"], brandMark: true,
     internalLinks: true },
 ];
 
@@ -75,9 +76,9 @@ const CHECKS = {
     const m = html.match(/<html lang="([a-z]+)"/);
     return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
   },
-  // every link the landing page offers to the talks must open in a new tab. The links
-  // check above only inspects absolute http hrefs, so a relative one slips past it —
-  // which is exactly how this would regress unnoticed.
+  // A deck must open in a new tab; navigation between the two prose pages must not. Both
+  // rules are about relative hrefs, which the `links` check above cannot see at all — it
+  // only inspects absolute http ones. That blind spot is why these two exist separately.
   async newTab(page, spec) {
     const bad = await page.evaluate(hrefs =>
       [...document.querySelectorAll("a[href]")]
@@ -86,6 +87,25 @@ const CHECKS = {
         .map(a => `${a.getAttribute("href")} [target=${a.target || "none"} rel=${a.rel || "none"}]`),
       spec.newTab);
     return bad.length ? "must open in a new tab with rel=noopener: " + bad.join(", ") : null;
+  },
+  async sameTab(page, spec) {
+    const bad = await page.evaluate(hrefs =>
+      [...document.querySelectorAll("a[href]")]
+        .filter(a => hrefs.includes(a.getAttribute("href")))
+        .filter(a => a.target === "_blank")
+        .map(a => a.getAttribute("href")),
+      spec.sameTab);
+    return bad.length ? "must stay in this tab: " + bad.join(", ") : null;
+  },
+  // the lockup carries a mark as well as a wordmark, and it is inlined rather than linked
+  // — an <img src="favicon.svg"> would render as a broken box from file://
+  async brandMark(page) {
+    const svgs = await page.evaluate(() =>
+      [...document.querySelectorAll(".brand svg")].length);
+    if (svgs !== 1) return `.brand holds ${svgs} inline svg mark(s), expected 1`;
+    const linked = await page.evaluate(() =>
+      [...document.querySelectorAll(".brand img")].map(i => i.getAttribute("src")));
+    return linked.length ? `.brand links its mark instead of inlining it: ${linked.join(", ")}` : null;
   },
   async internalLinks(page) {
     // `links` above only inspects a[href^='http'], which is why a root-absolute
