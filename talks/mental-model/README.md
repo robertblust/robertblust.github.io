@@ -5,7 +5,7 @@ machine-readable knowledge base that acts as the *brain* of a company: one sourc
 vision, strategy, processes, roles, KPIs, rules and decisions, serving both **human company
 management** and **agentic AI**.
 
-Same approach as the companion talk [essential-complexity](https://github.com/robertblust/essential-complexity).
+Same approach as the companion talk [essential-complexity](https://blust.ch/talks/essential-complexity/).
 
 ## View
 

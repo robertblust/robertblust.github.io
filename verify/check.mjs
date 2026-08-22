@@ -7,6 +7,8 @@ const BASE = process.env.BASE || "http://localhost:8000";
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
   { path: "/", title: /Robert Blust/, lang: "en" },
+  { path: "/talks/mental-model/", title: /Mental Model/, lang: "en" },
+  { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en" },
 ];
 
 const CHECKS = {
