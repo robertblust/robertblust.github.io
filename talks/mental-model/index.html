@@ -286,7 +286,11 @@
   /* below this the seven controls need every pixel; the slide kicker and the progress
      bar still say where you are */
   @media (max-width: 400px){
+    /* the LCD is the only surface a "no voice" message ever appears on; hiding it
+       unconditionally leaves a dead play button on narrow phones with nothing to
+       say why. Keep it hidden except while it is showing a message (.n.msg). */
     .lcd{display:none}
+    .lcd:has(.n.msg){display:flex}
     .transport{padding:.45rem .35rem}
     .tbtn{width:40px; height:40px}
     .tside{gap:.1rem}
