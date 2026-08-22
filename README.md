@@ -28,12 +28,20 @@ npm run serve      # python3 -m http.server 8000
 npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
 npm run og           # regenerate the four 1200×630 og:image share cards
 npm run pdf            # regenerate both decks' PDF fallbacks
+
+./tts/generate.py --dry-run     # narration: what would be billed, and for which slides
+./tts/generate.py               # narration: generate what changed, both decks
 ```
 
 Run `npm run verify` after any change under `index.html`, `talks/`, or `verify/`. Run
 `npm run og` and `npm run pdf` after a visual change to either deck or to `index.html` /
 `talks/index.html` — the share cards and PDFs are rendered, committed files, not
 generated on demand.
+
+Narration is generated from the speaker notes themselves and cached on a content hash, so
+editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in
+`~/.zshrc` and is therefore invisible to a non-interactive shell — `CLAUDE.md` has the
+one-liner that reaches it, and the rule about never printing it.
 
 ## Migration history — read before deleting the source repositories
 

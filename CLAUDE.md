@@ -52,15 +52,65 @@ courts have held to be a GDPR breach on its own. All four pages fall back to the
 sans stack. If a design pass ever wants a webfont, that is the conversation to have
 first, not a `<link>` to add and forgive later.
 
-## The decks have no recorded audio — `clipsSeen` must stay `false`
+## Narration (`tts/`)
 
-Both decks set `clipsSeen = false`. The reference deck this code was adapted from
-(`guestgraph/talks`) sets it `true` because it ships an `audio/` directory, so its
-no-voice branch is unreachable and easy to leave broken without noticing. These two
-decks have no `audio/` and never will — narration here is browser speech synthesis or
-nothing. Flip that flag to `true` without adding audio and a visitor with no installed
-voices gets a play button that lights up, produces silence, and never shows the message
-that exists specifically to explain why.
+`generate.py` reads the decks directly, so the speaker notes are the single source for
+what is said — there is no separate script to keep in step. Clips cache on a content
+hash of voice, model and text, so **editing one note regenerates exactly one clip** and
+costs a few hundred characters rather than a full run.
+
+```bash
+./tts/generate.py --dry-run                       # what would be billed, and for which slides
+./tts/generate.py                                 # both decks
+./tts/generate.py --deck mental-model --only 04   # one slide of one deck
+```
+
+One generator serves both talks rather than a copy per deck. The two copies of the PDF
+exporter this repository was assembled from had already drifted apart — different
+defaults, different comments — which is the argument for not repeating the pattern.
+
+- **`clipsSeen` is `true`, and that is now correct.** It was `false` while these decks
+  had no audio, because browser speech synthesis was the only narration path and a
+  viewer without installed voices needed the no-voice message to explain the silence.
+  With clips present the optimism is right: `clip.onerror` falls back to the browser
+  voice when a clip is missing, and reporting `false` would refuse to play for a
+  voiceless browser even though the recordings would play perfectly.
+- **Measurements before mechanisms.** `voice_settings.speed` is accepted by the API and
+  ignored by `eleven_v3`; audio tags and paragraph breaks move the speaking rate by a few
+  percent. The numbers are in the generator's docstring. Real pauses would mean silence
+  between separate clips, owned by the player. Don't re-litigate this by feel.
+- **Audio is committed, not LFS.** GitHub Pages does not resolve LFS objects — it would
+  serve the pointer text where the audio should be. `.gitattributes` records why.
+- **Narrated runs shorter than live.** Each deck is about ten minutes presented; narrated
+  it is roughly half that, because a recording takes none of the pauses a speaker does.
+  Measure before quoting a figure — these are the only two numbers here that are not.
+- **Slide 00 speaks only its title.** Its whole note is a stage direction about greeting
+  the room, so cue-stripping leaves nothing but the heading — about two seconds against
+  thirty for every other slide. That is honest to what was written; the greeting was
+  never authored as spoken words. Writing one would regenerate four clips.
+
+## Secrets
+
+`ELEVENLABS_API_KEY` is the only credential this repository needs, and it lives in
+`~/.zshrc`. Only an **interactive** zsh sources that file, so a tool shell starts without
+it — and so does a login shell, which is the surprising half. An empty variable is not
+evidence the key is missing. Pull it in for the one command that needs it:
+
+```bash
+export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/null)"
+./tts/generate.py
+```
+
+- **Never print an environment variable's value.** Not to check it, not in a debug line,
+  not buried inside a larger `echo`. A transcript outlives the session, and a key that
+  reaches one has to be rotated.
+- **`${VAR:-UNSET}` prints the value whenever the variable is set.** It reads like a
+  set/unset probe and does the exact opposite. This is not hypothetical: writing
+  `echo "${VAR:+SET}${VAR:-UNSET}"` put a live API key into a transcript and forced a
+  rotation. Probe with `${VAR:+SET}` alone, or
+  `[ -n "$VAR" ] && echo set || echo unset` — forms that can only ever emit a fixed string.
+- **Never `eval` an extraction from the shell profile.** A bare `export` with no match
+  prints the whole environment.
 
 ## Notes live inside HTML attributes, and that bites three specific ways
 
