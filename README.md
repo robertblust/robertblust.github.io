@@ -49,18 +49,34 @@ across a subtree merge commit — it shows only the merge itself, not what was m
 regardless of whether the history is actually there. A clean-looking one-line result
 from that command is not evidence of anything.
 
-The check that actually verifies the history is present is to confirm the two source
-repositories' original tip commits still exist as objects in this repository:
+An earlier draft of this runbook recommended `git cat-file -e <sha>` against this local
+repository instead. **That is not sufficient, and must not be reinstated.** `cat-file -e`
+only proves an object is reachable from local refs on this disk — it says nothing about
+whether it survives. `git remote -v` here is currently empty: nothing has ever been
+pushed anywhere. A local object passing `cat-file -e` is fully consistent with that
+history existing on exactly one machine — the one about to have its only other copies,
+the two source repositories, deleted. Since that deletion is irreversible, a gate that
+can pass while the history has a single point of failure is worse than no gate.
 
-```bash
-git cat-file -e 0b5acb75e48d2a8ad7132fd1b4abc15bf20dc6ea   # mental-model's original tip
-git cat-file -e 77757acea99102d128916e305d9f59e81610d08b   # essential-complexity's original tip
-```
+The check that actually protects against the deletion requires two steps, **in order**:
 
-Both exiting `0` (no output) means the history is genuinely in this repository. Run both
-before deleting `robertblust/mental-model` or `robertblust/essential-complexity` on
-GitHub — that step is irreversible, and this is the only check on that runbook that
-actually inspects the objects rather than a log formatted around them.
+1. **Push this repository to GitHub first.** Until `origin` exists and this history is
+   on it, there is no second copy to verify against — only local objects that would die
+   with this disk.
+2. **Verify against the pushed remote, not local `HEAD` and not local objects:**
+
+   ```bash
+   git fetch origin
+   git merge-base --is-ancestor 0b5acb75e48d2a8ad7132fd1b4abc15bf20dc6ea origin/main
+   git merge-base --is-ancestor 77757acea99102d128916e305d9f59e81610d08b origin/main
+   ```
+
+Both commands must exit `0`. `--is-ancestor` against `origin/main` confirms each source
+repository's original tip commit is not merely present somewhere but actually reachable
+from the branch GitHub is serving — which is what has to be true for the history to be
+recoverable once the source repositories are gone. Run both, against the remote, only
+after pushing, before deleting `robertblust/mental-model` or
+`robertblust/essential-complexity` on GitHub.
 
 ## Process
 
