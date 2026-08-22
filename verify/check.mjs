@@ -120,5 +120,35 @@ for (const spec of PAGES) {
 }
 
 await browser.close();
+
+// The crawl map is not a page, so it is checked separately: every URL a sitemap claims
+// must exist, or the sitemap is a list of promises the site does not keep.
+{
+  const res = await fetch(BASE + "/sitemap.xml");
+  if (!res.ok) { console.log(`✗ /sitemap.xml  HTTP ${res.status}`); failures++; }
+  else {
+    const xml = await res.text();
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    const expected = ["https://blust.ch/", "https://blust.ch/talks/",
+                      "https://blust.ch/talks/mental-model/",
+                      "https://blust.ch/talks/essential-complexity/"];
+    const missing = expected.filter(u => !locs.includes(u));
+    const extra = locs.filter(u => !expected.includes(u));
+    if (missing.length || extra.length) {
+      console.log(`✗ /sitemap.xml  missing: ${missing} unexpected: ${extra}`); failures++;
+    } else {
+      for (const u of locs) {
+        const r = await fetch(u.replace("https://blust.ch", BASE));
+        if (!r.ok) { console.log(`✗ sitemap URL ${u} → ${r.status}`); failures++; }
+      }
+      console.log("✓ /sitemap.xml  " + locs.length + " urls, all reachable");
+    }
+  }
+  const rb = await fetch(BASE + "/robots.txt");
+  if (!rb.ok || !(await rb.text()).includes("sitemap.xml")) {
+    console.log("✗ /robots.txt  missing or does not name the sitemap"); failures++;
+  } else console.log("✓ /robots.txt");
+}
+
 console.log(failures ? `\n${failures} page(s) FAILED` : "\nall checks pass");
 process.exit(failures ? 1 : 0);

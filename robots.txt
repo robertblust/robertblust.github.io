@@ -1,0 +1,9 @@
+# blust.ch
+#
+# Everything here is meant to be found. The only rule that matters is the pointer to the
+# sitemap — this site has no inbound links yet, so discovery starts here.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://blust.ch/sitemap.xml
