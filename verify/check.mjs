@@ -8,14 +8,14 @@ const BASE = process.env.BASE || "http://localhost:8000";
 const PAGES = [
   { path: "/", title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/"],
-    contains: ["deciding well", "The Mental Model", "Essential Complexity"] },
+    contains: ["deciding well", "The Mental Model", "Essential Complexity"], card: true },
   { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true },
+    transport: true, zeroBased: true, sourceLang: true, card: true },
   { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true },
+    transport: true, zeroBased: true, sourceLang: true, card: true },
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
-               "machine-readable knowledge base", "essential complexity"] },
+               "machine-readable knowledge base", "essential complexity"], card: true },
 ];
 
 const CHECKS = {
@@ -70,6 +70,25 @@ const CHECKS = {
     const html = await res.text();
     const m = html.match(/<html lang="([a-z]+)"/);
     return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
+  },
+  async card(page, spec) {
+    const img = await page.evaluate(() =>
+      (document.querySelector('meta[property="og:image"]') || {}).content);
+    if (!img) return "no og:image";
+    const declared = await page.evaluate(() => [
+      (document.querySelector('meta[property="og:image:width"]') || {}).content,
+      (document.querySelector('meta[property="og:image:height"]') || {}).content,
+    ]);
+    const real = await page.evaluate(async u => {
+      const r = await fetch(u.replace("https://blust.ch", location.origin));
+      if (!r.ok) return null;
+      const dv = new DataView(await r.arrayBuffer());
+      return [String(dv.getUint32(16)), String(dv.getUint32(20))];   // PNG IHDR
+    }, img);
+    if (!real) return `${img} is not fetchable`;
+    if (real[0] !== declared[0] || real[1] !== declared[1])
+      return `card is ${real.join("×")} but declared ${declared.join("×")}`;
+    return null;
   },
 };
 
