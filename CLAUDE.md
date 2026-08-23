@@ -112,24 +112,20 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 - **Never `eval` an extraction from the shell profile.** A bare `export` with no match
   prints the whole environment.
 
-## A deck opens in a new tab; moving between the two pages does not
+## Nothing opens in a new tab; every deck carries its own way out
 
-`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and belong in a
-new tab. So does a deck: someone who opens a ten-minute talk has not finished with the
-page that sent them, and a deck that swallows the tab it was opened from is a deck they
-have to navigate back out of. The two deck links on `talks/index.html` therefore carry
-`target="_blank" rel="noopener"`.
+`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and belong in a new
+tab. Nothing on this site does any more — not the talks index, and no longer the decks.
 
-The links to `talks/` do not, and used to. The rule above was once written to cover them —
-the nav item and the button on the profile page — but `talks/` is an index, not a deck:
-a short list page you read and leave. Nothing about it is worth taking the back button
-away for, and the argument that justifies the exception simply does not reach it. Same
-site, same tab.
+Each deck's transport bar has an *All talks* control on the far side of the divider, beside
+the language and notes buttons rather than beside play and next: one button away from those,
+a misclick mid-talk would leave the deck instead of skipping a slide. The credit in the
+bottom-left corner is the same link, in the one corner nobody clicks by accident.
 
-Both halves are invisible to the `links` check in `verify/check.mjs`, which only inspects
-absolute `http` hrefs — a relative `talks/` or `mental-model/` slips straight past it.
-That blind spot is what the separate `newTab` and `sameTab` checks exist to cover, and it
-is why flipping one of these rules means editing a check, not just an `href`.
+Neither half is visible to the `links` check, which only inspects absolute `http` hrefs — a
+relative `mental-model/` slips straight past it. That blind spot is what the `sameTab` and
+`wayOut` checks exist to cover, and it is why flipping any of this means editing a check and
+not just an `href`.
 
 ## The brand lockup is a mark plus a wordmark, and the mark is inlined
 
@@ -201,7 +197,91 @@ deliberate, not an oversight to fix later — a shared runtime between repositor
 break the rule directly above it: a deck is one file that works from `file://`. Port a
 fix by hand; do not link the two.
 
+## The design system, and why it is a copy
+
+Type and colour are shared across `blust.ch`, `guestgraph.io` and the talks repository.
+They share no stylesheet and cannot: a deck has to open from `file://`, so there is
+nothing to import. Every page therefore carries its own copy of the token block, fenced
+by `design tokens · vN` markers.
+
+- **Brightness is confidence, and each stop has exactly one job.** `--c-weak` a candidate
+  considered and not accepted; `--c-mid` anything interactive — links, controls, the brand
+  accent; `--c-firm` the resolved thing — the thesis, the current page; `--c-flag` a
+  reversal, at most once per page and never decoration. Before adding a colour, ask which
+  of the four jobs it is doing. If the answer is "none", it does not belong.
+- **Mono means data.** Record values, lengths, language pairs, URLs, code. Not navigation,
+  not buttons, not prose. It was on all of those before, which is why it had stopped
+  meaning anything. `verify` fails the build if mono appears outside data.
+- **Fonts are self-hosted, same origin.** Not a preference: a font CDN sends every
+  visitor's IP to a third party, and a bare family name with no `@font-face` — which is
+  what these sites shipped for months — silently renders in system-ui instead. Both
+  failures are invisible in the source. `verify` measures the rendered text and fails if a
+  declared family matches the fallback width.
+- **Redaction's grade is data.** Coarser means the record arrived more mangled. Grade 70 is
+  the floor for display type: at 100 it stops reading as a typeface and starts reading as a
+  page that failed to load — which is indistinguishable from the bug above. Grade 100 is
+  for short, source-labelled record values only.
+
+### Changing a token
+
+Edit the block, run `npm run verify`, and it will name any page in **this** repository that
+is behind. Nothing can tell you that a sibling repository is behind — that is why the block
+carries a version. Bumping `vN` means bumping it in all three repositories and running all
+three suites. The check is a habit with a tripwire, not a guarantee.
+
+Both decks under `talks/` carry the system too, each with its own `fonts/` directory
+rather than a shared one at the root. That is deliberate: a deck already keeps `audio/`
+and its images beside it, so the folder — not the file — is the unit that has to survive
+being copied to another machine. A shared `../../fonts/` would break the moment someone
+sent just the talk.
+
+## Slides are a canvas, not a page
+
+A deck lays its slides out once at a fixed height of **900**, and the whole plane is scaled
+to the screen — the way a presentation tool does it, not the way a web page does. Two
+things that used to be worth re-testing are now guarantees: **a slide can never scroll**,
+because the canvas always fits, and **the composition is identical on every screen**,
+because there is only one composition.
+
+- **Only the height is fixed.** The width follows the screen's aspect, so the canvas covers
+  the viewport exactly and there are never letterbox bars. A fixed 16:9 canvas put 96px of
+  black top and bottom on a 4:3 screen, which is the wrong trade on the *minimum* supported
+  size.
+- **Every length is in `cqmin`, never `vmin`.** `cqmin` is 1% of the canvas's shorter side,
+  and since the height is pinned at 900 and any landscape screen is wider than it is tall,
+  that is a constant 9px. Type keeps its size and a wider screen buys real width. `vmin`
+  did the opposite: it derived width from *viewport height*, so content width could never
+  track the frame — at 2560×1080 the slides used 36–51% of the width and the rest was
+  margin. That was the bug, and it is invisible unless you measure it.
+- **Media needs a ceiling.** `.slide svg, .slide img{max-height:60cqmin}`. Anything sized as
+  a fraction of width grows taller as the canvas widens: a square 300×300 diagram in a
+  half-width column reached 780px inside a 900px frame on an ultrawide screen and pushed
+  the slide into overflow. The cap sits well above any inline icon, so it only bites on a
+  figure that was about to break the guarantee.
+- **Below the breakpoint the canvas is switched off** — `transform:none`, `container-type:
+  normal` — and the deck reflows into the scrolling reading view it always had. That is
+  what "minimum supported width 1024" means in practice: canvas above, reflow below.
+
+The scale is driven by one `fit()` function at the end of each deck. Both exporters ride on
+it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case
+the canvas fills the frame exactly with no bars.
+
 ## Process
 
 - Commits happen when the user asks; suggest a message, don't auto-commit.
 - Never mention closed-source predecessor projects — here, in docs, or in commits.
+
+### Why this rule moved twice
+
+It first said every link off the landing page opens in a new tab, decks included. Then it
+said the talks index is an index and stays in the tab, but a deck still gets its own. Now
+nothing gets its own tab at all.
+
+None of those were wrong for what existed at the time — a deck really did have no exit, and
+opening one in the same tab really did strand the reader. The mistake was writing it down as
+a **navigation principle** when it was a **workaround for a missing button**. A principle
+invites you to defend it; a workaround invites you to remove the thing that made it
+necessary. Once the deck carried its own way out, the rule dissolved on its own.
+
+`verify` asserts both halves together — same-tab links *and* the deck's way out — because
+either one alone is a trap.

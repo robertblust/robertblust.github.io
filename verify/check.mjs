@@ -1,6 +1,7 @@
 // The deliverable is rendered pages, so the tests are assertions against a rendered DOM.
 // Run against a served copy of the repo: python3 -m http.server 8000
 import { chromium } from "playwright";
+import { DESIGN_CHECKS } from "./design.mjs";
 
 const BASE = process.env.BASE || "http://localhost:8000";
 
@@ -11,19 +12,30 @@ const PAGES = [
              "https://3ap.ch/", "https://likemagic.tech/"],
     contains: ["deciding well", "Robert Blust", "3AP", "LIKE MAGIC"], card: true,
     sameTab: ["talks/"], brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/mental-model/", title: /Mental Model/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
-  { path: "/talks/essential-complexity/", title: /Essential Complexity/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true, internalLinks: true },
+  { path: "/talks/mental-model/", wayOut: "../", title: /Mental Model/, lang: "en",
+    transport: true, zeroBased: true, sourceLang: true, card: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    internalLinks: true },
+  { path: "/talks/essential-complexity/", wayOut: "../", title: /Essential Complexity/, lang: "en",
+    transport: true, zeroBased: true, sourceLang: true, card: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    internalLinks: true },
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
-    newTab: ["mental-model/", "essential-complexity/"], brandMark: true,
+    sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
 ];
 
 const CHECKS = {
+  ...DESIGN_CHECKS,
   async title(page, spec) {
     const t = await page.title();
     if (!spec.title.test(t)) return `title ${JSON.stringify(t)} does not match ${spec.title}`;
@@ -69,12 +81,15 @@ const CHECKS = {
     ]);
     return cur === kicker ? null : `counter says ${cur}, kicker says ${kicker}`;
   },
+  // The language declared before any JS runs. It used to be `de`, because the markup was
+  // German and JS swapped it to English on load — which meant a crawler without JS read
+  // German from a page whose og tags and share card were English. The decks are
+  // English-first now, so this asserts the page tells the truth cold.
   async sourceLang(page, spec) {
-    // lang before JS runs — the static attribute must describe the German markup
     const res = await fetch(spec.absolute);
     const html = await res.text();
     const m = html.match(/<html lang="([a-z]+)"/);
-    return m && m[1] === "de" ? null : `static lang is ${m && m[1]}, expected de`;
+    return m && m[1] === "en" ? null : `static lang is ${m && m[1]}, expected en`;
   },
   // A deck must open in a new tab; navigation between the two prose pages must not. Both
   // rules are about relative hrefs, which the `links` check above cannot see at all — it
@@ -106,6 +121,23 @@ const CHECKS = {
     const linked = await page.evaluate(() =>
       [...document.querySelectorAll(".brand img")].map(i => i.getAttribute("src")));
     return linked.length ? `.brand links its mark instead of inlining it: ${linked.join(", ")}` : null;
+  },
+  // Decks open in the same tab now, which is only safe because the deck carries its own
+  // way out. If that button ever disappears the same-tab links strand the reader on a
+  // page with no exit — so the two rules are asserted together, deliberately.
+  async wayOut(page, spec) {
+    const found = await page.evaluate(href => {
+      const links = [...document.querySelectorAll("a[href]")]
+        .filter(a => a.getAttribute("href") === href);
+      return links.map(a => ({
+        inChrome: !!a.closest("#chrome"),
+        named: !!(a.getAttribute("aria-label") || (a.textContent || "").trim()),
+      }));
+    }, spec.wayOut);
+    if (!found.length) return `no link back to ${spec.wayOut} — a same-tab deck with no exit`;
+    if (!found.some(l => l.inChrome)) return `the way back is not in the transport bar`;
+    const unnamed = found.filter(l => !l.named).length;
+    return unnamed ? `${unnamed} way-back link(s) without an accessible name` : null;
   },
   async internalLinks(page) {
     // `links` above only inspects a[href^='http'], which is why a root-absolute

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,31 +25,79 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
+   unit that has to survive being copied to someone else's machine is the folder,
+   not the file. Before this the deck named a face it never shipped, so every slide
+   rendered in whatever system-ui the room's laptop happened to have. */
+@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across all three repositories ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
   :root{
-    --paper:#0f1013; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
-    --line:#282a30; --paper2:#191b20; --amber:#e0a75e;
-    /* the transport's own two surfaces: the slab it is milled from, and the
-       recessed window the track number sits behind */
-    --slab:#16181d; --lcd:#0a0b0e;
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+
+    /* deck-only, and deliberately outside the shared block: a warning red the
+       prose pages have no use for, and the transport's own two surfaces — the
+       slab it is milled from and the recessed window the track number sits in. */
+    --warn:#e0705e; --slab:#16181d; --lcd:#0a0b0e;
   }
   *{box-sizing:border-box; margin:0; padding:0}
   html,body{height:100%}
   body{
-    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background:var(--paper); color:var(--ink);
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
     -webkit-font-smoothing:antialiased; overflow:hidden;
   }
-  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
 
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at a fixed height of 900 and the whole plane is
+     scaled to the screen, the way a presentation tool does it. Two things
+     follow that were previously worth re-testing rather than guaranteed: a
+     slide can never scroll, because the canvas always fits; and the
+     composition is identical on every screen, because there is only one.
+
+     Only the height is fixed. The width follows the screen's aspect, so the
+     canvas covers the viewport exactly and there are never letterbox bars —
+     a fixed 16:9 canvas on a 4:3 screen put 96px of black top and bottom.
+     Every length below is in cqmin, 1% of the canvas's shorter side, which
+     is therefore a constant 9px on any landscape screen: type keeps its
+     size, and a wider screen buys real width instead of margin. Sizing by
+     cqmin did the opposite — it derived width from viewport height. */
   .deck{
-    position:fixed; inset:0;
-    background:radial-gradient(130% 85% at 50% 0%, #17191f 0%, var(--paper) 62%);
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    background:radial-gradient(130% 85% at 50% 0%, var(--raise) 0%, var(--ground) 62%);
   }
+
+  /* A slide can never be taller than the canvas, so anything that scales with
+     width needs a ceiling. A square 300×300 diagram in a half-width column was
+     780px tall on an ultrawide screen — inside a 900px frame that already held a
+     kicker and a headline. The cap is well above any inline icon, so it only ever
+     bites on a figure that was about to overflow. */
+  .slide svg, .slide img{max-height:60cqmin}
 
   .slide{
     position:absolute; inset:0;
     display:none; flex-direction:column; justify-content:center;
-    padding:6.5vmin 10vmin;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
     opacity:0; transition:opacity .35s ease;
   }
   .slide.active{display:flex; opacity:1}
@@ -74,91 +122,91 @@
   @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
 
   .kicker{
-    font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:clamp(.82rem,1.6vmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
-    color:var(--cobalt); margin-bottom:3.2vmin; display:flex; align-items:center; gap:1.1em;
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
   }
-  .kicker::before{content:attr(data-n); color:var(--muted)}
-  .kicker::after{content:""; flex:0 0 8vmin; height:2px; background:var(--cobalt); opacity:.5}
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
 
   h1{
     font-weight:600; line-height:1.07; letter-spacing:-.02em;
-    font-size:clamp(2.3rem,6.6vmin,5.6rem); max-width:21ch;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
   }
-  h1 em{font-style:normal; color:var(--cobalt)}
+  h1 em{font-style:normal; color:var(--c-mid)}
   .sub{
-    margin-top:3.4vmin; font-size:clamp(1.25rem,3.1vmin,2.5rem);
-    color:var(--muted); max-width:36ch; line-height:1.4; font-weight:400;
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
   }
   .note{
-    margin-top:4.4vmin; font-size:clamp(1.05rem,2.3vmin,1.7rem); color:var(--ink);
-    padding-left:1.4vmin; border-left:3px solid var(--cobalt); max-width:44ch; line-height:1.45;
+    margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
+    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
   }
 
   /* people / agents split */
-  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6vmin; margin-top:3vmin; max-width:60ch}
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6cqmin; margin-top:3cqmin}
   .col h4{
-    font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
-    letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:2vmin;
-    padding-bottom:1.2vmin; border-bottom:2px solid var(--line);
+    font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-bottom:2cqmin;
+    padding-bottom:1.2cqmin; border-bottom:2px solid var(--rule);
   }
-  .col.now h4{color:var(--cobalt); border-color:var(--cobalt)}
-  .col p{font-size:clamp(1.25rem,2.9vmin,2rem); line-height:1.3; font-weight:500}
-  .col .small{font-size:clamp(1rem,2.1vmin,1.45rem); color:var(--muted); font-weight:400; margin-top:1.4vmin; line-height:1.4}
-  .verdict{margin-top:4vmin; font-size:clamp(1.25rem,2.9vmin,2.1rem); font-weight:600}
-  .verdict em{font-style:normal; color:var(--cobalt)}
+  .col.now h4{color:var(--c-mid); border-color:var(--c-mid)}
+  .col p{font-size:clamp(1.25rem,2.9cqmin,2rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1rem,2.1cqmin,1.45rem); color:var(--dim); font-weight:400; margin-top:1.4cqmin; line-height:1.4}
+  .verdict{margin-top:4cqmin; font-size:clamp(1.25rem,2.9cqmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--c-mid)}
 
   /* breadth left, example diagram right */
-  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:5vmin; align-items:center; margin-top:2.4vmin; max-width:82ch}
-  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8vmin}
-  .blist li{border-top:2px solid var(--line); padding-top:1.2vmin}
-  .blist b{display:block; font-size:clamp(1.2rem,2.6vmin,1.85rem); font-weight:600}
-  .blist span{font-size:clamp(.98rem,1.85vmin,1.35rem); color:var(--muted)}
+  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:5cqmin; align-items:center; margin-top:2.4cqmin}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8cqmin}
+  .blist li{border-top:2px solid var(--rule); padding-top:1.2cqmin}
+  .blist b{display:block; font-size:clamp(1.2rem,2.6cqmin,1.85rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85cqmin,1.35rem); color:var(--dim)}
   .diagram svg{width:100%; height:auto; display:block}
-  .caption{margin-top:1.6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.82rem,1.6vmin,1.15rem); color:var(--muted); letter-spacing:.02em}
-  .caption b{color:var(--cobalt); font-weight:600}
+  .caption{margin-top:1.6cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.82rem,1.6cqmin,1.15rem); color:var(--dim); letter-spacing:.02em}
+  .caption b{color:var(--c-mid); font-weight:600}
   .stamp{
-    margin-top:3.4vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.9rem,1.7vmin,1.25rem);
-    color:var(--muted); letter-spacing:.02em;
+    margin-top:3.4cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    color:var(--dim); letter-spacing:.02em;
   }
-  .stamp b{color:var(--cobalt); font-weight:600}
+  .stamp b{color:var(--c-mid); font-weight:600}
 
   /* breadth grid (domains overview) */
-  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4vmin 5vmin; margin-top:4.4vmin; max-width:74ch}
-  .cell{border-top:2px solid var(--line); padding-top:1.4vmin}
-  .cell b{display:block; font-size:clamp(1.1rem,2.3vmin,1.65rem); font-weight:600}
-  .cell span{font-size:clamp(.88rem,1.6vmin,1.15rem); color:var(--muted)}
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 5cqmin; margin-top:4.4cqmin}
+  .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
+  .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
+  .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
 
   /* example – diagram + list */
-  .split.even{grid-template-columns:1fr 1.05fr; gap:6vmin}
-  .glossary{display:flex; flex-direction:column; gap:1.5vmin; margin:0}
-  .glossary div{border-top:2px solid var(--line); padding-top:1.1vmin}
-  .glossary dt{font-family:"IBM Plex Mono",monospace; color:var(--cobalt); font-weight:600; font-size:clamp(1.05rem,2.1vmin,1.5rem)}
-  .glossary dd{color:var(--muted); font-size:clamp(1rem,1.9vmin,1.4rem); line-height:1.34; margin:.3vmin 0 0}
+  .split.even{grid-template-columns:1fr 1.05fr; gap:6cqmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5cqmin; margin:0}
+  .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
+  .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
+  .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
 
-  .big-punch{font-size:clamp(2.3rem,7.2vmin,5.8rem)}
+  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
 
   /* title slide */
   .title-slide{justify-content:center}
-  .title-slide h1{font-size:clamp(2.8rem,9.5vmin,7.2rem); max-width:18ch; line-height:1.02}
-  .title-slide .sub{margin-top:4.2vmin; max-width:42ch; font-size:clamp(1.3rem,3.4vmin,2.6rem); color:var(--muted)}
-  .title-slide .byline{margin-top:6vmin; font-family:"IBM Plex Mono",monospace; font-size:clamp(.85rem,1.8vmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
-  .title-slide .byline span{color:var(--muted)}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:20ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
 
   /* SVG diagram tokens */
-  .node{fill:var(--paper2); stroke:var(--cobalt); stroke-width:1.5}
+  .node{fill:var(--raise); stroke:var(--c-mid); stroke-width:1.5}
   .node.center{fill:#1c2130; stroke-width:2.2}
-  .edge{stroke:var(--line); stroke-width:1.5}
-  .edge.live{stroke:var(--cobalt); stroke-width:1.5; opacity:.7}
-  .nlabel{fill:var(--ink); font-family:"IBM Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
-  .nlabel.c{fill:var(--cobalt); font-weight:700; font-size:14px}
-  .flowbox{fill:var(--paper2); stroke:var(--line); stroke-width:1.5}
-  .flowbox.hot{stroke:var(--cobalt)}
-  .flowlabel{fill:var(--ink); font-family:"IBM Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
-  .gate{fill:#1c2130; stroke:var(--cobalt); stroke-width:2}
-  .arrow{stroke:var(--cobalt); stroke-width:1.6; marker-end:url(#ah)}
+  .edge{stroke:var(--rule); stroke-width:1.5}
+  .edge.live{stroke:var(--c-mid); stroke-width:1.5; opacity:.7}
+  .nlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  .nlabel.c{fill:var(--c-mid); font-weight:700; font-size:14px}
+  .flowbox{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .flowbox.hot{stroke:var(--c-mid)}
+  .flowlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
+  .gate{fill:#1c2130; stroke:var(--c-mid); stroke-width:2}
+  .arrow{stroke:var(--c-mid); stroke-width:1.6; marker-end:url(#ah)}
 
-  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--cobalt); width:0; transition:width .35s ease; z-index:5}
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
 
   /* ---------- transport ----------
      One instrument along the bottom edge instead of four fixed corners competing for
@@ -169,18 +217,18 @@
   .chrome{
     position:fixed; left:0; right:0; bottom:0; z-index:21;
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
-    padding:0 4vmin 2.6vmin; pointer-events:none;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
   }
   .chrome > *{pointer-events:auto}
 
   .name{grid-column:1; justify-self:start;
-        font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.72rem;
-        color:var(--muted); letter-spacing:.14em; text-transform:uppercase}
+        font-family:"Plex Mono", ui-monospace, monospace; font-size:.72rem;
+        color:var(--dim); letter-spacing:.14em; text-transform:uppercase}
 
   .transport{
     grid-column:2; justify-self:center;
     display:flex; align-items:center; gap:.45rem;
-    background:var(--slab); border:1px solid var(--line); border-radius:14px;
+    background:var(--slab); border:1px solid var(--rule); border-radius:14px;
     padding:.45rem .55rem;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 12px 34px rgba(0,0,0,.5);
   }
@@ -191,73 +239,79 @@
     display:flex; flex-direction:column; align-items:center; gap:5px;
     background:var(--lcd); border-radius:8px; padding:.44rem .62rem .38rem;
     box-shadow:inset 0 1px 3px rgba(0,0,0,.85), inset 0 0 0 1px rgba(122,160,255,.1);
-    font-family:"IBM Plex Mono", ui-monospace, monospace; line-height:1;
+    font-family:"Plex Mono", ui-monospace, monospace; line-height:1;
     margin-right:.2rem;
   }
-  .lcd .n{font-size:.76rem; font-weight:600; letter-spacing:.09em; color:var(--cobalt); white-space:nowrap}
+  .lcd .n{font-size:.76rem; font-weight:600; letter-spacing:.09em; color:var(--c-mid); white-space:nowrap}
   .lcd .n .sep, .lcd .n #tot{color:#4c566e}
-  .lcd .n.msg{color:var(--amber); font-size:.62rem; letter-spacing:.14em}
+  .lcd .n.msg{color:var(--c-flag); font-size:.62rem; letter-spacing:.14em}
   .lcd .clip{width:100%; height:2px; background:#1e2029; border-radius:2px; overflow:hidden}
-  .lcd .clip i{display:block; height:100%; width:0; background:var(--cobalt); transition:width .25s linear}
+  .lcd .clip i{display:block; height:100%; width:0; background:var(--c-mid); transition:width .25s linear}
 
   .tmain, .tside{display:flex; align-items:center; gap:.45rem}
 
   .tbtn{
     display:grid; place-items:center; width:34px; height:34px; flex:0 0 auto;
-    background:none; border:0; border-radius:9px; color:var(--muted); cursor:pointer;
+    background:none; border:0; border-radius:9px; color:var(--dim); cursor:pointer;
     transition:color .15s ease, background-color .15s ease, border-color .15s ease;
   }
   .tbtn svg{width:18px; height:18px; fill:currentColor; display:block}
   .tbtn svg.stroked{fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
   .tbtn:hover{color:var(--ink); background:#20242e}
-  .tbtn:focus-visible{outline:2px solid var(--cobalt); outline-offset:2px; color:var(--ink)}
-  .tbtn[aria-pressed="true"]{color:var(--cobalt); background:#1b2231}
+  .tbtn:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px; color:var(--ink)}
+  .tbtn[aria-pressed="true"]{color:var(--c-mid); background:#1b2231}
 
-  .tbtn.play{width:44px; height:44px; border-radius:50%; border:1.5px solid #39435c; color:var(--cobalt)}
+  .tbtn.play{width:44px; height:44px; border-radius:50%; border:1.5px solid #39435c; color:var(--c-mid)}
   .tbtn.play svg{width:17px; height:17px}
-  .tbtn.play:hover{background:#1b2231; border-color:var(--cobalt); color:var(--cobalt)}
+  .tbtn.play:hover{background:#1b2231; border-color:var(--c-mid); color:var(--c-mid)}
   .tbtn .icontract{display:none}
   .tbtn[aria-pressed="true"] .icontract{display:block}
   .tbtn[aria-pressed="true"] .iexpand{display:none}
   .tbtn.play .ipause{display:none}
-  .tbtn.play.on{background:var(--cobalt); border-color:var(--cobalt); color:var(--paper)}
+  .tbtn.play.on{background:var(--c-mid); border-color:var(--c-mid); color:var(--ground)}
   .tbtn.play.on .iplay{display:none}
   .tbtn.play.on .ipause{display:block}
 
+  /* the exit is an <a>, so it works with no JS and the browser treats it as
+     navigation — history, middle-click and "open in new tab" all behave. */
+  a.tbtn{text-decoration:none}
+  a.name{text-decoration:none; color:inherit; pointer-events:auto}
+  a.name:hover, a.name:focus-visible{color:var(--ink)}
+
   .tdiv{width:1px; align-self:stretch; margin:.3rem .25rem; background:#333743; flex:0 0 auto}
 
-  .seg{display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; flex:0 0 auto}
+  .seg{display:flex; border:1px solid var(--rule); border-radius:8px; overflow:hidden; flex:0 0 auto}
   .seg button{
     background:none; border:0; cursor:pointer; padding:.44rem .48rem;
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.63rem; letter-spacing:.12em;
-    color:var(--muted); transition:color .15s ease, background-color .15s ease;
+    font-family:"Plex Mono", ui-monospace, monospace; font-size:.63rem; letter-spacing:.12em;
+    color:var(--dim); transition:color .15s ease, background-color .15s ease;
   }
   .seg button:hover{color:var(--ink)}
-  .seg button[aria-pressed="true"]{color:var(--cobalt); background:#1b2231; font-weight:600}
-  .seg button:focus-visible{outline:2px solid var(--cobalt); outline-offset:-2px}
+  .seg button[aria-pressed="true"]{color:var(--c-mid); background:#1b2231; font-weight:600}
+  .seg button:focus-visible{outline:2px solid var(--c-mid); outline-offset:-2px}
 
   @media (prefers-reduced-motion: reduce){
     .tbtn, .seg button, .lcd .clip i{transition:none}
   }
 
-  .notes{position:fixed; inset:auto 0 0 0; background:#17181c; color:#f1ede4; border-top:2px solid var(--cobalt); padding:3vmin 4vmin calc(var(--chromeH,0px) + 2vmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes{position:fixed; inset:auto 0 0 0; background:#17181c; color:#f1ede4; border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
   .notes.show{transform:none}
-  .notes h3{font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:#9db0ff; margin-bottom:1.4vmin}
-  .notes p{font-size:clamp(.95rem,2vmin,1.3rem); line-height:1.5; max-width:82ch}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:#9db0ff; margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
   /* Zwei Rollen, klar getrennt: eine Regie-Instruktion wird nicht gesprochen,
      eine Betonung schon. Vorher war beides <em> und die Vertonung verschluckte Wörter. */
   .notes em.cue{font-style:italic; color:#9a9dab}
   .notes em{font-style:normal; font-weight:600; color:#f1ede4}
-  .notes .time{float:right; color:#9db0ff; font-family:"IBM Plex Mono",monospace}
-  .notes .close{display:inline-block; margin-top:1.8vmin; background:none; cursor:pointer;
+  .notes .time{float:right; color:#9db0ff; font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
                 border:1px solid #33353d; border-radius:8px; padding:.5em .9em;
-                color:#b7b0a2; font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                color:#b7b0a2; font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
                 text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
   .notes .close:hover{color:#f1ede4; border-color:#9db0ff}
   .notes .close:focus-visible{outline:2px solid #9db0ff; outline-offset:2px}
   /* notes open: JS scales the active slide to fit above the panel */
-  .deck.notes-open .slide.active{justify-content:flex-start; padding:4vmin 10vmin; transform-origin:top center}
-  .deck.notes-open .split{align-items:start; margin-top:1.6vmin}
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+  .deck.notes-open .split{align-items:start; margin-top:1.6cqmin}
 
   /* mobile / portrait */
   @media (max-width: 860px), (max-aspect-ratio: 4/5){
@@ -266,11 +320,11 @@
        would push the controls off centre. */
     .chrome{
       grid-template-columns:1fr; padding:0;
-      background:var(--slab); border-top:1px solid var(--line);
+      background:var(--slab); border-top:1px solid var(--rule);
       padding-bottom:env(safe-area-inset-bottom);
     }
     .name{display:none}
-    .notes{bottom:var(--chromeH,0px); padding-bottom:3vmin;
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
            transform:translateY(calc(101% + var(--chromeH,0px)))}
     .transport{
       grid-column:1; justify-self:stretch; width:100%;
@@ -287,8 +341,9 @@
     .lcd{padding:.42rem .5rem .36rem; margin-right:0}
     /* the deck progress bar sits on the transport's top edge, not behind it */
     .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
     .slide{justify-content:flex-start; overflow-y:auto;
-           padding:14vmin 7vw calc(var(--chromeH,0px) + 5vh)}
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
     h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
     .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
     .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
@@ -320,6 +375,13 @@
     .tside{gap:.05rem}
     .seg button{min-width:28px; min-height:36px; padding:0 .22rem}
   }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. The slide headline carries the
+     same face the site's does; everything else on a slide is a label or a
+     value, and stays where it was. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
 </style>
 </head>
 <body>
@@ -337,10 +399,10 @@
     data-time="0:00"
     data-notes="<em class='cue'>Der Titel liegt an, während ich begrüsse und mich kurz vorstelle. Ich nenne meinen Namen und das Thema, dann gehe ich mit → zur ersten Folie.</em>"
     data-notes-en="<em class='cue'>The title stays up while I greet and briefly introduce myself. I say my name and the topic, then move to the first slide with →.</em>">
-    <div class="kicker mono" data-n="00" data-en="A concept explained by Robert Blust">Ein Konzept erklärt von Robert Blust</div>
-    <h1 data-en="The Mental Model.">Das Mental Model.</h1>
-    <p class="sub" data-en="The brain for company management and agentic AI.">Das Gehirn für Unternehmensführung und agentische KI.</p>
-    <p class="byline" data-en="Software Engineer &amp; Architect">Software Engineer &amp; Architekt</p>
+    <div class="kicker mono" data-n="00" data-de="Ein Konzept erklärt von Robert Blust">A concept explained by Robert Blust</div>
+    <h1 data-de="Das Mental Model.">The Mental Model.</h1>
+    <p class="sub" data-de="Das Gehirn für Unternehmensführung und agentische KI.">The brain for company management and agentic AI.</p>
+    <p class="byline" data-de="Software Engineer &amp; Architekt">Software Engineer &amp; Architect</p>
   </section>
 
   <!-- 01 · Der Haken -->
@@ -348,10 +410,10 @@
     data-time="1:00"
     data-notes="<em class='cue'>Persönlicher Einstieg.</em> Jede Firma läuft auf Wissen: Vision, Strategie, wie wir arbeiten, wer was verantwortet, was wir messen, welche Regeln gelten. Nur liegt dieses Wissen überall verstreut – in Köpfen, Confluence-Seiten, Sheets, Tickets. <em class='cue'>Meine Aufhänger-Frage – kurze Pause danach:</em> Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?"
     data-notes-en="<em class='cue'>Personal opener.</em> Every company runs on knowledge: vision, strategy, how we work, who owns what, what we measure, which rules apply. But that knowledge is scattered everywhere – in heads, Confluence pages, sheets, tickets. <em class='cue'>My hook question – short pause after it:</em> Neither people nor AI can rely on it. What if all of that were a graph a machine could read?">
-    <div class="kicker mono" data-n="01" data-en="The hook">Der Haken</div>
-    <h1 data-en="A company's knowledge lives everywhere – and nowhere.">Das Wissen einer Firma lebt überall – und nirgends.</h1>
-    <p class="sub" data-en="Vision, strategy, processes, roles, KPIs, rules – scattered across heads, documents and tools.">Vision, Strategie, Prozesse, Rollen, KPIs, Regeln – verstreut über Köpfe, Dokumente und Tools.</p>
-    <p class="note" data-en="Neither people nor AI can rely on it. What if all of it were a graph a machine could read?">Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?</p>
+    <div class="kicker mono" data-n="01" data-de="Der Haken">The hook</div>
+    <h1 data-de="Das Wissen einer Firma lebt überall – und nirgends.">A company's knowledge lives everywhere – and nowhere.</h1>
+    <p class="sub" data-de="Vision, Strategie, Prozesse, Rollen, KPIs, Regeln – verstreut über Köpfe, Dokumente und Tools.">Vision, strategy, processes, roles, KPIs, rules – scattered across heads, documents and tools.</p>
+    <p class="note" data-de="Weder Menschen noch KI können sich darauf verlassen. Was, wenn all das ein Graph wäre, den auch eine Maschine lesen kann?">Neither people nor AI can rely on it. What if all of it were a graph a machine could read?</p>
   </section>
 
   <!-- 02 · Die Idee -->
@@ -359,10 +421,10 @@
     data-time="1:10"
     data-notes="<em class='cue'>Die Kernidee – ruhig und bestimmt.</em> Genau dafür baue ich das Mental Model: eine strukturierte Wissensbasis, das Gehirn der Firma. Die Fakten als Markdown, strukturiert durch ein Meta-Modell, versioniert wie Code. <em class='cue'>Wichtig zu betonen:</em> Es ist keine neue Dokumentation, die verstaubt – sondern eine maschinenlesbare Projektion des Betriebssystems der Firma, synchron gehalten aus den echten Systemen (Confluence, Sheets, Tickets)."
     data-notes-en="<em class='cue'>The core idea – calm and firm.</em> This is exactly what I build the Mental Model for: a structured knowledge base, the brain of the company. The facts as Markdown, structured by a meta-model, versioned like code. <em class='cue'>Worth stressing:</em> it is not new documentation that goes stale – it is a machine-readable projection of the company's operating system, kept in sync with the real systems (Confluence, sheets, tickets).">
-    <div class="kicker mono" data-n="02" data-en="The idea">Die Idee</div>
-    <h1 data-en="One structured knowledge base – the <em>brain</em> of the company.">Eine strukturierte Wissensbasis – das <em>Gehirn</em> der Firma.</h1>
-    <p class="sub" data-en="I call it the Mental Model: the facts as Markdown, structured by a meta-model.">Ich nenne es das Mental Model: die Fakten als Markdown, strukturiert durch ein Meta-Modell.</p>
-    <p class="stamp" data-en="Not new documentation but a machine-readable <b>projection of the company's operating system</b> – versioned like code, synced from the real systems.">Keine neue Dokumentation, sondern eine maschinenlesbare <b>Projektion des Betriebssystems der Firma</b> – versioniert wie Code, synchron aus den echten Systemen.</p>
+    <div class="kicker mono" data-n="02" data-de="Die Idee">The idea</div>
+    <h1 data-de="Eine strukturierte Wissensbasis – das <em>Gehirn</em> der Firma.">One structured knowledge base – the <em>brain</em> of the company.</h1>
+    <p class="sub" data-de="Ich nenne es das Mental Model: die Fakten als Markdown, strukturiert durch ein Meta-Modell.">I call it the Mental Model: the facts as Markdown, structured by a meta-model.</p>
+    <p class="stamp" data-de="Keine neue Dokumentation, sondern eine maschinenlesbare <b>Projektion des Betriebssystems der Firma</b> – versioniert wie Code, synchron aus den echten Systemen.">Not new documentation but a machine-readable <b>projection of the company's operating system</b> – versioned like code, synced from the real systems.</p>
   </section>
 
   <!-- 03 · Die Breite -->
@@ -370,20 +432,20 @@
     data-time="1:20"
     data-notes="<em class='cue'>Ich zeige die Breite – ohne alles vorzulesen.</em> Im Modell steckt alles, was eine Firma ausmacht: Rollen und Teams (wer was tut), Prozesse mit Gates (wie Arbeit fliesst), Strategie und Ziele (wohin wir investieren), KPIs (was wir messen), Regeln (was wir durchsetzen), Features (was wir bauen), Begriffe (was wir definieren), Architektur-Entscheide (was wir entschieden haben) und Werte (was wir glauben). <em class='cue'>Kurz halten – ein Satz genügt:</em> versioniert wie Code, maschinenlesbar, EINE Quelle der Wahrheit."
     data-notes-en="<em class='cue'>I show the breadth – without reading everything out.</em> The model holds everything that makes a company: roles and teams (who does what), processes with gates (how work flows), strategy and objectives (where we invest), KPIs (what we measure), rules (what we enforce), features (what we build), concepts (what we define), architecture decisions (what we decided) and values (what we believe). <em class='cue'>Keep it short – one line is enough:</em> versioned like code, machine-readable, ONE source of truth.">
-    <div class="kicker mono" data-n="03" data-en="The breadth">Die Breite</div>
-    <h1 data-en="Everything that makes a company – in one place.">Alles, was eine Firma ausmacht – an einem Ort.</h1>
+    <div class="kicker mono" data-n="03" data-de="Die Breite">The breadth</div>
+    <h1 data-de="Alles, was eine Firma ausmacht – an einem Ort.">Everything that makes a company – in one place.</h1>
     <div class="grid">
-      <div class="cell"><b data-en="Roles &amp; Teams">Rollen &amp; Teams</b><span data-en="who does what">wer was tut</span></div>
-      <div class="cell"><b data-en="Processes &amp; Gates">Prozesse &amp; Gates</b><span data-en="how work flows">wie Arbeit fliesst</span></div>
-      <div class="cell"><b data-en="Strategy &amp; Objectives">Strategie &amp; Ziele</b><span data-en="where we invest">wohin wir investieren</span></div>
-      <div class="cell"><b data-en="KPIs">KPIs</b><span data-en="what we measure">was wir messen</span></div>
-      <div class="cell"><b data-en="Rules">Regeln</b><span data-en="what we enforce">was wir durchsetzen</span></div>
-      <div class="cell"><b data-en="Features">Features</b><span data-en="what we build">was wir bauen</span></div>
-      <div class="cell"><b data-en="Concepts">Begriffe</b><span data-en="what we define">was wir definieren</span></div>
-      <div class="cell"><b data-en="Architecture decisions">Architektur-Entscheide</b><span data-en="what we decided">was wir entschieden haben</span></div>
-      <div class="cell"><b data-en="Values">Werte</b><span data-en="what we believe">was wir glauben</span></div>
+      <div class="cell"><b data-de="Rollen &amp; Teams">Roles &amp; Teams</b><span data-de="wer was tut">who does what</span></div>
+      <div class="cell"><b data-de="Prozesse &amp; Gates">Processes &amp; Gates</b><span data-de="wie Arbeit fliesst">how work flows</span></div>
+      <div class="cell"><b data-de="Strategie &amp; Ziele">Strategy &amp; Objectives</b><span data-de="wohin wir investieren">where we invest</span></div>
+      <div class="cell"><b data-de="KPIs">KPIs</b><span data-de="was wir messen">what we measure</span></div>
+      <div class="cell"><b data-de="Regeln">Rules</b><span data-de="was wir durchsetzen">what we enforce</span></div>
+      <div class="cell"><b data-de="Features">Features</b><span data-de="was wir bauen">what we build</span></div>
+      <div class="cell"><b data-de="Begriffe">Concepts</b><span data-de="was wir definieren">what we define</span></div>
+      <div class="cell"><b data-de="Architektur-Entscheide">Architecture decisions</b><span data-de="was wir entschieden haben">what we decided</span></div>
+      <div class="cell"><b data-de="Werte">Values</b><span data-de="was wir glauben">what we believe</span></div>
     </div>
-    <p class="stamp" data-en="Versioned like code, machine-readable, <b>ONE source of truth.</b>">Versioniert wie Code, maschinenlesbar, <b>EINE Quelle der Wahrheit.</b></p>
+    <p class="stamp" data-de="Versioniert wie Code, maschinenlesbar, <b>EINE Quelle der Wahrheit.</b>">Versioned like code, machine-readable, <b>ONE source of truth.</b></p>
   </section>
 
   <!-- 04 · Der Graph -->
@@ -391,8 +453,8 @@
     data-time="1:20"
     data-notes="<em class='cue'>Der entscheidende Kniff.</em> All diese Bereiche stehen nicht nebeneinander – sie verweisen aufeinander. Dateinamen sind die kanonischen IDs, und Referenzen sind exakte Namen, keine Links. <em class='cue'>Meine Pointe:</em> Es gibt keine toten Links, weil bei jeder Änderung Konsistenz-Checks laufen – eine Person ohne Rolle, eine Regel ohne Owner, ein Feature ohne Parent fällt sofort auf. So bleibt aus vielen Dateien ein zusammenhängender, widerspruchsfreier Graph."
     data-notes-en="<em class='cue'>The decisive trick.</em> All these areas don't just sit side by side – they cross-reference each other. Filenames are the canonical IDs, and references are exact names, not links. <em class='cue'>My point:</em> there are no dead links, because consistency checks run on every change – a person without a role, a rule without an owner, a feature without a parent surfaces immediately. That turns many files into one connected, contradiction-free graph.">
-    <div class="kicker mono" data-n="04" data-en="The graph">Der Graph</div>
-    <h1 data-en="Everything cross-references – <em>no dead links</em>.">Alles verweist aufeinander – <em>keine toten Links</em>.</h1>
+    <div class="kicker mono" data-n="04" data-de="Der Graph">The graph</div>
+    <h1 data-de="Alles verweist aufeinander – <em>keine toten Links</em>.">Everything cross-references – <em>no dead links</em>.</h1>
     <div class="split">
       <div class="diagram">
         <svg viewBox="0 0 520 340" role="img" aria-label="Knowledge graph">
@@ -406,25 +468,25 @@
           <line class="edge live" x1="412" y1="112" x2="260" y2="288"></line>
           <line class="edge live" x1="108" y1="112" x2="108" y2="228"></line>
           <rect class="node" x="212" y="30" width="96" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="51" data-en="Person">Person</text>
+          <text class="nlabel" x="260" y="51" data-de="Person">Person</text>
           <rect class="node" x="360" y="90" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="111" data-en="Process">Prozess</text>
+          <text class="nlabel" x="412" y="111" data-de="Prozess">Process</text>
           <rect class="node" x="368" y="206" width="88" height="40" rx="0"></rect>
-          <text class="nlabel" x="412" y="227" data-en="KPI">KPI</text>
+          <text class="nlabel" x="412" y="227" data-de="KPI">KPI</text>
           <rect class="node" x="210" y="266" width="100" height="40" rx="0"></rect>
-          <text class="nlabel" x="260" y="287" data-en="Rule">Regel</text>
+          <text class="nlabel" x="260" y="287" data-de="Regel">Rule</text>
           <rect class="node" x="58" y="206" width="100" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="227" data-en="Feature">Feature</text>
+          <text class="nlabel" x="108" y="227" data-de="Feature">Feature</text>
           <rect class="node" x="56" y="90" width="104" height="40" rx="0"></rect>
-          <text class="nlabel" x="108" y="111" data-en="Role">Rolle</text>
+          <text class="nlabel" x="108" y="111" data-de="Rolle">Role</text>
           <rect class="node center" x="196" y="146" width="128" height="48" rx="0"></rect>
           <text class="nlabel c" x="260" y="170">Mental Model</text>
         </svg>
       </div>
       <ul class="blist">
-        <li><b data-en="Filenames are IDs">Dateinamen sind IDs</b><span data-en="the canonical name of every entry">der kanonische Name jedes Eintrags</span></li>
-        <li><b data-en="Exact-name references">Exakte Namensreferenzen</b><span data-en="no markdown links that rot">keine Markdown-Links, die verrotten</span></li>
-        <li><b data-en="Validated on every change">Bei jeder Änderung validiert</b><span data-en="a contradiction surfaces immediately">ein Widerspruch fällt sofort auf</span></li>
+        <li><b data-de="Dateinamen sind IDs">Filenames are IDs</b><span data-de="der kanonische Name jedes Eintrags">the canonical name of every entry</span></li>
+        <li><b data-de="Exakte Namensreferenzen">Exact-name references</b><span data-de="keine Markdown-Links, die verrotten">no markdown links that rot</span></li>
+        <li><b data-de="Bei jeder Änderung validiert">Validated on every change</b><span data-de="ein Widerspruch fällt sofort auf">a contradiction surfaces immediately</span></li>
       </ul>
     </div>
   </section>
@@ -434,26 +496,26 @@
     data-time="1:20"
     data-notes="<em class='cue'>Ich mache es konkret.</em> Nehmen wir einen Prozessschritt mit einem Gate – der Übergang von Konzept zu Umsetzung. Im Modell steht: wer verantwortlich ist (die Produktleitung), welche Kriterien das Gate hat, und die Regeln dahinter. <em class='cue'>Meine Pointe:</em> Das ist Governance nicht als Folie, sondern als Daten – ein Score für technische Schulden, eine Regel „ab +2 kommt Aufräumarbeit in den Scope“, und Kill-Kriterien. Genau darüber kann eine Maschine nachdenken."
     data-notes-en="<em class='cue'>I make it concrete.</em> Take a process step with a gate – the transition from concept to delivery. The model records who is accountable (product leadership), what the gate criteria are, and the rules behind them. <em class='cue'>My point:</em> this is governance not as a slide but as data – a technical-debt score, a rule 'above +2, cleanup work enters scope', and kill criteria. Exactly the kind of thing a machine can reason over.">
-    <div class="kicker mono" data-n="05" data-en="An example">Ein Beispiel</div>
-    <h1 data-en="Governance a machine can <em>reason over</em>.">Governance, über die eine Maschine <em>nachdenken</em> kann.</h1>
+    <div class="kicker mono" data-n="05" data-de="Ein Beispiel">An example</div>
+    <h1 data-de="Governance, über die eine Maschine <em>nachdenken</em> kann.">Governance a machine can <em>reason over</em>.</h1>
     <div class="split even">
       <div class="diagram">
         <svg viewBox="0 0 300 300" role="img" aria-label="Concept to delivery gate">
           <rect class="flowbox" x="70" y="20" width="160" height="46"></rect>
-          <text class="flowlabel" x="150" y="43" data-en="Concept">Konzept</text>
+          <text class="flowlabel" x="150" y="43" data-de="Konzept">Concept</text>
           <line class="arrow" x1="150" y1="66" x2="150" y2="104"></line>
           <polygon class="gate" points="150,110 214,150 150,190 86,150"></polygon>
           <text class="flowlabel" x="150" y="150" style="fill:#7aa0ff;font-weight:700">Gate</text>
           <line class="arrow" x1="150" y1="190" x2="150" y2="228"></line>
           <rect class="flowbox hot" x="70" y="232" width="160" height="46"></rect>
-          <text class="flowlabel" x="150" y="255" data-en="Delivery">Umsetzung</text>
+          <text class="flowlabel" x="150" y="255" data-de="Umsetzung">Delivery</text>
         </svg>
       </div>
       <ul class="blist">
-        <li><b data-en="Owner">Owner</b><span data-en="Head of Product · gate sign-off">Produktleitung · Gate-Freigabe</span></li>
-        <li><b data-en="Gate criterion">Gate-Kriterium</b><span data-en="Tech-Debt Impact Score (−3 … +3)">Tech-Debt-Impact-Score (−3 … +3)</span></li>
-        <li><b data-en="Rule">Regel</b><span data-en="score &gt; +2 → cleanup enters scope">Score &gt; +2 → Cleanup in den Scope</span></li>
-        <li><b data-en="Kill criterion">Kill-Kriterium</b><span data-en="adoption &lt; X% → deprecate">Adoption &lt; X % → deprecate</span></li>
+        <li><b data-de="Owner">Owner</b><span data-de="Produktleitung · Gate-Freigabe">Head of Product · gate sign-off</span></li>
+        <li><b data-de="Gate-Kriterium">Gate criterion</b><span data-de="Tech-Debt-Impact-Score (−3 … +3)">Tech-Debt Impact Score (−3 … +3)</span></li>
+        <li><b data-de="Regel">Rule</b><span data-de="Score &gt; +2 → Cleanup in den Scope">score &gt; +2 → cleanup enters scope</span></li>
+        <li><b data-de="Kill-Kriterium">Kill criterion</b><span data-de="Adoption &lt; X % → deprecate">adoption &lt; X% → deprecate</span></li>
       </ul>
     </div>
   </section>
@@ -463,14 +525,14 @@
     data-time="1:10"
     data-notes="<em class='cue'>Ich zeige die Tiefe an drei kurzen Beispielen – nicht vorlesen, herausgreifen.</em> Eine Regel: Deployments laufen dev zu test zu prod, Owner ist das Engineering. Ein KPI: Lead Time for Changes – je tiefer, desto besser, mit klarem Owner. Ein Architektur-Entscheid: JSONB wird nur für kontextuelle Daten genutzt – und die verworfene Alternative, darauf abzufragen, steht ehrlich dabei. <em class='cue'>Mein Kernsatz:</em> jede Regel, jede Kennzahl, jeder Entscheid ist benannt, begründet und gehört jemandem."
     data-notes-en="<em class='cue'>I show the depth with three short examples – don't read them out, pick them up.</em> A rule: deployments go dev to test to prod, owned by Engineering. A KPI: Lead Time for Changes – lower is better, with a clear owner. An architecture decision: JSONB is used only for contextual data – and the rejected alternative, querying on it, is recorded honestly next to it. <em class='cue'>My key line:</em> every rule, metric and decision is named, justified and owned.">
-    <div class="kicker mono" data-n="06" data-en="Rules, metrics, decisions">Regeln, Metriken, Entscheide</div>
-    <h1 data-en="Rules, metrics and decisions – structured and owned.">Regeln, Metriken und Entscheide – strukturiert und mit Owner.</h1>
+    <div class="kicker mono" data-n="06" data-de="Regeln, Metriken, Entscheide">Rules, metrics, decisions</div>
+    <h1 data-de="Regeln, Metriken und Entscheide – strukturiert und mit Owner.">Rules, metrics and decisions – structured and owned.</h1>
     <dl class="glossary">
-      <div><dt data-en="Rule">Regel</dt><dd data-en="“Deployments follow dev → test → prod.” — Owner: Engineering.">„Deployments folgen dev → test → prod.“ — Owner: Engineering.</dd></div>
-      <div><dt data-en="KPI">KPI</dt><dd data-en="“Lead Time for Changes” — lower is better. — Owner: Engineering.">„Lead Time for Changes“ — je tiefer, desto besser. — Owner: Engineering.</dd></div>
-      <div><dt data-en="Architecture decision">Architektur-Entscheid</dt><dd data-en="“JSONB only for contextual data.” — rejected: querying on it.">„JSONB nur für kontextuelle Daten.“ — verworfen: darauf abfragen.</dd></div>
+      <div><dt data-de="Regel">Rule</dt><dd data-de="„Deployments folgen dev → test → prod.“ — Owner: Engineering.">“Deployments follow dev → test → prod.” — Owner: Engineering.</dd></div>
+      <div><dt data-de="KPI">KPI</dt><dd data-de="„Lead Time for Changes“ — je tiefer, desto besser. — Owner: Engineering.">“Lead Time for Changes” — lower is better. — Owner: Engineering.</dd></div>
+      <div><dt data-de="Architektur-Entscheid">Architecture decision</dt><dd data-de="„JSONB nur für kontextuelle Daten.“ — verworfen: darauf abfragen.">“JSONB only for contextual data.” — rejected: querying on it.</dd></div>
     </dl>
-    <p class="stamp" data-en="Every rule, metric and decision: <b>named, justified, owned.</b>">Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b></p>
+    <p class="stamp" data-de="Jede Regel, jede Kennzahl, jeder Entscheid: <b>benannt, begründet, jemandem gehörend.</b>">Every rule, metric and decision: <b>named, justified, owned.</b></p>
   </section>
 
   <!-- 07 · Zwei Zielgruppen, eine Quelle -->
@@ -478,21 +540,21 @@
     data-time="1:15"
     data-notes="<em class='cue'>Jetzt der Kern – warum das doppelt zahlt.</em> Dasselbe Modell bedient zwei Zielgruppen. Menschen bekommen Onboarding nach Rolle, Entscheidungsunterstützung – „wer verantwortet das Deployment?“ – und gemeinsame Ausrichtung. Agenten bekommen eine Kontextschicht plus Zugriff über MCP-Tools und handeln innerhalb der Leitplanken: Vision, Strategie, Prozess, Regeln. <em class='cue'>Meine Pointe – kurze Pause:</em> eine Quelle, zwei Zielgruppen, kein Auseinanderdriften."
     data-notes-en="<em class='cue'>Now the core – why it pays off twice.</em> The same model serves two audiences. People get role-based onboarding, decision support – 'who owns the deployment?' – and shared alignment. Agents get a context layer plus access through MCP tools, and act within the guardrails: vision, strategy, process, rules. <em class='cue'>My point – short pause:</em> one source, two audiences, no drift.">
-    <div class="kicker mono" data-n="07" data-en="Two audiences, one source">Zwei Zielgruppen, eine Quelle</div>
-    <h1 data-en="The same model – for people <em>and</em> agents.">Dasselbe Modell – für Menschen <em>und</em> Agenten.</h1>
+    <div class="kicker mono" data-n="07" data-de="Zwei Zielgruppen, eine Quelle">Two audiences, one source</div>
+    <h1 data-de="Dasselbe Modell – für Menschen <em>und</em> Agenten.">The same model – for people <em>and</em> agents.</h1>
     <div class="thennow">
       <div class="col">
-        <h4 data-en="For people">Für Menschen</h4>
-        <p data-en="Onboarding by role, decisions, alignment.">Onboarding nach Rolle, Entscheidungen, Ausrichtung.</p>
-        <p class="small" data-en="“Who owns the deployment?” — answered from one source.">„Wer verantwortet das Deployment?“ — beantwortet aus einer Quelle.</p>
+        <h4 data-de="Für Menschen">For people</h4>
+        <p data-de="Onboarding nach Rolle, Entscheidungen, Ausrichtung.">Onboarding by role, decisions, alignment.</p>
+        <p class="small" data-de="„Wer verantwortet das Deployment?“ — beantwortet aus einer Quelle.">“Who owns the deployment?” — answered from one source.</p>
       </div>
       <div class="col now">
-        <h4 data-en="For agents">Für Agenten</h4>
-        <p data-en="A context layer plus MCP tools.">Eine Kontextschicht plus MCP-Tools.</p>
-        <p class="small" data-en="Agents act inside vision, strategy, process and rules.">Agenten handeln innerhalb von Vision, Strategie, Prozess und Regeln.</p>
+        <h4 data-de="Für Agenten">For agents</h4>
+        <p data-de="Eine Kontextschicht plus MCP-Tools.">A context layer plus MCP tools.</p>
+        <p class="small" data-de="Agenten handeln innerhalb von Vision, Strategie, Prozess und Regeln.">Agents act inside vision, strategy, process and rules.</p>
       </div>
     </div>
-    <p class="verdict" data-en="One source – <em>two audiences, no drift.</em>">Eine Quelle – <em>zwei Zielgruppen, kein Auseinanderdriften.</em></p>
+    <p class="verdict" data-de="Eine Quelle – <em>zwei Zielgruppen, kein Auseinanderdriften.</em>">One source – <em>two audiences, no drift.</em></p>
   </section>
 
   <!-- 08 · Warum es zählt -->
@@ -500,9 +562,9 @@
     data-time="1:00"
     data-notes="<em class='cue'>Meine Pointe – kurze Pause davor. EIN Punkt, klar:</em> Der richtige Kontext macht KI deutlich verlässlicher. Ohne Kontext kennt eine KI weder eure Entscheide noch eure Regeln – sie rät. <em class='cue'>Wichtig: nicht „ohne Halluzinationen“ behaupten.</em> Das Mental Model verkleinert den Raum, in dem sie raten muss, und hält Agenten innerhalb der Leitplanken – Vision, Strategie, Prozess, Regeln. <em class='cue'>Und immer betonen:</em> mit menschlicher Kontrolle; KI-Kommentare sind Input, nicht Urteil."
     data-notes-en="<em class='cue'>My punchline – short pause before it. ONE point, clearly:</em> the right context makes AI far more reliable. Without context an AI knows neither your decisions nor your rules – it guesses. <em class='cue'>Important: don't claim 'without hallucinations'.</em> The Mental Model shrinks the space where it has to guess and keeps agents inside the guardrails – vision, strategy, process, rules. <em class='cue'>And always stress:</em> with human oversight; AI comments are input, not verdict.">
-    <div class="kicker mono" data-n="08" data-en="Why it matters">Warum es zählt</div>
-    <h1 class="big-punch" data-en="The right context makes AI <em>far more reliable</em>.">Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.</h1>
-    <p class="note" data-en="Without context, AI knows neither your decisions nor your rules – it guesses. The Mental Model shrinks that space and keeps agents inside the guardrails. Always with human oversight.">Ohne Kontext kennt KI weder eure Entscheide noch eure Regeln – sie rät. Das Mental Model verkleinert diesen Raum und hält Agenten innerhalb der Leitplanken. Immer mit menschlicher Kontrolle.</p>
+    <div class="kicker mono" data-n="08" data-de="Warum es zählt">Why it matters</div>
+    <h1 class="big-punch" data-de="Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.">The right context makes AI <em>far more reliable</em>.</h1>
+    <p class="note" data-de="Ohne Kontext kennt KI weder eure Entscheide noch eure Regeln – sie rät. Das Mental Model verkleinert diesen Raum und hält Agenten innerhalb der Leitplanken. Immer mit menschlicher Kontrolle.">Without context, AI knows neither your decisions nor your rules – it guesses. The Mental Model shrinks that space and keeps agents inside the guardrails. Always with human oversight.</p>
   </section>
 
   <!-- 09 · Takeaway -->
@@ -510,16 +572,16 @@
     data-time="0:55"
     data-notes="<em class='cue'>Mein Takeaway – bodenständig.</em> Das Wissen einer Firma, explizit gemacht und strukturiert, zahlt doppelt: Menschen richten sich schneller aus, und Agenten haben endlich ein Gehirn, mit dem sie arbeiten können. <em class='cue'>Schlusssatz:</em> Struktur ist der Hebel – je sauberer das Modell, desto besser führen Menschen und desto verlässlicher handeln Agenten. Danke."
     data-notes-en="<em class='cue'>My takeaway – grounded.</em> A company's knowledge, made explicit and structured, pays off twice: people align faster, and agents finally have a brain to work with. <em class='cue'>Closing line:</em> structure is the lever – the cleaner the model, the better people lead and the more reliably agents act. Thank you.">
-    <div class="kicker mono" data-n="09" data-en="Takeaway">Takeaway</div>
-    <h1 data-en="Explicit knowledge pays off twice – for people and for agents.">Explizites Wissen zahlt doppelt – für Menschen und für Agenten.</h1>
-    <p class="sub" data-en="Structure is the lever. The cleaner the model, the better people lead and the more reliably agents act.">Struktur ist der Hebel. Je sauberer das Modell, desto besser führen Menschen und desto verlässlicher handeln Agenten.</p>
+    <div class="kicker mono" data-n="09" data-de="Takeaway">Takeaway</div>
+    <h1 data-de="Explizites Wissen zahlt doppelt – für Menschen und für Agenten.">Explicit knowledge pays off twice – for people and for agents.</h1>
+    <p class="sub" data-de="Struktur ist der Hebel. Je sauberer das Modell, desto besser führen Menschen und desto verlässlicher handeln Agenten.">Structure is the lever. The cleaner the model, the better people lead and the more reliably agents act.</p>
   </section>
 
 </div>
 
 <div class="chrome" id="chrome">
 
-  <div class="name">Robert Blust</div>
+  <a class="name" href="../" aria-label="Back to all talks">Robert Blust</a>
 
   <div class="transport" id="transport" role="group" aria-label="Deck controls">
 
@@ -562,6 +624,12 @@
       <button type="button" id="langEn" aria-pressed="true">EN</button>
     </div>
 
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
     <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
       <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
     </button>
@@ -583,7 +651,15 @@
   // slide numbering is zero-based everywhere the viewer can see it: the kicker on each
   // slide, the transport's display window, and the audio filenames all say the same number.
   function pad(n){ return (n < 10 ? '0' : '') + n; }
-  var i = 0, notesOpen = false, lang = 'en';
+  // The language choice is shared with the other pages on this origin, so arriving from
+  // the talks index keeps the language the reader already picked. Storage is guarded:
+  // file:// is an opaque origin in some browsers and throws, and a deck that cannot read
+  // a preference must still open — in English, its default.
+  var LANG_KEY = 'rb-lang';
+  function langStored(){ try { return localStorage.getItem(LANG_KEY); } catch (e) { return null; } }
+  function langRemember(v){ try { localStorage.setItem(LANG_KEY, v); } catch (e) {} }
+
+  var i = 0, notesOpen = false, lang = langStored() === 'de' ? 'de' : 'en';
   var deck = document.getElementById('deck');
   var bar = document.getElementById('bar'), cur = document.getElementById('cur');
   var notes = document.getElementById('notes'), ntext = document.getElementById('ntext'), ntime = document.getElementById('ntime');
@@ -595,8 +671,8 @@
   var langDe = document.getElementById('langDe'), langEn = document.getElementById('langEn');
   document.getElementById('tot').textContent = pad(slides.length - 1);
 
-  var i18n = Array.prototype.slice.call(document.querySelectorAll('[data-en]'));
-  i18n.forEach(function(el){ el.setAttribute('data-de', el.innerHTML); });
+  var i18n = Array.prototype.slice.call(document.querySelectorAll('[data-de]'));
+  i18n.forEach(function(el){ el.setAttribute('data-en', el.innerHTML); });
 
   var UI = {
     de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
@@ -604,13 +680,13 @@
          desc:'Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens — eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen.',
          play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
          prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
-         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', novoice:'Keine Stimme' },
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', novoice:'Keine Stimme', up:'Zurück zu allen Vorträgen' },
     en:{ label:'Speaker note', close:'Close notes',
          title:'The Mental Model · a talk by Robert Blust',
          desc:'A structured, machine-readable knowledge base that acts as the brain of a company — one source of truth for vision, strategy, processes, roles, KPIs, rules and decisions.',
          play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
          prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
-         notes:'Speaker notes', de:'In German', en:'In English', novoice:'No voice' }
+         notes:'Speaker notes', de:'In German', en:'In English', novoice:'No voice', up:'Back to all talks' }
   };
 
   function applyLang(){
@@ -628,6 +704,9 @@
     btn.prev.setAttribute('aria-label', t.prev);
     btn.next.setAttribute('aria-label', t.next);
     btn.notes.setAttribute('aria-label', t.notes);
+    var up = document.getElementById('tUp');
+    up.setAttribute('aria-label', t.up);
+    up.setAttribute('title', t.up);
     labelPlay();
     labelFull();
     document.documentElement.lang = lang;
@@ -707,7 +786,7 @@
   }
   document.addEventListener('fullscreenchange', function(){ labelFull(); measureChrome(); });
 
-  function setLang(next){ if (next === lang) return; lang = next; applyLang(); }
+  function setLang(next){ if (next === lang) return; lang = next; langRemember(next); applyLang(); }
 
   btn.first.addEventListener('click', restart);
   btn.prev .addEventListener('click', function(){ manual(i-1); });
@@ -933,6 +1012,27 @@
     synth.addEventListener('voiceschanged', function(){ /* refresh list */ });
   }
   window.addEventListener('beforeunload', function(){ if (synth) synth.cancel(); });
+</script>
+
+<script>
+// Scale the fixed-height canvas to the screen. Below the breakpoint the deck reflows
+// into a scrolling reading view instead, so the transform is cleared there.
+(function(){
+  var CH = 900;
+  var deck = document.getElementById("deck");
+  var small = window.matchMedia("(max-width: 860px), (max-aspect-ratio: 4/5)");
+  function fit(){
+    if (small.matches) { deck.style.transform = ""; deck.style.width = ""; return; }
+    // Height is the fixed dimension; width is whatever the screen's aspect asks
+    // for. The canvas then covers the viewport exactly — no bars, any aspect.
+    var s = window.innerHeight / CH;
+    deck.style.width = (window.innerWidth / s) + "px";
+    deck.style.transform = "scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  if (small.addEventListener) small.addEventListener("change", fit);
+  fit();
+})();
 </script>
 </body>
 </html>

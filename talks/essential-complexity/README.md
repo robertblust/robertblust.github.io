@@ -23,7 +23,7 @@ browser's own voice if a clip is missing.
 ## Contents
 - `index.html` – the presentation deck (self-contained except for the comic images)
 - `comic-1..6.png` – hand-drawn journey panels used as a side motif
-- `essential-complexity.pdf` – the exported PDF fallback
+- `essential-complexity-de.pdf` / `essential-complexity-en.pdf` – the exported PDF fallback
 
 The PDF and share-card exporters (`export-pdf.mjs`, `export-og.mjs`) live at the
 repository root and build both decks; there is no per-deck copy.
@@ -33,7 +33,7 @@ Run from the repository root:
 ```bash
 npm install
 npx playwright install chromium
-npm run pdf        # → talks/mental-model/mental-model.pdf and talks/essential-complexity/essential-complexity.pdf
+npm run pdf        # → both decks, both languages: <slug>-de.pdf and <slug>-en.pdf
 ```
 
 ## Serve locally

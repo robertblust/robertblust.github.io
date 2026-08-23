@@ -6,7 +6,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://blust.ch/talks/">
 <title>Robert Blust — talks</title>
-<meta name="description" content="Talks on deciding well, in German and English: describing a problem precisely before building it.">
+<meta id="metadesc" name="description" content="Talks on deciding well, in German and English: describing a problem precisely before building it.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Robert Blust">
 <meta property="og:url" content="https://blust.ch/talks/">
@@ -19,23 +19,42 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <style>
+/* Self-hosted, same origin — see index.html for why. Paths are ../ from here. */
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+
   /* Shell, header, brand, nav and footer are the profile page's, deliberately: these two
      are the site's only prose pages and a visitor moving between them should not feel a
      seam. What differs below that line is the talk list, which only this page carries. */
+  /* ─── design tokens · v1 · keep in step across all three repositories ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
   :root{
-    --paper:#0f1013; --paper2:#191b20; --ink:#f1ede4; --muted:#9a9384; --cobalt:#7aa0ff;
-    --line:#282a30;
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
   }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
   *{box-sizing:border-box; margin:0; padding:0}
   body{
-    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background:var(--paper); color:var(--ink); line-height:1.5; min-height:100vh;
-    background-image:radial-gradient(120% 60% at 50% -10%, #17191f 0%, var(--paper) 60%);
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
     -webkit-font-smoothing:antialiased;
     display:flex; flex-direction:column;
   }
   a{color:inherit}
-  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
 
   .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
 
@@ -46,62 +65,75 @@
   /* the mark is favicon.svg inlined, not linked: this site takes no external assets, and
      the decks have to open from file://. Its colours come from the tokens rather than the
      favicon's hard-coded hexes, so the two stay in step through a palette change. */
-  .brand .plate{fill:var(--paper2); stroke:var(--line); stroke-width:1.5}
-  .brand .rb{fill:var(--cobalt)}
+  .brand .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .brand .rb{fill:var(--c-mid)}
   .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
-  .brand b span{color:var(--cobalt)}
-  nav{display:flex; gap:1.9rem; font-family:"IBM Plex Mono", ui-monospace, monospace;
-      font-size:.8rem; letter-spacing:.1em; text-transform:uppercase}
-  nav a{color:var(--muted); text-decoration:none; padding-bottom:.2rem;
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem;
         border-bottom:1px solid transparent}
-  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--cobalt)}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
   /* the bar is the same component on both pages, so this page says which one you are on
      rather than dropping the item and leaving the header subtly different */
-  nav a[aria-current="page"]{color:var(--ink); border-color:var(--cobalt)}
+  nav a[aria-current="page"]{color:var(--c-firm); border-color:var(--c-firm)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
 
   main{flex:1; padding:2vh 0 5vh}
 
-  h1{font-weight:600; letter-spacing:-.02em; line-height:1.08;
-     font-size:clamp(2rem,4.4vw,3.4rem); max-width:22ch}
-  h1 em{font-style:normal; color:var(--cobalt)}
-  .lede{margin-top:1.5rem; font-size:clamp(1.02rem,1.5vw,1.22rem); color:var(--muted);
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; letter-spacing:-.032em; line-height:1.04;
+     font-size:clamp(2rem,4.6vw,3.5rem); max-width:22ch}
+  h1 em{font-style:normal; color:var(--c-firm)}
+  .lede{margin-top:1.5rem; font-size:clamp(1.02rem,1.5vw,1.22rem); color:var(--dim);
         max-width:52ch}
 
   .talks{margin-top:clamp(3rem,6vh,5rem)}
   .talk{
-    display:grid; grid-template-columns:auto 1fr auto; gap:1rem 2.5rem; align-items:baseline;
-    border-top:2px solid var(--line); padding:clamp(1.6rem,3vh,2.4rem) 0;
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.5rem 2.5rem; align-items:baseline;
+    border-top:2px solid var(--rule); padding:clamp(1.6rem,3vh,2.4rem) 0;
     text-decoration:none; color:inherit; transition:border-color .2s ease;
   }
-  .talk:last-child{border-bottom:2px solid var(--line)}
-  .talk:hover, .talk:focus-visible{border-color:var(--cobalt)}
-  .talk:hover .t, .talk:focus-visible .t{color:var(--cobalt)}
-  .num{font-family:"IBM Plex Mono",monospace; color:var(--muted); font-size:.95rem}
-  .t{font-size:clamp(1.3rem,2.6vw,2rem); font-weight:600; line-height:1.2;
+  .talkrow{border-top:2px solid var(--rule)}
+  .talkrow:last-child{border-bottom:2px solid var(--rule)}
+  .talk{border-top:0 !important}
+  .dl{margin:0 0 clamp(1.6rem,3vh,2.4rem); font-size:.78rem; letter-spacing:.06em}
+  .dl a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
+  .dl a:hover, .dl a:focus-visible{border-color:var(--c-mid)}
+  /* the whole card is already a link to the talk; these name the two things you can do
+     with it, because a large invisible click target is not an affordance */
+  .dl .sep{color:var(--dim); margin:0 .7em}
+  .talk:hover, .talk:focus-visible{border-color:var(--c-mid)}
+  .talk:hover .t, .talk:focus-visible .t{color:var(--c-mid)}
+  .t{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.32rem,2.65vw,2rem); font-weight:700; line-height:1.2;
      letter-spacing:-.015em; transition:color .2s ease}
-  .d{grid-column:2; margin-top:.7rem; color:var(--muted);
+  .d{grid-column:1; margin-top:.7rem; color:var(--dim);
      font-size:clamp(1rem,1.35vw,1.15rem); line-height:1.5; max-width:62ch}
   .meta{
-    font-family:"IBM Plex Mono",monospace; font-size:.78rem;
-    color:var(--muted); letter-spacing:.1em; white-space:nowrap; text-align:right;
+    font-family:"Plex Mono",monospace; font-size:.78rem;
+    color:var(--dim); letter-spacing:.1em; white-space:nowrap; text-align:right;
   }
   .meta b{color:var(--ink); font-weight:600}
 
   footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
-         font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.76rem;
-         letter-spacing:.08em; color:var(--muted)}
-  footer a{color:var(--cobalt); text-decoration:none}
+         font-family:"Plex Mono", ui-monospace, monospace; font-size:.76rem;
+         letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
   footer a:hover, footer a:focus-visible{text-decoration:underline}
 
-  :focus-visible{outline:2px solid var(--cobalt); outline-offset:3px; border-radius:3px}
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
   @media (max-width:900px){
     .lede{max-width:100%}
     nav{gap:1.4rem}
     main{padding:1vh 0 4vh}
-    .talk{grid-template-columns:auto 1fr; gap:.6rem 1.2rem}
-    .meta{grid-column:2; text-align:left; margin-top:.6rem}
-    .d{grid-column:2; max-width:100%}
+    .talk{grid-template-columns:minmax(0,1fr); gap:.5rem}
+    .meta{grid-column:1; text-align:left; margin-top:.4rem}
+    .d{grid-column:1; max-width:100%}
   }
   @media (prefers-reduced-motion:reduce){
     .talk, .t, nav a{transition:none}
@@ -115,7 +147,8 @@
     <div class="bar">
       <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
       <nav>
-        <a href="./" aria-current="page">Talks</a>
+        <a href="./" aria-current="page" data-de="Vorträge">Talks</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
       </nav>
     </div>
   </header>
@@ -123,28 +156,32 @@
 
 <main>
   <div class="shell">
-    <h1>Talks on <em>deciding well</em>.</h1>
-    <p class="lede">Each runs about ten minutes, in German and English, and argues the same
+    <h1 data-de="Vorträge über <em>gutes Entscheiden</em>.">Talks on <em>deciding well</em>.</h1>
+    <p class="lede" data-de="Jeder dauert etwa zehn Minuten, auf Deutsch und Englisch, und begründet denselben Punkt aus einem anderen Blickwinkel: Beschreibe das Problem präzise, und die schwierigere Hälfte der Arbeit ist bereits getan.">Each runs about ten minutes, in German and English, and argues the same
       point from a different angle: describe the problem precisely, and the harder half of
       the work is already done.</p>
 
     <div class="talks">
-      <a class="talk" target="_blank" rel="noopener" href="mental-model/">
-        <span class="num mono">01</span>
-        <span class="t">The Mental Model</span>
-        <span class="meta mono"><b>10 min</b><br>DE · EN</span>
-        <span class="d">A structured, machine-readable knowledge base that acts as the brain of a
+      <div class="talkrow">
+      <a class="talk" href="mental-model/">
+        <span class="t" data-de="Das Mental Model">The Mental Model</span>
+        <span class="meta mono"><b>10 min</b></span>
+        <span class="d" data-de="Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens: eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen — für die Unternehmensführung wie für agentische KI.">A structured, machine-readable knowledge base that acts as the brain of a
           company: one source of truth for vision, strategy, processes, roles, KPIs, rules and
           decisions, serving both human company management and agentic AI.</span>
       </a>
-      <a class="talk" target="_blank" rel="noopener" href="essential-complexity/">
-        <span class="num mono">02</span>
-        <span class="t">Essential Complexity</span>
-        <span class="meta mono"><b>10 min</b><br>DE · EN</span>
-        <span class="d">Describing a problem in its essential complexity — no more, no less. The
+      <p class="dl mono"><a href="mental-model/" data-de="Vortrag ansehen">Watch the talk</a><span class="sep">·</span><a href="mental-model/mental-model-en.pdf" data-de-href="mental-model/mental-model-de.pdf" data-de="PDF herunterladen">Download PDF</a></p>
+      </div>
+      <div class="talkrow">
+      <a class="talk" href="essential-complexity/">
+        <span class="t" data-de="Essenzielle Komplexität">Essential Complexity</span>
+        <span class="meta mono"><b>10 min</b></span>
+        <span class="d" data-de="Ein Problem in seiner essenziellen Komplexität beschreiben — nicht mehr, nicht weniger. Der Massstab hat sich in fünfzehn Jahren nicht verändert; was sich verändert hat, sind die Kosten. Mit KI und dem richtigen Meta-Modell erreicht man dieselbe Klarheit mit deutlich weniger Reibung.">Describing a problem in its essential complexity — no more, no less. The
           standard has not changed in fifteen years; what changed is the cost. With AI and the right
           meta-model you reach the same clarity with far less friction.</span>
       </a>
+      <p class="dl mono"><a href="essential-complexity/" data-de="Vortrag ansehen">Watch the talk</a><span class="sep">·</span><a href="essential-complexity/essential-complexity-en.pdf" data-de-href="essential-complexity/essential-complexity-de.pdf" data-de="PDF herunterladen">Download PDF</a></p>
+      </div>
     </div>
   </div>
 </main>
@@ -156,5 +193,47 @@
   </footer>
 </div>
 
+<script>
+// English is the markup, German lives in data-de; the choice is shared with the landing
+// page and both decks under rb-lang. Storage is guarded — file:// throws in some browsers.
+(function(){
+  var KEY = "rb-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  var UI = {
+    de:{ title:"Robert Blust — Vorträge",
+         desc:"Vorträge über gutes Entscheiden, auf Deutsch und Englisch: ein Problem präzise beschreiben, bevor man es baut." },
+    en:{ title:"Robert Blust — talks",
+         desc:"Talks on deciding well, in German and English: describing a problem precisely before building it." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    // the PDF exists in both languages; the link points at the one being read
+    Array.prototype.forEach.call(document.querySelectorAll("[data-de-href]"), function(a){
+      if (!a.hasAttribute("data-en-href")) a.setAttribute("data-en-href", a.getAttribute("href"));
+      a.setAttribute("href", a.getAttribute("data-" + lang + "-href"));
+    });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
 </body>
 </html>
