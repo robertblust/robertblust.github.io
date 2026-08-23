@@ -3,3 +3,6 @@ package-lock.json
 _dbg*
 .DS_Store
 .superpowers/
+
+# generate.py is imported by ad-hoc inspection scripts, which leaves this behind
+__pycache__/

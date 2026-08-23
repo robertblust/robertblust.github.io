@@ -147,6 +147,27 @@ the attribute swallows the rest of the tag with it:
 - **Never put an HTML comment inside a start tag.** The parser reads it as part of the
   tag's attributes; `data-notes` and everything after is lost. Comments go above the tag.
 
+## `generate.py` finds slides by a literal string, so attribute order matters
+
+`slides()` scans for `<section class="slide` — the exact characters, not a parse. Anything
+inserted between the tag name and `class` makes a slide stop being a slide, silently:
+
+```html
+<section data-say-title="no" class="slide title-slide">   <!-- invisible to the generator -->
+<section class="slide title-slide" data-say-title="no">   <!-- correct -->
+```
+
+Nothing errors. The deck still renders, the notes panel still works, and the only symptom
+is a clip that never gets generated — which looks exactly like a clip that was already up
+to date. `./generate.py --dry-run` is what catches it: the slide count drops. Check it
+against the number of slides in the deck before assuming a quiet run means a cached one.
+
+**`data-say-title="no"` suppresses the spoken title** for slides whose notes already name
+the talk in their first sentence — all three title slides do. Without it the voice says
+the title, then says it again as the opening words. And per the note above, the flag is
+matched by a substring test over the whole slide block, so writing it in a comment sets it
+on the neighbouring slide. Explaining a flag must never set it.
+
 ## `<em class='cue'>` is a stage direction; bare `<em>` is spoken
 
 Both decks originally used bare `<em>` for everything in the notes. Turning on narration

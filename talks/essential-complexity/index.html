@@ -402,9 +402,9 @@
 <div class="deck" id="deck">
 
   <!-- 0 · Titel -->
-  <section class="slide title-slide"
-    data-notes="<em class='cue'>Der Titel liegt an, während ich begrüsse und mich kurz vorstelle. Ich nenne meinen Namen und das Thema, dann gehe ich mit → zur ersten Folie.</em>"
-    data-notes-en="<em class='cue'>The title stays up while I greet and briefly introduce myself. I say my name and the topic, then go to the first slide with →.</em>"
+  <section class="slide title-slide" data-say-title="no"
+    data-notes="<em class='cue'>Der Titel liegt an, während ich begrüsse und mich kurz vorstelle. Ich nenne meinen Namen und das Thema, dann gehe ich mit → zur ersten Folie.</em> Essenzielle Komplexität ist der Teil eines Problems, den man nicht wegkonstruieren kann. In diesem Vortrag geht es darum, genau so viel davon zu beschreiben — nicht mehr, nicht weniger. Der Massstab hat sich in fünfzehn Jahren nicht verändert. Verändert haben sich die Kosten."
+    data-notes-en="<em class='cue'>The title stays up while I greet and briefly introduce myself. I say my name and the topic, then go to the first slide with →.</em> Essential complexity is the part of a problem you cannot design away. This talk is about describing exactly that much of it — no more, no less. The standard has not moved in fifteen years. What moved is the cost."
     data-time="">
     <div class="kicker" data-n="00" data-de="Ein Konzept erklärt von Robert Blust">A concept explained by Robert Blust</div>
     <h1 data-de="Essenzielle <em>Komplexität</em>.">Essential <em>complexity</em>.</h1>
@@ -477,10 +477,10 @@
 
   <!-- 5 · Beispiel: Domäne Finance -->
   <section class="slide"
-    data-notes="<em class='cue'>Ich mache es konkret</em> – ein echtes Modell aus einem meiner Projekte: die Domäne Finance. <em class='cue'>Ich lese nicht alle Begriffe vor – ich greife EINEN heraus:</em> Folio – das Finanzkonto einer Reservation, hängt an Debitor, sammelt OrderItems und Payments, mündet in eine PdfInvoice. <em class='cue'>Meine Pointe:</em> jeder Begriff auf einen Satz gebracht – nicht mehr, nicht weniger. <em class='cue'>Payment/Debitor/Invoice sprechen das Payment-Publikum direkt an.</em>"
-    data-notes-en="<em class='cue'>I make it concrete</em> – a real model from one of my projects: the Finance domain. <em class='cue'>I don't read out every term – I grab ONE:</em> Folio – the financial account of a reservation, attached to a Debitor, collecting OrderItems and Payments, ending in a PdfInvoice. <em class='cue'>My point:</em> every term in a single sentence – no more, no less. <em class='cue'>Payment/Debitor/Invoice speak directly to a payments audience.</em>"
+    data-notes="<em class='cue'>Ich mache es konkret</em> – die Domäne Finance aus LIKE MAGIC, einer Hotelplattform, bei der ich IT-Architektur, Business-Architektur und die Produktivplattform verantwortet habe. Ich lese nicht alle Begriffe vor — ich greife einen heraus, als Beispiel. Folio – das Finanzkonto einer Reservation, hängt an Debitor, sammelt OrderItems und Payments, mündet in eine PdfInvoice. <em class='cue'>Meine Pointe:</em> jeder Begriff auf einen Satz gebracht – nicht mehr, nicht weniger. <em class='cue'>Payment/Debitor/Invoice sprechen das Payment-Publikum direkt an.</em>"
+    data-notes-en="<em class='cue'>I make it concrete</em> – the Finance domain of LIKE MAGIC, a hospitality platform where I led the IT architecture, the business architecture and the production platform. I will not read out every term — let me take one, as an example. Folio – the financial account of a reservation, attached to a Debitor, collecting OrderItems and Payments, ending in a PdfInvoice. <em class='cue'>My point:</em> every term in a single sentence – no more, no less. <em class='cue'>Payment/Debitor/Invoice speak directly to a payments audience.</em>"
     data-time="1:15">
-    <div class="kicker" data-n="05" data-de="Ein Beispiel – Domäne Finance">An example – the Finance domain</div>
+    <div class="kicker" data-n="05" data-de="Ein Beispiel – Finance in einem Hotelsystem">An example – Finance in a hotel system</div>
     <div class="split even">
       <div class="diagram">
         <svg viewBox="0 0 500 300" role="img" aria-label="Finance domain: Folio with Debitor, OrderItem, Payment, PdfInvoice">
@@ -516,7 +516,7 @@
             <text x="405" y="251">PdfInvoice</text>
           </g>
         </svg>
-        <p class="caption" data-de="Echtes Modell aus einem Projekt von mir – <b>Markdown + Mermaid</b>">Real model from a project of mine – <b>Markdown + Mermaid</b></p>
+        <p class="caption" data-de="Echtes Modell aus LIKE MAGIC – <b>Markdown + Mermaid</b>">Real model from LIKE MAGIC – <b>Markdown + Mermaid</b></p>
       </div>
       <dl class="glossary">
         <div><dt>Folio</dt><dd data-de="Finanzkonto einer Reservation – bündelt alle Positionen eines Aufenthalts.">Financial account of a reservation – bundles all line items of a stay.</dd></div>
