@@ -24,10 +24,22 @@ check that catches a page that parses fine and renders wrong.
   from a repository named exactly `robertblust.github.io`. Renaming it, or forking under
   another name, loses `blust.ch` — Pages falls back to `<user>.github.io/<repo>/`, which
   is a different site at a different URL, silently.
-- **At Hostpoint, only `A`, `AAAA` and the `www` record belong to this site.** `MX` and
-  `TXT` are the domain's live mail. Touching them while pointing DNS at GitHub Pages
-  stops incoming mail with no error and no bounce anyone would notice — the failure
-  shows up as mail that never arrived, days later, from someone who gave up asking.
+- **At Hostpoint, only `A`, `AAAA` and the `www` record belong to this site.** Leave the
+  rest of the zone alone while chasing a Pages problem — but know what is actually in it.
+  The `MX` records point at Hostpoint's shared mail servers and the `TXT` carries their
+  SPF, and both are the default template that comes with domain management. There is no
+  mail package on this domain, so nothing is behind them: no mailbox receives, and
+  nothing is lost by replacing them.
+
+  This note used to say they were the domain's live mail, which was read off the DNS and
+  never checked. It cost a wrong answer — the records look exactly like a working mail
+  setup — and a convention that is wrong is worse than none, because it makes a safe
+  change look dangerous.
+
+  **It becomes true the day mail moves to Google Workspace.** From then on the `MX` and
+  the SPF `TXT` are live mail, and touching them stops delivery with no error and no
+  bounce anyone would notice — the failure shows up as mail that never arrived, days
+  later, from someone who gave up asking. Restore the warning then.
 - **Decks are self-contained single files that work from `file://`.** No bundler, no
   shared JS, no CDN. A change that only works when served breaks the one thing a deck is
   for: opening it cold, on someone else's machine, with no server running.
