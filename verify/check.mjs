@@ -32,10 +32,29 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
+  // The privacy page. Its claims are checkable, so verify checks them rather than trusting
+  // the prose: a page that says it makes no third-party request must make none.
+  { path: "/privacy/", title: /Blust/, lang: "en",
+    contains: ["This site collects", "There is no imprint yet"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    internalLinks: true },
 ];
 
 const CHECKS = {
   ...DESIGN_CHECKS,
+  // A page that says it makes no third-party request must make none. `links` and
+  // `internalLinks` cannot see this: they inspect markup, and a font, an analytics tag or
+  // an embed is a request. Copied from guestgraph.github.io, where the same claim is made.
+  async sameOrigin(page, spec) {
+    const seen = [];
+    page.on("request", r => seen.push(r.url()));
+    await page.reload({ waitUntil: "networkidle" });
+    const origin = new URL(spec.absolute).origin;
+    const foreign = [...new Set(seen.filter(u => /^https?:/.test(u) && !u.startsWith(origin)))];
+    return foreign.length ? "off-origin request(s): " + foreign.join(", ") : null;
+  },
   async title(page, spec) {
     const t = await page.title();
     if (!spec.title.test(t)) return `title ${JSON.stringify(t)} does not match ${spec.title}`;
@@ -209,7 +228,8 @@ await browser.close();
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
     const expected = ["https://blust.ch/", "https://blust.ch/talks/",
                       "https://blust.ch/talks/mental-model/",
-                      "https://blust.ch/talks/essential-complexity/"];
+                      "https://blust.ch/talks/essential-complexity/",
+                      "https://blust.ch/privacy/"];
     const missing = expected.filter(u => !locs.includes(u));
     const extra = locs.filter(u => !expected.includes(u));
     if (missing.length || extra.length) {

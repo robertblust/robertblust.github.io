@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Robert Blust</title>
+<meta id="metadesc" name="description" content="This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://blust.ch/privacy/">
+
+<meta property="og:title" content="Privacy — Robert Blust">
+<meta property="og:description" content="This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Robert Blust">
+<meta property="og:url" content="https://blust.ch/privacy/">
+<meta property="og:image" content="https://blust.ch/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Robert Blust — Software Engineer & Architect.">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Publisher and page, nothing about the product. The same rule the other two pages
+     follow: structured data is not a back door for claims the prose does not make. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://blust.ch/#organization",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "logo": "https://blust.ch/logo.svg",
+      "sameAs": ["https://github.com/robertblust"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/privacy/#webpage",
+      "name": "Privacy",
+      "url": "https://blust.ch/privacy/",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://blust.ch/#website" },
+      "publisher": { "@id": "https://blust.ch/#organization" }
+    }
+  ]
+}
+</script>
+<style>
+/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
+   Relative, because a root-absolute path breaks under file://. */
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  /* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  a{color:inherit}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  /* three nav items plus the language control no longer fit beside the lockup on a
+     phone: let the row wrap rather than clip the control off the right edge. */
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; color:var(--c-mid); flex:0 0 auto}
+
+  /* The mark is blust.ch's own: a plate with the initials on it. Its two rules live in
+     the site's stylesheet, and this page was built from a sibling that has no such mark —
+     without them the svg renders with no fill and the icon is simply invisible. */
+  .brand .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .brand .rb{fill:var(--c-mid)}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  main{flex:1; padding:2vh 0 6vh}
+
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  .title h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
+
+  /* The page's one reversal, and the only honest place for it: the headline says nothing
+     leaves, and one thing does — the request itself, to whoever serves the file. */
+  .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
+
+  section{margin-top:clamp(3rem,8vh,5.5rem)}
+  h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+     font-weight:700; letter-spacing:-.025em; line-height:1.06;
+     font-size:clamp(1.6rem,3vw,2.3rem)}
+  h2 em{font-style:normal; color:var(--c-mid)}
+  .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
+  .lede a{color:var(--c-mid)}
+
+  /* the same one-datum box the sibling site uses: one fact, stated plainly and
+     once, in the face this system reserves for data */
+  .unit{margin-top:1.8rem; display:inline-block; padding:1rem 1.35rem; border-radius:10px;
+        background:var(--raise); border:1.5px solid var(--c-firm);
+        font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
+
+  .cols{margin-top:2rem; display:grid; gap:1.1rem; align-items:start;
+        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))}
+  .card{background:var(--raise); border:1.5px solid var(--rule); border-radius:12px;
+        padding:1.5rem 1.6rem}
+  .card h3{font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--dim)}
+  .card ul{margin-top:1.1rem; list-style:none; display:grid; gap:.95rem}
+  .card li{font-size:.98rem; line-height:1.45}
+  .card li b{font-weight:600}
+  .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
+  .card li i .mono{font-size:.95em; color:var(--ink)}
+  /* five short items across a full-width card read as a list, not a column of stubs */
+  .wide ul{grid-template-columns:repeat(auto-fit, minmax(255px, 1fr)); gap:1.3rem 1.8rem}
+  /* things a site could do and this one does not: considered, not accepted */
+  .never li b{color:var(--c-weak)}
+
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  .rules p a{color:var(--c-mid)}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+  footer a[aria-current="page"]{color:var(--c-firm)}
+
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    nav{gap:1.4rem}
+    .tagline{max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
+      <nav>
+        <a href="../talks/" data-de="Vorträge">Talks</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+    <div class="title">
+      <h1 data-de="<span class='r70'>Diese Seite sammelt</span><span class='rcl'><em>nichts</em>.</span>"><span class="r70">This site collects</span><span class="rcl"><em>nothing</em>.</span></h1>
+      <p class="tagline" data-de="Keine Cookies, keine Statistik, keine Anfrage an Dritte. Die Liste dessen, was Ihren Browser verlässt, ist kurz genug, um sie hier abzudrucken.">No cookies, no analytics, no third-party requests. The list of what leaves your browser is short enough to print here.</p>
+      <p class="note" data-de="Eine Ausnahme, und sie steht uns nicht zu, sie zu entfernen: GitHub liefert diese Seiten aus und sieht dabei — wie jeder Hoster — die Anfrage, die sie holt.">One exception, and it is not ours to remove: GitHub serves these pages and, like any host, sees the request that fetches them.</p>
+    </div>
+
+    <section>
+      <h2 data-de="Was diese Seite tut">What this site does</h2>
+      <p class="lede" data-de="Alles, was diese Seite braucht, kommt von blust.ch — auch die Schriften. Nichts wird anderswo geholt, also erfährt kein Dritter, dass Sie hier waren.">Everything this page needs comes from blust.ch, fonts included. Nothing is fetched from anywhere else, so no third party learns that you were here.</p>
+      <!-- no data-de: this is the value itself, and it says the same thing in either language.
+           Both cases are shown because pinning one would be wrong the moment you switch. -->
+      <p class="unit mono">localStorage: rb-lang = "de" | "en"</p>
+      <p class="lede" data-de="Das ist alles, was gespeichert wird: Ihre Sprachwahl, zwei Buchstaben, damit die nächste Seite sie kennt. Sie erreicht keinen Server und identifiziert niemanden.">That is everything that gets stored: your choice of language, two letters, so the next page knows it. It reaches no server and identifies nobody.</p>
+      <div class="cols">
+        <div class="card never wide">
+          <h3 data-de="Gar nicht erst verwendet">Not used at all</h3>
+          <ul>
+            <li><b data-de="Cookies">Cookies</b><i data-de="Keine, keiner Art. Es gibt kein Banner, weil es nichts zuzustimmen gibt.">None, of any kind. There is no banner because there is nothing to consent to.</i></li>
+            <li><b data-de="Statistik und Tracking">Analytics</b><i data-de="Nichts zählt Sie, und niemandem wird gemeldet, dass Sie hier waren.">Nothing counts you, and nobody is told that you were here.</i></li>
+            <li><b data-de="Anfragen an Dritte">Third-party requests</b><i data-de="Schriften, Bilder und Stile kommen alle von diesem Ursprung. Kein CDN sieht Ihre Adresse.">Fonts, images and styles all come from this origin. No CDN sees your address.</i></li>
+            <li><b data-de="Formulare und Konten">Forms and accounts</b><i data-de="Nichts auszufüllen, nichts anzumelden, nichts zu speichern.">Nothing to fill in, nothing to sign up for, nothing to store.</i></li>
+            <li><b data-de="Wiedererkennung">Fingerprinting</b><i data-de="Es wird nicht versucht, Sie über Besuche hinweg wiederzuerkennen. Der Sprachschlüssel ist kein Merkmal dafür.">No attempt is made to recognise you across visits. The language key is not an identifier.</i></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-de="Was hier sonst noch passiert">What else happens here</h2>
+      <p class="lede" data-de="Nichts. Diese Seite verkauft nichts, misst nichts und betreibt nichts im Hintergrund — sie zeigt Vorträge und was ich tue.">Nothing. This site sells nothing, measures nothing and runs nothing in the background — it shows talks and what I do.</p>
+      <div class="rules">
+        <p data-de="<b>Die Vorträge sind Dateien.</b> Die Decks und die PDFs liegen auf dieser Domain und werden von hier ausgeliefert. Kein Video-Einbetter, kein Player, der anderswo nachfragt."><b>The talks are files.</b> The decks and the PDFs sit on this domain and are served from here. No video embed, no player phoning somewhere else.</p>
+        <p data-de="<b>Es gibt kein Formular und kein Konto.</b> Nichts auszufüllen, nichts anzumelden — also auch nichts, das gespeichert würde."><b>There is no form and no account.</b> Nothing to fill in, nothing to sign up for — so nothing that could be stored.</p>
+        <p data-de="<b>Wenn Sie mir schreiben, schreiben Sie mir.</b> Kontakt läuft über die Wege im Fuss dieser Seite, bei den Anbietern, die dort stehen. Diese Seite selbst nimmt nichts entgegen."><b>If you write to me, you write to me.</b> Contact runs through the links in the footer, at the providers named there. This site itself receives nothing.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-de="Wer das betreibt">Who runs this</h2>
+      <div class="rules">
+        <p data-de="Diese Seite gehört <a href='https://blust.ch/' target='_blank' rel='noopener'>Robert Blust</a> — Software Engineer und Architekt. Sie ist keine Firma und verkauft nichts.">This site belongs to <a href="https://blust.ch/" target="_blank" rel="noopener">Robert Blust</a> — software engineer and architect. It is not a company and it sells nothing.</p>
+        <p data-de="Ein Impressum gibt es noch nicht, und das ist Absicht statt Versäumnis: Es gibt hier nichts zu kaufen, also gibt es kein Geschäft, an das eines gehören würde.">There is no imprint yet, and that is deliberate rather than an omission: nothing here can be bought, so there is no transaction for one to belong to.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+    <span><a href="./" aria-current="page" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// Same mechanism as the other two pages: English is the markup so the page says the right
+// thing before any JS runs, and the choice is remembered per origin. This page describes
+// that key, which is the only reason it is worth pointing at the code from here.
+(function(){
+  var KEY = "rb-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  var UI = {
+    de:{ title:"Datenschutz — Robert Blust",
+         desc:"Diese Seite setzt keine Cookies, führt keine Statistik und stellt keine Anfragen an Dritte. Was den Browser verlässt, ist kurz genug, um es hier abzudrucken." },
+    en:{ title:"Privacy — Robert Blust",
+         desc:"This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
