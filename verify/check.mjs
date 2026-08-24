@@ -10,8 +10,14 @@ const PAGES = [
   { path: "/", title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
-    contains: ["deciding well", "Robert Blust", "3AP", "LIKE MAGIC"], card: true,
-    sameTab: ["talks/"], brandMark: true,
+    // The career break is on the page deliberately, so it is asserted deliberately: it is
+    // the sentence most likely to be quietly dropped later, and it is what explains why
+    // both ideas are built in the open.
+    contains: ["deciding well", "Robert Blust", "3AP", "LIKE MAGIC",
+               "career break", "See the ideas"], card: true,
+    // The two project names jump to their own section. Asserted by href, because a
+    // fragment that stops matching an id fails silently — the page just lands at the top.
+    sameTab: ["talks/", "ideas/", "ideas/#guestgraph", "ideas/#companygraph"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
@@ -40,6 +46,16 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
+  // The ideas page. Two claims make it worth reading and both are checkable: that each
+  // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
+  // the privacy note promises the second for the whole site.
+  { path: "/ideas/", title: /Ideas/, lang: "en",
+    contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
+    links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, cardBase: "https://blust.ch", internalLinks: true },
 ];
 
 const CHECKS = {
@@ -229,7 +245,8 @@ await browser.close();
     const expected = ["https://blust.ch/", "https://blust.ch/talks/",
                       "https://blust.ch/talks/mental-model/",
                       "https://blust.ch/talks/essential-complexity/",
-                      "https://blust.ch/privacy/"];
+                      "https://blust.ch/privacy/",
+                      "https://blust.ch/ideas/"];
     const missing = expected.filter(u => !locs.includes(u));
     const extra = locs.filter(u => !expected.includes(u));
     if (missing.length || extra.length) {

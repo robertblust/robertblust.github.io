@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://blust.ch/ideas/">
+
+<title>Ideas — Robert Blust</title>
+<meta id="metadesc" name="description" content="Two ideas, put up for scrutiny: GuestGraph and CompanyGraph. Five parts each — what is open source, what could ever earn money, and how far along it is.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blust.ch/ideas/">
+<meta property="og:title" content="Ideas — Robert Blust">
+<meta property="og:description" content="Two ideas, put up for scrutiny. Five parts each — what is open source, what could ever earn money, and how far along it is.">
+<meta property="og:image" content="https://blust.ch/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+
+/* ─── design tokens · v1 · keep in step across every repository that shares them ───
+     These sites share no stylesheet by design — a deck has to open from
+     file:// — so this block is a copy, and each repo's verify suite asserts
+     the copy still matches. Change it here, then run the checks.
+
+     Brightness is confidence. Each stop has exactly one job:
+       --c-weak  a candidate: considered, not accepted
+       --c-mid   anything interactive — links, controls, the brand accent
+       --c-firm  the resolved thing — the thesis, the current page
+       --c-flag  a reversal; at most one per page, never decoration
+  */
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+  }
+  /* ─── end design tokens ─────────────────────────────────────────────── */
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
+    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    -webkit-font-smoothing:antialiased; display:flex; flex-direction:column;
+  }
+  a{color:inherit}
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 7vw}
+
+  header{padding:2rem 0}
+  .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap}
+  .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none}
+  .brand svg{width:28px; height:28px; flex:0 0 auto}
+  .brand .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .brand .rb{fill:var(--c-mid)}
+  .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
+  .brand b span{color:var(--c-mid)}
+  nav{display:flex; align-items:center; gap:1.9rem; font-size:.76rem; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--dim); text-decoration:none; padding-bottom:.2rem; border-bottom:1px solid transparent}
+  nav a:hover, nav a:focus-visible{color:var(--ink); border-color:var(--c-mid)}
+  nav a[aria-current]{color:var(--c-firm)}
+  .langind{font:inherit; letter-spacing:inherit; text-transform:inherit; background:none;
+           border:0; border-bottom:1px solid transparent; padding:0 0 .2rem; cursor:pointer;
+           color:var(--dim); white-space:nowrap}
+  .langind:hover{color:var(--ink)}
+  .langind .on{color:var(--c-firm); font-weight:700}
+
+  main{flex:1; padding:2vh 0 6vh}
+  .eyebrow{font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.16em;
+           text-transform:uppercase; color:var(--dim); display:flex; align-items:center; gap:1rem}
+  .eyebrow::after{content:""; flex:0 0 5rem; height:2px; background:var(--c-mid); opacity:.5}
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700;
+     line-height:1.05; letter-spacing:-.032em; font-size:clamp(2.1rem,5.2vw,4rem);
+     max-width:20ch; margin-top:1.4rem}
+  h1 em{font-style:normal; color:var(--c-firm)}
+  .lede{margin-top:1.6rem; font-size:clamp(1.05rem,1.6vw,1.3rem); color:var(--dim); max-width:58ch}
+
+  /* The two questions the experiment has to answer. Mono for the numbers only — they are
+     record values; the questions themselves are prose. */
+  .questions{margin-top:clamp(2.6rem,5vh,4rem); border-top:2px solid var(--rule); padding-top:1.6rem}
+  /* Not monospace: mono here means data — record values, lengths, identifiers — and a
+     section heading is prose. It keeps the small letterspaced treatment, which is what
+     made it look like a label in the first place. */
+  .questions h2{font-size:.76rem; font-weight:500; letter-spacing:.16em;
+                text-transform:uppercase; color:var(--dim)}
+  .qlist{list-style:none; margin-top:1.2rem; display:flex; flex-direction:column; gap:1rem}
+  .qlist li{display:grid; grid-template-columns:auto 1fr; gap:1.2rem; align-items:baseline}
+  .qlist .num{color:var(--dim); font-size:.8rem}
+  .qlist p{font-size:clamp(1rem,1.4vw,1.16rem); max-width:64ch}
+  .qlist b{color:var(--c-firm); font-weight:600}
+  .questions .note{margin-top:1.4rem; color:var(--dim); font-size:.95rem; max-width:64ch}
+
+  .idea{margin-top:clamp(3rem,7vh,5.5rem); border-top:2px solid var(--rule); padding-top:2rem}
+  .idea-head{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap}
+  /* Each project's own mark, in its own repository's markup, drawn in currentColor so it
+     takes the accent from the heading beside it. The name is always Guest/Company in --ink
+     with Graph in --c-mid — that pairing is the wordmark, and splitting it anywhere on this
+     site would make two different things look like two different products. */
+  .idea-head .mark{display:flex; color:var(--c-mid); flex:0 0 auto}
+  .idea-head .mark svg{width:clamp(22px,2.4vw,30px); height:clamp(22px,2.4vw,30px); display:block}
+  /* An anchored heading must not sit flush against the top of the window. */
+  .idea{scroll-margin-top:2.5rem}
+  .idea-head h2{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.5rem,3vw,2.2rem);
+                font-weight:700; letter-spacing:-.02em}
+  .idea-head h2 span{color:var(--c-mid)}
+  .domain{font-family:"Plex Mono",monospace; font-size:.78rem; color:var(--c-mid); text-decoration:none;
+          letter-spacing:.04em}
+  .domain:hover{text-decoration:underline}
+  .tagline{margin-top:.9rem; font-family:"Bricolage Grotesque",sans-serif; font-weight:600;
+           font-size:clamp(1.15rem,2vw,1.6rem); letter-spacing:-.015em}
+  .tagline em{font-style:normal; color:var(--c-firm)}
+  .desc{margin-top:1rem; color:var(--dim); max-width:66ch}
+  .for{margin-top:1.1rem; display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:baseline; max-width:66ch}
+  .for .k{font-family:"Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em;
+          text-transform:uppercase; color:var(--dim)}
+  .for p{color:var(--dim); font-size:.95rem}
+
+  .parts{list-style:none; margin-top:2rem}
+  .part{display:grid; grid-template-columns:auto 1fr auto; gap:.4rem 1.2rem; align-items:start;
+        border-top:1px solid var(--rule); padding:1.2rem 0}
+  .part .num{color:var(--dim); font-size:.8rem; padding-top:.15rem}
+  .part h3{font-size:1.05rem; font-weight:600}
+  .part p{color:var(--dim); font-size:.95rem; margin-top:.3rem; max-width:62ch}
+  /* The bar is the one place a number is drawn rather than written: how far along the part
+     is. The label beside it says the same thing in words, because a bar alone is a feeling. */
+  .maturity{display:flex; align-items:center; gap:.9rem; margin-top:.7rem}
+  .track{position:relative; display:block; width:min(240px,40vw); height:3px; background:var(--rule)}
+  .track i{position:absolute; inset:0 auto 0 0; background:var(--c-mid); display:block}
+  .maturity .label{font-size:.72rem; letter-spacing:.1em; color:var(--dim)}
+  .tag{font-family:"Plex Mono",monospace; font-size:.66rem; letter-spacing:.12em;
+       text-transform:uppercase; padding:.3rem .6rem; border:1px solid var(--rule);
+       border-radius:3px; color:var(--dim); white-space:nowrap; justify-self:end}
+  .tag.com{border-color:var(--c-mid); color:var(--c-mid)}
+
+  .idea .note{margin-top:1.6rem; color:var(--dim); font-size:.95rem; max-width:62ch}
+  .links{margin-top:1.2rem; display:flex; flex-wrap:wrap; gap:.6rem 1.8rem;
+         font-family:"Plex Mono",monospace; font-size:.74rem; letter-spacing:.06em}
+  .links a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
+  .links a:hover, .links a:focus-visible{border-color:var(--c-mid)}
+
+  .close{margin-top:clamp(3rem,6vh,4.5rem); border-top:2px solid var(--rule); padding-top:1.4rem;
+         font-family:"Plex Mono",monospace; font-size:.74rem; letter-spacing:.08em; color:var(--dim)}
+
+  footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
+         font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
+  footer a{color:var(--c-mid); text-decoration:none}
+  footer a:hover, footer a:focus-visible{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
+
+  @media (max-width:900px){
+    .bar{gap:1.1rem 1.4rem}
+    nav{gap:1.4rem}
+    .part{grid-template-columns:auto 1fr; }
+    .part .tag{grid-column:2; justify-self:start; margin-top:.6rem}
+    .track{width:min(200px,55vw)}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header>
+    <div class="bar">
+      <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
+      <nav>
+        
+        <a href="./" aria-current="page" data-de="Ideen">Ideas</a>
+        <a href="../talks/" data-de="Vorträge">Talks</a>
+        <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<main>
+  <div class="shell">
+
+    <p class="eyebrow" data-de="Ideen · zur Prüfung gestellt">Ideas · put up for scrutiny</p>
+    <h1 data-de="Zwei Ideen. Offen gebaut, offen <em>geprüft</em>.">Two ideas. Built in the open, <em>validated</em> in the open.</h1>
+    <p class="lede" data-de="Beide sind Open Core: die Substanz steht unter Apache 2.0, und genau ein Teil von jeder könnte je Geld verdienen. Ob er es tut, ist das Experiment.">Both are open core: the substance is Apache 2.0, and exactly one part of each could ever earn money. Whether it will is the experiment.</p>
+
+    <section class="questions">
+      <h2 data-de="Die Fragen, die die Validierung beantworten muss">The questions validation has to answer</h2>
+      <ol class="qlist">
+        <li><span class="num mono">01</span><p data-de="Wie viel von einer Idee <b>muss existieren</b>, bevor sie sich prüfen lässt — und was kostet das an Stunden und Aufmerksamkeit?">How much of an idea <b>must exist</b> before it can be validated — and what does that cost in hours and focus?</p></li>
+        <li><span class="num mono">02</span><p data-de="Was ist ein <b>realistisches Ergebnis</b> — Umsatz, Erkenntnis oder ein sauberes Nein?">What is a <b>realistic outcome</b> — revenue, learning, or a clean no?</p></li>
+      </ol>
+      <p class="note" data-de="Was dabei herauskommt, wird veröffentlicht, sobald das Material reif ist. Mein Netzwerk ist Teil des Experiments: ehrliches Feedback ist der Punkt, und ein Nein ist mir mehr wert als ein höfliches Ja.">Findings will be published as the material matures. My network is part of the experiment: honest feedback is the point, and a no is worth more to me than a polite yes.</p>
+    </section>
+
+    <section class="idea" id="guestgraph">
+      <div class="idea-head">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"> <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"> <path d="M8.6 7.2 L20.5 14.2"/><path d="M8.6 16 L19.4 16"/><path d="M8.6 24.8 L20.5 17.8"/> <circle cx="6" cy="7.2" r="2.6" fill="#0C0E13"/> <circle cx="6" cy="16" r="2.6" fill="#0C0E13"/> <circle cx="6" cy="24.8" r="2.6" fill="#0C0E13"/> </g> <circle cx="24" cy="16" r="5.4" fill="currentColor"/> </svg></span>
+        <h2>Guest<span>Graph</span></h2>
+        <a class="domain" href="https://guestgraph.io/" target="_blank" rel="noopener">guestgraph.io</a>
+      </div>
+      <p class="tagline" data-de="Fünf Fremde. Ein <em>Gast</em>.">Five strangers. One <em>guest</em>.</p>
+      <p class="desc" data-de="Ein Gast bucht, checkt ein, isst, geht ins WLAN und hinterlässt eine Bewertung — und jedes System im Haus speichert jemand anderen. GuestGraph löst diese Fremden zu einem Profil auf und kann jederzeit sagen, warum. Eine falsche Zusammenführung ist ein Datenschutzvorfall, also ist jede Entscheidung erklärbar und umkehrbar.">A guest books, checks in, eats, joins the wifi and leaves a review — and every system in the hotel stores someone different. GuestGraph resolves those strangers into one profile, and can always tell you why. A wrong merge is a data protection incident, so every decision is explainable and reversible.</p>
+      <div class="for"><span class="k">For</span><p data-de="Hospitality-Tech — Hotels und Hotelgruppen, und die PMS-, POS- und Buchungsanbieter, die sie bedienen.">Hospitality tech — hotels and hotel groups, and the PMS, POS and booking-system vendors that serve them.</p></div>
+      <ol class="parts">
+        <li class="part">
+          <span class="num mono">01</span>
+          <div class="body">
+            <h3 data-de="Die Engine">The engine</h3>
+            <p data-de="Identitätsauflösung — deterministisch und probabilistisch, nach Sicherheit gestuft, mit einer Prüfschlange für Menschen.">Identity resolution — deterministic and probabilistic, layered by confidence, with a human review queue.</p>
+            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">02</span>
+          <div class="body">
+            <h3 data-de="Der Gast-Graph &amp; die API">The guest graph &amp; API</h3>
+            <p data-de="Unveränderliche Quelldatensätze, ein abgeleitetes Profil, das sich jederzeit neu berechnen lässt, alles über REST erreichbar.">Immutable source records, a derived profile that can always be recomputed, everything reachable over REST.</p>
+            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">03</span>
+          <div class="body">
+            <h3 data-de="Erklären, rückgängig machen, prüfen">Explain, undo, audit</h3>
+            <p data-de="Jede Zusammenführung beantwortet „warum?“ und lässt sich wieder trennen — ein Rückgängig schreibt eine dauerhafte Nicht-zusammenführen-Regel.">Every merge answers “why?” and can be split again — an undo writes a permanent do-not-merge rule.</p>
+            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">04</span>
+          <div class="body">
+            <h3 data-de="Konnektoren">Connectors</h3>
+            <p data-de="Echte PMS-, POS- und Buchungssysteme. Als Nächstes auf der Roadmap — und der Teil, der über die Brauchbarkeit entscheidet.">Real PMS, POS and booking systems. Next on the roadmap — and the part that decides usability.</p>
+            <div class="maturity"><span class="track"><i style="width:8%"></i></span><span class="label mono" data-de="als Nächstes">next up</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">05</span>
+          <div class="body">
+            <h3 data-de="Der gehostete Dienst">The hosted service</h3>
+            <p data-de="Hosting, Konsole, MCP für KI-Agenten. Ein Zähler: pro Anreise abgerechnet — eine Zahl, die ohnehin auf dem Dashboard des Hotels steht. Geplant, noch nicht offen.">Hosting, console, MCP for AI agents. One meter: billed per arrival — a number already on the hotel’s own dashboard. Planned, not open yet.</p>
+            <div class="maturity"><span class="track"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
+          </div>
+          <span class="tag com" data-de="Kommerziell">Commercial</span>
+        </li>
+      </ol>
+      <p class="note" data-de="Open Core, weil ich eine Blackbox, die Gäste zusammenführt, selbst nicht in Betrieb nehmen würde.">Open core, because a black box that merges guests is not something I would deploy either.</p>
+      <p class="links">
+        <a href="https://guestgraph.io/talks/intro/" target="_blank" rel="noopener" data-de="Einführungsvortrag · 12 Min">intro talk · 12 min</a>
+        <a href="https://guestgraph.io/billing/" target="_blank" rel="noopener" data-de="Abrechnungsmodell">billing model</a>
+        <a href="https://github.com/guestgraph" target="_blank" rel="noopener">github.com/guestgraph</a>
+      </p>
+    </section>
+
+    <section class="idea" id="companygraph">
+      <div class="idea-head">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"> <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/> <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/> <path d="M12.5 12 h4.5"/> <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/> </svg></span>
+        <h2>Company<span>Graph</span></h2>
+        <a class="domain" href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a>
+      </div>
+      <p class="tagline" data-de="Alles, was eine Firma weiss. Ein <em>Graph</em>.">Everything a company knows. One <em>graph</em>.</p>
+      <p class="desc" data-de="Was eine Firma weiss — Rollen, Prozesse, Kennzahlen, Regeln, Entscheide — steht geschrieben, aber keine zwei Leute würden am selben Ort nachschauen. Also fragt man doch wieder eine Person; das ist die Steuer. CompanyGraph ist die Struktur, die dieses Wissen annimmt: ein Graph aus Markdown, versioniert wie Code, lesbar für Menschen, verlässlich für KI.">What a company knows — roles, processes, metrics, rules, decisions — is written down, but no two people would look in the same place. So you ask a person instead; that is the tax. CompanyGraph is the structure that knowledge takes: a graph of Markdown, versioned like code, readable for people, reliable for AI.</p>
+      <div class="for"><span class="k">For</span><p data-de="Firmen, die es mit KI ernst meinen — alle, die wollen, dass Agenten in ihren Regeln handeln statt zu raten, von der Ein-Personen-Firma aufwärts.">Companies serious about using AI — anyone who wants agents acting inside their rules instead of guessing, from a company of one upward.</p></div>
+      <ol class="parts">
+        <li class="part">
+          <span class="num mono">01</span>
+          <div class="body">
+            <h3 data-de="Das Meta-Modell">The meta-model</h3>
+            <p data-de="Kerntypen, ein Schema pro Typ — das Vokabular, auf das zwei Firmen kamen, die nie voneinander wussten. Veröffentlicht.">Core types, one schema per type — the vocabulary two companies that never met converged on. Published.</p>
+            <div class="maturity"><span class="track"><i style="width:26%"></i></span><span class="label mono" data-de="Vokabular veröffentlicht">vocabulary published</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">02</span>
+          <div class="body">
+            <h3 data-de="Der Graph aus Markdown">The graph of Markdown</h3>
+            <p data-de="Eine Seite pro Sache, der Titel ist der Name, jede Referenz über den Namen — nichts zeigt ins Leere, nichts geht still verloren.">One page per thing, its title is its name, every reference by name — nothing points at nothing, nothing gets quietly lost.</p>
+            <div class="maturity"><span class="track"><i style="width:46%"></i></span><span class="label mono" data-de="Konventionen veröffentlicht">conventions published</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">03</span>
+          <div class="body">
+            <h3 data-de="Die Werkzeuge">The tooling</h3>
+            <p data-de="Was gebaut wird, um das Modell anzulegen und aktuell zu halten — quelloffen, nicht die zahlende Hälfte von etwas Freiem.">Whatever gets built to create the model and keep it current — open source, not the paid half of a free thing.</p>
+            <div class="maturity"><span class="track"><i style="width:4%"></i></span><span class="label mono" data-de="nicht begonnen">not started</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">04</span>
+          <div class="body">
+            <h3 data-de="Vorträge &amp; ein Beispiel">The talks &amp; worked example</h3>
+            <p data-de="Deck, PDF und Tonspur auf Deutsch und Englisch, dazu ein durchgearbeitetes Beispiel des Modells.">Deck, PDF and audio in German and English, plus one worked example of the model in use.</p>
+            <div class="maturity"><span class="track"><i style="width:22%"></i></span><span class="label mono" data-de="begonnen">started</span></div>
+          </div>
+          <span class="tag os" data-de="Quelloffen">Open source</span>
+        </li>
+        <li class="part">
+          <span class="num mono">05</span>
+          <div class="body">
+            <h3 data-de="Beratung">Consulting</h3>
+            <p data-de="Das Modell mit Ihnen bauen. Ein Zähler: pro Tag, nach Aufwand — jederzeit aufhören, alles bleibt Ihres.">Building the model with you. One meter: billed per day, time and material — stop any time, everything stays yours.</p>
+            <div class="maturity"><span class="track"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
+          </div>
+          <span class="tag com" data-de="Kommerziell">Commercial</span>
+        </li>
+      </ol>
+      <p class="note" data-de="Ein Modell, das Menschen und KI zugleich dienen soll, darf nicht teurer werden, je mehr davon es lesen.">A model meant for people and AI at once must not cost more the more of them read it.</p>
+      <p class="links">
+        <a href="https://companygraph.io/talks/intro/" target="_blank" rel="noopener" data-de="Einführungsvortrag · 10 Min">intro talk · 10 min</a>
+        <a href="https://blust.ch/talks/mental-model/" data-de="Das Konzept: Mental-Model-Vortrag">the concept: mental model talk</a>
+        <a href="https://companygraph.io/billing/" target="_blank" rel="noopener" data-de="Abrechnungsmodell">billing model</a>
+        <a href="https://github.com/companygraph" target="_blank" rel="noopener">github.com/companygraph</a>
+      </p>
+    </section>
+
+    <p class="close" data-de="Beide Ideen quelloffen · Apache 2.0">Both ideas open source · Apache 2.0</p>
+
+  </div>
+</main>
+
+<div class="shell">
+  <footer>
+    <span><a target="_blank" rel="noopener" href="https://github.com/robertblust">github.com/robertblust</a></span>
+    <span><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
+    <span><a href="../privacy/" data-de="Datenschutz">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// English is the markup and German lives in data-de: this page is delivered, shared and
+// indexed in English, so English is what it says before a line of JS has run. The choice
+// is remembered per origin under rb-lang, shared with the talks index and both decks —
+// guestgraph.io is a different origin and keeps its own. Storage is guarded because
+// file:// is an opaque origin in some browsers and throws.
+(function(){
+  var KEY = "rb-lang";
+  function stored(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function remember(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+  var lang = stored() === "de" ? "de" : "en";
+  var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
+  i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+
+  var UI = {
+    de:{ title:"Ideen — Robert Blust",
+         desc:"Zwei Ideen, zur Prüfung gestellt: GuestGraph und CompanyGraph. Je fünf Teile — was quelloffen ist, was je Geld verdienen könnte, und wie weit es ist." },
+    en:{ title:"Ideas — Robert Blust",
+         desc:"Two ideas, put up for scrutiny: GuestGraph and CompanyGraph. Five parts each — what is open source, what could ever earn money, and how far along it is." }
+  };
+
+  function applyLang(){
+    i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    document.title = UI[lang].title;
+    document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
+    document.getElementById("lde").classList.toggle("on", lang === "de");
+    document.getElementById("len").classList.toggle("on", lang === "en");
+    document.documentElement.lang = lang;
+  }
+  function toggle(){ lang = (lang === "de") ? "en" : "de"; remember(lang); applyLang(); }
+
+  document.getElementById("langind").addEventListener("click", toggle);
+  document.getElementById("lde").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="de") toggle(); });
+  document.getElementById("len").addEventListener("click", function(e){ e.stopPropagation(); if(lang!=="en") toggle(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>

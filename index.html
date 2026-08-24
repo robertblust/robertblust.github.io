@@ -107,6 +107,15 @@
           transition:color .18s ease, border-color .18s ease}
   .lede a:hover, .lede a:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
 
+  /* A project name, inline in prose: mark, then the wordmark with Graph in the accent.
+     Baseline-aligned so it sits in the line rather than on top of it. */
+  .pname{display:inline-flex; align-items:baseline; gap:.32em; text-decoration:none;
+         white-space:nowrap; border-bottom:1px solid transparent}
+  .pname:hover, .pname:focus-visible{border-color:var(--c-mid)}
+  .pname .mark{color:var(--c-mid); align-self:center; display:inline-flex}
+  .pname .mark svg{width:1.05em; height:1.05em; display:block}
+  .pname b{font-weight:600; color:var(--ink)}
+  .pname b span{color:var(--c-mid)}
   .cta{margin-top:2.3rem; display:flex; flex-wrap:wrap; gap:1rem}
   .btn{
     font-size:.82rem; font-weight:500; letter-spacing:.07em;
@@ -143,6 +152,8 @@
     <div class="bar">
       <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
       <nav>
+        
+        <a href="ideas/" data-de="Ideen">Ideas</a>
         <a href="talks/" data-de="Vorträge">Talks</a>
         <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
       </nav>
@@ -167,6 +178,25 @@
       </p>
       <div class="cta">
         <a class="btn primary" href="talks/" data-de="Zu den Vorträgen">See the talks</a>
+      </div>
+
+      <!-- The second half of the page, and the newer one: what the twenty-five years are
+           being spent on now. The career break is stated plainly rather than left as a gap
+           in a CV — it is the reason both ideas are built in the open instead of after
+           hours, which is the whole premise of the ideas page. -->
+      <!-- The two names are links, not words: each carries its own mark and jumps to its
+           section on the ideas page. They sit OUTSIDE the translated spans on purpose —
+           a data-de attribute holds its value as text, so an inline svg inside one would
+           have to be escaped, and the wordmark would be one bad quote away from vanishing.
+           The names do not translate, so nothing is lost by leaving them out of it. -->
+      <p class="lede">
+        <span data-de="Aus alldem sind zwei Ideen entstanden, und ich baue beide offen —">Two ideas have come out of that, and I am building both in the open —</span>
+        <a class="pname" href="ideas/#guestgraph"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true"> <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"> <path d="M8.6 7.2 L20.5 14.2"/><path d="M8.6 16 L19.4 16"/><path d="M8.6 24.8 L20.5 17.8"/> <circle cx="6" cy="7.2" r="2.6" fill="#0C0E13"/> <circle cx="6" cy="16" r="2.6" fill="#0C0E13"/> <circle cx="6" cy="24.8" r="2.6" fill="#0C0E13"/> </g> <circle cx="24" cy="16" r="5.4" fill="currentColor"/> </svg></span><b>Guest<span>Graph</span></b></a>
+        <span data-de="und">and</span>
+        <a class="pname" href="ideas/#companygraph"><span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"> <rect x="2" y="6.75" width="10.5" height="10.5" rx="1.5"/> <rect x="4.75" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/> <path d="M12.5 12 h4.5"/> <rect x="17" y="9.5" width="5" height="5" fill="currentColor" stroke="none"/> </svg></span><b>Company<span>Graph</span></b></a><span data-de=". Im Moment bin ich in einer bewussten Auszeit: kreativ, inspirierend, und der Grund, warum die beiden richtig gebaut und offen geprüft werden statt nebenbei am Abend.">. Right now I am on a deliberate career break: creative, inspiring, and the reason the two get built properly and validated in public rather than in the evenings.</span>
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="ideas/" data-de="Zu den Ideen">See the ideas</a>
       </div>
     </div>
   </div>
