@@ -331,6 +331,14 @@ whole time.
   all. Because each deck carries its own `fonts/`, perturbing the root `fonts/` marks the two
   index cards stale and leaves the decks alone — which is the layout described above,
   observable.
+- **A link is not an asset.** The walk skips `<a href>`: the talks index links four
+  multi-megabyte PDFs of the two talks, and hashing a link target reported that card stale
+  on every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
+  names — `<link>`, `<img>`, `url()` in the inline CSS — is an asset and counts. The
+  attribute pattern also admits `?` and `#` and strips them afterwards, because excluding
+  them from the character class means `href="a.css?v=2"` matches nothing and leaves the
+  recipe silently: over-reporting is survivable, under-reporting is the failure this
+  mechanism exists to prevent.
 - **Both files are committed together.** `og.png` and `og.sha`, in the same commit as the
   page that moved. The stamp is written after the screenshot, so an exporter that dies half
   way leaves the card reported stale rather than reported current.

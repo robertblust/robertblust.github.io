@@ -37,14 +37,33 @@ const cards = [
 // Everything the page pulls in from this repository: the fonts it declares, the images it
 // shows. A font swap changes every card while no HTML changes at all, so hashing the page
 // alone would call a card current that no longer looks like its page.
-const REF = /(?:src|href)="([^"#?]+)"|url\((['"]?)([^)'"]+)\2\)/g;
+//
+// Quoted spans are consumed whole, so a `>` inside an attribute value cannot end a tag
+// early and drop the references after it — the decks keep prose in `data-notes`, where
+// that character is ordinary. And the attribute pattern admits `?` and `#` so the split
+// below can strip them: excluding them from the character class instead means a ref that
+// carries either fails to match at all and drops out of the recipe silently, which is
+// under-reporting — the one direction this must never fail in.
+const TAG = /<([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^>"'])*)>/g;
+const ATTR = /(?:src|href)="([^"]+)"/g;
+const CSSURL = /url\((['"]?)([^)'"]+)\1\)/g;
 
 function sources(dir) {
   const page = path.join(dir, "index.html");
   const html = fs.readFileSync(path.join(root, page), "utf8");
   const found = new Set([page]);
-  for (const m of html.matchAll(REF)) {
-    const ref = (m[1] ?? m[3] ?? "").split(/[?#]/)[0];
+  const refs = [];
+  for (const [, tag, attrs] of html.matchAll(TAG)) {
+    // An `<a>` names somewhere else to go, not something to draw. The talks index is why
+    // this exception exists: it links four multi-megabyte PDFs of the two talks, so
+    // hashing link targets reported that card stale on every `npm run pdf`, over a page
+    // that had not moved a pixel.
+    if (tag.toLowerCase() === "a") continue;
+    for (const m of attrs.matchAll(ATTR)) refs.push(m[1]);
+  }
+  for (const m of html.matchAll(CSSURL)) refs.push(m[2]);
+  for (const raw of refs) {
+    const ref = raw.split(/[?#]/)[0];
     // absolute, inline and protocol-relative references leave this repository, and the
     // card's own og:image is one of them — hashing it would key the card on itself.
     if (!ref || /^(https?:)?\/\/|^data:|^mailto:/.test(ref)) continue;
