@@ -19,26 +19,26 @@ const PAGES = [
     // fragment that stops matching an id fails silently — the page just lands at the top.
     sameTab: ["talks/", "ideas/", "ideas/#guestgraph", "ideas/#companygraph"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/mental-model/", noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
@@ -46,7 +46,7 @@ const PAGES = [
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
@@ -56,7 +56,7 @@ const PAGES = [
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, monoScope: true, contrast: true, tokenVersion: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://blust.ch", internalLinks: true },
 ];
 

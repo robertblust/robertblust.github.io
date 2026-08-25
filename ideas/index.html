@@ -23,7 +23,7 @@
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
 
-/* ─── design tokens · v1 · keep in step across every repository that shares them ───
+/* ─── design tokens · v2 · keep in step across every repository that shares them ───
      These sites share no stylesheet by design — a deck has to open from
      file:// — so this block is a copy, and each repo's verify suite asserts
      the copy still matches. Change it here, then run the checks.
@@ -36,6 +36,7 @@
   */
   :root{
     --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --sky:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
     --ink:#EFEDE8;    --dim:#8A8B86;
     --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
   }
@@ -45,7 +46,7 @@
   body{
     font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     background:var(--ground); color:var(--ink); line-height:1.5; min-height:100vh;
-    background-image:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    background-image:var(--sky); background-repeat:no-repeat;
     -webkit-font-smoothing:antialiased; display:flex; flex-direction:column;
   }
   a{color:inherit}
@@ -54,7 +55,7 @@
 
   header{padding:2rem 0}
   .bar{display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap}
-  .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none}
+  .brand{display:flex; align-items:center; gap:.7rem; text-decoration:none}
   .brand svg{width:28px; height:28px; flex:0 0 auto}
   .brand .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
   .brand .rb{fill:var(--c-mid)}
