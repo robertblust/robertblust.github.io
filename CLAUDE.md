@@ -131,8 +131,18 @@ tab. Nothing on this site does any more — not the talks index, and no longer t
 
 Each deck's transport bar has an *All talks* control on the far side of the divider, beside
 the language and notes buttons rather than beside play and next: one button away from those,
-a misclick mid-talk would leave the deck instead of skipping a slide. The credit in the
-bottom-left corner is the same link, in the one corner nobody clicks by accident.
+a misclick mid-talk would leave the deck instead of skipping a slide.
+
+The bottom-left corner carries two destinations, not one. The lockup goes to the **landing
+page** (`../../`) and *Talks* / *Vorträge* goes to the **index** (`../`) — the same place the
+transport control goes, which is the deliberate duplicate: the corner offers both levels of
+"out", and the corner is the one place nobody clicks by accident. It used to be a single
+link to the index, which is why the note here used to say the credit and the control were
+the same link.
+
+`wayOut` covers the index link and is satisfied by either it or the transport control;
+`landing` covers the lockup and nothing else does, because a relative `../../` is invisible
+to the `links` check and a dead one looks like a working deck until somebody clicks it.
 
 Neither half is visible to the `links` check, which only inspects absolute `http` hrefs — a
 relative `mental-model/` slips straight past it. That blind spot is what the `sameTab` and
@@ -213,11 +223,22 @@ never wrote; that changes what is said, not just how it parses.
 
 ## `lang` describes the source markup, not what a visitor sees
 
-Each deck's `<html lang>` is `de`, because the deck's content is German markup with
-English carried in `data-en` — `applyLang()` swaps it in on load. The two are not the
-same claim: a crawler that runs JavaScript sees English delivered under `lang="en"`; one
-that does not sees German under `lang="de"`. Setting the static attribute to `en` would
-make the German source lie about its own language before any script has run.
+Each deck's `<html lang>` is **`en`**, and that is right, because the source markup is
+English: `applyLang()` collects every `[data-de]` element and captures each one's existing
+`innerHTML` as its `data-en` before anything is swapped. German is the translation carried
+in the attribute, not the other way round. So a crawler that never runs JavaScript sees
+English under `lang="en"`, which is exactly what the file says. `applyLang()` then sets
+`documentElement.lang` to whichever language is showing.
+
+Two consequences worth knowing before editing a deck: **new translatable text needs only a
+`data-de`** — writing a `data-en` by hand is redundant and will be overwritten on load —
+and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
+attribute reads `en`.
+
+This note used to say the opposite: that `lang` was `de` and English rode in `data-en`. It
+was wrong in both halves, and it contradicted a check sitting in the same repository that
+spells out `expected en`. Nothing broke, because nobody had acted on it yet — which is the
+only reason a wrong convention stays cheap.
 
 ## Slide numbers are zero-based everywhere the viewer can see them
 

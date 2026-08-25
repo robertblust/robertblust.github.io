@@ -23,11 +23,13 @@ const PAGES = [
     internalLinks: true },
   { path: "/talks/mental-model/", wayOut: "../", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", wayOut: "../", title: /Essential Complexity/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
@@ -175,6 +177,23 @@ const CHECKS = {
     if (!found.some(l => l.inChrome)) return `the way back is not in the transport bar`;
     const unnamed = found.filter(l => !l.named).length;
     return unnamed ? `${unnamed} way-back link(s) without an accessible name` : null;
+  },
+  // The footer carries two destinations now: the lockup to the site's landing page and
+  // "Talks" to the index. wayOut covers only the second. Nothing else would notice the
+  // brand pointing at a page that no longer exists — a relative href is invisible to the
+  // `links` check, and a 404 on a deck's own chrome looks like a working deck until clicked.
+  async landing(page, spec) {
+    const found = await page.evaluate(href =>
+      [...document.querySelectorAll("#chrome a[href]")]
+        .filter(a => a.getAttribute("href") === href)
+        .map(a => ({
+          named: !!(a.getAttribute("aria-label") || (a.textContent || "").trim()),
+          isLockup: !!a.querySelector(".namemark svg"),
+        })), spec.landing);
+    if (!found.length) return `no link to the landing page (${spec.landing}) in the transport bar`;
+    if (!found.some(l => l.isLockup)) return `the landing link is not the brand lockup`;
+    const unnamed = found.filter(l => !l.named).length;
+    return unnamed ? `${unnamed} landing link(s) without an accessible name` : null;
   },
   async internalLinks(page) {
     // `links` above only inspects a[href^='http'], which is why a root-absolute
