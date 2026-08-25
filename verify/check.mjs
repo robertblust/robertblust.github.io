@@ -393,10 +393,24 @@ await browser.close();
     } else console.log("✓ /favicon.svg");
   }
 
+  // Presence of the string "sitemap.xml" was the whole of this check, which is a test that
+  // the file mentions a sitemap rather than that it names one that exists. guestgraph.io
+  // named three and two were 404 in production — the same block is now in all three suites.
   const rb = await fetch(BASE + "/robots.txt");
-  if (!rb.ok || !(await rb.text()).includes("sitemap.xml")) {
-    console.log("✗ /robots.txt  missing or does not name the sitemap"); failures++;
-  } else console.log("✓ /robots.txt");
+  if (!rb.ok) { console.log(`✗ /robots.txt  HTTP ${rb.status}`); failures++; }
+  else {
+    const named = [...(await rb.text()).matchAll(/^\s*Sitemap:\s*(\S+)/gim)].map(m => m[1]);
+    if (!named.length) { console.log("✗ /robots.txt  names no sitemap"); failures++; }
+    else {
+      const dead = [];
+      for (const u of named) {
+        const r = await fetch(u.replace("https://blust.ch", BASE));
+        if (!r.ok) dead.push(`${u} → ${r.status}`);
+      }
+      if (dead.length) { console.log("✗ /robots.txt  names sitemap(s) that do not exist: " + dead.join(", ")); failures++; }
+      else console.log(`✓ /robots.txt  ${named.length} sitemap(s), all reachable`);
+    }
+  }
 }
 
 console.log(failures ? `\n${failures} page(s) FAILED` : "\nall checks pass");
