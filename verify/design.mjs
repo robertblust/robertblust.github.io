@@ -12,6 +12,17 @@
 
 export const TOKEN_VERSION = "v1";
 
+// The deck footer is copied across the three sites for the same reason the token block is:
+// a deck opens from file://, so there is nothing to import. What it holds is a contract, not
+// just a look — the lockup goes to the landing page, the person to blust.ch, the third link
+// to the talks index, and none of them opens in a new tab. Change any of that on one site and
+// the other two are quietly describing a footer that no longer exists.
+//
+// This marker is the tripwire, the same habit-with-a-tripwire the tokens get. Bumping it means
+// bumping it in all three repositories and running all three suites. Nothing here can see a
+// sibling; that is exactly the gap it is compensating for.
+export const FOOTER_VERSION = "v1";
+
 export const TOKENS = {
   "--ground": "#0C0E13", "--raise": "#171A21", "--rule": "#232833",
   "--ink":    "#EFEDE8", "--dim":   "#8A8B86",
@@ -172,5 +183,16 @@ export const DESIGN_CHECKS = {
     if (!m) return "the page carries no `design tokens · vN` marker";
     return m[1] === TOKEN_VERSION ? null
       : `page says ${m[1]}, this suite expects ${TOKEN_VERSION}`;
+  },
+
+  // the same marker for the deck footer, which is copied across the three sites and which no
+  // suite can see on a sibling. Armed on deck pages only — the prose pages have no footer row.
+  async footerVersion(page, spec) {
+    const res = await fetch(spec.absolute);
+    const html = await res.text();
+    const m = html.match(/deck footer · (v\d+)/);
+    if (!m) return "the deck carries no `deck footer · vN` marker";
+    return m[1] === FOOTER_VERSION ? null
+      : `deck says ${m[1]}, this suite expects ${FOOTER_VERSION}`;
   },
 };
