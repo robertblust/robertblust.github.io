@@ -29,10 +29,10 @@
    unit that has to survive being copied to someone else's machine is the folder,
    not the file. Before this the deck named a face it never shipped, so every slide
    rendered in whatever system-ui the room's laptop happened to have. */
-@font-face{font-family:"Instrument Sans";src:url(fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
-@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Plex Mono";src:url(fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Bricolage Grotesque";src:url(fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
 
   /* ─── design tokens · v1 · keep in step across every repository that shares them ───
      These sites share no stylesheet by design — a deck has to open from
@@ -238,7 +238,7 @@
      that is the half of the pattern not worth porting. */
   .name{grid-column:1; justify-self:start;
         font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:.72rem;
-        display:flex; align-items:center; gap:.6em}
+        display:flex; align-items:center; gap:.5em}
 
   /* The brand lockup, ported by hand from the sibling decks — mark plus wordmark, same shape
      guestgraph.io and companygraph.io carry in the same corner. One tier, not two: over there
@@ -249,12 +249,17 @@
      file://, which is the one thing a deck has to survive. It draws its colours from the
      tokens so a palette change moves it; the favicon keeps its own hexes because it has to
      stand alone. The face is "Plex Mono" — the name this deck actually @font-faces. */
+  .name .lockup{display:flex; align-items:center; gap:.6em}
   .name .namemark{display:flex}
   .name .namemark svg{width:16px; height:16px; display:block}
   .name .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
   .name .rb{fill:var(--c-mid)}
   .name b{color:var(--ink); font-weight:600; letter-spacing:.01em; text-transform:none}
   .name b em{font-style:normal; color:var(--c-mid)}
+  /* "Talks" is a nav item, so it takes the nav treatment the pages use — dim until
+     pointed at. The separator is not a link and must not read as one. */
+  .name .nsep{color:var(--dim)}
+  .name .nlink{color:var(--dim)}
 
   .transport{
     grid-column:2; justify-self:center;
@@ -306,11 +311,11 @@
   /* the exit is an <a>, so it works with no JS and the browser treats it as
      navigation — history, middle-click and "open in new tab" all behave. */
   a.tbtn{text-decoration:none}
-  a.name{text-decoration:none; color:inherit; pointer-events:auto}
-  a.name:hover, a.name:focus-visible{color:var(--ink)}
-  /* the wordmark sets its own colours, so the rule above no longer shows a hover;
+  .name a{text-decoration:none; color:inherit; pointer-events:auto}
+  .name a:hover, .name a:focus-visible{color:var(--ink)}
+  /* the wordmark sets its own colours, so the rule above cannot show its hover;
      the accent brightening to full ink is what replaces it. */
-  a.name:hover b em, a.name:focus-visible b em{color:var(--ink)}
+  .name .lockup:hover b em, .name .lockup:focus-visible b em{color:var(--ink)}
 
   .tdiv{width:1px; align-self:stretch; margin:.3rem .25rem; background:#333743; flex:0 0 auto}
 
@@ -610,7 +615,11 @@
 
 <div class="chrome" id="chrome">
 
-  <a class="name" href="../" aria-label="Back to all talks"><span class="namemark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
 
   <div class="transport" id="transport" role="group" aria-label="Deck controls">
 

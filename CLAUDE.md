@@ -40,9 +40,13 @@ check that catches a page that parses fine and renders wrong.
   the SPF `TXT` are live mail, and touching them stops delivery with no error and no
   bounce anyone would notice — the failure shows up as mail that never arrived, days
   later, from someone who gave up asking. Restore the warning then.
-- **Decks are self-contained single files that work from `file://`.** No bundler, no
-  shared JS, no CDN. A change that only works when served breaks the one thing a deck is
-  for: opening it cold, on someone else's machine, with no server running.
+- **Decks are single files that work from `file://`.** No bundler, no shared JS, no CDN, no
+  build step — open `talks/mental-model/index.html` in a browser with no server running and
+  it presents. A change that only works when served breaks that.
+
+  The rule is about not needing a *server*, not about not needing the *repository*: a deck
+  reads the root `fonts/` by relative path, so it is not a folder you can detach and mail.
+  It does not need to be — what gets sent to anyone is the PDF.
 
 ## Adding or editing a talk
 
@@ -126,13 +130,29 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 
 ## Nothing opens in a new tab; every deck carries its own way out
 
-`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and belong in a new
-tab. Nothing on this site does any more — not the talks index, and no longer the decks.
+**Not one link on this site opens in a new tab**, outbound ones included — `github.com`,
+`linkedin.com`, `3ap.ch` and `likemagic.tech` are no exception. A new tab takes away the
+visitor's back button, and every deck carries its own way out, so nothing needs one.
+`noNewTab` asserts it on every page.
+
+**The one exception, which this site does not use, is a link inside a slide.** A presenter who
+clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves that
+in front of a room. It keys on *where a link sits*, not where it points, so it needs no list of
+hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's has two,
+which is why the exception is written the same way in all three suites.
 
 Each deck's transport bar has an *All talks* control on the far side of the divider, beside
 the language and notes buttons rather than beside play and next: one button away from those,
-a misclick mid-talk would leave the deck instead of skipping a slide. The credit in the
-bottom-left corner is the same link, in the one corner nobody clicks by accident.
+a misclick mid-talk would leave the deck instead of skipping a slide.
+
+The bottom-left corner carries two destinations, not one. The lockup goes to the **landing
+page** (`../../`) and *Talks* / *Vorträge* goes to the **index** (`../`) — the same place the
+transport control goes, which is the deliberate duplicate: the corner offers both levels of
+"out", and the corner is the one place nobody clicks by accident.
+
+`wayOut` covers the index link and is satisfied by either it or the transport control;
+`landing` covers the lockup and nothing else does, because a relative `../../` is invisible
+to the `links` check and a dead one looks like a working deck until somebody clicks it.
 
 Neither half is visible to the `links` check, which only inspects absolute `http` hrefs — a
 relative `mental-model/` slips straight past it. That blind spot is what the `sameTab` and
@@ -213,11 +233,17 @@ never wrote; that changes what is said, not just how it parses.
 
 ## `lang` describes the source markup, not what a visitor sees
 
-Each deck's `<html lang>` is `de`, because the deck's content is German markup with
-English carried in `data-en` — `applyLang()` swaps it in on load. The two are not the
-same claim: a crawler that runs JavaScript sees English delivered under `lang="en"`; one
-that does not sees German under `lang="de"`. Setting the static attribute to `en` would
-make the German source lie about its own language before any script has run.
+Each deck's `<html lang>` is **`en`**, and that is right, because the source markup is
+English: `applyLang()` collects every `[data-de]` element and captures each one's existing
+`innerHTML` as its `data-en` before anything is swapped. German is the translation carried
+in the attribute, not the other way round. So a crawler that never runs JavaScript sees
+English under `lang="en"`, which is exactly what the file says. `applyLang()` then sets
+`documentElement.lang` to whichever language is showing.
+
+Two consequences worth knowing before editing a deck: **new translatable text needs only a
+`data-de`** — writing a `data-en` by hand is redundant and will be overwritten on load —
+and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
+attribute reads `en`.
 
 ## Slide numbers are zero-based everywhere the viewer can see them
 
@@ -292,11 +318,12 @@ is behind. Nothing can tell you that a sibling repository is behind — that is 
 carries a version. Bumping `vN` means bumping it in all three repositories and running all
 three suites. The check is a habit with a tripwire, not a guarantee.
 
-Both decks under `talks/` carry the system too, each with its own `fonts/` directory
-rather than a shared one at the root. That is deliberate: a deck already keeps `audio/`
-and its images beside it, so the folder — not the file — is the unit that has to survive
-being copied to another machine. A shared `../../fonts/` would break the moment someone
-sent just the talk.
+Both decks under `talks/` carry the system too, and all four pages load their faces from the
+**one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
+
+**Do not give a deck its own `fonts/`.** Nobody is sent a deck folder; what ships is the PDF,
+which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with
+the root by hand, with nothing checking that it is.
 
 ## Slides are a canvas, not a page
 
@@ -355,9 +382,8 @@ whole time.
   committed beside it. It renders nothing, needs no browser, and runs in CI before `npm ci`.
 - **The recipe is the page plus every local file the page names plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at
-  all. Because each deck carries its own `fonts/`, perturbing the root `fonts/` marks the two
-  index cards stale and leaves the decks alone — which is the layout described above,
-  observable.
+  all. Every page names the root `fonts/`, so perturbing it marks **all four** cards stale —
+  the layout described above, observable.
 - **A link is not an asset.** The walk skips `<a href>`: the talks index links four
   multi-megabyte PDFs of the two talks, and hashing a link target reported that card stale
   on every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
@@ -428,18 +454,3 @@ whole time.
   `~/git/3ap-ag`. A clone made outside those three directories gets the global default and
   no warning, so check `git config user.email` before the first commit in a fresh clone.
 - Never mention closed-source predecessor projects — here, in docs, or in commits.
-
-### Why this rule moved twice
-
-It first said every link off the landing page opens in a new tab, decks included. Then it
-said the talks index is an index and stays in the tab, but a deck still gets its own. Now
-nothing gets its own tab at all.
-
-None of those were wrong for what existed at the time — a deck really did have no exit, and
-opening one in the same tab really did strand the reader. The mistake was writing it down as
-a **navigation principle** when it was a **workaround for a missing button**. A principle
-invites you to defend it; a workaround invites you to remove the thing that made it
-necessary. Once the deck carried its own way out, the rule dissolved on its own.
-
-`verify` asserts both halves together — same-tab links *and* the deck's way out — because
-either one alone is a trap.

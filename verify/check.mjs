@@ -7,7 +7,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", title: /Robert Blust/, lang: "en",
+  { path: "/", noNewTab: true, title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -21,17 +21,19 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/mental-model/", wayOut: "../", title: /Mental Model/, lang: "en",
+  { path: "/talks/mental-model/", noNewTab: true, wayOut: "../", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/essential-complexity/", wayOut: "../", title: /Essential Complexity/, lang: "en",
+  { path: "/talks/essential-complexity/", noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", title: /talks/i, lang: "en",
+  { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -40,7 +42,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", title: /Blust/, lang: "en",
+  { path: "/privacy/", noNewTab: true, title: /Blust/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -49,7 +51,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", title: /Ideas/, lang: "en",
+  { path: "/ideas/", noNewTab: true, title: /Ideas/, lang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -81,16 +83,15 @@ const CHECKS = {
     const l = await page.evaluate(() => document.documentElement.lang);
     return l === spec.lang ? null : `lang=${l}, expected ${spec.lang}`;
   },
+  // Presence only. This used to assert `target="_blank" rel="noopener"` on every outbound link
+  // as well; that half moved to noNewTab and inverted, because nothing opens in a new tab any
+  // more. What is left is the one thing no other check does: fail when an absolute href is
+  // simply wrong.
   async links(page, spec) {
     const found = await page.evaluate(() =>
-      [...document.querySelectorAll("a[href^='http']")].map(a =>
-        ({ href: a.href, target: a.target, rel: a.rel })));
-    for (const want of spec.links) {
-      const hit = found.find(l => l.href === want);
-      if (!hit) return `missing outbound link ${want}`;
-      if (hit.target !== "_blank" || !hit.rel.includes("noopener"))
-        return `${want} must open in a new tab with rel=noopener`;
-    }
+      [...document.querySelectorAll("a[href^='http']")].map(a => a.href));
+    for (const want of spec.links)
+      if (!found.includes(want)) return `missing outbound link ${want}`;
     return null;
   },
   async contains(page, spec) {
@@ -129,14 +130,24 @@ const CHECKS = {
   // A deck must open in a new tab; navigation between the two prose pages must not. Both
   // rules are about relative hrefs, which the `links` check above cannot see at all — it
   // only inspects absolute http ones. That blind spot is why these two exist separately.
-  async newTab(page, spec) {
-    const bad = await page.evaluate(hrefs =>
-      [...document.querySelectorAll("a[href]")]
-        .filter(a => hrefs.includes(a.getAttribute("href")))
-        .filter(a => a.target !== "_blank" || !a.rel.includes("noopener"))
-        .map(a => `${a.getAttribute("href")} [target=${a.target || "none"} rel=${a.rel || "none"}]`),
-      spec.newTab);
-    return bad.length ? "must open in a new tab with rel=noopener: " + bad.join(", ") : null;
+  // Nothing opens in a new tab. The three sites are one ring — each links the other two, and
+  // every deck carries its own way out — so a new tab is a workaround for a problem that no
+  // longer exists, and it costs the visitor their back button.
+  //
+  // The exception, which this site does not use, is a link inside a slide: a presenter who
+  // clicks one mid-talk in the same tab loses the deck. It keys on *where* a link sits rather
+  // than where it points, so it needs no list of hrefs to maintain. Neither deck here has an
+  // outbound link in a slide; companygraph's has two, which is why the exception is written
+  // the same way in all three suites.
+  //
+  // This replaces `newTab`, which asserted the opposite. That function had already outlived
+  // its last caller — no page spec named it — so it was asserting nothing at all.
+  async noNewTab(page) {
+    const bad = await page.evaluate(() =>
+      [...document.querySelectorAll('a[target="_blank"]')]
+        .filter(a => !a.closest(".slide"))
+        .map(a => a.getAttribute("href")));
+    return bad.length ? "must stay in this tab: " + bad.join(", ") : null;
   },
   async sameTab(page, spec) {
     const bad = await page.evaluate(hrefs =>
@@ -175,6 +186,23 @@ const CHECKS = {
     if (!found.some(l => l.inChrome)) return `the way back is not in the transport bar`;
     const unnamed = found.filter(l => !l.named).length;
     return unnamed ? `${unnamed} way-back link(s) without an accessible name` : null;
+  },
+  // The footer carries two destinations now: the lockup to the site's landing page and
+  // "Talks" to the index. wayOut covers only the second. Nothing else would notice the
+  // brand pointing at a page that no longer exists — a relative href is invisible to the
+  // `links` check, and a 404 on a deck's own chrome looks like a working deck until clicked.
+  async landing(page, spec) {
+    const found = await page.evaluate(href =>
+      [...document.querySelectorAll("#chrome a[href]")]
+        .filter(a => a.getAttribute("href") === href)
+        .map(a => ({
+          named: !!(a.getAttribute("aria-label") || (a.textContent || "").trim()),
+          isLockup: !!a.querySelector(".namemark svg"),
+        })), spec.landing);
+    if (!found.length) return `no link to the landing page (${spec.landing}) in the transport bar`;
+    if (!found.some(l => l.isLockup)) return `the landing link is not the brand lockup`;
+    const unnamed = found.filter(l => !l.named).length;
+    return unnamed ? `${unnamed} landing link(s) without an accessible name` : null;
   },
   async internalLinks(page) {
     // `links` above only inspects a[href^='http'], which is why a root-absolute
