@@ -313,6 +313,31 @@ The scale is driven by one `fit()` function at the end of each deck. Both export
 it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case
 the canvas fills the frame exactly with no bars.
 
+## Share cards go stale silently, and nothing on the page says so
+
+`og.png` is not a banner someone drew: `npm run og` renders it from the page itself — an
+index card is the page, a deck's card is its title slide — so a link preview shows what the
+visitor is about to land on. The cost of that is a copy that has to be re-rendered whenever
+the page moves, and nothing about a stale card looks wrong. Two of the four here advertised
+the site as it read two days earlier, through several commits, and every check passed the
+whole time.
+
+- **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterise the
+  same text differently, so a card compared by its bytes reports which machine rendered it.
+  The check re-derives a hash of what went *into* the card and compares it with the `og.sha`
+  committed beside it. It renders nothing, needs no browser, and runs in CI before `npm ci`.
+- **The recipe is the page plus every local file the page names plus the exporter's own
+  frame.** Fonts and images count: a font swap changes every card while no HTML changes at
+  all. Because each deck carries its own `fonts/`, perturbing the root `fonts/` marks the two
+  index cards stale and leaves the decks alone — which is the layout described above,
+  observable.
+- **Both files are committed together.** `og.png` and `og.sha`, in the same commit as the
+  page that moved. The stamp is written after the screenshot, so an exporter that dies half
+  way leaves the card reported stale rather than reported current.
+- **It over-reports and never under-reports, deliberately.** Editing a comment in a page
+  marks its card stale even though the render would be identical. Clearing that is `npm run
+  og` and a commit — cheap, and the opposite error is a card nobody notices for two days.
+
 ## CI
 
 - **`.github/workflows/ci.yml` runs the suite on push to `main` and on every pull request** —
@@ -339,7 +364,8 @@ the canvas fills the frame exactly with no bars.
   assertion, and speaks the old words. The step fails on `would write` in that output.
 - **`npm run og` and `npm run pdf` never run here.** Both write files this repository commits
   — four share cards and two PDFs per deck — so in CI they would either overwrite the
-  committed artifacts or fail on a dirty tree, and neither is a check.
+  committed artifacts or fail on a dirty tree, and neither is a check. `npm run og:check`
+  does run, and is the check they are not: see the section above.
 
 ## Process
 
