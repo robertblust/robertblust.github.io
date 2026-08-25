@@ -174,9 +174,13 @@ is a clip that never gets generated — which looks exactly like a clip that was
 to date. `./generate.py --dry-run` is what catches it: the slide count drops. Check it
 against the number of slides in the deck before assuming a quiet run means a cached one.
 
-**`data-say-title="no"` suppresses the spoken title** for slides whose notes already name
-the talk in their first sentence — all three title slides do. Without it the voice says
-the title, then says it again as the opening words. And per the note above, the flag is
+**`data-say-title="no"` suppresses the spoken title** for slides whose note already
+delivers the headline: the title slides, whose notes open by naming the talk, and any
+slide whose first spoken sentence restates its `<h1>`. Without it the voice reads the
+line, takes a beat, and reads it again. Which slides those are is a question for the
+decks, not for a note like this one — it used to say "all three title slides do", and
+that count was wrong in both directions while three slides repeated themselves. To find
+them, compare each `<h1>` against its cue-stripped note in both languages. And per the note above, the flag is
 matched by a substring test over the whole slide block, so writing it in a comment sets it
 on the neighbouring slide. Explaining a flag must never set it.
 

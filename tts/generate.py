@@ -99,8 +99,12 @@ def slides(deck_html):
         if not n:
             continue
         # the headline leads, so a listener hears the point before the argument for it.
-        # Two slides opt out via data-say-title="no": the title slide, where the greeting is
-        # the opening, and slide 04, where the note restates the headline almost verbatim.
+        # A slide opts out with data-say-title="no" when its note already delivers the
+        # headline: the title slides, whose notes open by naming the talk, and any slide
+        # whose first spoken sentence restates the h1. Without the opt-out the voice reads
+        # the line, takes a beat, and reads it again. Don't count the slides in a comment —
+        # this one said "the title slide, and slide 04" long after that had stopped being
+        # true, which is how the repeat survived in two decks.
         say_title = 'data-say-title="no"' not in block
         titles = {}
         if say_title:
