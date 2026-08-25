@@ -7,7 +7,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", seo: true, noNewTab: true, title: /Robert Blust/, lang: "en",
+  { path: "/", seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -21,19 +21,19 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/mental-model/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+  { path: "/talks/mental-model/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
+    transport: true, zeroBased: true,  card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/essential-complexity/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+  { path: "/talks/essential-complexity/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
+    transport: true, zeroBased: true,  card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en",
+  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -42,7 +42,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", seo: true, noNewTab: true, title: /Blust/, lang: "en",
+  { path: "/privacy/", seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -51,7 +51,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", seo: true, noNewTab: true, title: /Ideas/, lang: "en",
+  { path: "/ideas/", seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -119,13 +119,17 @@ const CHECKS = {
   },
   // The language declared before any JS runs. It used to be `de`, because the markup was
   // German and JS swapped it to English on load — which meant a crawler without JS read
-  // German from a page whose og tags and share card were English. The decks are
-  // English-first now, so this asserts the page tells the truth cold.
+  // German from a page whose og tags, share card and canonical content were all English.
+  // The markup is English-first now, so this asserts the page tells the truth cold.
+  //
+  // `lang` is not this check. That one reads documentElement.lang *after* applyLang() has
+  // run, so a page whose source said `de` would be corrected on load and pass anyway, while
+  // a crawler that runs no JS still read German. Only this one is fetched cold, which is why
+  // it belongs on every page and not just the decks.
   async sourceLang(page, spec) {
-    const res = await fetch(spec.absolute);
-    const html = await res.text();
+    const html = await (await fetch(spec.absolute)).text();
     const m = html.match(/<html lang="([a-z]+)"/);
-    return m && m[1] === "en" ? null : `static lang is ${m && m[1]}, expected en`;
+    return m && m[1] === spec.sourceLang ? null : `static lang is ${m && m[1]}, expected ${spec.sourceLang}`;
   },
   // A deck must open in a new tab; navigation between the two prose pages must not. Both
   // rules are about relative hrefs, which the `links` check above cannot see at all — it
