@@ -245,6 +245,25 @@ Two consequences worth knowing before editing a deck: **new translatable text ne
 and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
 attribute reads `en`.
 
+## A link check that trusts the DOM inspects half the site
+
+The rendered DOM is only ever **one language**. German lives in `data-de` as markup that does
+not exist until a visitor switches, so `noNewTab`, `sameTab`, `links` and `internalLinks` see
+the English half and nothing else.
+
+That is not hypothetical. The privacy page's German credit kept `target='_blank'` — in
+**single quotes**, because it is nested inside an attribute — and survived both a source-wide
+strip of `target="_blank"` and the check itself. It was found by reading the source, not by a
+failing test.
+
+`noNewTab` now parses every `[data-de]` value into a template and inspects the links inside
+it, reporting them with a `[de]` suffix. **Any new link check must do the same.** Two things
+follow when editing translated markup:
+
+- nested markup uses single quotes, so a source-wide search for `target="_blank"` misses it;
+- a translated link and its English original must agree about opening in a new tab. They are
+  two separate attributes and nothing pairs them.
+
 ## Slide numbers are zero-based everywhere the viewer can see them
 
 The kicker on the slide, the counter in the transport bar, and (for the reference deck
