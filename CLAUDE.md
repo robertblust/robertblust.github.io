@@ -40,9 +40,15 @@ check that catches a page that parses fine and renders wrong.
   the SPF `TXT` are live mail, and touching them stops delivery with no error and no
   bounce anyone would notice — the failure shows up as mail that never arrived, days
   later, from someone who gave up asking. Restore the warning then.
-- **Decks are self-contained single files that work from `file://`.** No bundler, no
-  shared JS, no CDN. A change that only works when served breaks the one thing a deck is
-  for: opening it cold, on someone else's machine, with no server running.
+- **Decks are single files that work from `file://`.** No bundler, no shared JS, no CDN, no
+  build step — open `talks/mental-model/index.html` in a browser with no server running and
+  it presents. A change that only works when served breaks that.
+
+  "Self-contained" is the word that used to be here, and it claimed more than the rule needs.
+  A deck reads the repository's root `fonts/` by relative path, so it needs the checkout
+  around it — it is not a folder you can detach and mail. That is fine: **what gets sent to
+  anyone is the PDF.** The `file://` rule is about not needing a *server*, not about not
+  needing the *repository*.
 
 ## Adding or editing a talk
 
@@ -313,11 +319,19 @@ is behind. Nothing can tell you that a sibling repository is behind — that is 
 carries a version. Bumping `vN` means bumping it in all three repositories and running all
 three suites. The check is a habit with a tripwire, not a guarantee.
 
-Both decks under `talks/` carry the system too, each with its own `fonts/` directory
-rather than a shared one at the root. That is deliberate: a deck already keeps `audio/`
-and its images beside it, so the folder — not the file — is the unit that has to survive
-being copied to another machine. A shared `../../fonts/` would break the moment someone
-sent just the talk.
+Both decks under `talks/` carry the system too, and all four pages load their faces from the
+**one `fonts/` directory at the root** — `../../fonts/` from a deck.
+
+This note used to say the opposite, and defend it: that each deck kept its own `fonts/`
+because the folder, not the file, was the unit that had to survive being copied, and that a
+shared `../../fonts/` "would break the moment someone sent just the talk". Nobody sends the
+talk. **What ships is the PDF**, which has the outlines baked in and needs no font directory
+at all. The deck folder was being kept self-contained for a delivery that never happens, at
+the cost of four woff2 files duplicated per deck — 200K of bytes that had to stay in step
+with the root copy by hand, with nothing checking that they did.
+
+The two sibling sites had `../../fonts/` all along. This repository was the only one that
+diverged, which is what made it look deliberate.
 
 ## Slides are a canvas, not a page
 
@@ -376,9 +390,10 @@ whole time.
   committed beside it. It renders nothing, needs no browser, and runs in CI before `npm ci`.
 - **The recipe is the page plus every local file the page names plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at
-  all. Because each deck carries its own `fonts/`, perturbing the root `fonts/` marks the two
-  index cards stale and leaves the decks alone — which is the layout described above,
-  observable.
+  all. Every page now names the root `fonts/`, so perturbing it marks **all four** cards stale
+  — the layout described above, observable. It used to mark only the two index cards, because
+  the decks carried their own copies; that a font swap could leave two cards reported current
+  was the duplication showing through the recipe.
 - **A link is not an asset.** The walk skips `<a href>`: the talks index links four
   multi-megabyte PDFs of the two talks, and hashing a link target reported that card stale
   on every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
