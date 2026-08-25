@@ -44,11 +44,9 @@ check that catches a page that parses fine and renders wrong.
   build step — open `talks/mental-model/index.html` in a browser with no server running and
   it presents. A change that only works when served breaks that.
 
-  "Self-contained" is the word that used to be here, and it claimed more than the rule needs.
-  A deck reads the repository's root `fonts/` by relative path, so it needs the checkout
-  around it — it is not a folder you can detach and mail. That is fine: **what gets sent to
-  anyone is the PDF.** The `file://` rule is about not needing a *server*, not about not
-  needing the *repository*.
+  The rule is about not needing a *server*, not about not needing the *repository*: a deck
+  reads the root `fonts/` by relative path, so it is not a folder you can detach and mail.
+  It does not need to be — what gets sent to anyone is the PDF.
 
 ## Adding or editing a talk
 
@@ -132,21 +130,16 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 
 ## Nothing opens in a new tab; every deck carries its own way out
 
-The heading is now literally true: **not one link on this site opens in a new tab**, outbound
-ones included. `github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` used to be the
-standing exception, on the grounds that they are somewhere else. Being somewhere else was
-never the reason a new tab helped — the reason was that a deck had no way back, and that has
-been fixed. What a new tab reliably does is take away the visitor's back button.
+**Not one link on this site opens in a new tab**, outbound ones included — `github.com`,
+`linkedin.com`, `3ap.ch` and `likemagic.tech` are no exception. A new tab takes away the
+visitor's back button, and every deck carries its own way out, so nothing needs one.
+`noNewTab` asserts it on every page.
 
-`noNewTab` asserts it on every page, and it replaced a `newTab` check that asserted the
-opposite. That one had already outlived its last caller: no page spec named it any more, so
-it was asserting nothing at all while looking like a guarantee.
-
-**There is one exception, and this site does not use it: a link inside a slide.** A presenter
-who clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves
-that in front of a room. It keys on *where a link sits*, not where it points, so it needs no
-list of hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's
-has two, which is why the exception is written the same way in all three suites.
+**The one exception, which this site does not use, is a link inside a slide.** A presenter who
+clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves that
+in front of a room. It keys on *where a link sits*, not where it points, so it needs no list of
+hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's has two,
+which is why the exception is written the same way in all three suites.
 
 Each deck's transport bar has an *All talks* control on the far side of the divider, beside
 the language and notes buttons rather than beside play and next: one button away from those,
@@ -155,9 +148,7 @@ a misclick mid-talk would leave the deck instead of skipping a slide.
 The bottom-left corner carries two destinations, not one. The lockup goes to the **landing
 page** (`../../`) and *Talks* / *Vorträge* goes to the **index** (`../`) — the same place the
 transport control goes, which is the deliberate duplicate: the corner offers both levels of
-"out", and the corner is the one place nobody clicks by accident. It used to be a single
-link to the index, which is why the note here used to say the credit and the control were
-the same link.
+"out", and the corner is the one place nobody clicks by accident.
 
 `wayOut` covers the index link and is satisfied by either it or the transport control;
 `landing` covers the lockup and nothing else does, because a relative `../../` is invisible
@@ -254,11 +245,6 @@ Two consequences worth knowing before editing a deck: **new translatable text ne
 and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
 attribute reads `en`.
 
-This note used to say the opposite: that `lang` was `de` and English rode in `data-en`. It
-was wrong in both halves, and it contradicted a check sitting in the same repository that
-spells out `expected en`. Nothing broke, because nobody had acted on it yet — which is the
-only reason a wrong convention stays cheap.
-
 ## Slide numbers are zero-based everywhere the viewer can see them
 
 The kicker on the slide, the counter in the transport bar, and (for the reference deck
@@ -333,18 +319,11 @@ carries a version. Bumping `vN` means bumping it in all three repositories and r
 three suites. The check is a habit with a tripwire, not a guarantee.
 
 Both decks under `talks/` carry the system too, and all four pages load their faces from the
-**one `fonts/` directory at the root** — `../../fonts/` from a deck.
+**one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
 
-This note used to say the opposite, and defend it: that each deck kept its own `fonts/`
-because the folder, not the file, was the unit that had to survive being copied, and that a
-shared `../../fonts/` "would break the moment someone sent just the talk". Nobody sends the
-talk. **What ships is the PDF**, which has the outlines baked in and needs no font directory
-at all. The deck folder was being kept self-contained for a delivery that never happens, at
-the cost of four woff2 files duplicated per deck — 200K of bytes that had to stay in step
-with the root copy by hand, with nothing checking that they did.
-
-The two sibling sites had `../../fonts/` all along. This repository was the only one that
-diverged, which is what made it look deliberate.
+**Do not give a deck its own `fonts/`.** Nobody is sent a deck folder; what ships is the PDF,
+which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with
+the root by hand, with nothing checking that it is.
 
 ## Slides are a canvas, not a page
 
@@ -403,10 +382,8 @@ whole time.
   committed beside it. It renders nothing, needs no browser, and runs in CI before `npm ci`.
 - **The recipe is the page plus every local file the page names plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at
-  all. Every page now names the root `fonts/`, so perturbing it marks **all four** cards stale
-  — the layout described above, observable. It used to mark only the two index cards, because
-  the decks carried their own copies; that a font swap could leave two cards reported current
-  was the duplication showing through the recipe.
+  all. Every page names the root `fonts/`, so perturbing it marks **all four** cards stale —
+  the layout described above, observable.
 - **A link is not an asset.** The walk skips `<a href>`: the talks index links four
   multi-megabyte PDFs of the two talks, and hashing a link target reported that card stale
   on every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
@@ -477,24 +454,3 @@ whole time.
   `~/git/3ap-ag`. A clone made outside those three directories gets the global default and
   no warning, so check `git config user.email` before the first commit in a fresh clone.
 - Never mention closed-source predecessor projects — here, in docs, or in commits.
-
-### Why this rule moved three times
-
-It first said every link off the landing page opens in a new tab, decks included. Then it said
-the talks index is an index and stays in the tab, but a deck still gets its own. Then it said
-nothing on this site gets its own tab — while quietly keeping `github.com`, `linkedin.com`,
-`3ap.ch` and `likemagic.tech`. Now there is no exception at all.
-
-None of those were wrong for what existed at the time — a deck really did have no exit, and
-opening one in the same tab really did strand the reader. The mistake was writing it down as
-a **navigation principle** when it was a **workaround for a missing button**. A principle
-invites you to defend it; a workaround invites you to remove the thing that made it
-necessary. Once the deck carried its own way out, the rule dissolved on its own.
-
-The third move is the same mistake one layer down. "Outbound belongs in a new tab" sounds like
-a principle about other people's sites, and it survived two rewrites of the paragraph around
-it on that strength. It was the workaround again, generalised — and it left the section
-titled *Nothing opens in a new tab* listing four things that did.
-
-`verify` asserts every half together — no new tabs, same-tab links, the deck's way out, and the
-lockup's landing link — because any one of them alone is a trap.
