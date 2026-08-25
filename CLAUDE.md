@@ -325,6 +325,21 @@ Both decks under `talks/` carry the system too, and all four pages load their fa
 which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with
 the root by hand, with nothing checking that it is.
 
+### The footer carries a version marker, like the tokens
+
+The deck footer is copied across `blust.ch`, `guestgraph.io` and `companygraph.io`, and no
+suite can see a sibling — the same gap the token block has. It is fenced by a
+`deck footer · vN` marker and `footerVersion` asserts it.
+
+What the marker covers is a **contract, not a look**: the lockup goes to the landing page, the
+person to `blust.ch`, the third link to the talks index, and none of them opens in a new tab.
+Change any of that and bump `vN` **in all three repositories**, then run all three suites. A
+suite fails two ways — a version it does not expect, and no marker at all — so deleting the
+fence is not a way around it.
+
+`verify/design.mjs` is byte-identical across the three and holds both `TOKEN_VERSION` and
+`FOOTER_VERSION`. Never edit it in one repo alone.
+
 ## Slides are a canvas, not a page
 
 A deck lays its slides out once at a fixed height of **900**, and the whole plane is scaled
