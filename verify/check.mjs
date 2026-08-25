@@ -1,7 +1,7 @@
 // The deliverable is rendered pages, so the tests are assertions against a rendered DOM.
 // Run against a served copy of the repo: python3 -m http.server 8000
 import { chromium } from "playwright";
-import { DESIGN_CHECKS } from "./design.mjs";
+import { DESIGN_CHECKS, SYSTEM_FACES } from "./design.mjs";
 
 const BASE = process.env.BASE || "http://localhost:8000";
 
@@ -18,24 +18,24 @@ const PAGES = [
     // The two project names jump to their own section. Asserted by href, because a
     // fragment that stops matching an id fails silently — the page just lands at the top.
     sameTab: ["talks/", "ideas/", "ideas/#guestgraph", "ideas/#companygraph"], brandMark: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/mental-model/", wayOut: "../", title: /Mental Model/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", wayOut: "../", title: /Essential Complexity/, lang: "en",
-    transport: true, zeroBased: true, sourceLang: true, card: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   { path: "/talks/", title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
@@ -43,7 +43,7 @@ const PAGES = [
   { path: "/privacy/", title: /Blust/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
   // The ideas page. Two claims make it worth reading and both are checkable: that each
@@ -53,7 +53,7 @@ const PAGES = [
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
-    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"],
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, cardBase: "https://blust.ch", internalLinks: true },
 ];
@@ -147,15 +147,17 @@ const CHECKS = {
       spec.sameTab);
     return bad.length ? "must stay in this tab: " + bad.join(", ") : null;
   },
-  // the lockup carries a mark as well as a wordmark, and it is inlined rather than linked
-  // — an <img src="favicon.svg"> would render as a broken box from file://
+  // The lockup is a mark plus a wordmark, and the mark is inlined: a linked asset renders as
+  // a broken box under file://. Two places carry it — the header on the pages, and the way-out
+  // credit in a deck's transport bar, where it is the only thing that says whose talk this is —
+  // and the failure is the same one in both, so one check covers them.
   async brandMark(page) {
-    const svgs = await page.evaluate(() =>
-      [...document.querySelectorAll(".brand svg")].length);
-    if (svgs !== 1) return `.brand holds ${svgs} inline svg mark(s), expected 1`;
+    const MARK = ".brand svg, .name .namemark svg";
+    const svgs = await page.evaluate(s => [...document.querySelectorAll(s)].length, MARK);
+    if (svgs !== 1) return `the brand lockup holds ${svgs} inline svg mark(s), expected 1`;
     const linked = await page.evaluate(() =>
-      [...document.querySelectorAll(".brand img")].map(i => i.getAttribute("src")));
-    return linked.length ? `.brand links its mark instead of inlining it: ${linked.join(", ")}` : null;
+      [...document.querySelectorAll(".brand img, .name .namemark img")].map(i => i.getAttribute("src")));
+    return linked.length ? `the brand lockup links its mark instead of inlining it: ${linked.join(", ")}` : null;
   },
   // Decks open in the same tab now, which is only safe because the deck carries its own
   // way out. If that button ever disappears the same-tab links strand the reader on a
@@ -260,6 +262,22 @@ await browser.close();
       if (!unreachable) console.log("✓ /sitemap.xml  " + locs.length + " urls, all reachable");
     }
   }
+  // The favicon is the one place the brand mark exists outside a page, so no DOM check can
+  // reach it — and it is where the unavailable font name lived longest. It cannot @font-face
+  // anything and inherits nothing, so every face it names has to be one a machine already has.
+  const fav = await fetch(BASE + "/favicon.svg");
+  if (!fav.ok) { console.log(`✗ /favicon.svg  HTTP ${fav.status}`); failures++; }
+  else {
+    const svg = await fav.text();
+    const named = [...svg.matchAll(/font-family="([^"]+)"/g)]
+      .flatMap(m => m[1].split(",").map(f => f.trim().replace(/^["']|["']$/g, "")))
+      .filter(f => !SYSTEM_FACES.has(f.toLowerCase()));
+    if (named.length) {
+      console.log(`✗ /favicon.svg  names a face it cannot load and cannot count on: ${named.join(", ")}`);
+      failures++;
+    } else console.log("✓ /favicon.svg");
+  }
+
   const rb = await fetch(BASE + "/robots.txt");
   if (!rb.ok || !(await rb.text()).includes("sitemap.xml")) {
     console.log("✗ /robots.txt  missing or does not name the sitemap"); failures++;

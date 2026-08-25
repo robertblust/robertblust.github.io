@@ -257,6 +257,22 @@ by `design tokens · vN` markers.
   what these sites shipped for months — silently renders in system-ui instead. Both
   failures are invisible in the source. `verify` measures the rendered text and fails if a
   declared family matches the fallback width.
+- **A font this site does not ship cannot be named, not even as a first choice.** The face
+  is `Plex Mono` — the name the `@font-face` blocks actually declare. `IBM Plex Mono` is
+  what it is called upstream, it is declared nowhere, and no machine has it, so naming it
+  first meant the browser fell straight through to whatever mono the visitor's OS had. It
+  survived on all four pages and in `favicon.svg` for months, because `fontsLoaded` only
+  measures the families a page's spec *lists*, and this one was hiding in an SVG
+  `font-family` attribute on the brand mark. `fontsAvailable` is the general rule that
+  replaces looking: every family named anywhere on a page — stylesheet or attribute — must
+  be `@font-face`'d by that page or be a generic keyword or a platform face. Platform faces
+  are allowed and listed in `SYSTEM_FACES`; several are one OS's only — `Segoe UI` is
+  Windows, `Menlo` and `SF Mono` are Apple — and that is what a fallback chain is for. The
+  failure being caught is the other thing: a name that is on no machine and served from
+  nowhere. `favicon.svg` is checked separately, by fetch, because it is the one place the
+  mark lives outside a page and no DOM check can reach it — it can load nothing and inherit
+  nothing, so it names only generic and platform faces, and diverges from the pages' inline
+  copies exactly as its hard-coded hexes do.
 - **One display face across both sites: Bricolage Grotesque.** Its weight axis carries each
   page's argument — light where the sentence describes the solved or unresolved half, heavy
   where it lands. blust.ch sets *Building fast is solved* against *Deciding well is not*;
