@@ -322,6 +322,17 @@ the page moves, and nothing about a stale card looks wrong. Two of the four here
 the site as it read two days earlier, through several commits, and every check passed the
 whole time.
 
+- **Three files, one of them the single copy of the knobs.** `og-recipe.mjs` holds the card
+  list, the frame and the hide rules and nothing else — it is pure, so `verify/og-recipe.test.mjs`
+  can load it; `export-og.mjs` renders and stamps; `og-check.mjs` compares. A knob kept in the
+  exporter as well would be a knob that can be edited without the hash moving, which is the one
+  failure this mechanism exists to make impossible. All three sibling sites carry this shape.
+- **The hash covers every key of a card, sorted, not a hand-written list of them.** That is why
+  `settle` and `from` can exist in companygraph's cards and not here without the mechanism
+  differing: a knob added later enters the recipe by existing. It also means changing the
+  recipe format moves every `og.sha` while the cards themselves stay byte-identical — which is
+  what happened when this repository adopted the shared module, and is not a sign anything
+  about the pictures changed.
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterise the
   same text differently, so a card compared by its bytes reports which machine rendered it.
   The check re-derives a hash of what went *into* the card and compares it with the `og.sha`
@@ -366,6 +377,11 @@ whole time.
   hypothetical — and `cache: npm` has nothing to key on either. Ignoring it also let the
   Playwright version float, on a suite whose whole job is a deterministic browser. The
   sibling sites commit theirs for the same reason.
+- **`npm run test:og` runs beside the card check, and before it.** The check is only worth the
+  CI minute if the recipe it compares is right, and a recipe that quietly stops tracking a file
+  reports every card current for the wrong reason. The tests build throwaway trees in `tmp`
+  rather than asserting against this site's own pages, so they keep meaning something after the
+  pages change.
 - **The narration check runs first, before anything is installed.** `./tts/generate.py
   --dry-run` bills nothing and needs no key, and it catches the one failure a browser cannot
   see: a note edited without regenerating its clip renders perfectly, passes every DOM
