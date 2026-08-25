@@ -34,6 +34,8 @@ jobs:
           cache: npm
       # After setup-node for a known node, before npm ci because it installs nothing: the
       # check renders no page, it re-derives each card's recipe hash and compares.
+      - name: The card check still works
+        run: npm run test:og
       - name: Cards still show the page they render
         run: npm run og:check
       - run: npm ci

@@ -7,9 +7,10 @@
   "scripts": {
     "serve": "python3 -m http.server 8000",
     "verify": "node verify/check.mjs",
+    "test:og": "node --test verify/og-recipe.test.mjs",
     "pdf": "node export-pdf.mjs",
     "og": "node export-og.mjs",
-    "og:check": "node export-og.mjs --check"
+    "og:check": "node og-check.mjs"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
