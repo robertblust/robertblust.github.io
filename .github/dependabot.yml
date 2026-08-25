@@ -1,0 +1,37 @@
+# Every npm dependency here is a devDependency — playwright and pdf-lib drive `npm run
+# verify`, `npm run og` and `npm run pdf`. None of it reaches a visitor: the pages are
+# self-contained and ship no external assets. So this file is not a vulnerability
+# response, it is the thing that stops the toolchain bit-rotting until CI breaks on a
+# Playwright too old for the Chromium it installs.
+#
+# The shape is copied from guestgraph/engine, deliberately — the same duplication the
+# design tokens and the deck footer have, and the same absence of a tripwire. Grouping
+# minor and patch means a quiet week is one pull request, not five; a major arrives on
+# its own, which is when it deserves reading.
+#
+# Each PR is gated by the real check: ci.yml runs `npm run verify` on pull_request, so a
+# bump that breaks what the pages render fails before it can be merged. package.json is
+# named by no page, so the share-card recipe never sees these commits and `og:check`
+# stays quiet.
+version: 2
+updates:
+  # One package.json at the root — the decks under talks/ share it, unlike the two
+  # sibling sites, which carry a second one per talk.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
