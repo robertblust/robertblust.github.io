@@ -222,10 +222,13 @@ this pattern comes from) the audio filename all agree on the same zero-based num
 `npm run verify`'s `zeroBased` check exists because these two numbers drift independently
 the moment one of them is hand-edited.
 
-## `guestgraph/talks` is the reference copy for deck features
+## `guestgraph.github.io/talks/intro/` is the reference copy for deck features
 
-The intro deck there is where the transport bar, the language toggle, and the narration
-scaffolding were worked out first. Duplication across these decks and that one is
+That deck is where the transport bar, the language toggle, and the narration scaffolding
+were worked out first. It lived in a repository of its own, `guestgraph/talks`, until the
+talks were merged into the site they are served from — the same move companygraph.io made,
+and the same one this repository has always had: decks are folders under the site, not a
+second repository copying its chrome. Duplication across these decks and that one is
 deliberate, not an oversight to fix later — a shared runtime between repositories would
 break the rule directly above it: a deck is one file that works from `file://`. Port a
 fix by hand; do not link the two.
