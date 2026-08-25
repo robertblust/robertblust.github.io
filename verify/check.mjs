@@ -7,7 +7,7 @@ const BASE = process.env.BASE || "http://localhost:8000";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", noNewTab: true, title: /Robert Blust/, lang: "en",
+  { path: "/", seo: true, noNewTab: true, title: /Robert Blust/, lang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -21,19 +21,19 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/mental-model/", noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en",
+  { path: "/talks/mental-model/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/essential-complexity/", noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en",
+  { path: "/talks/essential-complexity/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en",
     transport: true, zeroBased: true, sourceLang: true, card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", noNewTab: true, title: /talks/i, lang: "en",
+  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -42,7 +42,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", noNewTab: true, title: /Blust/, lang: "en",
+  { path: "/privacy/", seo: true, noNewTab: true, title: /Blust/, lang: "en",
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -51,7 +51,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", noNewTab: true, title: /Ideas/, lang: "en",
+  { path: "/ideas/", seo: true, noNewTab: true, title: /Ideas/, lang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -228,6 +228,79 @@ const CHECKS = {
         .filter(h => h && !/^(https?:|mailto:|tel:|#)/i.test(h) && h.startsWith("/")));
     return bad.length ? `root-absolute internal link(s), break file://: ${bad.join(", ")}` : null;
   },
+  // The head Google reads, asserted as a contract rather than page by page. `card` below
+  // already proves og:image resolves at its declared size; nothing proved a canonical
+  // exists, that it agrees with og:url, or that structured data points at anything real.
+  // Both failures this replaced were live 404s — a logo.svg this site never had, and an
+  // isPartOf naming a #website node defined nowhere — and both had shipped green.
+  async seo(page, spec) {
+    const problems = [];
+    const m = await page.evaluate(() => {
+      const meta = (sel) => (document.querySelector(sel) || {}).content || null;
+      return {
+        canonical: (document.querySelector('link[rel="canonical"]') || {}).getAttribute?.("href") ?? null,
+        ogUrl: meta('meta[property="og:url"]'),
+        desc: meta('meta[name="description"]'),
+        site: meta('meta[property="og:site_name"]'),
+        locale: meta('meta[property="og:locale"]'),
+        alt: meta('meta[property="og:image:alt"]'),
+        twitter: meta('meta[name="twitter:card"]'),
+        ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => s.textContent),
+      };
+    });
+
+    if (!m.canonical) problems.push("no canonical");
+    else if (!/^https:\/\//.test(m.canonical))
+      problems.push(`canonical ${JSON.stringify(m.canonical)} is relative — nothing can compare it with og:url`);
+    else if (m.canonical !== m.ogUrl)
+      problems.push(`canonical ${m.canonical} != og:url ${m.ogUrl}`);
+
+    if (!m.desc) problems.push("no meta description");
+    else if (m.desc.length > 200) problems.push(`description is ${m.desc.length} chars, over 200`);
+
+    for (const [k, v] of [["og:site_name", m.site], ["og:locale", m.locale],
+                          ["og:image:alt", m.alt], ["twitter:card", m.twitter]])
+      if (!v) problems.push(`no ${k}`);
+
+    // Structured data has to resolve, not merely parse. Google reads @graph within one
+    // document, so an @id referenced but defined elsewhere is a pointer to nothing — and
+    // a URL inside it is a promise the site either keeps or does not.
+    if (!m.ld.length) problems.push("no application/ld+json");
+    const defined = new Set(), referenced = [], urls = new Set();
+    for (const block of m.ld) {
+      let data;
+      try { data = JSON.parse(block); }
+      catch (e) { problems.push("ld+json does not parse: " + e.message); continue; }
+      const nodes = data["@graph"] || (Array.isArray(data) ? data : [data]);
+      const walk = (o) => {
+        if (Array.isArray(o)) return o.forEach(walk);
+        if (!o || typeof o !== "object") return;
+        for (const [k, v] of Object.entries(o)) {
+          // A node that carries @id *and* @type defines something; a bare { "@id": ... }
+          // is a reference to a node that must be defined somewhere on this same page.
+          if (k === "@id" && typeof v === "string") { if (!o["@type"]) referenced.push(v); }
+          else if (typeof v === "string" && /^https?:\/\//.test(v) && k !== "@context") urls.add(v);
+          else walk(v);
+        }
+      };
+      nodes.forEach(n => { if (n && n["@id"]) defined.add(n["@id"]); });
+      nodes.forEach(walk);
+    }
+    for (const r of referenced)
+      if (!defined.has(r)) problems.push(`ld+json references ${r}, which no node on this page defines`);
+
+    for (const u of urls) {
+      if (!u.startsWith(spec.cardBase || new URL(spec.absolute).origin.replace(/^http:\/\/localhost:8000$/, "https://blust.ch"))) continue;
+      const status = await page.evaluate(async (x) => {
+        try { const r = await fetch(x.replace("https://blust.ch", location.origin), { method: "GET" }); return r.status; }
+        catch { return 0; }
+      }, u);
+      if (status !== 200) problems.push(`ld+json names ${u} → HTTP ${status}`);
+    }
+
+    return problems.length ? problems.join("; ") : null;
+  },
+
   async card(page, spec) {
     const img = await page.evaluate(() =>
       (document.querySelector('meta[property="og:image"]') || {}).content);

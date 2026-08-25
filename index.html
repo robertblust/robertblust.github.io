@@ -17,7 +17,54 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Robert Blust — Software Engineer and Architect.">
 <meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. Each page carries
+     the whole graph it references — Google resolves @graph within one document, so a bare
+     { "@id": ... } pointing at a node defined on another page resolves to nothing. That was
+     the bug this replaced, alongside a logo.svg this site has never served. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://blust.ch/#person",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "jobTitle": "Software Engineer & Architect",
+      "sameAs": [
+        "https://github.com/robertblust",
+        "https://www.linkedin.com/in/robertblust/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blust.ch/#website",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://blust.ch/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/#webpage",
+      "name": "Robert Blust \u2014 Software Engineer & Architect",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://blust.ch/#website"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      }
+    }
+  ]
+}
+</script>
 <style>
 /* Self-hosted, same origin: the "no external assets" rule kept the third party out
    but left the type falling back to system-ui for every visitor. These files fix

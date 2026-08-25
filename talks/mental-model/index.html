@@ -23,7 +23,82 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Mental Model — Robert Blust.">
 <meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. Each page carries
+     the whole graph it references — Google resolves @graph within one document, so a bare
+     { "@id": ... } pointing at a node defined on another page resolves to nothing. That was
+     the bug this replaced, alongside a logo.svg this site has never served. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://blust.ch/#person",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "jobTitle": "Software Engineer & Architect",
+      "sameAs": [
+        "https://github.com/robertblust",
+        "https://www.linkedin.com/in/robertblust/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blust.ch/#website",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://blust.ch/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/talks/mental-model/#webpage",
+      "name": "The Mental Model",
+      "url": "https://blust.ch/talks/mental-model/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://blust.ch/#website"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://blust.ch/talks/mental-model/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blust.ch/talks/mental-model/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://blust.ch/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://blust.ch/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Mental Model",
+          "item": "https://blust.ch/talks/mental-model/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
 <style>
 /* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
    unit that has to survive being copied to someone else's machine is the folder,
