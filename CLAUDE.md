@@ -321,14 +321,18 @@ the canvas fills the frame exactly with no bars.
   the job id, not the workflow name.** Rename the job and `protect-main` keeps requiring the
   old name, which will never report again — the branch looks protected and silently isn't.
 - **The suite drives a real browser against a served page, so the job has to serve one.** It
-  checks out, installs Node with the npm cache, `npm ci` (which is why `package-lock.json` is
-  committed), installs Chromium with its system dependencies, starts `python3 -m http.server
+  checks out, installs Node with the npm cache, `npm ci`, installs Chromium with its system dependencies, starts `python3 -m http.server
   8000` in the background, waits for it to answer, and only then runs `npm run verify`. The
   job carries `timeout-minutes: 10`, because the two ways of hanging it below are not
   hypothetical, and the default is six hours. Started in the foreground, the server step never
   returns. **Backgrounded without redirecting its output, it hangs the same way** — a
   backgrounded process keeps the step's log pipe open and the runner waits on a descriptor
   that never closes, so the output has to go to `/dev/null`, not just to the background.
+- **`package-lock.json` is committed, and `.gitignore` used to hide it.** `npm ci` fails
+  outright without a lockfile in the tree — this is the first CI run's actual failure, not a
+  hypothetical — and `cache: npm` has nothing to key on either. Ignoring it also let the
+  Playwright version float, on a suite whose whole job is a deterministic browser. The
+  sibling sites commit theirs for the same reason.
 - **The narration check runs first, before anything is installed.** `./tts/generate.py
   --dry-run` bills nothing and needs no key, and it catches the one failure a browser cannot
   see: a note edited without regenerating its clip renders perfectly, passes every DOM
