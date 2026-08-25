@@ -132,8 +132,21 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 
 ## Nothing opens in a new tab; every deck carries its own way out
 
-`github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are outbound and belong in a new
-tab. Nothing on this site does any more — not the talks index, and no longer the decks.
+The heading is now literally true: **not one link on this site opens in a new tab**, outbound
+ones included. `github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` used to be the
+standing exception, on the grounds that they are somewhere else. Being somewhere else was
+never the reason a new tab helped — the reason was that a deck had no way back, and that has
+been fixed. What a new tab reliably does is take away the visitor's back button.
+
+`noNewTab` asserts it on every page, and it replaced a `newTab` check that asserted the
+opposite. That one had already outlived its last caller: no page spec named it any more, so
+it was asserting nothing at all while looking like a guarantee.
+
+**There is one exception, and this site does not use it: a link inside a slide.** A presenter
+who clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves
+that in front of a room. It keys on *where a link sits*, not where it points, so it needs no
+list of hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's
+has two, which is why the exception is written the same way in all three suites.
 
 Each deck's transport bar has an *All talks* control on the far side of the divider, beside
 the language and notes buttons rather than beside play and next: one button away from those,
@@ -465,11 +478,12 @@ whole time.
   no warning, so check `git config user.email` before the first commit in a fresh clone.
 - Never mention closed-source predecessor projects — here, in docs, or in commits.
 
-### Why this rule moved twice
+### Why this rule moved three times
 
-It first said every link off the landing page opens in a new tab, decks included. Then it
-said the talks index is an index and stays in the tab, but a deck still gets its own. Now
-nothing gets its own tab at all.
+It first said every link off the landing page opens in a new tab, decks included. Then it said
+the talks index is an index and stays in the tab, but a deck still gets its own. Then it said
+nothing on this site gets its own tab — while quietly keeping `github.com`, `linkedin.com`,
+`3ap.ch` and `likemagic.tech`. Now there is no exception at all.
 
 None of those were wrong for what existed at the time — a deck really did have no exit, and
 opening one in the same tab really did strand the reader. The mistake was writing it down as
@@ -477,5 +491,10 @@ a **navigation principle** when it was a **workaround for a missing button**. A 
 invites you to defend it; a workaround invites you to remove the thing that made it
 necessary. Once the deck carried its own way out, the rule dissolved on its own.
 
-`verify` asserts both halves together — same-tab links *and* the deck's way out — because
-either one alone is a trap.
+The third move is the same mistake one layer down. "Outbound belongs in a new tab" sounds like
+a principle about other people's sites, and it survived two rewrites of the paragraph around
+it on that strength. It was the workaround again, generalised — and it left the section
+titled *Nothing opens in a new tab* listing four things that did.
+
+`verify` asserts every half together — no new tabs, same-tab links, the deck's way out, and the
+lockup's landing link — because any one of them alone is a trap.
