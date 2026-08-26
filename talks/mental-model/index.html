@@ -6,10 +6,12 @@
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://blust.ch/talks/mental-model/">
 
-<!-- lang="de" is the truth about this file: the slides are German markup, and English
-     lives in data-en until applyLang() swaps it. The head is English because it
-     describes the page as delivered — the deck opens in English — and applyLang()
-     swaps the title and description when a visitor picks German. -->
+<!-- lang="en" is the truth about this file: the slides are English markup, and German
+     lives in data-de until applyLang() swaps it. This comment said the reverse until
+     2026-08-26, describing an arrangement that had already been inverted — `sourceLang`
+     now fetches this file cold on every run and fails if the attribute ever says otherwise.
+     The speaker notes are the one place the old story still holds: those are authored in
+     German in data-notes, with English in data-notes-en. -->
 <title>The Mental Model · a talk by Robert Blust</title>
 <meta id="metadesc" name="description" content="A structured, machine-readable knowledge base that acts as the brain of a company — one source of truth for vision, strategy, processes, roles, KPIs, rules and decisions.">
 
