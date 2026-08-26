@@ -204,6 +204,20 @@
   .maturity{display:flex; align-items:center; gap:.9rem; margin-top:.7rem}
   .track{position:relative; display:block; width:min(240px,40vw); height:3px; background:var(--rule)}
   .track i{position:absolute; inset:0 auto 0 0; background:var(--c-mid); display:block}
+  /* Progress since the last update is drawn, not just claimed: the new slice sits on top of
+     the base in --c-firm (brightness is confidence) and both fill in when the bar scrolls
+     into view. data-prev/data-now on .track are the record; the next update edits those
+     two numbers and moves the inline width. Reduced motion draws the final state at once. */
+  .track s{position:absolute; inset:0 auto 0 0; background:var(--c-firm); display:block;
+           text-decoration:none; transform-origin:left; transform:scaleX(0)}
+  .track s::after{content:""; position:absolute; right:-1px; top:-2px; bottom:-2px; width:2px;
+                  background:var(--c-firm)}
+  .track.animate i{transition:width .7s cubic-bezier(.2,.7,.2,1) var(--delay,0s)}
+  .track.animate s{transition:transform .5s cubic-bezier(.2,.7,.2,1) calc(var(--delay,0s) + .55s)}
+  .track.animate.in s{transform:scaleX(1)}
+  @media (prefers-reduced-motion:reduce){
+    .track.animate i, .track.animate s{transition:none}
+  }
   .maturity .label{font-size:.72rem; letter-spacing:.1em; color:var(--dim)}
   .tag{font-family:"Plex Mono",monospace; font-size:.66rem; letter-spacing:.12em;
        text-transform:uppercase; padding:.3rem .6rem; border:1px solid var(--rule);
@@ -281,7 +295,7 @@
           <div class="body">
             <h3 data-de="Die Engine">The engine</h3>
             <p data-de="Identitätsauflösung — deterministisch und probabilistisch, nach Sicherheit gestuft, mit einer Prüfschlange für Menschen.">Identity resolution — deterministic and probabilistic, layered by confidence, with a human review queue.</p>
-            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+            <div class="maturity"><span class="track" data-prev="86" data-now="86"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -290,7 +304,7 @@
           <div class="body">
             <h3 data-de="Der Gast-Graph &amp; die API">The guest graph &amp; API</h3>
             <p data-de="Unveränderliche Quelldatensätze, ein abgeleitetes Profil, das sich jederzeit neu berechnen lässt, alles über REST erreichbar.">Immutable source records, a derived profile that can always be recomputed, everything reachable over REST.</p>
-            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+            <div class="maturity"><span class="track" data-prev="86" data-now="86"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -299,7 +313,7 @@
           <div class="body">
             <h3 data-de="Erklären, rückgängig machen, prüfen">Explain, undo, audit</h3>
             <p data-de="Jede Zusammenführung beantwortet „warum?“ und lässt sich wieder trennen — ein Rückgängig schreibt eine dauerhafte Nicht-zusammenführen-Regel.">Every merge answers “why?” and can be split again — an undo writes a permanent do-not-merge rule.</p>
-            <div class="maturity"><span class="track"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
+            <div class="maturity"><span class="track" data-prev="86" data-now="86"><i style="width:86%"></i></span><span class="label mono" data-de="gebaut">built</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -308,7 +322,7 @@
           <div class="body">
             <h3 data-de="Konnektoren">Connectors</h3>
             <p data-de="Echte PMS-, POS- und Buchungssysteme. Als Nächstes auf der Roadmap — und der Teil, der über die Brauchbarkeit entscheidet.">Real PMS, POS and booking systems. Next on the roadmap — and the part that decides usability.</p>
-            <div class="maturity"><span class="track"><i style="width:8%"></i></span><span class="label mono" data-de="als Nächstes">next up</span></div>
+            <div class="maturity"><span class="track" data-prev="8" data-now="8"><i style="width:8%"></i></span><span class="label mono" data-de="als Nächstes">next up</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -317,7 +331,7 @@
           <div class="body">
             <h3 data-de="Der gehostete Dienst">The hosted service</h3>
             <p data-de="Hosting, Konsole, MCP für KI-Agenten. Ein Zähler: pro Anreise abgerechnet — eine Zahl, die ohnehin auf dem Dashboard des Hotels steht. Geplant, noch nicht offen.">Hosting, console, MCP for AI agents. One meter: billed per arrival — a number already on the hotel’s own dashboard. Planned, not open yet.</p>
-            <div class="maturity"><span class="track"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
+            <div class="maturity"><span class="track" data-prev="12" data-now="12"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
           </div>
           <span class="tag com" data-de="Kommerziell">Commercial</span>
         </li>
@@ -345,7 +359,7 @@
           <div class="body">
             <h3 data-de="Das Meta-Modell">The meta-model</h3>
             <p data-de="Kerntypen, ein Schema pro Typ — das Vokabular, auf das zwei Firmen kamen, die nie voneinander wussten. Veröffentlicht.">Core types, one schema per type — the vocabulary two companies that never met converged on. Published.</p>
-            <div class="maturity"><span class="track"><i style="width:26%"></i></span><span class="label mono" data-de="Vokabular veröffentlicht">vocabulary published</span></div>
+            <div class="maturity"><span class="track" data-prev="26" data-now="30"><i style="width:30%"></i></span><span class="label mono" data-de="Vokabular veröffentlicht">vocabulary published</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -354,7 +368,7 @@
           <div class="body">
             <h3 data-de="Der Graph aus Markdown">The graph of Markdown</h3>
             <p data-de="Eine Seite pro Sache, der Titel ist der Name, jede Referenz über den Namen — nichts zeigt ins Leere, nichts geht still verloren.">One page per thing, its title is its name, every reference by name — nothing points at nothing, nothing gets quietly lost.</p>
-            <div class="maturity"><span class="track"><i style="width:46%"></i></span><span class="label mono" data-de="Konventionen veröffentlicht">conventions published</span></div>
+            <div class="maturity"><span class="track" data-prev="46" data-now="46"><i style="width:46%"></i></span><span class="label mono" data-de="Konventionen veröffentlicht">conventions published</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -362,8 +376,8 @@
           <span class="num mono">03</span>
           <div class="body">
             <h3 data-de="Die Werkzeuge">The tooling</h3>
-            <p data-de="Was gebaut wird, um das Modell anzulegen und aktuell zu halten — quelloffen, nicht die zahlende Hälfte von etwas Freiem.">Whatever gets built to create the model and keep it current — open source, not the paid half of a free thing.</p>
-            <div class="maturity"><span class="track"><i style="width:4%"></i></span><span class="label mono" data-de="nicht begonnen">not started</span></div>
+            <p data-de="Ein CLI mit vier Befehlen — init, add, check, upgrade — das eine Instanz anlegt, aus dem Schema gerüstet, mechanisch prüft und mit dem Kern aktuell hält. Spezifikation geschrieben, nichts gebaut. Quelloffen, nicht die zahlende Hälfte von etwas Freiem.">A CLI with four commands — init, add, check, upgrade — that creates an instance, scaffolds from the schema, checks it mechanically and keeps it current with core. Spec written, nothing built. Open source, not the paid half of a free thing.</p>
+            <div class="maturity"><span class="track" data-prev="4" data-now="14"><i style="width:14%"></i></span><span class="label mono" data-de="entworfen">designed</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -372,7 +386,7 @@
           <div class="body">
             <h3 data-de="Vorträge &amp; ein Beispiel">The talks &amp; worked example</h3>
             <p data-de="Deck, PDF und Tonspur auf Deutsch und Englisch, dazu ein durchgearbeitetes Beispiel des Modells.">Deck, PDF and audio in German and English, plus one worked example of the model in use.</p>
-            <div class="maturity"><span class="track"><i style="width:22%"></i></span><span class="label mono" data-de="begonnen">started</span></div>
+            <div class="maturity"><span class="track" data-prev="22" data-now="32"><i style="width:32%"></i></span><span class="label mono" data-de="Beispiel veröffentlicht">example published</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
         </li>
@@ -381,7 +395,7 @@
           <div class="body">
             <h3 data-de="Beratung">Consulting</h3>
             <p data-de="Das Modell mit Ihnen bauen. Ein Zähler: pro Tag, nach Aufwand — jederzeit aufhören, alles bleibt Ihres.">Building the model with you. One meter: billed per day, time and material — stop any time, everything stays yours.</p>
-            <div class="maturity"><span class="track"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
+            <div class="maturity"><span class="track" data-prev="12" data-now="12"><i style="width:12%"></i></span><span class="label mono" data-de="Modell definiert">model defined</span></div>
           </div>
           <span class="tag com" data-de="Kommerziell">Commercial</span>
         </li>
@@ -390,6 +404,8 @@
       <p class="links">
         <a href="https://companygraph.io/talks/intro/" data-de="Einführungsvortrag · 10 Min">intro talk · 10 min</a>
         <a href="https://blust.ch/talks/mental-model/" data-de="Das Konzept: Mental-Model-Vortrag">the concept: mental model talk</a>
+        <a href="https://companygraph.io/model/" data-de="das Modell · gezeichnet">the model · drawn</a>
+        <a href="https://companygraph.io/example/" data-de="durchgearbeitetes Beispiel">worked example</a>
         <a href="https://companygraph.io/billing/" data-de="Abrechnungsmodell">billing model</a>
         <a href="https://github.com/companygraph">github.com/companygraph</a>
       </p>
@@ -446,6 +462,38 @@
   document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
 
   applyLang();
+})();
+
+// Maturity bars fill when they scroll into view, and the slice gained since the last update
+// lands a beat later in --c-firm. Without JS or with reduced motion the bar is just its
+// final inline width — the markup is complete on its own.
+(function(){
+  var tracks = Array.prototype.slice.call(document.querySelectorAll(".track[data-now]"));
+  if (!tracks.length) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  tracks.forEach(function(t, n){
+    var prev = +t.getAttribute("data-prev"), now = +t.getAttribute("data-now");
+    if (now > prev) {
+      var gain = document.createElement("s");
+      gain.style.left = prev + "%"; gain.style.width = (now - prev) + "%";
+      t.appendChild(gain);
+    }
+    if (reduce || !("IntersectionObserver" in window)) { t.classList.add("animate","in"); return; }
+    t.style.setProperty("--delay", (n % 5) * 0.08 + "s");
+    t.querySelector("i").style.width = "0%";
+    t.classList.add("animate");
+  });
+  if (reduce || !("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var t = e.target;
+      t.querySelector("i").style.width = t.getAttribute("data-now") + "%";
+      t.classList.add("in");
+      io.unobserve(t);
+    });
+  }, { threshold: 0.6 });
+  tracks.forEach(function(t){ io.observe(t); });
 })();
 </script>
 </body>
