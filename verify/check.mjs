@@ -325,12 +325,13 @@ const CHECKS = {
     for (const r of referenced)
       if (!defined.has(r)) problems.push(`ld+json references ${r}, which no node on this page defines`);
 
+    // Fetched from Node against BASE, not in-page against location.origin: an origin carries
+    // no path, and a BASE can (the sibling sites are served under one). Nothing about these
+    // URLs needs a browser.
     for (const u of urls) {
       if (!u.startsWith(SITE)) continue;              // off-site URLs are not ours to keep
-      const status = await page.evaluate(async ({ url, site }) => {
-        try { const r = await fetch(url.replace(site, location.origin)); return r.status; }
-        catch { return 0; }
-      }, { url: u, site: SITE });
+      let status = 0;
+      try { status = (await fetch(u.replace(SITE, BASE))).status; } catch { status = 0; }
       if (status !== 200) problems.push(`ld+json names ${u} → HTTP ${status}`);
     }
 
