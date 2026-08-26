@@ -10,13 +10,84 @@
 <meta id="metadesc" name="description" content="Two ideas, put up for scrutiny: GuestGraph and CompanyGraph. Five parts each — what is open source, what could ever earn money, and how far along it is.">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Robert Blust">
 <meta property="og:url" content="https://blust.ch/ideas/">
 <meta property="og:title" content="Ideas — Robert Blust">
 <meta property="og:description" content="Two ideas, put up for scrutiny. Five parts each — what is open source, what could ever earn money, and how far along it is.">
-<meta property="og:image" content="https://blust.ch/og.png">
+<meta property="og:image" content="https://blust.ch/ideas/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Two ideas. Built in the open, validated in the open.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. Each page carries
+     the whole graph it references — Google resolves @graph within one document, so a bare
+     { "@id": ... } pointing at a node defined on another page resolves to nothing. That was
+     the bug this replaced, alongside a logo.svg this site has never served. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://blust.ch/#person",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "jobTitle": "Software Engineer & Architect",
+      "sameAs": [
+        "https://github.com/robertblust",
+        "https://www.linkedin.com/in/robertblust/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blust.ch/#website",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://blust.ch/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/ideas/#webpage",
+      "name": "Ideas",
+      "url": "https://blust.ch/ideas/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://blust.ch/#website"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://blust.ch/ideas/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blust.ch/ideas/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://blust.ch/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Ideas",
+          "item": "https://blust.ch/ideas/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 @font-face{font-family:"Bricolage Grotesque";src:url(../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
 @font-face{font-family:"Instrument Sans";src:url(../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
