@@ -49,18 +49,23 @@ VOICE = {
 
 # How the voices deliver, shared by both languages.
 #
-# `style` stays at 0.45 here. On guestgraph it is 0, because at 0.45 the model
+# `style` is 0 because of what it does to the ends of sentences. At 0.45 the model
 # over-articulates a word-final plosive into a release that detaches from the word - a stop
-# closure, then a burst of noise the ear takes for a click - and 0 shortens that release
-# from 120 ms to 20-70 ms. That finding was made on Jessica and Matilda, and these are
-# different voices on purpose, so it does not transfer by assumption. polish() below treats
-# the burst on the way to disk regardless of the setting, which is what makes leaving this
-# at 0.45 a decision rather than a postponement: audition before moving it.
+# closure, then a burst of noise the ear takes for a click. The finding was made on
+# guestgraph's voices; it was auditioned here before being adopted, because these voices are
+# different on purpose and the measurement did not transfer cleanly - on this repo's German
+# voice style 0 shortened a release from 170 ms to 125 ms, where on Jessica the same change
+# collapsed 120 ms to 35 ms.
+#
+# So the setting is not the guard it is on guestgraph, and polish() below still does the
+# work of treating what is left. What 0 buys here is the delivery: flatter, more even, and
+# the reason it was adopted. Anything above 0 trades that back - audition on one slide,
+# and listen to a whole clip rather than the last half-second, which is where style lives.
 #
 # It is in the cache key. Without that, editing it would leave every .sha looking current
 # while the audio still carried the old delivery.
 SETTINGS = {"stability": 0.4, "similarity_boost": 0.75,
-            "style": 0.45, "use_speaker_boost": True}
+            "style": 0.0, "use_speaker_boost": True}
 
 
 def deck_paths(slug):
