@@ -68,7 +68,8 @@ const PAGES = [
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
   { path: "/principles/", seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
-    contains: ["One model, true everywhere", "Values", "generated from robertblust/mental-model"],
+    contains: ["One model, true everywhere", "Values", "Generated from"],
+    links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,

@@ -113,6 +113,15 @@ function render({ vision, values }) {
     out.push(`      </article>`);
   }
   out.push(`    </section>`);
+  // Provenance, generated so it cannot go stale: which repository, which commit, and what that
+  // repository is an instance of. The CompanyGraph link is the disambiguation — the name invites
+  // the reading that it resolves company records, and it does not.
+  out.push(``);
+  out.push(`    <p class="derived">Generated from ` +
+    `<a href="https://github.com/${repo}">${repo}</a>@${commit.slice(0, 7)} — ` +
+    `<code class="mono">model/vision.md</code> and <code class="mono">model/values/</code>. ` +
+    `That repository is an instance of <a href="https://companygraph.io/">CompanyGraph</a>, ` +
+    `a meta-model for describing a company as a graph of Markdown.</p>`);
   return out.join("\n");
 }
 
