@@ -38,6 +38,13 @@ jobs:
         run: npm run test:og
       - name: Cards still show the page they render
         run: npm run og:check
+      # The principles page is generated from the model, so a page edited by hand — or a model
+      # that moved without the page being rebuilt — is a drift this catches before it ships.
+      # Reads the pinned commit over the API; the token is only for the rate limit.
+      - name: The principles page still matches the model
+        run: npm run principles:check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
