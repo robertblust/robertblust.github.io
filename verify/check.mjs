@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -39,7 +39,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -192,6 +192,42 @@ const CHECKS = {
       return out;
     });
     return bad.length ? bad.join("; ") : null;
+  },
+  // The nav is one row across three sites, and it is written by hand on every page, so it
+  // drifted: blust.ch put Principles after Talks on four pages and before it on the fifth,
+  // and companygraph.io led with Talks while its siblings did not. Nothing caught it — the
+  // items were all present, and `contains` does not see order.
+  //
+  // The family's order, left to right, is Ideas, Principles, Model, Example, Talks, Billing,
+  // Privacy, then the language switcher. Read right to left it is the reverse, which is how
+  // the rule was given: the switcher sits at the edge, and the further left an item is, the
+  // more it is the site's own subject. A site skips what it does not have; no site may
+  // reorder what it does have, and nothing outside the list may appear in the row.
+  //
+  // Privacy is on the list but lives in the footer on all three sites today. That is a
+  // placement, not an exception: if it ever moves into the nav, this is where it goes.
+  //
+  // This function is a fourth copy, kept identical in all three suites the way the head
+  // contract and the no-new-tab check are. A rule that is one row for a visitor is worth
+  // asserting the same way everywhere.
+  async navOrder(page) {
+    const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
+    return await page.evaluate(order => {
+      const nav = document.querySelector("nav");
+      if (!nav) return "there is no nav";
+      const items = [...nav.querySelectorAll("a")].map(a => a.textContent.trim());
+      const unknown = items.filter(i => !order.includes(i));
+      if (unknown.length) return "not named by the order rule: " + unknown.join(", ");
+      const want = order.filter(i => items.includes(i));
+      if (items.join(" ") !== want.join(" "))
+        return `order is ${items.join(" · ")}; the rule is ${want.join(" · ")}`;
+      // The switcher is the right-hand edge of the row, so nothing may follow it.
+      const kids = [...nav.children];
+      const sw = kids.findIndex(el => el.id === "langind" || el.classList.contains("langind"));
+      if (sw === -1) return "the language switcher is not in the nav";
+      if (sw !== kids.length - 1) return "something sits to the right of the language switcher";
+      return null;
+    }, ORDER);
   },
   async noNewTab(page) {
     const bad = await page.evaluate(() => {
