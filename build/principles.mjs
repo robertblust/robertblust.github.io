@@ -119,7 +119,7 @@ function render({ vision, values }) {
   out.push(`    </section>`);
   out.push(``);
   out.push(`    <section>`);
-  out.push(`      <h2>Values</h2>`);
+  out.push(`      <h2 data-de="Werte">Values</h2>`);
   for (const raw of values) {
     const x = parse(raw);
     out.push(`      <article class="value">`);
@@ -133,11 +133,19 @@ function render({ vision, values }) {
   // repository is an instance of. The CompanyGraph link is the disambiguation — the name invites
   // the reading that it resolves company records, and it does not.
   out.push(``);
-  out.push(`    <p class="derived">Generated from ` +
-    `<a href="https://github.com/${repo}">${repo}</a>@${commit.slice(0, 7)} — ` +
-    `<code class="mono">model/vision.md</code> and <code class="mono">model/values/</code>. ` +
-    `That repository is an instance of <a href="https://companygraph.io/">CompanyGraph</a>, ` +
-    `a meta-model for describing a company as a graph of Markdown.</p>`);
+  // The page's own words are bilingual like the rest of the site; only the model's stay in the
+  // one language it is written in, which is what the note above says. Static links inside
+  // `data-de` are the site's existing pattern — what must not go in there is anything a script
+  // rewrites, because the translated copy is one the script never reaches.
+  const link = `<a href="https://github.com/${repo}">${repo}</a>@${commit.slice(0, 7)}`;
+  const cg = `<a href="https://companygraph.io/">CompanyGraph</a>`;
+  const derivedEN = `Generated from ${link} — <code class="mono">model/vision.md</code> and ` +
+    `<code class="mono">model/values/</code>. That repository is an instance of ${cg}, ` +
+    `a meta-model for describing a company as a graph of Markdown.`;
+  const derivedDE = `Erzeugt aus ${link} — <code class="mono">model/vision.md</code> und ` +
+    `<code class="mono">model/values/</code>. Dieses Repository ist eine Instanz von ${cg}, ` +
+    `einem Meta-Modell, das ein Unternehmen als Graph aus Markdown beschreibt.`;
+  out.push(`    <p class="derived" data-de="${esc(derivedDE)}">${derivedEN}</p>`);
   return out.join("\n");
 }
 
