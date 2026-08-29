@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -39,7 +39,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -303,6 +303,64 @@ const CHECKS = {
     // Leave the page as this check found it, for whatever runs next.
     await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return problems.length ? problems.join("; ") : null;
+  },
+  // The row at phone widths. Every page in the three sites used to answer this its own way
+  // — some wrapped the bar, some wrapped the nav, and the two whose `.bar` carried no
+  // `flex-wrap` let the wordmark itself break, so "rb Robert Blust" arrived on two lines.
+  //
+  // Checked at 360px, which is narrower than the phones in the analytics and wide enough
+  // that nothing here is a special case. The wordmark is measured against its own mark: if
+  // the name has dropped below it the brand is twice the mark's height, and no tolerance is
+  // needed to see it.
+  //
+  // The switcher is asserted visible on purpose. It would be easy to sweep it into the menu
+  // with everything else, and for a bilingual audience that is the wrong trade — a language
+  // control someone cannot find costs more than the tap it saves.
+  async mobileNav(page, spec) {
+    const problems = [];
+    await page.setViewportSize({ width: 360, height: 640 });
+    try {
+      await page.goto(spec.absolute, { waitUntil: "networkidle" });
+      const shut = await page.evaluate(() => {
+        const q = s => document.querySelector(s);
+        const seen = el => el && getComputedStyle(el).display !== "none";
+        const brand = q(".brand").getBoundingClientRect().height;
+        const mark = q(".brand svg").getBoundingClientRect().height;
+        return {
+          brand: Math.round(brand), mark: Math.round(mark),
+          wide: document.documentElement.scrollWidth > window.innerWidth,
+          links: seen(q("#navlinks")), burger: seen(q("#burger")), seg: seen(q("#langind")),
+        };
+      });
+      if (shut.brand > shut.mark)
+        problems.push(`the wordmark broke: the brand is ${shut.brand}px against a ${shut.mark}px mark`);
+      if (shut.wide) problems.push("the page scrolls sideways");
+      if (shut.links) problems.push("the links are still in the row at 360px");
+      if (!shut.burger) problems.push("there is no menu button");
+      if (!shut.seg) problems.push("the language control is not on the bar");
+
+      // Only drive the button if it is there to be driven: clicking a hidden one waits the
+      // full timeout and reports that instead of the thing actually wrong.
+      if (shut.burger) {
+      await page.click("#burger");
+      const open = await page.evaluate(() => ({
+        links: getComputedStyle(document.getElementById("navlinks")).display !== "none",
+        flag: document.getElementById("burger").getAttribute("aria-expanded"),
+      }));
+      if (!open.links) problems.push("pressing the button did not open the menu");
+      if (open.flag !== "true") problems.push(`the button reports aria-expanded=${open.flag} while open`);
+
+      await page.keyboard.press("Escape");
+      const closed = await page.evaluate(() =>
+        getComputedStyle(document.getElementById("navlinks")).display === "none");
+      if (!closed) problems.push("Escape did not close the menu");
+      }
+    } finally {
+      // Every other check runs at the desktop size; leave the page as they expect it.
+      await page.setViewportSize({ width: 1280, height: 720 });
+      await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    }
     return problems.length ? problems.join("; ") : null;
   },
   async navOrder(page) {
