@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -27,19 +27,19 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/mental-model/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
+  { path: "/talks/mental-model/", carriesLang: true, seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
     transport: true, zeroBased: true,  card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/essential-complexity/", seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
+  { path: "/talks/essential-complexity/", carriesLang: true, seo: true, noNewTab: true, footerVersion: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
     transport: true, zeroBased: true,  card: true, brandMark: true,
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -253,6 +253,57 @@ const CHECKS = {
       }
       return null;
     });
+  },
+  // Three domains, three localStorages, one preference. A visitor reading German on one
+  // site and following a link to a sibling used to arrive in English, because an origin
+  // cannot see what another origin stored. The language travels in the link instead.
+  //
+  // Three things have to hold, and the middle one is the reason the implementation looks
+  // the way it does. A family link can live inside a data-de attribute, and switching
+  // language replaces that element whole, so an href decorated at load would be thrown
+  // away by the first toggle; decorating on mousedown survives it, and keeps the param
+  // out of the served markup — nothing crawlable or copyable carries it.
+  //
+  // Driven with mousedown rather than click on purpose: it is the event that fires before
+  // the browser follows a link, so it can be dispatched without navigating away.
+  async carriesLang(page, spec) {
+    const problems = [];
+    await page.goto(spec.absolute + "?lang=de", { waitUntil: "networkidle" });
+    const arrived = await page.evaluate(() => ({
+      lang: document.documentElement.lang, search: location.search,
+    }));
+    if (arrived.lang !== "de")
+      problems.push(`arriving with ?lang=de left the page in ${arrived.lang}`);
+    if (/lang=/.test(arrived.search))
+      problems.push(`the param stayed in the address bar as ${JSON.stringify(arrived.search)}`);
+
+    const probe = await page.evaluate(() => {
+      const pick = test => [...document.querySelectorAll("a[href]")].find(a => {
+        try { return test(new URL(a.href, location.href)); } catch (e) { return false; }
+      });
+      const press = a => {
+        const before = a.getAttribute("href");
+        a.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+        return { before, after: a.getAttribute("href") };
+      };
+      const FAMILY = /^(www\.)?(blust\.ch|companygraph\.io|guestgraph\.io)$/;
+      const out = { away: null, home: null };
+      const away = pick(u => u.origin !== location.origin && FAMILY.test(u.hostname));
+      if (away) out.away = press(away);
+      const home = pick(u => u.origin === location.origin);
+      if (home) out.home = press(home);
+      return out;
+    });
+    // A page with no link to a sibling domain simply has nothing to carry.
+    if (probe.away && !/[?&]lang=de(&|$)/.test(probe.away.after))
+      problems.push(`a link to ${probe.away.before} did not pick the language up: ${probe.away.after}`);
+    if (probe.home && probe.home.after !== probe.home.before)
+      problems.push(`a same-origin link was rewritten to ${probe.home.after}; it shares this storage already`);
+
+    // Leave the page as this check found it, for whatever runs next.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return problems.length ? problems.join("; ") : null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
