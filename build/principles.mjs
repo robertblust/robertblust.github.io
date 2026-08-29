@@ -88,11 +88,27 @@ const NOTE_DE = "Aus dem Modell erzeugt: Die Worte unten sind seine eigenen — 
   "Zweitfassung wäre eine zweite Sache, die wahr bleiben muss — genau das, wogegen diese Seite " +
   "argumentiert.";
 
+// The title pages here all break the headline the same way: a muted first clause, then the rest
+// in weight and its last word in the accent. The split is presentation, not content, so it is
+// derived from the string rather than stored beside it — at the first comma, which is where this
+// kind of sentence turns. A headline without one keeps its whole self in the second half, which
+// is the same treatment with an empty first clause rather than a different one.
+function headline(name) {
+  const i = name.indexOf(",");
+  const head = i === -1 ? "" : name.slice(0, i + 1);
+  const rest = (i === -1 ? name : name.slice(i + 1)).trim();
+  const words = rest.split(" ");
+  const last = words.pop();
+  const lead = words.length ? esc(words.join(" ")) + " " : "";
+  return (head ? `<span class="r70">${esc(head)}</span>` : "") +
+         `<span class="rcl">${lead}<em>${esc(last)}</em></span>`;
+}
+
 function render({ vision, values }) {
   const v = parse(vision);
   const out = [];
   out.push(`    <div class="title">`);
-  out.push(`      <h1>${inline(v.name)}</h1>`);
+  out.push(`      <h1>${headline(v.name)}</h1>`);
   out.push(`      <p class="tagline">${inline(v.tagline)}</p>`);
   out.push(`      <p class="note" data-de="${esc(NOTE_DE)}">${esc(NOTE_EN)}</p>`);
   out.push(`    </div>`);
