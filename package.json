@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "blust.ch — Robert Blust: profile page and talks.",
+  "description": "blust.ch \u2014 Robert Blust: profile page and talks.",
   "scripts": {
     "serve": "python3 -m http.server 8000",
     "verify": "node verify/check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
     "pdf": "node export-pdf.mjs",
     "og": "node export-og.mjs",
-    "og:check": "node og-check.mjs"
+    "og:check": "node og-check.mjs",
+    "principles": "node build/principles.mjs",
+    "principles:check": "node build/principles.mjs --check"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",

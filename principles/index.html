@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy — Robert Blust</title>
-<meta id="metadesc" name="description" content="This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print.">
+<title>Principles — Robert Blust</title>
+<meta id="metadesc" name="description" content="Where this work is going and what it holds to. Generated from the model it describes, not written twice.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://blust.ch/privacy/">
+<link rel="canonical" href="https://blust.ch/principles/">
 
-<meta property="og:title" content="Privacy — Robert Blust">
-<meta property="og:description" content="This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print.">
+<meta property="og:title" content="Principles — Robert Blust">
+<meta property="og:description" content="Where this work is going and what it holds to. Generated from the model it describes, not written twice.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Robert Blust">
-<meta property="og:url" content="https://blust.ch/privacy/">
-<meta property="og:image" content="https://blust.ch/privacy/og.png">
+<meta property="og:url" content="https://blust.ch/principles/">
+<meta property="og:image" content="https://blust.ch/principles/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="This site collects nothing.">
+<meta property="og:image:alt" content="One model, true everywhere.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,17 @@
     .tagline{max-width:100%}
   }
 </style>
+<style>
+  .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
+  .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem)}
+  .value .tagline{margin-top:.5rem; color:var(--c-firm); max-width:62ch}
+  .value p{margin-top:.9rem; color:var(--dim); max-width:70ch; line-height:1.6}
+  .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
+           letter-spacing:.06em; color:var(--dim)}
+</style>
 </head>
+
 <body>
 
 <div class="shell">
@@ -221,8 +231,8 @@
       <nav>
         
         <a href="../ideas/" data-de="Ideen">Ideas</a>
+        <a href="./" aria-current="page" data-de="Prinzipien">Principles</a>
         <a href="../talks/" data-de="Vorträge">Talks</a>
-        <a href="../principles/" data-de="Prinzipien">Principles</a>
         <button class="langind" id="langind" type="button" aria-label="Sprache wechseln — switch language"><span id="lde">DE</span> · <span id="len">EN</span></button>
       </nav>
     </div>
@@ -231,54 +241,58 @@
 
 <main>
   <div class="shell">
+    <!-- principles:start -->
     <div class="title">
-      <h1 data-de="<span class='r70'>Diese Seite sammelt</span><span class='rcl'><em>nichts</em>.</span>"><span class="r70">This site collects</span><span class="rcl"><em>nothing</em>.</span></h1>
-      <p class="tagline" data-de="Keine Cookies, keine Statistik, keine Anfrage an Dritte. Die Liste dessen, was Ihren Browser verlässt, ist kurz genug, um sie hier abzudrucken.">No cookies, no analytics, no third-party requests. The list of what leaves your browser is short enough to print here.</p>
-      <p class="note" data-de="Eine Ausnahme, und sie steht uns nicht zu, sie zu entfernen: GitHub liefert diese Seiten aus und sieht dabei — wie jeder Hoster — die Anfrage, die sie holt.">One exception, and it is not ours to remove: GitHub serves these pages and, like any host, sees the request that fetches them.</p>
+      <h1>One model, true everywhere</h1>
+      <p class="tagline">Whoever asks about my work — a person, a search engine, an agent — reaches the same answer, because every surface they can reach derives from one model I keep, and no claim in it stands without its evidence.</p>
     </div>
 
     <section>
-      <h2 data-de="Was diese Seite tut">What this site does</h2>
-      <p class="lede" data-de="Alles, was diese Seite braucht, kommt von blust.ch — auch die Schriften. Nichts wird anderswo geholt, also erfährt kein Dritter, dass Sie hier waren.">Everything this page needs comes from blust.ch, fonts included. Nothing is fetched from anywhere else, so no third party learns that you were here.</p>
-      <!-- no data-de: this is the value itself, and it says the same thing in either language.
-           Both cases are shown because pinning one would be wrong the moment you switch. -->
-      <p class="unit mono">localStorage: rb-lang = "de" | "en"</p>
-      <p class="lede" data-de="Das ist alles, was gespeichert wird: Ihre Sprachwahl, zwei Buchstaben, damit die nächste Seite sie kennt. Sie erreicht keinen Server und identifiziert niemanden.">That is everything that gets stored: your choice of language, two letters, so the next page knows it. It reaches no server and identifies nobody.</p>
-      <div class="cols">
-        <div class="card never wide">
-          <h3 data-de="Gar nicht erst verwendet">Not used at all</h3>
-          <ul>
-            <li><b data-de="Cookies">Cookies</b><i data-de="Keine, keiner Art. Es gibt kein Banner, weil es nichts zuzustimmen gibt.">None, of any kind. There is no banner because there is nothing to consent to.</i></li>
-            <li><b data-de="Statistik und Tracking">Analytics</b><i data-de="Nichts zählt Sie, und niemandem wird gemeldet, dass Sie hier waren.">Nothing counts you, and nobody is told that you were here.</i></li>
-            <li><b data-de="Anfragen an Dritte">Third-party requests</b><i data-de="Schriften, Bilder und Stile kommen alle von diesem Ursprung. Kein CDN sieht Ihre Adresse.">Fonts, images and styles all come from this origin. No CDN sees your address.</i></li>
-            <li><b data-de="Formulare und Konten">Forms and accounts</b><i data-de="Nichts auszufüllen, nichts anzumelden, nichts zu speichern.">Nothing to fill in, nothing to sign up for, nothing to store.</i></li>
-            <li><b data-de="Wiedererkennung">Fingerprinting</b><i data-de="Es wird nicht versucht, Sie über Besuche hinweg wiederzuerkennen. Der Sprachschlüssel ist kein Merkmal dafür.">No attempt is made to recognize you across visits. The language key is not an identifier.</i></li>
-          </ul>
-        </div>
-      </div>
+      <h2>What it means</h2>
+      <p class="lede">Everything public about my work is derived rather than maintained. One model holds the facts: what I have built, which capabilities I claim and on what evidence, and what I hold to. The CV and its per-application dossiers, the website and its talks, the LinkedIn profile and the loadable skill bundle are outputs of it. When two of them disagree the model is what gets corrected and the surfaces are rebuilt; none of them is edited on its own.</p>
+      <p class="lede">The claim is not that any single surface is good. It is that they agree — because someone asking about me increasingly asks a machine, and a machine assembling an answer from contradictory sources produces either mush or a confident error. I would know this holds when the same question put to a person, to a search engine and to an agent comes back the same.</p>
+      <p class="lede">The scope is the work. Private life is out of scope by design rather than by omission: the schemas have nowhere to put it, which is a stronger guarantee than a promise.</p>
     </section>
 
     <section>
-      <h2 data-de="Was hier sonst noch passiert">What else happens here</h2>
-      <p class="lede" data-de="Nichts. Diese Seite verkauft nichts, misst nichts und betreibt nichts im Hintergrund — sie zeigt Vorträge und was ich tue.">Nothing. This site sells nothing, measures nothing and runs nothing in the background — it shows talks and what I do.</p>
-      <div class="rules">
-        <p data-de="<b>Die Vorträge sind Dateien.</b> Die Decks und die PDFs liegen auf dieser Domain und werden von hier ausgeliefert. Kein Video-Einbetter, kein Player, der anderswo nachfragt."><b>The talks are files.</b> The decks and the PDFs sit on this domain and are served from here. No video embed, no player phoning somewhere else.</p>
-        <p data-de="<b>Es gibt kein Formular und kein Konto.</b> Nichts auszufüllen, nichts anzumelden — also auch nichts, das gespeichert würde."><b>There is no form and no account.</b> Nothing to fill in, nothing to sign up for — so nothing that could be stored.</p>
-        <p data-de="<b>Wenn Sie mir schreiben, schreiben Sie mir.</b> Kontakt läuft über die Wege im Fuss dieser Seite, bei den Anbietern, die dort stehen. Diese Seite selbst nimmt nichts entgegen."><b>If you write to me, you write to me.</b> Contact runs through the links in the footer, at the providers named there. This site itself receives nothing.</p>
-      </div>
+      <h2>Values</h2>
+      <article class="value">
+        <h3>Build the alternative before making the point</h3>
+        <p class="tagline">Naming what is broken is free, so it is not a position until something works differently.</p>
+        <p>I do not publish a criticism until I have built the thing that answers it, and then the working alternative is what I lead with — the argument comes second and can be lost without the point collapsing. Where I cannot build it, I say the problem is real and leave the criticism unmade.</p>
+        <p>I never let a complaint stand as a position.</p>
+      </article>
+      <article class="value">
+        <h3>Decide well over build fast</h3>
+        <p class="tagline">AI moved the constraint from building quickly to deciding correctly; the decision is the work.</p>
+        <p>I write the decision down before the code — with the alternatives that lost and why — so the next person can disagree with a reason rather than a rewrite. I spend the time that fast building saves on choosing well, because the constraint moved there.</p>
+        <p>I never ship a feature in a day and argue about it for a quarter because nobody can say what it was for.</p>
+      </article>
+      <article class="value">
+        <h3>Grow the people with the platform</h3>
+        <p class="tagline">A platform that outgrows the team that runs it is a liability with good uptime.</p>
+        <p>I grow the organization as deliberately as the platform — hiring, practices, ownership — so that every part of the system has someone who could be woken up for it and would know what to do. I judge a platform by the team that can run it without me.</p>
+        <p>I never let five people know everything while twenty wait for them.</p>
+      </article>
+      <article class="value">
+        <h3>Model it before you build it</h3>
+        <p class="tagline">A business described as concepts and capabilities is one that people and AI can both act inside of.</p>
+        <p>I keep a written model — domains, capabilities, processes, rules — that the code, the org chart and the agents all refer back to, and I keep it where the people who own the facts can edit it. I build from the model, not beside it.</p>
+        <p>I never let the model live in three heads and a slide deck, with every system encoding a slightly different version of it.</p>
+      </article>
+      <article class="value">
+        <h3>Production is the finish line</h3>
+        <p class="tagline">A platform counts when it runs for customers under real security and compliance obligations, not when the demo works.</p>
+        <p>I own reliability, incident management and the audit trail as part of building the thing. I treat ISO 27001 and GDPR as design inputs, not a form to fill in after. I call it done when it runs for customers under real obligations, not when the demo works.</p>
+        <p>I never meet a launch date with a system nobody is on call for.</p>
+      </article>
     </section>
+    <!-- principles:end -->
 
-    <section>
-      <h2 data-de="Wer das betreibt">Who runs this</h2>
-      <div class="rules">
-        <p data-de="Diese Seite gehört <a href='https://blust.ch/'>Robert Blust</a> — Software Engineer und Architekt. Sie ist keine Firma und verkauft nichts.">This site belongs to <a href="https://blust.ch/">Robert Blust</a> — software engineer and architect. It is not a company and it sells nothing.</p>
-        <p data-de="Ein Impressum gibt es noch nicht, und das ist Absicht statt Versäumnis: Es gibt hier nichts zu kaufen, also gibt es kein Geschäft, an das eines gehören würde.">There is no imprint yet, and that is deliberate rather than an omission: nothing here can be bought, so there is no transaction for one to belong to.</p>
-      </div>
-    </section>
+    <p class="derived">generated from robertblust/mental-model · model/vision.md and model/values/</p>
   </div>
 </main>
 
-<div class="shell">
   <footer>
     <span><a href="https://github.com/robertblust">github.com/robertblust</a></span>
     <span><a href="https://www.linkedin.com/in/robertblust/">linkedin.com/in/robertblust</a></span>
@@ -300,10 +314,10 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Datenschutz — Robert Blust",
-         desc:"Diese Seite setzt keine Cookies, führt keine Statistik und stellt keine Anfragen an Dritte. Was den Browser verlässt, ist kurz genug, um es hier abzudrucken." },
-    en:{ title:"Privacy — Robert Blust",
-         desc:"This site sets no cookies, runs no analytics and makes no third-party requests. The list of what leaves your browser is short enough to print." }
+    de:{ title:"Prinzipien — Robert Blust",
+         desc:"Wohin diese Arbeit geht und woran sie sich hält. Erzeugt aus dem Modell, das sie beschreibt — nicht zweimal geschrieben." },
+    en:{ title:"Principles — Robert Blust",
+         desc:"Where this work is going and what it holds to. Generated from the model it describes, not written twice." }
   };
 
   function applyLang(){

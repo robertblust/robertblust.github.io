@@ -64,6 +64,15 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, internalLinks: true },
+  // Generated from the model, so what it asserts is the shape of the page and one line of the
+  // content — the words themselves are `npm run principles:check`'s business, and asserting
+  // them twice would mean editing this file every time a value is written.
+  { path: "/principles/", seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+    contains: ["One model, true everywhere", "Values", "generated from robertblust/mental-model"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, internalLinks: true },
 ];
 
 const CHECKS = {
