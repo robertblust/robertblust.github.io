@@ -77,12 +77,24 @@ async function readModel() {
   return { vision: await get("model/vision.md"), values: await Promise.all(names.map((n) => get(`model/values/${n}`))) };
 }
 
+// The connective words are the page's, not the model's: the heading over the values, and the
+// note that says why these blocks do not switch language with the rest of the site. The model
+// owns the statements; this owns the frame around them.
+const NOTE_EN = "Generated from the model, so the words below are its own — and in the one " +
+  "language it is written in. The rest of this site is bilingual; a translated copy would be a " +
+  "second thing to keep true, which is what this page argues against.";
+const NOTE_DE = "Aus dem Modell erzeugt: Die Worte unten sind seine eigenen — und in der einen " +
+  "Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte " +
+  "Zweitfassung wäre eine zweite Sache, die wahr bleiben muss — genau das, wogegen diese Seite " +
+  "argumentiert.";
+
 function render({ vision, values }) {
   const v = parse(vision);
   const out = [];
   out.push(`    <div class="title">`);
   out.push(`      <h1>${inline(v.name)}</h1>`);
   out.push(`      <p class="tagline">${inline(v.tagline)}</p>`);
+  out.push(`      <p class="note" data-de="${esc(NOTE_DE)}">${esc(NOTE_EN)}</p>`);
   out.push(`    </div>`);
   out.push(``);
   out.push(`    <section>`);
