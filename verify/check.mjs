@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -39,7 +39,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -210,6 +210,50 @@ const CHECKS = {
   // This function is a fourth copy, kept identical in all three suites the way the head
   // contract and the no-new-tab check are. A rule that is one row for a visitor is worth
   // asserting the same way everywhere.
+  // One line runs through the middle of every word in the header — the wordmark, each nav
+  // item, and both language segments. It did not before: nav is a flex row, its links
+  // stretched to the row's height with their text at the top, and the language control sat
+  // 5px lower than the words beside it.
+  //
+  // Measured on the text, not the boxes. A box can be centred while the text inside it is
+  // not — that is exactly the bug this replaced, and a check comparing boxes would have
+  // called it aligned.
+  //
+  // Two tolerances, because there are two fonts. The nav items and the language segments
+  // are the same face at the same size, so they must agree to within half a pixel; that is
+  // the pair the fix was about, and a loose bound there proved useless — with the link box
+  // already symmetric, undoing `align-items:center` still landed inside 1px. The wordmark
+  // is a different face, and where a line box falls inside its em box is the font's
+  // business and the platform's, so it gets 1.5px and is judged against the row, not
+  // against a single item of it.
+  async headerBaseline(page) {
+    return await page.evaluate(() => {
+      const mid = el => {
+        const n = [...el.childNodes].find(x => x.nodeType === 3 && x.textContent.trim());
+        const r = document.createRange(); r.selectNodeContents(n || el);
+        const b = r.getBoundingClientRect(); return (b.top + b.bottom) / 2;
+      };
+      const row = [];
+      document.querySelectorAll("nav a").forEach(a => row.push([a.textContent.trim(), mid(a)]));
+      for (const id of ["lde", "len"]) {
+        const el = document.getElementById(id);
+        if (el) row.push([el.textContent.trim(), mid(el)]);
+      }
+      if (row.length < 2) return "the nav row has fewer texts than a row";
+      const vals = row.map(r => r[1]);
+      const base = vals.reduce((a, b) => a + b, 0) / vals.length;
+      const spread = Math.max(...vals) - Math.min(...vals);
+      if (spread > 0.5)
+        return `nav texts are ${spread.toFixed(2)}px apart: ` +
+          row.map(([n, v]) => `${n} ${(v - base >= 0 ? "+" : "") + (v - base).toFixed(2)}`).join(", ");
+      const mark = document.querySelector(".brand b");
+      if (mark) {
+        const d = mid(mark) - base;
+        if (Math.abs(d) > 1.5) return `the wordmark sits ${d.toFixed(2)}px off the nav row`;
+      }
+      return null;
+    });
+  },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
     return await page.evaluate(order => {
