@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -39,7 +39,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -162,6 +162,37 @@ const CHECKS = {
   //
   // This replaces `newTab`, which asserted the opposite. That function had already outlived
   // its last caller — no page spec named it — so it was asserting nothing at all.
+  // The footer is the same three links on every page, and it is copied by hand from a
+  // sibling when a page is added. Both ways that copy goes wrong shipped together on
+  // /principles/: the opening `<div class="shell">` was left behind, so the footer escaped
+  // the content column and sat flush against the viewport, and the privacy link came from
+  // the privacy page, where `./` is correct and `aria-current` is true — on any other page
+  // it points at itself and lies about where the visitor is.
+  //
+  // Neither is visible to a check that only reads text. The links are all present, the page
+  // renders, nothing 404s. What is wrong is where the footer sits and where one link goes,
+  // so those are what this asserts.
+  async footer(page) {
+    const bad = await page.evaluate(() => {
+      const f = document.querySelector("footer");
+      if (!f) return ["there is no footer"];
+      const out = [];
+      if (!f.closest(".shell")) out.push("footer is not inside .shell — it will not line up with the page");
+      const priv = [...f.querySelectorAll("a")]
+        .find(a => /^(privacy|datenschutz)$/i.test(a.textContent.trim()));
+      if (!priv) out.push("footer has no privacy link");
+      else {
+        const here = new URL(location.href).pathname.replace(/\/+$/, "/");
+        const to = new URL(priv.getAttribute("href"), location.href).pathname.replace(/\/+$/, "/");
+        if (to !== "/privacy/") out.push(`privacy link goes to ${to}, not /privacy/`);
+        const current = priv.hasAttribute("aria-current");
+        if (current && here !== "/privacy/") out.push("privacy link claims aria-current on a page that is not /privacy/");
+        if (!current && here === "/privacy/") out.push("privacy link is the current page and does not say so");
+      }
+      return out;
+    });
+    return bad.length ? bad.join("; ") : null;
+  },
   async noNewTab(page) {
     const bad = await page.evaluate(() => {
       const live = [...document.querySelectorAll('a[target="_blank"]')]
