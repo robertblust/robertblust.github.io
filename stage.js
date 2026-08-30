@@ -660,17 +660,21 @@
   // the other: one number would be clamped to the page's maximum every time the dialog closed,
   // and the reader's choice in the wider box would be lost on the way back. The default
   // differs for the same reason.
-  var CARD = {
-    page:  { key: "cg-stage-card",       fallback: 360 },
-    modal: { key: "cg-stage-card-modal", fallback: 400 }
-  };
+  var CARD = { page: { key: "cg-stage-card" }, modal: { key: "cg-stage-card-modal" } };
   var CARD_MIN = 280, CANVAS_MIN = 320;
   function cardMode(){ return modal.contains(stageEl) ? CARD.modal : CARD.page; }
+  // Nothing stored means half the box, not a fixed width: the two panes start equal and the
+  // reader decides from there. It is computed from the box in hand rather than carried as a
+  // number, so the page and the dialog each open even without either knowing the other's size.
+  function evenCard(){
+    var stage = stageEl.getBoundingClientRect().width;
+    var chrome = stage - stageEl.querySelector(".canvas").getBoundingClientRect().width - cardWidth();
+    return (stage - chrome) / 2;
+  }
   function storedCard(){
-    var mode = cardMode();
     var n = null;
-    try { n = parseInt(localStorage.getItem(mode.key), 10); } catch (e) {}
-    return n || mode.fallback;
+    try { n = parseInt(localStorage.getItem(cardMode().key), 10); } catch (e) {}
+    return n || evenCard();
   }
   var gutter = document.getElementById("gutter");
   function cardWidth(){ return stageEl.querySelector(".card").getBoundingClientRect().width; }
@@ -717,9 +721,8 @@
     // Double-click restores the default and forgets the stored one, the way a devtools split
     // does — otherwise the only way back to the original is to drag until it looks right.
     gutter.addEventListener("dblclick", function(){
-      var mode = cardMode();
-      try { localStorage.removeItem(mode.key); } catch (e) {}
-      setCard(mode.fallback, false); render();
+      try { localStorage.removeItem(cardMode().key); } catch (e) {}
+      setCard(evenCard(), false); render();
     });
     gutter.addEventListener("keydown", function(ev){
       var step = ev.key === "ArrowLeft" ? 16 : ev.key === "ArrowRight" ? -16 : 0;

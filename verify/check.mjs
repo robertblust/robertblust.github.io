@@ -525,6 +525,11 @@ const CHECKS = {
     const g = await page.$("#gutter");
     if (!g) return "there is no divider between the canvas and the card";
     const before = await width();
+    // With nothing stored the two panes start equal — the reader is shown both halves of the
+    // stage and decides from there, rather than being given a details column sized for the
+    // narrowest thing it ever has to hold.
+    if (Math.abs((await canvas()) - before) > 2)
+      return `the stage does not open even: canvas ${await canvas()}, card ${before}`;
 
     // The stage is taller than the window the suite runs at, so the handle's midpoint can sit
     // below the fold — a press aimed there lands on nothing and the drag silently does not
@@ -552,7 +557,9 @@ const CHECKS = {
       return `a stored width of 9000 left the canvas at ${await canvas()}px, under its ${CANVAS_MIN}px floor`;
 
     await page.dblclick("#gutter");
-    if ((await width()) !== before) return `double-click did not restore the default: ${await width()} vs ${before}`;
+    if (Math.abs((await width()) - before) > 2) return `double-click did not restore the even split: ${await width()} vs ${before}`;
+    if (Math.abs((await canvas()) - (await width())) > 2)
+      return `double-click left the panes uneven: canvas ${await canvas()}, card ${await width()}`;
     if (await page.evaluate(() => localStorage.getItem("cg-stage-card")))
       return "double-click restored the default but left the old width stored";
 

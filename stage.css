@@ -15,7 +15,11 @@
   /* Three columns: canvas, the handle between them, details. The details width is a custom
      property so one line of script can move it and every layout that reads it follows —
      including the dialog, which is the same .stage element moved, not a second one. */
-  .stage{--card-w:360px; margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
+  /* Half and half to begin with. The chrome between the panes is the handle plus the grid's
+     two gaps — 10 + 8 + 8 — so half of what is left is 50% minus 13px, and the script computes
+     the same number when it takes over. Declaring it here rather than only in the script means
+     the first paint is already even, instead of 360px for a frame and then a jump. */
+  .stage{--card-w:calc(50% - 13px); margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
          grid-template-columns:minmax(0,1fr) 10px var(--card-w); gap:.5rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
   /* No cursor at rest. The primary act on this canvas is clicking a node, not dragging the
