@@ -300,12 +300,16 @@
   var cbody = document.getElementById("cbody"), cfoot = document.getElementById("cfootlink");
   var modal = document.getElementById("stagemodal"), expandBtn = document.getElementById("expand");
   // Expand moves the stage itself into the dialog rather than rendering a copy into it, so
-  // every handler bound to #fig, #card and its links keeps working unchanged. figcapEl never
-  // moves, so it is the fixed anchor both elements are reinserted before on close — that
-  // makes the restore order-independent instead of relying on each other's remembered
-  // nextSibling, which the move itself would invalidate.
+  // every handler bound to #fig, #card and its links keeps working unchanged.
+  //
+  // A marker holds the place. It used to reinsert both elements before #figcap, on the
+  // reasoning that the caption never moves — true, but it assumed nothing else sits between
+  // the stage and the caption, and the moment a page put a line there (how to drag the
+  // drawing) the stage came back on the wrong side of it. A comment node left where the
+  // stage was cannot be wrong about what the page contains, because it is not a claim about
+  // the page at all.
   var stageHead = document.getElementById("stagehead"), stageEl = document.getElementById("stage");
-  var stageHome = stageHead.parentNode, figcapEl = document.getElementById("figcap");
+  var stageHome = stageHead.parentNode, stageMark = document.createComment("stage");
   var reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   var first = true;
   function dur(){ return (first || (reduce && reduce.matches)) ? 0 : 400; }
@@ -574,6 +578,9 @@
   }
 
   expandBtn.addEventListener("click", function(){
+    // Drop the marker where the stage stands before taking it away, so close has somewhere
+    // exact to put it back — in front of whatever followed it, not in front of the caption.
+    stageHome.insertBefore(stageMark, stageHead);
     modal.append(stageHead, stageEl);
     modal.showModal();
     refit();
@@ -584,12 +591,12 @@
   // what tells it apart from a click on the content the dialog contains.
   modal.addEventListener("click", function(ev){ if (ev.target === modal) modal.close(); });
   // One handler for every way the dialog closes — ×, Escape, backdrop click — because all
-  // three end in the native "close" event. figcapEl is the fixed point neither element ever
-  // leaves: inserting both before it restores stagehead-then-stage regardless of what moved
-  // in between.
+  // three end in the native "close" event. Both go back in front of the marker, in order,
+  // which puts them exactly where they were whatever else the page has around them.
   modal.addEventListener("close", function(){
-    stageHome.insertBefore(stageHead, figcapEl);
-    stageHome.insertBefore(stageEl, figcapEl);
+    stageHome.insertBefore(stageHead, stageMark);
+    stageHome.insertBefore(stageEl, stageMark);
+    if (stageMark.parentNode) stageMark.parentNode.removeChild(stageMark);
     refit();
     expandBtn.focus();
   });
