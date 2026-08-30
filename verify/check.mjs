@@ -13,7 +13,7 @@ const SITE = "https://blust.ch";
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
-  { path: "/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
              "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
@@ -39,7 +39,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
     internalLinks: true },
-  { path: "/talks/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -48,7 +48,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -57,7 +57,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -67,7 +67,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -77,7 +77,7 @@ const PAGES = [
   // The model page draws the same graph the example on companygraph.io draws, from this
   // person's own instance rather than the fictional one. `stage` is the check that the
   // drawing actually drew: the data block alone proves nothing rendered.
-  { path: "/model/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
+  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
     contains: ["A company of one", "drawn", "What is in it", "Generated from"],
     // The source link is not asserted here. The stage rewrites its href from the block's own
     // commit, so any literal in this list would be either the markup's placeholder (gone by
@@ -87,7 +87,7 @@ const PAGES = [
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
-    card: true, internalLinks: true, graph: "model-data" },
+    card: true, internalLinks: true, graph: "model-data", divider: true },
 ];
 
 const CHECKS = {
@@ -442,6 +442,54 @@ const CHECKS = {
     await click(from.id); await page.waitForTimeout(500);
     const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
     if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // Where you are and how you got here, in the drawing rather than only in the breadcrumb.
+    // `spine` was set on the ancestor chain and dropped before it reached the DOM, and the
+    // focused node wore the same colour as a hovered one, so the canvas said neither.
+    const context = await page.evaluate(() => ({
+      spines: document.querySelectorAll("#fig .own.spine").length,
+      ancestors: document.querySelectorAll("#fig .n.ancestor").length,
+      focusRing: (() => {
+        const f = document.querySelector("#fig .n.focus .sq, #fig .n.focus .box");
+        return f ? getComputedStyle(f).stroke : null;
+      })(),
+      hoverShares: (() => {
+        // the focus must not simply be what a pointer already does
+        const css = [...document.styleSheets].flatMap(s => { try { return [...s.cssRules]; } catch (e) { return []; } });
+        return css.some(r => r.selectorText && /\.n:hover .*\.n\.focus|\.n\.focus.*:hover/.test(r.selectorText));
+      })(),
+    }));
+    if (!context.spines) return "the path from the root to the focus is not drawn — no .own.spine";
+    if (!context.ancestors) return "no ancestor node is marked, so the path shows only as a line";
+    if (!context.focusRing || context.focusRing === "none")
+      return "the focused node carries no stroke of its own, so it reads as one more square";
+    if (context.hoverShares) return "the focus is styled in the same rule as :hover, so it cannot be told from a pointer";
+    // A line has to stop at the edge of the box it points at. The spine's ends were computed
+    // from a flat half-width, and a folder's box is drawn taller than a page's square while
+    // the focus is drawn larger than either — so a line into the focused folder ran six
+    // pixels inside it. Geometry rather than appearance: no end of a spine may sit strictly
+    // within any node's rectangle.
+    const inside = await page.evaluate(() => {
+      // Client coordinates on both sides, so nothing here parses a transform. Reading the
+      // translate out of the attribute worked on a freshly loaded page and silently stopped
+      // working after a click: d3 writes "translate(x y)" the first time and interpolates to
+      // "translate(x, y)" through a transition, and a regex expecting the first form matched
+      // nothing, put every node at the origin, and reported that all was well.
+      const boxes = [...document.querySelectorAll("#fig .n")].map((n) => ({
+        id: n.dataset.id, r: n.querySelector("rect").getBoundingClientRect(),
+      }));
+      const bad = [];
+      for (const p of document.querySelectorAll("#fig .own.spine")) {
+        const m = p.getScreenCTM();
+        const ends = [p.getPointAtLength(0), p.getPointAtLength(p.getTotalLength())]
+          .map((pt) => new DOMPoint(pt.x, pt.y).matrixTransform(m));
+        for (const pt of ends)
+          for (const b of boxes)
+            if (pt.x > b.r.left + 1 && pt.x < b.r.right - 1 && pt.y > b.r.top + 1 && pt.y < b.r.bottom - 1)
+              bad.push(`${b.id} (${pt.x.toFixed(0)},${pt.y.toFixed(0)})`);
+      }
+      return [...new Set(bad)];
+    });
+    if (inside.length) return `a spine ends inside a node instead of at its edge: ${inside.join(", ")}`;
     // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
     // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
     // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
@@ -488,6 +536,121 @@ const CHECKS = {
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
     if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
     return null;
+  },
+  // The details pane is draggable, because 360px is right for a folder's card and wrong for a
+  // profile claiming fifty-eight skills. Asserted through the behaviour a reader has, not the
+  // implementation: drag it, and the pane is wider and the width is remembered; double-click,
+  // and it is back to the default with nothing stored; and no drag may push the canvas under
+  // its floor, which is the failure that arithmetic ignoring the grid's gaps produced.
+  async divider(page, spec) {
+    const CANVAS_MIN = 320;
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
+    await page.reload({ waitUntil: "networkidle" });
+    const width = () => page.evaluate(() => Math.round(document.querySelector(".card").getBoundingClientRect().width));
+    const canvas = () => page.evaluate(() => Math.round(document.querySelector(".canvas").getBoundingClientRect().width));
+    const g = await page.$("#gutter");
+    if (!g) return "there is no divider between the canvas and the card";
+    const before = await width();
+    // With nothing stored the two panes start equal — the reader is shown both halves of the
+    // stage and decides from there, rather than being given a details column sized for the
+    // narrowest thing it ever has to hold.
+    if (Math.abs((await canvas()) - before) > 2)
+      return `the stage does not open even: canvas ${await canvas()}, card ${before}`;
+
+    // The stage is taller than the window the suite runs at, so the handle's midpoint can sit
+    // below the fold — a press aimed there lands on nothing and the drag silently does not
+    // happen. Bring it into view and aim at a point that is certainly on screen.
+    await page.$eval(".stage", (el) => el.scrollIntoView({ block: "center" }));
+    await page.waitForTimeout(150);
+    const box = await g.boundingBox();
+    const y = Math.min(box.y + box.height / 2, box.y + 60);
+    await page.mouse.move(box.x + box.width / 2, y);
+    await page.mouse.down();
+    await page.mouse.move(box.x - 160, y, { steps: 8 });
+    await page.mouse.up();
+    const dragged = await width();
+    if (!(dragged > before)) return `dragging the divider left did not widen the card: ${before} → ${dragged}`;
+    const stored = await page.evaluate(() => localStorage.getItem("stage-card"));
+    if (!stored) return "the width was not remembered after a drag";
+
+    await page.reload({ waitUntil: "networkidle" });
+    if (Math.abs((await width()) - dragged) > 2) return `the remembered width did not survive a reload: ${await width()} vs ${dragged}`;
+
+    // A stored width wider than the box must clamp, and the canvas keeps its floor.
+    await page.evaluate(() => localStorage.setItem("stage-card", "9000"));
+    await page.reload({ waitUntil: "networkidle" });
+    if ((await canvas()) < CANVAS_MIN)
+      return `a stored width of 9000 left the canvas at ${await canvas()}px, under its ${CANVAS_MIN}px floor`;
+
+    await page.dblclick("#gutter");
+    if (Math.abs((await width()) - before) > 2) return `double-click did not restore the even split: ${await width()} vs ${before}`;
+    if (Math.abs((await canvas()) - (await width())) > 2)
+      return `double-click left the panes uneven: canvas ${await canvas()}, card ${await width()}`;
+    if (await page.evaluate(() => localStorage.getItem("stage-card")))
+      return "double-click restored the default but left the old width stored";
+
+    // Drag is not the only way in: a control that needs a pointer is unreachable without one.
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    if (!((await width()) > before)) return "the divider does not respond to the keyboard";
+    const onPage = await width();
+
+    // Two boxes, two memories. The page gives the stage a column and the dialog gives it most
+    // of the window, so one number would be clamped to the page's maximum every time the
+    // dialog closed and the reader's choice in the wider box would be lost coming back.
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    const dialogDefault = await width();
+    if (dialogDefault === onPage)
+      return "the dialog opened at the page's width, so the two boxes share one memory";
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    const inDialog = await width();
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - onPage) > 2)
+      return `closing the dialog left the page at ${await width()}, expected its own ${onPage}`;
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - inDialog) > 2)
+      return `the dialog forgot its own width: ${await width()}, expected ${inDialog}`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+
+    await page.evaluate(() => { try { localStorage.removeItem("stage-card"); localStorage.removeItem("stage-card-modal"); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return null;
+  },
+  // The privacy page says "that is everything that gets stored" and then lists the keys. It
+  // was true until the divider started remembering its width, and nothing noticed — the claim
+  // is prose and the keys are in a script, so the two could only be compared by hand.
+  //
+  // This drives the page instead of reading it: every write to localStorage is recorded, the
+  // page is then made to do the things that write — switch language, move the divider — and
+  // each key that turns up must be named on the privacy page. A key the page does not declare
+  // is the failure; a key it declares and never writes is not, because a claim to store
+  // something is not a claim anyone is harmed by.
+  async storageKeys(page, spec) {
+    const declared = await (await fetch(new URL("/privacy/", spec.absolute).href)).text();
+    await page.addInitScript(() => {
+      window.__keys = [];
+      const real = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) { window.__keys.push(k); return real.call(this, k, v); };
+    });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    // The two things on any page that write: the language control, and the divider where the
+    // page has one.
+    if (await page.$("#lde")) { await page.click("#lde"); await page.click("#len"); }
+    if (await page.$("#gutter")) { await page.focus("#gutter"); await page.keyboard.press("ArrowLeft"); }
+    const written = await page.evaluate(() => [...new Set(window.__keys)]);
+    const undeclared = written.filter((k) => !declared.includes(k));
+    // Leave the page as the rest of the suite expects it, storage included.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    return undeclared.length
+      ? `writes ${undeclared.join(", ")}, which /privacy/ does not name`
+      : null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];
@@ -734,6 +897,38 @@ let failures = 0;
   const xml = res.ok ? await res.text() : "";
   if (!xml.includes(`<loc>${SITE}/</loc>`)) {
     console.log(`✗ ${BASE} is not serving ${SITE} — check what is on that port`);
+    failures++;
+  }
+}
+
+// The token block is a copy on every page, and until now only its version was checked. That
+// is how three of them came to be in circulation at once: the ideas page had lost its
+// indentation and sat at column zero, and two more wordings arrived minutes apart from the
+// same edit run twice. A version says which release a page claims to be on; it cannot say
+// whether the page actually carries that release.
+//
+// Compared against each other rather than a recorded hash, because a hash is a second thing
+// to keep in step and would drift the same way. What this cannot see is a sibling repository
+// — that is what the version is for, and the two together are the whole guarantee.
+//
+// The slice stops at the last shared declaration. A deck's `:root` continues with tokens of
+// its own, so the brace after it belongs to the file and not to the block.
+{
+  const START = /[ \t]*\/\* ─── design tokens · v\d+[\s\S]*?--c-path:#[0-9A-Fa-f]{6};\n/;
+  const seen = new Map();
+  for (const spec of PAGES) {
+    const res = await fetch(BASE + spec.path);
+    const html = res.ok ? await res.text() : "";
+    const m = html.match(START);
+    if (!m) { console.log(`✗ ${spec.path}  carries no design token block`); failures++; continue; }
+    const key = m[0];
+    if (!seen.has(key)) seen.set(key, []);
+    seen.get(key).push(spec.path);
+  }
+  if (seen.size > 1) {
+    const groups = [...seen.values()].sort((a, b) => b.length - a.length);
+    console.log(`✗ PAGES  ${seen.size} different token blocks are in circulation:`);
+    for (const g of groups) console.log(`    ${g.join(", ")}`);
     failures++;
   }
 }

@@ -195,6 +195,12 @@
   var K_MIN = 0.8;                                  // the camera's floor, one with the zoom's
 
   function markW(p){ return p.role === "focus" ? R_FOCUS : R_NODE; }
+  // Half the mark's height, which is not half its width for a folder: a folder's box is drawn
+  // 4px taller than a page's square so the two read as different shapes, and the spine has to
+  // stop at the edge that is actually there. It used a flat R_NODE for both ends, so a line
+  // into the focus — 4px wider and 2px taller again — ran six pixels inside its box, and a
+  // line out of any folder started two pixels inside that one.
+  function markH(p){ return markW(p) + (p.node.kind === "entity" ? 0 : 2); }
   function nameW(p){
     var per = p.node.kind === "root" ? CH_ROOT : p.node.kind === "folder" ? CH_MONO : CH_TEXT;
     return p.node.label.length * per;
@@ -354,8 +360,8 @@
   function shape(l, a, b){
     if (l.spine) {
       var x = a.x;
-      if (a.x === b.x) return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - R_NODE);
-      return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - 10) +
+      if (a.x === b.x) return "M" + x + " " + (a.y + markH(a)) + "V" + (b.y - markH(b));
+      return "M" + x + " " + (a.y + markH(a)) + "V" + (b.y - 10) +
              "Q" + x + " " + b.y + " " + (x + 10) + " " + b.y +
              "H" + (b.x - markW(b));
     }
@@ -375,7 +381,6 @@
     lsel.exit().classed("gone", true).style("pointer-events", "none")
         .transition().duration(D).style("opacity", 0).remove();
     lsel.enter().append("path")
-        .attr("class", function(d){ return d.kind === "own" ? "own" : "ref"; })
         .attr("data-from", function(d){ return d.from; })
         .attr("data-to", function(d){ return d.to; })
         .attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); })
@@ -383,6 +388,17 @@
     // An update always drives opacity/pointer-events back to their settled state, so an enter
     // fade interrupted by a second click within the transition window still finishes instead
     // of leaving the survivor translucent and unclickable.
+    // `spine` reaches the DOM now — it was set on the ancestor chain when the neighbourhood
+    // was built, used for geometry, and thrown away before it was drawn, so the path from the
+    // root to the focus looked like any other ownership line.
+    //
+    // Classed on the update, not on the enter. A link keyed from→to survives a click, and
+    // whether it is part of the spine depends on where the focus now is: the link into a
+    // folder is an ordinary line until you descend through it, at which point it becomes the
+    // path. Setting the class only where a path is created leaves every survivor wearing the
+    // answer to a question asked one focus ago.
+    lsel.merge(gLink.selectAll("path:not(.gone)"))
+        .attr("class", function(d){ return d.kind === "own" ? (d.spine ? "own spine" : "own") : "ref"; });
     lsel.style("pointer-events", null).transition().duration(D)
         .style("opacity", 1).attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); });
 
@@ -419,6 +435,7 @@
 
     var all = enter.merge(nsel);
     all.classed("focus", function(d){ return d.role === "focus"; })
+       .classed("ancestor", function(d){ return d.role === "ancestor"; })
        .attr("aria-current", function(d){ return d.role === "focus" ? "true" : null; });
     all.select("rect")
        .attr("class", function(d){ return d.node.kind === "entity" ? "sq" : "box"; })
@@ -583,6 +600,8 @@
     stageHome.insertBefore(stageMark, stageHead);
     modal.append(stageHead, stageEl);
     modal.showModal();
+    // The stage has changed boxes, so it changes memories with it.
+    setCard(storedCard(), false);
     refit();
   });
   document.getElementById("modalclose").addEventListener("click", function(){ modal.close(); });
@@ -597,6 +616,7 @@
     stageHome.insertBefore(stageHead, stageMark);
     stageHome.insertBefore(stageEl, stageMark);
     if (stageMark.parentNode) stageMark.parentNode.removeChild(stageMark);
+    setCard(storedCard(), false);
     refit();
     expandBtn.focus();
   });
@@ -629,6 +649,99 @@
   // eyebrows and the folder card are built here, after that pass, so they follow the flag.
   new MutationObserver(function(){ if (focused) { render(); showCard(focused); } })
     .observe(document.documentElement, { attributes:true, attributeFilter:["lang"] });
+
+  // ── the divider ───────────────────────────────────────────────────────────────────────
+  // The details pane is fixed at 360px, which is right for a folder's card and wrong for a
+  // profile claiming fifty-eight skills. A drag handle is what every two-pane tool a visitor
+  // already uses puts between them, so it is what this uses: drag, double-click to reset,
+  // arrow keys when focused.
+  //
+  // The width is remembered, and clamped on the way back in. A number dragged wide on a large
+  // monitor would otherwise swallow the canvas on a laptop, and the same clamp handles a
+  // window resized after the page loaded. The key is a constant here rather than the page's:
+  // this file is byte-identical on every site that draws a stage and knows none of their
+  // names, and localStorage is per-origin, so one name cannot collide with another site's.
+  // Two memories, because there are two boxes. The page gives the stage a ~980px column and
+  // the dialog gives it nearly the whole window, so a width that is right in one is wrong in
+  // the other: one number would be clamped to the page's maximum every time the dialog closed,
+  // and the reader's choice in the wider box would be lost on the way back. The default
+  // differs for the same reason.
+  var CARD = { page: { key: "stage-card" }, modal: { key: "stage-card-modal" } };
+  var CARD_MIN = 280, CANVAS_MIN = 320;
+  function cardMode(){ return modal.contains(stageEl) ? CARD.modal : CARD.page; }
+  // Nothing stored means half the box, not a fixed width: the two panes start equal and the
+  // reader decides from there. It is computed from the box in hand rather than carried as a
+  // number, so the page and the dialog each open even without either knowing the other's size.
+  function evenCard(){
+    var stage = stageEl.getBoundingClientRect().width;
+    var chrome = stage - stageEl.querySelector(".canvas").getBoundingClientRect().width - cardWidth();
+    return (stage - chrome) / 2;
+  }
+  function storedCard(){
+    var n = null;
+    try { n = parseInt(localStorage.getItem(cardMode().key), 10); } catch (e) {}
+    return n || evenCard();
+  }
+  var gutter = document.getElementById("gutter");
+  function cardWidth(){ return stageEl.querySelector(".card").getBoundingClientRect().width; }
+  function cardLimit(){
+    var stage = stageEl.getBoundingClientRect().width;
+    var canvas = stageEl.querySelector(".canvas").getBoundingClientRect().width;
+    // Everything between and around the two panes — the handle and the grid's gaps — measured
+    // rather than assumed. Subtracting a hard-coded handle width left the canvas 16px under
+    // its floor, because the grid has two gaps and the arithmetic knew about neither.
+    var chrome = stage - canvas - cardWidth();
+    // On a narrow box the floor wins and this collapses to one legal value, which is the
+    // honest answer rather than a negative one.
+    return Math.max(CARD_MIN, stage - CANVAS_MIN - chrome);
+  }
+  function setCard(px, remember){
+    var w = Math.round(Math.min(cardLimit(), Math.max(CARD_MIN, px)));
+    stageEl.style.setProperty("--card-w", w + "px");
+    if (remember) { try { localStorage.setItem(cardMode().key, String(w)); } catch (e) {} }
+    return w;
+  }
+  if (gutter) {
+    setCard(storedCard(), false);
+
+    var dragFrom = 0, dragWidth = 0;
+    gutter.addEventListener("pointerdown", function(ev){
+      dragFrom = ev.clientX; dragWidth = cardWidth();
+      gutter.setPointerCapture(ev.pointerId);
+      gutter.classList.add("dragging");
+      ev.preventDefault();
+    });
+    gutter.addEventListener("pointermove", function(ev){
+      if (!gutter.classList.contains("dragging")) return;
+      // The details pane is on the right, so dragging left widens it.
+      setCard(dragWidth - (ev.clientX - dragFrom), false);
+      render();
+    });
+    function endDrag(){
+      if (!gutter.classList.contains("dragging")) return;
+      gutter.classList.remove("dragging");
+      setCard(cardWidth(), true);
+    }
+    gutter.addEventListener("pointerup", endDrag);
+    gutter.addEventListener("pointercancel", endDrag);
+    // Double-click restores the default and forgets the stored one, the way a devtools split
+    // does — otherwise the only way back to the original is to drag until it looks right.
+    gutter.addEventListener("dblclick", function(){
+      try { localStorage.removeItem(cardMode().key); } catch (e) {}
+      setCard(evenCard(), false); render();
+    });
+    gutter.addEventListener("keydown", function(ev){
+      var step = ev.key === "ArrowLeft" ? 16 : ev.key === "ArrowRight" ? -16 : 0;
+      if (!step) return;
+      ev.preventDefault();
+      setCard(cardWidth() + step, true); render();
+    });
+    // On resize, re-apply what was asked for rather than what is currently shown: a width
+    // clamped down on a narrow window should come back when the window has room again. The
+    // stored number is the preference; the rendered one is only what last fitted.
+    window.addEventListener("resize", function(){ setCard(storedCard(), false); });
+  }
+
   window.addEventListener("resize", function(){ if (focused) render(); });
   window.addEventListener("hashchange", function(){
     var id = decodeURIComponent(location.hash.slice(1));
