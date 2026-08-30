@@ -449,6 +449,8 @@ const CHECKS = {
     // back on close lands #fig inside .figure-section again — nothing here is a literal from
     // the example, every name comes from the block or from the DOM itself.
     if (!(await page.evaluate(() => !!document.getElementById("expand")))) return "#expand is missing";
+    const orderBefore = await page.evaluate(() =>
+      [...document.querySelector(".figure-section").children].map(e => e.id || e.className));
     const widthBefore = await page.evaluate(() => document.getElementById("fig").getBoundingClientRect().width);
     await page.click("#expand");
     await page.waitForTimeout(300);
@@ -471,6 +473,14 @@ const CHECKS = {
     if (await page.evaluate(() => !!document.querySelector("dialog[open]"))) return "Escape did not close dialog#stagemodal";
     const backInPlace = await page.evaluate(() => document.querySelector(".figure-section").contains(document.getElementById("fig")));
     if (!backInPlace) return "closing the dialog did not move #fig back inside .figure-section";
+    // Back inside is not back in place. The restore used to insert the stage before the
+    // caption, which was right only while nothing sat between them; the moment a page put a
+    // line there, closing the dialog left it above the drawing instead of below it. Compare
+    // the whole running order, not just containment.
+    const orderAfter = await page.evaluate(() =>
+      [...document.querySelector(".figure-section").children].map(e => e.id || e.className));
+    if (orderAfter.join(" ") !== orderBefore.join(" "))
+      return `closing the dialog left the figure section as ${orderAfter.join(" ")}, was ${orderBefore.join(" ")}`;
     const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
     for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
     ns = await nodes();
