@@ -74,6 +74,20 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
     card: true, internalLinks: true },
+  // The model page draws the same graph the example on companygraph.io draws, from this
+  // person's own instance rather than the fictional one. `stage` is the check that the
+  // drawing actually drew: the data block alone proves nothing rendered.
+  { path: "/model/", mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
+    contains: ["A company of one", "drawn", "What is in it", "Generated from"],
+    // The source link is not asserted here. The stage rewrites its href from the block's own
+    // commit, so any literal in this list would be either the markup's placeholder (gone by
+    // the time the check reads the DOM) or a commit that changes on every repin. `graph`
+    // asserts it instead, against the block itself.
+    links: ["https://companygraph.io/"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
+    card: true, internalLinks: true, graph: "model-data" },
 ];
 
 const CHECKS = {
@@ -362,6 +376,108 @@ const CHECKS = {
       await page.goto(spec.absolute, { waitUntil: "networkidle" });
     }
     return problems.length ? problems.join("; ") : null;
+  },
+  // The drawing, not just the data block: a block that parses proves nothing rendered.
+  // Copied whole from companygraph.io, where the same stage draws the example — it carries
+  // no literal from either page, deriving every id, name and count from the block itself,
+  // which is exactly why it transplants.
+  async graph(page, spec) {
+    const data = await page.evaluate((id) => JSON.parse(document.getElementById(id).textContent), spec.graph);
+    if (!data.entities) return "the data block is empty — run: npm run example";
+    // The source link and its short commit are rewritten by the script from the block's own
+    // commit, so a stale generator that leaves the markup's placeholder in place would pass
+    // every other check here while pointing at the wrong tree.
+    // Which folder of the model repository the block came from is the page's to say, not
+    // this check's: `stage.js` reads it off #srclink's data-src, so the assertion reads it
+    // from the same place rather than carrying a second copy that could disagree.
+    const srcSub = await page.evaluate(() => document.getElementById("srclink").getAttribute("data-src"));
+    const srcHref = await page.evaluate(() => document.getElementById("srclink").getAttribute("href"));
+    const wantHref = `/tree/${data.commit}/${srcSub}`;
+    if (!srcHref.endsWith(wantHref)) return `source link is ${JSON.stringify(srcHref)}, expected it to end with ${JSON.stringify(wantHref)}`;
+    const srcCommit = await page.evaluate(() => document.getElementById("srccommit").textContent);
+    if (srcCommit !== data.commit.slice(0, 7)) return `source commit reads ${JSON.stringify(srcCommit)}, expected ${JSON.stringify(data.commit.slice(0, 7))}`;
+    const nodes = () => page.evaluate(() => Array.from(document.querySelectorAll("#fig .n")).map(n => ({ id: n.dataset.id, focus: n.classList.contains("focus") })));
+    const click = (id) => page.evaluate((id) => {
+      const n = document.querySelector(`#fig .n[data-id="${id}"]`);
+      if (n) n.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      return !!n;
+    }, id);
+    // A singular type has no folder (core 0.4.0, R6/R13): its one entity hangs off the root
+    // beside the folders, so it is counted here and never walked down to.
+    const singular = new Set(data.types.filter(t => !t.owner && !t.folder).map(t => t.type));
+    const roots = data.types.filter(t => !t.owner && t.folder).map(t => t.folder);
+    // The root is the identity entity where an instance has one, drawn as one node rather
+    // than two carrying the same name; the rest of the singular entities hang beside the
+    // folders.
+    const loose = data.entities.filter(e => singular.has(e.type) && e.id !== data.rootId);
+    let ns = await nodes();
+    if (!ns.find(n => n.id === "root" && n.focus)) return "initially the root is not the focus";
+    if (ns.length !== roots.length + loose.length + 1)
+      return `initially ${ns.length} nodes, expected root + ${roots.length} folders + ${loose.length} singular entities`;
+    for (const e of loose)
+      if (!ns.find(n => n.id === e.id)) return `${e.id} is a singular type's entity and is not drawn at the root`;
+    if (data.rootId && ns.find(n => n.id === data.rootId))
+      return `${data.rootId} is drawn beside the root it is`;
+    // The walk below descends to a folder, so it needs an edge that starts inside one.
+    const edge = data.edges.find(e => {
+      const f = data.entities.find(x => x.id === e.from);
+      return f && !singular.has(f.type);
+    });
+    if (!edge) return null;
+    const from = data.entities.find(e => e.id === edge.from);
+    const folder = from.id.slice(0, from.id.lastIndexOf("/"));
+    // Walk down to that folder one click at a time. The canvas is a neighbourhood, not a
+    // tree, so a folder four levels down is not on it until its parent is the focus — and
+    // every prefix of an id IS a node here, because an id is the thing's path on disk.
+    const parts = folder.split("/");
+    for (let i = 1; i <= parts.length; i++) {
+      const prefix = parts.slice(0, i).join("/");
+      if (!(await click(prefix))) return `${prefix} is not on the canvas at this point in the walk`;
+      await page.waitForTimeout(500);
+    }
+    ns = await nodes();
+    if (!ns.find(n => n.id === folder && n.focus)) return `clicking ${folder} did not focus it`;
+    if (!ns.find(n => n.id === "root")) return `focused ${folder}, but its ancestor root is gone`;
+    if (!ns.find(n => n.id === from.id)) return `focused ${folder}, but its child ${from.id} is not drawn`;
+    await click(from.id); await page.waitForTimeout(500);
+    const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
+    if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
+    // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
+    // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
+    // than a second rendering of them) and that the canvas really grew, then that the move
+    // back on close lands #fig inside .figure-section again — nothing here is a literal from
+    // the example, every name comes from the block or from the DOM itself.
+    if (!(await page.evaluate(() => !!document.getElementById("expand")))) return "#expand is missing";
+    const widthBefore = await page.evaluate(() => document.getElementById("fig").getBoundingClientRect().width);
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    const modalOpen = await page.evaluate(() => !!document.querySelector("dialog#stagemodal[open]"));
+    if (!modalOpen) return "clicking #expand did not open dialog#stagemodal";
+    const holds = await page.evaluate(() => {
+      const dialog = document.getElementById("stagemodal");
+      return dialog.contains(document.getElementById("fig")) && dialog.contains(document.getElementById("card"));
+    });
+    if (!holds) return "dialog#stagemodal does not contain #fig and #card — Expand should move the stage, not copy it";
+    const widthAfter = await page.evaluate(() => document.getElementById("fig").getBoundingClientRect().width);
+    if (!(widthAfter > widthBefore)) return `#fig width in the dialog is ${widthAfter}, expected more than ${widthBefore} before Expand`;
+    const stillFocused = await page.evaluate((id) => {
+      const n = document.querySelector(`#fig .n[data-id="${id}"]`);
+      return !!n && n.classList.contains("focus");
+    }, from.id);
+    if (!stillFocused) return `${from.id} is no longer the focus after Expand`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+    if (await page.evaluate(() => !!document.querySelector("dialog[open]"))) return "Escape did not close dialog#stagemodal";
+    const backInPlace = await page.evaluate(() => document.querySelector(".figure-section").contains(document.getElementById("fig")));
+    if (!backInPlace) return "closing the dialog did not move #fig back inside .figure-section";
+    const drawn = await page.evaluate((id) => Array.from(document.querySelectorAll(`#fig .ref[data-from="${id}"]`)).map(p => p.dataset.to), from.id);
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!drawn.includes(x.to)) return `reference ${from.id} → ${x.to} is in the block but not drawn`;
+    ns = await nodes();
+    for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
+    const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
+    if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    return null;
   },
   async navOrder(page) {
     const ORDER = ["Ideas", "Principles", "Model", "Example", "Talks", "Billing", "Privacy"];

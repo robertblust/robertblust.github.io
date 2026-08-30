@@ -1,0 +1,147 @@
+/* The stage: the figure, the card and the expand dialog, shared by every page that draws a
+   data block (spec §4). Loaded relatively — `<link rel="stylesheet" href="../stage.css">` —
+   after the page's own inline <style>, so the page's tokens are defined before these rules
+   use them and a page rule and a stage rule of equal weight still resolve the way they did
+   when both lived in the one block. The page keeps `.figure-section`, `.figcap` and its
+   prose; everything below belongs to the stage and is edited in this one place.
+
+   The design tokens (--ground, --raise, --rule, --ink, --dim, --c-*) and the `.mono` face
+   come from the page: this file names them, it does not define them. */
+  /* The path line and Expand share a row: the control belongs beside the thing it acts on,
+     not tucked in the card's footer — Expand opens the whole stage, not just the card. */
+  .stagehead{display:flex; align-items:baseline; justify-content:space-between; gap:1rem}
+  .path{min-height:1.4em; font-size:.8rem; letter-spacing:.06em; color:var(--dim)}
+  .path b{color:var(--c-firm); font-weight:600}
+  .stage{margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
+         grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
+  .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
+  /* No cursor at rest. The primary act on this canvas is clicking a node, not dragging the
+     space between them, and a permanent grab hand advertises the wrong one — every canvas a
+     visitor already knows (Figma, Miro, tldraw, a map) shows an arrow until a pan actually
+     begins, and reserves the hand for the moment the thing is moving.
+     `.panning` is set by the stage on the first pointer move that pans, and cleared on
+     release, so the closed hand is feedback rather than an invitation. */
+  .canvas svg{display:block; width:100%; height:100%}
+  .canvas svg.panning{cursor:grabbing}
+  .recenter{position:absolute; right:.8rem; bottom:.8rem; font:inherit; font-size:.72rem; letter-spacing:.08em;
+            background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
+            padding:.35rem .6rem; cursor:pointer}
+  .recenter:hover, .recenter:focus-visible{border-color:var(--c-mid)}
+  .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
+  .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
+  .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem;
+         display:flex; align-items:center; justify-content:space-between; gap:1rem}
+  .cfoot a{font-family:"Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; color:var(--c-mid); text-decoration:none}
+  /* A control, never mono — .expand sits at the end of the path line, styled like .recenter
+     because both are things you can do to the stage, not things it reports. It is visible at
+     every focus: the whole stage — path, canvas and card — is always worth expanding, unlike
+     the card alone, which had nothing to show for the root or a folder. */
+  .expand{font:inherit; font-size:.72rem; letter-spacing:.08em; background:var(--raise);
+          color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
+          padding:.35rem .6rem; cursor:pointer; white-space:nowrap}
+  .expand:hover, .expand:focus-visible{border-color:var(--c-mid)}
+  .cbody .eyebrow{font-family:"Plex Mono",monospace; font-size:.72rem; letter-spacing:.08em; color:var(--dim); word-break:break-all}
+  .cbody h3{margin-top:.35rem; font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; letter-spacing:-.02em; font-size:1.45rem; line-height:1.1}
+  .cbody .tag{margin-top:.55rem; color:var(--dim); line-height:1.4}
+  .cbody dl{margin-top:1.1rem; display:grid; grid-template-columns:max-content 1fr; gap:.3rem .9rem; font-size:.9rem}
+  .cbody dt{font-family:"Plex Mono",monospace; font-size:.78rem; color:var(--dim); padding-top:.15rem}
+  .cbody h4{margin-top:1.2rem; font-family:"Plex Mono",monospace; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim)}
+  .cbody p{margin-top:.4rem; font-size:.93rem; line-height:1.5}
+  .cbody table{margin-top:.5rem; border-collapse:collapse; width:100%; font-size:.88rem}
+  .cbody th{text-align:left; font-family:"Plex Mono",monospace; font-weight:600; font-size:.72rem; letter-spacing:.06em; color:var(--dim); padding:.3rem .6rem .3rem 0; border-bottom:1px solid var(--rule)}
+  .cbody td{padding:.35rem .6rem .35rem 0; vertical-align:top; border-bottom:1px solid var(--rule)}
+  /* A caption addresses the table under it and is quoted out of the file it came from —
+     mono, because it is data, not this page's prose. Carries .mono for the face, which
+     the page defines, and this rule for the size and the space above its table. */
+  .cbody .caption{margin-top:1.1rem; font-size:.78rem; color:var(--dim); line-height:1.45}
+  .cbody .caption + table{margin-top:.35rem}
+  /* Inline code is a string quoted out of a file, so it takes the data face the page defines
+     as .mono. Sized in em against whatever it sits in — a browser's default monospace is a
+     size smaller than the prose around it — and allowed to break, because a path is one long
+     unbreakable word and the card is one column wide on a phone. break-word only breaks at a
+     boundary the browser would already choose for prose, so a short word like "Evidence"
+     stays whole; a table cell that is one long unbreakable token still wraps because there is
+     nowhere else to put it. */
+  .cbody code{font-size:.92em; overflow-wrap:break-word}
+  /* Prose, not a table cell, is where a path or URL actually runs long enough to need the
+     anywhere break — back to that here. */
+  .cbody p code{overflow-wrap:anywhere}
+  .cbody a.go{color:var(--c-mid); text-decoration:none; border-bottom:1px solid var(--c-weak); cursor:pointer}
+  .cbody .empty{color:var(--dim); line-height:1.5}
+  @media (max-width: 860px){
+    /* minmax(0,1fr), never a bare 1fr: a grid track sized `auto` at its floor takes the
+       widest min-content of the items in it, and the card's is a table of quoted field
+       names. On a phone that pushed the one column past the shell and scrolled the whole
+       document sideways. The card scrolls inside itself instead — .cbody already does. */
+    .stage{height:auto; grid-template-columns:minmax(0,1fr)}
+    .canvas{height:52vh; min-height:360px}
+    .card{height:44vh; min-height:300px}
+  }
+
+  /* The stage, expanded. Not a copy: Expand moves the same .stagehead and .stage elements
+     into this dialog, so the same #fig, #card and their handlers keep working, and moves
+     them back on close. A dialog in the browser's own top layer needs no z-index and closes
+     on Escape for free. */
+  /* max-width/max-height override the UA stylesheet's own dialog:modal clamp — Chromium's is
+     tighter than the 96vw/92vh this page asks for, and without this the dialog quietly
+     renders smaller than its own width/height rule says, defeating the point of Expand on a
+     narrow viewport, where every pixel back is a pixel the graph needed. */
+  dialog.modal{width:min(1500px,96vw); height:min(92vh,1000px);
+               max-width:96vw; max-height:92vh; padding:1rem 1.2rem 1.2rem;
+               margin:auto; border:1.5px solid var(--c-mid); border-radius:12px;
+               background:var(--raise); color:var(--ink); flex-direction:column}
+  dialog.modal[open]{display:flex}
+  dialog.modal::backdrop{background:rgba(0,0,0,.6)}
+  @keyframes modalIn{ from{opacity:0} to{opacity:1} }
+  dialog.modal[open]{animation:modalIn .15s ease-out}
+  @media (prefers-reduced-motion: reduce){
+    dialog.modal[open]{animation:none}
+  }
+  .modal .close{position:absolute; top:.6rem; right:.6rem; width:2.2rem; height:2.2rem;
+                display:flex; align-items:center; justify-content:center;
+                font:inherit; font-size:1.3rem; line-height:1; background:none; border:0;
+                border-radius:6px; color:var(--dim); cursor:pointer}
+  .modal .close:hover, .modal .close:focus-visible{color:var(--c-mid)}
+  /* Flex column so .stage takes whatever height .stagehead leaves — no hardcoded header
+     height to keep in step with the row's actual size. padding-right clears the × sitting in
+     the same corner, now that Expand (below) is the row's only other content. */
+  .modal .stagehead{flex:0 0 auto; padding-right:2.4rem}
+  /* Expand travels into the dialog with the rest of .stagehead, but there is nothing left
+     for it to do there — the × is the way out — and it would sit under the close button.
+     Turned into nothing rather than removed, so the same element still exists to move back. */
+  .modal .expand{display:none}
+  .modal .stage{flex:1 1 auto; min-height:0; height:auto; margin-top:.8rem;
+                grid-template-columns:minmax(0,1fr) 400px}
+  @media (max-width: 860px){
+    /* The fixed vh splits below are sized for the page, which can scroll; the dialog
+       cannot, so its two regions split the box's own remaining height instead — the card
+       at a fixed height that leaves it readable without dominating the box, the canvas
+       taking every pixel left over. A percentage split shrank the canvas below its
+       on-page size on a short viewport, which is Expand doing the opposite of its job. */
+    .modal .stage{display:flex; flex-direction:column; height:auto}
+    .modal .canvas{height:auto; flex:1 1 auto; min-height:200px}
+    .modal .card{height:auto; flex:0 0 230px; min-height:0}
+    /* On a phone .shell's own 7vw side padding is already narrow, so the dialog needs
+       tighter chrome of its own just to come out ahead on width, not merely on height. */
+    dialog.modal{width:98vw; max-width:98vw; padding:.7rem .8rem .8rem}
+  }
+  /* figure tokens. No @media (prefers-reduced-motion) block here on purpose: every node is
+     placed by its own transform attribute, and a blanket `transform:none !important` would
+     not cancel a displacement, it would replace the attribute-derived position and collapse
+     the figure onto (0,0). Reduced motion is a transition duration of 0 ms in the script,
+     which lands on exactly the same drawing. */
+  #fig .own{fill:none; stroke:var(--c-weak); stroke-width:2; stroke-linecap:square}
+  #fig .ref{fill:none; stroke:var(--c-mid); stroke-width:1.6; stroke-dasharray:5 5}
+  #fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
+  #fig .sq{fill:var(--c-firm)}
+  #fig .n{cursor:pointer}
+  #fig .n:hover .box, #fig .n:focus-visible .box, #fig .n.focus .box{stroke:var(--c-mid)}
+  #fig .n:hover .sq, #fig .n:focus-visible .sq, #fig .n.focus .sq{fill:var(--c-mid)}
+  #fig .n:focus:not(:focus-visible){outline:none}
+  #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
+  #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
+  #fig text.eyebrow{fill:var(--dim); letter-spacing:.08em}
+  #fig text.typelab{font-family:"Plex Mono",monospace; font-size:11.5px; fill:var(--dim);
+                    letter-spacing:.08em}
+  #fig text.attr{fill:var(--dim)}
+  #fig text.root{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:15px}

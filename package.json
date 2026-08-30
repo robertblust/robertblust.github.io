@@ -12,7 +12,10 @@
     "og": "node export-og.mjs",
     "og:check": "node og-check.mjs",
     "principles": "node build/principles.mjs",
-    "principles:check": "node build/principles.mjs --check"
+    "principles:check": "node build/principles.mjs --check",
+    "model": "node build/model.mjs",
+    "model:check": "node build/model.mjs --check",
+    "test:instance": "node --test verify/instance.test.mjs"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
