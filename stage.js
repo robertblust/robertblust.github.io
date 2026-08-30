@@ -660,7 +660,7 @@
   // the other: one number would be clamped to the page's maximum every time the dialog closed,
   // and the reader's choice in the wider box would be lost on the way back. The default
   // differs for the same reason.
-  var CARD = { page: { key: "cg-stage-card" }, modal: { key: "cg-stage-card-modal" } };
+  var CARD = { page: { key: "stage-card" }, modal: { key: "stage-card-modal" } };
   var CARD_MIN = 280, CANVAS_MIN = 320;
   function cardMode(){ return modal.contains(stageEl) ? CARD.modal : CARD.page; }
   // Nothing stored means half the box, not a fixed width: the two panes start equal and the
