@@ -176,6 +176,18 @@
   #fig .n.focus .sq{fill:var(--c-firm); stroke:var(--ink); stroke-width:2}
   #fig .n:hover .box, #fig .n:focus-visible .box{stroke:var(--c-mid); stroke-width:3}
   #fig .n:hover .sq, #fig .n:focus-visible .sq{fill:var(--c-mid)}
+
+  /* Everything off the path steps back rather than the path stepping forward. On a focus with
+     fifty-eight references the band is the loudest thing on the canvas and the structure is
+     the quietest, which is backwards: the band is what you came to read, but the path is what
+     tells you where you are while you read it. Dimming is reversible by hovering, so nothing
+     is hidden — it is ordered. */
+  #fig .own:not(.spine), #fig .ref{opacity:.45}
+  /* The lines step back, and nothing else does. Two things were tried first and both cost
+     more than they bought: dimming whole nodes put an attribute that is already --dim under
+     the contrast floor this site holds itself to, and dimming the marks alone turned the
+     squares grey, which reads as a third kind of node rather than a quieter one. The
+     dashes were the noise all along — fifty-eight of them against one path. */
   #fig .n:focus:not(:focus-visible){outline:none}
   #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
   #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
