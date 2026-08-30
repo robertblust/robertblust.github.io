@@ -594,6 +594,8 @@
     stageHome.insertBefore(stageMark, stageHead);
     modal.append(stageHead, stageEl);
     modal.showModal();
+    // The stage has changed boxes, so it changes memories with it.
+    setCard(storedCard(), false);
     refit();
   });
   document.getElementById("modalclose").addEventListener("click", function(){ modal.close(); });
@@ -608,6 +610,7 @@
     stageHome.insertBefore(stageHead, stageMark);
     stageHome.insertBefore(stageEl, stageMark);
     if (stageMark.parentNode) stageMark.parentNode.removeChild(stageMark);
+    setCard(storedCard(), false);
     refit();
     expandBtn.focus();
   });
@@ -652,7 +655,23 @@
   // window resized after the page loaded. The key is a constant here rather than the page's:
   // this file is byte-identical on every site that draws a stage and knows none of their
   // names, and localStorage is per-origin, so one name cannot collide with another site's.
-  var CARD_KEY = "cg-stage-card", CARD_DEFAULT = 360, CARD_MIN = 280, CANVAS_MIN = 320;
+  // Two memories, because there are two boxes. The page gives the stage a ~980px column and
+  // the dialog gives it nearly the whole window, so a width that is right in one is wrong in
+  // the other: one number would be clamped to the page's maximum every time the dialog closed,
+  // and the reader's choice in the wider box would be lost on the way back. The default
+  // differs for the same reason.
+  var CARD = {
+    page:  { key: "cg-stage-card",       fallback: 360 },
+    modal: { key: "cg-stage-card-modal", fallback: 400 }
+  };
+  var CARD_MIN = 280, CANVAS_MIN = 320;
+  function cardMode(){ return modal.contains(stageEl) ? CARD.modal : CARD.page; }
+  function storedCard(){
+    var mode = cardMode();
+    var n = null;
+    try { n = parseInt(localStorage.getItem(mode.key), 10); } catch (e) {}
+    return n || mode.fallback;
+  }
   var gutter = document.getElementById("gutter");
   function cardWidth(){ return stageEl.querySelector(".card").getBoundingClientRect().width; }
   function cardLimit(){
@@ -669,13 +688,11 @@
   function setCard(px, remember){
     var w = Math.round(Math.min(cardLimit(), Math.max(CARD_MIN, px)));
     stageEl.style.setProperty("--card-w", w + "px");
-    if (remember) { try { localStorage.setItem(CARD_KEY, String(w)); } catch (e) {} }
+    if (remember) { try { localStorage.setItem(cardMode().key, String(w)); } catch (e) {} }
     return w;
   }
   if (gutter) {
-    var stored = null;
-    try { stored = parseInt(localStorage.getItem(CARD_KEY), 10); } catch (e) {}
-    if (stored) setCard(stored, false);
+    setCard(storedCard(), false);
 
     var dragFrom = 0, dragWidth = 0;
     gutter.addEventListener("pointerdown", function(ev){
@@ -700,8 +717,9 @@
     // Double-click restores the default and forgets the stored one, the way a devtools split
     // does — otherwise the only way back to the original is to drag until it looks right.
     gutter.addEventListener("dblclick", function(){
-      try { localStorage.removeItem(CARD_KEY); } catch (e) {}
-      setCard(CARD_DEFAULT, false); render();
+      var mode = cardMode();
+      try { localStorage.removeItem(mode.key); } catch (e) {}
+      setCard(mode.fallback, false); render();
     });
     gutter.addEventListener("keydown", function(ev){
       var step = ev.key === "ArrowLeft" ? 16 : ev.key === "ArrowRight" ? -16 : 0;
@@ -712,11 +730,7 @@
     // On resize, re-apply what was asked for rather than what is currently shown: a width
     // clamped down on a narrow window should come back when the window has room again. The
     // stored number is the preference; the rendered one is only what last fitted.
-    window.addEventListener("resize", function(){
-      var want = null;
-      try { want = parseInt(localStorage.getItem(CARD_KEY), 10); } catch (e) {}
-      setCard(want || CARD_DEFAULT, false);
-    });
+    window.addEventListener("resize", function(){ setCard(storedCard(), false); });
   }
 
   window.addEventListener("resize", function(){ if (focused) render(); });

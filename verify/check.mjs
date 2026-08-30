@@ -518,7 +518,7 @@ const CHECKS = {
   async divider(page, spec) {
     const CANVAS_MIN = 320;
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
-    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); } catch (e) {} });
+    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); localStorage.removeItem("cg-stage-card-modal"); } catch (e) {} });
     await page.reload({ waitUntil: "networkidle" });
     const width = () => page.evaluate(() => Math.round(document.querySelector(".card").getBoundingClientRect().width));
     const canvas = () => page.evaluate(() => Math.round(document.querySelector(".canvas").getBoundingClientRect().width));
@@ -560,8 +560,31 @@ const CHECKS = {
     await page.focus("#gutter");
     await page.keyboard.press("ArrowLeft");
     if (!((await width()) > before)) return "the divider does not respond to the keyboard";
+    const onPage = await width();
 
-    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); } catch (e) {} });
+    // Two boxes, two memories. The page gives the stage a column and the dialog gives it most
+    // of the window, so one number would be clamped to the page's maximum every time the
+    // dialog closed and the reader's choice in the wider box would be lost coming back.
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    const dialogDefault = await width();
+    if (dialogDefault === onPage)
+      return "the dialog opened at the page's width, so the two boxes share one memory";
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    const inDialog = await width();
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - onPage) > 2)
+      return `closing the dialog left the page at ${await width()}, expected its own ${onPage}`;
+    await page.click("#expand");
+    await page.waitForTimeout(300);
+    if (Math.abs((await width()) - inDialog) > 2)
+      return `the dialog forgot its own width: ${await width()}, expected ${inDialog}`;
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(300);
+
+    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); localStorage.removeItem("cg-stage-card-modal"); } catch (e) {} });
     await page.goto(spec.absolute, { waitUntil: "networkidle" });
     return null;
   },
