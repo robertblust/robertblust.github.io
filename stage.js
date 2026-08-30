@@ -195,6 +195,12 @@
   var K_MIN = 0.8;                                  // the camera's floor, one with the zoom's
 
   function markW(p){ return p.role === "focus" ? R_FOCUS : R_NODE; }
+  // Half the mark's height, which is not half its width for a folder: a folder's box is drawn
+  // 4px taller than a page's square so the two read as different shapes, and the spine has to
+  // stop at the edge that is actually there. It used a flat R_NODE for both ends, so a line
+  // into the focus — 4px wider and 2px taller again — ran six pixels inside its box, and a
+  // line out of any folder started two pixels inside that one.
+  function markH(p){ return markW(p) + (p.node.kind === "entity" ? 0 : 2); }
   function nameW(p){
     var per = p.node.kind === "root" ? CH_ROOT : p.node.kind === "folder" ? CH_MONO : CH_TEXT;
     return p.node.label.length * per;
@@ -354,8 +360,8 @@
   function shape(l, a, b){
     if (l.spine) {
       var x = a.x;
-      if (a.x === b.x) return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - R_NODE);
-      return "M" + x + " " + (a.y + R_NODE) + "V" + (b.y - 10) +
+      if (a.x === b.x) return "M" + x + " " + (a.y + markH(a)) + "V" + (b.y - markH(b));
+      return "M" + x + " " + (a.y + markH(a)) + "V" + (b.y - 10) +
              "Q" + x + " " + b.y + " " + (x + 10) + " " + b.y +
              "H" + (b.x - markW(b));
     }

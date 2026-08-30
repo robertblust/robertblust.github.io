@@ -463,6 +463,33 @@ const CHECKS = {
     if (!context.focusRing || context.focusRing === "none")
       return "the focused node carries no stroke of its own, so it reads as one more square";
     if (context.hoverShares) return "the focus is styled in the same rule as :hover, so it cannot be told from a pointer";
+    // A line has to stop at the edge of the box it points at. The spine's ends were computed
+    // from a flat half-width, and a folder's box is drawn taller than a page's square while
+    // the focus is drawn larger than either — so a line into the focused folder ran six
+    // pixels inside it. Geometry rather than appearance: no end of a spine may sit strictly
+    // within any node's rectangle.
+    const inside = await page.evaluate(() => {
+      // Client coordinates on both sides, so nothing here parses a transform. Reading the
+      // translate out of the attribute worked on a freshly loaded page and silently stopped
+      // working after a click: d3 writes "translate(x y)" the first time and interpolates to
+      // "translate(x, y)" through a transition, and a regex expecting the first form matched
+      // nothing, put every node at the origin, and reported that all was well.
+      const boxes = [...document.querySelectorAll("#fig .n")].map((n) => ({
+        id: n.dataset.id, r: n.querySelector("rect").getBoundingClientRect(),
+      }));
+      const bad = [];
+      for (const p of document.querySelectorAll("#fig .own.spine")) {
+        const m = p.getScreenCTM();
+        const ends = [p.getPointAtLength(0), p.getPointAtLength(p.getTotalLength())]
+          .map((pt) => new DOMPoint(pt.x, pt.y).matrixTransform(m));
+        for (const pt of ends)
+          for (const b of boxes)
+            if (pt.x > b.r.left + 1 && pt.x < b.r.right - 1 && pt.y > b.r.top + 1 && pt.y < b.r.bottom - 1)
+              bad.push(`${b.id} (${pt.x.toFixed(0)},${pt.y.toFixed(0)})`);
+      }
+      return [...new Set(bad)];
+    });
+    if (inside.length) return `a spine ends inside a node instead of at its edge: ${inside.join(", ")}`;
     // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
     // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
     // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
