@@ -87,7 +87,7 @@ const PAGES = [
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, contrast: true, tokenVersion: true,
-    card: true, internalLinks: true, graph: "model-data" },
+    card: true, internalLinks: true, graph: "model-data", divider: true },
 ];
 
 const CHECKS = {
@@ -442,6 +442,27 @@ const CHECKS = {
     await click(from.id); await page.waitForTimeout(500);
     const name = await page.evaluate(() => (document.querySelector("#card h3") || {}).textContent);
     if (name !== from.name) return `card shows ${JSON.stringify(name)}, expected ${JSON.stringify(from.name)}`;
+    // Where you are and how you got here, in the drawing rather than only in the breadcrumb.
+    // `spine` was set on the ancestor chain and dropped before it reached the DOM, and the
+    // focused node wore the same colour as a hovered one, so the canvas said neither.
+    const context = await page.evaluate(() => ({
+      spines: document.querySelectorAll("#fig .own.spine").length,
+      ancestors: document.querySelectorAll("#fig .n.ancestor").length,
+      focusRing: (() => {
+        const f = document.querySelector("#fig .n.focus .sq, #fig .n.focus .box");
+        return f ? getComputedStyle(f).stroke : null;
+      })(),
+      hoverShares: (() => {
+        // the focus must not simply be what a pointer already does
+        const css = [...document.styleSheets].flatMap(s => { try { return [...s.cssRules]; } catch (e) { return []; } });
+        return css.some(r => r.selectorText && /\.n:hover .*\.n\.focus|\.n\.focus.*:hover/.test(r.selectorText));
+      })(),
+    }));
+    if (!context.spines) return "the path from the root to the focus is not drawn — no .own.spine";
+    if (!context.ancestors) return "no ancestor node is marked, so the path shows only as a line";
+    if (!context.focusRing || context.focusRing === "none")
+      return "the focused node carries no stroke of its own, so it reads as one more square";
+    if (context.hoverShares) return "the focus is styled in the same rule as :hover, so it cannot be told from a pointer";
     // The stage, expanded: Expand moves the whole stage — path, canvas and card — into
     // dialog#stagemodal, closed by its ×, Escape or a backdrop click. It is the same stage
     // moved, not a copy, so this checks the dialog actually contains #fig and #card (rather
@@ -487,6 +508,61 @@ const CHECKS = {
     for (const x of data.edges.filter(x => x.from === from.id)) if (!ns.find(n => n.id === x.to)) return `reference target ${x.to} is not on the canvas`;
     const hash = await page.evaluate(() => decodeURIComponent(location.hash.slice(1)));
     if (hash !== from.id) return `hash is ${JSON.stringify(hash)}, expected ${from.id}`;
+    return null;
+  },
+  // The details pane is draggable, because 360px is right for a folder's card and wrong for a
+  // profile claiming fifty-eight skills. Asserted through the behaviour a reader has, not the
+  // implementation: drag it, and the pane is wider and the width is remembered; double-click,
+  // and it is back to the default with nothing stored; and no drag may push the canvas under
+  // its floor, which is the failure that arithmetic ignoring the grid's gaps produced.
+  async divider(page, spec) {
+    const CANVAS_MIN = 320;
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); } catch (e) {} });
+    await page.reload({ waitUntil: "networkidle" });
+    const width = () => page.evaluate(() => Math.round(document.querySelector(".card").getBoundingClientRect().width));
+    const canvas = () => page.evaluate(() => Math.round(document.querySelector(".canvas").getBoundingClientRect().width));
+    const g = await page.$("#gutter");
+    if (!g) return "there is no divider between the canvas and the card";
+    const before = await width();
+
+    // The stage is taller than the window the suite runs at, so the handle's midpoint can sit
+    // below the fold — a press aimed there lands on nothing and the drag silently does not
+    // happen. Bring it into view and aim at a point that is certainly on screen.
+    await page.$eval(".stage", (el) => el.scrollIntoView({ block: "center" }));
+    await page.waitForTimeout(150);
+    const box = await g.boundingBox();
+    const y = Math.min(box.y + box.height / 2, box.y + 60);
+    await page.mouse.move(box.x + box.width / 2, y);
+    await page.mouse.down();
+    await page.mouse.move(box.x - 160, y, { steps: 8 });
+    await page.mouse.up();
+    const dragged = await width();
+    if (!(dragged > before)) return `dragging the divider left did not widen the card: ${before} → ${dragged}`;
+    const stored = await page.evaluate(() => localStorage.getItem("cg-stage-card"));
+    if (!stored) return "the width was not remembered after a drag";
+
+    await page.reload({ waitUntil: "networkidle" });
+    if (Math.abs((await width()) - dragged) > 2) return `the remembered width did not survive a reload: ${await width()} vs ${dragged}`;
+
+    // A stored width wider than the box must clamp, and the canvas keeps its floor.
+    await page.evaluate(() => localStorage.setItem("cg-stage-card", "9000"));
+    await page.reload({ waitUntil: "networkidle" });
+    if ((await canvas()) < CANVAS_MIN)
+      return `a stored width of 9000 left the canvas at ${await canvas()}px, under its ${CANVAS_MIN}px floor`;
+
+    await page.dblclick("#gutter");
+    if ((await width()) !== before) return `double-click did not restore the default: ${await width()} vs ${before}`;
+    if (await page.evaluate(() => localStorage.getItem("cg-stage-card")))
+      return "double-click restored the default but left the old width stored";
+
+    // Drag is not the only way in: a control that needs a pointer is unreachable without one.
+    await page.focus("#gutter");
+    await page.keyboard.press("ArrowLeft");
+    if (!((await width()) > before)) return "the divider does not respond to the keyboard";
+
+    await page.evaluate(() => { try { localStorage.removeItem("cg-stage-card"); } catch (e) {} });
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
     return null;
   },
   async navOrder(page) {

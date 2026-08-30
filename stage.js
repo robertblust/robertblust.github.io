@@ -375,7 +375,6 @@
     lsel.exit().classed("gone", true).style("pointer-events", "none")
         .transition().duration(D).style("opacity", 0).remove();
     lsel.enter().append("path")
-        .attr("class", function(d){ return d.kind === "own" ? "own" : "ref"; })
         .attr("data-from", function(d){ return d.from; })
         .attr("data-to", function(d){ return d.to; })
         .attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); })
@@ -383,6 +382,17 @@
     // An update always drives opacity/pointer-events back to their settled state, so an enter
     // fade interrupted by a second click within the transition window still finishes instead
     // of leaving the survivor translucent and unclickable.
+    // `spine` reaches the DOM now — it was set on the ancestor chain when the neighbourhood
+    // was built, used for geometry, and thrown away before it was drawn, so the path from the
+    // root to the focus looked like any other ownership line.
+    //
+    // Classed on the update, not on the enter. A link keyed from→to survives a click, and
+    // whether it is part of the spine depends on where the focus now is: the link into a
+    // folder is an ordinary line until you descend through it, at which point it becomes the
+    // path. Setting the class only where a path is created leaves every survivor wearing the
+    // answer to a question asked one focus ago.
+    lsel.merge(gLink.selectAll("path:not(.gone)"))
+        .attr("class", function(d){ return d.kind === "own" ? (d.spine ? "own spine" : "own") : "ref"; });
     lsel.style("pointer-events", null).transition().duration(D)
         .style("opacity", 1).attr("d", function(d){ return shape(d, pos[d.from], pos[d.to]); });
 
@@ -419,6 +429,7 @@
 
     var all = enter.merge(nsel);
     all.classed("focus", function(d){ return d.role === "focus"; })
+       .classed("ancestor", function(d){ return d.role === "ancestor"; })
        .attr("aria-current", function(d){ return d.role === "focus" ? "true" : null; });
     all.select("rect")
        .attr("class", function(d){ return d.node.kind === "entity" ? "sq" : "box"; })
@@ -629,6 +640,85 @@
   // eyebrows and the folder card are built here, after that pass, so they follow the flag.
   new MutationObserver(function(){ if (focused) { render(); showCard(focused); } })
     .observe(document.documentElement, { attributes:true, attributeFilter:["lang"] });
+
+  // ── the divider ───────────────────────────────────────────────────────────────────────
+  // The details pane is fixed at 360px, which is right for a folder's card and wrong for a
+  // profile claiming fifty-eight skills. A drag handle is what every two-pane tool a visitor
+  // already uses puts between them, so it is what this uses: drag, double-click to reset,
+  // arrow keys when focused.
+  //
+  // The width is remembered, and clamped on the way back in. A number dragged wide on a large
+  // monitor would otherwise swallow the canvas on a laptop, and the same clamp handles a
+  // window resized after the page loaded. The key is a constant here rather than the page's:
+  // this file is byte-identical on every site that draws a stage and knows none of their
+  // names, and localStorage is per-origin, so one name cannot collide with another site's.
+  var CARD_KEY = "cg-stage-card", CARD_DEFAULT = 360, CARD_MIN = 280, CANVAS_MIN = 320;
+  var gutter = document.getElementById("gutter");
+  function cardWidth(){ return stageEl.querySelector(".card").getBoundingClientRect().width; }
+  function cardLimit(){
+    var stage = stageEl.getBoundingClientRect().width;
+    var canvas = stageEl.querySelector(".canvas").getBoundingClientRect().width;
+    // Everything between and around the two panes — the handle and the grid's gaps — measured
+    // rather than assumed. Subtracting a hard-coded handle width left the canvas 16px under
+    // its floor, because the grid has two gaps and the arithmetic knew about neither.
+    var chrome = stage - canvas - cardWidth();
+    // On a narrow box the floor wins and this collapses to one legal value, which is the
+    // honest answer rather than a negative one.
+    return Math.max(CARD_MIN, stage - CANVAS_MIN - chrome);
+  }
+  function setCard(px, remember){
+    var w = Math.round(Math.min(cardLimit(), Math.max(CARD_MIN, px)));
+    stageEl.style.setProperty("--card-w", w + "px");
+    if (remember) { try { localStorage.setItem(CARD_KEY, String(w)); } catch (e) {} }
+    return w;
+  }
+  if (gutter) {
+    var stored = null;
+    try { stored = parseInt(localStorage.getItem(CARD_KEY), 10); } catch (e) {}
+    if (stored) setCard(stored, false);
+
+    var dragFrom = 0, dragWidth = 0;
+    gutter.addEventListener("pointerdown", function(ev){
+      dragFrom = ev.clientX; dragWidth = cardWidth();
+      gutter.setPointerCapture(ev.pointerId);
+      gutter.classList.add("dragging");
+      ev.preventDefault();
+    });
+    gutter.addEventListener("pointermove", function(ev){
+      if (!gutter.classList.contains("dragging")) return;
+      // The details pane is on the right, so dragging left widens it.
+      setCard(dragWidth - (ev.clientX - dragFrom), false);
+      render();
+    });
+    function endDrag(){
+      if (!gutter.classList.contains("dragging")) return;
+      gutter.classList.remove("dragging");
+      setCard(cardWidth(), true);
+    }
+    gutter.addEventListener("pointerup", endDrag);
+    gutter.addEventListener("pointercancel", endDrag);
+    // Double-click restores the default and forgets the stored one, the way a devtools split
+    // does — otherwise the only way back to the original is to drag until it looks right.
+    gutter.addEventListener("dblclick", function(){
+      try { localStorage.removeItem(CARD_KEY); } catch (e) {}
+      setCard(CARD_DEFAULT, false); render();
+    });
+    gutter.addEventListener("keydown", function(ev){
+      var step = ev.key === "ArrowLeft" ? 16 : ev.key === "ArrowRight" ? -16 : 0;
+      if (!step) return;
+      ev.preventDefault();
+      setCard(cardWidth() + step, true); render();
+    });
+    // On resize, re-apply what was asked for rather than what is currently shown: a width
+    // clamped down on a narrow window should come back when the window has room again. The
+    // stored number is the preference; the rendered one is only what last fitted.
+    window.addEventListener("resize", function(){
+      var want = null;
+      try { want = parseInt(localStorage.getItem(CARD_KEY), 10); } catch (e) {}
+      setCard(want || CARD_DEFAULT, false);
+    });
+  }
+
   window.addEventListener("resize", function(){ if (focused) render(); });
   window.addEventListener("hashchange", function(){
     var id = decodeURIComponent(location.hash.slice(1));

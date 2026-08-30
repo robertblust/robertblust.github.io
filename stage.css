@@ -12,8 +12,11 @@
   .stagehead{display:flex; align-items:baseline; justify-content:space-between; gap:1rem}
   .path{min-height:1.4em; font-size:.8rem; letter-spacing:.06em; color:var(--dim)}
   .path b{color:var(--c-firm); font-weight:600}
-  .stage{margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
-         grid-template-columns:minmax(0,1fr) 360px; gap:1rem}
+  /* Three columns: canvas, the handle between them, details. The details width is a custom
+     property so one line of script can move it and every layout that reads it follows —
+     including the dialog, which is the same .stage element moved, not a second one. */
+  .stage{--card-w:360px; margin-top:.8rem; height:clamp(520px,62vh,720px); display:grid;
+         grid-template-columns:minmax(0,1fr) 10px var(--card-w); gap:.5rem}
   .canvas{position:relative; overflow:hidden; border:1.5px solid var(--rule); border-radius:12px; background:var(--raise)}
   /* No cursor at rest. The primary act on this canvas is clicking a node, not dragging the
      space between them, and a permanent grab hand advertises the wrong one — every canvas a
@@ -27,6 +30,17 @@
             background:var(--raise); color:var(--c-mid); border:1px solid var(--rule); border-radius:6px;
             padding:.35rem .6rem; cursor:pointer}
   .recenter:hover, .recenter:focus-visible{border-color:var(--c-mid)}
+  /* A drag handle wide enough to hit — 10px — with a 1px rule drawn down its middle, which
+     is the shape every resizable pane a visitor already knows has: an editor's sidebar, a
+     devtools split, a Finder column. It is a real separator to the accessibility tree and it
+     takes the keyboard, because a control that can only be dragged cannot be reached at all
+     by someone who does not drag. */
+  .gutter{align-self:stretch; position:relative; cursor:col-resize; border:0; padding:0;
+          background:none; touch-action:none}
+  .gutter::before{content:""; position:absolute; inset:0 4px; background:var(--rule);
+                  border-radius:1px; transition:background-color .15s ease}
+  .gutter:hover::before, .gutter:focus-visible::before, .gutter.dragging::before{background:var(--c-mid)}
+  .gutter:focus{outline:none}
   .card{display:flex; flex-direction:column; min-height:0; border:1.5px solid var(--c-mid); border-radius:12px; background:var(--raise)}
   .cbody{flex:1; min-height:0; overflow:auto; padding:1.3rem 1.4rem}
   .cfoot{border-top:1px solid var(--rule); padding:.8rem 1.4rem; min-height:2.6rem;
@@ -73,7 +87,9 @@
        widest min-content of the items in it, and the card's is a table of quoted field
        names. On a phone that pushed the one column past the shell and scrolled the whole
        document sideways. The card scrolls inside itself instead — .cbody already does. */
+    /* One column below this width, so there is nothing to divide and no handle to show. */
     .stage{height:auto; grid-template-columns:minmax(0,1fr)}
+    .gutter{display:none}
     .canvas{height:52vh; min-height:360px}
     .card{height:44vh; min-height:300px}
   }
@@ -111,7 +127,7 @@
      Turned into nothing rather than removed, so the same element still exists to move back. */
   .modal .expand{display:none}
   .modal .stage{flex:1 1 auto; min-height:0; height:auto; margin-top:.8rem;
-                grid-template-columns:minmax(0,1fr) 400px}
+                grid-template-columns:minmax(0,1fr) 10px var(--card-w)}
   @media (max-width: 860px){
     /* The fixed vh splits below are sized for the page, which can scroll; the dialog
        cannot, so its two regions split the box's own remaining height instead — the card
@@ -119,6 +135,7 @@
        taking every pixel left over. A percentage split shrank the canvas below its
        on-page size on a short viewport, which is Expand doing the opposite of its job. */
     .modal .stage{display:flex; flex-direction:column; height:auto}
+    .modal .gutter{display:none}
     .modal .canvas{height:auto; flex:1 1 auto; min-height:200px}
     .modal .card{height:auto; flex:0 0 230px; min-height:0}
     /* On a phone .shell's own 7vw side padding is already narrow, so the dialog needs
@@ -135,8 +152,26 @@
   #fig .box{fill:none; stroke:var(--c-weak); stroke-width:2}
   #fig .sq{fill:var(--c-firm)}
   #fig .n{cursor:pointer}
-  #fig .n:hover .box, #fig .n:focus-visible .box, #fig .n.focus .box{stroke:var(--c-mid)}
-  #fig .n:hover .sq, #fig .n:focus-visible .sq, #fig .n.focus .sq{fill:var(--c-mid)}
+
+  /* Where you are, and how you got here. The breadcrumb prints the path and marks its last
+     segment; the drawing said neither, because `spine` never reached the DOM and the focused
+     node wore hover's own colour. Three tiers now, and the path is the thing that carries
+     them: the spine from the root to the focus, the ancestors it passes through, and the
+     focus at the end of it.
+
+     Hover keeps --c-mid and adds width, so it is still felt on a node that already carries a
+     colour — an ancestor. That is what makes the tiers survive a pointer moving over them. */
+  #fig .own.spine{stroke:var(--c-mid); stroke-width:2.5}
+  #fig .n.ancestor .box{stroke:var(--c-mid)}
+  #fig .n.ancestor .sq{fill:var(--c-mid)}
+  /* The focus is ringed, not recoloured. Every page square is already --c-firm, so filling
+     the focused one with the same colour made it one more square among fifty-eight; a ring in
+     the page's strongest ink is the one mark nothing else on the canvas wears. The folder
+     outline can just brighten, because no other box is --c-firm. */
+  #fig .n.focus .box{stroke:var(--c-firm); stroke-width:2.5}
+  #fig .n.focus .sq{fill:var(--c-firm); stroke:var(--ink); stroke-width:2}
+  #fig .n:hover .box, #fig .n:focus-visible .box{stroke:var(--c-mid); stroke-width:3}
+  #fig .n:hover .sq, #fig .n:focus-visible .sq{fill:var(--c-mid)}
   #fig .n:focus:not(:focus-visible){outline:none}
   #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
   #fig text.folder, #fig text.attr, #fig text.eyebrow{font-family:"Plex Mono",monospace; font-size:11.5px}
