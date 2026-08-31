@@ -108,7 +108,7 @@ Any CSS movement means the rewriter is wrong and the task stops.
 | `lib/rewrite.mjs` | pure text: find a fence in a document, replace its body, report what it found |
 | `blocks/tokens.css` | the canonical token block, fence lines included, without the closing brace |
 | `blocks/header.css` | the canonical header contract, fence lines included |
-| `blocks/stage.css` | the canonical stage contract, fence lines included |
+| `blocks/stage.css` | the canonical stage contract fence — 30 lines, **not** `assets/stage.css` |
 | `versions.json` | per-block content versions: `{"tokens":"v4","header":"v2","stage":"v2"}` |
 | `test/rewrite.test.mjs` | the parser against hand-built documents, including the nasty cases |
 | `test/fences.test.mjs` | the manifest names real files; every block carries its own fence lines |
@@ -374,8 +374,9 @@ git commit -m "Find a fenced block in a page, and swap it without touching the r
     with the version stamped from `versions.json` and the closing brace appended when the variant
     calls for it.
 
-**Extraction is mechanical, not retyped.** These are 30, 98 and 190 lines of intricate CSS with
-prose comments. Extract them with the commands given; a transcription slip would change what
+**Extraction is mechanical, not retyped.** These are 30, 98 and 30 lines of intricate CSS with
+prose comments. (Do not confuse the 30-line `stage contract` *fence* with `assets/stage.css`, the
+198-line stage *stylesheet* plan 1 vendored — they are different things with similar names.) Extract them with the commands given; a transcription slip would change what
 three sites render.
 
 - [ ] **Step 1: Extract the three blocks from blust.ch**
@@ -404,7 +405,7 @@ wc -l blocks/*.css
 tail -3 blocks/tokens.css
 ```
 
-Expected: `tokens.css` 29 lines, `header.css` 98, `stage.css` 190. `tokens.css`'s last three
+Expected: `tokens.css` 30 lines, `header.css` 98, `stage.css` 30. `tokens.css`'s last three
 lines must be `    --c-path:#B8D0FF;`, then the end-marker comment — **no bare `  }` between
 them.** If the brace is still there the awk did not strip it and the deck variant will be wrong.
 
@@ -624,7 +625,10 @@ node -e '
   const { blockFor } = await import("./lib/fences.mjs");
   const fs = await import("node:fs");
   const RB = "/Users/rob/git/robertblust/robertblust.github.io";
-  const strip = t => t.split("\n").filter(l => !/^\s*\/\*\s*─/.test(l)).join("\n");
+  // strip EVERY comment region, not just the marker lines: Step 2 rewrites prose inside the
+  // comment, so a marker-only strip reports those rewrites as differences and hides the one
+  // thing this check is for — whether any CSS moved.
+  const strip = t => t.replace(/\/\*[\s\S]*?\*\//g, "").split("\n").map(l=>l.trim()).filter(Boolean).join("\n");
   const live = (f, name) => {
     const src = fs.readFileSync(f, "utf8").split("\n");
     const a = src.findIndex(l => l.includes(name + " · v"));
@@ -1121,6 +1125,41 @@ it does.
 Identical in shape to Task 5. Repeated in full rather than referenced, because tasks may be read
 out of order.
 
+- [ ] **Step 1a: Declare the variant word on every `design tokens` fence — BEFORE anything else**
+
+This step was missing from an earlier draft and the plan does not work without it. `planFences`
+throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and
+**no page declares one yet**: they all still read `· keep in step across every repository that
+shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and
+the tool cannot bootstrap itself.
+
+Edit each page's `design tokens` opening line so the word after the version is the variant. It is a
+one-word prose edit inside a comment — change no CSS, and do not touch the version number, which
+the sync will move from `v3` to `v4`:
+
+```
+  /* ─── design tokens · v3 · page ───────────────────────────────────────
+  /* ─── design tokens · v3 · deck ───────────────────────────────────────
+```
+
+Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares
+`--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the
+fence. Confirm rather than assume:
+
+```bash
+find . -name '*.html' -not -path './node_modules/*' -not -path './.git/*' \
+  -exec grep -l "design tokens · v" {} \; | while read f; do
+    n=$(grep -n "end design tokens" "$f" | cut -d: -f1)
+    prev=$(sed -n "$((n-1))p" "$f" | tr -d ' ')
+    [ "$prev" = "}" ] && v=page || v=deck
+    printf "  %-38s -> %s\n" "$f" "$v"
+  done
+```
+
+For this site that is **6 `page` and 1 `deck`** — the deck is `talks/intro/index.html`.
+
+Only then run Step 1's `design:check` and expect exit 1.
+
 - [ ] **Step 1: Branch, and see the check go red**
 
 ```bash
@@ -1195,6 +1234,41 @@ git push -u origin adopt-fences
 This site has no `stage contract` fence — it draws no graph. It has `design tokens` on all five
 pages and `header contract` on four. That asymmetry is correct and needs no configuration: the
 tool rewrites the fences it finds.
+
+- [ ] **Step 1a: Declare the variant word on every `design tokens` fence — BEFORE anything else**
+
+This step was missing from an earlier draft and the plan does not work without it. `planFences`
+throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and
+**no page declares one yet**: they all still read `· keep in step across every repository that
+shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and
+the tool cannot bootstrap itself.
+
+Edit each page's `design tokens` opening line so the word after the version is the variant. It is a
+one-word prose edit inside a comment — change no CSS, and do not touch the version number, which
+the sync will move from `v3` to `v4`:
+
+```
+  /* ─── design tokens · v3 · page ───────────────────────────────────────
+  /* ─── design tokens · v3 · deck ───────────────────────────────────────
+```
+
+Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares
+`--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the
+fence. Confirm rather than assume:
+
+```bash
+find . -name '*.html' -not -path './node_modules/*' -not -path './.git/*' \
+  -exec grep -l "design tokens · v" {} \; | while read f; do
+    n=$(grep -n "end design tokens" "$f" | cut -d: -f1)
+    prev=$(sed -n "$((n-1))p" "$f" | tr -d ' ')
+    [ "$prev" = "}" ] && v=page || v=deck
+    printf "  %-38s -> %s\n" "$f" "$v"
+  done
+```
+
+For this site that is **4 `page` and 1 `deck`** — the deck is `talks/intro/index.html`.
+
+Only then run Step 1's `design:check` and expect exit 1.
 
 - [ ] **Step 1: Branch, and see the check go red**
 
@@ -1297,6 +1371,29 @@ md5 -q /Users/rob/git/robertblust/robertblust.github.io/verify/design.mjs \
 ```
 
 Expected: `1`.
+
+- [ ] **Step 1b: Retire the intra-repo "token blocks in circulation" check**
+
+Also missing from an earlier draft. Each site's `verify/check.mjs` carries a block (search for
+`different token blocks are in circulation`) that fetches every page in `PAGES`, slices from the
+`design tokens` fence through `--c-path:#……;`, and asserts every page's slice is identical. It now
+fails legitimately, and reporting **`2 different token blocks are in circulation`** is the correct
+answer to the question it asks — the variant word `page`/`deck` sits on the opening line, inside
+the slice, so the two forms differ there by design.
+
+Do not teach it to group by variant. **Delete it**, and say why in the commit.
+
+Its own comment explains what it was for: *"The token block is a copy on every page, and until now
+only its version was checked… Compared against each other rather than a recorded hash, because a
+hash is a second thing to keep in step and would drift the same way."* It compared pages to each
+other because there was no single source to compare them against. There is one now, and
+`design:check` compares every page's fence **byte for byte against it** — strictly stronger than
+pages agreeing with one another, and it sees the two variants correctly because the package emits
+them. Keeping both would mean maintaining a weaker check that has to be taught about every variant
+the stronger one already handles.
+
+This is the same reasoning that demotes `TOKEN_VERSION` in the next step, applied to the other
+half of the same habit.
 
 - [ ] **Step 2: Run all three suites green**
 
