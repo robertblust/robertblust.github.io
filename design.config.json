@@ -1,3 +1,7 @@
 {
-  "groups": ["fonts", "stage"]
+  "groups": [
+    "fonts",
+    "stage"
+  ],
+  "langKey": "rb-lang"
 }
