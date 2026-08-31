@@ -743,6 +743,31 @@ Measurable, and checkable on the day each phase lands.
     own.** That is the check on this spec's own completeness, and it should be run again at
     the end rather than trusted now.
 
+13. **`robertblust/design` carries a branch ruleset on `main`, and it is switched on the day
+    the last plan lands — not before.** Today the repository has none: `gh api
+    repos/robertblust/design/rulesets` returns empty, while `robertblust.github.io` has
+    `protect-main` active. That asymmetry was deliberate while the package was being built —
+    plans 1, 2 and 3 commit tasks straight to `main`, because the package has no reviewers and
+    its gate is `npm test`, and a required pull request would have meant one nobody reads per
+    task. It stops being deliberate the moment three published sites pin its tags: from then on
+    a bad `main` is a bad release, and a release is what the sites take.
+
+    Two things it must require, and one trap.
+
+    - A pull request, so a change to the one file three sites share cannot be pushed straight
+      to `main`.
+    - The status check, so the suite that guards it has to be green.
+
+    **The context to name is `test`, not `CI`.** A ruleset requires the *job id*, and this
+    repository's workflow is named `CI` with a single job `test` — the reverse of the sites,
+    whose job is `verify`. Naming the workflow instead produces a check that never reports:
+    the branch looks protected and silently is not. `robertblust.github.io`'s own conventions
+    record this failure, which is why it is written here rather than discovered again.
+
+    Do not attempt `commit_author_email_pattern`. It is a metadata restriction and is rejected
+    on this account's plan — tested, not assumed. Authorship stays enforced by the `includeIf`
+    blocks in `~/.gitconfig` and by merging with merge commits rather than squashes.
+
 ## Decisions taken
 
 Settled on 2026-08-30. Recorded here so they are not re-opened by accident.
