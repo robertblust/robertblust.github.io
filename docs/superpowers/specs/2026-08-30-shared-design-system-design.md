@@ -15,12 +15,45 @@ copied as a file:
 | --- | --- | --- |
 | `design tokens · v3` | 20 pages | byte-identical, in exactly two variants |
 | `header contract · v1` | 16 pages | byte-identical, all sixteen |
-| `deck footer · v1` | 4 decks | **has no end fence at all**; already drifted |
+| `deck footer · v1` | 4 decks | **no end fence; and it is two things in one fence** — see below |
 | `stage contract · v1` | 3 files | `stage.css` byte-identical in the two repos that have it |
 | the language + storage block | **20 pages** | **no fence, no version marker, no check** |
 | the `<head>` — meta + JSON-LD | **20 pages** | **no fence; six shapes where three belong** |
 | the deck runtime, markup and layout CSS | **4 decks** | **no fence; ~625 shared lines each** |
 | the prose typography kit | **16 pages** | **no fence; 54 lines common to all three sites** |
+
+**The `deck footer` fence is misnamed, and that is why it decayed.** Its own
+`FOOTER_VERSION` comment states a contract — *"the lockup goes to the landing page, the person to
+blust.ch, the third link to the talks index, and none of them opens in a new tab"* — and then the
+fence goes on to contain the **entire transport bar**: `.transport`, `.lcd`, `.tbtn`,
+`.tmain`/`.tside`, play, pause, fullscreen, notes, the LCD track counter. Thirty-odd selectors of
+playback component the comment never mentions.
+
+Split at `.transport{`, the two halves behave completely differently:
+
+| half | lines per deck | distinct forms |
+| --- | --- | --- |
+| the lockup — what the contract actually describes | 9 / 9 / 31 / 31 | **two**, each internally byte-identical |
+| the transport bar — a component | 162 / 150 / 154 / 160 | **four**, all different |
+
+**The contract half has not drifted at all.** companygraph.io and guestgraph.io share one 9-line
+form; blust.ch's two decks share a 31-line one. That is not decay, it is an undocumented
+structural difference — blust.ch *is* the person's site, so "the person goes to blust.ch" means
+something different there. The drift is entirely in the transport bar, which is what happens to a
+grab-bag with no stated contract: nothing holds it still.
+
+So the fix is not to reconcile four copies. It is to draw the line the header contract already
+draws — the fence holds what must be identical everywhere, each site's own bits sit outside it
+deliberately, and the checks assert the *outcome* rather than the declaration. Concretely:
+
+- **The transport belongs with the deck runtime, not the footer.** Its CSS, its markup and its
+  JavaScript are one component that a fence happened to cut in half. It moves as part of the deck.
+- **The lockup is what the footer contract is** — and the checks that guard it (`wayOut`,
+  `landing`, `sameTab`, `noNewTab`) already exist and already pass. It needs a real end fence and
+  a parameter for its two legitimate forms, the way the language block needs `langKey`.
+
+Where the line falls exactly is not knowable until the deck has been pulled apart, so it is
+decided there rather than guessed here.
 
 The two token variants are not a drift. A prose page closes its `:root`; a deck's `:root`
 continues with tokens of its own, so the deck carries the same block minus its final `}`.
@@ -443,8 +476,13 @@ empty diff is the proof.
 **Tier 2b — the deck.** Its own tier, because it is the largest extraction in the plan and
 the one with the least standing behind it. Per deck: ~310 shared lines of runtime script,
 ~160 shared lines of layout CSS in no fence at all, ~135 lines of transport markup, and the
-`deck footer` fence that already exists. Four decks, 615–807 shared significant lines each —
-60% to 72% of the file.
+`deck footer` fence that already exists — which, as measured above, is really the transport bar
+plus a nine-or-thirty-one-line lockup wearing one name. Four decks, 615–807 shared significant
+lines each — 60% to 72% of the file.
+
+This tier is where the footer fence gets cut in two: the transport moves with the runtime and the
+markup it belongs to, and the lockup is fenced on its own as the contract `FOOTER_VERSION` always
+claimed it was, with a parameter for its two forms.
 
 What stays per-talk: the slides, the narration cues, the talk's own UI strings, the slide
 count. The boundary is the one the stage already demonstrates — generic behaviour over a
@@ -576,9 +614,9 @@ owners, which is real secret-management cost for the difference between "within 
 Eight phases. Each ends in a state you could stop at.
 
 **0 — Pre-flight.** Create `robertblust/design`, public, Apache 2.0. Nothing here is
-irreversible any more — there is no scope to claim and no first publish to get right. **Add the
-end fence to the four deck footers**, in the three site repositories, and reconcile the four
-copies by hand — worth doing on its own merits, and it makes phase 3 mechanical.
+irreversible any more — there is no scope to claim and no first publish to get right. The four deck footers still lack an end fence,
+but adding one is **no longer phase 0 work**: the fence turns out to bundle a contract with a
+component, and where to cut it is decided when the deck is pulled apart, not before.
 
 **1 — Seed the package with tier 1 only.** `stage.js`, `stage.css`, `d3`, the four fonts,
 and the `graph` and `divider` checks — taking `blust.ch`'s `stage.js`, which is the repaired

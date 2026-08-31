@@ -1738,8 +1738,13 @@ Named here so they are not attempted: the fence rewriter and the 111 shared bloc
 header, language, head, prose kit); `verify/design.mjs` and the fourteen shared check bodies;
 the deck; the card harness. Each has its own plan, in the order the spec's phases give.
 
-**One piece of the spec's phase 0 is deliberately deferred rather than done here:** adding an
-end fence to the four deck footers and reconciling their four copies by hand. It is
-independent of everything in this plan — nothing here parses HTML — and it belongs with the
-fence work it makes mechanical. It is the first task of plan 2. Do not let it fall out of
-phase 0 unnoticed.
+**One piece of the spec's phase 0 is deliberately deferred rather than done here:** the four
+deck footers still have no end fence. It is independent of everything in this plan — nothing here
+parses HTML.
+
+It is **not** plan 2's first task, as an earlier draft of this paragraph said. Measuring it
+showed the fence bundles two different things: a lockup contract that has *not* drifted (two
+forms, 9 and 31 lines, each internally byte-identical) and a transport bar that has, four ways.
+So it is not a reconciliation, and the transport half belongs with the deck runtime and markup it
+is part of. That is **plan 4**, where the deck is pulled apart and the cut can be placed rather
+than guessed. See the spec's fence table for the measurements.
