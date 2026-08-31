@@ -393,6 +393,11 @@
 // guestgraph.io is a different origin and keeps its own. Storage is guarded because
 // file:// is an opaque origin in some browsers and throws.
 (function(){
+  /* ─── language · v1 · page ─────────────────────────────────────────────
+     One language across three domains, and where it is remembered. Generated
+     from @robertblust/design — editing it here does nothing, because the next
+     `npm run design` overwrites it. Change it in the package.
+  */
   var LANG_KEY = "rb-lang";
   function langStored(){ try { return localStorage.getItem(LANG_KEY); } catch (e) { return null; } }
   function langRemember(v){ try { localStorage.setItem(LANG_KEY, v); } catch (e) {} }
@@ -431,6 +436,7 @@
   // carries the language too; both fire before the browser follows the href.
   document.addEventListener("mousedown", carryLang, true);
   document.addEventListener("click", carryLang, true);
+  /* ─── end language ─────────────────────────────────────────────────── */
 
 
   var urlLang = langFromUrl();
