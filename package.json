@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "blust.ch \u2014 Robert Blust: profile page and talks.",
+  "description": "blust.ch — Robert Blust: profile page and talks.",
   "scripts": {
     "serve": "python3 -m http.server 8000",
+    "design": "design sync",
+    "design:check": "design sync --check",
     "verify": "node verify/check.mjs",
     "test:og": "node --test verify/og-recipe.test.mjs",
     "pdf": "node export-pdf.mjs",
@@ -18,6 +20,7 @@
     "test:instance": "node --test verify/instance.test.mjs"
   },
   "devDependencies": {
+    "@robertblust/design": "github:robertblust/design#v0.1.0",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
   }

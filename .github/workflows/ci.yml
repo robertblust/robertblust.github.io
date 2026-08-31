@@ -46,6 +46,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
+      # After npm ci because it needs the package; before the browser because a file that is
+      # not what the package ships should fail on the cheap step, not on a rendered page.
+      - name: The shared files are still what the package ships
+        run: npm run design:check
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
         run: python3 -m http.server 8000 > /dev/null 2>&1 &
