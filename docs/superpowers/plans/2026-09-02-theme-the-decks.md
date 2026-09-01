@@ -46,9 +46,14 @@ Three false-positive classes were excluded and are worth knowing about, because 
 
 ## The seventeen shared values, and what each is
 
+Sixteen become `--deck-*` tokens that follow the theme; one — `#4c566e` — sits inside the readout
+and becomes `--lcd-faint`, which does not. Two more invariant names, `--lcd-ink` and
+`--lcd-flag`, replace uses of `--c-mid` and `--c-flag` inside the readout that this plan's
+correction found flipping against a surface that does not.
+
 | value | n | where | proposed name |
 |---|---|---|---|
-| `#9db0ff` | 16 | `color`, `border-color` | `--deck-accent` — brighter than `--c-mid`, the deck's own interactive tone |
+| `#9db0ff` | 16 | `color`, `border-color`, `outline` | `--deck-accent` — brighter than `--c-mid`, the deck's own interactive tone. Verified not painted on the readout. |
 | `#f1ede4` | 13 | background, colour, border | `--deck-paper` — the warm off-white the slide canvas uses for inverted panels |
 | `#1b2231` | 12 | background | **already `--press`** |
 | `#7aa0ff` | 7 | inline SVG | `--deck-mark` — the mark's stroke |
@@ -58,7 +63,7 @@ Three false-positive classes were excluded and are worth knowing about, because 
 | `#333743` | 4 | background | `--deck-divider` |
 | `#33353d` | 4 | border | `--deck-edge` |
 | `#39435c` | 4 | border | `--deck-ring` — the play button's ring |
-| `#4c566e` | 4 | colour | `--deck-faint` — the LCD's separator and total |
+| `#4c566e` | 4 | colour on the LCD | **`--lcd-faint`** — the readout's separator and total, so invariant, and raised from 2.68:1 to 5.25:1 |
 | `#9a9dab` | 4 | colour | `--deck-quiet` |
 | `#b7b0a2` | 4 | colour | `--deck-warm` |
 | `rgba(255,255,255,.055)` | 4 | shadow | `--deck-lift` |
@@ -164,6 +169,8 @@ Append to `test/theme.test.mjs`. `palette` and the contrast helpers already exis
 const DECK_TOKENS = ["deck-accent", "deck-paper", "deck-mark", "deck-well", "deck-track",
   "deck-hover", "deck-divider", "deck-edge", "deck-ring", "deck-faint", "deck-quiet",
   "deck-warm", "deck-lift", "deck-drop", "deck-inset", "deck-glow"];
+// --lcd, --lcd-ink, --lcd-faint and --lcd-flag are deliberately NOT here: they are invariant
+// and are asserted by the test below instead.
 
 test("both themes define every deck token", () => {
   // Seventeen names arriving in one half and not the other is the failure that shows up as a
