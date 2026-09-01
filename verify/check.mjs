@@ -582,14 +582,19 @@ const CHECKS = {
     return unnamed ? `${unnamed} landing link(s) without an accessible name` : null;
   },
   async internalLinks(page) {
-    // `links` above only inspects a[href^='http'], which is why a root-absolute
-    // internal link (broken under file://) survived nine reviews. Any link that
-    // isn't external, an anchor, or a special scheme must be relative, not "/...".
-    const bad = await page.evaluate(() =>
-      [...document.querySelectorAll("a[href]")]
-        .map(a => a.getAttribute("href"))
-        .filter(h => h && !/^(https?:|mailto:|tel:|#)/i.test(h) && h.startsWith("/")));
-    return bad.length ? `root-absolute internal link(s), break file://: ${bad.join(", ")}` : null;
+    const bad = await page.evaluate(() => {
+      const out = [...document.querySelectorAll("[href], [src]")]
+        .map(el => el.getAttribute("href") || el.getAttribute("src"))
+        .filter(v => v && v.startsWith("/"));
+      for (const sheet of document.styleSheets) {
+        let rules;
+        try { rules = sheet.cssRules; } catch (e) { continue; }  // unreadable: not ours
+        const css = [...rules].map(r => r.cssText).join("\n");
+        for (const m of css.matchAll(/url\(\s*["']?(\/[^"')]*)/g)) out.push(`url(${m[1]})`);
+      }
+      return out;
+    });
+    return bad.length ? "root-absolute internal path: " + bad.join(", ") : null;
   },
   // The head Google reads, asserted as a contract rather than page by page. Three of these
   // were live failures before the check existed: a logo.svg this site has never served, an
@@ -696,15 +701,18 @@ const CHECKS = {
       (document.querySelector('meta[property="og:image"]') || {}).content);
     if (!img) return "no og:image";
     const declared = await page.evaluate(() => [
-      (document.querySelector('meta[property="og:image:width"]') || {}).content,
-      (document.querySelector('meta[property="og:image:height"]') || {}).content,
-    ]);
-    const real = await page.evaluate(async ({ url, site }) => {
-      const r = await fetch(url.replace(site, location.origin));
+      (document.querySelector('meta[property="og:image:width"]')  || {}).content,
+      (document.querySelector('meta[property="og:image:height"]') || {}).content]);
+    // Rewrite the card's absolute URL onto whatever is being tested — BASE, not
+    // location.origin. An origin carries no path, and a site served under one (a talks
+    // subdirectory, say) loses that prefix: a card that serves perfectly then reports
+    // "not fetchable" the first time the suite is pointed at production.
+    const real = await page.evaluate(async ({ u, base, testBase }) => {
+      const r = await fetch(base ? u.replace(base, testBase) : u.replace(/^https:\/\/[^/]+/, testBase));
       if (!r.ok) return null;
       const dv = new DataView(await r.arrayBuffer());
       return [String(dv.getUint32(16)), String(dv.getUint32(20))];   // PNG IHDR
-    }, { url: img, site: SITE });
+    }, { u: img, base: spec.cardBase, testBase: BASE });
     if (!real) return `${img} is not fetchable`;
     if (real[0] !== declared[0] || real[1] !== declared[1])
       return `card is ${real.join("×")} but declared ${declared.join("×")}`;
