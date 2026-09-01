@@ -37,6 +37,8 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"],
     internalLinks: true },
+  // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
+  // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
   { path: "/talks/mental-model/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
     transport: true, zeroBased: true,  card: true, brandMark: true,
     landing: "../../",
