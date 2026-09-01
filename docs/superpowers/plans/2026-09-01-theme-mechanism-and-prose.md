@@ -85,7 +85,9 @@ In `blocks/tokens.css`, the existing `:root{` gains one declaration, and a secon
     --c-path:#B8D0FF; --press:#1b2231;
 ```
 
-The light half goes after the `:root` block closes. On the `deck` variant the fence does not close `:root`, so the light rule must come **after** the closing brace the page supplies — put it in the `page` variant's closing text and in the deck variant's equivalent position. Add this comment above it verbatim; it is the block's own explanation of why the values are not simply inverted:
+**The light rule goes FIRST in the source, above the dark `:root`** — forced by the mechanism, not a style preference. `blockFor` splices the closing `  }` immediately before the end marker when the variant equals `closes`, which is `"page"`. Whichever rule is written last is therefore the one closed for pages and deliberately left open for decks, because a deck adds `--warn`, `--slab` and `--lcd` and closes `:root` itself. Written after the dark rule, the light half would be the one left hanging, and a deck's three extra tokens would land in the light palette. Source order costs nothing: `:root[data-theme="light"]` is specificity (0,2,0) against `:root`'s (0,1,0), so the light values win wherever they sit.
+
+Add this comment above it verbatim; it is the block's own explanation of why the values are not simply inverted:
 
 ```css
   /* The same eleven names, re-picked. The ramp's axis flips: on dark, brightness is
@@ -104,6 +106,18 @@ The light half goes after the `:root` block closes. On the `deck` variant the fe
     --c-weak:#8FA6C2; --c-mid:#3A6DA6; --c-firm:#1C3E68; --c-flag:#8A5A12;
     --c-path:#1C3E68; --press:#E2E8F2;
   }
+  :root{
+    --ground:#0C0E13; --raise:#171A21; --rule:#232833;
+    --sky:radial-gradient(120% 60% at 50% -10%, var(--raise) 0%, var(--ground) 60%);
+    --ink:#EFEDE8;    --dim:#8A8B86;
+    --c-weak:#3E5878; --c-mid:#7FA3D8; --c-firm:#B8D0FF; --c-flag:#D9A44F;
+    --c-path:#B8D0FF; --press:#1b2231;
+```
+
+The dark rule stays last and has **no** closing brace, unchanged from today. Verify both variants after editing — page must balance, deck must be one short:
+
+```bash
+node -e 'import("./lib/fences.mjs").then(({blockFor})=>{for(const v of ["page","deck"]){const t=blockFor("design tokens",v);console.log(v,(t.match(/\{/g)||[]).length,(t.match(/\}/g)||[]).length)}})'
 ```
 
 `--sky` is not repeated: it is defined in terms of `var(--raise)` and `var(--ground)`, so it follows the theme on its own. Confirm that in the test.
@@ -425,7 +439,7 @@ git commit -m "Two fences for the theme: one in head to beat first paint, one in
 
 - [ ] **Step 1: Add the control's rules to `blocks/header.css`**
 
-The theme control reuses `.seg`, so it needs only what differs: icon sizing and the pressed background moving to the new token. Bump the `header contract` fence to the next version and update `versions.json`.
+The theme control reuses `.seg`, so it needs only what differs: icon sizing and the pressed background moving to the new token. Set the `header contract` fence's first line to **v4** (it is v3 today) and set `versions.json`'s `header` to `"v4"`.
 
 ```css
   /* The theme control is a .seg like the language one, so it inherits the border, the radius
