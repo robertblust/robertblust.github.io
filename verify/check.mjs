@@ -55,7 +55,10 @@ const PAGES = [
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit"],
+    // fences is presence-only and order-blind — deck runtime landing last here while
+    // fenceOrder places it third, two lines down, is not the pair disagreeing.
+    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
+    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
@@ -63,7 +66,10 @@ const PAGES = [
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit"],
+    // fences is presence-only and order-blind — deck runtime landing last here while
+    // fenceOrder places it third, two lines down, is not the pair disagreeing.
+    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
+    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",

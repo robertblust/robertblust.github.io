@@ -341,9 +341,10 @@ you.** This section used to say "edit the block, run `npm run verify`, bump `vN`
 repositories". That was true while the blocks were maintained by hand. It is now the one
 instruction in this file that silently does nothing.
 
-Six blocks are generated, and the fence markers name them: `design tokens`, `header contract`,
-`stage contract`, `language`, `prose reset` and `prose footer`. Everything between and including a
-pair of markers belongs to the package.
+Ten blocks are generated, and the fence markers name them: `design tokens`, `header contract`,
+`stage contract`, `language`, `prose reset`, `prose footer`, `deck transport`, `deck lockup`,
+`deck fit` and `deck runtime`. Everything between and including a pair of markers belongs to
+the package.
 
 ```bash
 npm run design         # rewrite every fenced block from the pinned release
@@ -369,9 +370,9 @@ remembering to look. That is the guarantee the old habit-with-a-tripwire never w
 with a one-line diff. Either one means this site has decided to own that block and diverge. That is
 a real choice; make it deliberately, in a commit that says so.
 
-**Not everything is generated.** The deck footer is still a hand-maintained copy carrying its own
-version marker — see below, where the old discipline applies in full — and the `<head>` contract is
-a copy with no fence at all.
+**Not everything is generated.** The `<head>` contract is a copy with no fence at all — see
+below. The deck footer used to belong here too, hand-maintained; it doesn't any more — see
+below, where its old version marker was replaced rather than kept.
 
 Both decks under `talks/` carry the system too, and all four pages load their faces from the
 **one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
@@ -380,20 +381,24 @@ Both decks under `talks/` carry the system too, and all four pages load their fa
 which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with
 the root by hand, with nothing checking that it is.
 
-### The footer carries a version marker, like the tokens
+### The deck's chrome fences replaced the footer's version marker
 
-The deck footer is copied across `blust.ch`, `guestgraph.io` and `companygraph.io`, and no
-suite can see a sibling — the same gap the token block has. It is fenced by a
-`deck footer · vN` marker and `footerVersion` asserts it.
+The deck footer used to be a hand-maintained copy across `blust.ch`, `guestgraph.io` and
+`companygraph.io`, fenced by its own `deck footer · vN` marker with a `footerVersion` check —
+because no suite can see a sibling, the same gap the token block has. Both are gone, not
+retargeted: that marker and that check were retired in a previous plan. The deck's whole
+chrome and runtime are generated fences now — `deck transport`, `deck lockup`, `deck fit` and
+`deck runtime` — exactly like the tokens above.
 
-What the marker covers is a **contract, not a look**: the lockup goes to the landing page, the
-person to `blust.ch`, the third link to the talks index, and none of them opens in a new tab.
-Change any of that and bump `vN` **in all three repositories**, then run all three suites. A
-suite fails two ways — a version it does not expect, and no marker at all — so deleting the
-fence is not a way around it.
+What the old marker covered was a **contract, not a look**: the lockup goes to the landing
+page, the person to `blust.ch`, the third link to the talks index, and none of them opens in a
+new tab. That contract still holds; `design:check` is what enforces it now, comparing each
+fence's bytes against the pinned release — strictly stronger than `footerVersion` ever was,
+because the constant had to be hand-edited in three repositories to stay true, which was the
+very drift it existed to catch.
 
-`verify/design.mjs` is byte-identical across the three and holds both `TOKEN_VERSION` and
-`FOOTER_VERSION`. Never edit it in one repo alone.
+`verify/design.mjs` is byte-identical across the three and holds `TOKEN_VERSION`. Never edit
+it in one repo alone.
 
 ## The header is a contract, and its copy carries a version
 
@@ -547,8 +552,8 @@ per page, German swapped in at runtime from `data-de`. It becomes correct the da
 ship, and not before.
 
 **The head contract is a third copy**, shared with `guestgraph.io` and `companygraph.io` and
-carrying no `· vN` tripwire, unlike the token block and the deck footer. Port changes by hand
-to all three.
+carrying no `· vN` tripwire, unlike the token block and the deck's other generated fences.
+Port changes by hand to all three.
 
 ## CI
 
