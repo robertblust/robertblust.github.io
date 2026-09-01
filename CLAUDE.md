@@ -397,8 +397,12 @@ fence's bytes against the pinned release — strictly stronger than `footerVersi
 because the constant had to be hand-edited in three repositories to stay true, which was the
 very drift it existed to catch.
 
-`verify/design.mjs` is byte-identical across the three and holds `TOKEN_VERSION`. Never edit
-it in one repo alone.
+`verify/design.mjs` now lives in `@robertblust/design`, alongside the nineteen shared page
+checks — edited there, released as a tag, and taken here by re-pinning that tag in
+`package.json`, exactly like the fences above. `verify/check.mjs` imports it by package
+specifier, `@robertblust/design/verify/design`; a `verify/design.mjs` created in this
+repository is never resolved by that import and would be silently ignored — the suite would
+still report green, having run the pinned release's code instead of the one just edited.
 
 ## The header is a contract, and its copy carries a version
 
