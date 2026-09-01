@@ -37,8 +37,10 @@ async function httpStatus(url) {
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 const PAGES = [
   { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
-             "https://3ap.ch/", "https://likemagic.tech/"],
+    // LinkedIn left this list when it left the footer. It is still asserted as identity in
+    // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
+    // anchors, so keeping it here would fail on a link the page no longer renders.
+    links: ["https://github.com/robertblust", "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
     // the sentence most likely to be quietly dropped later, and it is what explains why
     // both ideas are built in the open.
