@@ -127,7 +127,7 @@ Light half:
     --deck-accent:#2F5F96; --deck-paper:#1A1C21; --deck-mark:#3A6DA6;
     --deck-well:#EDEAE2;   --deck-track:#D8D4CA; --deck-hover:#E4E0D6;
     --deck-divider:#D2CEC3; --deck-edge:#DFDCD3; --deck-ring:#B9C4D6;
-    --deck-faint:#7C8496;  --deck-quiet:#5F6058; --deck-warm:#6B6455;
+    --deck-quiet:#5F6058;  --deck-warm:#6B6455;
     --deck-lift:rgba(0,0,0,.04); --deck-drop:rgba(0,0,0,.10);
     --deck-inset:rgba(0,0,0,.18); --deck-glow:rgba(58,109,166,.10);
     --lcd:#0a0b0e; --lcd-ink:#7FA3D8; --lcd-faint:#7C8496; --lcd-flag:#D9A44F;
@@ -139,7 +139,7 @@ Dark half:
     --deck-accent:#9db0ff; --deck-paper:#f1ede4; --deck-mark:#7aa0ff;
     --deck-well:#17181c;   --deck-track:#1e2029; --deck-hover:#20242e;
     --deck-divider:#333743; --deck-edge:#33353d; --deck-ring:#39435c;
-    --deck-faint:#4c566e;  --deck-quiet:#9a9dab; --deck-warm:#b7b0a2;
+    --deck-quiet:#9a9dab;  --deck-warm:#b7b0a2;
     --deck-lift:rgba(255,255,255,.055); --deck-drop:rgba(0,0,0,.5);
     --deck-inset:rgba(0,0,0,.85); --deck-glow:rgba(122,160,255,.1);
     --lcd:#0a0b0e; --lcd-ink:#7FA3D8; --lcd-faint:#7C8496; --lcd-flag:#D9A44F;
@@ -154,8 +154,9 @@ separator is worse and already is: `#4c566e` on `--lcd` is **2.68:1** today, in 
 
 So the readout gets its own constant palette — `--lcd-ink`, `--lcd-faint`, `--lcd-flag` —
 declared identically in both halves beside `--lcd`, for the same reason. A real instrument's
-digits do not change colour because the room did. `--deck-accent` and `--deck-faint` are then
-only for chrome that genuinely flips.
+digits do not change colour because the room did. `--deck-accent` is then only for chrome that
+genuinely flips, and `--deck-faint` does not exist at all — its one use was inside the readout,
+so it is `--lcd-faint` outright.
 
 Note `--deck-paper` and `--deck-well` **swap roles** between themes: on dark, paper is the warm off-white that inverted panels use and well is a dark recess; on light, paper is the dark text tone and well is the pale slab. That is the Device treatment — the object's body follows the theme, its readout does not. Set the fence's first line to `v7` and `versions.json`'s `tokens` to `"v7"`.
 
@@ -167,7 +168,7 @@ Append to `test/theme.test.mjs`. `palette` and the contrast helpers already exis
 
 ```js
 const DECK_TOKENS = ["deck-accent", "deck-paper", "deck-mark", "deck-well", "deck-track",
-  "deck-hover", "deck-divider", "deck-edge", "deck-ring", "deck-faint", "deck-quiet",
+  "deck-hover", "deck-divider", "deck-edge", "deck-ring", "deck-quiet",
   "deck-warm", "deck-lift", "deck-drop", "deck-inset", "deck-glow"];
 // --lcd, --lcd-ink, --lcd-faint and --lcd-flag are deliberately NOT here: they are invariant
 // and are asserted by the test below instead.
