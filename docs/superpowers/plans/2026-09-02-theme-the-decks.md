@@ -365,6 +365,25 @@ Bump `package.json` to **0.11.0** — new variants and new tokens are a minor. C
 **Interfaces:**
 - Consumes: the package release from Task 3.
 
+- [ ] **Step 0: Fix the stale variant word first — the sync tool will not run until you do**
+
+`theme boot` and `theme` shipped in Plan A with no variants, so every prose page's marker reads
+`· shared`. This release gives both fences `variants: ["page", "deck"]`, and `lib/sync.mjs` reads
+that word as input. `shared` is no longer legal, so `planFences` throws before **either** `design`
+or `design:check` writes or compares anything — there is no self-healing path and `npm run design`
+cannot fix it.
+
+All sixteen prose pages are the `page` variant (the decks do not carry these fences yet — you add
+them in Step 2), so the rewrite is unambiguous. Per site, before anything else:
+
+```bash
+grep -rl 'theme boot · v1 · shared' --include=index.html . | grep -v node_modules | \
+  xargs sed -i '' -e 's/theme boot · v1 · shared/theme boot · v2 · page/' \
+                  -e 's/─── theme · v2 · shared/─── theme · v3 · page/'
+```
+
+Then confirm no `· shared` marker remains for either fence before you run the sync.
+
 - [ ] **Step 1: Re-pin and sync**
 
 Per site, once the tag exists:
