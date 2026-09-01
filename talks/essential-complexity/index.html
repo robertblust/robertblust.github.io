@@ -795,7 +795,7 @@
     <div class="tside">
     <div class="tdiv"></div>
 
-    <div class="seg" id="lang">
+    <div class="seg" id="lang" role="group" aria-label="Sprache wechseln — switch language">
       <button type="button" id="langDe" aria-pressed="false">DE</button>
       <button type="button" id="langEn" aria-pressed="true">EN</button>
     </div>
@@ -969,6 +969,12 @@
       ntext.innerHTML = (lang === 'en' && d.notesEn) ? d.notesEn : d.notes;
       ntime.textContent = d.time || '';
     }
+    /* The ends of the deck, made visible. go() has always clamped, so these controls
+       were already no-ops here — this is the state saying so rather than a click that
+       does nothing. `first` goes with `prev`: at slide zero it is equally inert, and
+       dimming one while the other stays lit next to it reads as a bug. */
+    btn.prev.disabled = btn.first.disabled = (i === 0);
+    btn.next.disabled = (i === slides.length - 1);
     fitNotes();
   }
   window.addEventListener('resize', function(){ measureChrome(); fitNotes(); });
