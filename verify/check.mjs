@@ -55,6 +55,8 @@ const PAGES = [
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
+    // fences is presence-only and order-blind — deck runtime landing last here while
+    // fenceOrder places it third, two lines down, is not the pair disagreeing.
     fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
     fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
@@ -64,6 +66,8 @@ const PAGES = [
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, tokenVersion: true,
+    // fences is presence-only and order-blind — deck runtime landing last here while
+    // fenceOrder places it third, two lines down, is not the pair disagreeing.
     fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
     fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
