@@ -125,7 +125,7 @@ Light half:
     --deck-faint:#7C8496;  --deck-quiet:#5F6058; --deck-warm:#6B6455;
     --deck-lift:rgba(0,0,0,.04); --deck-drop:rgba(0,0,0,.10);
     --deck-inset:rgba(0,0,0,.18); --deck-glow:rgba(58,109,166,.10);
-    --lcd:#0a0b0e;
+    --lcd:#0a0b0e; --lcd-ink:#7FA3D8; --lcd-faint:#7C8496; --lcd-flag:#D9A44F;
 ```
 
 Dark half:
@@ -137,8 +137,20 @@ Dark half:
     --deck-faint:#4c566e;  --deck-quiet:#9a9dab; --deck-warm:#b7b0a2;
     --deck-lift:rgba(255,255,255,.055); --deck-drop:rgba(0,0,0,.5);
     --deck-inset:rgba(0,0,0,.85); --deck-glow:rgba(122,160,255,.1);
-    --lcd:#0a0b0e;
+    --lcd:#0a0b0e; --lcd-ink:#7FA3D8; --lcd-faint:#7C8496; --lcd-flag:#D9A44F;
 ```
+
+**The readout's contents are invariant too, and that is the correction this plan needed.** The
+Device decision keeps `--lcd` dark in both themes — but the digits inside it are painted with
+`var(--c-mid)` and the message with `var(--c-flag)`, and both of those *flip*. Measured against
+the permanently dark `--lcd`, the light theme would print 0.76rem digits at **3.67:1** and a
+message at **3.33:1**, inside the one element the whole metaphor exists to preserve. The
+separator is worse and already is: `#4c566e` on `--lcd` is **2.68:1** today, in both themes.
+
+So the readout gets its own constant palette — `--lcd-ink`, `--lcd-faint`, `--lcd-flag` —
+declared identically in both halves beside `--lcd`, for the same reason. A real instrument's
+digits do not change colour because the room did. `--deck-accent` and `--deck-faint` are then
+only for chrome that genuinely flips.
 
 Note `--deck-paper` and `--deck-well` **swap roles** between themes: on dark, paper is the warm off-white that inverted panels use and well is a dark recess; on light, paper is the dark text tone and well is the pale slab. That is the Device treatment — the object's body follows the theme, its readout does not. Set the fence's first line to `v7` and `versions.json`'s `tokens` to `"v7"`.
 
@@ -173,8 +185,9 @@ test("--lcd is declared in both halves with the same value", () => {
   const dark = palette(css, ":root");
   const light = palette(css, ':root\\[data-theme="light"\\]');
   assert.ok(dark["lcd"], "--lcd missing from the dark half");
-  assert.equal(light["lcd"], dark["lcd"],
-    "--lcd differs between themes; the readout is meant to stay dark in both");
+  for (const t of ["lcd", "lcd-ink", "lcd-faint", "lcd-flag"])
+    assert.equal(light[t], dark[t],
+      `--${t} differs between themes; the readout and everything printed on it stay constant`);
 });
 
 test("the deck's readable tokens clear AA against the surface each is painted on", () => {
@@ -185,8 +198,8 @@ test("the deck's readable tokens clear AA against the surface each is painted on
   const css = blockFor("design tokens", "deck");
   for (const [name, sel] of [["dark", ":root"], ["light", ':root\\[data-theme="light"\\]']]) {
     const p = palette(css, sel);
-    for (const [fg, bg] of [["deck-accent", "lcd"], ["deck-quiet", "deck-well"],
-                            ["deck-warm", "deck-well"]]) {
+    for (const [fg, bg] of [["lcd-ink", "lcd"], ["lcd-faint", "lcd"], ["lcd-flag", "lcd"],
+                            ["deck-quiet", "deck-well"], ["deck-warm", "deck-well"]]) {
       const r = ratio(p[fg], p[bg]);
       assert.ok(r >= 4.5, `${name}: --${fg} on --${bg} is ${r.toFixed(2)}:1, needs 4.5`);
     }
@@ -246,7 +259,10 @@ grep -ohE '(?<!&)#[0-9a-fA-F]{3,8}|rgba?\([^)]*\)' blocks/deck-transport.css blo
 
 Every value it prints must appear in Task 1's table. If one does not, stop and report it — an unlisted value means the sweep missed something and the plan's count is wrong.
 
-`#1b2231` becomes `var(--press)`, which already exists. Bump `deck transport` to **v5**, the two lockup fences by one each, and update `versions.json`.
+`#1b2231` becomes `var(--press)`, which already exists. Four rules inside the readout re-point at
+the invariant names rather than the flipping ones: `.lcd .n` takes `var(--lcd-ink)`,
+`.lcd .n .sep` and `.lcd .n #tot` take `var(--lcd-faint)`, and `.lcd .n.msg` takes
+`var(--lcd-flag)`. Those four are the reason the readout survives a theme it does not follow. Bump `deck transport` to **v5**, the two lockup fences by one each, and update `versions.json`.
 
 - [ ] **Step 2: Write the failing test**
 
