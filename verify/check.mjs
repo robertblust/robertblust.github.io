@@ -35,10 +35,17 @@ async function httpStatus(url) {
 }
 
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
+// What every prose footer reads, left to right. The check compares this to the rendered DOM,
+// so it is the one place that decides the order — and the German labels never appear here
+// because the suite loads each page in its source language.
+const FOOTER = ["GitHub", "Licence", "Privacy"];
+
 const PAGES = [
-  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    links: ["https://github.com/robertblust", "https://www.linkedin.com/in/robertblust/",
-             "https://3ap.ch/", "https://likemagic.tech/"],
+  { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+    // LinkedIn left this list when it left the footer. It is still asserted as identity in
+    // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
+    // anchors, so keeping it here would fail on a link the page no longer renders.
+    links: ["https://github.com/robertblust", "https://3ap.ch/", "https://likemagic.tech/"],
     // The career break is on the page deliberately, so it is asserted deliberately: it is
     // the sentence most likely to be quietly dropped later, and it is what explains why
     // both ideas are built in the open.
@@ -72,7 +79,7 @@ const PAGES = [
     fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
     lockupCollapses: true,
     internalLinks: true },
-  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+  { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -81,7 +88,7 @@ const PAGES = [
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
-  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+  { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -90,7 +97,7 @@ const PAGES = [
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
-  { path: "/ideas/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+  { path: "/ideas/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -100,7 +107,7 @@ const PAGES = [
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
-  { path: "/principles/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+  { path: "/principles/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -110,7 +117,7 @@ const PAGES = [
   // The model page draws the same graph the example on companygraph.io draws, from this
   // person's own instance rather than the fictional one. `stage` is the check that the
   // drawing actually drew: the data block alone proves nothing rendered.
-  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: true, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
+  { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
     contains: ["A company of one", "drawn", "What is in it", "Generated from"],
     // The source link is not asserted here. The stage rewrites its href from the block's own
     // commit, so any literal in this list would be either the markup's placeholder (gone by
@@ -220,14 +227,39 @@ const CHECKS = {
   // Neither is visible to a check that only reads text. The links are all present, the page
   // renders, nothing 404s. What is wrong is where the footer sits and where one link goes,
   // so those are what this asserts.
-  async footer(page) {
-    const bad = await page.evaluate(() => {
+  // The footer's entries, in the order the page renders them. `prose footer` in the package
+  // owns this footer's CSS and design:check compares those bytes — but nothing looked at the
+  // markup, so a rewrite that truncated the credit lockup at the nested </span> of .rbmark
+  // passed design:check, verify, og:check and the og suite together: it dropped "Robert Blust"
+  // and left an unclosed <a>, and the browser reparented every entry after it inside that <a>.
+  // Direct children are therefore what this counts — nesting collapses the list to one.
+  //
+  // The mark's <svg> carries the letters "rb" as <text>, so svg is stripped before reading a
+  // label. Otherwise the credit reads "rbRobert Blust" and the expected value has to encode a
+  // rendering detail of the logo.
+  async footer(page, spec) {
+    const bad = await page.evaluate((want) => {
       const f = document.querySelector("footer");
       if (!f) return ["there is no footer"];
       const out = [];
       if (!f.closest(".shell")) out.push("footer is not inside .shell — it will not line up with the page");
+      const spans = [...f.children].filter((el) => el.tagName === "SPAN");
+      const label = (el) => {
+        const c = el.cloneNode(true);
+        c.querySelectorAll("svg").forEach((s) => s.remove());
+        return c.textContent.replace(/\s+/g, " ").trim();
+      };
+      const got = spans.map(label);
+      if (got.join(" · ") !== want.join(" · "))
+        out.push(`reads "${got.join(" · ")}", expected "${want.join(" · ")}"`);
+      // One link per entry: an unclosed anchor swallows its neighbours rather than dropping
+      // them, so a correct-looking label list can still hide a broken entry.
+      for (const el of spans) {
+        const n = el.querySelectorAll("a").length;
+        if (n !== 1) out.push(`entry "${label(el)}" holds ${n} links, expected exactly 1`);
+      }
       const priv = [...f.querySelectorAll("a")]
-        .find(a => /^(privacy|datenschutz)$/i.test(a.textContent.trim()));
+        .find((a) => /^(privacy|datenschutz)$/i.test(a.textContent.trim()));
       if (!priv) out.push("footer has no privacy link");
       else {
         const here = new URL(location.href).pathname.replace(/\/+$/, "/");
@@ -238,7 +270,7 @@ const CHECKS = {
         if (!current && here === "/privacy/") out.push("privacy link is the current page and does not say so");
       }
       return out;
-    });
+    }, spec.footer);
     return bad.length ? bad.join("; ") : null;
   },
   // The nav is one row across three sites, and it is written by hand on every page, so it
