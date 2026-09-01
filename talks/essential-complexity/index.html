@@ -312,17 +312,6 @@
   .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
   .title-slide .byline span{color:var(--dim)}
 
-  /* comic accents – hand-drawn journey panels as a consistent side motif */
-  .comic-r{position:absolute; right:5.5cqmin; top:50%; transform:translateY(-52%);
-    width:clamp(180px,25cqmin,320px); border:3px solid #2f3238; border-radius:0;
-    box-shadow:8px 8px 0 rgba(122,160,255,.22); overflow:hidden; background:#fff}
-  .comic-r img{display:block; width:100%}
-  .has-comic h1{max-width:15ch}
-  .has-comic .big-punch{max-width:14ch}
-  .has-comic .sub{max-width:23ch}
-  .has-comic .note{max-width:40ch}
-  .has-comic .checks{max-width:47ch}
-  .has-comic .blist{max-width:26ch}
 
   .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
 
@@ -543,10 +532,9 @@
   .notes .close:focus-visible{outline:2px solid #9db0ff; outline-offset:2px}
   /* notes open: JS scales the active slide to fit above the panel */
   .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
-  .deck.notes-open .comic-r{position:static; transform:none; width:min(40cqmin,230px); margin:2.4cqmin 0 0; box-shadow:6px 6px 0 rgba(122,160,255,.22)}  /* comic flows under the text so it scales with the content */
   .deck.notes-open .split{align-items:start; margin-top:1.6cqmin}
 
-  /* mobile / portrait: stack content and comic, one column, scrollable. */
+  /* mobile / portrait: one column, scrollable. */
   @media (max-width: 860px), (max-aspect-ratio: 4/5){
     .chrome{
       grid-template-columns:1fr; padding:0;
@@ -563,10 +551,6 @@
     .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
     .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
     .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
-    .has-comic h1, .has-comic .big-punch, .has-comic .sub, .has-comic .note,
-    .has-comic .checks, .has-comic .blist{max-width:100%}
-    /* comic into the flow, on its own line under the text */
-    .comic-r{position:static; transform:none; width:min(78%,320px); margin:6vw 0 0; box-shadow:6px 6px 0 rgba(122,160,255,.22)}
     /* two-column blocks stack */
     .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
     .checks{max-width:100%}
@@ -605,7 +589,7 @@
   </section>
 
   <!-- 1 · Roter Faden -->
-  <section class="slide has-comic"
+  <section class="slide"
     data-notes="<em class='cue'>Persönlicher Einstieg – wer ich bin, mein roter Faden.</em> Vier Bereiche prägen meine Laufbahn: Softwareentwicklung, Methodik, IT-Architektur und Business-Architektur; mal lag mein Fokus mehr auf dem einen, mal auf dem anderen – so kenne ich alle vier. Mein Ziel ist immer die durchgängige Spur: von der Business-Architektur bis zur Entwicklung, mit voller Traceability. <em class='cue'>Diese Spannung lasse ich offen – das Ziel war lange teuer und schwer zu erreichen. Die Auflösung (UML/SysML/DSL nötig, Code ≠ Realität → mit KI möglich) spare ich mir bewusst für Slide 3/7/8 auf. Hier verrate ich die Pointe noch NICHT.</em>"
     data-notes-en="<em class='cue'>Personal opener – who I am, my through-line.</em> Four areas shaped my career: software development, methodology, IT architecture and business architecture; at times my focus leaned to one, at times to another – so I know all four. My goal is always the same continuous trace: from business architecture down to implementation, with full traceability. <em class='cue'>I keep the tension open – the goal was long expensive and hard to reach. I deliberately save the resolution (UML/SysML/DSL were needed, code ≠ reality → with AI it becomes possible) for slides 3/7/8. I do NOT give away the punchline here.</em>"
     data-time="1:00">
@@ -613,11 +597,10 @@
     <h1 data-de="Von der <em>Business-Architektur</em> bis zum <em>Code</em> – durchgängige Traceability.">From <em>business architecture</em> to <em>code</em> – end-to-end traceability.</h1>
     <p class="sub" data-de="Vier Bereiche prägen meine Laufbahn: Softwareentwicklung, Methodik, IT-Architektur und Business-Architektur. Ich kenne alle vier.">Four areas shaped my career: software development, methodology, IT architecture and business architecture. I know all four.</p>
     <p class="note" data-de="Das Ziel ist immer die Durchgängigkeit von der Fachlichkeit bis zur Umsetzung – nur war der Weg dorthin lange teuer und schwer.">The goal is always end-to-end continuity – from the business domain to implementation. Only the path there was long expensive and hard.</p>
-    <div class="comic-r"><img src="comic-1.png" alt="Comic: We need a detailed map"></div>
   </section>
 
   <!-- 2 · Der Anspruch -->
-  <section class="slide has-comic" data-say-title="no"
+  <section class="slide" data-say-title="no"
     data-notes="<em class='cue'>Mein eigentlicher Anspruch – der Kern des Vortrags.</em> „Ein gutes Modell beschreibt ein Problem in seiner essenziellen Komplexität – nicht mehr, nicht weniger.“ Das Wesentliche erfassen, das Unwichtige weglassen – das ist die eigentliche Kunst. <em class='cue'>Persönlich betonen:</em> Das ist mein Anspruch an jedes Modell, seit rund 15 Jahren."
     data-notes-en="<em class='cue'>My real standard – the core of the talk.</em> “A good model captures a problem in its essential complexity – no more, no less.” Capture the essential, leave out the unimportant – that is the real craft. <em class='cue'>Make it personal:</em> This has been my standard for every model, for about 15 years."
     data-time="1:10">
@@ -625,7 +608,6 @@
     <h1 data-de="Ein Modell beschreibt ein Problem in seiner <em>essenziellen Komplexität</em> – nicht mehr.">A model captures a problem in its <em>essential complexity</em> – no more.</h1>
     <p class="sub" data-de="Das Wesentliche erfassen, das Unwichtige weglassen. Das ist die eigentliche Kunst.">Capture the essential, leave out the unimportant. That is the real craft.</p>
     <p class="note" data-de="Seit rund 15 Jahren mein Anspruch an jedes Modell.">My standard for every model, for about 15 years.</p>
-    <div class="comic-r"><img src="comic-2.png" alt="Comic: To document everything, we must begin the journey"></div>
   </section>
 
   <!-- 3 · Früher schwer, heute einfacher -->
@@ -650,7 +632,7 @@
   </section>
 
   <!-- 4 · Mein Ansatz -->
-  <section class="slide has-comic"
+  <section class="slide"
     data-notes="<em class='cue'>Überblick – ich zeige die Breite, ohne zu dozieren.</em> „Genau das habe ich bei LIKE MAGIC gebaut: unser Geschäftswissen als lebende Wissensbasis – die Fakten als Markdown, strukturiert durch ein Meta-Modell.“ <em class='cue'>Ich benenne die vier Bereiche kurz</em> (Domänen und Begriffe · Rollen/Teams/Prozesse · Architektur-Entscheide und Regeln · KPIs) <em class='cue'>und betone:</em> versioniert wie Code, maschinenlesbar, EINE Quelle der Wahrheit. <em class='cue'>Kurz halten – das konkrete Beispiel kommt gleich.</em>"
     data-notes-en="<em class='cue'>Overview – I show the breadth, I don't lecture.</em> “This is exactly what I built at LIKE MAGIC: our business knowledge as a living knowledge base – the facts as Markdown, structured by a meta-model.” <em class='cue'>I briefly name the four areas</em> (domains and terms · roles/teams/processes · architecture decisions and rules · KPIs) <em class='cue'>and emphasize:</em> versioned like code, machine-readable, ONE source of truth. <em class='cue'>Keep it short – the concrete example comes next.</em>"
     data-time="0:45">
@@ -664,7 +646,6 @@
       <li data-de="<b>Woran wir messen</b><span>KPIs</span>"><b>How we measure</b><span>KPIs</span></li>
     </ul>
     <p class="stamp" data-de="Fakten als Markdown &nbsp;·&nbsp; strukturiert durch ein Meta-Modell &nbsp;·&nbsp; <b>maschinenlesbar</b>">Facts as Markdown &nbsp;·&nbsp; structured by a meta-model &nbsp;·&nbsp; <b>machine-readable</b></p>
-    <div class="comic-r"><img src="comic-3.png" alt="Comic: Each fact is a building block – structured knowledge"></div>
   </section>
 
   <!-- 5 · Beispiel: Domäne Finance -->
@@ -722,7 +703,7 @@
   </section>
 
   <!-- 6 · Der Nutzen -->
-  <section class="slide has-comic"
+  <section class="slide"
     data-notes="<em class='cue'>Der eigentliche Nutzen – das überzeugt Entwickler.</em> Weil es EINE Referenz gibt, lassen sich die Bereiche gegeneinander validieren: Requirements verwenden nur Begriffe aus dem Glossar – eine Sprache, keine Synonyme. Die Implementierung prüfe ich gegen Glossar UND Architektur-Entscheide (ADRs). Und: neue Begriffe müssen erst ins Glossar, sonst kein Merge – so bleibt die Sprache sauber. <em class='cue'>Mein Kernsatz:</em> Widersprüche fallen auf, weil es eine Referenz gibt – Konsistenz über den ganzen Lebenszyklus. <em class='cue'>Überleitung: genau diese Prüfung kann heute die KI übernehmen.</em>"
     data-notes-en="<em class='cue'>The real payoff – this convinces developers.</em> Because there is ONE reference, the areas can be validated against each other: requirements use only terms from the glossary – one language, no synonyms. I check the implementation against glossary AND architecture decisions (ADRs). And: new terms must land in the glossary first, otherwise no merge – that keeps the language clean. <em class='cue'>My key line:</em> contradictions surface because there is a reference – consistency across the whole lifecycle. <em class='cue'>Bridge: this very check can now be done by AI.</em>"
     data-time="1:10">
@@ -734,18 +715,16 @@
       <div class="check"><span data-de="<b>Neue Begriffe</b> müssen erst ins <i>Glossar</i> – sonst kein Merge."><b>New terms</b> must land in the <i>glossary</i> first – otherwise no merge.</span></div>
     </div>
     <p class="stamp" data-de="Keine Dokumentation, sondern ein Artefakt zum Validieren – damit <b>Änderungen günstiger und sicherer werden.</b>">Not documentation but an artifact to validate against – so that <b>change gets cheaper and safer.</b></p>
-    <div class="comic-r"><img src="comic-5.png" alt="Comic: Shared across all platforms"></div>
   </section>
 
   <!-- 7 · Warum es jetzt zählt -->
-  <section class="slide has-comic"
+  <section class="slide"
     data-notes="<em class='cue'>Meine Pointe – kurze Pause davor. EIN Punkt, klar:</em> „Ein Modell wie das <em>Mental Model</em> gibt der KI den richtigen Kontext – es verkleinert den Raum, in dem sie raten muss.“ <em class='cue'>Wichtig: nicht „ohne Halluzinationen“ behaupten – Kontext reduziert das Raten, eliminiert es nicht.</em> Je sauberer die Struktur, desto besser der Kontext. In der Praxis nutze ich das Mental Model als Kontextschicht für KI-Assistenten. <em class='cue'>Meine These:</em> Nicht die KI ersetzt die Fachleute – sie macht ihr explizites Wissen wertvoller denn je. <em class='cue'>Optional, nur auf Nachfrage: derselbe Effekt via RAG (der KI die relevanten Fakten mitgeben). Auto-Validierung spreche ich hier NICHT an – die gehört auf Slide 6.</em>"
     data-notes-en="<em class='cue'>My punchline – short pause before it. ONE point, clearly:</em> “A model like the <em>Mental Model</em> gives AI the right context – it shrinks the space where it has to guess.” <em class='cue'>Important: don't claim “without hallucinations” – context reduces the guessing, it doesn't eliminate it.</em> The cleaner the structure, the better the context. In practice I use the Mental Model as a context layer for AI assistants. <em class='cue'>My thesis:</em> AI does not replace the experts – it makes their explicit knowledge more valuable than ever. <em class='cue'>Optional, only if engineers ask: the same effect via RAG (giving AI the relevant facts). I do NOT raise auto-validation here – that belongs on slide 6.</em>"
     data-time="1:00">
     <div class="kicker" data-n="07" data-de="Warum es jetzt zählt">Why it matters now</div>
     <h1 class="big-punch" data-de="Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.">The right context makes AI <em>far more reliable</em>.</h1>
     <p class="note" data-de="Ein Modell wie das <em>Mental Model</em> gibt der KI den richtigen Kontext: Es eliminiert Halluzinationen nicht – aber es verkleinert den Raum, in dem sie raten muss, und verschiebt sie von Raten zu fundiertem Arbeiten. Je sauberer die Struktur, desto besser der Kontext. In der Praxis: das Mental Model als Kontextschicht für KI-Assistenten.">A model like the <em>Mental Model</em> gives AI the right context: it does not eliminate hallucinations – but it shrinks the space where AI has to guess, moving it from guessing to grounded reasoning. The cleaner the structure, the better the context. In practice: the Mental Model as a context layer for AI assistants.</p>
-    <div class="comic-r"><img src="comic-4.png" alt="Comic: Consistent projection"></div>
   </section>
 
   <!-- 8 · Wohin es geht -->
@@ -760,7 +739,7 @@
   </section>
 
   <!-- 9 · Takeaway -->
-  <section class="slide has-comic"
+  <section class="slide"
     data-notes="<em class='cue'>Mein Takeaway.</em> „Der Anspruch bleibt derselbe wie vor 15 Jahren – die essenzielle Komplexität erfassen, nicht mehr. Neu ist: der Weg dorthin steht heute allen offen, und das Ergebnis zahlt doppelt – für Menschen und für KI.“ <em class='cue'>Bodenständiger Schluss:</em> „Deshalb baue ich bis heute so – nah am Code, aber mit dem Modell im Kopf.“ <em class='cue'>Kurze Pause, dann der Dank.</em> Danke. <em class='cue'>Optional: Gerne zeige ich das Mental Model gleich im Detail.</em>"
     data-notes-en="<em class='cue'>My takeaway.</em> “The standard stays the same as 15 years ago – capture essential complexity, no more. What is new: the path there is now open to everyone, and the result pays off twice – for people and for AI.” <em class='cue'>Grounded close:</em> “That is how I still build today – close to the code, but with the model in mind.” <em class='cue'>Short pause, then the thanks.</em> Thank you. <em class='cue'>Optional: happy to show the Mental Model in detail right away.</em>"
     data-time="0:55">
@@ -768,7 +747,6 @@
     <h1 data-de="Werkzeuge kommen und gehen – <em>das Modell bleibt</em>.">Tools come and go – <em>the model stays</em>.</h1>
     <p class="sub" data-de="Der Anspruch bleibt: die essenzielle Komplexität erfassen. Nur steht der Weg heute allen offen.">The standard stays: capture essential complexity. Only now the path is open to everyone.</p>
     <p class="note" data-de="Deshalb baue ich bis heute so: nah am Code, aber mit dem Modell im Kopf. Danke.">That is how I still build today: close to the code, but with the model in mind. Thank you.</p>
-    <div class="comic-r"><img src="comic-6.png" alt="Comic: The horizon is within reach, one consistent step at a time"></div>
   </section>
 
 </div>
