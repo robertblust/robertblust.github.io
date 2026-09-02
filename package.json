@@ -21,7 +21,7 @@
     "dupes": "node tools/dupes.mjs"
   },
   "devDependencies": {
-    "@robertblust/design": "github:robertblust/design#v0.11.3",
+    "@robertblust/design": "github:robertblust/design#v0.12.2",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
   }
