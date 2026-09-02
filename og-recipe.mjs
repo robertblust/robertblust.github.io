@@ -9,15 +9,21 @@
 // The comparison is the recipe, never the pixels. Two machines rasterise the same text
 // differently, so a card compared by its bytes reports which machine rendered it. Re-deriving
 // a hash of what went *into* the card needs no browser and no server, which is why the check
-// can run in CI before `npm ci`.
+// needs no server and no browser — it does need `npm ci`, because the machinery below now
+// arrives from the package.
 //
-// The knobs below are the single copy. The exporter reads its frame and its hide rules from
-// here rather than holding its own: a second copy is a knob that can be edited without the
-// hash moving, which is the one failure this whole mechanism exists to make impossible.
-import crypto from "node:crypto";
-import fs from "node:fs";
+// The knobs below are the single copy. The machinery that hashes them is not here at all: it
+// is `@robertblust/design/cards/recipe`, shared with the two sibling sites, and the exporter
+// and the check read their frame and their hide rules from this file rather than holding their
+// own. A second copy of a knob is a knob that can be edited without the hash moving, which is
+// the one failure this whole mechanism exists to make impossible.
+//
+// `REPO_ROOT` is derived here and passed in, never derived by the package: this file really
+// does sit at the repository root, and the same line inside a dependency would point into
+// `node_modules`.
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { recipeFor } from "@robertblust/design/cards/recipe";
 
 export const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,79 +57,6 @@ export const cards = [
   { dir: "talks/essential-complexity", ...FRAME, hide: HIDE, titleSlide: true },
 ];
 
-// Everything the page pulls in from this repository: the fonts it declares, the images it
-// shows. A font swap changes every card while no HTML changes at all, so hashing the page
-// alone would call a card current that no longer looks like its page.
-//
-// Quoted spans are consumed whole, so a `>` inside an attribute value cannot end a tag early
-// and drop the references after it — the decks keep prose in `data-notes`, where that
-// character is ordinary. The attribute pattern admits `?` and `#` so the split below can strip
-// them: excluding them from the character class instead means a reference carrying either
-// fails to match at all and drops out of the recipe silently, which is under-reporting.
-const TAG = /<([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^>"'])*)>/g;
-const ATTR = /(?:src|href)="([^"]+)"/g;
-const CSSURL = /url\((['"]?)([^)'"]+)\1\)/g;
-
-export function sources(dir, root = REPO_ROOT) {
-  const page = path.join(dir, "index.html");
-  const html = fs.readFileSync(path.join(root, page), "utf8");
-  const found = new Set([page]);
-  const refs = [];
-  for (const [, tag, attrs] of html.matchAll(TAG)) {
-    // An `<a>` names somewhere else to go, not something to draw. The talks index is why this
-    // exception exists: it links four multi-megabyte PDFs of the two talks, so hashing link
-    // targets reported that card stale on every `npm run pdf`, over a page that had not moved
-    // a pixel.
-    if (tag.toLowerCase() === "a") continue;
-    for (const m of attrs.matchAll(ATTR)) refs.push(m[1]);
-  }
-  for (const m of html.matchAll(CSSURL)) refs.push(m[2]);
-  for (const raw of refs) {
-    const ref = raw.split(/[?#]/)[0];
-    // absolute, inline and protocol-relative references leave this repository, and the card's
-    // own og:image is one of them — hashing it would key the card on itself.
-    if (!ref || /^(https?:)?\/\/|^data:|^mailto:/.test(ref)) continue;
-    const rel = path.normalize(path.join(dir, ref));
-    if (rel.startsWith("..")) continue;
-    const abs = path.join(root, rel);
-    if (fs.existsSync(abs) && fs.statSync(abs).isFile()) found.add(rel);
-  }
-  return [...found].sort();
-}
-
-// Key order in a card literal is not a change to the card, and a knob added to a card later is.
-// Sorting the keys and hashing all of them means a new knob enters the recipe by existing,
-// rather than by someone remembering to list it here as well.
-const canonical = (card) =>
-  JSON.stringify(Object.fromEntries(Object.entries(card).sort(([a], [b]) => (a < b ? -1 : 1))));
-
-export function recipe(card, root = REPO_ROOT) {
-  const h = crypto.createHash("sha256");
-  h.update("og-recipe/1\n" + canonical(card) + "\n");
-  for (const rel of sources(card.dir, root)) {
-    h.update(rel + "\0");
-    h.update(fs.readFileSync(path.join(root, rel)));
-  }
-  return h.digest("hex");
-}
-
-export const stampOf = (dir, root = REPO_ROOT) => path.join(root, dir, "og.sha");
-
-export function state(card, root = REPO_ROOT) {
-  const stamp = stampOf(card.dir, root);
-  const want = recipe(card, root);
-  const have = fs.existsSync(stamp) ? fs.readFileSync(stamp, "utf8").trim() : "";
-  return {
-    dir: card.dir,
-    card: path.join(card.dir, "og.png"),
-    want,
-    have,
-    state: !have ? "unstamped" : have === want ? "current" : "stale",
-  };
-}
-
-// Written after the screenshot, so an exporter that dies half way leaves its card reported
-// stale rather than reported current on a file it never wrote.
-export function stamp(card, root = REPO_ROOT) {
-  fs.writeFileSync(stampOf(card.dir, root), recipe(card, root) + "\n");
-}
+// Bound to this site's root, so every caller here keeps calling `state(card)` with one
+// argument while the shared tests can still pass a throwaway tree as a second.
+export const { sources, recipe, stampOf, state, stamp } = recipeFor(REPO_ROOT);
