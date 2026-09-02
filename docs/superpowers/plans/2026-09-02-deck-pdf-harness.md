@@ -30,6 +30,15 @@ site-side. `pymupdf` is used only as a local measuring tool for the proof and is
   dependency only.
 - **Merge with `gh pr merge --merge`, never `--squash`.** Author is `robert.blust@flatland.ch`.
   Stage by name; never `git add -A`.
+- **AMENDED DURING EXECUTION — the proof is fresh-original vs fresh-harness, not before-vs-committed.**
+  The committed PDFs cannot be reproduced on this machine, and that has nothing to do with this
+  change: running the *original, unmodified* exporter on untouched `main` re-renders slide 5 of
+  both `essential-complexity` decks and slides 4–5 of both `mental-model` decks differently from
+  the files in git. Two fresh runs of the original agree with each other exactly, so the exporter
+  is deterministic per machine and the committed files were produced on a different one. Each
+  site task therefore renders once with the script it already has, hashes that, then applies the
+  change, renders again and compares **those two**. The delta against the committed files is
+  recorded in the PR as an observation, not a failure. No PDF is committed either way.
 - **`npm run pdf` runs in no CI workflow on any site**, and this plan adds no workflow step. The
   proof is done locally, by hand, and recorded in each pull request.
 
