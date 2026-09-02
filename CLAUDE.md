@@ -479,11 +479,24 @@ the page moves, and nothing about a stale card looks wrong. Two of the four here
 the site as it read two days earlier, through several commits, and every check passed the
 whole time.
 
-- **Three files, one of them the single copy of the knobs.** `og-recipe.mjs` holds the card
-  list, the frame and the hide rules and nothing else — it is pure, so `verify/og-recipe.test.mjs`
-  can load it; `export-og.mjs` renders and stamps; `og-check.mjs` compares. A knob kept in the
-  exporter as well would be a knob that can be edited without the hash moving, which is the one
-  failure this mechanism exists to make impossible. All three sibling sites carry this shape.
+- **One file of knobs and three thin callers over a shared harness.** `og-recipe.mjs` holds
+  the card list, the frame and the hide rules and nothing else, and binds the machinery with
+  `recipeFor(REPO_ROOT)`; `export-og.mjs`, `og-check.mjs` and `verify/og-recipe.test.mjs` are
+  four lines each over `@robertblust/design/cards/{export,check,recipe-tests}`. A knob kept in
+  the exporter as well would be a knob that can be edited without the hash moving, which is the
+  one failure this mechanism exists to make impossible — and the harness holds none, so there
+  is nowhere for a second copy to live. All three sibling sites carry this shape, which is why
+  it is worth having in a package: the three had drifted into each holding a capability the
+  other two had lost, and every one of those losses renders a card that looks plausible.
+- **`REPO_ROOT` is this file's, and is passed in.** The package never derives a root from its
+  own `import.meta.url` — that line is correct here, where the file really does sit at the
+  repository root, and points inside `node_modules` once the same code ships as a dependency.
+  Bind through `recipeFor(REPO_ROOT)` rather than `export * from`, which leaves `root` unbound
+  and makes `state()` throw for this site's own callers.
+- **The frame is this site's and is not interchangeable.** blust.ch and companygraph carry
+  `clipY` and no `deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`.
+  The recipe hashes every key of a card, so a single spurious `deviceScaleFactor: 1` copied in
+  from a sibling moves all eight `og.sha` here while no picture changes.
 - **The hash covers every key of a card, sorted, not a hand-written list of them.** That is why
   `settle` and `from` can exist in companygraph's cards and not here without the mechanism
   differing: a knob added later enters the recipe by existing. It also means changing the
@@ -493,14 +506,19 @@ whole time.
 - **`npm run og:check` compares the recipe, never the pixels.** Two machines rasterise the
   same text differently, so a card compared by its bytes reports which machine rendered it.
   The check re-derives a hash of what went *into* the card and compares it with the `og.sha`
-  committed beside it. It renders nothing, needs no browser, and runs in CI before `npm ci`.
+  committed beside it. It renders nothing and needs no browser, so it runs in CI before
+  `npx playwright install` — but after `npm ci`, because the check now arrives from the
+  package. Left where it used to sit, ahead of `npm ci`, every push fails with
+  `ERR_MODULE_NOT_FOUND`, and a local run cannot catch that because `node_modules` is already
+  on the machine. `npm run test:dupes` imports nothing outside `node:` and still runs first.
 - **The recipe is the page plus every local file the page names plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at
   all. Every page names the root `fonts/`, so perturbing it marks **all four** cards stale —
   the layout described above, observable.
-- **A link is not an asset.** The walk skips `<a href>`: the talks index links four
-  multi-megabyte PDFs of the two talks, and hashing a link target reported that card stale
-  on every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
+- **A link is not an asset.** The walk skips `<a href>`. The shared comment states the rule
+  in the family's terms — a talks index links each deck's multi-megabyte PDF — and this is the
+  site it was learned on: the four PDFs of the two talks here reported that card stale on
+  every `npm run pdf`, over a page that had not moved a pixel. Everything else a page
   names — `<link>`, `<img>`, `url()` in the inline CSS — is an asset and counts. The
   attribute pattern also admits `?` and `#` and strips them afterwards, because excluding
   them from the character class means `href="a.css?v=2"` matches nothing and leaves the

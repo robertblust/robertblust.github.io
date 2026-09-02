@@ -32,18 +32,13 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      # After setup-node for a known node, before npm ci because it installs nothing: the
-      # check renders no page, it re-derives each card's recipe hash and compares.
-      # The duplication sweep decides what counts as duplication by deciding which lines the
-      # package owns. It has been wrong about that three times, and each time the wrong answer
-      # looked like a clean result. This runs its own tests; it does not run the sweep, which
-      # needs all three checkouts side by side and so only works on a developer's machine.
+      # Before npm ci because it installs nothing: the duplication sweep decides what counts as
+      # duplication by deciding which lines the package owns. It has been wrong about that three
+      # times, and each time the wrong answer looked like a clean result. This runs its own
+      # tests; it does not run the sweep, which needs all three checkouts side by side and so
+      # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
-      - name: The card check still works
-        run: npm run test:og
-      - name: Cards still show the page they render
-        run: npm run og:check
       # The principles page is generated from the model, so a page edited by hand — or a model
       # that moved without the page being rebuilt — is a drift this catches before it ships.
       # Reads the pinned commit over the API; the token is only for the rate limit.
@@ -56,6 +51,15 @@ jobs:
       # not what the package ships should fail on the cheap step, not on a rendered page.
       - name: The shared files are still what the package ships
         run: npm run design:check
+      # The card harness now arrives from the package, so these two can no longer run before
+      # npm ci — left above it they fail every push with ERR_MODULE_NOT_FOUND. They still need
+      # no browser, which is the property worth keeping: og:check renders no page, it
+      # re-derives each card's recipe hash and compares. So they sit here, after npm ci and
+      # before playwright install.
+      - name: The card check still works
+        run: npm run test:og
+      - name: Cards still show the page they render
+        run: npm run og:check
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
         run: python3 -m http.server 8000 > /dev/null 2>&1 &
