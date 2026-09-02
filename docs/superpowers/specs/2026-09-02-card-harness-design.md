@@ -30,9 +30,9 @@ The recipe tests have drifted the same way. Blust.ch is missing *"changing how t
 settles changes the recipe"* and *"two cards from the same page with the same frame agree"*,
 which the other two have; it alone has *"a fragment-only url() names nothing on disk"*.
 Companygraph is missing the key-ordering test that blust.ch and guestgraph both have, and
-alone has *"changing the state the card renders changes the recipe"*. `cardFor` exists in two
-repositories of three. The counts are **29, 30 and 30, and no one of them is a superset of
-another** — there is no copy here to consolidate onto.
+alone has *"changing the state the card renders changes the recipe"*. The counts are **29, 30
+and 30, and no one of them is a superset of another** — there is no copy here to consolidate
+onto.
 
 This is the exact shape of the defect that nearly shipped in the suite runner consolidation:
 three copies of one thing, a premise that they were identical, and a consolidation onto one
@@ -95,11 +95,14 @@ recipe(card, root)   -> string     a hash over the card's knobs and its sources'
 stampOf(dir, root)   -> string     the path of the stamp file beside a card
 state(card, root)    -> "current" | "stale" | "unstamped"
 stamp(card, root)    -> void       write the stamp beside the card
-cardFor(cards, dir)  -> card       look a card up by directory
+recipeFor(root)      -> the five above, with root defaulted to the site's
 ```
 
-`cardFor` gains a `cards` parameter, since the package cannot see a site's list. It is
-otherwise the function two of the three sites already have.
+**`cardFor` is dropped rather than shared.** Companygraph and guestgraph both export it, which
+is what made it look like a union item; it is defined once in each and called nowhere, in
+either repository. The union rule protects capabilities a site would otherwise lose, and an
+export nothing imports is not one. Recording the decision here because the alternative — moving
+it quietly — would put dead code in the package and make the next reader think it matters.
 
 **`root` must stay a parameter.** The suite runner consolidation shipped a `SITE_ROOT` derived
 from `import.meta.url`, which pointed inside `node_modules` the moment the module moved into
@@ -239,8 +242,13 @@ the card lists genuinely differ, and no site's list belongs in the package.
 
 ## Success criteria
 
-1. `npm run og:check` passes on all three sites, and **no `og.png` or `og.sha` file changes**
-   anywhere in the work.
+1. **No `og.png` changes anywhere**, on any site. `npm run og:check` passes on all three.
+
+   One expected exception, and only one: dropping `from` from guestgraph's cards (decision 3)
+   moves every guestgraph `og.sha`, because the recipe hashes every key of a card. The
+   pictures are byte-identical; the hashes are not. So guestgraph runs `npm run og` and its
+   diff must contain `og.sha` files and nothing else. A changed `og.png` there is a defect
+   like anywhere else.
 2. Every capability in the table at the top of this spec is present on all three sites
    afterwards. Verified by test, not by reading.
 3. The union recipe test suite runs on all three sites and reports **32 tests on each**, up
