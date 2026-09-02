@@ -17,7 +17,8 @@
     "principles:check": "node build/principles.mjs --check",
     "model": "node build/model.mjs",
     "model:check": "node build/model.mjs --check",
-    "test:instance": "node --test verify/instance.test.mjs"
+    "test:instance": "node --test verify/instance.test.mjs",
+    "dupes": "node tools/dupes.mjs"
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.11.3",
