@@ -36,6 +36,16 @@ updates:
       # bumps it is the one that has to be checked against the page it draws. It also comes
       # by tag rather than by version range, which Dependabot reads only because the pin is
       # a tag — a commit SHA here would be invisible to it entirely.
+      #
+      # A pull request from this group proposing a LOWER version is closed, never merged. That
+      # happened three times on 2026-09-02 — v0.5.0 down to v0.4.1, a commit predating the
+      # instance parser, so it has no lib/ and the import fails. CI caught it every time. The
+      # cause is Dependabot's release cooldown, not its tag ranking: it dates each git tag by
+      # that tag's GitHub Release and filters out anything released within three days.
+      # meta-model had a Release for v0.5.0 alone, so the newest tag was excluded as too fresh
+      # while the older tags, carrying no Release and therefore no date to filter on, all
+      # survived — leaving v0.4.1 the best of the remainder. It stops once a release ages past
+      # the cooldown, and does not recur while every recent tag carries one.
       meta-model:
         patterns:
           - "companygraph-meta-model"
