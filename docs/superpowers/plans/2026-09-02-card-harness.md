@@ -28,8 +28,11 @@ the package never imports it).
   files and nothing else.
 - **Zero dependencies and zero devDependencies in `@robertblust/design`.** It never imports
   Playwright — `exportCards` receives a `chromium`.
-- **`cards/check.mjs` imports nothing outside node's standard library.** CI runs `og:check`
-  before `npm ci`; a non-`node:` import there breaks the job's cheapest step.
+- **`cards/check.mjs` imports nothing outside node's standard library**, so `og:check` needs no
+  browser and can run before `npx playwright install`. It can no longer run before `npm ci`:
+  adoption makes it import the package, which is not on disk until `npm ci` has run. **Every
+  site's `ci.yml` must move `og:check` and `test:og` to after `npm ci`** or every push fails
+  with `ERR_MODULE_NOT_FOUND`. All three order it the old way today.
 - **`root` is never derived inside the package.** The site owns `REPO_ROOT` and passes it in.
   Deriving it from `import.meta.url` points inside `node_modules` — that is the `SITE_ROOT`
   defect from the suite runner round, and this plan avoids it by construction.
@@ -586,12 +589,22 @@ import { recipeFor } from "@robertblust/design/cards/recipe";
 
 export const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
-const FRAME = { width: 1200, height: 630, renderHeight: 675, deviceScaleFactor: 1 };
-const HIDE = `…`;                        // unchanged
-export const cards = [ … ];              // unchanged, byte for byte
+const FRAME = /* THIS SITE'S, VERBATIM — do not retype it */;
+const HIDE  = /* unchanged */;
+export const cards = [ /* unchanged, byte for byte */ ];
 
 export const { sources, recipe, stampOf, state, stamp } = recipeFor(REPO_ROOT);
 ```
+
+**Copy `FRAME` verbatim. Do not retype it and do not normalise it.** The three sites' frames
+differ and none is interchangeable: blust.ch and companygraph carry `clipY` and no
+`deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`. The recipe hashes
+every key of a card, so adding one key moves every `og.sha` on that site — measured at 8 of 8
+on blust.ch from a single spurious `deviceScaleFactor: 1`.
+
+The specifier is `@robertblust/design/cards/recipe`, with no `.mjs` — the `exports` map has no
+suffixed entry and raises `ERR_PACKAGE_PATH_NOT_EXPORTED`. Use `recipeFor(REPO_ROOT)`, never
+`export * from`: that leaves `root` unbound and `state()` throws for the site's own callers.
 
 `REPO_ROOT` stays here and stays derived from `import.meta.url` — which is correct in the
 site, where the file really does sit at the repository root, and would be wrong in the package.
@@ -627,6 +640,17 @@ import * as recipe from "../og-recipe.mjs";
 
 checkRecipe(recipe);
 ```
+
+- [ ] **Step 5b: Move `og:check` and `test:og` after `npm ci` in `.github/workflows/ci.yml`**
+
+Both steps now import the package, which does not exist on disk until `npm ci` has run. Left
+where they are, every push fails with `ERR_MODULE_NOT_FOUND`. Put them after `npm ci` and
+before `npx playwright install` — `og:check` still needs no browser, which is the property
+worth keeping. `test:dupes`, which imports nothing outside `node:`, stays where it is.
+
+**Local verification cannot catch this**, because `node_modules` exists on your machine. Prove
+it the way CI sees it: `mv node_modules /tmp/nm && npm run og:check; mv /tmp/nm node_modules`
+must fail before your change is meaningful.
 
 - [ ] **Step 6: Pin the tag and prove the fixed point**
 

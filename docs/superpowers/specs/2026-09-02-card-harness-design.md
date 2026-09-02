@@ -182,11 +182,25 @@ change"* and *"reordering a card's keys does not change the recipe"* are one tes
 
 ```js
 export const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
-const FRAME = { width: 1200, height: 630, renderHeight: 675, deviceScaleFactor: 1 };
-const HIDE = /* this site's hide rules */;
-export const cards = [ /* this site's cards */ ];
-export * from "@robertblust/design/cards/recipe.mjs";
+const FRAME = /* THIS SITE'S, VERBATIM — see below */;
+const HIDE = /* this site's hide rules, unchanged */;
+export const cards = [ /* this site's cards, unchanged */ ];
+
+export const { sources, recipe, stampOf, state, stamp } = recipeFor(REPO_ROOT);
 ```
+
+**Every line of data is copied verbatim, `FRAME` included.** The three sites' frames are not
+the same and no two are interchangeable — blust.ch and companygraph carry `clipY` and no
+`deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`. The recipe hashes
+every key of a card, so adding or removing one moves every `og.sha` on that site. An earlier
+draft of this spec showed a plausible-looking `FRAME` that matched none of them; it was
+measured to move 8 of 8 stamps on blust.ch alone.
+
+Two details about the last line, both of which fail loudly if got wrong. The specifier is
+`@robertblust/design/cards/recipe` — the `exports` map has no `.mjs` entry, so the suffixed
+form raises `ERR_PACKAGE_PATH_NOT_EXPORTED`. And it is `recipeFor(REPO_ROOT)`, not
+`export * from`: re-exporting the raw functions leaves `root` unbound, and `state()` then
+throws on the site's own callers.
 
 The other three become thin callers: `export-og.mjs` imports `chromium` and calls
 `exportCards`; `og-check.mjs` calls `checkCards` and exits on its count;
@@ -256,8 +270,16 @@ the card lists genuinely differ, and no site's list belongs in the package.
    union against each site's current test names, not by counting.
 4. Each shared module has a test in the package that is proven red by mutating the behaviour
    it guards. A gate that has never been seen to fail is not yet a gate.
-5. `og-check.mjs` still imports nothing outside node's standard library, and CI still runs it
-   before `npm ci`. Verified by a test that fails if the module gains a non-`node:` import.
+5. `cards/check.mjs` imports nothing outside node's standard library, so `og:check` still needs
+   no browser and runs **before `npx playwright install`** — the genuinely expensive step.
+   Verified behaviourally: the module is imported from a child process in a directory with no
+   `node_modules` above it, which is the condition, not a grep for import statements.
+
+   **It can no longer run before `npm ci`, and each site's `ci.yml` must move it.** Adoption
+   makes `og:check` and `test:og` import `@robertblust/design`, which is not on disk until
+   `npm ci` has run — so leaving the step where it is fails with `ERR_MODULE_NOT_FOUND` on
+   every push. All three sites order it that way today. This is the one property the tier
+   costs: the check moves from the cheapest step in the job to the second cheapest.
 6. The package still has zero dependencies and zero devDependencies, and still never imports
    Playwright.
 7. `npm run dupes` reports **fewer than 100 duplicated lines** across the card toolchain,
