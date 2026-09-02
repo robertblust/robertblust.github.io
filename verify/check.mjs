@@ -41,6 +41,7 @@ const PAGES = [
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
   { path: "/talks/mental-model/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
     transport: true, zeroBased: true,  card: true, brandMark: true,
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "rb-theme", tokenVersion: true,
@@ -52,6 +53,7 @@ const PAGES = [
     internalLinks: true },
   { path: "/talks/essential-complexity/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
     transport: true, zeroBased: true,  card: true, brandMark: true,
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "rb-theme", tokenVersion: true,
