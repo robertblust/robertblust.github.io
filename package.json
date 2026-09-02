@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "blust.ch — Robert Blust: profile page and talks.",
+  "description": "blust.ch \u2014 Robert Blust: profile page and talks.",
   "scripts": {
     "serve": "python3 -m http.server 8000",
     "design": "design sync",
@@ -18,7 +18,8 @@
     "model": "node build/model.mjs",
     "model:check": "node build/model.mjs --check",
     "test:instance": "node --test verify/instance.test.mjs",
-    "dupes": "node tools/dupes.mjs"
+    "dupes": "node tools/dupes.mjs",
+    "test:dupes": "node --test tools/dupes.test.mjs"
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.12.2",
