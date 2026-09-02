@@ -765,7 +765,9 @@ Put both hash listings in the PR body. Do not merge.
       `decks/export.mjs`.
 - [ ] `export-pdf.mjs` sits at the repository root on all three sites, and all three
       `package.json` files read `"pdf": "node export-pdf.mjs"`.
-- [ ] `npm run dupes` from blust.ch reports **no `export-pdf.mjs` row**, from 49 attributed lines.
+- [ ] `npm run dupes` from blust.ch reports **24 lines** for `export-pdf.mjs`, down from 49 —
+      the residue is the thin caller's own header comment, import block and call, which this
+      design duplicates on purpose across the three sites, so zero was never reachable.
 - [ ] The package's tests cover both shapes — a one-deck site and a two-deck site — and three of
       them have been seen red by mutation.
 - [ ] No CI workflow changed in any of the four repositories.
