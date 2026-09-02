@@ -12,14 +12,16 @@
 // it, because a graph is not prose and the drawing is the point. Both pin the same commit, so
 // the two pages can never disagree about which model they are showing.
 //
-// The parser is `build/instance.mjs`, copied from companygraph.io — it implements the
-// CompanyGraph conventions, and the conventions are the contract, not this repository. If the
-// model gains a type or a section shape, the fix belongs there and then here.
+// The parser comes from `companygraph-meta-model`, pinned by tag. It implements the
+// CompanyGraph conventions and now lives in the repository that defines them, so a rule and
+// its implementation can no longer drift apart unseen — that repository's own CI fails if the
+// parser cites a rule `core/CONVENTIONS.md` does not define. If the model gains a type or a
+// section shape, the fix belongs there and arrives here as a version bump.
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseInstance } from "./instance.mjs";
+import { parseInstance } from "companygraph-meta-model/instance";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { repo, commit } = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
