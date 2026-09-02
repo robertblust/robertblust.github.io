@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.13.0",
-    "companygraph-meta-model": "github:companygraph/meta-model#v0.5.0",
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.4.1",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
   }
