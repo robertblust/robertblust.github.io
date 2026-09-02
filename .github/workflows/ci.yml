@@ -60,6 +60,17 @@ jobs:
         run: npm run test:og
       - name: Cards still show the page they render
         run: npm run og:check
+      # The model page is generated from the model, exactly as the principles page is — but it
+      # cannot sit beside its sibling above, because build/model.mjs now imports the parser
+      # from companygraph-meta-model and that is not on disk until npm ci has run. Left up
+      # there it would fail every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch
+      # that, because node_modules is already on the machine. Until now neither this check nor
+      # the parser's tests ran here at all, so the one page this site builds from an external
+      # model was the one page CI never looked at.
+      - name: The model page still matches the model
+        run: npm run model:check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npx playwright install --with-deps chromium
       - name: Serve the site
         run: python3 -m http.server 8000 > /dev/null 2>&1 &

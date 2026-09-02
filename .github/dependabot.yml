@@ -31,6 +31,14 @@ updates:
       design:
         patterns:
           - "@robertblust/design"
+      # Same reason as design above, and the same requirement to be read: a meta-model
+      # release can change how `build/model.mjs` reads the model, so the pull request that
+      # bumps it is the one that has to be checked against the page it draws. It also comes
+      # by tag rather than by version range, which Dependabot reads only because the pin is
+      # a tag — a commit SHA here would be invisible to it entirely.
+      meta-model:
+        patterns:
+          - "companygraph-meta-model"
       minor-and-patch:
         update-types:
           - "minor"
