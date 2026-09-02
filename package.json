@@ -20,7 +20,7 @@
     "test:instance": "node --test verify/instance.test.mjs"
   },
   "devDependencies": {
-    "@robertblust/design": "github:robertblust/design#v0.12.0",
+    "@robertblust/design": "github:robertblust/design#v0.12.1",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
   }
