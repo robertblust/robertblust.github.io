@@ -3,5 +3,6 @@
     "fonts",
     "stage"
   ],
-  "langKey": "rb-lang"
+  "langKey": "rb-lang",
+  "themeKey": "rb-theme"
 }
