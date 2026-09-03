@@ -17,7 +17,7 @@ A talk lives in one file. `talks/index.html` is the only page that names a talk;
 profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore
 one edit, not two — see `CLAUDE.md` for why the second one is gone.
 
-Each deck is bilingual (German content, English via `data-en`), self-contained, and
+Each deck is bilingual (English content, German via `data-de`), self-contained, and
 works from `file://` as well as a local server.
 
 ## Commands

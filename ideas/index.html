@@ -136,7 +136,7 @@
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
 
-  /* ─── design tokens · v10 · page ───────────────────────────────
+  /* ─── design tokens · v11 · page ───────────────────────────────
      These sites share no stylesheet by design — a deck has to open from
      file:// — so this block is a copy, generated from @robertblust/design.
      Editing it here has no effect: the next `npm run design` overwrites it
@@ -187,7 +187,7 @@
     /* The deck's own chrome. A transport is a physical object in this design — the source
        calls --slab "the slab it is milled from" and --lcd "the recessed window the track
        number sits in" — so the light theme makes the slab pale milled metal and leaves the
-       readout dark. A real machine with an aluminium body still has a dark display, and that
+       readout dark. A real machine with an aluminum body still has a dark display, and that
        is the whole reason --lcd appears in both halves with the same value: it is a decision,
        not an omission, and the next person to "complete" this palette should read this line
        before adding a light one. */
@@ -202,7 +202,7 @@
     /* --slab was left behind when --lcd moved in: a deck page declared it on its own,
        one value, no light variant, which put a dark bar back on a pale page. Pale milled
        metal (1.14:1 against --ground, both a hair off white) with the LCD still a 16.37:1
-       recess inside it — the aluminium body, lit. --warn follows for the same reason: it
+       recess inside it — the aluminum body, lit. --warn follows for the same reason: it
        is deck-only chrome that must not be left for a page to restate. */
     --slab:#EDEAE2; --warn:#BC3924;
   }
@@ -216,7 +216,7 @@
     /* The deck's own chrome. A transport is a physical object in this design — the source
        calls --slab "the slab it is milled from" and --lcd "the recessed window the track
        number sits in" — so the light theme makes the slab pale milled metal and leaves the
-       readout dark. A real machine with an aluminium body still has a dark display, and that
+       readout dark. A real machine with an aluminum body still has a dark display, and that
        is the whole reason --lcd appears in both halves with the same value: it is a decision,
        not an omission, and the next person to "complete" this palette should read this line
        before adding a light one. */
@@ -713,7 +713,7 @@
           <span class="num mono">04</span>
           <div class="body">
             <h3 data-de="Vorträge, Beispiel &amp; eine echte Instanz">The talks, the example and a real instance</h3>
-            <p data-de="Deck, PDF und Tonspur auf Deutsch und Englisch, dazu ein durchgearbeitetes Beispiel — und seit Kurzem eine echte Instanz statt einer erfundenen: 110 Seiten, öffentlich, gegen die Konventionen geprüft und als Graph <a href=&quot;../model/&quot;>gezeichnet</a>.">Deck, PDF and audio in German and English, plus one worked example — and now a real instance rather than an invented one: 110 pages, public, checked against the conventions and <a href="../model/">drawn as a graph</a>.</p>
+            <p data-de="Deck, PDF und Tonspur auf Deutsch und Englisch, dazu ein durchgearbeitetes Beispiel — und seit Kurzem eine echte Instanz statt einer erfundenen: 110 Seiten, öffentlich, gegen die Konventionen geprüft und als Graph <a href='../model/'>gezeichnet</a>.">Deck, PDF and audio in German and English, plus one worked example — and now a real instance rather than an invented one: 110 pages, public, checked against the conventions and <a href="../model/">drawn as a graph</a>.</p>
             <div class="maturity"><span class="track" data-prev="32" data-now="46"><i style="width:46%"></i></span><span class="label mono" data-de="echte Instanz öffentlich">real instance public</span></div>
           </div>
           <span class="tag os" data-de="Quelloffen">Open source</span>
