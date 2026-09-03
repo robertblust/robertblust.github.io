@@ -69,7 +69,10 @@ async function readRemote() {
 const files = process.env.MENTAL_MODEL ? readLocal() : await readRemote();
 // `repo` travels with the data because the stage draws more than one repository's model and
 // the file link has to point at the right one.
-const data = { ...parseInstance(files), commit, repo };
+// `SUB` is where these files sit in the model's own repository, and the parser needs it: an
+// entity's `path` is what the page turns into a link to the file on GitHub. It used to be
+// hardcoded upstream to `example/model/`, so every file link from this page was a 404.
+const data = { ...parseInstance(files, { sub: SUB }), commit, repo };
 
 // Fenced by markers naming the commit, the way the token block is fenced by its version: a
 // reader of the HTML can see which state of the model the page shows, and the check can find
