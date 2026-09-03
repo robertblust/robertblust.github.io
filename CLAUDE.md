@@ -164,7 +164,7 @@ not just an `href`.
 Both pages open with the `rb` mark left of **Robert Blust**, the same shape guestgraph.io
 uses. The mark is `favicon.svg` reproduced as inline SVG rather than `<img src=...>`,
 because a linked asset renders as a broken box under `file://` — see *No external assets*
-above. It draws its colours from the CSS tokens instead of the favicon's hard-coded hexes,
+above. It draws its colors from the CSS tokens instead of the favicon's hard-coded hexes,
 so a palette change moves both together; the favicon keeps its own hexes because it has to
 stand alone. `verify/check.mjs` asserts the inline mark on both pages.
 
@@ -245,6 +245,21 @@ Two consequences worth knowing before editing a deck: **new translatable text ne
 and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
 attribute reads `en`.
 
+## A page is en-US; `data-de` and `data-notes` are de-CH
+
+One rule, positional, with no exceptions to remember: every word of a page is American
+English, and the values of `data-de` — and in a deck, `data-notes` — are Swiss German.
+`data-notes-en` is English and follows the page.
+
+It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
+correct German, not a British spelling left behind, and renaming it produces German that is
+wrong in a way nothing here can catch: every DOM check reads the rendered page, and the
+rendered page is only ever one language. A sweep masks those two attributes and touches
+nothing else.
+
+This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says
+where it applies.
+
 ## A link check that trusts the DOM inspects half the site
 
 The rendered DOM is only ever **one language**. German lives in `data-de` as markup that does
@@ -284,7 +299,7 @@ fix by hand; do not link the two.
 
 ## The design system, and why it is a copy
 
-Type and colour are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`.
+Type and color are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`.
 They share no stylesheet and cannot: a deck has to open from `file://`, so there is
 nothing to import. Every page therefore carries its own copy of the token block, fenced
 by `design tokens · vN` markers.
@@ -296,7 +311,7 @@ in *Changing a token* below, and it is the opposite of what this file said for m
 - **Brightness is confidence, and each stop has exactly one job.** `--c-weak` a candidate
   considered and not accepted; `--c-mid` anything interactive — links, controls, the brand
   accent; `--c-firm` the resolved thing — the thesis, the current page; `--c-flag` a
-  reversal, at most once per page and never decoration. Before adding a colour, ask which
+  reversal, at most once per page and never decoration. Before adding a color, ask which
   of the four jobs it is doing. If the answer is "none", it does not belong.
 - **Mono means data.** Record values, lengths, language pairs, URLs, code. Not navigation,
   not buttons, not prose. It was on all of those before, which is why it had stopped
@@ -420,13 +435,13 @@ What the contract says:
   switcher is at the edge and each step left is more the site's own subject.
 - **One baseline.** A single line runs through the middle of every text in the row. The
   links carry equal space above and below: the hover underline hangs below the word, and
-  centring the boxes instead would ride the text high — which it did, by 5px, until the
+  centering the boxes instead would ride the text high — which it did, by 5px, until the
   language control sat next to it and made it visible.
 - **States are different things.** Hover is an underline and nothing else. The current page
   is brighter ink and carries no line. When both drew the same line, the page you were on
   read as permanently hovered.
 - **The wordmark never breaks.** It is `white-space:nowrap` and does not shrink. This one
-  sits *outside* the fence, because each site's mark has its own colours; the rule is the
+  sits *outside* the fence, because each site's mark has its own colors; the rule is the
   outcome, not the declaration, and `mobileNav` asserts it.
 - **Under 640px the links collapse behind a button.** The language control stays on the bar
   — two characters, reached for constantly by a bilingual audience, and one a visitor
@@ -436,7 +451,7 @@ What the contract says:
 
 `navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they
 cannot do is see a sibling — that is the whole reason the block carries a version. Before
-this was written down there were five different mobile behaviours across the family and
+this was written down there were five different mobile behaviors across the family and
 eight different wordings of the same CSS, and nothing failed anywhere.
 
 ## Slides are a canvas, not a page
