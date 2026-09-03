@@ -170,7 +170,7 @@ stand alone. `verify/check.mjs` asserts the inline mark on both pages.
 
 ## Notes live inside HTML attributes, and that bites three specific ways
 
-Speaker notes are `data-notes` / `data-notes-en` attribute values, so anything that ends
+Speaker notes are `data-notes` (English) / `data-notes-de` (German) attribute values, so anything that ends
 the attribute swallows the rest of the tag with it:
 
 - **Nested markup uses single quotes** — `<em class='cue'>`, never `class="cue"`.
@@ -245,11 +245,16 @@ Two consequences worth knowing before editing a deck: **new translatable text ne
 and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
 attribute reads `en`.
 
-## A page is en-US; `data-de` and `data-notes` are de-CH
+## A page is en-US; a `-de` attribute is de-CH
 
 One rule, positional, with no exceptions to remember: every word of a page is American
-English, and the values of `data-de` — and in a deck, `data-notes` — are Swiss German.
-`data-notes-en` is English and follows the page.
+English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`,
+and in a deck `data-notes-de`.
+
+It reads as one line now because the attributes were made to agree. Notes used to invert the
+page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so
+the base attribute meant a different language depending on which pair you were reading.
+Design v0.25.0 swapped them, which is what leaves nothing here to remember.
 
 It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
 correct German, not a British spelling left behind, and renaming it produces German that is
