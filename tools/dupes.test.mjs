@@ -39,7 +39,7 @@ test("the open marker requires a version, so prose about fences is not one", () 
   assert.ok(CLOSE.test(RUNTIME_END));
 });
 
-test("markers are recognised in HTML and JS comment syntax too", () => {
+test("markers are recognized in HTML and JS comment syntax too", () => {
   const html = "<!-- ─── deck shell · v1 · shared ─────────────── -->";
   const htmlEnd = "<!-- ─── end deck shell ─────────────────────── -->";
   assert.deepEqual(deFence([html, "x();", htmlEnd, "mine();"]), ["", "", "", "mine();"]);

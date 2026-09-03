@@ -186,17 +186,17 @@
 
   /* Where you are, and how you got here. The breadcrumb prints the path and marks its last
      segment; the drawing said neither, because `spine` never reached the DOM and the focused
-     node wore hover's own colour. Three tiers now, and the path is the thing that carries
+     node wore hover's own color. Three tiers now, and the path is the thing that carries
      them: the spine from the root to the focus, the ancestors it passes through, and the
      focus at the end of it.
 
      Hover keeps --c-mid and adds width, so it is still felt on a node that already carries a
-     colour — an ancestor. That is what makes the tiers survive a pointer moving over them. */
+     color — an ancestor. That is what makes the tiers survive a pointer moving over them. */
   #fig .own.spine{stroke:var(--c-path); stroke-width:2.5}
   #fig .n.ancestor .box{stroke:var(--c-path); stroke-width:2.5}
   #fig .n.ancestor .sq{fill:var(--c-path)}
   /* The focus is ringed, not recoloured. Every page square is already --c-firm, so filling
-     the focused one with the same colour made it one more square among fifty-eight; a ring in
+     the focused one with the same color made it one more square among fifty-eight; a ring in
      the page's strongest ink is the one mark nothing else on the canvas wears. The folder
      outline can just brighten, because no other box is --c-firm. */
   #fig .n.focus .box{stroke:var(--c-firm); stroke-width:2.5}
@@ -213,7 +213,7 @@
   /* The lines step back, and nothing else does. Two things were tried first and both cost
      more than they bought: dimming whole nodes put an attribute that is already --dim under
      the contrast floor this site holds itself to, and dimming the marks alone turned the
-     squares grey, which reads as a third kind of node rather than a quieter one. The
+     squares gray, which reads as a third kind of node rather than a quieter one. The
      dashes were the noise all along — fifty-eight of them against one path. */
   #fig .n:focus:not(:focus-visible){outline:none}
   #fig text{fill:var(--ink); font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:13px; dominant-baseline:middle}
