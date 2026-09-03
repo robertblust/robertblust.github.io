@@ -51,6 +51,12 @@ const PAGES = [
                   desc: "Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens — eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen." },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
+    // One width per tier of the transport's own breakpoints, plus two above them. The
+    // desktop pair is where the two controls actually disagreed before design v0.27.0;
+    // the three narrow widths hold for free today, because each tier restates
+    // `min-height` on `.seg button` — they are named so a change to the theme control's
+    // padding cannot break one of them unseen.
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, readoutInvariant: true,
@@ -66,6 +72,12 @@ const PAGES = [
                   desc: "Ein Problem in seiner essenziellen Komplexität beschreiben — nicht mehr und nicht weniger. Der Massstab ist derselbe wie vor fünfzehn Jahren; was sich geändert hat, sind die Kosten." },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
+    // One width per tier of the transport's own breakpoints, plus two above them. The
+    // desktop pair is where the two controls actually disagreed before design v0.27.0;
+    // the three narrow widths hold for free today, because each tier restates
+    // `min-height` on `.seg button` — they are named so a change to the theme control's
+    // padding cannot break one of them unseen.
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, readoutInvariant: true,
