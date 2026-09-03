@@ -137,15 +137,22 @@ function render({ vision, values }) {
   // one language it is written in, which is what the note above says. Static links inside
   // `data-de` are the site's existing pattern — what must not go in there is anything a script
   // rewrites, because the translated copy is one the script never reaches.
+  // Nested markup inside `data-de` uses single quotes — the site's convention for every
+  // translated attribute — and the attribute escapes only what would end it. Running the German
+  // through `esc` turned its tags into `&lt;a href=&quot;…`, which the browser decodes and
+  // renders identically, but which no search for the href or for `<a ` ever finds.
+  const escAttr = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   const link = `<a href="https://github.com/${repo}">${repo}</a>@${commit.slice(0, 7)}`;
+  const linkDE = `<a href='https://github.com/${repo}'>${repo}</a>@${commit.slice(0, 7)}`;
   const cg = `<a href="https://companygraph.io/">CompanyGraph</a>`;
+  const cgDE = `<a href='https://companygraph.io/'>CompanyGraph</a>`;
   const derivedEN = `Generated from ${link} — <code class="mono">model/vision.md</code> and ` +
     `<code class="mono">model/values/</code>. That repository is an instance of ${cg}, ` +
     `a meta-model for describing a company as a graph of Markdown.`;
-  const derivedDE = `Erzeugt aus ${link} — <code class="mono">model/vision.md</code> und ` +
-    `<code class="mono">model/values/</code>. Dieses Repository ist eine Instanz von ${cg}, ` +
+  const derivedDE = `Erzeugt aus ${linkDE} — <code class='mono'>model/vision.md</code> und ` +
+    `<code class='mono'>model/values/</code>. Dieses Repository ist eine Instanz von ${cgDE}, ` +
     `einem Meta-Modell, das ein Unternehmen als Graph aus Markdown beschreibt.`;
-  out.push(`    <p class="derived" data-de="${esc(derivedDE)}">${derivedEN}</p>`);
+  out.push(`    <p class="derived" data-de="${escAttr(derivedDE)}">${derivedEN}</p>`);
   return out.join("\n");
 }
 

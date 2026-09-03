@@ -22,6 +22,10 @@ const FOOTER = ["GitHub", "License", "Privacy"];
 
 const PAGES = [
   { path: "/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "VORTRÄGE"],
+                  hides: ["See the talks", "See the ideas"],
+                  title: "Robert Blust — Software Engineer & Architekt",
+                  desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Fünfundzwanzig Jahre Plattformen — und die Vorträge, die das begründen." },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
     // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
     // anchors, so keeping it here would fail on a link the page no longer renders.
@@ -40,6 +44,11 @@ const PAGES = [
   // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
   { path: "/talks/mental-model/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
+    // The deck's German is the whole second half of the talk, including every speaker note.
+    // "Architekt"/"Architect" is the pair: one letter apart, present in exactly one language each.
+    translates: { lang: "de", shows: ["Architekt", "Das Mental Model"], hides: ["Architect"], id: "langDe", backId: "langEn",
+                  title: "Das mentale Modell · ein Vortrag von Robert Blust",
+                  desc: "Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens — eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen." },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     landing: "../../",
@@ -52,6 +61,9 @@ const PAGES = [
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Architekt", "Essenzielle"], hides: ["Architect"], id: "langDe", backId: "langEn",
+                  title: "Essenzielle Komplexität · ein Vortrag von Robert Blust",
+                  desc: "Ein Problem in seiner essenziellen Komplexität beschreiben — nicht mehr und nicht weniger. Der Massstab ist derselbe wie vor fünfzehn Jahren; was sich geändert hat, sind die Kosten." },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     landing: "../../",
@@ -64,6 +76,12 @@ const PAGES = [
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
+    // The German PDF is reached by data-de-href, which `sameTab` cannot see: it reads the href as
+    // delivered, and the swap happens only after a click. `dlHref` reads the first such link.
+    translates: { lang: "de", shows: ["Vorträge über", "Vortrag ansehen", "PDF herunterladen"], hides: ["Watch the talk", "Download PDF"],
+                  dlHref: { de: "mental-model/mental-model-de.pdf", en: "mental-model/mental-model-en.pdf" },
+                  title: "Robert Blust — Vorträge",
+                  desc: "Vorträge über gutes Entscheiden: Jedes Projekt ist entschieden, bevor es gebaut wird — dadurch, wie präzise das Problem beschrieben wurde." },
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -73,6 +91,9 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
   { path: "/privacy/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
+    translates: { lang: "de", shows: ["Was diese Seite tut", "Wer das betreibt"], hides: ["What this site does", "Who runs this"],
+                  title: "Datenschutz — Robert Blust",
+                  desc: "Diese Seite setzt keine Cookies, führt keine Statistik und stellt keine Anfragen an Dritte. Was den Browser verlässt, ist kurz genug, um es hier abzudrucken." },
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -82,6 +103,9 @@ const PAGES = [
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
   { path: "/ideas/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Zwei Ideen. Offen gebaut", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"],
+                  title: "Ideen — Robert Blust",
+                  desc: "Zwei Ideen, zur Prüfung gestellt: GuestGraph und CompanyGraph. Je fünf Teile — was quelloffen ist, was je Geld verdienen könnte, und wie weit es ist." },
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -92,6 +116,11 @@ const PAGES = [
   // content — the words themselves are `npm run principles:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
   { path: "/principles/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
+    // The page's own words swap; the model's stay English, which its note says. `shows` names
+    // the note, `hides` the English note — never a principle, which is the same in both views.
+    translates: { lang: "de", shows: ["Aus dem Modell erzeugt", "Werte"], hides: ["Generated from the model, so"],
+                  title: "Prinzipien — Robert Blust",
+                  desc: "Wohin diese Arbeit geht und woran sie sich hält. Erzeugt aus dem Modell, das sie beschreibt — nicht zweimal geschrieben." },
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -102,6 +131,9 @@ const PAGES = [
   // person's own instance rather than the fictional one. `stage` is the check that the
   // drawing actually drew: the data block alone proves nothing rendered.
   { path: "/model/", storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Was hier steht", "Dieselbe Form wie das Beispiel"], hides: ["What is in it", "The same shape as the example"],
+                  title: "Modell — Robert Blust",
+                  desc: "Die Firma aus einer Person, gezeichnet: meine eigene Arbeit, in CompanyGraph beschrieben und als der Graph gezeichnet, den ihre Dateien bilden." },
     contains: ["A company of one", "drawn", "What is in it", "Generated from"],
     // The source link is not asserted here. The stage rewrites its href from the block's own
     // commit, so any literal in this list would be either the markup's placeholder (gone by
