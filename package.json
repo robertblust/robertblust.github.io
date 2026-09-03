@@ -18,10 +18,11 @@
     "model": "node build/model.mjs",
     "model:check": "node build/model.mjs --check",
     "dupes": "node tools/dupes.mjs",
-    "test:dupes": "node --test tools/dupes.test.mjs"
+    "test:dupes": "node --test tools/dupes.test.mjs",
+    "pin:check": "node pin-check.mjs"
   },
   "devDependencies": {
-    "@robertblust/design": "github:robertblust/design#v0.17.0",
+    "@robertblust/design": "github:robertblust/design#v0.18.0",
     "companygraph-meta-model": "github:companygraph/meta-model#v0.10.0",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.49.1"
