@@ -83,20 +83,30 @@ const START = new RegExp(`<!-- ${MARKER} · (?:[0-9a-f]+|none) -->\\n<script typ
 const END = `</script>\n<!-- /${MARKER} -->`;
 const block = `<!-- ${MARKER} · ${commit} -->\n<script type="application/json" id="${ID}" data-stage>${JSON.stringify(data)}${END}`;
 
-const PAGE = path.join(ROOT, "model", "index.html");
-const page = fs.readFileSync(PAGE, "utf8");
-const start = page.search(START), end = page.indexOf(END);
-if (start < 0 || end < 0) throw new Error("model/index.html has no data block markers");
-const current = page.slice(start, end + END.length);
+// Two pages carry the block, and it is one block: the model page draws it, the timeline
+// lists one type out of it. Written by one loop so they cannot show different states of
+// the model, and checked by the same loop so a page edited by hand goes red for both.
+const PAGES = ["model", "timeline"].map((dir) => path.join(ROOT, dir, "index.html"));
+
+let stale = [];
+for (const PAGE of PAGES) {
+  const page = fs.readFileSync(PAGE, "utf8");
+  const start = page.search(START), end = page.indexOf(END);
+  if (start < 0 || end < 0) throw new Error(`${path.relative(ROOT, PAGE)} has no data block markers`);
+  const current = page.slice(start, end + END.length);
+  if (process.argv.includes("--check")) {
+    if (current !== block) stale.push(path.relative(ROOT, PAGE));
+  } else {
+    fs.writeFileSync(PAGE, page.slice(0, start) + block + page.slice(end + END.length));
+  }
+}
 
 if (process.argv.includes("--check")) {
-  if (current === block) {
-    console.log(`  ✓ model/index.html shows ${repo}@${commit.slice(0, 7)}`);
-  } else {
-    console.log(`  ✗ model/index.html no longer matches ${repo}@${commit.slice(0, 7)} — run: npm run model`);
+  if (stale.length) {
+    console.log(`  ✗ ${stale.join(", ")} no longer match ${repo}@${commit.slice(0, 7)} — run: npm run model`);
     process.exit(1);
   }
+  console.log(`  ✓ model/index.html and timeline/index.html show ${repo}@${commit.slice(0, 7)}`);
 } else {
-  fs.writeFileSync(PAGE, page.slice(0, start) + block + page.slice(end + END.length));
-  console.log(`  wrote model/index.html: ${data.entities.length} entities, ${data.edges.length} edges from ${repo}@${commit.slice(0, 7)}`);
+  console.log(`  wrote model/index.html and timeline/index.html: ${data.entities.length} entities, ${data.edges.length} edges from ${repo}@${commit.slice(0, 7)}`);
 }

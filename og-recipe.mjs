@@ -50,6 +50,7 @@ export const cards = [
   { dir: "ideas", ...FRAME, hide: HIDE, titleSlide: false },
   { dir: "principles", ...FRAME, hide: HIDE, titleSlide: false },
   { dir: "model", ...FRAME, hide: HIDE, titleSlide: false },
+  { dir: "timeline", ...FRAME, hide: HIDE, titleSlide: false },
   // …and /privacy/ was still borrowing it after that fix. A shared card previews the
   // landing page under the privacy page's title on every LinkedIn or Slack paste.
   { dir: "privacy", ...FRAME, hide: HIDE, titleSlide: false },

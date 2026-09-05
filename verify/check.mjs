@@ -22,7 +22,7 @@ const FOOTER = ["GitHub", "License", "Privacy"];
 
 const PAGES = [
   { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "VORTRÄGE"],
+    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
                   hides: ["See the talks", "See the ideas"],
                   title: "Robert Blust – Software Engineer & Architekt",
                   desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Fünfundzwanzig Jahre Plattformen – und die Vorträge, die das begründen." },
@@ -155,7 +155,19 @@ const PAGES = [
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"],
-    card: true, internalLinks: true, graph: "model-data", divider: true },
+    card: true, internalLinks: true, graph: "model-data", divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
+  // opening into the card card.js renders. `ledger` is the check that the rows are the block's
+  // experiences in the order they began and that a card is the entity, field for field.
+  { path: "/timeline/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Timeline/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Wie man es liest", "Alle öffnen", "Nichts davon wurde für diese Seite geschrieben"], hides: ["How to read it", "Open all", "Nothing here was written for this page"],
+                  title: "Werdegang – Robert Blust",
+                  desc: "Fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
+    contains: ["Twenty-five years,", "in order", "How to read it", "Generated from"],
+    links: ["https://companygraph.io/"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "rb-theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer", "stage contract"],
+    card: true, internalLinks: true, ledger: "model-data" },
 ];
 
 const CHECKS = {
@@ -190,6 +202,64 @@ const CHECKS = {
     const linked = await page.evaluate(() =>
       [...document.querySelectorAll(".brand img, .name .namemark img")].map(i => i.getAttribute("src")));
     return linked.length ? `the brand lockup links its mark instead of inlining it: ${linked.join(", ")}` : null;
+  },
+  // Local to this site until a second site has a ledger. Reads the block the page carries
+  // and holds the page to it: the rows are the block's experiences in the order they began,
+  // an open row's card lists the entity's fields in file order, the foot names the file at
+  // the block's commit, and the address opens a row.
+  async ledger(page, spec) {
+    const data = await page.evaluate((id) => JSON.parse(document.getElementById(id).textContent), spec.ledger);
+    const exps = data.entities.filter(e => e.type === "experience");
+    if (!exps.length) return "the block holds no experiences — run: npm run model";
+    const ids = await page.evaluate(() => [...document.querySelectorAll("#ledger details")].map(d => d.id));
+    if (ids.length !== exps.length) return `${ids.length} rows for ${exps.length} experiences`;
+    const day = (v) => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(v || ""); return m ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) : 0; };
+    const want = exps.slice().sort((a, b) => day(a.stamp.start) - day(b.stamp.start)).map(e => e.id.slice(e.id.lastIndexOf("/") + 1));
+    for (let i = 0; i < ids.length; i++)
+      if (ids[i] !== want[i] && day(exps.find(e => e.id.endsWith("/" + ids[i])).stamp.start) !== day(exps.find(e => e.id.endsWith("/" + want[i])).stamp.start))
+        return `row ${i + 1} is ${ids[i]}, expected ${want[i]}`;
+    const srcSub = await page.evaluate(() => document.getElementById("srclink").getAttribute("data-src"));
+    const srcHref = await page.evaluate(() => document.getElementById("srclink").getAttribute("href"));
+    if (!srcHref.endsWith(`/tree/${data.commit}/${srcSub}`)) return `source link is ${JSON.stringify(srcHref)}`;
+    const srcCommit = await page.evaluate(() => document.getElementById("srccommit").textContent);
+    if (srcCommit !== data.commit.slice(0, 7)) return `source commit reads ${JSON.stringify(srcCommit)}`;
+    const count = await page.evaluate(() => document.getElementById("srccount").textContent);
+    if (count !== String(exps.length)) return `srccount reads ${count}, expected ${exps.length}`;
+    // Open the first row and read its card against the entity.
+    // The toggle event a details fires is queued, not synchronous: the card and the hash
+    // arrive a tick after `open` is set, so the page is given that tick before it is read.
+    const first = exps.find(e => e.id.endsWith("/" + ids[0]));
+    await page.evaluate((id) => { document.getElementById(id).open = true; }, ids[0]);
+    await page.waitForFunction((id) => location.hash === "#" + id, ids[0], { timeout: 2000 }).catch(() => null);
+    const card = await page.evaluate((id) => {
+      const d = document.getElementById(id);
+      return { dts: [...d.querySelectorAll(".cbody dt")].map(x => x.textContent),
+               eyebrow: d.querySelector(".cbody .eyebrow").textContent,
+               foot: d.querySelector(".cfoot a").getAttribute("href"),
+               hash: location.hash };
+    }, ids[0]);
+    const fields = Object.keys(first.fields);
+    if (card.dts.join("|") !== fields.join("|")) return `first card lists ${card.dts.join(", ")}; the file has ${fields.join(", ")}`;
+    if (card.eyebrow !== `experience · ${first.id}`) return `first card's eyebrow reads ${JSON.stringify(card.eyebrow)}`;
+    if (!card.foot.endsWith(`/blob/${data.commit}/${first.path}`)) return `first card's foot link is ${card.foot}`;
+    if (card.hash !== "#" + ids[0]) return `opening a row wrote ${JSON.stringify(card.hash)} to the address`;
+    // Open all opens every row and reads Close all; the address still names the last opened.
+    await page.click("#openall");
+    await page.waitForFunction(() => document.getElementById("openall").getAttribute("aria-pressed") === "true", null, { timeout: 2000 }).catch(() => null);
+    const after = await page.evaluate(() => ({
+      open: [...document.querySelectorAll("#ledger details")].filter(d => d.open).length,
+      label: document.getElementById("openall").textContent,
+      pressed: document.getElementById("openall").getAttribute("aria-pressed") }));
+    if (after.open !== ids.length) return `Open all opened ${after.open} of ${ids.length}`;
+    if (after.label !== "Close all" || after.pressed !== "true") return `after Open all the control reads ${JSON.stringify(after.label)}, pressed ${after.pressed}`;
+    // Arriving with a hash opens that row.
+    const target = ids[Math.floor(ids.length / 2)];
+    await page.goto(BASE + spec.path + "#" + target);
+    const opened = await page.evaluate((id) => document.getElementById(id).open, target);
+    if (!opened) return `arriving at #${target} did not open that row`;
+    // Leave the page as it was found — at rest, no row open — for whatever check runs next.
+    await page.goto(BASE + spec.path);
+    return null;
   },
 };
 
