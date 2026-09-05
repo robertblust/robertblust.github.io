@@ -189,8 +189,9 @@ Speaker notes are `data-notes` (English) / `data-notes-de` (German) attribute va
 the attribute swallows the rest of the tag with it:
 
 - **Nested markup uses single quotes** — `<em class='cue'>`, never `class="cue"`.
-- **German quotes must be typographic**, `„…“` (U+201E/U+201C). One straight ASCII `"`
-  inside a note ends the attribute early and dumps the rest of the note onto the slide.
+- **German quotes are guillemets**, `«…»` with `‹…›` inside — the Swiss form WRITING.md sets. They
+  also cannot end an attribute: one straight ASCII `"` inside a note ends it early and dumps the
+  rest of the note onto the slide, which is what the old „…“ rule existed to prevent.
 - **Never put an HTML comment inside a start tag.** The parser reads it as part of the
   tag's attributes; `data-notes` and everything after is lost. Comments go above the tag.
 
