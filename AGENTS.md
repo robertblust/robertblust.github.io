@@ -637,6 +637,17 @@ ship, and not before.
 carrying no `· vN` tripwire, unlike the token block and the deck's other generated fences.
 Port changes by hand to all three.
 
+## Two pages carry one data block
+
+`/model/` and `/timeline/` both hold the parsed model as a JSON block between `model data`
+markers, and `build/model.mjs` writes both from one parse — `npm run model` rewrites both,
+`npm run model:check` holds both. So a red check names a page that was not touched: edit
+the timeline page's prose by hand and the model page still passes, but re-pin the model and
+forget `npm run model`, and both go red together. The timeline page draws no card of its
+own: `card.js`, from the design package, renders every card and formats every date on it,
+exactly as it does on the model page, and that is why the two pages can never disagree
+about what a file says.
+
 ## CI
 
 - **`.github/workflows/ci.yml` runs the suite on push to `main` and on every pull request** —

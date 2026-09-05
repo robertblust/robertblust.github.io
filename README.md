@@ -11,6 +11,7 @@ assets. Working conventions and the traps that break this site silently are in
 /talks/                          talks index — the descriptions live here
 /talks/mental-model/             deck: The Mental Model
 /talks/essential-complexity/     deck: Essential Complexity
+/timeline/                       the experiences as a ledger — built from the same block as /model/
 ```
 
 A talk lives in one file. `talks/index.html` is the only page that names a talk; the
