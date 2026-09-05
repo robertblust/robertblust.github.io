@@ -2,7 +2,7 @@
 
 Robert Blust's profile page and two talks. Self-contained, no build step, no external
 assets. Working conventions and the traps that break this site silently are in
-`CLAUDE.md`.
+`AGENTS.md`.
 
 ## Pages
 
@@ -15,7 +15,7 @@ assets. Working conventions and the traps that break this site silently are in
 
 A talk lives in one file. `talks/index.html` is the only page that names a talk; the
 profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore
-one edit, not two — see `CLAUDE.md` for why the second one is gone.
+one edit, not two — see `AGENTS.md` for why the second one is gone.
 
 Each deck is bilingual (English content, German via `data-de`), self-contained, and
 works from `file://` as well as a local server.
@@ -43,10 +43,5 @@ runs it on every push, so forgetting is caught rather than shipped.
 
 Narration is generated from the speaker notes themselves and cached on a content hash, so
 editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in
-`~/.zshrc` and is therefore invisible to a non-interactive shell — `CLAUDE.md` has the
+`~/.zshrc` and is therefore invisible to a non-interactive shell — `AGENTS.md` has the
 one-liner that reaches it, and the rule about never printing it.
-
-## Process
-
-- Commits happen when the user asks; suggest a message, don't auto-commit.
-- Never mention closed-source predecessor projects — here, in docs, or in commits.
