@@ -22,7 +22,7 @@ const FOOTER = ["GitHub", "License", "Privacy"];
 
 const PAGES = [
   { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "VORTRÄGE"],
+    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
                   hides: ["See the talks", "See the ideas"],
                   title: "Robert Blust – Software Engineer & Architekt",
                   desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Fünfundzwanzig Jahre Plattformen – und die Vorträge, die das begründen." },
