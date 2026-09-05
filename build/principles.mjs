@@ -83,9 +83,9 @@ async function readModel() {
 const NOTE_EN = "Generated from the model, so the words below are its own — and in the one " +
   "language it is written in. The rest of this site is bilingual; a translated copy would be a " +
   "second thing to keep true, which is what this page argues against.";
-const NOTE_DE = "Aus dem Modell erzeugt: Die Worte unten sind seine eigenen — und in der einen " +
+const NOTE_DE = "Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen " +
   "Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte " +
-  "Zweitfassung wäre eine zweite Sache, die wahr bleiben muss — genau das, wogegen diese Seite " +
+  "Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite " +
   "argumentiert.";
 
 // The title pages here all break the headline the same way: a muted first clause, then the rest
@@ -149,7 +149,7 @@ function render({ vision, values }) {
   const derivedEN = `Generated from ${link} — <code class="mono">model/vision.md</code> and ` +
     `<code class="mono">model/values/</code>. That repository is an instance of ${cg}, ` +
     `a meta-model for describing a company as a graph of Markdown.`;
-  const derivedDE = `Erzeugt aus ${linkDE} — <code class='mono'>model/vision.md</code> und ` +
+  const derivedDE = `Erzeugt aus ${linkDE} – <code class='mono'>model/vision.md</code> und ` +
     `<code class='mono'>model/values/</code>. Dieses Repository ist eine Instanz von ${cgDE}, ` +
     `einem Meta-Modell, das ein Unternehmen als Graph aus Markdown beschreibt.`;
   out.push(`    <p class="derived" data-de="${escAttr(derivedDE)}">${derivedEN}</p>`);
