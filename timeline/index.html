@@ -904,19 +904,29 @@
         cbody = h("div", null, "cbody"), cfoot = h("div", null, "cfoot"), cfootLink = h("span");
     cfoot.appendChild(cfootLink); card.appendChild(cbody); card.appendChild(cfoot); body.appendChild(card);
     d.appendChild(sum); d.appendChild(body); li.appendChild(d); ol.appendChild(li);
-    return { r: r, li: li, d: d, when: when, meta: what.lastChild, cbody: cbody, cfoot: cfootLink };
+    return { r: r, li: li, d: d, when: when, meta: what.lastChild, cbody: cbody, cfoot: cfootLink, lang: null };
   });
+  // A card is rendered the first time its row opens, and again when the language has changed
+  // since — the way the stage renders a card on focus and not before. Thirty-one cards at
+  // rest would be thirty-one copies of the model's own words in the page before anyone asked
+  // for one, and the page's checks read the body at rest.
+  function ensure(b){
+    var L = lang();
+    if (b.lang === L) return;
+    rbCard.render(b.r.e, b.cbody, b.cfoot, { data: data, lang: L, link: goLink });
+    b.lang = L;
+  }
   var today = h("li", null, "now"); ol.appendChild(today);
 
-  // Everything in a language: the gutters, the meta lines, the cards, the path line, the
-  // control and the TODAY line. Built once and rebuilt when <html lang> changes, the way the
-  // stage rebuilds what it draws.
+  // Everything in a language: the gutters, the meta lines, the open cards, the path line,
+  // the control and the TODAY line. Built once and rebuilt when <html lang> changes, the way
+  // the stage rebuilds what it draws.
   function render(){
     var L = lang();
     built.forEach(function(b){
       b.when.textContent = yearsOf(b.r.e.stamp);
       b.meta.textContent = metaOf(b.r.e);
-      rbCard.render(b.r.e, b.cbody, b.cfoot, { data: data, lang: L, link: goLink });
+      if (b.d.open) ensure(b);
     });
     var first = rows[0].e.stamp.start.slice(0, 4), now = new Date();
     var ym = now.getUTCFullYear() + "-" + String(now.getUTCMonth() + 1).replace(/^(\d)$/, "0$1");
@@ -942,6 +952,7 @@
   // one opens that row and brings it into view.
   ol.addEventListener("toggle", function(ev){
     var d = ev.target; if (d.tagName !== "DETAILS") return;
+    if (d.open) built.forEach(function(b){ if (b.d === d) ensure(b); });
     try {
       if (d.open) history.replaceState(null, "", "#" + d.id);
       else if (location.hash === "#" + d.id) history.replaceState(null, "", location.pathname + location.search);
@@ -951,6 +962,8 @@
   openAll.addEventListener("click", function(){
     var open = openAll.getAttribute("aria-pressed") !== "true";
     built.forEach(function(b){ b.d.open = open; });
+    // The toggle events are queued; the control reads right at once rather than a tick late.
+    syncOpenAll();
   });
   function arrive(){
     var id = decodeURIComponent(location.hash.slice(1)), d = id && document.getElementById(id);
