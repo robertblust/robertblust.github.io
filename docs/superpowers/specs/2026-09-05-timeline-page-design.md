@@ -302,3 +302,34 @@ existing tests hold the header version, the group's file list and the fence vers
 which clicks into an entity and reads its card.
 
 Verified by rendering, never by reading the diff.
+
+---
+
+## Amended 2026-09-06: the card, after a second look
+
+Decided against a prototype of the opened row, live beside the proposal, on 2026-09-06.
+Four things in §5 change, and the first of them is what made the other three visible.
+
+**The model and timeline pages carried a card grid they never had.** The rules from `.cols`
+through `.wide`, copied from the landing page, matched only the stage's `.card` and painted its
+title uppercase and dim, doubled its inset to 49 px and re-spaced its lists. Both pages drop
+that block; stage.css's card returns as written.
+
+**The card draws every field but two.** `source` is not drawn: in an instance that masters
+itself it reads Local on every page, machinery rather than a fact. `skills` is not a field row:
+it is the card's last section, under its own heading, one closed group per category as the
+skill files' `group` names it, the group's name and count on the line and its skills as chips
+when opened. Groups and the chips inside them are both alphabetical: one rule at both levels, and one
+that knows no name from any page. A model whose skills carry no group gets the
+flat list under the heading. Two columns and bullets were considered and refused: columns for
+reading across a list that has no across, bullets for the reason stage.css already gives.
+
+**The eyebrow is the type alone.** The path it carried was the card's longest line for the
+least information; the foot names the file, and the model page's path line says where you are.
+
+**Inside a ledger the card's title steps down** to 1.2 rem, so the row leads the card, the way
+the dialog sets the card's width. The card stays the same card.
+
+All four are design v0.31.0, a minor, since two synced files change and a site takes them with a
+sync. The `ledger` check reads the field list without the two fields and the eyebrow as the
+type, and counts the chips against the skills the file names.
