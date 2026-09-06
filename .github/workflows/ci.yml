@@ -48,6 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # The home page's sameAs is written from the model's profile, so an address typed into
       # the page by hand, or a model that moved without the page being rebuilt, fails here.
+      # Before npm ci because it installs nothing: the script reads source.json and the pages
+      # with node built-ins only.
       - name: The home page's sameAs still matches the model
         run: npm run sameas:check
       - run: npm ci
