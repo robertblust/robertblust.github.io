@@ -100,7 +100,7 @@
 <!-- Publisher and page, nothing about the product. The same rule the other two pages
      follow: structured data is not a back door for claims the prose does not make. -->
 <script>
-  /* ─── theme boot · v2 · page ────────────────────────────────────
+  /* ─── theme boot · v3 · page ────────────────────────────────────
      Set the theme before anything paints. Generated from @robertblust/design —
      editing it here does nothing, because the next `npm run design` overwrites it.
 
@@ -120,7 +120,7 @@
   (function(){
     try {
       var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
-      var t = m ? m[1] : localStorage.getItem("rb-theme");
+      var t = m ? m[1] : localStorage.getItem("theme");
       if (t === "light") document.documentElement.setAttribute("data-theme", "light");
     } catch (e) {}
   })();
@@ -569,9 +569,7 @@
       <p class="lede" data-de="Alles, was diese Seite braucht, kommt von blust.ch – auch die Schriften. Nichts wird anderswo geholt, also erfährt kein Dritter, dass Sie hier waren.">Everything this page needs comes from blust.ch, fonts included. Nothing is fetched from anywhere else, so no third party learns that you were here.</p>
       <!-- no data-de: this is the value itself, and it says the same thing in either language.
            Both cases are shown because pinning one would be wrong the moment you switch. -->
-      <p class="unit mono">localStorage: rb-lang = "de" | "en"</p>
-      <p class="unit mono">localStorage: rb-theme = "light" | "dark"</p>
-      <p class="unit mono">localStorage: stage-card, stage-card-modal = a width in pixels</p>
+      <p class="unit mono"><b>localStorage</b><br>lang = "de" | "en"<br>theme = "light" | "dark"<br>stage-card, stage-card-modal = a width in pixels</p>
       <p class="lede" data-de="Das ist alles, was gespeichert wird: Ihre Sprachwahl in zwei Buchstaben, Ihre Darstellungswahl in einem Wort, und – falls Sie auf der Modell-Seite den Trenner verschoben haben – wie breit Sie den Detailbereich gelassen haben, einmal für die Seite und einmal für die vergrösserte Ansicht. Zwei Zahlen, zwei Buchstaben und ein Wort. Nichts davon erreicht einen Server, und nichts davon identifiziert jemanden.">That is everything that gets stored: your choice of language in two letters, your choice of appearance in one word, and — if you have moved the divider on the model page — how wide you left the details panel, once for the page and once for the expanded view. Two numbers, two letters and one word. None of it reaches a server and none of it identifies anybody.</p>
       <div class="cols">
         <div class="card never wide">
@@ -620,7 +618,7 @@
 // thing before any JS runs, and the choice is remembered per origin. This page describes
 // that key, which is the only reason it is worth pointing at the code from here.
 (function(){
-  /* ─── language · v2 · page ─────────────────────────────────────────────
+  /* ─── language · v3 · page ─────────────────────────────────────────────
      One language across three domains, and where it is remembered. Generated
      from @robertblust/design — editing it here does nothing, because the next
      `npm run design` overwrites it. Change it in the package.
@@ -631,8 +629,12 @@
      wherever it reads and writes the visitor's saved choice. Rename `lang` or drop those calls
      and the fence still matches byte for byte — every check stays green — while a click throws
      ReferenceError and the language silently stops crossing domains.
+
+     The key is `lang`, the family's: one name on three origins, the same word the address
+     carries. A storage key is a promise to every visitor, and this one is made once, for the
+     family, by the package, so that no site can make it differently.
   */
-  var LANG_KEY = "rb-lang";
+  var LANG_KEY = "lang";
   function langStored(){ try { return localStorage.getItem(LANG_KEY); } catch (e) { return null; } }
   function langRemember(v){ try { localStorage.setItem(LANG_KEY, v); } catch (e) {} }
 
@@ -677,7 +679,7 @@
   if (urlLang) langRemember(urlLang);
   var lang = urlLang || (langStored() === "de" ? "de" : "en");
 
-  /* ─── theme · v3 · page ───────────────────────────────────────
+  /* ─── theme · v4 · page ───────────────────────────────────────
      One theme across three domains, and where it is remembered. Generated from
      @robertblust/design — editing it here does nothing.
 
@@ -689,7 +691,7 @@
      the page's own `noFlash` flag: a page that declares it and is missing either control fails
      there.
   */
-  var THEME_KEY = "rb-theme";
+  var THEME_KEY = "theme";
   function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
   function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
 
