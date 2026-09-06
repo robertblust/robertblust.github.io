@@ -885,6 +885,9 @@
     var d = h("details"); d.id = stem(e);
     var sum = h("summary");
     var when = h("span", null, "when"), mark = h("span", null, "mark"), what = h("span", null, "what");
+    // Both forms in the markup, the stylesheet showing one: the range where the column has
+    // room, the start year alone where it has not.
+    when.appendChild(h("span", null, "range")); when.appendChild(h("span", null, "start"));
     mark.setAttribute("aria-hidden", "true");
     what.appendChild(h("span", e.name, "name"));
     what.appendChild(h("span", null, "meta"));
@@ -913,7 +916,8 @@
   function render(){
     var L = lang();
     built.forEach(function(b){
-      b.when.textContent = yearsOf(b.r.e.stamp);
+      b.when.firstChild.textContent = yearsOf(b.r.e.stamp);
+      b.when.lastChild.textContent = b.r.e.stamp.start.slice(0, 4);
       b.meta.textContent = metaOf(b.r.e);
       if (b.d.open) ensure(b);
     });
