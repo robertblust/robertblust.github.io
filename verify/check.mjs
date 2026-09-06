@@ -47,7 +47,7 @@ const PAGES = [
     // The deck's German is the whole second half of the talk, including every speaker note.
     // "Architekt"/"Architect" is the pair: one letter apart, present in exactly one language each.
     translates: { lang: "de", shows: ["Architekt", "Das Mental Model"], hides: ["Architect"], id: "langDe", backId: "langEn",
-                  title: "Das mentale Modell · ein Vortrag von Robert Blust",
+                  title: "Das Mental Model · ein Vortrag von Robert Blust",
                   desc: "Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens – eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen." },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
