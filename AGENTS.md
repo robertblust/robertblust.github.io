@@ -648,7 +648,9 @@ the timeline page's prose by hand and the model page still passes, but re-pin th
 forget `npm run model`, and both go red together. The timeline page draws no card of its
 own: `card.js`, from the design package, renders every card and formats every date on it,
 exactly as it does on the model page, and that is why the two pages can never disagree
-about what a file says.
+about what a file says. The home page's `sameAs` is written from the profile's `## Also at`
+rows in that same block by `npm run sameas`, and `npm run sameas:check` holds it; both run
+after `npm run model`, because they read what it wrote.
 
 ## CI
 
