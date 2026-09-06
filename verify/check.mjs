@@ -25,7 +25,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
                   hides: ["See the talks", "See the ideas"],
                   title: "Robert Blust – Software Engineer & Architekt",
-                  desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Fünfundzwanzig Jahre Plattformen – und die Vorträge, die das begründen." },
+                  desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Über fünfundzwanzig Jahre Plattformen – und die Vorträge, die das begründen." },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
     // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
     // anchors, so keeping it here would fail on a link the page no longer renders.
@@ -161,8 +161,8 @@ const PAGES = [
   { path: "/timeline/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Timeline/, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Wie man es liest", "Alle öffnen", "Nichts davon wurde für diese Seite geschrieben"], hides: ["How to read it", "Open all", "Nothing here was written for this page"],
                   title: "Werdegang – Robert Blust",
-                  desc: "Fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
-    contains: ["Twenty-five years,", "in order", "How to read it", "Generated from"],
+                  desc: "Über fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
+    contains: ["Over twenty-five years,", "in order", "How to read it", "Generated from"],
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
