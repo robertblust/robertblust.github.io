@@ -586,7 +586,7 @@
     <div class="title">
       <h1 data-de="<span class='r70'>Eine Firma aus einer Person,</span><span class='rcl'><em>gezeichnet</em>.</span>"><span class="r70">A company of one,</span><span class="rcl"><em>drawn</em>.</span></h1>
       <p class="tagline" data-de="Meine eigene Arbeit, in CompanyGraph beschrieben – genau so, wie ihre Dateien es sagen, und gezeichnet als der Graph, den diese Dateien bilden.">My own work described in CompanyGraph — exactly as its files say, drawn as the graph those files form.</p>
-      <p class="note" data-de="Dieselbe Form wie das Beispiel auf companygraph.io, nur ist die Firma hier nicht erfunden. Nichts davon wurde von Hand geschrieben: Die Seite wird aus dem Modell erzeugt, beim Commit, der neben der Zeichnung steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">The same shape as the example on companygraph.io, except the company is not invented. Nothing here was written by hand: the page is generated from the model, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <p class="note" data-de="Dieselbe Form wie das Beispiel auf companygraph.io, nur ist die Firma hier nicht erfunden. Nichts davon wurde von Hand geschrieben: Die Seite wird aus dem Modell erzeugt, beim Commit, der neben dem Diagramm steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">The same shape as the example on companygraph.io, except the company is not invented. Nothing here was written by hand: the page is generated from the model, at the commit named beside the figure — in the one language the model is written in. The rest of this page is bilingual.</p>
     </div>
 
     <section class="figure-section">
@@ -597,7 +597,7 @@
       <div class="stage" id="stage">
         <div class="canvas">
           <svg id="fig" role="group" aria-labelledby="figcap"></svg>
-          <button class="recenter" id="recenter" type="button" data-de="zentrieren">recenter</button>
+          <button class="recenter" id="recenter" type="button" data-de="neu zentrieren">recenter</button>
         </div>
         <button class="gutter" id="gutter" type="button"
                 aria-label="Resize the details panel" data-de-aria="Detailbereich verkleinern oder vergrössern"></button>
@@ -608,7 +608,7 @@
           </div>
         </aside>
       </div>
-      <p class="stagehint" data-de="Ziehen bewegt die Zeichnung · ⌘- oder Strg-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
+      <p class="stagehint" data-de="Ziehen bewegt das Diagramm · ⌘- oder Ctrl-Scrollen zoomt">Drag to move · ⌘- or Ctrl-scroll to zoom</p>
       <p class="figcap" id="figcap" data-de="Ein durchgezogener Strich heisst <b>besitzt</b>. Ein gestrichelter heisst <b>verweist per Namen auf</b>. Ein umrandeter Kasten ist ein Ordner, ein gefülltes Quadrat eine Seite. Anklicken rückt in die Mitte.">A solid line means <b>owns</b>. A dashed line means <b>refers to by name</b>. An outlined box is a folder, a filled square is a page. Click to bring it to the center.</p>
 
       <!-- The stage, expanded. Not a copy: Expand moves .stagehead and .stage in here — the
@@ -631,7 +631,7 @@
       </div>
     </section>
 
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/robertblust/mental-model/tree/HEAD/model">robertblust/mental-model</a>@<span id="srccommit">HEAD</span> — <span data-de="dasselbe Repository, aus dem die Prinzipien-Seite stammt, und dasselbe Meta-Modell wie">the same repository the principles page is drawn from, and an instance of</span> <a href="https://companygraph.io/">CompanyGraph</a>.</p>
+    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/robertblust/mental-model/tree/HEAD/model">robertblust/mental-model</a>@<span id="srccommit">HEAD</span> <span data-de="– das Repository, aus dem die Prinzipien-Seite stammt, selbst eine Instanz von">— the repository the principles page is drawn from, itself an instance of</span> <a href="https://companygraph.io/">CompanyGraph</a>.</p>
 
   </div>
 </main>
@@ -783,6 +783,10 @@
 
   var i18n = Array.prototype.slice.call(document.querySelectorAll("[data-de]"));
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
+  // An aria-label is swapped the way innerHTML is: data-en-aria is captured on load, never
+  // written by hand, so the German view is read out in German too.
+  var aria = Array.prototype.slice.call(document.querySelectorAll("[data-de-aria]"));
+  aria.forEach(function(el){ el.setAttribute("data-en-aria", el.getAttribute("aria-label")); });
 
   var UI = {
     de:{ title:"Modell – Robert Blust",
@@ -793,6 +797,7 @@
 
   function applyLang(){
     i18n.forEach(function(el){ el.innerHTML = el.getAttribute("data-" + lang); });
+    aria.forEach(function(el){ el.setAttribute("aria-label", el.getAttribute("data-" + lang + "-aria")); });
     document.title = UI[lang].title;
     document.getElementById("metadesc").setAttribute("content", UI[lang].desc);
     document.getElementById("lde").setAttribute("aria-pressed", String(lang === "de"));
