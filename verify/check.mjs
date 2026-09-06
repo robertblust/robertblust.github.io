@@ -225,6 +225,20 @@ const CHECKS = {
     if (srcCommit !== data.commit.slice(0, 7)) return `source commit reads ${JSON.stringify(srcCommit)}`;
     const count = await page.evaluate(() => document.getElementById("srccount").textContent);
     if (count !== String(exps.length)) return `srccount reads ${count}, expected ${exps.length}`;
+    // The indent: a row began while a track ran — a role or an independent period — and says
+    // so with --lvl 1 and the class the stylesheet draws the stem on; every other row is flush.
+    const dayEnd = (v) => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(v || ""); if (!m) return Infinity;
+      return m[3] ? Date.UTC(+m[1], +m[2] - 1, +m[3] + 1) : m[2] ? Date.UTC(+m[1], +m[2], 1) : Date.UTC(+m[1] + 1, 0, 1); };
+    const tracks = exps.filter(e => e.stamp.kind === "Role" || e.stamp.kind === "Independent");
+    const wantUnder = new Set(exps.filter(e => !tracks.includes(e) && tracks.some(t => day(t.stamp.start) <= day(e.stamp.start) && day(e.stamp.start) < dayEnd(t.stamp.end)))
+      .map(e => e.id.slice(e.id.lastIndexOf("/") + 1)));
+    const rowsLvl = await page.evaluate(() => [...document.querySelectorAll("#ledger li:has(details)")]
+      .map(li => ({ id: li.querySelector("details").id, lvl: li.style.getPropertyValue("--lvl").trim(), under: li.classList.contains("under") })));
+    for (const r of rowsLvl) {
+      const want = wantUnder.has(r.id);
+      if (r.under !== want || r.lvl !== (want ? "1" : "0")) return `${r.id} is ${r.under ? "under" : "flush"} at --lvl ${r.lvl}; it ${want ? "began while a track ran" : "began outside every track"}`;
+    }
+    if (!wantUnder.size) return "no row began while a track ran — the block or the rule is wrong";
     // Open the first row and read its card against the entity.
     // The toggle event a details fires is queued, not synchronous: the card and the hash
     // arrive a tick after `open` is set, so the page is given that tick before it is read.
