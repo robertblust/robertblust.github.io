@@ -485,21 +485,6 @@
         background:var(--raise); border:1.5px solid var(--c-firm);
         font-size:clamp(.95rem,1.6vw,1.2rem); color:var(--ink); letter-spacing:.02em}
 
-  .cols{margin-top:2rem; display:grid; gap:1.1rem; align-items:start;
-        grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))}
-  .card{background:var(--raise); border:1.5px solid var(--rule); border-radius:12px;
-        padding:1.5rem 1.6rem}
-  .card h3{font-size:.76rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-           color:var(--dim)}
-  .card ul{margin-top:1.1rem; list-style:none; display:grid; gap:.95rem}
-  .card li{font-size:.98rem; line-height:1.45}
-  .card li b{font-weight:600}
-  .card li i{font-style:normal; display:block; color:var(--dim); font-size:.88rem; margin-top:.2rem}
-  .card li i .mono{font-size:.95em; color:var(--ink)}
-  /* five short items across a full-width card read as a list, not a column of stubs */
-  .wide ul{grid-template-columns:repeat(auto-fit, minmax(255px, 1fr)); gap:1.3rem 1.8rem}
-  /* the .never card (declined options): terms use plain --ink like any other card, no separate treatment needed */
-
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
   .rules p b{font-weight:600; color:var(--ink)}

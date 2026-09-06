@@ -235,14 +235,21 @@ const CHECKS = {
       const d = document.getElementById(id);
       return { dts: [...d.querySelectorAll(".cbody dt")].map(x => x.textContent),
                eyebrow: d.querySelector(".cbody .eyebrow").textContent,
+               groups: [...d.querySelectorAll(".cbody .grp")].map(g => g.querySelectorAll(".chips a").length),
                foot: d.querySelector(".cfoot a").getAttribute("href"),
                hash: location.hash };
     }, ids[0]);
-    const fields = Object.keys(first.fields);
+    // The card draws every field but two: `source`, which reads Local on every page here,
+    // and `skills`, which is the card's last section, grouped, rather than a field row.
+    const fields = Object.keys(first.fields).filter(k => k !== "source" && k !== "skills");
     if (card.dts.join("|") !== fields.join("|")) return `first card lists ${card.dts.join(", ")}; the file has ${fields.join(", ")}`;
-    if (card.eyebrow !== `experience · ${first.id}`) return `first card's eyebrow reads ${JSON.stringify(card.eyebrow)}`;
+    if (card.eyebrow !== "experience") return `first card's eyebrow reads ${JSON.stringify(card.eyebrow)}`;
     if (!card.foot.endsWith(`/blob/${data.commit}/${first.path}`)) return `first card's foot link is ${card.foot}`;
     if (card.hash !== "#" + ids[0]) return `opening a row wrote ${JSON.stringify(card.hash)} to the address`;
+    // Every skill the file names is in exactly one group's chips.
+    const claimed = Array.isArray(first.fields.skills) ? first.fields.skills.length : 0;
+    const chipped = card.groups.reduce((n, k) => n + k, 0);
+    if (chipped !== claimed) return `first card shows ${chipped} skills in ${card.groups.length} groups; the file names ${claimed}`;
     // Open all opens every row and reads Close all; the address still names the last opened.
     await page.click("#openall");
     await page.waitForFunction(() => document.getElementById("openall").getAttribute("aria-pressed") === "true", null, { timeout: 2000 }).catch(() => null);
