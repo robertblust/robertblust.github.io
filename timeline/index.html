@@ -599,7 +599,7 @@
       </div>
       <ol class="ledger" id="ledger" aria-label="Every experience, in the order it began" data-de-aria="Jede Erfahrung, in der Reihenfolge ihres Beginns"></ol>
       <p class="stagehint" data-de="Ein Klick auf einen Eintrag öffnet die Details an Ort und Stelle · die Adresse merkt sich den zuletzt geöffneten">Click an entry to open its card in place · the address remembers the last one opened</p>
-      <p class="figcap" data-de="Die Jahre links sind die Spanne eines Eintrags; die Zeile unter dem Namen nennt seine Art, wo er stattfand und seine genaue Zeit. Ein <b>grosses Quadrat</b> ist eine Rolle oder eine unabhängige Zeit, ein <b>kleines</b> alles andere. Ein Eintrag, der unter einer Rolle <b>eingerückt</b> ist, begann, während diese Rolle lief.">The years on the left are the span of an entry; the line under its name is its kind, where it was done and its exact period. A <b>large square</b> is a role or an independent period, a <b>small one</b> anything else. An entry <b>indented</b> under a role began while that role ran.</p>
+      <p class="figcap" data-de="Die Jahre links sind die Spanne eines Eintrags; die Zeile unter dem Namen nennt seine Art, wo er stattfand und seine genaue Zeit. Die Form auf der Linie ist die Art: ein <b>gefülltes Quadrat</b> eine Rolle, ein <b>leeres</b> eine unabhängige Zeit, eine <b>Raute</b> ein Projekt, ein <b>Kreis</b> Community-Arbeit, ein <b>Dreieck</b> eine Ausbildung. Ein Eintrag, der unter einer Rolle oder einer unabhängigen Zeit <b>eingerückt</b> ist, begann, während sie lief.">The years on the left are the span of an entry; the line under its name is its kind, where it was done and its exact period. The shape on the line is the kind: a <b>filled square</b> a role, a <b>hollow one</b> an independent period, a <b>diamond</b> a project, a <b>circle</b> community work, a <b>triangle</b> education. An entry <b>indented</b> under a role or an independent period began while it ran.</p>
     </section>
 
     <section>
@@ -607,8 +607,8 @@
       <div class="rules">
         <p data-de="<b>Fünf Arten, und die Art sagt, was ein Eintrag ist.</b> Rolle, Projekt, Community, Ausbildung und Unabhängig sind die Erfahrungsarten des Modells, so wie das Modell sie definiert: Eine Rolle ist eine Position, ein Projekt eine Lieferung in einer Rolle oder neben ihr, Community ist Arbeit in der Öffentlichkeit: ein Vortrag, ein Mandat, eine Arbeitsgruppe, ein veröffentlichter Fall.">
           <b>Five kinds, and the kind says what an entry is.</b> Role, Project, Community, Education and Independent are the model’s experience kinds, as the model defines them: a role is a position, a project is a delivery inside a role or beside one, community is work done in public: a talk, a seat, a working group, a published case.</p>
-        <p data-de="<b>Die Reihenfolge ist der Beginn, die Einrückung das Während.</b> Ein Vortrag ist ein Tag, ein Vorstandssitz sind Jahre, und beides ist Community-Arbeit, weil das Publikum sie dazu macht, nicht die Dauer. Was ein Eintrag unter einer Rolle sagt, ist nur, dass er begann, während sie lief; wer ihn beauftragt hat, steht in seiner Karte.">
-          <b>The order is the beginning, the indent is the during.</b> A talk is a day, a board seat is years, and both are community work because the audience makes them so, not the duration. What an entry under a role says is only that it began while the role ran; who commissioned it is in its card.</p>
+        <p data-de="<b>Die Reihenfolge ist der Beginn, die Einrückung das Während.</b> Ein Vortrag ist ein Tag, ein Vorstandssitz sind Jahre, und beides ist Community-Arbeit, weil das Publikum sie dazu macht, nicht die Dauer. Was ein Eintrag unter einer Rolle oder einer unabhängigen Zeit sagt, ist nur, dass er begann, während sie lief; wer ihn beauftragt hat, steht in seiner Karte.">
+          <b>The order is the beginning, the indent is the during.</b> A talk is a day, a board seat is years, and both are community work because the audience makes them so, not the duration. What an entry under a role or an independent period says is only that it began while it ran; who commissioned it is in its card.</p>
         <p data-de="<b>Eine Karte ist die Datei, nicht ein Auszug daraus.</b> Art, Anfang, Ende, Organisation und Fähigkeiten stehen so da, wie die Datei sie schreibt; die Erfolge sind ihre Liste; der Link am Fuss führt zu ihr, beim Commit, den diese Seite zeigt. Ein Datum, das hier falsch ist, ist dort falsch, und wird dort korrigiert.">
           <b>A card is the file, not an excerpt of it.</b> Kind, start, end, organization and skills read as the file writes them; the achievements are its list; the link at the foot goes to it, at the commit this page shows. A date wrong here is wrong there, and is corrected there.</p>
       </div>
@@ -889,11 +889,14 @@
   var rows = data.entities.filter(function(e){ return e.type === "experience" && e.stamp; })
     .map(function(e){ return { e: e, s: day(e.stamp.start), t: e.stamp.end ? day(e.stamp.end, true) : Infinity }; })
     .sort(function(a, b){ return a.s - b.s || a.t - b.t; });
-  var roles = rows.filter(function(r){ return r.e.stamp.kind === "Role"; });
-  // One level, never more: the fact the indent states is "began while that role ran".
+  // The track: a role or an independent period, the two kinds that are a stretch of time
+  // with things inside it. The stylesheet draws both a size up; the indent reads both.
+  function isTrack(r){ return r.e.stamp.kind === "Role" || r.e.stamp.kind === "Independent"; }
+  var tracks = rows.filter(isTrack);
+  // One level, never more: the fact the indent states is "began while that track ran".
   function level(r){
-    if (r.e.stamp.kind === "Role") return 0;
-    for (var i = 0; i < roles.length; i++) if (roles[i].s <= r.s && r.s < roles[i].t) return 1;
+    if (isTrack(r)) return 0;
+    for (var i = 0; i < tracks.length; i++) if (tracks[i].s <= r.s && r.s < tracks[i].t) return 1;
     return 0;
   }
   function stem(e){ return e.id.slice(e.id.lastIndexOf("/") + 1); }
@@ -914,8 +917,8 @@
   var ol = document.getElementById("ledger"), pathLine = document.getElementById("path"),
       openAll = document.getElementById("openall");
   var built = rows.map(function(r){
-    var e = r.e, li = h("li", null, "k-" + e.stamp.kind.toLowerCase());
-    li.style.setProperty("--lvl", level(r));
+    var e = r.e, lvl = level(r), li = h("li", null, "k-" + e.stamp.kind.toLowerCase() + (lvl ? " under" : ""));
+    li.style.setProperty("--lvl", lvl);
     var d = h("details"); d.id = stem(e);
     var sum = h("summary");
     var when = h("span", null, "when"), mark = h("span", null, "mark"), what = h("span", null, "what");
