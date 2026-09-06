@@ -344,3 +344,15 @@ on the line under the name in the page's language, and four characters fit in an
 any phone. Above 640 px the range stays. Both forms are in the markup and the stylesheet shows
 one, so a rotation re-renders nothing. Widening the column was refused: it moves the edge to
 the next longer word and takes a fifth of a name's width on a 320 px phone.
+
+## Amended 2026-09-06: a skill opens the stage expanded
+
+A skill in a card links to the model page with `?stage=expanded` beside the hash that names
+the node. The stage reads the parameter on arrival, opens its dialog on the focused node and
+takes the parameter back out of the address, the way the pages take `lang` and `theme`; the hash
+stays, since a focus is a place with an address. A visitor who clicked a skill wants to read it
+with its references around it, and the dialog is where one node is read. Escape or the close
+button leaves them on the model page focused on that skill; the browser's back button returns
+them to the row they left. The page cannot know where a visitor came from and does not try;
+the link says what it wants. Design v0.34.0 carries the reading in stage.js and the check that
+holds it.

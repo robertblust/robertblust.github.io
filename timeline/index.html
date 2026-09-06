@@ -874,8 +874,9 @@
     return parts.filter(function(x){ return x; }).join(" · ");
   }
   // A resolved reference in a card — a skill — leaves for the model page, which reads the
-  // hash on load and focuses that node.
-  function goLink(id){ var a = h("a", byId[id].name, "go"); a.href = "../model/#" + id; return a; }
+  // hash on load and focuses that node, and opens the stage expanded because the address
+  // asks it to: a visitor who clicked a skill wants to read it with its references around it.
+  function goLink(id){ var a = h("a", byId[id].name, "go"); a.href = "../model/?stage=expanded#" + id; return a; }
 
   var ol = document.getElementById("ledger"), pathLine = document.getElementById("path"),
       openAll = document.getElementById("openall");
