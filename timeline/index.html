@@ -592,7 +592,10 @@
     <section class="figure-section">
       <div class="stagehead" id="stagehead">
         <p class="path mono" id="path"></p>
-        <button type="button" class="expand" id="openall" aria-pressed="false">Open all</button>
+        <div class="right">
+          <details class="kinds" id="kinds"><summary id="kindslabel">All kinds</summary><div class="menu" id="kindsmenu"></div></details>
+          <button type="button" class="expand" id="openall" aria-pressed="false">Open all</button>
+        </div>
       </div>
       <ol class="ledger" id="ledger" aria-label="Every experience, in the order it began" data-de-aria="Jede Erfahrung, in der Reihenfolge ihres Beginns"></ol>
       <p class="stagehint" data-de="Ein Klick auf einen Eintrag öffnet die Details an Ort und Stelle · die Adresse merkt sich den zuletzt geöffneten">Click an entry to open its card in place · the address remembers the last one opened</p>
@@ -854,9 +857,18 @@
   function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
   var STR = {
     entries: { en:"entries",   de:"Einträge" },
+    of:      { en:"of",        de:"von" },
+    // the counted form after "of": "12 of 35 entries" — German declines the noun there
+    ofEntries:{ en:"entries",  de:"Einträgen" },
     open:    { en:"Open all",  de:"Alle öffnen" },
     close:   { en:"Close all", de:"Alle schliessen" },
-    today:   { en:"today",     de:"heute" }
+    today:   { en:"today",     de:"heute" },
+    allKinds:{ en:"All kinds", de:"Alle Erfahrungsarten" },
+    noKind:  { en:"No kind",   de:"Keine Erfahrungsart" },
+    kinds:   { en:"kinds",     de:"Erfahrungsarten" },
+    showAll: { en:"Show all kinds", de:"Alle Erfahrungsarten zeigen" },
+    allOff:  { en:"Every kind is off. ", de:"Alle Erfahrungsarten sind ausgeschaltet. " },
+    kindsOf: { en:"Which kinds the ledger shows", de:"Welche Erfahrungsarten die Liste zeigt" }
   };
   function t(k){ return STR[k][lang()]; }
   function h(tag, text, cls){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -930,6 +942,47 @@
     rbCard.render(b.r.e, b.cbody, b.cfoot, { data: data, lang: L, link: goLink });
     b.lang = L;
   }
+  // The kind filter: one control beside Open all naming what is shown, opening a list with
+  // a box per kind. The kinds are the block's experience-kind entities, so a kind added to
+  // the model appears here with its count; each is described with the note card.js moves
+  // to it, the kind's name and its one line. A kind off takes its rows out of the ledger
+  // and the rule runs on; the indent of what stays is unchanged, because a project that
+  // began while a role ran still did. The selection is state, not a place: remembered in
+  // the browser like the card's width, never written into the address — and a link to a
+  // row of a kind that is off turns that kind back on, because a link must land.
+  var KINDS = data.entities.filter(function(e){ return e.type === "experience-kind"; })
+    .sort(function(a, b){ return a.name.localeCompare(b.name, "en"); });
+  var KIND_KEY = "timeline-kinds", on = {};
+  KINDS.forEach(function(k){ on[k.name] = true; });
+  try { var saved = JSON.parse(localStorage.getItem(KIND_KEY) || "null"); if (saved) KINDS.forEach(function(k){ if (k.name in saved) on[k.name] = !!saved[k.name]; }); } catch (e) {}
+  var kinds = document.getElementById("kinds"), kindsLabel = document.getElementById("kindslabel"), kindsMenu = document.getElementById("kindsmenu");
+  var none = h("li", null, "none"); none.hidden = true; ol.appendChild(none);
+  var boxes = [];
+  KINDS.forEach(function(k){
+    var l = h("label"), c = h("input"); c.type = "checkbox"; c.checked = on[k.name];
+    c.addEventListener("change", function(){ on[k.name] = c.checked; applyKinds(true); });
+    l.appendChild(c); l.appendChild(h("span", k.name));
+    l.appendChild(h("span", String(rows.filter(function(r){ return r.e.stamp.kind === k.name; }).length), "n"));
+    rbCard.describe(l, k.type, k.name, k.tagline || "");
+    kindsMenu.appendChild(l); boxes.push(c);
+  });
+  var allLine = h("div", null, "all"), allBtn = h("button"); allBtn.type = "button";
+  allBtn.addEventListener("click", function(){ KINDS.forEach(function(k){ on[k.name] = true; }); applyKinds(true); });
+  allLine.appendChild(allBtn); kindsMenu.appendChild(allLine);
+  function shown(){ return built.filter(function(b){ return on[b.r.e.stamp.kind]; }); }
+  function filtered(){ return KINDS.some(function(k){ return !on[k.name]; }); }
+  // Written only when the visitor changes the selection: a page that stored a key on every
+  // visit would leave a mark on a browser that never touched the control.
+  function applyKinds(remember){
+    built.forEach(function(b){ b.li.hidden = !on[b.r.e.stamp.kind]; });
+    none.hidden = shown().length > 0;
+    boxes.forEach(function(c, i){ c.checked = on[KINDS[i].name]; });
+    if (remember) { try { localStorage.setItem(KIND_KEY, JSON.stringify(on)); } catch (e) {} }
+    render();
+  }
+  document.addEventListener("click", function(ev){ if (kinds.open && !kinds.contains(ev.target)) kinds.open = false; });
+  document.addEventListener("keydown", function(ev){ if (ev.key === "Escape" && kinds.open) { kinds.open = false; kinds.firstChild.focus(); } });
+
   var today = h("li", null, "now"); ol.appendChild(today);
 
   // Everything in a language: the gutters, the meta lines, the open cards, the path line,
@@ -948,7 +1001,14 @@
     today.textContent = rbCard.fmtDate(ym, L) + " · " + t("today");
     pathLine.innerHTML = "";
     pathLine.appendChild(document.createTextNode("experiences · "));
-    pathLine.appendChild(h("b", rows.length + " " + t("entries")));
+    pathLine.appendChild(h("b", filtered() ? shown().length + " " + t("of") + " " + rows.length + " " + t("ofEntries") : rows.length + " " + t("entries")));
+    var sel = KINDS.filter(function(k){ return on[k.name]; });
+    kindsLabel.textContent = sel.length === KINDS.length ? t("allKinds") : sel.length === 0 ? t("noKind")
+                           : sel.length <= 2 ? sel.map(function(k){ return k.name; }).join(", ") : sel.length + " " + t("kinds");
+    kinds.setAttribute("aria-label", t("kindsOf"));
+    allBtn.textContent = t("showAll");
+    none.innerHTML = ""; none.appendChild(document.createTextNode(t("allOff")));
+    var back = h("a", t("showAll")); back.href = "#"; back.addEventListener("click", function(ev){ ev.preventDefault(); allBtn.click(); }); none.appendChild(back);
     pathLine.appendChild(document.createTextNode(" · " + first + "–" + now.getUTCFullYear()));
     document.getElementById("srccount").textContent = String(rows.length);
     ol.setAttribute("aria-label", ol.getAttribute(L === "de" ? "data-de-aria" : "data-en-aria"));
@@ -956,9 +1016,9 @@
   }
   ol.setAttribute("data-en-aria", ol.getAttribute("aria-label"));
 
-  function openCount(){ return built.filter(function(b){ return b.d.open; }).length; }
+  function openCount(){ return shown().filter(function(b){ return b.d.open; }).length; }
   function syncOpenAll(){
-    var all = openCount() === built.length;
+    var v = shown(), all = v.length > 0 && openCount() === v.length;
     openAll.setAttribute("aria-pressed", String(all));
     openAll.textContent = all ? t("close") : t("open");
   }
@@ -976,18 +1036,21 @@
   }, true);
   openAll.addEventListener("click", function(){
     var open = openAll.getAttribute("aria-pressed") !== "true";
-    built.forEach(function(b){ b.d.open = open; });
+    shown().forEach(function(b){ b.d.open = open; });
     // The toggle events are queued; the control reads right at once rather than a tick late.
     syncOpenAll();
   });
   function arrive(){
     var id = decodeURIComponent(location.hash.slice(1)), d = id && document.getElementById(id);
-    if (d && d.tagName === "DETAILS") { d.open = true; d.scrollIntoView({ block: "start" }); }
+    if (d && d.tagName === "DETAILS") {
+      built.forEach(function(b){ if (b.d === d && !on[b.r.e.stamp.kind]) { on[b.r.e.stamp.kind] = true; applyKinds(true); } });
+      d.open = true; d.scrollIntoView({ block: "start" });
+    }
   }
   window.addEventListener("hashchange", arrive);
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 
-  render();
+  applyKinds();
   arrive();
 })();
 </script>

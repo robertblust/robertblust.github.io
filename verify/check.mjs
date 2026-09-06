@@ -262,6 +262,26 @@ const CHECKS = {
       pressed: document.getElementById("openall").getAttribute("aria-pressed") }));
     if (after.open !== ids.length) return `Open all opened ${after.open} of ${ids.length}`;
     if (after.label !== "Close all" || after.pressed !== "true") return `after Open all the control reads ${JSON.stringify(after.label)}, pressed ${after.pressed}`;
+    // The kind filter: a kind off takes its rows out of the ledger and the path line counts
+    // what is left; Show all kinds brings every row back and the plain count with it. The
+    // kinds are the block's, so the first box is whichever kind sorts first.
+    await page.evaluate(() => { document.getElementById("kinds").open = true; });
+    const kindOff = await page.evaluate(() => { const c = document.querySelector("#kindsmenu input"); c.click(); return c.parentNode.querySelector("span").textContent; });
+    const off = await page.evaluate((kind) => {
+      const rows = [...document.querySelectorAll("#ledger li.k-" + kind.toLowerCase())];
+      return { rows: rows.length, hidden: rows.filter(li => li.hidden).length, others: [...document.querySelectorAll("#ledger li[id], #ledger li:has(details)")].filter(li => !li.classList.contains("k-" + kind.toLowerCase()) && li.hidden).length,
+               path: document.getElementById("path").textContent, label: document.getElementById("kindslabel").textContent };
+    }, kindOff);
+    if (off.rows && off.hidden !== off.rows) return `turning ${kindOff} off hid ${off.hidden} of its ${off.rows} rows`;
+    if (off.others) return `turning ${kindOff} off also hid ${off.others} rows of other kinds`;
+    if (!/\d+ of \d+ entries/.test(off.path)) return `with ${kindOff} off the path line reads ${JSON.stringify(off.path)}`;
+    if (off.label === "All kinds") return `with ${kindOff} off the filter still reads All kinds`;
+    await page.click("#kindsmenu .all button");
+    const back = await page.evaluate(() => ({ hidden: [...document.querySelectorAll("#ledger li:has(details)")].filter(li => li.hidden).length,
+      path: document.getElementById("path").textContent, label: document.getElementById("kindslabel").textContent }));
+    if (back.hidden) return `Show all kinds left ${back.hidden} rows hidden`;
+    if (/ of /.test(back.path) || back.label !== "All kinds") return `after Show all kinds the head row reads ${JSON.stringify(back.path)} / ${JSON.stringify(back.label)}`;
+    await page.evaluate(() => { document.getElementById("kinds").open = false; });
     // Arriving with a hash opens that row.
     const target = ids[Math.floor(ids.length / 2)];
     await page.goto(BASE + spec.path + "#" + target);
