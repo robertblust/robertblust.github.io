@@ -244,6 +244,9 @@ const CHECKS = {
     const fields = Object.keys(first.fields).filter(k => k !== "source" && k !== "skills");
     if (card.dts.join("|") !== fields.join("|")) return `first card lists ${card.dts.join(", ")}; the file has ${fields.join(", ")}`;
     if (card.eyebrow !== "experience") return `first card's eyebrow reads ${JSON.stringify(card.eyebrow)}`;
+    // A skill in a card leaves for the model page with the stage expanded and the node in the hash.
+    const skillLink = await page.evaluate((id) => (document.getElementById(id).querySelector(".cbody .grp .chips a") || {}).getAttribute?.("href") || null, ids[0]);
+    if (skillLink !== null && !/^\.\.\/model\/\?stage=expanded#skills\//.test(skillLink)) return `a skill link reads ${JSON.stringify(skillLink)}`;
     if (!card.foot.endsWith(`/blob/${data.commit}/${first.path}`)) return `first card's foot link is ${card.foot}`;
     if (card.hash !== "#" + ids[0]) return `opening a row wrote ${JSON.stringify(card.hash)} to the address`;
     // Every skill the file names is in exactly one group's chips.
