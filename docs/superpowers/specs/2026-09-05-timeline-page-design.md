@@ -333,3 +333,14 @@ the dialog sets the card's width. The card stays the same card.
 All four are design v0.31.0, a minor, since two synced files change and a site takes them with a
 sync. The `ledger` check reads the field list without the two fields and the eyebrow as the
 type, and counts the chips against the skills the file names.
+
+## Amended 2026-09-06: the gutter on a phone
+
+The gutter carries the start year and the end year, and on a phone the open-ended entry's
+"present" or "heute" overran the 4.2 rem column in both languages, the German ranges sitting
+closest to the edge because WRITING.md sets their en-dash with spaces. Below 640 px the gutter
+shows the start year alone. The start year is what places a row on the axis, the full period is
+on the line under the name in the page's language, and four characters fit in any language on
+any phone. Above 640 px the range stays. Both forms are in the markup and the stylesheet shows
+one, so a rotation re-renders nothing. Widening the column was refused: it moves the edge to
+the next longer word and takes a fifth of a name's width on a 320 px phone.
