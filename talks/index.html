@@ -458,12 +458,17 @@
 
   main{flex:1; display:flex; align-items:center; padding:2vh 0 5vh}
 
-  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-     font-weight:700; letter-spacing:-.032em; line-height:1.04;
-     font-size:clamp(2rem,4.6vw,3.5rem); max-width:22ch}
-  h1 em{font-style:normal; color:var(--c-firm)}
-  .lede{margin-top:1.5rem; font-size:clamp(1.02rem,1.5vw,1.22rem); color:var(--dim);
-        max-width:52ch}
+  /* The title block every prose page in the family carries: the first clause light and dim,
+     the completion heavy under it, the one word that carries the point in the accent. The
+     page's subject is what changes between pages, never the shape. */
+  .title h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            letter-spacing:-.035em; line-height:1.0;
+            font-size:clamp(2.2rem,6vw,4.6rem)}
+  .title h1 .r70{display:block; font-weight:300; color:var(--dim)}
+  .title h1 .rcl{display:block; font-weight:800}
+  .title h1 em{font-style:normal; color:var(--c-firm)}
+  .tagline{margin-top:1.6rem; font-size:clamp(1.1rem,1.9vw,1.4rem); color:var(--dim);
+           max-width:46ch; line-height:1.4}
 
   .talks{margin-top:clamp(3rem,6vh,5rem)}
   .talk{
@@ -514,7 +519,7 @@
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
   @media (max-width:900px){
-    .lede{max-width:100%}
+    .tagline{max-width:100%}
     main{padding:1vh 0 4vh}
     .talk{grid-template-columns:minmax(0,1fr); gap:.5rem}
     .meta{grid-column:1; text-align:left; margin-top:.4rem}
@@ -552,8 +557,10 @@
 
 <main>
   <div class="shell">
-    <h1 data-de="Vorträge über <em>gutes Entscheiden</em>.">Talks on <em>deciding well</em>.</h1>
-    <p class="lede" data-de="Jedes Projekt ist entschieden, bevor es gebaut wird – dadurch, wie präzise das Problem beschrieben wurde. Jeder Vortrag begründet das aus einem anderen Blickwinkel, in etwa zehn Minuten.">Every project is decided before it is built — in how precisely the problem was described. Each talk argues that from a different angle, in about ten minutes.</p>
+    <div class="title">
+      <h1 data-de="<span class='r70'>Vorträge über</span><span class='rcl'><em>gutes Entscheiden</em>.</span>"><span class="r70">Talks on</span><span class="rcl"><em>deciding well</em>.</span></h1>
+      <p class="tagline" data-de="Jedes Projekt ist entschieden, bevor es gebaut wird – dadurch, wie präzise das Problem beschrieben wurde. Jeder Vortrag begründet das aus einem anderen Blickwinkel, in etwa zehn Minuten.">Every project is decided before it is built — in how precisely the problem was described. Each talk argues that from a different angle, in about ten minutes.</p>
+    </div>
 
     <div class="talks">
       <div class="talkrow">
