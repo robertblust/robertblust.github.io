@@ -115,7 +115,7 @@ const PAGES = [
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
   { path: "/ideas/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Zwei Ideen, offen gebaut", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"],
+    translates: { lang: "de", shows: ["offen geprüft", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"],
                   title: "Ideen – Robert Blust",
                   desc: "Zwei Ideen, zur Prüfung gestellt: GuestGraph und CompanyGraph. Je fünf Teile – was quelloffen ist, was je Geld verdienen könnte, und wie weit es ist." },
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
