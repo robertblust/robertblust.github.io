@@ -162,7 +162,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["Wie man es liest", "Alle öffnen", "Nichts davon wurde für diese Seite geschrieben"], hides: ["How to read it", "Open all", "Nothing here was written for this page"],
                   title: "Werdegang – Robert Blust",
                   desc: "Über fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
-    contains: ["Over twenty-five years,", "in order", "How to read it", "Generated from"],
+    contains: ["Over 25 years,", "in order", "How to read it", "Generated from"],
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
