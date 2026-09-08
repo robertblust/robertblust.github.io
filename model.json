@@ -1,5 +1,5 @@
 {
-  "commit": "dcabb46f48b89c04fb0b509cfc3bc5e10e5e7676",
+  "commit": "616ff42ca88d39fab9c727500247b7c72302fe62",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -635,6 +635,11 @@
                   "Advised clients including Credit Suisse, Swisscard, AXA and Mobiliar as 3AP's CTO and joined each project's ramp-up to negotiate with the client's security and platform organizations (2015–2022). Presented the solution architecture in the winning Aroov pitch (2019). Presented the solution architecture in the winning Stay KooooK pitch (2020)."
                 ],
                 [
+                  "Storytelling",
+                  "Proficient",
+                  "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
+                ],
+                [
                   "Technical writing",
                   "Expert",
                   "Wrote the Analysis & Design methodology and guidance a UBS division worked to (2004–2009). Published an article on process monitoring with BPMN, with the runnable sample it describes (2021). Built the LIKE MAGIC Mental Model as the organization's written context layer (2022–2026). Wrote CompanyGraph's conventions, design specs and worked example, prose other people follow for readers who were not in the room (2026)."
@@ -989,6 +994,11 @@
                 "Stakeholder management",
                 "Proficient",
                 "Advised clients including Credit Suisse, Swisscard, AXA and Mobiliar as 3AP's CTO and joined each project's ramp-up to negotiate with the client's security and platform organizations (2015–2022). Presented the solution architecture in the winning Aroov pitch (2019). Presented the solution architecture in the winning Stay KooooK pitch (2020)."
+              ],
+              [
+                "Storytelling",
+                "Proficient",
+                "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
               ],
               [
                 "Technical writing",
@@ -3048,7 +3058,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — nine schemas and sixteen numbered conventions that make the graph checkable — with a worked example company and an instance parser, and released it 18 times to v0.14.0, a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, 36 experiences, 69 skills on a four-level ladder and 5 values, every claim traced to an experience that shows it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
+          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — nine schemas and sixteen numbered conventions that make the graph checkable — with a worked example company and an instance parser, and released it 18 times to v0.14.0, a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, 36 experiences, 70 skills on a four-level ladder and 5 values, every claim traced to an experience that shows it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
           "tables": []
         },
         {
@@ -3178,7 +3188,8 @@
         "end": "2026-09-06",
         "url": "https://robertblust.substack.com/p/turn-your-work-history-into-code",
         "skills": [
-          "Context engineering"
+          "Context engineering",
+          "Storytelling"
         ]
       },
       "sections": [
@@ -4468,6 +4479,25 @@
       ],
       "owner": null,
       "path": "model/skills/stakeholder-management.md"
+    },
+    {
+      "id": "skills/storytelling",
+      "type": "skill",
+      "name": "Storytelling",
+      "tagline": "Ordering facts into a story an audience will follow, and holding it together across every piece that tells it.",
+      "fields": {
+        "source": "Local",
+        "group": "Leadership"
+      },
+      "sections": [
+        {
+          "heading": "In practice",
+          "text": "Decide the one claim the whole story has to land, and cut what does not carry it. Order the\npieces so each stands alone and still carries the through-line — the first earns attention,\nthe last asks for something. Fix what may be said before drafting starts, so the shape\nsurvives a co-author or a generating tool. Keep the claim checkable, because an audience\nthat can verify one thing will grant the rest.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/skills/storytelling.md"
     },
     {
       "id": "skills/technical-writing",
@@ -6857,6 +6887,12 @@
     },
     {
       "from": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -7466,6 +7502,15 @@
     },
     {
       "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Skills.Skill",
+      "attrs": {
+        "Level": "proficiency-levels/proficient",
+        "Evidence": "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
       "to": "skills/technical-writing",
       "via": "Skills.Skill",
       "attrs": {
@@ -7886,6 +7931,12 @@
     },
     {
       "from": "skills/stakeholder-management",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "skills/storytelling",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
