@@ -1,5 +1,5 @@
 {
-  "commit": "66cd79d01ce9e47ebf6adeec4e50cf5d33ee3d30",
+  "commit": "dcabb46f48b89c04fb0b509cfc3bc5e10e5e7676",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -3176,7 +3176,7 @@
         "kind": "Community",
         "start": "2026-09-06",
         "end": "2026-09-06",
-        "url": "https://robblust.substack.com/p/turn-your-work-history-into-code",
+        "url": "https://robertblust.substack.com/p/turn-your-work-history-into-code",
         "skills": [
           "Context engineering"
         ]
