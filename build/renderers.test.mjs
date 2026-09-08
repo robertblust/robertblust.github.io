@@ -92,3 +92,49 @@ test("writePrinciples orders values by path, not by entity order", () => {
   assert.ok(page.includes('<p class="lede">First para wrapped.</p>'));
   assert.ok(page.includes('<p class="lede">Second para.</p>'));
 });
+
+import { writeJsonLd, alsoAt } from "./jsonld.mjs";
+
+const PROFILE_FIXTURE = {
+  ...FIXTURE,
+  root: "Someone",
+  rootId: "identity",
+  entities: [
+    { id: "identity", type: "identity", name: "Someone", tagline: "", sections: [] },
+    { id: "profiles/someone", type: "profile", name: "Someone", tagline: "",
+      sections: [{ heading: "Also at", tables: [
+        { columns: ["What", "URL"], rows: [["GitHub", "https://example.com/a"], ["Elsewhere", "https://example.com/b"]] }] }] },
+  ],
+};
+
+test("alsoAt takes the URL column of the root profile's Also at table", () => {
+  assert.deepEqual(alsoAt(PROFILE_FIXTURE), ["https://example.com/a", "https://example.com/b"]);
+});
+
+test("alsoAt throws rather than publishing an empty sameAs", () => {
+  const bare = { ...PROFILE_FIXTURE, entities: [PROFILE_FIXTURE.entities[0],
+    { ...PROFILE_FIXTURE.entities[1], sections: [] }] };
+  assert.throws(() => alsoAt(bare), /Also at/);
+});
+
+test("writeJsonLd replaces the leading three nodes and leaves the rest byte-identical", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
+      { "@type": "WebPage", "@id": "https://blust.ch/#webpage", name: "Kept", about: { "@id": "https://blust.ch/#person" } },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["index.html"] });
+  const written = JSON.parse(fs.readFileSync(path.join(dir, "index.html"), "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
+  assert.equal(written["@graph"].length, 4);
+  assert.deepEqual(written["@graph"][3], doc["@graph"][3], "the page-specific node is untouched");
+  assert.deepEqual(written["@graph"][0].sameAs, ["https://example.com/a", "https://example.com/b"]);
+  assert.equal(written["@graph"][1].distribution.contentUrl, "https://blust.ch/model.json");
+});
