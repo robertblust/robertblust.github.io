@@ -666,7 +666,7 @@ convention inside `data-de` and the `escAttr` that does not run the German throu
 - [ ] **Step 4: Run the tests and make sure they pass**
 
 Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 7 tests
+Expected: PASS, 6 tests
 
 - [ ] **Step 5: Register the renderer**
 
@@ -714,7 +714,7 @@ reading of the model and, with it, the second GitHub endpoint this repository ca
 page's own words — the heading over the values, the note about language, the provenance
 line — stay here, because the model owns the statements and this owns the frame.
 
-Verified: node --test build/renderers.test.mjs passes 7 tests; npm run pages leaves
+Verified: node --test build/renderers.test.mjs passes 6 tests; npm run pages leaves
 principles/index.html byte-identical, so git diff is empty; pages:check goes red on a hand
 edit.
 
@@ -926,7 +926,7 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
 - [ ] **Step 4: Run the tests and make sure they pass**
 
 Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 10 tests
+Expected: PASS, 9 tests
 
 - [ ] **Step 5: Register it and delete its predecessor**
 
@@ -1014,7 +1014,7 @@ there is no list to be missing from. The Dataset node also gains the download it
 model.json as a DataDownload, url moved to the page that draws the model, and the source
 repository named as isBasedOn.
 
-Verified: node --test build/renderers.test.mjs passes 10 tests; the diff is nine pages of
+Verified: node --test build/renderers.test.mjs passes 9 tests; the diff is nine pages of
 JSON-LD and nothing else; pages:check goes red on one page edited alone; npm run verify is
 green, which resolves every @id and fetches every on-site URL in the graph.
 
