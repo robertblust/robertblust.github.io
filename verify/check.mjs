@@ -155,7 +155,7 @@ const PAGES = [
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
-    card: true, internalLinks: true, graph: "model-data", divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
+    card: true, internalLinks: true, graph: true, divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
   // opening into the card card.js renders. `ledger` is the check that the rows are the block's
   // experiences in the order they began and that a card is the entity, field for field.
   { path: "/timeline/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Timeline/, lang: "en", sourceLang: "en",
@@ -167,7 +167,7 @@ const PAGES = [
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
-    card: true, internalLinks: true, ledger: "model-data" },
+    card: true, internalLinks: true, ledger: true },
 ];
 
 const CHECKS = {
@@ -203,14 +203,24 @@ const CHECKS = {
       [...document.querySelectorAll(".brand img, .name .namemark img")].map(i => i.getAttribute("src")));
     return linked.length ? `the brand lockup links its mark instead of inlining it: ${linked.join(", ")}` : null;
   },
-  // Local to this site until a second site has a ledger. Reads the block the page carries
-  // and holds the page to it: the rows are the block's experiences in the order they began,
+  // Local to this site until a second site has a ledger. Reads the file the page names
+  // and holds the page to it: the rows are the model's experiences in the order they began,
   // an open row's card lists the entity's fields in file order, the foot names the file at
-  // the block's commit, and the address opens a row.
+  // the model's commit, and the address opens a row.
   async ledger(page, spec) {
-    const data = await page.evaluate((id) => JSON.parse(document.getElementById(id).textContent), spec.ledger);
+    // The same file the page reads, found the same way, so a row and the model it claims to show
+    // cannot disagree. It used to parse a block the build had inlined into the page.
+    const found = await page.evaluate(async () => {
+      const link = document.querySelector("link[data-stage]");
+      if (!link) return { error: 'names no data — add <link rel="preload" as="fetch" href="…" data-stage crossorigin> to it and rebuild' };
+      const res = await fetch(link.href);
+      if (!res.ok) return { error: `names ${link.href}, and it answers HTTP ${res.status}` };
+      return { data: await res.json() };
+    });
+    if (found.error) return `the page ${found.error}`;
+    const data = found.data;
     const exps = data.entities.filter(e => e.type === "experience");
-    if (!exps.length) return "the block holds no experiences — run: npm run model";
+    if (!exps.length) return "the model holds no experiences — run: npm run model";
     const ids = await page.evaluate(() => [...document.querySelectorAll("#ledger details")].map(d => d.id));
     if (ids.length !== exps.length) return `${ids.length} rows for ${exps.length} experiences`;
     const day = (v) => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(v || ""); return m ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) : 0; };

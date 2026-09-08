@@ -11,7 +11,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { writeBlock } from "./block.mjs";
 import { writePrinciples } from "./principles.mjs";
 import { writeJsonLd } from "./jsonld.mjs";
 
@@ -30,7 +29,7 @@ if (data.commit !== commit) {
 }
 
 const check = process.argv.includes("--check");
-const RENDERERS = [writeBlock, writePrinciples, writeJsonLd];
+const RENDERERS = [writePrinciples, writeJsonLd];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
 
