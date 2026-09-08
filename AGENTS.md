@@ -639,19 +639,26 @@ ship, and not before.
 carrying no `· vN` tripwire, unlike the token block and the deck's other generated fences.
 Port changes by hand to all three.
 
-## Two pages carry one data block
+## One artifact, and every derived page
 
-`/model/` and `/timeline/` both hold the parsed model as a JSON block between `model data`
-markers, and `build/model.mjs` writes both from one parse — `npm run model` rewrites both,
-`npm run model:check` holds both. So a red check names a page that was not touched: edit
-the timeline page's prose by hand and the model page still passes, but re-pin the model and
-forget `npm run model`, and both go red together. The timeline page draws no card of its
-own: `card.js`, from the design package, renders every card and formats every date on it,
-exactly as it does on the model page, and that is why the two pages can never disagree
-about what a file says. Every page that carries the person node has its `sameAs` written
-from the profile's `## Also at` rows in that same block by `npm run sameas`, and
-`npm run sameas:check` holds it; both run after `npm run model`, because they read what it
-wrote.
+`model.json` is the parsed model at the commit `source.json` pins, committed like the share
+cards and the PDFs are. `npm run model` writes it and is the only script here that reaches
+GitHub or the parser; `npm run pages` renders it into every page derived from it and reaches
+neither. So re-pinning is `source.json`, then `npm run model`, then `npm run pages`, and
+forgetting the last step is caught rather than shipped: `npm run pages` refuses to run when
+the artifact names a commit other than the one pinned, and `npm run pages:check` holds every
+page in CI before `npm ci` has run.
+
+Twelve regions are derived. The data block in `/model/` and `/timeline/` is one block written
+into two pages, so a red check names a page nobody touched: re-pin and forget `npm run pages`
+and both go red together. The vision and the values are rendered as HTML into `/principles/`,
+because a crawler has to read them without running JS. And the JSON-LD nodes that do not vary
+from page to page — `Person`, `Dataset`, `WebSite` — are written into all nine pages that
+carry a graph, while `WebPage` and `BreadcrumbList` differ per page and stay by hand. That
+split is the rule: **a node that does not vary from page to page is written from one
+definition.** Nine hand-typed copies is nine chances for eight of them to be right, which is
+how two talk decks came to describe the person without an address the other seven pages
+carried.
 
 ## CI
 

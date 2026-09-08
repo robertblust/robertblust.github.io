@@ -39,19 +39,13 @@ jobs:
       # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
-      # The principles page is generated from the model, so a page edited by hand — or a model
-      # that moved without the page being rebuilt — is a drift this catches before it ships.
-      # Reads the pinned commit over the API; the token is only for the rate limit.
-      - name: The principles page still matches the model
-        run: npm run principles:check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # The home page's sameAs is written from the model's profile, so an address typed into
-      # the page by hand, or a model that moved without the page being rebuilt, fails here.
-      # Before npm ci because it installs nothing: the script reads source.json and the pages
-      # with node built-ins only.
-      - name: The home page's sameAs still matches the model
-        run: npm run sameas:check
+      # Every page this site derives from the model, held against the artifact it derives them
+      # from. Before npm ci because it installs nothing: pages.mjs and its renderers are node
+      # built-ins and one committed file, with no network. That is the whole reason the artifact
+      # is committed — the check that catches a page edited by hand is also the cheapest step
+      # in this job.
+      - name: The derived pages still match the model
+        run: npm run pages:check
       - run: npm ci
       # How far the model pin has fallen behind what it points at. Non-blocking on purpose:
       # the pin is editorial — it says which state of the model these pages publish — so a pin
@@ -75,14 +69,12 @@ jobs:
         run: npm run test:og
       - name: Cards still show the page they render
         run: npm run og:check
-      # The model page is generated from the model, exactly as the principles page is — but it
-      # cannot sit beside its sibling above, because build/model.mjs now imports the parser
-      # from companygraph-meta-model and that is not on disk until npm ci has run. Left up
-      # there it would fail every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch
-      # that, because node_modules is already on the machine. Until now neither this check nor
-      # the parser's tests ran here at all, so the one page this site builds from an external
-      # model was the one page CI never looked at.
-      - name: The model page still matches the model
+      # Whether the artifact is still what the pinned commit parses to. This cannot sit beside
+      # the step above, because it is the one part of the build that imports the parser from
+      # companygraph-meta-model, and that is not on disk until npm ci has run. Left up there it
+      # fails every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch that, because
+      # node_modules is already on the machine.
+      - name: model.json still matches the pinned commit
         run: npm run model:check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
