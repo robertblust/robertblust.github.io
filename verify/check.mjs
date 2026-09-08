@@ -125,7 +125,7 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"],
     card: true, internalLinks: true },
   // Generated from the model, so what it asserts is the shape of the page and one line of the
-  // content — the words themselves are `npm run principles:check`'s business, and asserting
+  // content — the words themselves are `npm run pages:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
   { path: "/principles/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     // The page's own words swap; the model's stay English, which its note says. `shows` names

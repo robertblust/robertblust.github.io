@@ -1,6 +1,6 @@
 # blust.ch
 
-Robert Blust's profile page and two talks. Self-contained, no build step, no external
+Robert Blust's profile page and two talks. Self-contained, no bundler, no external
 assets. Working conventions and the traps that break this site silently are in
 `AGENTS.md`.
 
@@ -27,10 +27,16 @@ works from `file://` as well as a local server.
 npm install && npx playwright install chromium
 npm run serve      # python3 -m http.server 8000
 npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
-npm run og           # regenerate the four 1200×630 og:image share cards
+npm run og           # regenerate the nine 1200×630 og:image share cards
 npm run og:check      # do those cards still show the pages they were rendered from?
 npm run test:og        # unit tests for the card recipe the check compares
 npm run pdf            # regenerate both decks' PDF fallbacks
+
+npm run model          # fetch the pinned model and write model.json — needs the network
+npm run model:check     # is model.json still what that commit parses to?
+npm run pages            # render model.json into every derived page region
+npm run pages:check       # do those pages still match model.json?
+npm run test:build         # unit tests for the three renderers
 
 ./tts/generate.py --dry-run     # narration: what would be billed, and for which slides
 ./tts/generate.py               # narration: generate what changed, both decks
@@ -40,7 +46,9 @@ Run `npm run verify` after any change under `index.html`, `talks/`, or `verify/`
 `npm run og` and `npm run pdf` after a visual change to either deck or to `index.html` /
 `talks/index.html` — the share cards and PDFs are rendered, committed files, not
 generated on demand. `npm run og:check` says when a card has fallen behind its page; CI
-runs it on every push, so forgetting is caught rather than shipped.
+runs it on every push, so forgetting is caught rather than shipped. Run `npm run model`
+then `npm run pages` after moving the pin in `source.json`; `model.json` and every page
+built from it are committed files, not generated on demand.
 
 Narration is generated from the speaker notes themselves and cached on a content hash, so
 editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in
