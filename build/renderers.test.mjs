@@ -55,3 +55,40 @@ test("writeBlock reports nothing once the pages are written", () => {
   writeBlock(FIXTURE, { check: false, root: dir });
   assert.deepEqual(writeBlock(FIXTURE, { check: true, root: dir }), []);
 });
+
+import { writePrinciples, paragraphs } from "./principles.mjs";
+
+test("paragraphs splits on blank lines and unwraps each paragraph", () => {
+  const text = "One line\nwrapped here.\n\nA second\nparagraph.";
+  assert.deepEqual(paragraphs(text), ["One line wrapped here.", "A second paragraph."]);
+});
+
+test("paragraphs drops the empty trailing paragraph", () => {
+  assert.deepEqual(paragraphs("Only this.\n\n"), ["Only this."]);
+});
+
+const PRINCIPLES_FIXTURE = {
+  ...FIXTURE,
+  entities: [
+    { id: "vision", type: "vision", name: "One thing, everywhere",
+      tagline: "A `tagline` with code.", path: "model/vision.md",
+      sections: [{ heading: "What it means", text: "First para\nwrapped.\n\nSecond para." }] },
+    { id: "values/b", type: "value", name: "Bee", tagline: "Bee tagline.",
+      path: "model/values/b.md", sections: [{ heading: "In practice", text: "Bee body." }] },
+    { id: "values/a", type: "value", name: "Ay", tagline: "Ay tagline.",
+      path: "model/values/a.md", sections: [{ heading: "In practice", text: "Ay body." }] },
+  ],
+};
+
+test("writePrinciples orders values by path, not by entity order", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-princ-"));
+  fs.mkdirSync(path.join(dir, "principles"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "principles", "index.html"),
+    "<div>\n    <!-- principles:start -->\n    old\n    <!-- principles:end -->\n</div>\n");
+  writePrinciples(PRINCIPLES_FIXTURE, { check: false, root: dir });
+  const page = fs.readFileSync(path.join(dir, "principles", "index.html"), "utf8");
+  assert.ok(page.indexOf("Ay") < page.indexOf("Bee"), "a/ sorts before b/");
+  assert.ok(page.includes('<code class="mono">tagline</code>'), "backticks become code");
+  assert.ok(page.includes('<p class="lede">First para wrapped.</p>'));
+  assert.ok(page.includes('<p class="lede">Second para.</p>'));
+});
