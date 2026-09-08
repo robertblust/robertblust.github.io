@@ -1,6 +1,6 @@
 # blust.ch
 
-Robert Blust's profile page and two talks. Self-contained, no build step, no external
+Robert Blust's profile page and two talks. Self-contained, no bundler, no external
 assets. Working conventions and the traps that break this site silently are in
 `AGENTS.md`.
 

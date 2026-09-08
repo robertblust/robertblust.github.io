@@ -17,7 +17,7 @@ a shared file in robertblust/conventions, never here.
 
 # blust.ch — working conventions
 
-Robert Blust's profile page and two talks, self-contained, no build step. What the pages
+Robert Blust's profile page and two talks, self-contained, no bundler. What the pages
 are, the URL map and the commands live in `README.md`; this file is about the ways this
 site breaks silently.
 
@@ -558,7 +558,7 @@ whole time.
 - **The frame is this site's and is not interchangeable.** blust.ch and companygraph carry
   `clipY` and no `deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`.
   The recipe hashes every key of a card, so a single spurious `deviceScaleFactor: 1` copied in
-  from a sibling moves all eight `og.sha` here while no picture changes.
+  from a sibling moves all nine `og.sha` here while no picture changes.
 - **The hash covers every key of a card, sorted, not a hand-written list of them.** That is why
   `settle` and `from` can exist in companygraph's cards and not here without the mechanism
   differing: a knob added later enters the recipe by existing. It also means changing the
