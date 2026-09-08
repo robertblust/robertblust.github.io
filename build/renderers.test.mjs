@@ -138,3 +138,19 @@ test("writeJsonLd replaces the leading three nodes and leaves the rest byte-iden
   assert.deepEqual(written["@graph"][0].sameAs, ["https://example.com/a", "https://example.com/b"]);
   assert.equal(written["@graph"][1].distribution.contentUrl, "https://blust.ch/model.json");
 });
+
+test("writeJsonLd refuses to write a graph that does not lead with Person, Dataset, WebSite", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebPage", "@id": "https://blust.ch/#webpage", name: "Kept" },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["index.html"] }),
+    /@graph must lead with Person, Dataset, WebSite/);
+});

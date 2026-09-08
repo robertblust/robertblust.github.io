@@ -94,12 +94,25 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
     if (!m) throw new Error(`${rel} carries no JSON-LD block`);
     const doc = JSON.parse(m[2]);
     if (!Array.isArray(doc["@graph"])) throw new Error(`${rel}'s JSON-LD has no @graph`);
+    // The leading three entries are what this renderer replaces, so a page whose graph is
+    // shaped differently is a page it must refuse rather than truncate: slicing them off
+    // unconditionally would silently drop a fourth node — WebPage on a page with no
+    // BreadcrumbList — with no error and no length change to notice.
+    const lead = doc["@graph"].slice(0, nodes.length).map((n) => n && n["@type"]);
+    const want = nodes.map((n) => n["@type"]);
+    if (lead.join() !== want.join()) {
+      throw new Error(`${rel}: @graph must lead with ${want.join(", ")}, not ${lead.join(", ") || "nothing"}`);
+    }
     doc["@graph"] = [...nodes, ...doc["@graph"].slice(nodes.length)];
     const text = JSON.stringify(doc, null, 2);
-    // It has to parse after the write as well as before it: this rewrites a region inside a
-    // document that the rest of the site, and every crawler, reads as JSON.
-    JSON.parse(text);
     const next = page.replace(RE, (all, open, _body, close) => open + text + close);
+    // It has to parse after the write as well as before it: this rewrites a region inside a
+    // document that the rest of the site, and every crawler, reads as JSON. Re-extracted from
+    // the rewritten page rather than from `text`, because parsing what JSON.stringify just
+    // returned proves only that JSON.stringify works.
+    const after = RE.exec(next);
+    if (!after) throw new Error(`${rel}: the JSON-LD block did not survive the write`);
+    JSON.parse(after[2]);
     if (next === page) continue;
     if (check) stale.push(rel);
     else fs.writeFileSync(file, next);
