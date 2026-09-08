@@ -649,9 +649,14 @@ forgetting the last step is caught rather than shipped: `npm run pages` refuses 
 the artifact names a commit other than the one pinned, and `npm run pages:check` holds every
 page in CI before `npm ci` has run.
 
-Twelve regions are derived. The data block in `/model/` and `/timeline/` is one block written
-into two pages, so a red check names a page nobody touched: re-pin and forget `npm run pages`
-and both go red together. The vision and the values are rendered as HTML into `/principles/`,
+Ten regions are derived, and `/model/` and `/timeline/` are not among them. Those two draw the
+model, and they name it rather than carry it: one `<link rel="preload" as="fetch" href="../model.json"
+data-stage crossorigin>` in the head, which the stage and the ledger both find by the attribute
+and fetch. Nothing derives that link — its href and its marker never vary — so it is ordinary
+markup, and the page holds no commit at all. What holds those pages to the pin is that there is
+only one copy: `model.json`, which `pages:check` holds against `source.json`. A page that names
+no data does not fail quietly; the stage throws, and the suite reports it on every page through
+the listener it already has. The vision and the values are rendered as HTML into `/principles/`,
 because a crawler has to read them without running JS. And the JSON-LD nodes that do not vary
 from page to page — `Person`, `Dataset`, `WebSite` — are written into all nine pages that
 carry a graph, while `WebPage` and `BreadcrumbList` differ per page and stay by hand. That
