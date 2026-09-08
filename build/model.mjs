@@ -1,9 +1,11 @@
 // Writes the pinned model into `model.json`, or checks that the file there is still what that
 // commit parses to — `npm run model` and `npm run model:check`.
 //
-// This is the only script in the repository that reaches the network or the parser. Everything
-// else on this site is rendered from the file it writes, which is why the pages can be checked
-// before `npm ci` has run and without GitHub being reachable.
+// This is the only part of the build that needs both GitHub and the parser, and that pairing is
+// what fixes its place in CI below `npm ci`: the parser is a dependency and is not on disk until
+// then. Reaching the network is not the rare half — `pin-check.mjs` reaches GitHub too.
+// Everything else on this site is rendered from the file this writes, which is why the pages can
+// be checked before `npm ci` has run and without GitHub being reachable.
 //
 // Pretty-printed because the file is committed and the point of committing it is review: a
 // re-pin then shows which experience gained a field and which tagline was reworded, rather than

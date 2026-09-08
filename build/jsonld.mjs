@@ -3,8 +3,9 @@
 // written from one definition, and a node that differs — WebPage, BreadcrumbList — is left
 // alone. Nine hand-typed copies of one node is nine chances for eight of them to be right, and
 // that had already happened: two pages described the person without an address the other seven
-// carried, and the check passed because it held only the pages on its list. There is no list to
-// be missing from now.
+// carried, and the check passed because it held only the pages on its list. This list is checked
+// rather than trusted: a page that describes the person without being on it fails here instead of
+// drifting quietly.
 //
 // The three nodes are the leading three entries of @graph on every page, so the whole block is
 // re-emitted with them replaced and everything after them preserved. The nodes that stay carry
@@ -84,7 +85,37 @@ function invariant(data) {
 
 const RE = /(<script type="application\/ld\+json">\n)([\s\S]*?)(\n<\/script>)/;
 
+// The list above is checked rather than trusted. A tenth page added with a hand-copied Person
+// node and left off it would reproduce the very drift this renderer ends, and nothing would say
+// so, so every HTML file under the root is read before any page is written. Naming the person's
+// @id is enough to be caught: a page that names it and does not define it publishes a reference
+// that resolves nowhere, so there is no honest reason for the string to appear off the list.
+const PERSON = `"${SITE}/#person"`;
+
+function htmlFiles(dir) {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === "node_modules" || entry.name.startsWith(".")) continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...htmlFiles(full));
+    else if (entry.name.endsWith(".html")) out.push(full);
+  }
+  return out;
+}
+
+function refuseUnlisted(root, pages) {
+  const listed = new Set(pages.map((rel) => path.join(root, rel)));
+  const found = htmlFiles(root)
+    .filter((file) => !listed.has(file) && fs.readFileSync(file, "utf8").includes(PERSON))
+    .map((file) => path.relative(root, file));
+  if (found.length) {
+    throw new Error(`off this renderer's list and naming ${PERSON}: ${found.join(", ")} — ` +
+      "add each to PAGES in build/jsonld.mjs, so the node it carries is written rather than typed");
+  }
+}
+
 export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } = {}) {
+  refuseUnlisted(root, pages);
   const nodes = invariant(data);
   const stale = [];
   for (const rel of pages) {

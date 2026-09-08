@@ -127,7 +127,11 @@ export function writePrinciples(data, { check = false, root = HERE } = {}) {
   const page = fs.readFileSync(file, "utf8");
   const re = new RegExp(`${START}[\\s\\S]*?${END}`);
   if (!re.test(page)) throw new Error(`${rel} has no ${START} … ${END} block`);
-  const next = page.replace(re, `${START}\n${render(data)}\n    ${END}`);
+  // The replacement carries the model's own prose, and a `$&` in a value's text would be read as
+  // a reference to the match rather than as two characters — writing the start marker into the
+  // paragraph, and leaving a block that re-expands against itself on every later run. The
+  // function form has no such reading, which is why `jsonld.mjs` writes its block the same way.
+  const next = page.replace(re, () => `${START}\n${render(data)}\n    ${END}`);
   if (next === page) return [];
   if (check) return [rel];
   fs.writeFileSync(file, next);

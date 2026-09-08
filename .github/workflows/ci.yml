@@ -39,6 +39,12 @@ jobs:
       # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
+      # The renderers decide what every derived page says, and the check below only holds their
+      # output against itself: a renderer that writes the wrong thing everywhere is green there
+      # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.
+      # Above npm ci for the same reason as the sweep — they import nothing outside node:.
+      - name: The renderers still say what the model says
+        run: npm run test:build
       # Every page this site derives from the model, held against the artifact it derives them
       # from. Before npm ci because it installs nothing: pages.mjs and its renderers are node
       # built-ins and one committed file, with no network. That is the whole reason the artifact

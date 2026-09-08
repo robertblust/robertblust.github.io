@@ -27,7 +27,7 @@ site breaks silently.
 npm install && npx playwright install chromium
 npm run serve      # → localhost:8000, all four pages
 npm run verify      # Playwright DOM assertions — the tests
-npm run og           # four 1200×630 share cards
+npm run og           # nine 1200×630 share cards
 npm run pdf            # both decks' PDFs
 ```
 
@@ -642,8 +642,8 @@ Port changes by hand to all three.
 ## One artifact, and every derived page
 
 `model.json` is the parsed model at the commit `source.json` pins, committed like the share
-cards and the PDFs are. `npm run model` writes it and is the only script here that reaches
-GitHub or the parser; `npm run pages` renders it into every page derived from it and reaches
+cards and the PDFs are. `npm run model` writes it and is the only script here that needs both
+GitHub and the parser; `npm run pages` renders it into every page derived from it and needs
 neither. So re-pinning is `source.json`, then `npm run model`, then `npm run pages`, and
 forgetting the last step is caught rather than shipped: `npm run pages` refuses to run when
 the artifact names a commit other than the one pinned, and `npm run pages:check` holds every
@@ -658,7 +658,9 @@ carry a graph, while `WebPage` and `BreadcrumbList` differ per page and stay by 
 split is the rule: **a node that does not vary from page to page is written from one
 definition.** Nine hand-typed copies is nine chances for eight of them to be right, which is
 how two talk decks came to describe the person without an address the other seven pages
-carried.
+carried. The renderer re-serializes the whole block rather than the three nodes alone, so it
+owns the formatting of the nodes that stay by hand too: compacting an `isPartOf` onto one line
+reports the page stale, and reads as a model change when nothing about the model moved.
 
 ## CI
 

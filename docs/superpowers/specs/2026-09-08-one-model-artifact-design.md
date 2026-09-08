@@ -119,8 +119,9 @@ adds belongs without anyone having to remember a list. It puts `Person`, `Datase
 `WebSite` under the renderer and leaves `WebPage` and `BreadcrumbList` alone, which takes 27
 of the 44 nodes off hand-maintenance and closes the duplication rather than reducing it.
 
-The rule is also what fixes the deck drift, and it fixes it by construction: there is no page
-list to be missing from, because every page carrying the graph is written the same way. So
+The rule is also what fixes the deck drift, and the list of pages carrying the graph is checked
+rather than trusted: before anything is written, every HTML file under the root is read, and one
+that describes the person without being on the list fails the run instead of drifting quietly. So
 `sameas.mjs` is not extended, it is deleted — writing whole nodes needs no `sameAs` array
 regex, and the property comes along with the node that holds it.
 
@@ -188,7 +189,9 @@ half-run rebuild is the failure the removal prevents.
 The three model steps become two, and the half that runs before `npm ci` gets broader rather
 than smaller. `pages:check` moves up into it and covers the data block, the principles page,
 every invariant JSON-LD node and the pin agreement, on node built-ins alone. `model:check`
-stays below `npm ci`, where it has to be, and remains the only step that reaches GitHub.
+stays below `npm ci`, where it has to be, because it is the only step that needs both GitHub and
+the parser. `pin:check` reaches GitHub as well; it is the parser, a dependency, that fixes this
+step's position.
 
 `principles:check` needed the network from its position above `npm ci`, which is the one
 thing this removes from that block rather than adds to it.

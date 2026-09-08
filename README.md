@@ -27,7 +27,7 @@ works from `file://` as well as a local server.
 npm install && npx playwright install chromium
 npm run serve      # python3 -m http.server 8000
 npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
-npm run og           # regenerate the four 1200×630 og:image share cards
+npm run og           # regenerate the nine 1200×630 og:image share cards
 npm run og:check      # do those cards still show the pages they were rendered from?
 npm run test:og        # unit tests for the card recipe the check compares
 npm run pdf            # regenerate both decks' PDF fallbacks

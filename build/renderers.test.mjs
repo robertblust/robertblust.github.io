@@ -93,6 +93,23 @@ test("writePrinciples orders values by path, not by entity order", () => {
   assert.ok(page.includes('<p class="lede">Second para.</p>'));
 });
 
+test("writePrinciples writes a $& in a section's text as itself", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-princ-"));
+  fs.mkdirSync(path.join(dir, "principles"), { recursive: true });
+  const file = path.join(dir, "principles", "index.html");
+  fs.writeFileSync(file,
+    "<div>\n    <!-- principles:start -->\n    old\n    <!-- principles:end -->\n</div>\n");
+  const dollars = {
+    ...PRINCIPLES_FIXTURE,
+    entities: PRINCIPLES_FIXTURE.entities.map((e) => e.type !== "vision" ? e
+      : { ...e, sections: [{ heading: "What it means", text: "A $& sign, kept." }] }),
+  };
+  writePrinciples(dollars, { check: false, root: dir });
+  const page = fs.readFileSync(file, "utf8");
+  assert.ok(page.includes("A $&amp; sign, kept."), "the model's text reaches the page as itself");
+  assert.equal(page.split("<!-- principles:start -->").length - 1, 1, "one start marker, not two");
+});
+
 import { writeJsonLd, alsoAt } from "./jsonld.mjs";
 
 const PROFILE_FIXTURE = {
@@ -153,4 +170,24 @@ test("writeJsonLd refuses to write a graph that does not lead with Person, Datas
     `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
   assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["index.html"] }),
     /@graph must lead with Person, Dataset, WebSite/);
+});
+
+test("writeJsonLd refuses to run while a page off its list names the person", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  fs.mkdirSync(path.join(dir, "tenth"), { recursive: true });
+  const unlisted = path.join("tenth", "index.html");
+  fs.writeFileSync(path.join(dir, unlisted),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["index.html"] }),
+    (err) => err.message.includes(unlisted), "the error names the page that was left off the list");
 });
