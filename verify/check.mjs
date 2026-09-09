@@ -311,7 +311,27 @@ const CHECKS = {
     await page.goto(BASE + spec.path + "#" + target);
     const opened = await page.evaluate((id) => document.getElementById(id).open, target);
     if (!opened) return `arriving at #${target} did not open that row`;
-    // Leave the page as it was found — at rest, no row open — for whatever check runs next.
+    // Arriving with ?kinds= sets the selection from the address: the kinds named are on and
+    // the rest off, the parameter leaves the address the way ?lang= does, and the selection
+    // is remembered as if the menu had been used. A name the model does not know is ignored,
+    // and a list naming no kind at all is ignored whole.
+    await page.goto(BASE + spec.path + "?kinds=" + kindOff.toLowerCase() + ",nosuchkind");
+    const linked = await page.evaluate((kind) => ({
+      hidden: [...document.querySelectorAll("#ledger li.k-" + kind.toLowerCase())].filter(li => li.hidden).length,
+      others: [...document.querySelectorAll("#ledger li:has(details)")].filter(li => !li.classList.contains("k-" + kind.toLowerCase()) && !li.hidden).length,
+      label: document.getElementById("kindslabel").textContent, search: location.search,
+      stored: (() => { try { return JSON.parse(localStorage.getItem("timeline-kinds")); } catch (e) { return null; } })() }), kindOff);
+    if (linked.hidden) return `?kinds=${kindOff} hid ${linked.hidden} rows of that kind`;
+    if (linked.others) return `?kinds=${kindOff} left ${linked.others} rows of other kinds showing`;
+    if (linked.label !== kindOff) return `with ?kinds=${kindOff} the filter reads ${JSON.stringify(linked.label)}`;
+    if (linked.search) return `the address still carries ${linked.search}`;
+    if (!linked.stored || linked.stored[kindOff] !== true || Object.keys(linked.stored).some(k => k !== kindOff && linked.stored[k])) return `?kinds=${kindOff} was not remembered: ${JSON.stringify(linked.stored)}`;
+    await page.goto(BASE + spec.path + "?kinds=nosuchkind");
+    const ignored = await page.evaluate(() => ({ hidden: [...document.querySelectorAll("#ledger li:has(details)")].filter(li => li.hidden).length, label: document.getElementById("kindslabel").textContent }));
+    if (ignored.label !== kindOff) return `?kinds naming no kind changed the selection to ${JSON.stringify(ignored.label)}`;
+    // Leave the page as it was found — at rest, every kind on, no row open — for whatever
+    // check runs next.
+    await page.evaluate(() => { try { localStorage.removeItem("timeline-kinds"); } catch (e) {} });
     await page.goto(BASE + spec.path);
     return null;
   },
