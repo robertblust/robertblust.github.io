@@ -28,6 +28,12 @@ updates:
       # bundled with a Playwright or pdf-lib bump — and this is the one pull request that has
       # to be read rather than merged on sight: it goes red until someone runs `npm run design`
       # and commits what changed.
+      #
+      # A pull request from this group proposing a LOWER version is closed, never merged, for
+      # the reason the meta-model group below spells out: the release cooldown, not the tag
+      # ranking. It reached this group on 2026-09-08, when v0.55.0 was offered a downgrade to
+      # v0.30.0 (#159, closed) on the day the release was cut, and it stops once the release
+      # ages past the cooldown. All three sites carry the warning on this group.
       design:
         patterns:
           - "@robertblust/design"
