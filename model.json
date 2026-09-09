@@ -1,5 +1,5 @@
 {
-  "commit": "616ff42ca88d39fab9c727500247b7c72302fe62",
+  "commit": "2241591106e36cc8c4c616d6028173341db036ae",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -42,6 +42,12 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "surface",
+      "folder": "surfaces",
       "owner": null,
       "singular": false
     },
@@ -3058,7 +3064,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — nine schemas and sixteen numbered conventions that make the graph checkable — with a worked example company and an instance parser, and released it 18 times to v0.14.0, a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, 36 experiences, 70 skills on a four-level ladder and 5 values, every claim traced to an experience that shows it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
+          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — ten schemas and eighteen numbered conventions that make the graph checkable — with a worked example company and an instance parser, and released it 20 times to v0.16.0, a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, 36 experiences, 70 skills on a four-level ladder and 5 values, every claim traced to an experience that shows it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
           "tables": []
         },
         {
@@ -4548,6 +4554,35 @@
       "sections": [],
       "owner": null,
       "path": "model/sources/local.md"
+    },
+    {
+      "id": "surfaces/linkedin-profile",
+      "type": "surface",
+      "name": "LinkedIn profile",
+      "tagline": "The professional network profile a recruiter, a client or a former colleague reaches first, kept by hand.",
+      "fields": {
+        "source": "Local",
+        "url": "https://www.linkedin.com/in/robertblust/"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Headline** — the slogan the blust.ch landing page carries as its H1, and nothing beside it.\n- **Location** — the metropolitan area the network's own list offers for the identity's\n  `location`.\n- **About** — the profile's `## Summary`, rewritten in this surface's register.\n- **Experience** — the experiences of kind `Role`, kind `Independent` and kind `Community`.\n- **Projects** — the experiences of kind `Project`.\n- **Education** — the experiences of kind `Education`.\n- **Skills** — five skills of the profile's, chosen by the owner.\n- **Languages** — the two languages `conventions/WRITING.md` names, English and Swiss German.",
+          "tables": []
+        },
+        {
+          "heading": "Projection rules",
+          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay: the first line carries the point, sentences\n  run short because the profile is read on a phone, and a claim it opens with is a claim it then\n  shows.\n- An entry carries the title and the period of the experience it was made from, and its body is\n  written rather than copied. What the entry holds was written for a reader who came to read.\n- The model is a company of one, so an experience nobody commissioned or hosted was the\n  company's own work: an entry whose experience carries no `organization` names the identity.\n  The network asks for a company on every entry and this answers it from the model rather than\n  by inventing a name.\n- An entry's body runs to one paragraph, and an entry whose period is a single day runs to a\n  sentence or two. The dates say which an entry is, so no count is needed here, and the register\n  holds either way: the first sentence carries the point.\n- For a talk, an article or a published tool the address is most of what the entry is, so an\n  entry whose experience carries a `url` shows it. An entry whose experience carries none shows\n  no link: the model holds an address or it does not, and this surface invents none.\n- The About text is the profile's `## Summary` rewritten the same way. The sentence naming the\n  security and compliance standards is not carried, because the LIKE MAGIC entry names those\n  standards beside the work that met them, and a standard named without its work is a claim the\n  reader cannot place.\n- Every dated unit runs newest first by `end`, with an experience that has none — a period still\n  running — above them all, and `start` breaking a tie. Not by `start`: a position starts once\n  and then runs for years, so ordering by it buries a long role under everything that began\n  while it was running, and a talk given during a job would stand above the job. What a reader\n  wants first is what ended last.\n- Every experience reaches a dated unit and each kind reaches one: `Role`, `Independent` and\n  `Community` are Experience, `Project` is Projects, `Education` is Education. Nothing here reads\n  what an experience produced or who it was for, because the kind already says both and the\n  model records nothing finer.\n- The Skills unit shows five because the network shows five on this account. Which five is the\n  owner's choice at each rebuild and not a rule: the model holds seventy skills and no ordering\n  among them, so nothing here could derive the five without inventing a ranking.\n- The Skills unit carries no proficiency level. The surface shows names alone, and a level\n  beside a name the surface does not explain reads as a grade.\n- The profile's tagline reaches no unit. It is the profile's `## Summary` compressed, the About\n  text is that Summary rewritten, and the headline states a value instead, so the tagline\n  wherever it landed would be the same claim a second time.\n- The model's values and its vision reach no unit. The surface has no unit for a stated\n  principle, and the About text is the only place one could go, where it would take the room\n  that text has for the work the principle was held during.\n- An experience's `## References` and its `skills` reach no unit either. The references are the\n  documents a claim rests on, which a reader of the model follows and a reader of a profile does\n  not — the entry's own address is what they came for. The skills are already on the surface, as\n  the five the Skills unit carries, and a list per entry would be the same claim told longer.\n- Nothing else the model holds reaches this surface: the standing links of the profile's\n  `## Also at`, the identity's `email`, the proficiency levels, the experience kinds, the\n  sources and this file's own type. Each is either how the model is kept, or a way to reach the\n  subject that the network already provides.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- Every unit that can travel on its own — the headline, a search result snippet, a share card —\n  carries something beside the name that resolves it: a role, a domain, a project or a location.\n  The name is shared with a notable deceased academic, and a unit carrying the name and nothing\n  else resolves to the wrong person. The headline meets this through its subject rather than a\n  title: the slogan is a claim about building software, which the other holder of the name did\n  not make.\n- The headline is at most 220 characters, the network's limit, read from its editor on\n  2026-09-09.\n- The About section is at most 2600 characters, read from the same editor on the same day.\n- Every dated entry carries as its title the H1 of the experience it was made from, and the\n  dates it shows are that experience's `start` and `end`. An experience with no `end` is a\n  period still running, and its entry shows the start and no end date.\n- Every name in the Skills unit is a skill in the model, spelled as that skill's H1.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/linkedin-profile.md"
     },
     {
       "id": "values/build-the-alternative-before-making-the-point",
@@ -7949,6 +7984,12 @@
     },
     {
       "from": "skills/vendor-management",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/linkedin-profile",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
