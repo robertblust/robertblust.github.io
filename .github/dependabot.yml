@@ -21,6 +21,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # Zero, stated, because Dependabot applies three days when the key is absent. The cooldown
+    # drops every release younger than that and offers the highest version left — the pinned
+    # release included, so for a package pinned by tag and released more than once a week the
+    # offer is a DOWNGRADE. It came on 2026-09-09 as v0.55.0 down to v0.30.0 in the design group
+    # and v0.15.0 down to v0.13.2 in the meta-model group, each the newest release older than
+    # three days at that hour, and each returned on the next run after its pull request was
+    # closed; a run is triggered by every change to this file. With zero, Dependabot sees the
+    # pinned release and proposes nothing. Nothing is lost: the pins are editorial and move when
+    # the owner decides, so a cooldown protected nothing here.
+    cooldown:
+      default-days: 0
     groups:
       # Declared first on purpose: Dependabot puts a dependency in the FIRST group it matches,
       # so naming the design package here keeps it out of minor-and-patch below. A design
@@ -29,11 +40,8 @@ updates:
       # to be read rather than merged on sight: it goes red until someone runs `npm run design`
       # and commits what changed.
       #
-      # A pull request from this group proposing a LOWER version is closed, never merged, for
-      # the reason the meta-model group below spells out: the release cooldown, not the tag
-      # ranking. It reached this group on 2026-09-08, when v0.55.0 was offered a downgrade to
-      # v0.30.0 (#159, closed) on the day the release was cut, and it stops once the release
-      # ages past the cooldown. All three sites carry the warning on this group.
+      # A pull request from this group proposing a LOWER version is closed, never merged. The
+      # cooldown block above says why one appears and what stops it.
       design:
         patterns:
           - "@robertblust/design"
@@ -46,12 +54,7 @@ updates:
       # A pull request from this group proposing a LOWER version is closed, never merged. That
       # happened three times on 2026-09-02 — v0.5.0 down to v0.4.1, a commit predating the
       # instance parser, so it has no lib/ and the import fails. CI caught it every time. The
-      # cause is Dependabot's release cooldown, not its tag ranking: it dates each git tag by
-      # that tag's GitHub Release and filters out anything released within three days.
-      # meta-model had a Release for v0.5.0 alone, so the newest tag was excluded as too fresh
-      # while the older tags, carrying no Release and therefore no date to filter on, all
-      # survived — leaving v0.4.1 the best of the remainder. It stops once a release ages past
-      # the cooldown, and does not recur while every recent tag carries one.
+      # cooldown block above says why one appears and what stops it.
       meta-model:
         patterns:
           - "companygraph-meta-model"
