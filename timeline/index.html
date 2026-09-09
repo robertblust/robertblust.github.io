@@ -987,11 +987,28 @@ function rbLedger(data) {
   // began while a role ran still did. The selection is state, not a place: remembered in
   // the browser like the card's width, never written into the address — and a link to a
   // row of a kind that is off turns that kind back on, because a link must land.
+  //
+  // A link can still set it. ?kinds= names the kinds to show, by name and in any case,
+  // comma-separated: those are on and the rest off, and the page reads it the way it reads
+  // ?lang= — once, on arrival, then strips it from the address and remembers the selection
+  // as if the menu had been used, so the link hands the visitor a view and nothing they
+  // copy afterwards carries it. A name the model does not know is dropped, and a list naming
+  // no kind at all is ignored whole rather than emptying the ledger.
   var KINDS = data.entities.filter(function(e){ return e.type === "experience-kind"; })
     .sort(function(a, b){ return a.name.localeCompare(b.name, "en"); });
   var KIND_KEY = "timeline-kinds", on = {};
   KINDS.forEach(function(k){ on[k.name] = true; });
   try { var saved = JSON.parse(localStorage.getItem(KIND_KEY) || "null"); if (saved) KINDS.forEach(function(k){ if (k.name in saved) on[k.name] = !!saved[k.name]; }); } catch (e) {}
+  var linked = /[?&]kinds=([^&#]*)(&|$)/.exec(location.search), linkedKinds = null;
+  if (linked) {
+    var named = decodeURIComponent(linked[1]).toLowerCase().split(",");
+    var known = KINDS.filter(function(k){ return named.indexOf(k.name.toLowerCase()) >= 0; });
+    if (known.length) { linkedKinds = {}; KINDS.forEach(function(k){ linkedKinds[k.name] = known.indexOf(k) >= 0; }); }
+    try {
+      var q = location.search.replace(/([?&])kinds=[^&#]*(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+  }
   var kinds = document.getElementById("kinds"), kindsLabel = document.getElementById("kindslabel"), kindsMenu = document.getElementById("kindsmenu");
   var none = h("li", null, "none"); none.hidden = true; ol.appendChild(none);
   var boxes = [];
@@ -1087,7 +1104,7 @@ function rbLedger(data) {
   window.addEventListener("hashchange", arrive);
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 
-  applyKinds();
+  if (linkedKinds) { on = linkedKinds; applyKinds(true); } else applyKinds();
   arrive();
 }
 
