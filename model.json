@@ -1,5 +1,5 @@
 {
-  "commit": "d7c2de52805664dc418c5d9c722bc75c8c51218f",
+  "commit": "54732716fe566b16e7c9309f8e9a66db740553b7",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1276,6 +1276,7 @@
         "end": "2010-10-28",
         "url": "https://wiki.eclipse.org/Eclipse_MDD_Day",
         "organization": "Eclipse Foundation",
+        "role": "Co-Organizer & Speaker",
         "skills": [
           "Model-driven engineering",
           "Public speaking",
@@ -1437,6 +1438,7 @@
         "end": "2014-12",
         "url": "https://www.jug.ch/",
         "organization": "JUG Switzerland",
+        "role": "Board member",
         "skills": [
           "Community building"
         ]
@@ -1508,6 +1510,7 @@
         "end": "2012-05-04",
         "url": "https://www.youtube.com/watch?v=53jrNcbd5N0",
         "organization": "Eclipse Foundation",
+        "role": "Speaker",
         "skills": [
           "Data modeling",
           "Model-driven engineering",
@@ -1541,6 +1544,7 @@
         "end": "2012-10-16",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2012/",
         "organization": "Eclipse Foundation",
+        "role": "Speaker",
         "skills": [
           "Integration architecture",
           "Software modeling (UML, SysML, C4)",
@@ -1615,6 +1619,7 @@
         "end": "2013-11-05",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2013/",
         "organization": "Eclipse Foundation",
+        "role": "Speaker",
         "skills": [
           "Integration architecture",
           "Enterprise architecture",
@@ -1688,6 +1693,7 @@
         "end": "2014-10",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2014/",
         "organization": "Eclipse Foundation",
+        "role": "Co-Organizer",
         "skills": [
           "Community building"
         ]
@@ -1888,6 +1894,7 @@
         "start": "2015-12",
         "end": "2016-09",
         "organization": "Swisscard",
+        "role": "Backend Engineer",
         "skills": [
           "API design",
           "Java",
@@ -1923,6 +1930,7 @@
         "start": "2015-09",
         "end": "2015-11",
         "organization": "Swisscom",
+        "role": "Integration Architect & Engineer",
         "skills": [
           "Integration architecture",
           "Java",
@@ -1957,6 +1965,7 @@
         "start": "2016-02",
         "end": "2016-09",
         "organization": "Credit Suisse",
+        "role": "Lead Architect & Developer",
         "skills": [
           "Model-driven engineering",
           "Data governance",
@@ -2034,6 +2043,7 @@
         "end": "2021-11",
         "url": "https://www.lost-tag.com",
         "organization": "Digibonum AG",
+        "role": "Architect and hands-on lead",
         "skills": [
           "Solution architecture",
           "Software modeling (UML, SysML, C4)",
@@ -2107,6 +2117,7 @@
         "end": "2019-05",
         "url": "https://3ap.ch/case_studies/digitale-gesundheitsplattform/",
         "organization": "AXA Health",
+        "role": "Lead Architect & Backend Engineer",
         "skills": [
           "API design",
           "Database design",
@@ -2194,6 +2205,7 @@
         "start": "2018-11",
         "end": "2020-10",
         "organization": "3AP AG",
+        "role": "Architect",
         "skills": [
           "Solution architecture",
           "Microservices architecture",
@@ -2236,6 +2248,7 @@
         "end": "2019-02",
         "url": "https://3ap.ch/case_studies/networked-first-aid-kit/",
         "organization": "Flawa",
+        "role": "Solution Architect",
         "skills": [
           "Integration architecture",
           "Solution architecture",
@@ -2352,7 +2365,7 @@
     {
       "id": "profiles/robert-blust/experiences/2019-aroov-realestate",
       "type": "experience",
-      "name": "Aroov",
+      "name": "Aroov digital rental platform",
       "tagline": "3AP · Backend & Integration Architect — a digital rental platform on the reference architecture in its event-driven form, the first of them on PostgreSQL, integrated with Garaio REM.",
       "fields": {
         "source": "Local",
@@ -2361,6 +2374,7 @@
         "end": "2020-09",
         "url": "https://3ap.ch/case_studies/platform-for-digital-rental/",
         "organization": "Aroov",
+        "role": "Backend & Integration Architect",
         "skills": [
           "Cloud architecture",
           "Database design",
@@ -2443,6 +2457,7 @@
         "end": "2022-03",
         "url": "https://3ap.ch/case_studies/hospitality-platform/",
         "organization": "SV Group",
+        "role": "Lead Architect",
         "skills": [
           "Cloud architecture",
           "CI/CD",
@@ -2561,6 +2576,7 @@
         "start": "2020-04",
         "end": "2020-07",
         "organization": "3AP AG",
+        "role": "Architect",
         "skills": [
           "Solution architecture",
           "Cloud architecture",
@@ -2598,6 +2614,7 @@
         "end": "2021-06-03",
         "url": "https://engineering.3ap.ch/post/process-monitoring-with-bpmn/",
         "organization": "3AP AG",
+        "role": "Author",
         "skills": [
           "Business process modeling (BPMN, DMN)",
           "Process orchestration",
@@ -2848,6 +2865,7 @@
         "end": "2022-10-06",
         "url": "https://page.camunda.com/camundacon-2022-on-demand",
         "organization": "Camunda",
+        "role": "Speaker",
         "skills": [
           "Process orchestration",
           "Public speaking"
@@ -4567,17 +4585,17 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Headline** — the profile's tagline, and nothing beside it.\n- **Location** — the metropolitan area the network's own list offers for the identity's\n  `location`.\n- **About** — the profile's `## Summary`, rewritten in this surface's register.\n- **Experience** — the experiences of kind `Role`, kind `Independent` and kind `Community`.\n- **Projects** — the experiences of kind `Project`, each with the role the entry names.\n- **Education** — the experiences of kind `Education`.\n- **Skills** — five skills of the profile's, chosen by the owner.\n- **Languages** — the two languages `conventions/WRITING.md` names, English and Swiss German.",
+          "text": "- **Headline** — the profile's tagline, and nothing beside it.\n- **Location** — the metropolitan area the network's own list offers for the identity's\n  `location`.\n- **About** — the profile's `## Summary`, rewritten in this surface's register.\n- **Experience** — the experiences of kind `Role`, kind `Independent` and kind `Community`.\n- **Projects** — the experiences of kind `Project`.\n- **Education** — the experiences of kind `Education`.\n- **Skills** — skills of the profile's, chosen by the owner.\n- **Languages** — the languages `conventions/WRITING.md` names.",
           "tables": []
         },
         {
           "heading": "Projection rules",
-          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay: the first line carries the point, sentences\n  run short because the profile is read on a phone, and a claim it opens with is a claim it then\n  shows.\n- An entry carries the title and the period of the experience it was made from, and its body is\n  written rather than copied. What the entry holds was written for a reader who came to read.\n- An experience's own tagline supplies the role an entry was played in, where it names one:\n  several read `3AP · Lead Architect & Developer` and no other field carries that, so without\n  this rule a reader learns what was delivered and never what part in it was yours.\n- A body is written from the experience's `## Achievements`, and from its `## Ending` where the\n  ending states a fact the achievements do not. An ending says why a period closed and what it\n  left, and on some entries that is the only place the outcome is written down.\n- The model is a company of one, so an experience nobody commissioned or hosted was the\n  company's own work: an entry whose experience carries no `organization` names the identity.\n  The network asks for a company on every entry and this answers it from the model rather than\n  by inventing a name.\n- An entry's body runs to one paragraph, and an entry whose period is a single day runs to a\n  sentence or two. The dates say which an entry is, so no count is needed here, and the register\n  holds either way: the first sentence carries the point.\n- For a talk, an article or a published tool the address is most of what the entry is, so an\n  entry whose experience carries a `url` shows it. An entry whose experience carries none shows\n  no link: the model holds an address or it does not, and this surface invents none.\n- The About text is the profile's `## Summary` rewritten the same way. The sentence naming the\n  security and compliance standards is not carried whole, because the LIKE MAGIC entry names\n  those standards beside the work that met them, and a standard named without its work is a\n  claim the reader cannot place. The claim that sentence also makes about AI goes with it, and\n  is not restored elsewhere in the About text: the headline is that claim, and this surface does\n  not say one thing twice.\n- Every dated unit runs newest first by `end`, with an experience that has none — a period still\n  running — above them all, and `start` breaking a tie. Not by `start`: a position starts once\n  and then runs for years, so ordering by it buries a long role under everything that began\n  while it was running, and a talk given during a job would stand above the job. What a reader\n  wants first is what ended last.\n- Every experience reaches a dated unit and each kind reaches one: `Role`, `Independent` and\n  `Community` are Experience, `Project` is Projects, `Education` is Education. Nothing here reads\n  what an experience produced or who it was for, because the kind already says both and the\n  model records nothing finer.\n- The Skills unit shows five because the network shows five on this account. Which five is the\n  owner's choice at each rebuild and not a rule: the model holds seventy skills and no ordering\n  among them, so nothing here could derive the five without inventing a ranking.\n- The Skills unit carries no proficiency level. The surface shows names alone, and a level\n  beside a name the surface does not explain reads as a grade.\n- The headline is the profile's tagline, carried whole. The tagline states the claim this work\n  makes rather than describing it, which core admits since 0.17.0 and holds to one condition:\n  the claim is one the model keeps elsewhere. This one is, as the value Decide well over build\n  fast, so a reader who wants the argument behind the line has somewhere to go.\n- The model's values and its vision reach no unit. The surface has no unit for a stated\n  principle, and the About text is the only place one could go, where it would take the room\n  that text has for the work the principle was held during.\n- An experience's `## References` and its `skills` reach no unit either. The references are the\n  documents a claim rests on, which a reader of the model follows and a reader of a profile does\n  not — the entry's own address is what they came for. The skills are already on the surface, as\n  the five the Skills unit carries, and a list per entry would be the same claim told longer.\n- Nothing else the model holds reaches this surface: the standing links of the profile's\n  `## Also at`, the identity's `email`, the proficiency levels, the experience kinds, the\n  sources and this file's own type. Each is either how the model is kept, or a way to reach the\n  subject that the network already provides.",
+          "text": "- Everything written for this surface is in the prose register of `conventions/WRITING.md`,\n  aimed at a visitor who has not decided to stay.\n- An entry's body is written rather than copied. What the experience holds was written for a\n  reader who came to read, and this surface is read by one who has not decided to.\n- An entry names the part played and the employer it was held through, where the model holds\n  them. The part is the experience's `role`, and the employer is the `organization` of the\n  containing period of kind `Role`, since that is the kind that names an employer; where no such\n  period contains it, or more than one does, the entry names no employer. It reaches only a unit\n  with somewhere to put it: a qualification names the body that issued it and never an employer,\n  which the model does not say paid for it or knew of it. Both reach the entry,\n  because a part named beside a client and not beside\n  its employer reads as though the client employed you. An experience carrying no `role` shows\n  none: its H1 is the part, or the model does not say.\n- A body is written from the experience's `## Achievements`, and from its `## Ending` where the\n  ending states a fact the achievements do not. An ending says why a period closed and what it\n  left, and on some entries that is the only place the outcome is written down.\n- The model is a company of one, so an experience nobody commissioned or hosted was the\n  company's own work: an entry whose experience carries no `organization` names the identity,\n  unless the kind says there was none. `Independent` says exactly that, so such an entry names no\n  company, and the network's demand goes unmet rather than answered with a fact the model denies.\n- An entry's body is one paragraph of at most three sentences, and where an ending is carried it\n  is a second paragraph of one sentence. An entry whose period is a single day or a single month\n  is one sentence and no second paragraph. A reader takes the first sentence and skims the rest,\n  and a paragraph with no bound grows to the length of what an entry has to say rather than the\n  length a reader will give it.\n- Three sentences is a budget, and it is spent on what a recruiter, a client or a former\n  colleague could not have guessed from the title. Prefer the achievement carrying a number, a\n  named system or a named result over the one stating what was owned, since the schema already\n  separates those and the title has said the second already. Where two carry evidence, the one a\n  reader of this surface can act on wins: what was delivered and what changed, over how it was\n  built.\n- A sentence is not spent repeating another unit's wording or its detail. A summary claim that\n  entries then evidence is not a repetition, it is what an About is for; two entries telling the\n  same fact at the same length is.\n- A sentence in a body carries one idea, as an achievement does, and runs to about twenty words.\n  Three sentences each carrying five facts is the same wall as one unbounded paragraph with the\n  breaks moved, and bounding the count without bounding the sentence is how a body gets there.\n- For a talk, an article or a published tool the address is most of what the entry is, so an\n  entry whose experience carries a `url` shows it. An entry whose experience carries none shows\n  no link: the model holds an address or it does not, and this surface invents none.\n- The sentence of the `## Summary` naming the security and compliance standards is not carried\n  into the About text. A standard named without the work that met it is a claim the reader\n  cannot place, and the About has no room to bring the work with it. The claim that sentence\n  also makes about AI goes with it and is not restored: the headline is that claim.\n- Every dated unit runs newest first by `end`, with an experience that has none — a period still\n  running — above them all, and `start` breaking a tie. Not by `start`: a position starts once\n  and then runs for years, so ordering by it buries a long role under everything that began\n  while it was running, and a talk given during a job would stand above the job. What a reader\n  wants first is what ended last. Where `end` and `start` both tie, the entry whose name sorts\n  first in English comes first: an arbitrary choice, written down so that two producers make the\n  same profile rather than each making one.\n- Which unit takes an experience depends only on its kind. Every kind reaches one and none\n  reaches two, so no experience is left over and none is shown twice.\n- The Skills unit takes five because the network shows five on this account, and which five is\n  the owner's because nothing here could derive them: the model holds far more skills than the\n  unit shows and no ordering among them, so any five this surface chose would be a ranking it\n  invented.\n- The headline is the tagline and nothing beside it, so it carries no role, domain, project or\n  location to resolve the name. That is a decision and this records its cost: the name is shared\n  with a notable deceased academic, and a reader meeting the headline alone learns that this\n  subject builds software, not what or where.\n- The Languages unit takes the languages `conventions/WRITING.md` names. That is not a\n  publishing habit standing in for a fact about a person: the conventions name the second\n  because the person behind the family is Swiss, so the list is grounded in the subject and this\n  unit reads it from there.\n- The Skills unit carries no proficiency level. The surface shows names alone, and a level\n  beside a name the surface does not explain reads as a grade.\n- The tagline the headline carries states the claim this work makes rather than describing it,\n  which core admits since 0.17.0 on one condition: the claim is one the model keeps elsewhere.\n  This one is, as the value Decide well over build fast, so a reader who wants the argument\n  behind the line has somewhere to go, and so the headline resolves the name through its subject\n  rather than through a title.\n- The model's values and its vision reach no unit of their own. The headline carries one\n  value's claim, in the tagline's words, and nothing else on this surface states a principle.\n- An experience's `## References` and its `skills` reach no unit either. The references are the\n  documents a claim rests on, which a reader of the model follows and a reader of a profile does\n  not — the entry's own address is what they came for. The skills are already on the surface, as\n  the five the Skills unit carries, and a list per entry would be the same claim told longer.\n- Nothing else the model holds reaches this surface: the standing links of the profile's\n  `## Also at`, the identity's `email`, the experience kinds, the sources and this file's own\n  type. Each is either how the model is kept, or a way to reach the\n  subject that the network already provides.",
           "tables": []
         },
         {
           "heading": "Constraints",
-          "text": "- Every unit that can travel on its own — the headline, a search result snippet, a share card —\n  carries something beside the name that resolves it: a role, a domain, a project or a location.\n  The name is shared with a notable deceased academic, and a unit carrying the name and nothing\n  else resolves to the wrong person. The headline meets this through its subject rather than a\n  title: the slogan is a claim about building software, which the other holder of the name did\n  not make.\n- The headline is at most 220 characters, the network's limit, read from its editor on\n  2026-09-09.\n- The About section is at most 2600 characters, read from the same editor on the same day.\n- Every dated entry carries as its title the H1 of the experience it was made from, and the\n  dates it shows are that experience's `start` and `end`. An experience with no `end` is a\n  period still running, and its entry shows the start and no end date.\n- Every name in the Skills unit is a skill in the model, spelled as that skill's H1.",
+          "text": "- The headline is at most 220 characters, the network's limit, read from its editor on\n  2026-09-09.\n- The About section is at most 2600 characters, read from the same editor on the same day.\n- Every dated entry carries as its title the H1 of the experience it was made from, and the\n  dates it shows are that experience's `start` and `end`. An experience with no `end` is a\n  period still running, and its entry shows the start and no end date.\n- Every name in the Skills unit is a skill in the model, spelled as that skill's H1.",
           "tables": []
         }
       ],
@@ -6006,12 +6024,6 @@
       "from": "profiles/robert-blust/experiences/2019-aroov-realestate",
       "to": "experience-kinds/project",
       "via": "kind",
-      "attrs": {}
-    },
-    {
-      "from": "profiles/robert-blust/experiences/2019-aroov-realestate",
-      "to": "profiles/robert-blust/experiences/2019-aroov-realestate",
-      "via": "organization",
       "attrs": {}
     },
     {
