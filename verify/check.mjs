@@ -316,6 +316,11 @@ const CHECKS = {
     // is remembered as if the menu had been used. A name the model does not know is ignored,
     // and a list naming no kind at all is ignored whole.
     await page.goto(BASE + spec.path + "?kinds=" + kindOff.toLowerCase() + ",nosuchkind");
+    // The ledger is built from a fetch, not from a block the page carries, so a goto resolves
+    // before there is anything to read. Every assertion below reads state the page writes after
+    // that fetch lands; without this wait they read the page as it was a moment earlier, which
+    // fails as a filter that reads "All kinds" about one in several runs.
+    await page.waitForFunction(() => document.querySelectorAll("#ledger details").length > 0);
     const linked = await page.evaluate((kind) => ({
       hidden: [...document.querySelectorAll("#ledger li.k-" + kind.toLowerCase())].filter(li => li.hidden).length,
       others: [...document.querySelectorAll("#ledger li:has(details)")].filter(li => !li.classList.contains("k-" + kind.toLowerCase()) && !li.hidden).length,
@@ -327,6 +332,7 @@ const CHECKS = {
     if (linked.search) return `the address still carries ${linked.search}`;
     if (!linked.stored || linked.stored[kindOff] !== true || Object.keys(linked.stored).some(k => k !== kindOff && linked.stored[k])) return `?kinds=${kindOff} was not remembered: ${JSON.stringify(linked.stored)}`;
     await page.goto(BASE + spec.path + "?kinds=nosuchkind");
+    await page.waitForFunction(() => document.querySelectorAll("#ledger details").length > 0);
     const ignored = await page.evaluate(() => ({ hidden: [...document.querySelectorAll("#ledger li:has(details)")].filter(li => li.hidden).length, label: document.getElementById("kindslabel").textContent }));
     if (ignored.label !== kindOff) return `?kinds naming no kind changed the selection to ${JSON.stringify(ignored.label)}`;
     // Leave the page as it was found — at rest, every kind on, no row open — for whatever
