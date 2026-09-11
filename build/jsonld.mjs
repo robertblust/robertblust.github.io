@@ -27,7 +27,11 @@ const PAGES = ["index.html", "ideas/index.html", "model/index.html", "principles
   "talks/mental-model/index.html", "talks/essential-complexity/index.html"];
 
 // The person is the profile whose name is the root's — the company of one — and the addresses
-// are the URL column of that profile's Also at table.
+// are the URL column of that profile's Also at table. The identity carries an Also at table of
+// its own and it is deliberately not read here: by the two schemas the profile's rows are the
+// places the person maintains and the identity's are the places the company does, and sameAs on
+// a Person node is a claim about the person. Where the two tables differ, the subjects differ;
+// that is not drift, and nothing here reconciles them.
 export function alsoAt(data) {
   const root = data.entities.find((e) => e.id === data.rootId);
   if (!root) throw new Error("the model has no entity at its rootId");

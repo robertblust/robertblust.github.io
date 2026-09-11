@@ -17,8 +17,10 @@ const SITE = "https://blust.ch";
 // Extended by later tasks. `lang` is the expected documentElement.lang AFTER JS runs.
 // What every prose footer reads, left to right. The check compares this to the rendered DOM,
 // so it is the one place that decides the order — and the German labels never appear here
-// because the suite loads each page in its source language.
-const FOOTER = ["GitHub", "License", "Privacy"];
+// because the suite loads each page in its source language. `model.json` is the name of the file
+// a reader lands on, not a word for it, so that entry is the same in both languages and carries
+// no `-de` attribute to translate.
+const FOOTER = ["GitHub", "License", "Privacy", "model.json"];
 
 const PAGES = [
   { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
