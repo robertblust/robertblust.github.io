@@ -1,5 +1,5 @@
 {
-  "commit": "95b82a7301bca9a895475f5904e0c212b6b647f6",
+  "commit": "1c5c04508b691faebe77aa7fa65b276244cdffb3",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -42,6 +42,18 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategic-objective",
+      "folder": "strategic-objectives",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "strategy",
+      "folder": "strategies",
       "owner": null,
       "singular": false
     },
@@ -4605,6 +4617,61 @@
       "path": "model/sources/local.md"
     },
     {
+      "id": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
+      "type": "strategic-objective",
+      "name": "Whoever decides about me decided from the model",
+      "tagline": "A client or an employer arrives having read it, and the decision rests on what the model says rather than on what I said in a room.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-08"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "The conversation starts in the wrong place today. Someone deciding whether to hire me or to buy\nhelp spends the first hour establishing what I have done, from a CV I wrote about myself, and\nthe model — which holds the same facts with their evidence attached, and is public — is reached\nonly if they go looking. When this holds, that hour goes to their company instead, because the\nbackground question was answered before the call.\n\nIt holds when the answer survives the check. A claim in the model names the document it rests\non, so a decider can verify it without asking me, and what they verify is the same thing a\nsearch engine and an agent would have told them. That is the whole of the vision, pointed at the\none moment where being true everywhere costs something if it is not.\n\nWhat falls outside: how many people arrive, and whether they decide yes. This is not a reach\ntarget and no volume makes it truer — a single decision made from the model and against me\nsatisfies it, and a room full of people who enjoyed the conversation does not. Also outside: the\ndecisions I make about them. What I need in order to choose well is a different question and\nnothing here serves it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/whoever-decides-about-me-decided-from-the-model.md"
+    },
+    {
+      "id": "strategies/model-first-strategy",
+      "type": "strategy",
+      "name": "Model-First Strategy",
+      "tagline": "Agents draft everything, inside conventions written down first, and I spend my time on the decisions they cannot make.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09",
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ],
+        "upholds": [
+          "Decide well over build fast",
+          "Model it before you build it"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The approach",
+          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git,\nwhat each repository is — vendored into every repository at a pinned release, so a rule improves\nin one place and reaches all of them. Roles are files too: the writer and the translator are\nbriefs, invoked as subagents, and neither commits.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
+          "tables": []
+        },
+        {
+          "heading": "What it rules out",
+          "text": "No agent commits on its own initiative, and no agent merges at all. Work that leaves no artifact\nis not done: a decision reached in conversation and never written to a spec will be re-opened,\nso the conversation is not where it lives. Nothing is hand-maintained that could be derived — a\nsecond copy of a fact is the thing this model exists to end. No tool enters the chain before the\nconvention it works under is written, because a tool adopted first sets the rules by what it\nhappens to do. And no fact reaches a published surface because a model produced it fluently: a\nclaim arrives from me or from a document or it does not arrive, and an agent that cannot find\nits source says so instead of writing around the gap.",
+          "tables": []
+        },
+        {
+          "heading": "What would show it is working",
+          "text": "A change to a published surface that bypassed the path — hand-edited, no spec, no pull request —\nis countable in git, and it has been zero since this strategy was adopted. A correction made\ntwice is countable the same way: if the same fact has to be fixed in two places, a derivation is\nmissing and the model has grown a second master. Both are visible the week they happen, which is\nthe point; a strategy about how the work is done cannot wait for the horizon to be judged.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategies/model-first-strategy.md"
+    },
+    {
       "id": "surfaces/linkedin-profile",
       "type": "surface",
       "name": "LinkedIn profile",
@@ -8053,6 +8120,36 @@
       "from": "skills/vendor-management",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/model-first-strategy",
+      "to": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/model-first-strategy",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/model-first-strategy",
+      "to": "values/decide-well-over-build-fast",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "strategies/model-first-strategy",
+      "to": "values/model-it-before-you-build-it",
+      "via": "upholds",
       "attrs": {}
     },
     {
