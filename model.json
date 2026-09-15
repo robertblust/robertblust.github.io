@@ -1,5 +1,5 @@
 {
-  "commit": "54732716fe566b16e7c9309f8e9a66db740553b7",
+  "commit": "95b82a7301bca9a895475f5904e0c212b6b647f6",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -383,7 +383,7 @@
                 [
                   "Context engineering",
                   "Expert",
-                  "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026)."
+                  "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
                 ],
                 [
                   "Conversational AI",
@@ -643,7 +643,7 @@
                 [
                   "Storytelling",
                   "Proficient",
-                  "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
+                  "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
                 ],
                 [
                   "Technical writing",
@@ -744,7 +744,7 @@
               [
                 "Context engineering",
                 "Expert",
-                "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026)."
+                "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
               ],
               [
                 "Conversational AI",
@@ -1004,7 +1004,7 @@
               [
                 "Storytelling",
                 "Proficient",
-                "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
+                "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
               ],
               [
                 "Technical writing",
@@ -3124,6 +3124,37 @@
         "kind": "Community",
         "start": "2026-08",
         "end": null
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "type": "experience",
+      "name": "Build the model first",
+      "tagline": "A five-minute film on twenty-five years of building from a model, generated from the model's own files under a written brief and read against its sources before it went out.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-15",
+        "end": "2026-09-15",
+        "url": "https://robertblust.substack.com/p/build-the-model-first",
+        "skills": [
+          "Context engineering",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "- Fixed the film in a written brief before anything was generated: one point — a career is worth modeling rather than described, so a claim can be checked instead of believed — five threads each tied to the source file that carries it, an ending on the invitation in my words, and the constraints: no company, person or school from the 2026 job search, no salary figure, no AI vendor named, the figures in the sources used as they are and none added.\n- Rebuilt the export bundle before generating anything, because the generator reads a build and not the model: the committed bundle was five experiences behind, 31 against the model's 36, and its skills table disagreed too, so the brief's counts and the sources under them would have contradicted each other. Checked every entity off disk against the model before uploading.\n- Published it on Sep 15, 2026 as four minutes forty-three that trace one discipline across three organizations and then one person: at UBS a model-driven repository for the mainframe service interfaces, then a tool chain several hundred engineers across the wealth management division worked inside, with a canonical data model every interface was specified against; at 3AP a company described as circles inside circles with a capacity and a validity window per role as it grew from five to about seventy people; at LIKE MAGIC twelve business domains and an API-first platform carrying 89M+ events a year; and then a company of one kept as Markdown under conventions an agent checks, where a reference naming something that does not exist fails the check.\n- Read the transcript against the sources before publishing and found two places where the narration strays: it says “Dynarap” for DynaRep and merges it with the Integration Architecture Tool Chain, a different thing five years later, and it says the central model blocked an unapproved connection, where the conformance part measured technical coupling and identified what did not conform and interfaces passed a role-based review. Wrote the published title, subtitle and description to avoid both, and verified the pull quotes against the transcript.",
+          "tables": []
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-film-build-the-model-first.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-15",
+        "end": "2026-09-15"
       }
     },
     {
@@ -6825,6 +6856,30 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust/experiences/2026-guestgraph",
       "to": "experience-kinds/community",
       "via": "kind",
@@ -7085,7 +7140,7 @@
       "via": "Skills.Skill",
       "attrs": {
         "Level": "proficiency-levels/expert",
-        "Evidence": "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026)."
+        "Evidence": "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
       }
     },
     {
@@ -7553,7 +7608,7 @@
       "via": "Skills.Skill",
       "attrs": {
         "Level": "proficiency-levels/proficient",
-        "Evidence": "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026)."
+        "Evidence": "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
       }
     },
     {
