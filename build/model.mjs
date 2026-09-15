@@ -29,12 +29,20 @@ const OUT = path.join(ROOT, "model.json");
 // `meta/`, `.companygraph/`, the READMEs at the root — is machinery, not the company.
 const SUB = "model/";
 
-const files = await readInstance({ repo, commit, sub: SUB });
+// The vendored core sits beside the container, and the parser reads the model against it:
+// R16 makes the declared type the only thing that decides which fields are edges, so the
+// schemas travel with the pages they declare.
+const CORE = "meta/core/";
+
+const [files, schemas] = await Promise.all([
+  readInstance({ repo, commit, sub: SUB }),
+  readInstance({ repo, commit, sub: CORE }),
+]);
 // `repo` travels with the data because the stage draws more than one repository's model and the
 // file link has to point at the right one. `sub` is where these files sit in the model's own
 // repository, and the parser needs it: an entity's `path` is what a page turns into a link to
 // the file on GitHub.
-const data = { ...parseInstance(files, { sub: SUB }), commit, repo };
+const data = { ...parseInstance(files, { sub: SUB, schemas }), commit, repo };
 const text = JSON.stringify(data, null, 2) + "\n";
 
 if (process.argv.includes("--check")) {
