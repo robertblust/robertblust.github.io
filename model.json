@@ -1,5 +1,5 @@
 {
-  "commit": "82f41f62d8fb534b740e67de65a04fbf9a94747b",
+  "commit": "9738dd774678da0fe6f65c944c3e54749abd3257",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -30,6 +30,12 @@
     {
       "type": "profile",
       "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "role",
+      "folder": "roles",
       "owner": null,
       "singular": false
     },
@@ -297,12 +303,97 @@
       "path": "model/proficiency-levels/proficient.md"
     },
     {
+      "id": "profiles/ai-agent",
+      "type": "profile",
+      "name": "AI Agent",
+      "tagline": "Drafts, translates, implements and reviews across the family, under a rulebook for each, and decides nothing.",
+      "fields": {
+        "source": "Local",
+        "nature": "agent",
+        "roles": [
+          "Writer",
+          "Translator",
+          "Implementer",
+          "Reviewer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Skills",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Skill",
+                "Level",
+                "Evidence"
+              ],
+              "rows": [
+                [
+                  "Software engineering",
+                  "Proficient",
+                  "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
+                ],
+                [
+                  "Software testing",
+                  "Competent",
+                  "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
+                ],
+                [
+                  "Technical writing",
+                  "Proficient",
+                  "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Skill",
+              "Level",
+              "Evidence"
+            ],
+            "rows": [
+              [
+                "Software engineering",
+                "Proficient",
+                "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
+              ],
+              [
+                "Software testing",
+                "Competent",
+                "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
+              ],
+              [
+                "Technical writing",
+                "Proficient",
+                "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Summary",
+          "text": "Four seats, one session: the English of every page from a brief, the Swiss German of every\nreviewed element, the commit a task brief specifies and the findings on a diff. Whichever model\nruns it, the rulebooks are the same and the Owner's word ends every question it parks.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/profiles/ai-agent/ai-agent.md"
+    },
+    {
       "id": "profiles/robert-blust",
       "type": "profile",
       "name": "Robert Blust",
       "tagline": "Building fast is solved. Deciding well is not.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "nature": "human",
+        "roles": [
+          "Owner"
+        ]
       },
       "sections": [
         {
@@ -3275,6 +3366,336 @@
       }
     },
     {
+      "id": "roles/implementer",
+      "type": "role",
+      "name": "Implementer",
+      "tagline": "The seat that turns one task brief into a tested commit and a report, and nothing beyond the brief.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Software engineering",
+          "Spec-driven development",
+          "Software testing"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A task brief that is the whole of its requirements, the interfaces earlier tasks produced, the\nrepository's own agent file and a path for the report. Where the brief is unclear the seat\nasks before starting.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The change the brief specifies, test first where the brief says so; the commit in the git\nregister; a report naming what was built, what was run and what it doubts; and a short status\nthe controller acts on.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never spawns a subagent or a reviewer; review comes from the controller after the report.\n- Never changes a test's expectation to make it pass.\n- Never merges, tags or edits a pull request.\n- Never claims a check it did not run.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/implementer-prompt.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/implementer-prompt.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/implementer.md"
+    },
+    {
+      "id": "roles/owner",
+      "type": "role",
+      "name": "Owner",
+      "tagline": "The seat that decides what the company is for, takes the money and the liability, and says the last word on every page.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Company vision and strategy",
+          "Consulting",
+          "Solution selling",
+          "Technical writing"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The model, read before deciding: the vision, the objectives and the strategies under them, and\nthe values a decision is weighed against. A draft or a pull request to review, on the branch\nand on the rendered page. The signals a strategy names as showing whether it is working.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Decisions, recorded where they bind: a merge, a tag, a release, a signed contract, a corrected\nmodel. The proposals and pitches the company lives on, and the advice a client pays for, since\nin a company of one the seat that decides is the seat that sells and delivers. The reviewed\nEnglish every translation is made from. The word that ends a question an agent has parked.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never lets a made thing outlive a disagreement with the model; the model is corrected and\n  the thing rebuilt.\n- Never delegates a merge, a tag or a signature; an agent opens and reports, the Owner merges.\n- Never states a number that was not counted or a claim the model does not hold.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/owner.md"
+    },
+    {
+      "id": "roles/reviewer",
+      "type": "role",
+      "name": "Reviewer",
+      "tagline": "The seat that reads one diff against its brief, returns findings with a severity and changes nothing.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Software architecture",
+          "Software engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The brief the work was done from, the implementer's report read as unverified claims, the\ndiff as one file with its commits and context, and the constraints that bind the task.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is\nwrong, why it matters and how to fix it, ranked by severity, with the strengths named first. A\nfinding is an input to whoever merges, never a verdict on a person.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never mutates the working tree, the index, a branch or the pull request.\n- Never re-runs a suite to confirm a report; it runs one focused test on a doubt the report\n  does not answer.\n- Never spawns another reviewer.\n- Never marks polish as critical.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, one task",
+                  "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/task-reviewer-prompt.md"
+                ],
+                [
+                  "Rulebook, a fix round",
+                  "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/re-review-prompt.md"
+                ],
+                [
+                  "Rulebook, a whole branch",
+                  "https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/code-reviewer.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, one task",
+                "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/task-reviewer-prompt.md"
+              ],
+              [
+                "Rulebook, a fix round",
+                "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/re-review-prompt.md"
+              ],
+              [
+                "Rulebook, a whole branch",
+                "https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/code-reviewer.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/reviewer.md"
+    },
+    {
+      "id": "roles/translator",
+      "type": "role",
+      "name": "Translator",
+      "tagline": "The seat that makes the Swiss German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Technical writing"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The reviewed English of the elements the task names, and the glossary. Reviewed means the\nOwner has said the English is done; a draft is not reviewed, and the seat says so. Where the\ntask names no elements, the seat names the gap and writes nothing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The German in the element's own place, de-CH in the forms Switzerland uses, and beside each\nelement a back-translation in English, so a reviewer with a minute can read what the German\nsays.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never translates a draft.\n- Never edits the English.\n- Never writes a family term in any form but the glossary's.\n- Never commits.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Glossary",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/TRANSLATOR.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Glossary",
+                "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/robertblust/conventions/blob/main/conventions/TRANSLATOR.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/translator.md"
+    },
+    {
+      "id": "roles/writer",
+      "type": "role",
+      "name": "Writer",
+      "tagline": "The seat that drafts English in the family voice from a brief, so the Owner reviews a draft instead of writing one.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Technical writing",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A brief naming the audience, the one point, the facts the text may claim and where each is\nshown, and the file and the place the text lands. The rulebook and the glossary. Where the\nbrief lacks the audience, the point or a fact's source, the seat names the gap and writes\nnothing.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "The text in its file on the current branch, in the register the place calls for, and a reply\nnaming what was written, what changed and which claims could not be traced to the brief or\nthe repository.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes a fact or a number the brief or the repository does not show.\n- Never writes German; the translation is the Translator's, made after the English is\n  reviewed.\n- Never commits and never runs the build.\n- Never uses an adjective that sells.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Glossary",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITER.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Glossary",
+                "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITER.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/writer.md"
+    },
+    {
       "id": "skills/agentic-ai-development",
       "type": "skill",
       "name": "Agentic AI development",
@@ -4654,7 +5075,7 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git,\nwhat each repository is — vendored into every repository at a pinned release, so a rule improves\nin one place and reaches all of them. Roles are files too: the writer and the translator are\nbriefs, invoked as subagents, and neither commits.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
+          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: five seats, one held\nby me and four by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; the Writer,\nthe Translator and the Reviewer never commit at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
           "tables": []
         },
         {
@@ -4866,6 +5287,63 @@
     },
     {
       "from": "proficiency-levels/proficient",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "skills/software-engineering",
+      "via": "Skills.Skill",
+      "attrs": {
+        "Level": "proficiency-levels/proficient",
+        "Evidence": "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
+      }
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "skills/software-testing",
+      "via": "Skills.Skill",
+      "attrs": {
+        "Level": "proficiency-levels/competent",
+        "Evidence": "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
+      }
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "skills/technical-writing",
+      "via": "Skills.Skill",
+      "attrs": {
+        "Level": "proficiency-levels/proficient",
+        "Evidence": "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
+      }
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/implementer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/reviewer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/translator",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/writer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -7698,6 +8176,114 @@
     },
     {
       "from": "profiles/robert-blust",
+      "to": "roles/owner",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/implementer",
+      "to": "skills/software-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/implementer",
+      "to": "skills/software-testing",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/implementer",
+      "to": "skills/spec-driven-development",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/implementer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "skills/company-vision-and-strategy",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "skills/consulting",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "skills/solution-selling",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "skills/technical-writing",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/owner",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "skills/software-architecture",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "skills/software-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/reviewer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/translator",
+      "to": "skills/technical-writing",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/translator",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/writer",
+      "to": "skills/storytelling",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/writer",
+      "to": "skills/technical-writing",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/writer",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
