@@ -1,5 +1,5 @@
 {
-  "commit": "06f8425e9219aa6512e8f4d0e4bedc40c0bfe5ff",
+  "commit": "c43921f7761986c9bd4f368ade2102454d0cb2b5",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -20,6 +20,18 @@
       "folder": null,
       "owner": null,
       "singular": true
+    },
+    {
+      "type": "phase",
+      "folder": "phases",
+      "owner": "process",
+      "singular": false
+    },
+    {
+      "type": "process",
+      "folder": "processes",
+      "owner": null,
+      "singular": false
     },
     {
       "type": "proficiency-level",
@@ -227,6 +239,554 @@
       "path": "model/identity.md"
     },
     {
+      "id": "processes/delivery",
+      "type": "process",
+      "name": "Delivery",
+      "tagline": "How anything the company ships is shaped, specified, planned, made and merged, in code and in prose.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "supported-by": [
+          "Reviewer"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track",
+                "Produces"
+              ],
+              "rows": [
+                [
+                  "Code",
+                  "A merged change to a repository of the family, with its checks green"
+                ],
+                [
+                  "Prose",
+                  "A published page or post in reviewed English, and the Swiss German where the place carries it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track",
+              "Produces"
+            ],
+            "rows": [
+              [
+                "Code",
+                "A merged change to a repository of the family, with its checks green"
+              ],
+              [
+                "Prose",
+                "A published page or post in reviewed English, and the Swiss German where the place carries it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "1. [Shape](phases/shape.md)\n2. [Spec](phases/spec.md)\n3. [Plan](phases/plan.md)\n4. [Implement](phases/implement.md)\n5. [Integrate](phases/integrate.md)",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never begins a phase whose predecessor's gate the Owner has not approved.\n- Never lets an agent merge, tag or sign anything.\n- Never makes the German from English the Owner has not reviewed.\n- Never counts a check nobody ran as a check that passed.\n- Never lets a made thing outlive a disagreement with the model; the model is corrected and the\n  thing rebuilt.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Writing rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Rulebook",
+                  "https://github.com/obra/superpowers"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Writing rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Rulebook",
+                "https://github.com/obra/superpowers"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/delivery/delivery.md"
+    },
+    {
+      "id": "processes/delivery/phases/implement",
+      "type": "phase",
+      "name": "Implement",
+      "tagline": "Make the thing, and let nothing go forward unread.",
+      "fields": {
+        "source": "Local",
+        "owner": "Controller",
+        "executed-by": [
+          "Controller",
+          "Implementer",
+          "Reviewer",
+          "Writer",
+          "Translator",
+          "Owner"
+        ],
+        "supported-by": [
+          "Planner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Integrate"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An approved plan, a branch, and for each task the brief that is the whole of its requirements.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built,\n   what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line\n   and a severity, strengths named first.\n4. The Controller decides: fix, accept, or park for the Owner.\n5. The task is committed before the next one is dispatched.\n6. A finding against a task already committed comes back as its own brief; the commit\n   stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it\n   could not trace to the brief or the repository.\n2. The Owner reviews on the branch, in the diff and on the rendered page.\n3. The Translator makes the Swiss German from the reviewed English only, one element at a time,\n   with the glossary open, and hands back a back-translation beside each element.\n4. An English edit re-runs the Translator on that element alone.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Reviewed commits",
+                  "One per task, on the branch, with every finding resolved or parked"
+                ],
+                [
+                  "Reviewed English",
+                  "For prose: the draft the Owner has read on the branch and on the page"
+                ],
+                [
+                  "Swiss German",
+                  "For prose: made from the reviewed English, with its back-translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Reviewed commits",
+                "One per task, on the branch, with every finding resolved or parked"
+              ],
+              [
+                "Reviewed English",
+                "For prose: the draft the Owner has read on the branch and on the page"
+              ],
+              [
+                "Swiss German",
+                "For prose: made from the reviewed English, with its back-translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never changes a test's expectation to make it pass.\n- Never makes the German from English the Owner has not reviewed.\n- Never dispatches the next task while the last one's findings are open.\n- Never claims a check that was not run.\n- Never merges.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Implement, all of these hold:\n\n- Every task's findings are resolved, or parked for the Owner and named in the pull request.\n- The repository's checks pass on the branch.\n- The branch does what the specification said, and nothing else.\n\nWhere they cannot be met, the Owner decides whether the branch is reworked or abandoned.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/implement.md"
+    },
+    {
+      "id": "processes/delivery/phases/integrate",
+      "type": "phase",
+      "name": "Integrate",
+      "tagline": "Put the change where it binds, and move everything that names it.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Controller",
+          "Reviewer",
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A branch that left Implement with its checks green, and the specification it was made from.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Reviewer reviews the whole branch against the specification, not task by task.\n2. The Controller opens the pull request and stops.\n3. The Owner reads the diff and the rendered page, and merges.\n4. Where a release is due, the Owner tags it and publishes it.\n5. The Owner moves every pin that names the release, and deletes the branch as its own step.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Merged change",
+                  "On the default branch, with its checks green"
+                ],
+                [
+                  "Release",
+                  "Where one is due: the tag, its notes, and every pin that names it moved"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Merged change",
+                "On the default branch, with its checks green"
+              ],
+              [
+                "Release",
+                "Where one is due: the tag, its notes, and every pin that names it moved"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never merges without the Owner; an agent opens and reports.\n- Never chains a branch delete after a merge, because a failed merge would still run the delete\n  and close the pull request.\n- Never leaves a member pinned to a release that no longer exists.\n- Never releases a change the model disagrees with.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "Integrate is the last phase. The work is done when all of these hold:\n\n- The checks pass on the pull request.\n- The Owner has merged it.\n- Every pin that names the release has moved with it.\n\nWhere they cannot be met, the Owner decides whether the change is reverted or the release held.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/integrate.md"
+    },
+    {
+      "id": "processes/delivery/phases/plan",
+      "type": "phase",
+      "name": "Plan",
+      "tagline": "Cut the approved specification into pieces that can be worked one at a time.",
+      "fields": {
+        "source": "Local",
+        "owner": "Planner",
+        "executed-by": [
+          "Planner"
+        ],
+        "supported-by": [
+          "Specifier"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Implement"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A specification or brief the Owner has approved, and the repository the work lands in with the\nrules that bind it.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Planner maps the files the change creates and modifies, and what each is responsible for.\n2. The Planner cuts the work into task briefs, each the whole of its own requirements.\n3. The Planner names the interfaces each brief produces and consumes, so no brief depends on a\n   conversation its holder did not have.\n4. The Planner orders them so each can be worked, tested and committed on its own.\n\n### Prose\n\n1. The Planner names the elements that change, and in what order.\n2. The Planner names which of them the Translator re-runs on, and which need no German.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Task briefs",
+                  "An ordered set, each whole on its own, each with a way to tell it is done"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Task briefs",
+                "An ordered set, each whole on its own, each with a way to tell it is done"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never re-opens a decision the specification took.\n- Never writes a brief whose holder would have to guess at an interface.\n- Never writes the change.\n- Never plans a task whose completion cannot be checked.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Plan, all of these hold:\n\n- The Owner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.\n\nWhere they cannot be met, the Owner decides whether the plan is recut or the specification\nreopened.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/plan.md"
+    },
+    {
+      "id": "processes/delivery/phases/shape",
+      "type": "phase",
+      "name": "Shape",
+      "tagline": "Decide what kind of change this is, and how much of it gets written down.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Spec"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A request in whatever words it arrived in, and the part of the model or the repository it will\nhave to agree with, read rather than remembered.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Owner states the request as one sentence.\n2. The Owner classifies it: a question whose output is an answer, a bounded change to something\n   already here to read, or a change to how things fit together.\n3. The Owner names the track it runs on.\n4. The Owner says which phases write a document and which are satisfied in conversation.\n5. The Owner names what is explicitly not being changed.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Classification",
+                  "Which of the three kinds of change this is, and why"
+                ],
+                [
+                  "Track",
+                  "Which track the work runs on, named as the process spells it"
+                ],
+                [
+                  "Document plan",
+                  "Which phases produce a file and which are answered in conversation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Classification",
+                "Which of the three kinds of change this is, and why"
+              ],
+              [
+                "Track",
+                "Which track the work runs on, named as the process spells it"
+              ],
+              [
+                "Document plan",
+                "Which phases produce a file and which are answered in conversation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never classifies by how familiar the work feels rather than by what exists to read.\n- Never lets a classification skip a gate; only the document scales, never the approval.\n- Never begins the work it is classifying.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Shape, all of these hold:\n\n- The request is stated as one sentence.\n- The track is named.\n- The classification is stated, and the phases that will write a document are named.\n\nWhere they cannot be met, the Owner decides whether the request is reshaped or dropped.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/shape.md"
+    },
+    {
+      "id": "processes/delivery/phases/spec",
+      "type": "phase",
+      "name": "Spec",
+      "tagline": "Write what the change must do, completely enough that nobody downstream has to guess.",
+      "fields": {
+        "source": "Local",
+        "owner": "Specifier",
+        "executed-by": [
+          "Specifier"
+        ],
+        "supported-by": [
+          "Writer"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Plan"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A classified request, the model the change must not contradict, and whatever it will touch.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "### Code\n\n1. The Specifier reads the model and the code the change lands in, before proposing anything.\n2. The Specifier names the approaches worth considering, with their trade-offs, and recommends\n   one.\n3. The Specifier writes the specification: the gap, the decisions and their reasons, what was\n   rejected and why, and what is explicitly not being done.\n4. The Specifier parks every question that is the Owner's, rather than answering it conveniently.\n\n### Prose\n\n1. The Specifier names the audience, the one point, and the facts the text may claim with\n   where each is shown.\n2. The Specifier names the file and the place it lands, and the register the place calls for.\n3. The Specifier names the claims it may not make.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Specification",
+                  "The whole of the requirements for a change to code, with what is not being done named"
+                ],
+                [
+                  "Brief",
+                  "For prose: the audience, the one point, the facts it may claim and where it lands"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Specification",
+                "The whole of the requirements for a change to code, with what is not being done named"
+              ],
+              [
+                "Brief",
+                "For prose: the audience, the one point, the facts it may claim and where it lands"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change it specifies.\n- Never decides a question that is the Owner's; it names the options and parks it.\n- Never states a fact the model does not hold.\n- Never leaves a question unasked because an assumption would be convenient.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "To leave Spec, all of these hold:\n\n- The Owner has read the specification or the brief and approved it.\n- What is explicitly not being done is written down.\n- Every parked question has the Owner's word on it.\n\nWhere they cannot be met, the Owner decides whether the change is reshaped, narrowed or dropped.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/phases/spec.md"
+    },
+    {
       "id": "proficiency-levels/competent",
       "type": "proficiency-level",
       "name": "Competent",
@@ -306,21 +866,24 @@
       "id": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
-      "tagline": "Drafts, translates, implements and reviews across the family, under a rulebook for each, and decides nothing.",
+      "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates across the family, under a rulebook for each, and decides nothing.",
       "fields": {
         "source": "Local",
         "nature": "agent",
         "roles": [
-          "Writer",
-          "Translator",
+          "Specifier",
+          "Planner",
+          "Controller",
           "Implementer",
-          "Reviewer"
+          "Reviewer",
+          "Writer",
+          "Translator"
         ]
       },
       "sections": [
         {
           "heading": "Summary",
-          "text": "Four seats, one session: the English of every page from a brief, the Swiss German of every\nreviewed element, the commit a task brief specifies and the findings on a diff. Whichever model\nruns it, the rulebooks are the same and the Owner's word ends every question it parks.",
+          "text": "Seven seats, one session: the specification a request is shaped into, the plan it is cut into,\nthe dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the\nEnglish of every page and the Swiss German of every reviewed element. Whichever model runs it,\nthe rulebooks are the same and the Owner's word ends every question it parks.",
           "tables": []
         }
       ],
@@ -3310,6 +3873,87 @@
       }
     },
     {
+      "id": "roles/controller",
+      "type": "role",
+      "name": "Controller",
+      "tagline": "The seat that runs a plan one brief at a time, reads every report as a claim, and writes nothing itself.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Agentic AI development",
+          "Context engineering",
+          "Software process engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An approved plan, the repository's own agent file, and a place to keep each task's brief, report\nand findings.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "One dispatched brief at a time; a decision after each report — fix, accept, or park for the\nOwner; review ordered on the diff rather than on the report; and a branch whose tasks are done\nin the plan's order, each committed as it lands.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change or the test itself.\n- Never rewrites what a commit contains; a finding against a committed task is a new brief.\n- Never dispatches the next task while the last one's findings are open.\n- Never accepts a claim that a check passed without the check's output.\n- Never merges, tags or edits a pull request.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Rulebook, superpowers",
+                  "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md"
+                ],
+                [
+                  "Rulebook, spec-kit, one agent holding this seat and the Implementer",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-implement/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Rulebook, superpowers",
+                "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md"
+              ],
+              [
+                "Rulebook, spec-kit, one agent holding this seat and the Implementer",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-implement/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/controller.md"
+    },
+    {
       "id": "roles/implementer",
       "type": "role",
       "name": "Implementer",
@@ -3330,12 +3974,12 @@
         },
         {
           "heading": "What it produces",
-          "text": "The change the brief specifies, test first where the brief says so; the commit in the git\nregister; a report naming what was built, what was run and what it doubts; and a short status\nthe controller acts on.",
+          "text": "The change the brief specifies, test first where the brief says so; the commit in the git\nregister; a report naming what was built, what was run and what it doubts; and a short status\nthe Controller acts on.",
           "tables": []
         },
         {
           "heading": "What it never does",
-          "text": "- Never spawns a subagent or a reviewer; review comes from the controller after the report.\n- Never changes a test's expectation to make it pass.\n- Never merges, tags or edits a pull request.\n- Never claims a check it did not run.",
+          "text": "- Never spawns a subagent or a reviewer; review comes from the Controller after the report.\n- Never changes a test's expectation to make it pass.\n- Never merges, tags or edits a pull request.\n- Never claims a check it did not run.",
           "tables": []
         },
         {
@@ -3354,8 +3998,12 @@
                   "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
                 ],
                 [
-                  "Rulebook",
+                  "Rulebook, superpowers",
                   "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/implementer-prompt.md"
+                ],
+                [
+                  "Rulebook, spec-kit, one agent holding this seat and the Controller",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-implement/SKILL.md"
                 ]
               ]
             }
@@ -3372,8 +4020,12 @@
                 "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
               ],
               [
-                "Rulebook",
+                "Rulebook, superpowers",
                 "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/implementer-prompt.md"
+              ],
+              [
+                "Rulebook, spec-kit, one agent holding this seat and the Controller",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-implement/SKILL.md"
               ]
             ]
           }
@@ -3411,10 +4063,131 @@
           "heading": "What it never does",
           "text": "- Never lets a made thing outlive a disagreement with the model; the model is corrected and\n  the thing rebuilt.\n- Never delegates a merge, a tag or a signature; an agent opens and reports, the Owner merges.\n- Never states a number that was not counted or a claim the model does not hold.",
           "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
         }
       ],
       "owner": null,
       "path": "model/roles/owner.md"
+    },
+    {
+      "id": "roles/planner",
+      "type": "role",
+      "name": "Planner",
+      "tagline": "The seat that cuts an approved specification into task briefs, each whole on its own, and writes none of them.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Spec-driven development",
+          "Software process engineering",
+          "Agile delivery"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A specification the Owner has approved, and the repository the work lands in, including the\nrules that bind it.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "An ordered set of task briefs. Each is the whole of its own requirements, names the interfaces\nthe briefs around it produce and consume, and states how its holder can tell it is done. The\norder is the order they can be worked in, not the order they were thought of.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never re-opens a decision the specification took.\n- Never writes a brief that depends on a conversation its holder did not have.\n- Never writes the change.\n- Never plans a task whose completion cannot be checked.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Rulebook, superpowers",
+                  "https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md"
+                ],
+                [
+                  "Rulebook, spec-kit, the plan",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-plan/SKILL.md"
+                ],
+                [
+                  "Rulebook, spec-kit, the tasks",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-tasks/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Rulebook, superpowers",
+                "https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md"
+              ],
+              [
+                "Rulebook, spec-kit, the plan",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-plan/SKILL.md"
+              ],
+              [
+                "Rulebook, spec-kit, the tasks",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-tasks/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/planner.md"
     },
     {
       "id": "roles/reviewer",
@@ -3456,16 +4229,24 @@
               ],
               "rows": [
                 [
-                  "Rulebook, one task",
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Rulebook, superpowers, one task",
                   "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/task-reviewer-prompt.md"
                 ],
                 [
-                  "Rulebook, a fix round",
+                  "Rulebook, superpowers, a fix round",
                   "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/re-review-prompt.md"
                 ],
                 [
-                  "Rulebook, a whole branch",
+                  "Rulebook, superpowers, a whole branch",
                   "https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/code-reviewer.md"
+                ],
+                [
+                  "Rulebook, spec-kit, the artifacts",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-analyze/SKILL.md"
                 ]
               ]
             }
@@ -3478,16 +4259,24 @@
             ],
             "rows": [
               [
-                "Rulebook, one task",
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Rulebook, superpowers, one task",
                 "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/task-reviewer-prompt.md"
               ],
               [
-                "Rulebook, a fix round",
+                "Rulebook, superpowers, a fix round",
                 "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/re-review-prompt.md"
               ],
               [
-                "Rulebook, a whole branch",
+                "Rulebook, superpowers, a whole branch",
                 "https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/code-reviewer.md"
+              ],
+              [
+                "Rulebook, spec-kit, the artifacts",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-analyze/SKILL.md"
               ]
             ]
           }
@@ -3495,6 +4284,95 @@
       ],
       "owner": null,
       "path": "model/roles/reviewer.md"
+    },
+    {
+      "id": "roles/specifier",
+      "type": "role",
+      "name": "Specifier",
+      "tagline": "The seat that turns a shaped request into a specification nobody has to guess at, and builds nothing.",
+      "fields": {
+        "source": "Local",
+        "requires": [
+          "Requirements engineering",
+          "Spec-driven development",
+          "Technical writing"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A request already classified, the model it must not contradict, and the code or the pages it\nwill touch, read rather than remembered. Where the request is ambiguous the seat asks before\nwriting.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A specification that is the whole of the requirements: the gap it closes, the approaches\nconsidered with the one chosen and why, the decisions taken, and what is explicitly not being\ndone. Where a decision is the Owner's, the seat names the options and parks the question.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never writes the change it specifies.\n- Never decides scope; it names the options and the Owner chooses.\n- Never leaves a question unasked because an assumption would be convenient.\n- Never states a fact the model does not hold.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
+                  "Rulebook, superpowers",
+                  "https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md"
+                ],
+                [
+                  "Rulebook, spec-kit, the specification",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-specify/SKILL.md"
+                ],
+                [
+                  "Rulebook, spec-kit, the open questions",
+                  "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-clarify/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
+              [
+                "Rulebook, superpowers",
+                "https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md"
+              ],
+              [
+                "Rulebook, spec-kit, the specification",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-specify/SKILL.md"
+              ],
+              [
+                "Rulebook, spec-kit, the open questions",
+                "https://github.com/guestgraph/engine/blob/main/.claude/skills/speckit-clarify/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/specifier.md"
     },
     {
       "id": "roles/translator",
@@ -3535,6 +4413,10 @@
               ],
               "rows": [
                 [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
                   "Glossary",
                   "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
                 ],
@@ -3552,6 +4434,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
               [
                 "Glossary",
                 "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
@@ -3607,6 +4493,10 @@
               ],
               "rows": [
                 [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ],
+                [
                   "Glossary",
                   "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
                 ],
@@ -3624,6 +4514,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ],
               [
                 "Glossary",
                 "https://github.com/robertblust/conventions/blob/main/conventions/GLOSSARY.md"
@@ -5019,7 +5913,7 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: five seats, one held\nby me and four by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; the Writer,\nthe Translator and the Reviewer never commit at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
+          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: eight seats, one held\nby me and seven by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; none of the\nother agent-held seats commits at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
           "tables": []
         },
         {
@@ -5212,6 +6106,258 @@
       "attrs": {}
     },
     {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/controller",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/implementer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/translator",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/writer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/phases/integrate",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/controller",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "roles/planner",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/controller",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/reviewer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/integrate",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/planner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/phases/implement",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/planner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "roles/specifier",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "processes/delivery/phases/spec",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/shape",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/specifier",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/phases/plan",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/specifier",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "roles/writer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "roles/reviewer",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
       "from": "proficiency-levels/competent",
       "to": "sources/local",
       "via": "source",
@@ -5237,13 +6383,31 @@
     },
     {
       "from": "profiles/ai-agent",
+      "to": "roles/controller",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
       "to": "roles/implementer",
       "via": "roles",
       "attrs": {}
     },
     {
       "from": "profiles/ai-agent",
+      "to": "roles/planner",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
       "to": "roles/reviewer",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/specifier",
       "via": "roles",
       "attrs": {}
     },
@@ -8104,6 +9268,30 @@
       "attrs": {}
     },
     {
+      "from": "roles/controller",
+      "to": "skills/agentic-ai-development",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/controller",
+      "to": "skills/context-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/controller",
+      "to": "skills/software-process-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/controller",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "roles/implementer",
       "to": "skills/software-engineering",
       "via": "requires",
@@ -8158,6 +9346,30 @@
       "attrs": {}
     },
     {
+      "from": "roles/planner",
+      "to": "skills/agile-delivery",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/planner",
+      "to": "skills/software-process-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/planner",
+      "to": "skills/spec-driven-development",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/planner",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "roles/reviewer",
       "to": "skills/software-architecture",
       "via": "requires",
@@ -8171,6 +9383,30 @@
     },
     {
       "from": "roles/reviewer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/specifier",
+      "to": "skills/requirements-engineering",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/specifier",
+      "to": "skills/spec-driven-development",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/specifier",
+      "to": "skills/technical-writing",
+      "via": "requires",
+      "attrs": {}
+    },
+    {
+      "from": "roles/specifier",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
