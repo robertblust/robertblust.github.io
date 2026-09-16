@@ -16,6 +16,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { NOTE_EN, NOTE_DE } from "./note.mjs";
+
 const HERE = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const START = "<!-- principles:start -->";
 const END = "<!-- principles:end -->";
@@ -34,14 +36,8 @@ const inline = (s) => esc(s).replace(/`([^`]+)`/g, '<code class="mono">$1</code>
 
 // The connective words are the page's, not the model's: the heading over the values, and the
 // note that says why these blocks do not switch language with the rest of the site. The model
-// owns the statements; this owns the frame around them.
-const NOTE_EN = "Generated from the model, so the words below are its own — and in the one " +
-  "language it is written in. The rest of this site is bilingual; a translated copy would be a " +
-  "second thing to keep true, which is what this page argues against.";
-const NOTE_DE = "Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen " +
-  "Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte " +
-  "Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite " +
-  "argumentiert.";
+// owns the statements; this owns the frame around them. The note itself lives in note.mjs,
+// because the team page writes the same sentence and two copies would drift.
 
 // The title pages here all break the headline the same way: a muted first clause, then the rest
 // in weight and its last word in the accent. The split is presentation, not content, so it is
