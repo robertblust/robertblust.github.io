@@ -1,5 +1,5 @@
 {
-  "commit": "9738dd774678da0fe6f65c944c3e54749abd3257",
+  "commit": "559cf81ffb632005acda618ec49216185adccaa5",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -318,62 +318,6 @@
         ]
       },
       "sections": [
-        {
-          "heading": "Skills",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Skill",
-                "Level",
-                "Evidence"
-              ],
-              "rows": [
-                [
-                  "Software engineering",
-                  "Proficient",
-                  "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
-                ],
-                [
-                  "Software testing",
-                  "Competent",
-                  "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
-                ],
-                [
-                  "Technical writing",
-                  "Proficient",
-                  "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Skill",
-              "Level",
-              "Evidence"
-            ],
-            "rows": [
-              [
-                "Software engineering",
-                "Proficient",
-                "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
-              ],
-              [
-                "Software testing",
-                "Competent",
-                "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
-              ],
-              [
-                "Technical writing",
-                "Proficient",
-                "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
-              ]
-            ]
-          }
-        },
         {
           "heading": "Summary",
           "text": "Four seats, one session: the English of every page from a brief, the Swiss German of every\nreviewed element, the commit a task brief specifies and the findings on a diff. Whichever model\nruns it, the rulebooks are the same and the Owner's word ends every question it parks.",
@@ -5290,33 +5234,6 @@
       "to": "sources/local",
       "via": "source",
       "attrs": {}
-    },
-    {
-      "from": "profiles/ai-agent",
-      "to": "skills/software-engineering",
-      "via": "Skills.Skill",
-      "attrs": {
-        "Level": "proficiency-levels/proficient",
-        "Evidence": "Implemented the meta-model's typed-resolution release task by task under review, tests first, with the same graph proven on every consumer."
-      }
-    },
-    {
-      "from": "profiles/ai-agent",
-      "to": "skills/software-testing",
-      "via": "Skills.Skill",
-      "attrs": {
-        "Level": "proficiency-levels/competent",
-        "Evidence": "Wrote the failing test before the change on every task of the meta-model's typed-resolution and role releases, and reported the red and the green in each task report."
-      }
-    },
-    {
-      "from": "profiles/ai-agent",
-      "to": "skills/technical-writing",
-      "via": "Skills.Skill",
-      "attrs": {
-        "Level": "proficiency-levels/proficient",
-        "Evidence": "Drafts every page, README and release note of the family under the writer's rulebook; the Owner reviews each on the branch and the rendered page."
-      }
     },
     {
       "from": "profiles/ai-agent",
