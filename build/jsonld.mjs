@@ -138,6 +138,22 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
     if (lead.join() !== want.join()) {
       throw new Error(`${rel}: @graph must lead with ${want.join(", ")}, not ${lead.join(", ") || "nothing"}`);
     }
+    // The tail is the page's own — WebPage and BreadcrumbList are about this page, not about
+    // the person, so this renderer does not write them. That makes them the one part of the
+    // graph a new page copies by hand, and the team page proved what that costs: it carried
+    // the timeline's @id, name, url and breadcrumb to a different address, and every check
+    // passed. A page whose own nodes name a different page is refused here rather than
+    // published, because nothing downstream reads JSON-LD closely enough to notice.
+    const here = `${SITE}/${rel === "index.html" ? "" : rel.replace(/index\.html$/, "")}`;
+    for (const node of doc["@graph"].slice(nodes.length)) {
+      const named = [node["@id"], node.url, node.breadcrumb && node.breadcrumb["@id"]]
+        .filter(Boolean)
+        .filter((v) => !String(v).startsWith(here));
+      if (named.length) {
+        throw new Error(`${rel}: its ${node["@type"]} names ${named.join(", ")}, which is not ${here} — ` +
+          "a page's own nodes were copied from another page");
+      }
+    }
     doc["@graph"] = [...nodes, ...doc["@graph"].slice(nodes.length)];
     const text = JSON.stringify(doc, null, 2);
     const next = page.replace(RE, (all, open, _body, close) => open + text + close);

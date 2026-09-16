@@ -283,3 +283,47 @@ test("a page missing either marker is an error, not a page half-generated", () =
     "<html><body><!-- team:start -->\n<!-- team:end --></body></html>");
   assert.throws(() => writeTeam(TEAM_FIXTURE, { root: dir }), /team-note:start/);
 });
+
+test("writeJsonLd refuses a page whose own nodes were copied from another page", () => {
+  // The bug this exists for, reproduced: the team page was generated from the timeline's
+  // markup and carried its @id, name, url and breadcrumb to a different address. Every check
+  // in the suite passed, because nothing else reads JSON-LD closely enough to notice.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  fs.mkdirSync(path.join(dir, "team"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
+      { "@type": "WebPage", "@id": "https://blust.ch/timeline/#webpage", name: "Timeline",
+        url: "https://blust.ch/timeline/", breadcrumb: { "@id": "https://blust.ch/timeline/#breadcrumb" } },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "team/index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["team/index.html"] }),
+    (err) => err.message.includes("https://blust.ch/team/") && err.message.includes("WebPage"),
+    "the error does not name the page it should have been about");
+});
+
+test("writeJsonLd accepts a page whose own nodes name its own address", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  fs.mkdirSync(path.join(dir, "team"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
+      { "@type": "WebPage", "@id": "https://blust.ch/team/#webpage", name: "Team",
+        url: "https://blust.ch/team/", breadcrumb: { "@id": "https://blust.ch/team/#breadcrumb" } },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "team/index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["team/index.html"] });
+  const written = JSON.parse(fs.readFileSync(path.join(dir, "team/index.html"), "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
+  assert.equal(written["@graph"][3].name, "Team", "the page's own node was not left alone");
+});
