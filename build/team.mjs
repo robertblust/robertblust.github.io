@@ -16,6 +16,13 @@ import { NOTE_EN, NOTE_DE } from "./note.mjs";
 const HERE = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const START = "<!-- team:start -->";
 const END = "<!-- team:end -->";
+// The note sits in the title block, under the tagline, where /model/ and /principles/ put
+// theirs — above the section label rather than under it, because it is about the page and
+// not about the figure. It is still written from here rather than typed into the page: it is
+// one sentence with one home, and a note explaining why a page does not translate is the
+// note that must not say two different things on two pages.
+const NOTE_START = "<!-- team-note:start -->";
+const NOTE_END = "<!-- team-note:end -->";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
   .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -109,7 +116,6 @@ function render(data) {
   const profiles = [...new Set(seats.map((s) => s.profile))];
   const out = [];
 
-  out.push(`      <p class="note" data-de="${esc(NOTE_DE)}">${esc(NOTE_EN)}</p>`);
 
   out.push(`      <div class="hdrail"><div class="whos">`);
   for (const p of profiles) {
@@ -159,12 +165,25 @@ export function writeTeam(data, { check = false, root = HERE } = {}) {
   const rel = "team/index.html";
   const file = path.join(root, rel);
   const page = fs.readFileSync(file, "utf8");
-  const re = new RegExp(`${START}[\\s\\S]*?${END}`);
-  if (!re.test(page)) throw new Error(`${rel} has no ${START} … ${END} block`);
-  // The replacement carries the model's own prose, and a `$&` in a tagline would be read as a
-  // reference to the match rather than as two characters. The function form has no such
-  // reading, which is why principles.mjs and jsonld.mjs write their blocks the same way.
-  const next = page.replace(re, () => `${START}\n${render(data)}\n      ${END}`);
+
+  // Two regions, one renderer: the note in the title block and the board in the figure
+  // section. They are written together because they are read from the same artifact, and a
+  // page carrying one marker and not the other is a page half-generated.
+  const regions = [
+    [NOTE_START, NOTE_END, "    ",
+     () => `      <p class="note" data-de="${esc(NOTE_DE)}">${esc(NOTE_EN)}</p>`],
+    [START, END, "      ", () => render(data)],
+  ];
+  let next = page;
+  for (const [start, end, indent, body] of regions) {
+    const re = new RegExp(`${start}[\\s\\S]*?${end}`);
+    if (!re.test(next)) throw new Error(`${rel} has no ${start} … ${end} block`);
+    // The replacement carries the model's own prose, and a `$&` in a tagline would be read as
+    // a reference to the match rather than as two characters. The function form has no such
+    // reading, which is why principles.mjs and jsonld.mjs write their blocks the same way.
+    next = next.replace(re, () => `${start}\n${body()}\n${indent}${end}`);
+  }
+
   if (next === page) return [];
   if (check) return [rel];
   fs.writeFileSync(file, next);

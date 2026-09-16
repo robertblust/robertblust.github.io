@@ -189,7 +189,8 @@ function renderTeamInto(fixture) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-team-"));
   fs.mkdirSync(path.join(dir, "team"));
   fs.writeFileSync(path.join(dir, "team/index.html"),
-    "<html><body><!-- team:start -->\n<!-- team:end --></body></html>");
+    "<html><body><p class=\"tagline\">t</p>\n<!-- team-note:start -->\n<!-- team-note:end -->\n" +
+    "<div class=\"lbl\">The team</div>\n<!-- team:start -->\n<!-- team:end --></body></html>");
   writeTeam(fixture, { root: dir });
   return fs.readFileSync(path.join(dir, "team/index.html"), "utf8");
 }
@@ -260,4 +261,25 @@ test("every row carries the compact strip as well as the five cells", () => {
   assert.match(html, /<span class="strip" aria-hidden="true"><b>01 One<\/b><i class="g ex"><\/i><\/span>/);
   // Boss touches both, so its strip names both.
   assert.match(html, /<b>01 One<\/b><i class="g ga"><\/i><b>02 Two<\/b><i class="g ex"><\/i><i class="g ga"><\/i>/);
+});
+
+test("the note lands in the title block, above the section label and the board", () => {
+  const html = renderTeamInto(TEAM_FIXTURE);
+  // It is about the page, not about the figure, so it reads before the label rather than under
+  // it — where /model/ and /principles/ put theirs. Written from here and not typed into the
+  // page, so the sentence keeps one home.
+  const note = html.indexOf('<p class="note"');
+  const label = html.indexOf('class="lbl">The team');
+  const board = html.indexOf('<div class="grid"');
+  assert.ok(note > 0, "the note was not written");
+  assert.ok(note < label, "the note reads after the section label");
+  assert.ok(label < board, "the section label reads after the board");
+});
+
+test("a page missing either marker is an error, not a page half-generated", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-team-"));
+  fs.mkdirSync(path.join(dir, "team"));
+  fs.writeFileSync(path.join(dir, "team/index.html"),
+    "<html><body><!-- team:start -->\n<!-- team:end --></body></html>");
+  assert.throws(() => writeTeam(TEAM_FIXTURE, { root: dir }), /team-note:start/);
 });
