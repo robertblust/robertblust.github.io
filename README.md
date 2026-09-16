@@ -11,6 +11,7 @@ assets. Working conventions and the traps that break this site silently are in
 /talks/                          talks index — the descriptions live here
 /talks/mental-model/             deck: The Mental Model
 /talks/essential-complexity/     deck: Essential Complexity
+/team/                           the two profiles and the eight seats they hold — reads the same model.json as /model/
 /timeline/                       the experiences as a ledger — reads the same model.json as /model/
 ```
 

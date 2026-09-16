@@ -170,6 +170,18 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
     card: true, internalLinks: true, ledger: true },
+  // The team page. Its claims are checkable, so verify checks them rather than trusting the
+  // prose: a page that says every gate is approved by the only human in the company must show
+  // exactly that, and must still show it the day the model changes.
+  { path: "/team/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, footer: FOOTER, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"],
+                  title: "Team – Robert Blust",
+                  desc: "Die zwei Profile des Modells und die acht Sitze dazwischen: wer welche Phase des Lieferprozesses ausf\u00fchrt, wer sie unterst\u00fctzt und wer ihr Gate freigibt." },
+    contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    card: true, internalLinks: true, board: true },
 ];
 
 const CHECKS = {
@@ -204,6 +216,55 @@ const CHECKS = {
     const linked = await page.evaluate(() =>
       [...document.querySelectorAll(".brand img, .name .namemark img")].map(i => i.getAttribute("src")));
     return linked.length ? `the brand lockup links its mark instead of inlining it: ${linked.join(", ")}` : null;
+  },
+  // Local to this site until a second site has a board. The page's argument is that every gate
+  // in the company is approved by the only human in it; that is a claim about the model, so it
+  // is read off the rendered page rather than trusted. If it ever stops being true of the
+  // model, this is where that is found.
+  async board(page, spec) {
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    const problems = await page.evaluate(async () => {
+      const bad = [];
+      const rows = [...document.querySelectorAll("#board details")];
+      if (rows.length !== 8) bad.push(`the board has ${rows.length} rows, not 8`);
+
+      const heads = [...document.querySelectorAll("#board .ghead .phname")].map((e) => e.textContent.trim());
+      if (heads.join(" ") !== "Shape Spec Plan Implement Integrate")
+        bad.push(`the phase headings are ${heads.join(" \u00b7 ")}`);
+
+      rows.forEach((d) => {
+        const name = d.querySelector(".tw").textContent.trim();
+        const gates = d.querySelectorAll("summary > span:not(.sname) .g.ga").length;
+        if (name === "Owner" && gates !== 5) bad.push(`the Owner approves ${gates} gates, not 5`);
+        if (name !== "Owner" && gates) bad.push(`${name} carries ${gates} gate marks`);
+      });
+
+      // Every row says itself in words, because the grid is not a table: a tr cannot be
+      // wrapped in details, and a summary given role="row" would stop announcing that it opens.
+      rows.forEach((d) => {
+        const l = d.querySelector("summary").getAttribute("aria-label") || "";
+        const name = d.querySelector(".tw").textContent.trim();
+        if (!l.startsWith(name + ",")) bad.push(`${name}'s summary has no aria-label naming it`);
+        if (!/approves (the gate of|no gate)/.test(l)) bad.push(`${name}'s aria-label says nothing about gates`);
+      });
+
+      // A seat opens onto the card, rendered on demand and not before.
+      const rev = rows.find((d) => d.querySelector(".tw").textContent.trim() === "Reviewer");
+      if (!rev) return bad.concat("there is no Reviewer row");
+      if (rev.querySelector(".cbody").textContent.trim())
+        bad.push("a card is rendered before its row was opened");
+      rev.open = true;
+      await new Promise((r) => setTimeout(r, 300));
+      const h3 = rev.querySelector(".cbody h3");
+      if (!h3 || h3.textContent.trim() !== "Reviewer")
+        bad.push("opening the Reviewer row did not render the Reviewer card");
+      const go = rev.querySelector(".cbody a.go");
+      if (!go) bad.push("the Reviewer card has no resolved reference");
+      else if (!/\.\.\/model\/\?stage=expanded#/.test(go.getAttribute("href")))
+        bad.push(`a requires link points at ${go.getAttribute("href")}`);
+      return bad;
+    });
+    return problems.length ? problems.join("; ") : null;
   },
   // Local to this site until a second site has a ledger. Reads the file the page names
   // and holds the page to it: the rows are the model's experiences in the order they began,
