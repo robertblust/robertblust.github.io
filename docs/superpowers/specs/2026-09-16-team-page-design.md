@@ -218,10 +218,17 @@ changing any page's script order.
 Five columns do not fit at 360 px, and widening the seat column moves the problem rather than
 solving it.
 
-Below 640 px the board keeps one column. A summary becomes the seat's mark and name on one
-line, and under it a strip naming only the phases that seat touches — the number, the short
-name and that phase's marks — so the Owner shows five entries and the Translator one. The head
-row is hidden, because there are no columns left for it to head.
+**Measured on the built page rather than guessed: the columns overflow below 760 px.** The
+first draft of this section said 640 px, which put the page six pixels above a cliff and, at
+641 px, scrolled sideways. The board keeps one column below **900 px** — the width the header
+already collapses at, so the page has one breakpoint rather than two, a reader meets both
+changes at once, and there is 140 px of margin over the measurement instead of one.
+
+A summary becomes the seat's mark and name on one line, and under it a strip naming only the
+phases that seat touches — the number, the short name and that phase's marks — so the Owner
+shows five entries and the Translator one. The head row is hidden, because there are no columns
+left for it to head. Checked from 320 px to 1600 px: no width scrolls sideways, and a row still
+opens on a phone.
 
 Both forms are in the markup and the stylesheet shows one, so a rotation re-renders nothing.
 That is the rule the timeline's gutter already follows, and the reason is the same: a page
@@ -276,7 +283,10 @@ marks from the phases and writes the head rail, the board and the legend between
 which gives it `npm run pages` and `npm run pages:check` with no further wiring. The shared
 note moves out of `build/principles.mjs` in the same commit.
 
-`build/jsonld.mjs` gains `team/index.html`, taking `PAGES` to ten. The Dataset's description
+`build/jsonld.mjs` gains `team/index.html`, taking `PAGES` to ten. **This is not a later step:**
+that renderer refuses any page carrying the Person node that is not on its list, and the page
+carries one, so `npm run pages` throws until the list names it. It moves in the commit that
+adds the page. The Dataset's description
 is corrected while that file is open: it reads "One person described in CompanyGraph", which
 stopped being true when the model gained a second profile, eight roles and a process. What it
 should say is a question for whoever writes it, not a decision this design takes.

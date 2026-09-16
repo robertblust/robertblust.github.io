@@ -249,3 +249,15 @@ test("the note that says why a region does not translate has one home", () => {
       `${name} carries its own copy of the note`);
   }
 });
+
+test("every row carries the compact strip as well as the five cells", () => {
+  const html = renderTeamInto(TEAM_FIXTURE);
+  // Two forms in the markup and the stylesheet showing one, so a rotation re-renders nothing
+  // and never loses what was open. This is the timeline gutter's rule.
+  const strips = html.match(/<span class="strip" aria-hidden="true">/g) || [];
+  assert.equal(strips.length, (html.match(/<details/g) || []).length);
+  // The strip names only the phases that seat touches, so most rows are short.
+  assert.match(html, /<span class="strip" aria-hidden="true"><b>01 One<\/b><i class="g ex"><\/i><\/span>/);
+  // Boss touches both, so its strip names both.
+  assert.match(html, /<b>01 One<\/b><i class="g ga"><\/i><b>02 Two<\/b><i class="g ex"><\/i><i class="g ga"><\/i>/);
+});

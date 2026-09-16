@@ -130,6 +130,15 @@ function render(data) {
     out.push(`          <summary aria-label="${esc(rowLabel(role, profile, phases, cells))}">` +
       `<span class="sname">${markFor(profile)}<span class="tw">${esc(role.name)}</span></span>` +
       cells.map((c) => `<span>${c.map((g) => `<i class="g ${g}"></i>`).join("")}</span>`).join("") +
+      // The same row again, for a width with no columns to put it in. Both forms are in the
+      // markup and the stylesheet shows one, so a rotation re-renders nothing and never loses
+      // what was open — the rule the timeline's gutter already follows. aria-hidden, because
+      // the summary's own label says the row in words, and two readings of one row is what
+      // the tooltip was removed for.
+      `<span class="strip" aria-hidden="true">${cells.map((c, i) => c.length
+        ? `<b>${String(i + 1).padStart(2, "0")} ${esc(phases[i].name)}</b>` +
+          c.map((g) => `<i class="g ${g}"></i>`).join("")
+        : "").filter(Boolean).join("")}</span>` +
       `</summary>`);
     out.push(`          <div class="drawer"><div class="card"><div class="cbody"></div>` +
       `<div class="cfoot"><span></span></div></div></div>`);
