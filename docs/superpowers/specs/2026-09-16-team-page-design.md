@@ -95,8 +95,16 @@ subject there is. `ORDER` becomes Team, API, Ideas, Principles, Model, Timeline,
 Talks, Billing, Privacy, and this site's nav becomes Team, Ideas, Principles, Model, Timeline,
 Talks. Six items were measured on the landing page before this was decided, at 901, 930, 960,
 1000 and 1100 px with a sixth link injected: no page scrolls sideways, no wordmark breaks and
-every link stays one line tall. Below 900 px the question does not arise, since the burger
-takes the links then.
+every link stays one line tall.
+
+**That measurement was not enough, and the sentence that stood here was wrong.** It said the
+question did not arise below 900 px because the burger took the links then. The burger took
+them at 640, not 900, and between 641 and 1035 px the bar wrapped in English and to 1099 in
+German — on this page and on every other, in both languages, and already with five items
+before Team was one of them. Page-level sideways scroll and the wordmark's height were what
+got measured, and a wrapped bar causes neither. Design v0.59.0 moves the collapse to 1000 px
+and adds `headerFits`, which walks eight widths in both languages and fails on a bar that is
+two rows.
 
 **A seat opens in place, at the board's full width.** The card is not indented under its row
 and not capped at a narrow column: it spans the board, because the References table under a
