@@ -251,17 +251,6 @@ test("the note that says why a region does not translate has one home", () => {
   }
 });
 
-test("every row carries the compact strip as well as the five cells", () => {
-  const html = renderTeamInto(TEAM_FIXTURE);
-  // Two forms in the markup and the stylesheet showing one, so a rotation re-renders nothing
-  // and never loses what was open. This is the timeline gutter's rule.
-  const strips = html.match(/<span class="strip" aria-hidden="true">/g) || [];
-  assert.equal(strips.length, (html.match(/<details/g) || []).length);
-  // The strip names only the phases that seat touches, so most rows are short.
-  assert.match(html, /<span class="strip" aria-hidden="true"><b>01 One<\/b><i class="g ex"><\/i><\/span>/);
-  // Boss touches both, so its strip names both.
-  assert.match(html, /<b>01 One<\/b><i class="g ga"><\/i><b>02 Two<\/b><i class="g ex"><\/i><i class="g ga"><\/i>/);
-});
 
 test("the note lands in the title block, above the section label and the board", () => {
   const html = renderTeamInto(TEAM_FIXTURE);
@@ -326,4 +315,18 @@ test("writeJsonLd accepts a page whose own nodes name its own address", () => {
   const written = JSON.parse(fs.readFileSync(path.join(dir, "team/index.html"), "utf8")
     .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
   assert.equal(written["@graph"][3].name, "Team", "the page's own node was not left alone");
+});
+
+test("the board is followed by what each phase is, in the model's own words", () => {
+  const html = renderTeamInto(TEAM_FIXTURE);
+  // The columns name the phases; until this block nothing on the page said what any of them
+  // was for, because the page carries no tooltip.
+  assert.match(html, /<dl class="phases">/);
+  assert.match(html, /<dt><span class="phnum">01<\/span><span class="phname">One<\/span><\/dt>\n\s*<dd>First\.<\/dd>/);
+  assert.match(html, /<dt><span class="phnum">02<\/span><span class="phname">Two<\/span><\/dt>\n\s*<dd>Second\.<\/dd>/);
+  // In the process's order, not the folder's, and every phase present.
+  assert.equal((html.match(/<dd>/g) || []).length, 2);
+  // The model's words, so no data-de on them — the note above the board says why.
+  const block = html.slice(html.indexOf('<dl class="phases">'));
+  assert.ok(!/data-de/.test(block), "a phase tagline carries a translation it should not");
 });

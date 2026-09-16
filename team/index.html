@@ -650,26 +650,41 @@
   .grid .drawer .card{width:100%}
   .cbody p, .cbody ul.prose{max-width:72ch}
   @media (prefers-reduced-motion: reduce){ .grid .sname::before{transition:none} }
-  .grid .strip{display:none}
+  /* The five phases in words, under the board that only names them. A grid rather than a
+     table: two columns, the phase and its one line, and the phase column sized to the longest
+     name so the sentences start on one edge. */
+  .phases{margin-top:1.9rem; padding-top:1.5rem; border-top:1px solid var(--rule);
+          display:grid; grid-template-columns:max-content 1fr; gap:.55rem 1.4rem}
+  .phases dt{display:flex; align-items:baseline; gap:.5rem; white-space:nowrap}
+  .phases dd{margin:0; color:var(--dim); font-size:.93rem; line-height:1.5; max-width:72ch}
+  @media (max-width:640px){
+    .phases{grid-template-columns:1fr; gap:.2rem 0}
+    .phases dd{margin-bottom:.9rem}
+  }
   @media (max-width:900px){
-    /* Five columns do not fit, and widening the seat column only moves the edge to the next
-       longer word. The row keeps its name and shows only the phases it touches, by number and
-       short name, so the Owner shows five entries and the Translator one.
-
-       900px, measured: the columns overflow the page below 760px, so the cliff is real and the
-       question is only where to stand back from it. This is the width the header already
-       collapses at, so the page has one breakpoint rather than two and a reader meets both
-       changes at once — with 140px of margin over the measurement rather than six. */
-    .grid{--cols:1fr}
-    .ghead{display:none}
-    .grid summary{grid-template-columns:1fr; gap:.35rem; padding:.7rem 0}
-    .grid summary > span:not(.sname):not(.strip){display:none}
-    .grid .strip{display:flex; flex-wrap:wrap; align-items:center; gap:.3rem .8rem;
-                 padding-left:1.2rem; color:var(--dim); font-size:.74rem}
-    .grid .strip b{font-weight:600; color:var(--dim)}
-    .grid .strip .g{margin-left:.2rem}
+    /* The board stays a board. Its argument is a column — only the Owner's row carries a
+       triangle, and you read that off the shape of the column rather than off any one row —
+       so a form with no columns has no argument left to make. The phase names give way to
+       their numbers and the columns narrow; the block under the board is what says which
+       number is which phase, and it earns its place twice over here. */
+    .grid{--cols:minmax(0,1fr) repeat(5,2.1rem)}
+    .ghead .phname{display:none}
+    .ghead .phnum{font-size:.74rem; color:var(--dim); letter-spacing:.08em}
+    .grid summary{padding:.72rem 0}
+    .grid .sname .tw{font-size:.86rem}
+    .g{width:9px; height:9px; margin:0}
+    .g.ga{border-left-width:5px; border-right-width:5px; border-bottom-width:9px}
     .hdrail{flex-wrap:wrap; gap:1rem}
     .whos{gap:1.4rem}
+  }
+  @media (max-width:640px){
+    /* Side by side, the two profiles wrapped "HUMAN · HOLDS 1 OF 8" onto a second line and put
+       the agent hard against the edge. One under the other, each reads on one line. */
+    .whos{flex-direction:column; gap:.9rem}
+    .hdrail{align-items:flex-start}
+    .grid{--cols:minmax(0,1fr) repeat(5,1.8rem)}
+    .grid .sname{gap:.42rem}
+    .grid .sname .tw{font-size:.8rem}
   }
 
 </style>
@@ -746,39 +761,51 @@
       <div class="grid" id="board">
         <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Shape</span></span><span><span class="phnum">02</span><span class="phname">Spec</span></span><span><span class="phnum">03</span><span class="phname">Plan</span></span><span><span class="phnum">04</span><span class="phname">Implement</span></span><span><span class="phnum">05</span><span class="phname">Integrate</span></span></div>
         <details class="human" id="owner" data-role="roles/owner">
-          <summary aria-label="Owner, human. executes Shape, Implement, Integrate. approves the gate of Shape, Spec, Plan, Implement, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span class="strip" aria-hidden="true"><b>01 Shape</b><i class="g ex"></i><i class="g ga"></i><b>02 Spec</b><i class="g ga"></i><b>03 Plan</b><i class="g ga"></i><b>04 Implement</b><i class="g ex"></i><i class="g ga"></i><b>05 Integrate</b><i class="g ex"></i><i class="g ga"></i></span></summary>
+          <summary aria-label="Owner, human. executes Shape, Implement, Integrate. approves the gate of Shape, Spec, Plan, Implement, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="specifier" data-role="roles/specifier">
-          <summary aria-label="Specifier, agent. executes Spec. supports Plan. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Specifier</span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span></span><span class="strip" aria-hidden="true"><b>02 Spec</b><i class="g ex"></i><b>03 Plan</b><i class="g su"></i></span></summary>
+          <summary aria-label="Specifier, agent. executes Spec. supports Plan. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Specifier</span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="planner" data-role="roles/planner">
-          <summary aria-label="Planner, agent. executes Plan. supports Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Planner</span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span class="strip" aria-hidden="true"><b>03 Plan</b><i class="g ex"></i><b>04 Implement</b><i class="g su"></i></span></summary>
+          <summary aria-label="Planner, agent. executes Plan. supports Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Planner</span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="controller" data-role="roles/controller">
-          <summary aria-label="Controller, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Controller</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span><span class="strip" aria-hidden="true"><b>04 Implement</b><i class="g ex"></i><b>05 Integrate</b><i class="g ex"></i></span></summary>
+          <summary aria-label="Controller, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Controller</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="implementer" data-role="roles/implementer">
-          <summary aria-label="Implementer, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Implementer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span><span class="strip" aria-hidden="true"><b>04 Implement</b><i class="g ex"></i></span></summary>
+          <summary aria-label="Implementer, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Implementer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="reviewer" data-role="roles/reviewer">
-          <summary aria-label="Reviewer, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span><span class="strip" aria-hidden="true"><b>04 Implement</b><i class="g ex"></i><b>05 Integrate</b><i class="g ex"></i></span></summary>
+          <summary aria-label="Reviewer, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="writer" data-role="roles/writer">
-          <summary aria-label="Writer, agent. executes Implement. supports Spec. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Writer</span></span><span></span><span><i class="g su"></i></span><span></span><span><i class="g ex"></i></span><span></span><span class="strip" aria-hidden="true"><b>02 Spec</b><i class="g su"></i><b>04 Implement</b><i class="g ex"></i></span></summary>
+          <summary aria-label="Writer, agent. executes Implement. supports Spec. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Writer</span></span><span></span><span><i class="g su"></i></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
         <details id="translator" data-role="roles/translator">
-          <summary aria-label="Translator, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Translator</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span><span class="strip" aria-hidden="true"><b>04 Implement</b><i class="g ex"></i></span></summary>
+          <summary aria-label="Translator, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Translator</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
       </div>
       <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Shape</span></dt>
+        <dd>Decide what kind of change this is, and how much of it gets written down.</dd>
+        <dt><span class="phnum">02</span><span class="phname">Spec</span></dt>
+        <dd>Write what the change must do, completely enough that nobody downstream has to guess.</dd>
+        <dt><span class="phnum">03</span><span class="phname">Plan</span></dt>
+        <dd>Cut the approved specification into pieces that can be worked one at a time.</dd>
+        <dt><span class="phnum">04</span><span class="phname">Implement</span></dt>
+        <dd>Make the thing, and let nothing go forward unread.</dd>
+        <dt><span class="phnum">05</span><span class="phname">Integrate</span></dt>
+        <dd>Put the change where it binds, and move everything that names it.</dd>
+      </dl>
       <!-- team:end -->
       <p class="figcap" data-de="Eine Zeile zeigt, was ein Sitz über die Arbeit hinweg tut, eine Spalte, wer eine Phase berührt. Die Dreiecksspalte ist das Argument: Jedes Gate im Unternehmen gibt der einzige Mensch darin frei, und keine Agentenzeile trägt eines. Ein Sitz öffnet die Karte, die die Modellseite und der Werdegang bereits zeichnen.">Read a row for what a seat does across the work, and a column for who touches a phase. The triangle column is the argument: every gate in the company is approved by the only human in it, and no agent row carries one. A seat opens onto the card the model page and the timeline already draw.</p>
     </section>

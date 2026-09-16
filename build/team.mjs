@@ -141,10 +141,6 @@ function render(data) {
       // what was open — the rule the timeline's gutter already follows. aria-hidden, because
       // the summary's own label says the row in words, and two readings of one row is what
       // the tooltip was removed for.
-      `<span class="strip" aria-hidden="true">${cells.map((c, i) => c.length
-        ? `<b>${String(i + 1).padStart(2, "0")} ${esc(phases[i].name)}</b>` +
-          c.map((g) => `<i class="g ${g}"></i>`).join("")
-        : "").filter(Boolean).join("")}</span>` +
       `</summary>`);
     out.push(`          <div class="drawer"><div class="card"><div class="cbody"></div>` +
       `<div class="cfoot"><span></span></div></div></div>`);
@@ -158,6 +154,19 @@ function render(data) {
     `<span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span>` +
     `<span>${MARK_HUMAN} <span data-de="Mensch">human</span></span>` +
     `<span>${MARK_AGENT} <span data-de="Agent">agent</span></span></div>`);
+
+  // What each column is. The board names the five phases and says who touches them, and until
+  // this block the page said nowhere what any of them is for — the tooltip that would have
+  // carried it was taken off this page, and a heading is not a place for a sentence. The
+  // taglines are the model's own words, so they stay English here for the reason the note
+  // above the board gives, while the numbers and the heading are the page's.
+  out.push(`      <dl class="phases">`);
+  phases.forEach((p, i) => {
+    out.push(`        <dt><span class="phnum">${String(i + 1).padStart(2, "0")}</span>` +
+      `<span class="phname">${esc(p.name)}</span></dt>`);
+    out.push(`        <dd>${esc(p.tagline || "")}</dd>`);
+  });
+  out.push(`      </dl>`);
   return out.join("\n");
 }
 

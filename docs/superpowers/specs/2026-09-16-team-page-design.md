@@ -215,24 +215,30 @@ changing any page's script order.
 
 ## 6. The phone
 
-Five columns do not fit at 360 px, and widening the seat column moves the problem rather than
-solving it.
+Five columns of *named* phases do not fit: measured on the built page, they overflow below
+760 px, and widening the seat column only moves the edge to the next longer word.
 
-**Measured on the built page rather than guessed: the columns overflow below 760 px.** The
-first draft of this section said 640 px, which put the page six pixels above a cliff and, at
-641 px, scrolled sideways. The board keeps one column below **900 px** — the width the header
-already collapses at, so the page has one breakpoint rather than two, a reader meets both
-changes at once, and there is 140 px of margin over the measurement instead of one.
+The first answer was to give up the matrix — below 900 px a row became its name and a strip
+listing only the phases it touched. It was built, and then read on a phone, and it was wrong.
+**The board's argument is a column.** Only the Owner's row carries a triangle, and a reader
+gets that from the shape of the column rather than from any one row; a form with no columns has
+nothing left to argue. The stacked form also repeated "04 Implement" down six rows and ran to
+four screens.
 
-A summary becomes the seat's mark and name on one line, and under it a strip naming only the
-phases that seat touches — the number, the short name and that phase's marks — so the Owner
-shows five entries and the Translator one. The head row is hidden, because there are no columns
-left for it to head. Checked from 320 px to 1600 px: no width scrolls sideways, and a row still
-opens on a phone.
+So the board stays a board at every width, and what gives way is the phase *names*. Below
+900 px the head row shows the numbers alone, `01` to `05`, the columns narrow to 2.1 rem and
+again to 1.8 rem below 640 px, and the marks shrink with them. The block under the board is
+what says which number is which phase — it was added to answer a different question and it
+carries this one too.
 
-Both forms are in the markup and the stylesheet shows one, so a rotation re-renders nothing.
-That is the rule the timeline's gutter already follows, and the reason is the same: a page
-that rebuilds its own rows on a resize is a page that loses whatever was open.
+Two things do change below 640 px: the two profiles in the head rail stack, because side by
+side they wrapped "HUMAN · HOLDS 1 OF 8" onto a second line and put the agent hard against the
+edge.
+
+Measured at 320, 360, 390, 430, 640, 899, 901 and 1280 px: no width scrolls sideways, and
+"Implementer", the longest seat name, is not clipped at any of them. Read on an emulated
+iPhone 13 at 390 px, where a row still opens and the card inside it — including its References
+table, whose URLs wrap within their column — reads without pushing the page out.
 
 ## 7. The design release
 

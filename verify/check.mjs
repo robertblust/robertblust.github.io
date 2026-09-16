@@ -234,10 +234,7 @@ const CHECKS = {
 
       rows.forEach((d) => {
         const name = d.querySelector(".tw").textContent.trim();
-        // The cells only. A row is written twice — five cells and a compact strip for a
-        // width with no columns — and both carry the same marks, so an unscoped selector
-        // counts every gate twice and reports ten.
-        const gates = d.querySelectorAll("summary > span:not(.sname):not(.strip) .g.ga").length;
+        const gates = d.querySelectorAll("summary > span:not(.sname) .g.ga").length;
         if (name === "Owner" && gates !== 5) bad.push(`the Owner approves ${gates} gates, not 5`);
         if (name !== "Owner" && gates) bad.push(`${name} carries ${gates} gate marks`);
       });
@@ -250,10 +247,6 @@ const CHECKS = {
         if (!l.startsWith(name + ",")) bad.push(`${name}'s summary has no aria-label naming it`);
         if (!/approves (the gate of|no gate)/.test(l)) bad.push(`${name}'s aria-label says nothing about gates`);
       });
-
-      // Both forms of a row are in the markup, so a rotation re-renders nothing.
-      if (rows.some((d) => !d.querySelector("summary .strip")))
-        bad.push("a row carries no compact strip, so it has nothing to show below 900px");
 
       // A seat opens onto the card, rendered on demand and not before.
       const rev = rows.find((d) => d.querySelector(".tw").textContent.trim() === "Reviewer");
