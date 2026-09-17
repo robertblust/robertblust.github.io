@@ -1,5 +1,5 @@
 {
-  "commit": "c43921f7761986c9bd4f368ade2102454d0cb2b5",
+  "commit": "3bc58c338980721e4321418056bdcbd1476f704a",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -245,10 +245,7 @@
       "tagline": "How anything the company ships is shaped, specified, planned, made and merged, in code and in prose.",
       "fields": {
         "source": "Local",
-        "owner": "Owner",
-        "supported-by": [
-          "Reviewer"
-        ]
+        "owner": "Owner"
       },
       "sections": [
         {
@@ -883,7 +880,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "Seven seats, one session: the specification a request is shaped into, the plan it is cut into,\nthe dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the\nEnglish of every page and the Swiss German of every reviewed element. Whichever model runs it,\nthe rulebooks are the same and the Owner's word ends every question it parks.",
+          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into,\nthe dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the\nEnglish of every page and the Swiss German of every reviewed element. Whichever model runs it,\nthe rulebooks are the same and the Owner's word ends every question it parks.",
           "tables": []
         }
       ],
@@ -937,8 +934,8 @@
                 ],
                 [
                   "AI tool integration (MCP)",
-                  "Competent",
-                  "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). No server authored: the platform's own MCP layer was still roadmap at exit, as CompanyGraph's is now"
+                  "Proficient",
+                  "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). Authored CompanyGraph's MCP server, read-only tools over any instance, and deployed it for this model at mcp.blust.ch, listed in the MCP Registry with its description written from the model (2026)."
                 ],
                 [
                   "API design",
@@ -1088,7 +1085,7 @@
                 [
                   "Infrastructure as code",
                   "Competent",
-                  "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026)."
+                  "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026). Deployed CompanyGraph's MCP server for this model on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand (2026)."
                 ],
                 [
                   "Integration architecture",
@@ -1298,8 +1295,8 @@
               ],
               [
                 "AI tool integration (MCP)",
-                "Competent",
-                "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). No server authored: the platform's own MCP layer was still roadmap at exit, as CompanyGraph's is now"
+                "Proficient",
+                "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). Authored CompanyGraph's MCP server, read-only tools over any instance, and deployed it for this model at mcp.blust.ch, listed in the MCP Registry with its description written from the model (2026)."
               ],
               [
                 "API design",
@@ -1449,7 +1446,7 @@
               [
                 "Infrastructure as code",
                 "Competent",
-                "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026)."
+                "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026). Deployed CompanyGraph's MCP server for this model on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand (2026)."
               ],
               [
                 "Integration architecture",
@@ -1646,6 +1643,10 @@
               ],
               "rows": [
                 [
+                  "blust.ch",
+                  "https://blust.ch"
+                ],
+                [
                   "GitHub",
                   "https://github.com/robertblust"
                 ],
@@ -1667,6 +1668,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "blust.ch",
+                "https://blust.ch"
+              ],
               [
                 "GitHub",
                 "https://github.com/robertblust"
@@ -3686,13 +3691,15 @@
           "Product discovery",
           "Solution selling",
           "Company vision and strategy",
-          "Public speaking"
+          "Public speaking",
+          "AI tool integration (MCP)",
+          "Infrastructure as code"
         ]
       },
       "sections": [
         {
           "heading": "Achievements",
-          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — ten schemas and eighteen numbered conventions that make the graph checkable — with a worked example company and an instance parser, and released it 20 times to v0.16.0, a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, 36 experiences, 70 skills on a four-level ladder and 5 values, every claim traced to an experience that shows it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
+          "text": "- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Published the core as one shipped unit — a schema per type and numbered conventions that make the graph checkable — with a worked example company and an instance parser, released by tag with a manifest per release.\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Built the reference instance from it: this profile, its experiences, its skills on a proficiency ladder and its values, every claim traced to an experience that shows it.\n- Wrote an MCP server that serves any instance to an agent through read-only tools, every answer naming the model commit it was read from, and deployed it for the reference instance at mcp.blust.ch, listed in the MCP Registry.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English, and put it in front of a professional network with a stated outcome each way.",
           "tables": []
         },
         {
@@ -3707,6 +3714,10 @@
               ],
               "rows": [
                 [
+                  "MCP server repository",
+                  "https://github.com/companygraph/mcp-server"
+                ],
+                [
                   "Source repository",
                   "https://github.com/companygraph/meta-model"
                 ]
@@ -3720,6 +3731,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "MCP server repository",
+                "https://github.com/companygraph/mcp-server"
+              ],
               [
                 "Source repository",
                 "https://github.com/companygraph/meta-model"
@@ -4209,7 +4224,7 @@
         },
         {
           "heading": "What it produces",
-          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is\nwrong, why it matters and how to fix it, ranked by severity, with the strengths named first. A\nfinding is an input to whoever merges, never a verdict on a person.",
+          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is\nwrong, why it matters and how to fix it, ranked by severity, with the strengths named first. A\nfinding is an input to whoever merges and never a verdict: it does not decide, and it is not\npassed on a person.",
           "tables": []
         },
         {
@@ -5913,7 +5928,7 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: eight seats, one held\nby me and seven by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; none of the\nother agent-held seats commits at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
+          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: one seat held by me\nand every other by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; none of the\nother agent-held seats commits at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
           "tables": []
         },
         {
@@ -5931,12 +5946,34 @@
       "path": "model/strategies/model-first-strategy.md"
     },
     {
+      "id": "surfaces/blust-ch-website",
+      "type": "surface",
+      "name": "blust.ch website",
+      "tagline": "The owner's own site, in English and Swiss German, that a visitor, a search engine or an",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/robertblust/robertblust.github.io",
+        "url": "https://blust.ch"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/blust-ch-website.md"
+    },
+    {
       "id": "surfaces/linkedin-profile",
       "type": "surface",
       "name": "LinkedIn profile",
       "tagline": "The professional network profile a recruiter, a client or a former colleague reaches first, kept by hand.",
       "fields": {
         "source": "Local",
+        "production": "written",
         "url": "https://www.linkedin.com/in/robertblust/"
       },
       "sections": [
@@ -5958,6 +5995,48 @@
       ],
       "owner": null,
       "path": "model/surfaces/linkedin-profile.md"
+    },
+    {
+      "id": "surfaces/mcp-blust-ch-mcp-server",
+      "type": "surface",
+      "name": "mcp.blust.ch MCP server",
+      "tagline": "The server an agent connects to for answers about the owner's work, reading a pinned commit of",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/robertblust/mcp-blust-ch",
+        "url": "https://mcp.blust.ch/mcp"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then the commit and core\n  release the answers are read from.\n- **Tools** — listing the types, describing a schema, listing and returning entities, finding\n  evidence, searching and fetching, over every entity in the model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/mcp-blust-ch-mcp-server.md"
+    },
+    {
+      "id": "surfaces/mcp-registry-listing",
+      "type": "surface",
+      "name": "MCP Registry listing",
+      "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/robertblust/mcp-blust-ch",
+        "url": "https://registry.modelcontextprotocol.io/v0/servers?search=ch.blust/mental-model"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Title** — the identity's name.\n- **Description** — the identity's name and the vision's name, joined by a colon.\n- **Remote** — the MCP server's address.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/mcp-registry-listing.md"
     },
     {
       "id": "values/build-the-alternative-before-making-the-point",
@@ -6349,12 +6428,6 @@
       "from": "processes/delivery",
       "to": "sources/local",
       "via": "source",
-      "attrs": {}
-    },
-    {
-      "from": "processes/delivery",
-      "to": "roles/reviewer",
-      "via": "supported-by",
       "attrs": {}
     },
     {
@@ -8405,6 +8478,12 @@
     },
     {
       "from": "profiles/robert-blust/experiences/2026-companygraph",
+      "to": "skills/ai-tool-integration-mcp",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-companygraph",
       "to": "skills/company-vision-and-strategy",
       "via": "skills",
       "attrs": {}
@@ -8418,6 +8497,12 @@
     {
       "from": "profiles/robert-blust/experiences/2026-companygraph",
       "to": "skills/data-modeling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-companygraph",
+      "to": "skills/infrastructure-as-code",
       "via": "skills",
       "attrs": {}
     },
@@ -8666,8 +8751,8 @@
       "to": "skills/ai-tool-integration-mcp",
       "via": "Skills.Skill",
       "attrs": {
-        "Level": "proficiency-levels/competent",
-        "Evidence": "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). No server authored: the platform's own MCP layer was still roadmap at exit, as CompanyGraph's is now"
+        "Level": "proficiency-levels/proficient",
+        "Evidence": "Wired Atlassian, Google Drive and Slack MCP servers into the agent that maintained the LIKE MAGIC Mental Model, each command scoped to a named allowlist of tools, so the knowledge base stayed in step with the systems it described (2022–2026). Authored CompanyGraph's MCP server, read-only tools over any instance, and deployed it for this model at mcp.blust.ch, listed in the MCP Registry with its description written from the model (2026)."
       }
     },
     {
@@ -8937,7 +9022,7 @@
       "via": "Skills.Skill",
       "attrs": {
         "Level": "proficiency-levels/competent",
-        "Evidence": "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026)."
+        "Evidence": "Built LIKE MAGIC's production platform as infrastructure as code on Google Cloud (2022–2026). Deployed CompanyGraph's MCP server for this model on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand (2026)."
       }
     },
     {
@@ -9892,7 +9977,25 @@
       "attrs": {}
     },
     {
+      "from": "surfaces/blust-ch-website",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "surfaces/linkedin-profile",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/mcp-blust-ch-mcp-server",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/mcp-registry-listing",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
