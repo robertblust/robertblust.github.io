@@ -39,6 +39,10 @@ jobs:
       # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
+      # The deploy ping runs after Pages publishes, where nothing reviews it, so which pages it
+      # sends is held here instead. Built-ins only, so it sits with the other tests before npm ci.
+      - name: IndexNow still sends only the pages that changed
+        run: npm run test:indexnow
       # The renderers decide what every derived page says, and the check below only holds their
       # output against itself: a renderer that writes the wrong thing everywhere is green there
       # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.

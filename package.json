@@ -20,6 +20,7 @@
     "test:build": "node --test build/renderers.test.mjs",
     "dupes": "node tools/dupes.mjs",
     "test:dupes": "node --test tools/dupes.test.mjs",
+    "test:indexnow": "node --test tools/indexnow.test.mjs",
     "pin:check": "node pin-check.mjs"
   },
   "devDependencies": {
