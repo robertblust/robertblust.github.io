@@ -34,10 +34,14 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: "22"
+          cache: npm
+      # The command arrives from @robertblust/design, which decides for all three sites which
+      # pages a range changed.
+      - run: npm ci
       # Every change reaches main as a merge commit, so its first parent is what was deployed
       # before it and the diff between the two is the whole pull request.
       - name: Send the pages this deploy changed
         env:
           BASE: ${{ inputs.base || format('{0}^1', github.event.workflow_run.head_sha) }}
           HEAD: ${{ inputs.head || github.event.workflow_run.head_sha }}
-        run: node tools/indexnow.mjs "$BASE" "$HEAD"
+        run: npx design indexnow "$BASE" "$HEAD"
