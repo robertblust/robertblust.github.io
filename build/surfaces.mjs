@@ -80,7 +80,7 @@ function render(data) {
   out.push(`        <ul class="ln-groups">`);
   for (const m of makers) {
     const who = m.hand
-      ? `<span data-de="Der Inhaber">The owner</span><span class="how" data-de="von Hand">by hand</span>`
+      ? `<span data-de="Der Owner">The owner</span><span class="how" data-de="von Hand">by hand</span>`
       : `${esc(m.repo.split("/").pop())}<span class="how" data-de="Build">build</span>`;
     out.push(`          <li class="ln-group${m.hand ? " hand" : ""}">`);
     out.push(`            <div class="ln-maker" data-maker="${esc(m.key)}">${m.hand ? MARK_HAND : MARK_BUILD}` +
