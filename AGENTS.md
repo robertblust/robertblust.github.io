@@ -700,6 +700,16 @@ reports the page stale, and reads as a model change when nothing about the model
   — four share cards and two PDFs per deck — so in CI they would either overwrite the
   committed artifacts or fail on a dirty tree, and neither is a check. `npm run og:check`
   does run, and is the check they are not: see the section above.
+- **`.github/workflows/indexnow.yml` tells Bing and the other IndexNow engines which pages a
+  deploy changed.** It runs when `pages-build-deployment` succeeds, not on push, because a ping
+  sent while Pages is still publishing has the engines fetch the page being replaced. It sends
+  only sitemap URLs whose `index.html` changed in the merge, plus the pages that draw
+  `model.json` when that changed, because an engine told about unchanged pages on every deploy
+  learns to ignore the site. The 32-character `.txt` file at the root is the key, and it looks
+  like a stray: deleting it makes every ping answer 403. It is public by design, which is why it
+  is committed and not a secret. `npm run test:indexnow` runs in `verify` before `npm ci`, and
+  `node tools/indexnow.mjs <base> <head> --dry-run` shows what a range would send. Google does
+  not take part; it still finds pages through the sitemap.
 
 ## Checks
 
