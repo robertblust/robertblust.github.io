@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 import { writePrinciples } from "./principles.mjs";
 import { writeJsonLd } from "./jsonld.mjs";
 import { writeTeam } from "./team.mjs";
+import { writeSurfaces } from "./surfaces.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { repo, commit } = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
@@ -30,7 +31,7 @@ if (data.commit !== commit) {
 }
 
 const check = process.argv.includes("--check");
-const RENDERERS = [writePrinciples, writeTeam, writeJsonLd];
+const RENDERERS = [writePrinciples, writeTeam, writeSurfaces, writeJsonLd];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check }));
 

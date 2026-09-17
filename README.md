@@ -11,6 +11,7 @@ assets. Working conventions and the traps that break this site silently are in
 /talks/                          talks index — the descriptions live here
 /talks/mental-model/             deck: The Mental Model
 /talks/essential-complexity/     deck: Essential Complexity
+/surfaces/                       every place the model is published and how each is made — reads the same model.json as /model/
 /team/                           the two profiles and the eight seats they hold — reads the same model.json as /model/
 /timeline/                       the experiences as a ledger — reads the same model.json as /model/
 ```
@@ -28,7 +29,7 @@ works from `file://` as well as a local server.
 npm install && npx playwright install chromium
 npm run serve      # python3 -m http.server 8000
 npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
-npm run og           # regenerate the nine 1200×630 og:image share cards
+npm run og           # regenerate the 1200×630 og:image share cards
 npm run og:check      # do those cards still show the pages they were rendered from?
 npm run test:og        # unit tests for the card recipe the check compares
 npm run pdf            # regenerate both decks' PDF fallbacks
@@ -37,7 +38,7 @@ npm run model          # fetch the pinned model and write model.json — needs t
 npm run model:check     # is model.json still what that commit parses to?
 npm run pages            # render model.json into every derived page region
 npm run pages:check       # do those pages still match model.json?
-npm run test:build         # unit tests for the three renderers
+npm run test:build         # unit tests for the renderers
 
 npm run sitemap            # date each sitemap URL from its page's last commit — run before committing a page
 npm run sitemap:check       # are those dates still what git says?

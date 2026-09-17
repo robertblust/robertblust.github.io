@@ -1,5 +1,5 @@
 // The one sentence that says why a generated region does not translate, and the only copy of
-// it. Two renderers write it — the principles page and the team page — and a note explaining
+// it. Every renderer that writes a generated page's note takes it from here, and a note explaining
 // why a page does not translate is exactly the note that must not say two different things on
 // two pages.
 export const NOTE_EN = "Generated from the model, so the words below are its own — and in the one " +

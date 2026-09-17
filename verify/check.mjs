@@ -182,6 +182,14 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
     card: true, internalLinks: true, board: true },
+  // The surfaces page. Where each surface sits is a claim about how the model says it is made,
+  // so verify reads it off the page against the block rather than trusting the renderer.
+  { path: "/surfaces/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
+    contains: ["One model,", "every", "surface", "How to read it", "Generated from"],
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    card: true, internalLinks: true, lineage: true },
 ];
 
 const CHECKS = {
@@ -264,6 +272,54 @@ const CHECKS = {
         bad.push(`a requires link points at ${go.getAttribute("href")}`);
       return bad;
     });
+    return problems.length ? problems.join("; ") : null;
+  },
+  // Local to this site until a second site draws a lineage. Every surface in the block is a node,
+  // under the maker its own production and built-by name; choosing one draws its card and lights
+  // its two wires, and nothing is rendered before a choice.
+  async lineage(page, spec) {
+    await page.goto(spec.absolute, { waitUntil: "networkidle" });
+    const problems = await page.evaluate(async () => {
+      const bad = [];
+      const data = await (await fetch(document.querySelector("link[data-stage]").href)).json();
+      const want = data.entities.filter((e) => e.type === "surface");
+      const btns = [...document.querySelectorAll("#lineage .ln-s")];
+      if (btns.length !== want.length) bad.push(`the drawing has ${btns.length} surfaces, the model ${want.length}`);
+      for (const s of want) {
+        const b = btns.find((x) => x.getAttribute("data-id") === s.id);
+        if (!b) { bad.push(`${s.name} is not drawn`); continue; }
+        const maker = s.fields.production === "written" ? "hand" : s.fields["built-by"];
+        if (b.getAttribute("data-maker") !== maker) bad.push(`${s.name} sits under ${b.getAttribute("data-maker")}, not ${maker}`);
+        const group = b.closest(".ln-group").querySelector(".ln-maker").getAttribute("data-maker");
+        if (group !== maker) bad.push(`${s.name} is nested under ${group}, not ${maker}`);
+        if (b.querySelector(".nm").textContent.trim() !== s.name) bad.push(`${s.id} is labeled ${b.querySelector(".nm").textContent}`);
+      }
+      const panel = document.getElementById("lnpanel");
+      if (!panel.hidden || panel.querySelector(".cbody").textContent.trim())
+        bad.push("a card is shown before a surface was chosen");
+      const wires = document.querySelectorAll("#wires path").length;
+      const makers = document.querySelectorAll(".ln-maker").length;
+      if (wires !== makers + btns.length) bad.push(`${wires} wires for ${makers} makers and ${btns.length} surfaces`);
+
+      const pick = btns.find((b) => b.getAttribute("data-maker") === "hand") || btns[0];
+      pick.click();
+      await new Promise((r) => setTimeout(r, 300));
+      const h3 = panel.querySelector(".cbody h3");
+      const name = pick.querySelector(".nm").textContent.trim();
+      if (panel.hidden || !h3 || h3.textContent.trim() !== name) bad.push(`choosing ${name} did not draw its card`);
+      if (/\*\*/.test(panel.querySelector(".cbody").textContent)) bad.push(`${name}'s card prints markdown asterisks`);
+      if (pick.getAttribute("aria-pressed") !== "true") bad.push(`${name} is not pressed once chosen`);
+      if (location.hash !== "#" + pick.id) bad.push(`choosing ${name} left the address at ${location.hash || "no hash"}`);
+      if (document.querySelectorAll("#wires path.on").length !== 2) bad.push(`choosing ${name} lit ${document.querySelectorAll("#wires path.on").length} wires, not 2`);
+      return bad;
+    });
+    // A link must land: arriving with a hash chooses that surface.
+    const id = await page.evaluate(() => document.querySelector("#lineage .ln-s").id);
+    await page.goto(spec.absolute + "#" + id, { waitUntil: "networkidle" });
+    await page.waitForTimeout(300);
+    const landed = await page.evaluate((id) => document.getElementById(id).getAttribute("aria-pressed") === "true"
+      && !!document.querySelector("#lnpanel .cbody h3"), id);
+    if (!landed) problems.push(`arriving on #${id} did not choose it`);
     return problems.length ? problems.join("; ") : null;
   },
   // Local to this site until a second site has a ledger. Reads the file the page names

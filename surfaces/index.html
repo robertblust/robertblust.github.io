@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Team — Robert Blust</title>
-<meta id="metadesc" name="description" content="The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate.">
+<title>Surfaces — Robert Blust</title>
+<meta id="metadesc" name="description" content="Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://blust.ch/team/">
+<link rel="canonical" href="https://blust.ch/surfaces/">
 
-<meta property="og:title" content="Team — Robert Blust">
-<meta property="og:description" content="The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate.">
+<meta property="og:title" content="Surfaces — Robert Blust">
+<meta property="og:description" content="Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Robert Blust">
-<meta property="og:url" content="https://blust.ch/team/">
-<meta property="og:image" content="https://blust.ch/team/og.png">
+<meta property="og:url" content="https://blust.ch/surfaces/">
+<meta property="og:image" content="https://blust.ch/surfaces/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A company of one, staffed.">
+<meta property="og:image:alt" content="One model, every surface.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,9 +71,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://blust.ch/team/#webpage",
-      "name": "Team",
-      "url": "https://blust.ch/team/",
+      "@id": "https://blust.ch/surfaces/#webpage",
+      "name": "Surfaces",
+      "url": "https://blust.ch/surfaces/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://blust.ch/#website"
@@ -82,12 +82,12 @@
         "@id": "https://blust.ch/#model"
       },
       "breadcrumb": {
-        "@id": "https://blust.ch/team/#breadcrumb"
+        "@id": "https://blust.ch/surfaces/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://blust.ch/team/#breadcrumb",
+      "@id": "https://blust.ch/surfaces/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -98,8 +98,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Team",
-          "item": "https://blust.ch/team/"
+          "name": "Surfaces",
+          "item": "https://blust.ch/surfaces/"
         }
       ]
     }
@@ -589,11 +589,6 @@
 
 </style>
 <style>
-  .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
-  .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem)}
-  .value .tagline{margin-top:.5rem; color:var(--c-firm); max-width:62ch}
-  .value p{margin-top:.9rem; color:var(--dim); max-width:70ch; line-height:1.6}
   /* ─── stage contract · v2 · shared ───────────────────────────────────
      `stage.css` styles the drawing, the card and the dialog, and says in its own header that
      the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
@@ -624,106 +619,74 @@
   .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
            letter-spacing:.06em; color:var(--dim)}
   /* ─── end stage contract ────────────────────────────────────────────────── */
-  /* The board. --cols is declared once and used by the head row and every summary, which is
-     what lines the columns up across rows without a table. */
   .lbl{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.66rem;
        letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
   .mk{width:1.05em; height:1.05em; flex:none; vertical-align:-.16em}
-  .mk.human{color:var(--c-firm)}
-  .mk.agent{color:var(--c-mid)}
-  .hw .mk{width:2.3rem; height:2.3rem}
+  .mk.hand{color:var(--c-firm)}
+  .mk.build{color:var(--c-mid)}
 
-  .hdrail{display:flex; gap:2rem; align-items:center; justify-content:space-between;
-          padding-bottom:1.1rem; border-bottom:1px solid var(--rule); margin-top:.9rem}
-  .whos{display:flex; gap:2.6rem}
-  .hw{display:flex; gap:.7rem; align-items:center}
-  .hw .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-          font-weight:700; font-size:1.05rem}
-  .openall{background:none; border:1px solid var(--rule); border-radius:5px; color:var(--dim);
-           font:inherit; font-size:.76rem; padding:.28rem .7rem; cursor:pointer}
-  .openall:hover, .openall:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
-
-  /* Three cell marks, one hue. tokens.css allows one hue at four brightnesses and refuses a
-     second, so what a colour would have carried is carried by shape. */
-  .g{display:inline-block; width:10px; height:10px; margin:0 1px}
-  .g.ex{background:var(--c-mid); border-radius:50%}
-  .g.su{border:1.4px solid var(--c-weak); border-radius:50%}
-  .g.ga{width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent;
-        border-bottom:10px solid var(--c-firm); vertical-align:-1px}
-  .legend{display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:1.1rem; color:var(--dim);
-          font-size:.76rem}
-  .legend span{display:flex; align-items:center; gap:.45rem}
-
-  .grid{--cols:30% repeat(5,1fr); margin-top:0}
-  .ghead{display:grid; grid-template-columns:var(--cols); border-bottom:1px solid var(--rule);
-         padding:.9rem 0 .8rem}
-  .ghead > span{text-align:center}
-  .ghead > span:first-child{text-align:left}
-  .phnum{color:var(--c-weak); font-size:.66rem; letter-spacing:.12em; display:block;
-         font-family:"Plex Mono", ui-monospace, Menlo, monospace}
-  .phname{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-          font-weight:700; font-size:.9rem; color:var(--ink)}
-  .grid details{border-bottom:1px solid var(--rule)}
-  .grid summary{display:grid; grid-template-columns:var(--cols); align-items:center;
-                list-style:none; cursor:pointer; padding:.62rem 0}
-  .grid summary::-webkit-details-marker{display:none}
-  .grid summary:hover{background:var(--press)}
-  .grid summary:focus-visible{outline:2px solid var(--c-mid); outline-offset:-2px}
-  .grid summary > span{text-align:center}
-  .grid .sname{display:flex; align-items:center; gap:.6rem; text-align:left}
-  .grid .sname .tw{font-weight:600; font-size:.9rem}
-  /* The disclosure triangle is this page's only affordance that a row opens, since the page
-     carries no tooltip: the card is the seat's detail, and a hover showing a shorter version
-     of what a click shows in full is a second answer to one question. */
-  .grid .sname::before{content:""; width:0; height:0; border-style:solid; border-width:4px 0 4px 6px;
-                       border-color:transparent transparent transparent var(--c-weak);
-                       transition:transform .12s ease; flex:none}
-  .grid details[open] .sname::before{transform:rotate(90deg); border-left-color:var(--c-mid)}
-  .grid details[open] .sname .tw{color:var(--c-firm)}
-  .grid details.human summary{background:var(--press)}
-  /* Full width, not an indent: the References table under a role wrapped its URLs at anything
-     narrower. The card's own prose keeps a measure inside it. */
-  .grid .drawer{padding:.3rem 0 1.5rem}
-  .grid .drawer .card{width:100%}
+  /* The lineage. Three columns on a wide screen — the model, the makers, the surfaces — laid out
+     by nesting, so the markup is the tree the drawing shows and a reader with no CSS gets the
+     same order. The wires sit behind it and are drawn by the page from where the nodes landed. */
+  .lineage{position:relative; display:grid; grid-template-columns:minmax(0,13rem) minmax(0,1fr);
+           column-gap:clamp(3rem,7vw,6rem); align-items:center; margin-top:1.4rem}
+  .wires{position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none}
+  .wires path{fill:none; stroke:var(--rule); stroke-width:1.5; transition:stroke .2s ease}
+  .wires path.hand{stroke-dasharray:5 5}
+  /* --c-path is the token for exactly this: the way back to the root from what is focused. */
+  .wires path.on{stroke:var(--c-path); stroke-width:2}
+  .ln-model{position:relative; padding:1.1rem 1.2rem; border:1.5px solid var(--c-firm); border-radius:10px;
+            background:var(--raise)}
+  .ln-model .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:800;
+                font-size:clamp(1.2rem,2vw,1.5rem); letter-spacing:-.02em; line-height:1.05; margin-top:.35rem}
+  .ln-model .at{font-size:.78rem; color:var(--c-mid); margin-top:.3rem}
+  .ln-groups, .ln-surfaces{list-style:none}
+  .ln-groups{display:grid; gap:2.2rem}
+  .ln-group{display:grid; grid-template-columns:minmax(0,12rem) minmax(0,1fr);
+            column-gap:clamp(2.5rem,6vw,5rem); align-items:center}
+  .ln-maker{position:relative; display:flex; gap:.6rem; align-items:center; padding:.5rem 0}
+  .ln-maker .mk{width:1.5rem; height:1.5rem}
+  .ln-maker .who{font-weight:600; font-size:.92rem; line-height:1.25}
+  .ln-maker .how{display:block; font-size:.76rem; color:var(--dim); font-weight:400}
+  .ln-surfaces{display:grid; grid-template-columns:minmax(0,1fr); gap:.6rem}
+  .ln-surfaces li{min-width:0}
+  .ln-s{position:relative; width:100%; text-align:left; font:inherit; color:var(--ink); cursor:pointer;
+        display:flex; flex-direction:column; gap:.1rem; padding:.7rem .95rem;
+        background:var(--ground); border:1px solid var(--rule); border-radius:8px;
+        transition:border-color .15s ease, background-color .15s ease}
+  .ln-s:hover{border-color:var(--c-mid)}
+  .ln-s:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  .ln-s .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:1.02rem}
+  /* An address, so mono: it is a record value, not prose. */
+  .ln-s .host{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.72rem; color:var(--dim);
+              overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .ln-s[aria-pressed="true"]{border-color:var(--c-path); background:var(--press)}
+  .ln-s[aria-pressed="true"] .nm{color:var(--c-firm)}
+  .legend{display:flex; gap:.6rem 1.5rem; flex-wrap:wrap; margin-top:1.4rem; color:var(--dim); font-size:.76rem}
+  .legend > span{display:flex; align-items:center; gap:.5rem}
+  .legend svg.ln{width:28px; height:6px; flex:none}
+  .legend svg.ln path{stroke:var(--dim); stroke-width:1.5}
+  .ln-hint{margin-top:1.6rem; font-size:.82rem; color:var(--dim)}
+  /* Full width, like a seat's card on /team/: a References table needs the width. */
+  .ln-panel{margin-top:1.6rem}
+  .ln-panel .card{width:100%}
   .cbody p, .cbody ul.prose{max-width:72ch}
-  @media (prefers-reduced-motion: reduce){ .grid .sname::before{transition:none} }
-  /* The five phases in words, under the board that only names them. A grid rather than a
-     table: two columns, the phase and its one line, and the phase column sized to the longest
-     name so the sentences start on one edge. */
-  .phases{margin-top:1.9rem; padding-top:1.5rem; border-top:1px solid var(--rule);
-          display:grid; grid-template-columns:max-content 1fr; gap:.55rem 1.4rem}
-  .phases dt{display:flex; align-items:baseline; gap:.5rem; white-space:nowrap}
-  .phases dd{margin:0; color:var(--dim); font-size:.93rem; line-height:1.5; max-width:72ch}
-  @media (max-width:640px){
-    .phases{grid-template-columns:1fr; gap:.2rem 0}
-    .phases dd{margin-bottom:.9rem}
-  }
-  @media (max-width:900px){
-    /* The board stays a board. Its argument is a column — only the Owner's row carries a
-       triangle, and you read that off the shape of the column rather than off any one row —
-       so a form with no columns has no argument left to make. The phase names give way to
-       their numbers and the columns narrow; the block under the board is what says which
-       number is which phase, and it earns its place twice over here. */
-    .grid{--cols:minmax(0,1fr) repeat(5,2.1rem)}
-    .ghead .phname{display:none}
-    .ghead .phnum{font-size:.74rem; color:var(--dim); letter-spacing:.08em}
-    .grid summary{padding:.72rem 0}
-    .grid .sname .tw{font-size:.86rem}
-    .g{width:9px; height:9px; margin:0}
-    .g.ga{border-left-width:5px; border-right-width:5px; border-bottom-width:9px}
-    .hdrail{flex-wrap:wrap; gap:1rem}
-    .whos{gap:1.4rem}
-  }
-  @media (max-width:640px){
-    /* Side by side, the two profiles wrapped "HUMAN · HOLDS 1 OF 8" onto a second line and put
-       the agent hard against the edge. One under the other, each reads on one line. */
-    .whos{flex-direction:column; gap:.9rem}
-    .hdrail{align-items:flex-start}
-    .grid{--cols:minmax(0,1fr) repeat(5,1.8rem)}
-    .grid .sname{gap:.42rem}
-    .grid .sname .tw{font-size:.8rem}
-  }
 
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  @media (prefers-reduced-motion: reduce){ .wires path, .ln-s{transition:none} }
+  /* No room for three columns: the drawing becomes the tree it already is, its lines drawn as
+     rules — dashed under the hand, as the wire is. */
+  @media (max-width:760px){
+    .wires{display:none}
+    .lineage{grid-template-columns:minmax(0,1fr); row-gap:0}
+    .ln-model{justify-self:start}
+    .ln-groups{gap:0; margin-left:1rem; padding:1.2rem 0 0 1.1rem; border-left:1.5px solid var(--rule)}
+    .ln-group{grid-template-columns:minmax(0,1fr); padding-bottom:1.2rem}
+    .ln-surfaces{margin-left:.7rem; padding-left:1rem; border-left:1.5px solid var(--rule)}
+    .ln-group.hand .ln-surfaces{border-left-style:dashed}
+  }
 </style>
 <link rel="stylesheet" href="../stage.css">
 <!-- The model this page draws. The stage and the ledger both find it by the data-stage
@@ -735,21 +698,17 @@
 
 <body>
 
-<!-- The two natures, as form rather than as colour: tokens.css allows one hue at four
-     brightnesses and refuses a second in writing, so a filled figure and an outlined machine
-     carry what a second hue would have. The timeline tells its five kinds apart the same way. -->
+<!-- The two ways a surface is made, as form rather than as colour, the way /team/ tells a human
+     from an agent: a filled pen for the hand, an outlined build for the machine. tokens.css
+     allows one hue at four brightnesses and refuses a second in writing. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="m-human" viewBox="0 0 16 16">
-    <circle cx="8" cy="4.6" r="3.1" fill="currentColor"/>
-    <path d="M1.6 15.4a6.4 6.4 0 0 1 12.8 0z" fill="currentColor"/>
+  <symbol id="m-hand" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M8 .8l5.4 6.3-2.9 8.1H5.5L2.6 7.1zM8 7.2a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7z"/>
   </symbol>
-  <symbol id="m-agent" viewBox="0 0 16 16">
-    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
-      <rect x="2" y="5.4" width="12" height="8.6" rx="2.6"/><path d="M8 5.4V3.2"/>
+  <symbol id="m-build" viewBox="0 0 16 16">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2.8"/><path d="M6.4 5.6L4.2 8l2.2 2.4M9.6 5.6L11.8 8 9.6 10.4"/>
     </g>
-    <circle cx="8" cy="2.1" r="1.1" fill="currentColor"/>
-    <circle cx="5.7" cy="9.6" r="1.05" fill="currentColor"/>
-    <circle cx="10.3" cy="9.6" r="1.05" fill="currentColor"/>
   </symbol>
 </defs></svg>
 
@@ -759,8 +718,8 @@
       <a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg><b>Robert <span>Blust</span></b></a>
       <nav>
         <div class="navlinks" id="navlinks">
-          <a href="./" aria-current="page">Team</a>
-          <a href="../surfaces/">Surfaces</a>
+          <a href="../team/">Team</a>
+          <a href="./" aria-current="page">Surfaces</a>
           <a href="../ideas/" data-de="Ideen">Ideas</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
           <a href="../model/" data-de="Modell">Model</a>
@@ -782,81 +741,54 @@
   <div class="shell">
 
     <div class="title">
-      <h1 data-de="<span class='r70'>Eine Firma aus einer Person,</span><span class='rcl'><em>besetzt</em>.</span>"><span class="r70">A company of one,</span><span class="rcl"><em>staffed</em>.</span></h1>
-      <p class="tagline" data-de="Zwei Profile halten acht Sitze. Eines davon ist ein Mensch, und dieses entscheidet.">Two profiles hold eight seats. One of them is a person, and that one decides.</p>
-      <!-- team-note:start -->
+      <h1><span class="r70">One model,</span><span class="rcl">every <em>surface</em>.</span></h1>
+      <p class="tagline">Every place the model is published, and how each is made from it: by hand, or by a build that reads a pinned commit.</p>
+      <!-- surfaces-note:start -->
       <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
-    <!-- team-note:end -->
+    <!-- surfaces-note:end -->
     </div>
 
     <section class="figure-section">
-      <div class="lbl" data-de="Das Team">The team</div>
-      <!-- team:start -->
-      <div class="hdrail"><div class="whos">
-        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 8</div></div></div>
-        <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 7 of 8</div></div></div>
-      </div><button class="openall" id="openall" type="button" data-de="Alle öffnen">Open all</button></div>
-      <div class="grid" id="board">
-        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Shape</span></span><span><span class="phnum">02</span><span class="phname">Spec</span></span><span><span class="phnum">03</span><span class="phname">Plan</span></span><span><span class="phnum">04</span><span class="phname">Implement</span></span><span><span class="phnum">05</span><span class="phname">Integrate</span></span></div>
-        <details class="human" id="owner" data-role="roles/owner">
-          <summary aria-label="Owner, human. executes Shape, Implement, Integrate. approves the gate of Shape, Spec, Plan, Implement, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="specifier" data-role="roles/specifier">
-          <summary aria-label="Specifier, agent. executes Spec. supports Plan. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Specifier</span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="planner" data-role="roles/planner">
-          <summary aria-label="Planner, agent. executes Plan. supports Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Planner</span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="controller" data-role="roles/controller">
-          <summary aria-label="Controller, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Controller</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="implementer" data-role="roles/implementer">
-          <summary aria-label="Implementer, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Implementer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="reviewer" data-role="roles/reviewer">
-          <summary aria-label="Reviewer, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="writer" data-role="roles/writer">
-          <summary aria-label="Writer, agent. executes Implement. supports Spec. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Writer</span></span><span></span><span><i class="g su"></i></span><span></span><span><i class="g ex"></i></span><span></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
-        <details id="translator" data-role="roles/translator">
-          <summary aria-label="Translator, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Translator</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
-          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
-        </details>
+      <div class="lbl">The surfaces</div>
+      <!-- surfaces:start -->
+      <div class="lineage" id="lineage">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+        <div class="ln-model" id="lnmodel"><div class="lbl">The model</div><div class="nm">mental-model</div><div class="at mono">@db44174</div></div>
+        <ul class="ln-groups">
+          <li class="ln-group hand">
+            <div class="ln-maker" data-maker="hand"><svg class="mk hand" aria-hidden="true"><use href="#m-hand"/></svg><span class="who"><span>The owner</span><span class="how">by hand</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="linkedin-profile" data-id="surfaces/linkedin-profile" data-maker="hand" aria-pressed="false" aria-controls="lnpanel"><span class="nm">LinkedIn profile</span><span class="host">linkedin.com/in/robertblust</span></button></li>
+            </ul>
+          </li>
+          <li class="ln-group">
+            <div class="ln-maker" data-maker="https://github.com/robertblust/mcp-blust-ch"><svg class="mk build" aria-hidden="true"><use href="#m-build"/></svg><span class="who">mcp-blust-ch<span class="how">build</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="mcp-registry-listing" data-id="surfaces/mcp-registry-listing" data-maker="https://github.com/robertblust/mcp-blust-ch" aria-pressed="false" aria-controls="lnpanel"><span class="nm">MCP Registry listing</span><span class="host">registry.modelcontextprotocol.io/v0/servers</span></button></li>
+              <li><button class="ln-s" type="button" id="mcp-blust-ch-mcp-server" data-id="surfaces/mcp-blust-ch-mcp-server" data-maker="https://github.com/robertblust/mcp-blust-ch" aria-pressed="false" aria-controls="lnpanel"><span class="nm">mcp.blust.ch MCP server</span><span class="host">mcp.blust.ch/mcp</span></button></li>
+            </ul>
+          </li>
+          <li class="ln-group">
+            <div class="ln-maker" data-maker="https://github.com/robertblust/robertblust.github.io"><svg class="mk build" aria-hidden="true"><use href="#m-build"/></svg><span class="who">robertblust.github.io<span class="how">build</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="blust-ch-website" data-id="surfaces/blust-ch-website" data-maker="https://github.com/robertblust/robertblust.github.io" aria-pressed="false" aria-controls="lnpanel"><span class="nm">blust.ch website</span><span class="host">blust.ch</span></button></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
-      <dl class="phases">
-        <dt><span class="phnum">01</span><span class="phname">Shape</span></dt>
-        <dd>Decide what kind of change this is, and how much of it gets written down.</dd>
-        <dt><span class="phnum">02</span><span class="phname">Spec</span></dt>
-        <dd>Write what the change must do, completely enough that nobody downstream has to guess.</dd>
-        <dt><span class="phnum">03</span><span class="phname">Plan</span></dt>
-        <dd>Cut the approved specification into pieces that can be worked one at a time.</dd>
-        <dt><span class="phnum">04</span><span class="phname">Implement</span></dt>
-        <dd>Make the thing, and let nothing go forward unread.</dd>
-        <dt><span class="phnum">05</span><span class="phname">Integrate</span></dt>
-        <dd>Put the change where it binds, and move everything that names it.</dd>
-      </dl>
-      <!-- team:end -->
-      <p class="figcap" data-de="Eine Zeile zeigt, was ein Sitz über die Arbeit hinweg tut, eine Spalte, wer eine Phase berührt. Die Dreiecksspalte ist das Argument: Jedes Gate im Unternehmen gibt der einzige Mensch darin frei, und keine Agentenzeile trägt eines. Ein Sitz öffnet die Karte, die die Modellseite und der Werdegang bereits zeichnen.">Read a row for what a seat does across the work, and a column for who touches a phase. The triangle column is the argument: every gate in the company is approved by the only human in it, and no agent row carries one. A seat opens onto the card the model page and the timeline already draw.</p>
+      <!-- surfaces:end -->
+      <div class="legend"><span><svg class="ln" aria-hidden="true"><path d="M0 3H28"/></svg> <span>a build, which runs again on the next pin</span></span><span><svg class="ln" aria-hidden="true"><path d="M0 3H28" stroke-dasharray="5 5"/></svg> <span>a person, who reads the rules</span></span></div>
+      <div class="ln-panel" id="lnpanel" aria-live="polite" hidden><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+      <p class="ln-hint" id="lnhint">Choose a surface to follow its line and read its card.</p>
+      <p class="figcap">Every line starts at one commit of the model. A solid line is a build, which runs again on the next pin; the dashed line is a person, who reads the rules and writes the surface by hand.</p>
     </section>
 
     <section>
-      <h2 data-de="Wie man es liest">How to read it</h2>
+      <h2>How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Ein Sitz ist eine Rolle, keine Person.</b> Das Modell beschreibt, was ein Sitz nimmt, produziert und niemals tut; ein Profil hält ihn. Sitze und Personen werden nicht gleichgesetzt: Hier hält ein Profil einen Sitz und eines sieben.">
-          <b>A seat is a role, not a person.</b> The model says what a seat takes, produces and never does; a profile holds it. Seats and people are not the same count — here one profile holds one seat and one holds seven.</p>
-        <p data-de="<b>Ein Gate ist das, ohne das eine Phase nicht verlassen wird.</b> Alle fünf gibt derselbe Sitz frei, und dieser Sitz wird von dem einzigen Menschen gehalten.">
-          <b>A gate is what a phase cannot be left without.</b> All five are approved by the same seat, and that seat is held by the only human.</p>
-        <p data-de="<b>Kein Zeichen ist getippt.</b> Jede Zelle wird aus der Phasendatei selbst gelesen, daher kann die Tafel dem Prozess, den sie zeichnet, nicht widersprechen.">
-          <b>No mark is typed.</b> Every cell is read off the phase's own file, so the board cannot disagree with the process it draws.</p>
+        <p><b>A surface is a page, not a place.</b> The model holds a LinkedIn profile, not LinkedIn. The place is where the owner can be reached; the surface is what that page shows and how it is made.</p>
+        <p><b>Written or built says where the rules are kept.</b> A written surface keeps its projection rules in the model, because nothing re-runs a person. A built surface names the repository whose build writes it, and the rules are that build.</p>
+        <p><b>No line is typed.</b> Each surface sits under the maker its own file names, so the drawing cannot disagree with the model.</p>
       </div>
     </section>
 
@@ -1100,10 +1032,10 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Team – Robert Blust",
-         desc:"Die zwei Profile des Modells und die acht Sitze dazwischen: wer welche Phase des Lieferprozesses ausführt, wer sie unterstützt und wer ihr Gate freigibt." },
-    en:{ title:"Team — Robert Blust",
-         desc:"The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate." }
+    de:{ title:"Surfaces – Robert Blust",
+         desc:"Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build." },
+    en:{ title:"Surfaces — Robert Blust",
+         desc:"Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build." }
   };
 
   function applyLang(){
@@ -1150,62 +1082,84 @@
 
 <script src="../card.js"></script>
 <script>
-// The seats are in the markup; the cards are not. Eight cards at rest would be eight copies of
-// the model's own words in a page that already serves the model as a file, and this site's
-// checks read the body at rest. So a card is rendered the first time its row opens, and again
-// when the language has changed since — the way the timeline renders an experience and the
-// stage renders a card on focus.
+// The nodes are in the markup; the lines and the cards are not. A line is drawn from where two
+// nodes landed, which only the browser knows, and says nothing the nesting of the lists does not.
+// A card is rendered when its surface is chosen and again when the language changes, as a seat's
+// card is on /team/.
 (function(){
+  var box = document.getElementById("lineage"), svg = document.getElementById("wires"),
+      model = document.getElementById("lnmodel"), panel = document.getElementById("lnpanel"),
+      hint = document.getElementById("lnhint"),
+      btns = [].slice.call(document.querySelectorAll(".ln-s")), current = null, card = null;
+
+  function at(el){
+    var a = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+    return { l: a.left - b.left, r: a.right - b.left, y: a.top - b.top + a.height / 2 };
+  }
+  function curve(x1, y1, x2, y2){
+    var m = (x1 + x2) / 2;
+    return "M" + x1 + " " + y1 + "C" + m + " " + y1 + " " + m + " " + y2 + " " + x2 + " " + y2;
+  }
+  // Model to each maker, maker to each of its surfaces. The chosen surface's two segments take
+  // --c-path, which is what that token names: the way back to the root.
+  function draw(){
+    if (getComputedStyle(svg).display === "none") return;
+    var on = current && current.getAttribute("data-maker"), out = [], m = at(model);
+    [].forEach.call(document.querySelectorAll(".ln-maker"), function(mk){
+      var key = mk.getAttribute("data-maker"), a = at(mk), cls = key === "hand" ? "hand" : "";
+      out.push('<path class="' + cls + (on === key ? " on" : "") + '" d="' + curve(m.r, m.y, a.l - 8, a.y) + '"/>');
+      var right = at(mk.querySelector(".who")).r + 10;
+      btns.forEach(function(b){
+        if (b.getAttribute("data-maker") !== key) return;
+        var s = at(b);
+        out.push('<path class="' + cls + (b === current ? " on" : "") + '" d="' + curve(right, a.y, s.l, s.y) + '"/>');
+      });
+    });
+    svg.innerHTML = out.join("");
+  }
   function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
-  rbCard.data("team", function (data) {
+  function show(){
+    if (!current || !card) return;
+    card(current.getAttribute("data-id"));
+  }
+  function select(b, address){
+    current = b;
+    btns.forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+    panel.hidden = !b; hint.hidden = !!b;
+    show();
+    if (address) history.replaceState(null, "", b ? "#" + b.id : location.pathname + location.search);
+    draw();
+  }
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){ select(current === b ? null : b, true); });
+  });
+  // A link must land: arriving on /surfaces/#linkedin-profile chooses that surface.
+  function fromHash(){
+    var b = document.getElementById(location.hash.slice(1));
+    if (b && b.classList.contains("ln-s")) select(b, false);
+  }
+  window.addEventListener("hashchange", fromHash);
+  window.addEventListener("resize", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  new MutationObserver(function(){ show(); draw(); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+  fromHash();
+  draw();
+
+  rbCard.data("surfaces", function (data) {
     var byId = {};
     data.entities.forEach(function (e) { byId[e.id] = e; });
-    // The href the timeline already builds: a visitor who clicked a skill wants to read it with
-    // its references around it, and the stage's dialog is where one node is read.
     function goLink(id){
       var a = document.createElement("a");
       a.className = "go"; a.textContent = byId[id].name;
       a.href = "../model/?stage=expanded#" + id;
       return a;
     }
-    var seen = {};
-    function ensure(d){
-      var id = d.getAttribute("data-role"), L = lang();
-      if (seen[id] === L) return;
-      rbCard.render(byId[id], d.querySelector(".cbody"), d.querySelector(".cfoot span"),
-        { data: data, lang: L, link: goLink });
-      seen[id] = L;
-    }
-    var rows = [].slice.call(document.querySelectorAll("#board details"));
-    rows.forEach(function (d) {
-      d.addEventListener("toggle", function(){ if (d.open) ensure(d); });
-    });
-    // A link must land: arriving on /team/#reviewer opens that seat rather than scrolling to a
-    // shut row whose name is all the visitor sees.
-    function fromHash(){
-      var id = location.hash.slice(1); if (!id) return;
-      var d = document.getElementById(id);
-      if (d && d.tagName === "DETAILS") { d.open = true; ensure(d); }
-    }
-    window.addEventListener("hashchange", fromHash);
-    fromHash();
-    // Re-render what is open when the language changes, and leave what is shut alone: a shut
-    // row renders on its next open, in whatever language is current then.
-    new MutationObserver(function(){
-      rows.forEach(function (d) { if (d.open) ensure(d); });
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
-
-    var all = document.getElementById("openall");
-    function label(shut){
-      return shut ? (lang() === "de" ? "Alle schliessen" : "Close all")
-                  : (lang() === "de" ? "Alle öffnen" : "Open all");
-    }
-    all.addEventListener("click", function(){
-      var shut = rows.some(function (d) { return !d.open; });
-      rows.forEach(function (d) { d.open = shut; if (shut) ensure(d); });
-      all.textContent = label(shut);
-      all.setAttribute("data-de", shut ? "Alle schliessen" : "Alle öffnen");
-    });
+    card = function (id) {
+      rbCard.render(byId[id], panel.querySelector(".cbody"), panel.querySelector(".cfoot span"),
+        { data: data, lang: lang(), link: goLink });
+    };
+    show();
   });
 })();
 </script>
