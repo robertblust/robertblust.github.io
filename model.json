@@ -1,5 +1,5 @@
 {
-  "commit": "3bc58c338980721e4321418056bdcbd1476f704a",
+  "commit": "db441743bf7fb952e607f5469ea126240b63a9ed",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -5949,7 +5949,7 @@
       "id": "surfaces/blust-ch-website",
       "type": "surface",
       "name": "blust.ch website",
-      "tagline": "The owner's own site, in English and Swiss German, that a visitor, a search engine or an",
+      "tagline": "The owner's own site, in English and Swiss German, that a visitor, a search engine or an agent reaches at the owner's address, rebuilt from a pinned commit of the model.",
       "fields": {
         "source": "Local",
         "production": "built",
@@ -6000,7 +6000,7 @@
       "id": "surfaces/mcp-blust-ch-mcp-server",
       "type": "surface",
       "name": "mcp.blust.ch MCP server",
-      "tagline": "The server an agent connects to for answers about the owner's work, reading a pinned commit of",
+      "tagline": "The server an agent connects to for answers about the owner's work, reading a pinned commit of the model and adding nothing to it.",
       "fields": {
         "source": "Local",
         "production": "built",
@@ -6021,7 +6021,7 @@
       "id": "surfaces/mcp-registry-listing",
       "type": "surface",
       "name": "MCP Registry listing",
-      "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the",
+      "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the MCP server.",
       "fields": {
         "source": "Local",
         "production": "built",
