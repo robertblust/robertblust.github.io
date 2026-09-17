@@ -252,7 +252,8 @@ test("the board carries one details per seat, with its slug as an address", () =
 test("the note that says why a region does not translate has one home", () => {
   const princ = fs.readFileSync(new URL("./principles.mjs", import.meta.url), "utf8");
   const team = fs.readFileSync(new URL("./team.mjs", import.meta.url), "utf8");
-  for (const [name, src] of [["principles.mjs", princ], ["team.mjs", team]]) {
+  const surf = fs.readFileSync(new URL("./surfaces.mjs", import.meta.url), "utf8");
+  for (const [name, src] of [["principles.mjs", princ], ["team.mjs", team], ["surfaces.mjs", surf]]) {
     assert.match(src, /from "\.\/note\.mjs"/, `${name} does not import the note`);
     assert.ok(!/Generated from the model, so the words below/.test(src),
       `${name} carries its own copy of the note`);
@@ -337,4 +338,74 @@ test("the board is followed by what each phase is, in the model's own words", ()
   // The model's words, so no data-de on them — the note above the board says why.
   const block = html.slice(html.indexOf('<dl class="phases">'));
   assert.ok(!/data-de/.test(block), "a phase tagline carries a translation it should not");
+});
+
+// ── the surfaces lineage ──────────────────────────────────────────────────────────────
+import { writeSurfaces, makersOf, hostOf } from "./surfaces.mjs";
+
+// One written surface and three built by two repositories, deliberately not the real model:
+// this asserts the grouping, and the real model's shape is asserted by pages:check and verify.
+const surface = (slug, name, fields) => ({ id: `surfaces/${slug}`, type: "surface", name, tagline: "t.",
+  path: `model/surfaces/${slug}.md`, fields: { source: "Local", ...fields }, sections: [] });
+const SURFACES_FIXTURE = {
+  ...FIXTURE,
+  repo: "someone/a-model",
+  entities: [
+    surface("zine", "Zine", { production: "written", url: "https://www.example.org/zine/" }),
+    surface("site", "Site", { production: "built", "built-by": "https://github.com/someone/zz-site", url: "https://example.org" }),
+    surface("feed", "feed listing", { production: "built", "built-by": "https://github.com/someone/aa-server", url: "https://example.org/feed?x=1" }),
+    surface("api", "API server", { production: "built", "built-by": "https://github.com/someone/aa-server", url: "https://api.example.org/" }),
+  ],
+};
+
+function renderSurfacesInto(fixture) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-surfaces-"));
+  fs.mkdirSync(path.join(dir, "surfaces"));
+  fs.writeFileSync(path.join(dir, "surfaces/index.html"),
+    "<html><body><p class=\"tagline\">t</p>\n<!-- surfaces-note:start -->\n<!-- surfaces-note:end -->\n" +
+    "<div class=\"lbl\">The surfaces</div>\n<!-- surfaces:start -->\n<!-- surfaces:end --></body></html>");
+  writeSurfaces(fixture, { root: dir });
+  return fs.readFileSync(path.join(dir, "surfaces/index.html"), "utf8");
+}
+
+test("makersOf puts the hand first, then each build by repository", () => {
+  assert.deepEqual(makersOf(SURFACES_FIXTURE).map((m) => m.key),
+    ["hand", "https://github.com/someone/aa-server", "https://github.com/someone/zz-site"]);
+});
+
+test("makersOf groups every surface under the maker its own fields name, sorted by name", () => {
+  const m = makersOf(SURFACES_FIXTURE);
+  assert.deepEqual(m.map((g) => g.surfaces.map((s) => s.name)), [["Zine"], ["API server", "feed listing"], ["Site"]]);
+  assert.equal(m[1].repo, "someone/aa-server");
+});
+
+test("a surface the page cannot place is an error, not a node left out", () => {
+  const f = structuredClone(SURFACES_FIXTURE);
+  f.entities[1].fields.production = "generated";
+  assert.throws(() => makersOf(f), /production this page does not draw: generated/);
+  const g = structuredClone(SURFACES_FIXTURE);
+  delete g.entities[1].fields["built-by"];
+  assert.throws(() => makersOf(g), /is built but names no built-by/);
+});
+
+test("hostOf shows an address without its scheme, www, query or trailing slash", () => {
+  assert.equal(hostOf("https://www.example.org/zine/"), "example.org/zine");
+  assert.equal(hostOf("https://example.org/feed?x=1"), "example.org/feed");
+});
+
+test("each surface is a button with its slug as an address, under its maker", () => {
+  const html = renderSurfacesInto(SURFACES_FIXTURE);
+  assert.equal((html.match(/class="ln-s"/g) || []).length, 4);
+  assert.match(html, /<li class="ln-group hand">/);
+  assert.match(html, /id="api" data-id="surfaces\/api" data-maker="https:\/\/github.com\/someone\/aa-server" aria-pressed="false"/);
+  assert.match(html, /<div class="nm">a-model<\/div>/);
+  assert.ok(html.indexOf('id="zine"') < html.indexOf('id="api"'), "the hand's surfaces do not come first");
+});
+
+test("the surfaces page missing either marker is an error, not a page half-generated", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-surfaces-"));
+  fs.mkdirSync(path.join(dir, "surfaces"));
+  fs.writeFileSync(path.join(dir, "surfaces/index.html"),
+    "<html><body><!-- surfaces:start -->\n<!-- surfaces:end --></body></html>");
+  assert.throws(() => writeSurfaces(SURFACES_FIXTURE, { root: dir }), /surfaces-note:start/);
 });

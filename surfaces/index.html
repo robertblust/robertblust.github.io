@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Timeline — Robert Blust</title>
-<meta id="metadesc" name="description" content="Over twenty-five years in order: every experience in the model as a ledger, each row the file it is read from, at the commit the page names.">
+<title>Surfaces — Robert Blust</title>
+<meta id="metadesc" name="description" content="Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://blust.ch/timeline/">
+<link rel="canonical" href="https://blust.ch/surfaces/">
 
-<meta property="og:title" content="Timeline — Robert Blust">
-<meta property="og:description" content="Over twenty-five years in order: every experience in the model as a ledger, each row the file it is read from, at the commit the page names.">
+<meta property="og:title" content="Surfaces — Robert Blust">
+<meta property="og:description" content="Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Robert Blust">
-<meta property="og:url" content="https://blust.ch/timeline/">
-<meta property="og:image" content="https://blust.ch/timeline/og.png">
+<meta property="og:url" content="https://blust.ch/surfaces/">
+<meta property="og:image" content="https://blust.ch/surfaces/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Over 25 years, in order.">
+<meta property="og:image:alt" content="One model, every surface.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="de_CH">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,9 +71,9 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://blust.ch/timeline/#webpage",
-      "name": "Timeline",
-      "url": "https://blust.ch/timeline/",
+      "@id": "https://blust.ch/surfaces/#webpage",
+      "name": "Surfaces",
+      "url": "https://blust.ch/surfaces/",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://blust.ch/#website"
@@ -82,12 +82,12 @@
         "@id": "https://blust.ch/#model"
       },
       "breadcrumb": {
-        "@id": "https://blust.ch/timeline/#breadcrumb"
+        "@id": "https://blust.ch/surfaces/#breadcrumb"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://blust.ch/timeline/#breadcrumb",
+      "@id": "https://blust.ch/surfaces/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -98,8 +98,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Timeline",
-          "item": "https://blust.ch/timeline/"
+          "name": "Surfaces",
+          "item": "https://blust.ch/surfaces/"
         }
       ]
     }
@@ -589,11 +589,6 @@
 
 </style>
 <style>
-  .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
-  .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem)}
-  .value .tagline{margin-top:.5rem; color:var(--c-firm); max-width:62ch}
-  .value p{margin-top:.9rem; color:var(--dim); max-width:70ch; line-height:1.6}
   /* ─── stage contract · v2 · shared ───────────────────────────────────
      `stage.css` styles the drawing, the card and the dialog, and says in its own header that
      the page keeps `.figure-section`, `.figcap` and its prose. This is that remainder: the few
@@ -624,6 +619,74 @@
   .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
            letter-spacing:.06em; color:var(--dim)}
   /* ─── end stage contract ────────────────────────────────────────────────── */
+  .lbl{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.66rem;
+       letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  .mk{width:1.05em; height:1.05em; flex:none; vertical-align:-.16em}
+  .mk.hand{color:var(--c-firm)}
+  .mk.build{color:var(--c-mid)}
+
+  /* The lineage. Three columns on a wide screen — the model, the makers, the surfaces — laid out
+     by nesting, so the markup is the tree the drawing shows and a reader with no CSS gets the
+     same order. The wires sit behind it and are drawn by the page from where the nodes landed. */
+  .lineage{position:relative; display:grid; grid-template-columns:minmax(0,13rem) minmax(0,1fr);
+           column-gap:clamp(3rem,7vw,6rem); align-items:center; margin-top:1.4rem}
+  .wires{position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none}
+  .wires path{fill:none; stroke:var(--rule); stroke-width:1.5; transition:stroke .2s ease}
+  .wires path.hand{stroke-dasharray:5 5}
+  /* --c-path is the token for exactly this: the way back to the root from what is focused. */
+  .wires path.on{stroke:var(--c-path); stroke-width:2}
+  .ln-model{position:relative; padding:1.1rem 1.2rem; border:1.5px solid var(--c-firm); border-radius:10px;
+            background:var(--raise)}
+  .ln-model .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:800;
+                font-size:clamp(1.2rem,2vw,1.5rem); letter-spacing:-.02em; line-height:1.05; margin-top:.35rem}
+  .ln-model .at{font-size:.78rem; color:var(--c-mid); margin-top:.3rem}
+  .ln-groups, .ln-surfaces{list-style:none}
+  .ln-groups{display:grid; gap:2.2rem}
+  .ln-group{display:grid; grid-template-columns:minmax(0,12rem) minmax(0,1fr);
+            column-gap:clamp(2.5rem,6vw,5rem); align-items:center}
+  .ln-maker{position:relative; display:flex; gap:.6rem; align-items:center; padding:.5rem 0}
+  .ln-maker .mk{width:1.5rem; height:1.5rem}
+  .ln-maker .who{font-weight:600; font-size:.92rem; line-height:1.25}
+  .ln-maker .how{display:block; font-size:.76rem; color:var(--dim); font-weight:400}
+  .ln-surfaces{display:grid; grid-template-columns:minmax(0,1fr); gap:.6rem}
+  .ln-surfaces li{min-width:0}
+  .ln-s{position:relative; width:100%; text-align:left; font:inherit; color:var(--ink); cursor:pointer;
+        display:flex; flex-direction:column; gap:.1rem; padding:.7rem .95rem;
+        background:var(--ground); border:1px solid var(--rule); border-radius:8px;
+        transition:border-color .15s ease, background-color .15s ease}
+  .ln-s:hover{border-color:var(--c-mid)}
+  .ln-s:focus-visible{outline:2px solid var(--c-mid); outline-offset:2px}
+  .ln-s .nm{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; font-weight:700; font-size:1.02rem}
+  /* An address, so mono: it is a record value, not prose. */
+  .ln-s .host{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.72rem; color:var(--dim);
+              overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .ln-s[aria-pressed="true"]{border-color:var(--c-path); background:var(--press)}
+  .ln-s[aria-pressed="true"] .nm{color:var(--c-firm)}
+  .legend{display:flex; gap:.6rem 1.5rem; flex-wrap:wrap; margin-top:1.4rem; color:var(--dim); font-size:.76rem}
+  .legend > span{display:flex; align-items:center; gap:.5rem}
+  .legend svg.ln{width:28px; height:6px; flex:none}
+  .legend svg.ln path{stroke:var(--dim); stroke-width:1.5}
+  .ln-hint{margin-top:1.6rem; font-size:.82rem; color:var(--dim)}
+  /* Full width, like a seat's card on /team/: a References table needs the width. */
+  .ln-panel{margin-top:1.6rem}
+  .ln-panel .card{width:100%}
+  .cbody p, .cbody ul.prose{max-width:72ch}
+
+  .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
+  .rules p{color:var(--dim); font-size:1rem}
+  .rules p b{font-weight:600; color:var(--ink)}
+  @media (prefers-reduced-motion: reduce){ .wires path, .ln-s{transition:none} }
+  /* No room for three columns: the drawing becomes the tree it already is, its lines drawn as
+     rules — dashed under the hand, as the wire is. */
+  @media (max-width:760px){
+    .wires{display:none}
+    .lineage{grid-template-columns:minmax(0,1fr); row-gap:0}
+    .ln-model{justify-self:start}
+    .ln-groups{gap:0; margin-left:1rem; padding:1.2rem 0 0 1.1rem; border-left:1.5px solid var(--rule)}
+    .ln-group{grid-template-columns:minmax(0,1fr); padding-bottom:1.2rem}
+    .ln-surfaces{margin-left:.7rem; padding-left:1rem; border-left:1.5px solid var(--rule)}
+    .ln-group.hand .ln-surfaces{border-left-style:dashed}
+  }
 </style>
 <link rel="stylesheet" href="../stage.css">
 <!-- The model this page draws. The stage and the ledger both find it by the data-stage
@@ -635,6 +698,20 @@
 
 <body>
 
+<!-- The two ways a surface is made, as form rather than as colour, the way /team/ tells a human
+     from an agent: a filled pen for the hand, an outlined build for the machine. tokens.css
+     allows one hue at four brightnesses and refuses a second in writing. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="m-hand" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M8 .8l5.4 6.3-2.9 8.1H5.5L2.6 7.1zM8 7.2a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7z"/>
+  </symbol>
+  <symbol id="m-build" viewBox="0 0 16 16">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1.8" y="1.8" width="12.4" height="12.4" rx="2.8"/><path d="M6.4 5.6L4.2 8l2.2 2.4M9.6 5.6L11.8 8 9.6 10.4"/>
+    </g>
+  </symbol>
+</defs></svg>
+
 <div class="shell">
   <header>
     <div class="bar">
@@ -642,11 +719,11 @@
       <nav>
         <div class="navlinks" id="navlinks">
           <a href="../team/">Team</a>
-          <a href="../surfaces/">Surfaces</a>
+          <a href="./" aria-current="page">Surfaces</a>
           <a href="../ideas/" data-de="Ideen">Ideas</a>
           <a href="../principles/" data-de="Prinzipien">Principles</a>
           <a href="../model/" data-de="Modell">Model</a>
-          <a href="./" aria-current="page" data-de="Werdegang">Timeline</a>
+          <a href="../timeline/" data-de="Werdegang">Timeline</a>
           <a href="../talks/" data-de="Vorträge">Talks</a>
         </div>
         <button class="burger" id="burger" type="button" aria-expanded="false"
@@ -664,37 +741,58 @@
   <div class="shell">
 
     <div class="title">
-      <h1 data-de="<span class='r70'>Über 25 Jahre,</span><span class='rcl'><em>der Reihe nach</em>.</span>"><span class="r70">Over 25 years,</span><span class="rcl"><em>in order</em>.</span></h1>
-      <p class="tagline" data-de="Jede Erfahrung im Modell, in der Reihenfolge, in der sie begann – Rollen, Projekte, Vorträge und Abschlüsse, und was jeweils während welcher Periode lief. Gelesen aus denselben Dateien wie das Modell, am selben Commit.">Every experience in the model, in the order it began — roles, projects, talks and qualifications, and what ran during what. Read from the same files as the model, at the same commit.</p>
-      <p class="note" data-de="Nichts davon wurde für diese Seite geschrieben: Jeder Eintrag ist die Datei im Modell, beim Commit, der unter der Liste steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig.">Nothing here was written for this page: every entry is the file in the model, at the commit named under the list — in the one language the model is written in. The rest of this page is bilingual.</p>
+      <h1 data-de="<span class='r70'>Ein Modell,</span><span class='rcl'>jede <em>Surface</em>.</span>"><span class="r70">One model,</span><span class="rcl">every <em>surface</em>.</span></h1>
+      <p class="tagline" data-de="Jeder Ort, an dem das Modell veröffentlicht wird, und wie er aus ihm entsteht: von Hand oder durch einen Build, der einen gepinnten Commit liest.">Every place the model is published, and how each is made from it: by hand, or by a build that reads a pinned commit.</p>
+      <!-- surfaces-note:start -->
+      <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
+    <!-- surfaces-note:end -->
     </div>
 
     <section class="figure-section">
-      <div class="stagehead" id="stagehead">
-        <p class="path mono" id="path"></p>
-        <div class="right">
-          <details class="kinds" id="kinds"><summary id="kindslabel">All kinds</summary><div class="menu" id="kindsmenu"></div></details>
-          <button type="button" class="expand" id="openall" aria-pressed="false">Open all</button>
-        </div>
+      <div class="lbl" data-de="Die Surfaces">The surfaces</div>
+      <!-- surfaces:start -->
+      <div class="lineage" id="lineage">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+        <div class="ln-model" id="lnmodel"><div class="lbl" data-de="Das Modell">The model</div><div class="nm">mental-model</div><div class="at mono">@db44174</div></div>
+        <ul class="ln-groups">
+          <li class="ln-group hand">
+            <div class="ln-maker" data-maker="hand"><svg class="mk hand" aria-hidden="true"><use href="#m-hand"/></svg><span class="who"><span data-de="Der Owner">The owner</span><span class="how" data-de="von Hand">by hand</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="linkedin-profile" data-id="surfaces/linkedin-profile" data-maker="hand" aria-pressed="false" aria-controls="lnpanel"><span class="nm">LinkedIn profile</span><span class="host">linkedin.com/in/robertblust</span></button></li>
+            </ul>
+          </li>
+          <li class="ln-group">
+            <div class="ln-maker" data-maker="https://github.com/robertblust/mcp-blust-ch"><svg class="mk build" aria-hidden="true"><use href="#m-build"/></svg><span class="who">mcp-blust-ch<span class="how" data-de="Build">build</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="mcp-registry-listing" data-id="surfaces/mcp-registry-listing" data-maker="https://github.com/robertblust/mcp-blust-ch" aria-pressed="false" aria-controls="lnpanel"><span class="nm">MCP Registry listing</span><span class="host">registry.modelcontextprotocol.io/v0/servers</span></button></li>
+              <li><button class="ln-s" type="button" id="mcp-blust-ch-mcp-server" data-id="surfaces/mcp-blust-ch-mcp-server" data-maker="https://github.com/robertblust/mcp-blust-ch" aria-pressed="false" aria-controls="lnpanel"><span class="nm">mcp.blust.ch MCP server</span><span class="host">mcp.blust.ch/mcp</span></button></li>
+            </ul>
+          </li>
+          <li class="ln-group">
+            <div class="ln-maker" data-maker="https://github.com/robertblust/robertblust.github.io"><svg class="mk build" aria-hidden="true"><use href="#m-build"/></svg><span class="who">robertblust.github.io<span class="how" data-de="Build">build</span></span></div>
+            <ul class="ln-surfaces">
+              <li><button class="ln-s" type="button" id="blust-ch-website" data-id="surfaces/blust-ch-website" data-maker="https://github.com/robertblust/robertblust.github.io" aria-pressed="false" aria-controls="lnpanel"><span class="nm">blust.ch website</span><span class="host">blust.ch</span></button></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <ol class="ledger" id="ledger" aria-label="Every experience, in the order it began" data-de-aria="Jede Erfahrung, in der Reihenfolge ihres Beginns"></ol>
-      <p class="stagehint" data-de="Ein Klick auf einen Eintrag öffnet die Details an Ort und Stelle · die Adresse merkt sich den zuletzt geöffneten">Click an entry to open its card in place · the address remembers the last one opened</p>
-      <p class="figcap" data-de="Die Jahre links sind die Spanne eines Eintrags; die Zeile unter dem Namen nennt seine Art, wo er stattfand und seine genaue Zeit. Die Form auf der Linie ist die Art: <span class='glyph k-role' role='img' aria-label='ein gefülltes Quadrat'></span> eine Rolle, <span class='glyph k-independent' role='img' aria-label='ein leeres Quadrat'></span> eine unabhängige Zeit, <span class='glyph k-project' role='img' aria-label='eine Raute'></span> ein Projekt, <span class='glyph k-community' role='img' aria-label='ein Kreis'></span> Community-Arbeit, <span class='glyph k-education' role='img' aria-label='ein Dreieck'></span> eine Ausbildung. Ein Eintrag, der unter einer Rolle oder einer unabhängigen Zeit <b>eingerückt</b> ist, begann, während sie lief.">The years on the left are the span of an entry; the line under its name is its kind, where it was done and its exact period. The shape on the line is the kind: <span class="glyph k-role" role="img" aria-label="a filled square"></span> a role, <span class="glyph k-independent" role="img" aria-label="a hollow square"></span> an independent period, <span class="glyph k-project" role="img" aria-label="a diamond"></span> a project, <span class="glyph k-community" role="img" aria-label="a circle"></span> community work, <span class="glyph k-education" role="img" aria-label="a triangle"></span> education. An entry <b>indented</b> under a role or an independent period began while it ran.</p>
+      <!-- surfaces:end -->
+      <div class="legend"><span><svg class="ln" aria-hidden="true"><path d="M0 3H28"/></svg> <span data-de="ein Build, der beim nächsten Pin erneut läuft">a build, which runs again on the next pin</span></span><span><svg class="ln" aria-hidden="true"><path d="M0 3H28" stroke-dasharray="5 5"/></svg> <span data-de="eine Person, die die Regeln liest">a person, who reads the rules</span></span></div>
+      <div class="ln-panel" id="lnpanel" aria-live="polite" hidden><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+      <p class="ln-hint" id="lnhint" data-de="Wählen Sie eine Surface, um ihrer Linie zu folgen und ihre Karte zu lesen.">Choose a surface to follow its line and read its card.</p>
+      <p class="figcap" data-de="Jede Linie beginnt bei einem Commit des Modells. Eine durchgezogene Linie ist ein Build, der beim nächsten Pin erneut läuft; die gestrichelte Linie ist eine Person, die die Regeln liest und die Surface von Hand schreibt.">Every line starts at one commit of the model. A solid line is a build, which runs again on the next pin; the dashed line is a person, who reads the rules and writes the surface by hand.</p>
     </section>
 
     <section>
       <h2 data-de="Wie man es liest">How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Fünf Arten, und die Art sagt, was ein Eintrag ist.</b> Rolle, Projekt, Community, Ausbildung und Unabhängig sind die Erfahrungsarten des Modells, so wie das Modell sie definiert: Eine Rolle ist eine Position, ein Projekt eine Lieferung in einer Rolle oder neben ihr, Community ist Arbeit in der Öffentlichkeit: ein Vortrag, ein Mandat, eine Arbeitsgruppe, ein veröffentlichter Fall.">
-          <b>Five kinds, and the kind says what an entry is.</b> Role, Project, Community, Education and Independent are the model’s experience kinds, as the model defines them: a role is a position, a project is a delivery inside a role or beside one, community is work done in public: a talk, a seat, a working group, a published case.</p>
-        <p data-de="<b>Die Reihenfolge ist der Beginn, die Einrückung das Während.</b> Ein Vortrag ist ein Tag, ein Vorstandssitz sind Jahre, und beides ist Community-Arbeit, weil das Publikum sie dazu macht, nicht die Dauer. Was ein Eintrag unter einer Rolle oder einer unabhängigen Zeit sagt, ist nur, dass er begann, während sie lief; wer ihn beauftragt hat, steht in seiner Karte.">
-          <b>The order is the beginning, the indent is the during.</b> A talk is a day, a board seat is years, and both are community work because the audience makes them so, not the duration. What an entry under a role or an independent period says is only that it began while it ran; who commissioned it is in its card.</p>
-        <p data-de="<b>Eine Karte ist die Datei, nicht ein Auszug daraus.</b> Art, Anfang, Ende, Organisation und Fähigkeiten stehen so da, wie die Datei sie schreibt; die Erfolge sind ihre Liste; der Link am Fuss führt zu ihr, beim Commit, den diese Seite zeigt. Ein Datum, das hier falsch ist, ist dort falsch, und wird dort korrigiert.">
-          <b>A card is the file, not an excerpt of it.</b> Kind, start, end, organization and skills read as the file writes them; the achievements are its list; the link at the foot goes to it, at the commit this page shows. A date wrong here is wrong there, and is corrected there.</p>
+        <p data-de="<b>Eine Surface ist eine Seite, kein Ort.</b> Das Modell enthält ein LinkedIn-Profil, nicht LinkedIn. Über den Ort ist der Owner erreichbar; die Surface ist das, was diese Seite zeigt, und wie sie entsteht."><b>A surface is a page, not a place.</b> The model holds a LinkedIn profile, not LinkedIn. The place is where the owner can be reached; the surface is what that page shows and how it is made.</p>
+        <p data-de="<b>Geschrieben oder gebaut: Das sagt, wo die Regeln stehen.</b> Bei einer geschriebenen Surface stehen die Projektionsregeln im Modell, denn eine Person lässt sich nicht erneut ausführen. Eine gebaute Surface nennt das Repository, dessen Build sie schreibt, und die Regeln sind dieser Build."><b>Written or built says where the rules are kept.</b> A written surface keeps its projection rules in the model, because nothing re-runs a person. A built surface names the repository whose build writes it, and the rules are that build.</p>
+        <p data-de="<b>Keine Linie ist getippt.</b> Jede Surface steht unter dem Urheber, den ihre eigene Datei nennt, daher kann das Diagramm dem Modell nicht widersprechen."><b>No line is typed.</b> Each surface sits under the maker its own file names, so the drawing cannot disagree with the model.</p>
       </div>
     </section>
 
-    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model/profiles/robert-blust/experiences" href="https://github.com/robertblust/mental-model/tree/HEAD/model/profiles/robert-blust/experiences">robertblust/mental-model</a>@<span id="srccommit">HEAD</span> <span data-de="–">—</span> <span id="srccount">0</span> <span data-de="Dateien unter">files under</span> <code class="mono">model/profiles/robert-blust/experiences/</code>, <span data-de="dasselbe Repository, aus dem die Modell-Seite gezeichnet wird, und eine Instanz von">the same repository the model page is drawn from, and an instance of</span> <a href="https://companygraph.io/">CompanyGraph</a>.</p>
+    <p class="derived"><span data-de="Erzeugt aus">Generated from</span> <a id="srclink" data-src="model" href="https://github.com/robertblust/mental-model/tree/HEAD/model">robertblust/mental-model</a>@<span id="srccommit">HEAD</span></p>
 
   </div>
 </main>
@@ -934,10 +1032,10 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"Werdegang – Robert Blust",
-         desc:"Über fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
-    en:{ title:"Timeline — Robert Blust",
-         desc:"Over twenty-five years in order: every experience in the model as a ledger, each row the file it is read from, at the commit the page names." }
+    de:{ title:"Surfaces – Robert Blust",
+         desc:"Jeder Ort, an dem das Modell veröffentlicht wird, und wie er aus ihm entsteht: von Hand geschrieben oder vom Build eines Repositorys aus einem gepinnten Commit gebaut." },
+    en:{ title:"Surfaces — Robert Blust",
+         desc:"Every place the model is published, and how each is made from it: written by hand, or built from a pinned commit by a repository's build." }
   };
 
   function applyLang(){
@@ -984,257 +1082,89 @@
 
 <script src="../card.js"></script>
 <script>
-// The ledger: every experience in the block as one row, in the order it began, opening into
-// the card card.js draws. This page's own, not the package's — one site has a ledger — but
-// it draws no card and formats no date itself; rbCard does both, so a row here and a node on
-// the model page can never read differently.
-function rbLedger(data) {
-  var repo = data.repo || "robertblust/mental-model";
-  var src = document.getElementById("srclink");
-  src.href = "https://github.com/" + repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
-  document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
-
-  function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
-  var STR = {
-    entries: { en:"entries",   de:"Einträge" },
-    of:      { en:"of",        de:"von" },
-    // the counted form after "of": "12 of 35 entries" — German declines the noun there
-    ofEntries:{ en:"entries",  de:"Einträgen" },
-    open:    { en:"Open all",  de:"Alle öffnen" },
-    close:   { en:"Close all", de:"Alle schliessen" },
-    today:   { en:"today",     de:"heute" },
-    allKinds:{ en:"All kinds", de:"Alle Erfahrungsarten" },
-    noKind:  { en:"No kind",   de:"Keine Erfahrungsart" },
-    kinds:   { en:"kinds",     de:"Erfahrungsarten" },
-    showAll: { en:"Show all kinds", de:"Alle Erfahrungsarten zeigen" },
-    allOff:  { en:"Every kind is off. ", de:"Alle Erfahrungsarten sind ausgeschaltet. " },
-    kindsOf: { en:"Which kinds the ledger shows", de:"Welche Erfahrungsarten die Liste zeigt" }
-  };
-  function t(k){ return STR[k][lang()]; }
-  function h(tag, text, cls){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-
-  // A date's place on the line, in days. A start is the first day it names; an end is the
-  // day after the last day it names, so 2001-03 ends where 2001-04 begins and two adjacent
-  // roles touch without overlapping. No kind decides how a date is read; the schema says so.
-  function day(v, endSide){
-    var m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(v || "");
-    if (!m) return endSide ? Infinity : 0;
-    var y = +m[1], mo = m[2] ? +m[2] : 1, d = m[3] ? +m[3] : 1;
-    if (!endSide) return Date.UTC(y, mo - 1, d);
-    if (m[3]) return Date.UTC(y, mo - 1, d + 1);
-    if (m[2]) return Date.UTC(y, mo, 1);
-    return Date.UTC(y + 1, 0, 1);
-  }
-  var byId = {}; data.entities.forEach(function(e){ byId[e.id] = e; });
-  var rows = data.entities.filter(function(e){ return e.type === "experience" && e.stamp; })
-    .map(function(e){ return { e: e, s: day(e.stamp.start), t: e.stamp.end ? day(e.stamp.end, true) : Infinity }; })
-    .sort(function(a, b){ return a.s - b.s || a.t - b.t; });
-  // The track: a role or an independent period, the two kinds that are a stretch of time
-  // with things inside it. The stylesheet draws both a size up; the indent reads both.
-  function isTrack(r){ return r.e.stamp.kind === "Role" || r.e.stamp.kind === "Independent"; }
-  var tracks = rows.filter(isTrack);
-  // One level, never more: the fact the indent states is "began while that track ran".
-  function level(r){
-    if (isTrack(r)) return 0;
-    for (var i = 0; i < tracks.length; i++) if (tracks[i].s <= r.s && r.s < tracks[i].t) return 1;
-    return 0;
-  }
-  function stem(e){ return e.id.slice(e.id.lastIndexOf("/") + 1); }
-  function yearsOf(st){
-    // The gutter is years only; rbCard writes the dash and the word for an open end, so the
-    // gutter reads the way the stamp does, in the page's language.
-    return rbCard.fmtPeriod({ start: st.start.slice(0, 4), end: st.end ? st.end.slice(0, 4) : "" }, lang());
-  }
-  function metaOf(e){
-    var parts = [e.stamp.kind, e.fields.organization, rbCard.fmtPeriod(e.stamp, lang())];
-    return parts.filter(function(x){ return x; }).join(" · ");
-  }
-  // A resolved reference in a card — a skill — leaves for the model page, which reads the
-  // hash on load and focuses that node, and opens the stage expanded because the address
-  // asks it to: a visitor who clicked a skill wants to read it with its references around it.
-  function goLink(id){ var a = h("a", byId[id].name, "go"); a.href = "../model/?stage=expanded#" + id; return a; }
-
-  var ol = document.getElementById("ledger"), pathLine = document.getElementById("path"),
-      openAll = document.getElementById("openall");
-  var built = rows.map(function(r){
-    var e = r.e, lvl = level(r), li = h("li", null, "k-" + e.stamp.kind.toLowerCase() + (lvl ? " under" : ""));
-    li.style.setProperty("--lvl", lvl);
-    var d = h("details"); d.id = stem(e);
-    var sum = h("summary");
-    var when = h("span", null, "when"), mark = h("span", null, "mark"), what = h("span", null, "what");
-    // Both forms in the markup, the stylesheet showing one: the range where the column has
-    // room, the start year alone where it has not.
-    when.appendChild(h("span", null, "range")); when.appendChild(h("span", null, "start"));
-    mark.setAttribute("aria-hidden", "true");
-    what.appendChild(h("span", e.name, "name"));
-    what.appendChild(h("span", null, "meta"));
-    sum.appendChild(when); sum.appendChild(mark); sum.appendChild(what);
-    var body = h("div", null, "body"), card = h("div", null, "card"),
-        cbody = h("div", null, "cbody"), cfoot = h("div", null, "cfoot"), cfootLink = h("span");
-    cfoot.appendChild(cfootLink); card.appendChild(cbody); card.appendChild(cfoot); body.appendChild(card);
-    d.appendChild(sum); d.appendChild(body); li.appendChild(d); ol.appendChild(li);
-    return { r: r, li: li, d: d, when: when, meta: what.lastChild, cbody: cbody, cfoot: cfootLink, lang: null };
-  });
-  // A card is rendered the first time its row opens, and again when the language has changed
-  // since — the way the stage renders a card on focus and not before. Thirty-one cards at
-  // rest would be thirty-one copies of the model's own words in the page before anyone asked
-  // for one, and the page's checks read the body at rest.
-  function ensure(b){
-    var L = lang();
-    if (b.lang === L) return;
-    rbCard.render(b.r.e, b.cbody, b.cfoot, { data: data, lang: L, link: goLink });
-    b.lang = L;
-  }
-  // The kind filter: one control beside Open all naming what is shown, opening a list with
-  // a box per kind. The kinds are the block's experience-kind entities, so a kind added to
-  // the model appears here with its count; each is described with the note card.js moves
-  // to it, the kind's name and its one line. A kind off takes its rows out of the ledger
-  // and the rule runs on; the indent of what stays is unchanged, because a project that
-  // began while a role ran still did. The selection is state, not a place: remembered in
-  // the browser like the card's width, never written into the address — and a link to a
-  // row of a kind that is off turns that kind back on, because a link must land.
-  //
-  // A link can still set it. ?kinds= names the kinds to show, by name and in any case,
-  // comma-separated: those are on and the rest off, and the page reads it the way it reads
-  // ?lang= — once, on arrival, then strips it from the address and remembers the selection
-  // as if the menu had been used, so the link hands the visitor a view and nothing they
-  // copy afterwards carries it. A name the model does not know is dropped, and a list naming
-  // no kind at all is ignored whole rather than emptying the ledger.
-  var KINDS = data.entities.filter(function(e){ return e.type === "experience-kind"; })
-    .sort(function(a, b){ return a.name.localeCompare(b.name, "en"); });
-  var KIND_KEY = "timeline-kinds", on = {};
-  KINDS.forEach(function(k){ on[k.name] = true; });
-  try { var saved = JSON.parse(localStorage.getItem(KIND_KEY) || "null"); if (saved) KINDS.forEach(function(k){ if (k.name in saved) on[k.name] = !!saved[k.name]; }); } catch (e) {}
-  var linked = /[?&]kinds=([^&#]*)(&|$)/.exec(location.search), linkedKinds = null;
-  if (linked) {
-    var named = decodeURIComponent(linked[1]).toLowerCase().split(",");
-    var known = KINDS.filter(function(k){ return named.indexOf(k.name.toLowerCase()) >= 0; });
-    if (known.length) { linkedKinds = {}; KINDS.forEach(function(k){ linkedKinds[k.name] = known.indexOf(k) >= 0; }); }
-    try {
-      var q = location.search.replace(/([?&])kinds=[^&#]*(&|$)/, "$1").replace(/[?&]$/, "");
-      history.replaceState(null, "", location.pathname + q + location.hash);
-    } catch (e) {}
-  }
-  var kinds = document.getElementById("kinds"), kindsLabel = document.getElementById("kindslabel"), kindsMenu = document.getElementById("kindsmenu");
-  var none = h("li", null, "none"); none.hidden = true; ol.appendChild(none);
-  var boxes = [];
-  KINDS.forEach(function(k){
-    var l = h("label"), c = h("input"); c.type = "checkbox"; c.checked = on[k.name];
-    c.addEventListener("change", function(){ on[k.name] = c.checked; applyKinds(true); });
-    l.appendChild(c); l.appendChild(h("span", k.name));
-    l.appendChild(h("span", String(rows.filter(function(r){ return r.e.stamp.kind === k.name; }).length), "n"));
-    rbCard.describe(l, k.type, k.name, k.tagline || "");
-    kindsMenu.appendChild(l); boxes.push(c);
-  });
-  var allLine = h("div", null, "all"), allBtn = h("button"); allBtn.type = "button";
-  allBtn.addEventListener("click", function(){ KINDS.forEach(function(k){ on[k.name] = true; }); applyKinds(true); });
-  allLine.appendChild(allBtn); kindsMenu.appendChild(allLine);
-  function shown(){ return built.filter(function(b){ return on[b.r.e.stamp.kind]; }); }
-  function filtered(){ return KINDS.some(function(k){ return !on[k.name]; }); }
-  // Written only when the visitor changes the selection: a page that stored a key on every
-  // visit would leave a mark on a browser that never touched the control.
-  function applyKinds(remember){
-    built.forEach(function(b){ b.li.hidden = !on[b.r.e.stamp.kind]; });
-    none.hidden = shown().length > 0;
-    boxes.forEach(function(c, i){ c.checked = on[KINDS[i].name]; });
-    if (remember) { try { localStorage.setItem(KIND_KEY, JSON.stringify(on)); } catch (e) {} }
-    render();
-  }
-  document.addEventListener("click", function(ev){ if (kinds.open && !kinds.contains(ev.target)) kinds.open = false; });
-  document.addEventListener("keydown", function(ev){ if (ev.key === "Escape" && kinds.open) { kinds.open = false; kinds.firstChild.focus(); } });
-
-  var today = h("li", null, "now"); ol.appendChild(today);
-
-  // Everything in a language: the gutters, the meta lines, the open cards, the path line,
-  // the control and the TODAY line. Built once and rebuilt when <html lang> changes, the way
-  // the stage rebuilds what it draws.
-  function render(){
-    var L = lang();
-    built.forEach(function(b){
-      b.when.firstChild.textContent = yearsOf(b.r.e.stamp);
-      b.when.lastChild.textContent = b.r.e.stamp.start.slice(0, 4);
-      b.meta.textContent = metaOf(b.r.e);
-      if (b.d.open) ensure(b);
-    });
-    var first = rows[0].e.stamp.start.slice(0, 4), now = new Date();
-    var ym = now.getUTCFullYear() + "-" + String(now.getUTCMonth() + 1).replace(/^(\d)$/, "0$1");
-    today.textContent = rbCard.fmtDate(ym, L) + " · " + t("today");
-    pathLine.innerHTML = "";
-    pathLine.appendChild(document.createTextNode("experiences · "));
-    pathLine.appendChild(h("b", filtered() ? shown().length + " " + t("of") + " " + rows.length + " " + t("ofEntries") : rows.length + " " + t("entries")));
-    var sel = KINDS.filter(function(k){ return on[k.name]; });
-    kindsLabel.textContent = sel.length === KINDS.length ? t("allKinds") : sel.length === 0 ? t("noKind")
-                           : sel.length <= 2 ? sel.map(function(k){ return k.name; }).join(", ") : sel.length + " " + t("kinds");
-    kinds.setAttribute("aria-label", t("kindsOf"));
-    allBtn.textContent = t("showAll");
-    none.innerHTML = ""; none.appendChild(document.createTextNode(t("allOff")));
-    var back = h("a", t("showAll")); back.href = "#"; back.addEventListener("click", function(ev){ ev.preventDefault(); allBtn.click(); }); none.appendChild(back);
-    pathLine.appendChild(document.createTextNode(" · " + first + "–" + now.getUTCFullYear()));
-    document.getElementById("srccount").textContent = String(rows.length);
-    ol.setAttribute("aria-label", ol.getAttribute(L === "de" ? "data-de-aria" : "data-en-aria"));
-    syncOpenAll();
-  }
-  ol.setAttribute("data-en-aria", ol.getAttribute("aria-label"));
-
-  function openCount(){ return shown().filter(function(b){ return b.d.open; }).length; }
-  function syncOpenAll(){
-    var v = shown(), all = v.length > 0 && openCount() === v.length;
-    openAll.setAttribute("aria-pressed", String(all));
-    openAll.textContent = all ? t("close") : t("open");
-  }
-  // The address names the last entry opened, so a link can point at one row: opening a row
-  // writes its id without scrolling, closing the last open row clears it, and arriving with
-  // one opens that row and brings it into view.
-  ol.addEventListener("toggle", function(ev){
-    var d = ev.target; if (d.tagName !== "DETAILS") return;
-    if (d.open) built.forEach(function(b){ if (b.d === d) ensure(b); });
-    try {
-      if (d.open) history.replaceState(null, "", "#" + d.id);
-      else if (location.hash === "#" + d.id) history.replaceState(null, "", location.pathname + location.search);
-    } catch (e) {}
-    syncOpenAll();
-  }, true);
-  openAll.addEventListener("click", function(){
-    var open = openAll.getAttribute("aria-pressed") !== "true";
-    shown().forEach(function(b){ b.d.open = open; });
-    // The toggle events are queued; the control reads right at once rather than a tick late.
-    syncOpenAll();
-  });
-  function arrive(){
-    var id = decodeURIComponent(location.hash.slice(1)), d = id && document.getElementById(id);
-    if (d && d.tagName === "DETAILS") {
-      built.forEach(function(b){ if (b.d === d && !on[b.r.e.stamp.kind]) { on[b.r.e.stamp.kind] = true; applyKinds(true); } });
-      d.open = true; d.scrollIntoView({ block: "start" });
-    }
-  }
-  window.addEventListener("hashchange", arrive);
-  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
-
-  if (linkedKinds) { on = linkedKinds; applyKinds(true); } else applyKinds();
-  arrive();
-}
-
-// The page names its model with a <link data-stage> and this reads the same file the stage does,
-// found the same way, so a row here and a node on the model page cannot disagree about which
-// commit they show. It used to read a block inlined into the page — three hundred kilobytes to
-// list thirty-six rows, of a file this site already commits and serves.
-//
-// The throw is deliberate: nothing here reads console output, while an uncaught exception is
-// reported by the suite's pageerror listener on every page. The ledger is called from a timeout
-// so its own errors stay uncaught too, rather than becoming an unhandled rejection nothing sees.
+// The nodes are in the markup; the lines and the cards are not. A line is drawn from where two
+// nodes landed, which only the browser knows, and says nothing the nesting of the lists does not.
+// A card is rendered when its surface is chosen and again when the language changes, as a seat's
+// card is on /team/.
 (function(){
-  var link = document.querySelector("link[data-stage]");
-  if (!link) {
-    throw new Error('timeline: this page names no data. Add <link rel="preload" as="fetch" ' +
-      'href="…" data-stage crossorigin> and rebuild the page.');
+  var box = document.getElementById("lineage"), svg = document.getElementById("wires"),
+      model = document.getElementById("lnmodel"), panel = document.getElementById("lnpanel"),
+      hint = document.getElementById("lnhint"),
+      btns = [].slice.call(document.querySelectorAll(".ln-s")), current = null, card = null;
+
+  function at(el){
+    var a = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+    return { l: a.left - b.left, r: a.right - b.left, y: a.top - b.top + a.height / 2 };
   }
-  fetch(link.href).then(function (res) {
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    return res.json();
-  }).then(function (data) {
-    setTimeout(function () { rbLedger(data); }, 0);
-  }, function (err) {
-    console.error("timeline: could not read " + link.href + " — " + err.message);
+  function curve(x1, y1, x2, y2){
+    var m = (x1 + x2) / 2;
+    return "M" + x1 + " " + y1 + "C" + m + " " + y1 + " " + m + " " + y2 + " " + x2 + " " + y2;
+  }
+  // Model to each maker, maker to each of its surfaces. The chosen surface's two segments take
+  // --c-path, which is what that token names: the way back to the root.
+  function draw(){
+    if (getComputedStyle(svg).display === "none") return;
+    var on = current && current.getAttribute("data-maker"), out = [], m = at(model);
+    [].forEach.call(document.querySelectorAll(".ln-maker"), function(mk){
+      var key = mk.getAttribute("data-maker"), a = at(mk), cls = key === "hand" ? "hand" : "";
+      out.push('<path class="' + cls + (on === key ? " on" : "") + '" d="' + curve(m.r, m.y, a.l - 8, a.y) + '"/>');
+      var right = at(mk.querySelector(".who")).r + 10;
+      btns.forEach(function(b){
+        if (b.getAttribute("data-maker") !== key) return;
+        var s = at(b);
+        out.push('<path class="' + cls + (b === current ? " on" : "") + '" d="' + curve(right, a.y, s.l, s.y) + '"/>');
+      });
+    });
+    svg.innerHTML = out.join("");
+  }
+  function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
+  function show(){
+    if (!current || !card) return;
+    card(current.getAttribute("data-id"));
+  }
+  function select(b, address){
+    current = b;
+    btns.forEach(function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+    panel.hidden = !b; hint.hidden = !!b;
+    show();
+    if (address) history.replaceState(null, "", b ? "#" + b.id : location.pathname + location.search);
+    draw();
+  }
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){ select(current === b ? null : b, true); });
+  });
+  // A link must land: arriving on /surfaces/#linkedin-profile chooses that surface.
+  function fromHash(){
+    var b = document.getElementById(location.hash.slice(1));
+    if (b && b.classList.contains("ln-s")) select(b, false);
+  }
+  window.addEventListener("hashchange", fromHash);
+  window.addEventListener("resize", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  new MutationObserver(function(){ show(); draw(); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+  fromHash();
+  draw();
+
+  rbCard.data("surfaces", function (data) {
+    // The provenance line names the commit this was read from, as the timeline's does; the
+    // markup carries HEAD only until the data arrives.
+    var src = document.getElementById("srclink");
+    src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
+    document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
+    var byId = {};
+    data.entities.forEach(function (e) { byId[e.id] = e; });
+    function goLink(id){
+      var a = document.createElement("a");
+      a.className = "go"; a.textContent = byId[id].name;
+      a.href = "../model/?stage=expanded#" + id;
+      return a;
+    }
+    card = function (id) {
+      rbCard.render(byId[id], panel.querySelector(".cbody"), panel.querySelector(".cfoot span"),
+        { data: data, lang: lang(), link: goLink });
+    };
+    show();
   });
 })();
 </script>
