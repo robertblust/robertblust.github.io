@@ -234,6 +234,12 @@ const CHECKS = {
     const problems = await page.evaluate(async () => {
       const bad = [];
       const rows = [...document.querySelectorAll("#board details")];
+      // The provenance line names the commit the board was read from, not the placeholder.
+      const data = await (await fetch(document.querySelector("link[data-stage]").href)).json();
+      await new Promise((r) => setTimeout(r, 300));
+      const said = document.getElementById("srccommit").textContent.trim();
+      if (said !== data.commit.slice(0, 7)) bad.push(`the provenance line reads @${said}, the block is at ${data.commit.slice(0, 7)}`);
+      if (!document.getElementById("srclink").href.includes("/tree/" + data.commit + "/")) bad.push("the provenance link is not pinned to the block's commit");
       if (rows.length !== 8) bad.push(`the board has ${rows.length} rows, not 8`);
 
       const heads = [...document.querySelectorAll("#board .ghead .phname")].map((e) => e.textContent.trim());
@@ -283,6 +289,10 @@ const CHECKS = {
       const bad = [];
       const data = await (await fetch(document.querySelector("link[data-stage]").href)).json();
       const want = data.entities.filter((e) => e.type === "surface");
+      // The provenance line names the commit the drawing was read from, not the placeholder.
+      const said = document.getElementById("srccommit").textContent.trim();
+      if (said !== data.commit.slice(0, 7)) bad.push(`the provenance line reads @${said}, the block is at ${data.commit.slice(0, 7)}`);
+      if (!document.getElementById("srclink").href.includes("/tree/" + data.commit + "/")) bad.push("the provenance link is not pinned to the block's commit");
       const btns = [...document.querySelectorAll("#lineage .ln-s")];
       if (btns.length !== want.length) bad.push(`the drawing has ${btns.length} surfaces, the model ${want.length}`);
       for (const s of want) {

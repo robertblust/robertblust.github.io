@@ -1147,6 +1147,11 @@
   draw();
 
   rbCard.data("surfaces", function (data) {
+    // The provenance line names the commit this was read from, as the timeline's does; the
+    // markup carries HEAD only until the data arrives.
+    var src = document.getElementById("srclink");
+    src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
+    document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
     var byId = {};
     data.entities.forEach(function (e) { byId[e.id] = e; });
     function goLink(id){
