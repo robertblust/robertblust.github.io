@@ -32,6 +32,8 @@ const PAGES = ["index.html", "ideas/index.html", "model/index.html", "principles
 // places the person maintains and the identity's are the places the company does, and sameAs on
 // a Person node is a claim about the person. Where the two tables differ, the subjects differ;
 // that is not drift, and nothing here reconciles them.
+// The site's own address is left out: the Person node states it as `url`, and sameAs names the
+// other places that are the same person, which the site itself is not.
 export function alsoAt(data) {
   const root = data.entities.find((e) => e.id === data.rootId);
   if (!root) throw new Error("the model has no entity at its rootId");
@@ -41,7 +43,8 @@ export function alsoAt(data) {
     .filter((s) => s.heading === "Also at")
     .flatMap((s) => s.tables || [])
     .flatMap((t) => { const u = t.columns.indexOf("URL"); return u < 0 ? [] : t.rows.map((r) => r[u]); })
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((u) => u.replace(/\/+$/, "") !== SITE);
   if (!urls.length) throw new Error("the profile has no Also at rows — the page would publish an empty sameAs");
   return urls;
 }

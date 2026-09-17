@@ -89,6 +89,14 @@ test("alsoAt takes the URL column of the root profile's Also at table", () => {
   assert.deepEqual(alsoAt(PROFILE_FIXTURE), ["https://example.com/a", "https://example.com/b"]);
 });
 
+test("alsoAt leaves out the site's own origin, which the Person node already states as url", () => {
+  const own = { ...PROFILE_FIXTURE, entities: [PROFILE_FIXTURE.entities[0],
+    { ...PROFILE_FIXTURE.entities[1], sections: [{ heading: "Also at", tables: [
+      { columns: ["Where", "URL"], rows: [["Site", "https://blust.ch"], ["Site again", "https://blust.ch/"],
+        ["GitHub", "https://example.com/a"]] }] }] }] };
+  assert.deepEqual(alsoAt(own), ["https://example.com/a"]);
+});
+
 test("alsoAt throws rather than publishing an empty sameAs", () => {
   const bare = { ...PROFILE_FIXTURE, entities: [PROFILE_FIXTURE.entities[0],
     { ...PROFILE_FIXTURE.entities[1], sections: [] }] };
