@@ -39,6 +39,9 @@ npm run pages            # render model.json into every derived page region
 npm run pages:check       # do those pages still match model.json?
 npm run test:build         # unit tests for the three renderers
 
+npm run sitemap            # date each sitemap URL from its page's last commit — run before committing a page
+npm run sitemap:check       # are those dates still what git says?
+
 ./tts/generate.py --dry-run     # narration: what would be billed, and for which slides
 ./tts/generate.py               # narration: generate what changed, both decks
 ```

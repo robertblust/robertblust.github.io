@@ -28,6 +28,11 @@ export function pageUrl(file, site) {
   return dir === "." ? `${site}/` : `${site}/${dir}/`;
 }
 
+// The file a sitemap URL is served from, the inverse of pageUrl.
+export function pageFile(loc) {
+  return path.posix.join(new URL(loc).pathname.slice(1), "index.html");
+}
+
 // Which sitemap URLs a set of changed files touches. A page changes when its own HTML does,
 // and a page that draws the model also changes when `model.json` does: its markup names the
 // file and never varies, so the HTML diff alone would never report it.
@@ -68,8 +73,7 @@ async function main(argv) {
   const locs = [...new Set([...sitemapLocs(sitemapAt(base)), ...sitemapLocs(sitemapAt(head))])];
   const changed = git("diff", "--name-only", base, head).split("\n").filter(Boolean);
   const stagePages = locs.filter((loc) => {
-    const file = path.posix.join(new URL(loc).pathname.slice(1), "index.html");
-    try { return git("show", `${head}:${file}`).includes("data-stage"); } catch { return false; }
+    try { return git("show", `${head}:${pageFile(loc)}`).includes("data-stage"); } catch { return false; }
   });
 
   const urlList = changedUrls({ changed, locs, site, stagePages });

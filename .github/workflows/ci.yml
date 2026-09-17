@@ -17,6 +17,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+        with:
+          # The sitemap's dates are read from each page's last commit, and a shallow clone has
+          # only one commit to name for every page.
+          fetch-depth: 0
       # First, because it needs nothing installed and it catches the one failure the browser
       # cannot see: a note edited without regenerating its clip renders perfectly and speaks
       # the old words. --dry-run bills nothing and needs no key.
@@ -43,6 +47,10 @@ jobs:
       # sends is held here instead. Built-ins only, so it sits with the other tests before npm ci.
       - name: IndexNow still sends only the pages that changed
         run: npm run test:indexnow
+      # A lastmod is used only while it is accurate, so the dates are written from git and held
+      # to it here: a page committed without `npm run sitemap` fails on the date it now bears.
+      - name: The sitemap's dates are still each page's last change
+        run: npm run test:sitemap && npm run sitemap:check
       # The renderers decide what every derived page says, and the check below only holds their
       # output against itself: a renderer that writes the wrong thing everywhere is green there
       # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.

@@ -710,6 +710,15 @@ reports the page stale, and reads as a model change when nothing about the model
   is committed and not a secret. `npm run test:indexnow` runs in `verify` before `npm ci`, and
   `node tools/indexnow.mjs <base> <head> --dry-run` shows what a range would send. Google does
   not take part; it still finds pages through the sitemap.
+- **Every sitemap URL carries a `<lastmod>` that git wrote, and `sitemap:check` fails when it
+  moves.** Crawlers use the date only while it stays accurate, and a date typed by hand is
+  accurate on the day it is typed. `npm run sitemap` takes the author date, in UTC, of the last
+  commit that changed the page, by the same rule IndexNow uses: the page's `index.html`, plus
+  `model.json` for a page that draws the model. A page edited and not yet committed is dated today,
+  so run it after editing a page and commit both together. The date is when the change was
+  committed, not when it was merged; a branch left open for days publishes a date older than its
+  deploy. `verify` checks out full history for this, because a shallow clone names its one commit
+  as every page's last change, and the script refuses to run on one.
 
 ## Checks
 
