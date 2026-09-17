@@ -702,23 +702,17 @@ reports the page stale, and reads as a model change when nothing about the model
   does run, and is the check they are not: see the section above.
 - **`.github/workflows/indexnow.yml` tells Bing and the other IndexNow engines which pages a
   deploy changed.** It runs when `pages-build-deployment` succeeds, not on push, because a ping
-  sent while Pages is still publishing has the engines fetch the page being replaced. It sends
-  only sitemap URLs whose `index.html` changed in the merge, plus the pages that draw
-  `model.json` when that changed, because an engine told about unchanged pages on every deploy
-  learns to ignore the site. The 32-character `.txt` file at the root is the key, and it looks
-  like a stray: deleting it makes every ping answer 403. It is public by design, which is why it
-  is committed and not a secret. `npm run test:indexnow` runs in `verify` before `npm ci`, and
-  `node tools/indexnow.mjs <base> <head> --dry-run` shows what a range would send. Google does
-  not take part; it still finds pages through the sitemap.
+  sent while Pages is still publishing has the engines fetch the page being replaced. The
+  32-character `.txt` file at the root is the key, and it looks like a stray: deleting it makes
+  every ping answer 403. It is public by design, which is why it is committed and not a secret.
 - **Every sitemap URL carries a `<lastmod>` that git wrote, and `sitemap:check` fails when it
-  moves.** Crawlers use the date only while it stays accurate, and a date typed by hand is
-  accurate on the day it is typed. `npm run sitemap` takes the author date, in UTC, of the last
-  commit that changed the page, by the same rule IndexNow uses: the page's `index.html`, plus
-  `model.json` for a page that draws the model. A page edited and not yet committed is dated today,
-  so run it after editing a page and commit both together. The date is when the change was
-  committed, not when it was merged; a branch left open for days publishes a date older than its
-  deploy. `verify` checks out full history for this, because a shallow clone names its one commit
-  as every page's last change, and the script refuses to run on one.
+  moves.** Run `npm run sitemap` after editing a page and commit both together; a page edited and
+  not yet committed is dated today. `verify` checks out full history, because the dates are read
+  from it.
+- **Both come from `@robertblust/design`**, `design indexnow` and `design sitemap`, because all
+  three sites need them and they must agree on which page changed: its `index.html`, or the file
+  its `<link data-stage>` names. The rule and its tests live in the package's *Crawlers* section,
+  and `npx design indexnow <base> <head> --dry-run` shows what a range would send.
 
 ## Checks
 

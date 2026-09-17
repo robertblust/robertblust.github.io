@@ -43,14 +43,6 @@ jobs:
       # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
-      # The deploy ping runs after Pages publishes, where nothing reviews it, so which pages it
-      # sends is held here instead. Built-ins only, so it sits with the other tests before npm ci.
-      - name: IndexNow still sends only the pages that changed
-        run: npm run test:indexnow
-      # A lastmod is used only while it is accurate, so the dates are written from git and held
-      # to it here: a page committed without `npm run sitemap` fails on the date it now bears.
-      - name: The sitemap's dates are still each page's last change
-        run: npm run test:sitemap && npm run sitemap:check
       # The renderers decide what every derived page says, and the check below only holds their
       # output against itself: a renderer that writes the wrong thing everywhere is green there
       # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.
@@ -78,6 +70,12 @@ jobs:
       # not what the package ships should fail on the cheap step, not on a rendered page.
       - name: The shared files are still what the package ships
         run: npm run design:check
+      # A lastmod is used only while it is accurate, so the dates are written from git and held
+      # to it here: a page committed without `npm run sitemap` fails on the date it now bears.
+      # After npm ci because the command arrives from the package; the full history the checkout
+      # fetches is what it reads the dates from.
+      - name: The sitemap's dates are still each page's last change
+        run: npm run sitemap:check
       # The card harness now arrives from the package, so these two can no longer run before
       # npm ci — left above it they fail every push with ERR_MODULE_NOT_FOUND. They still need
       # no browser, which is the property worth keeping: og:check renders no page, it
