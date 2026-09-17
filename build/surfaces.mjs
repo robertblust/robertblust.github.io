@@ -75,13 +75,13 @@ function render(data) {
 
   out.push(`      <div class="lineage" id="lineage">`);
   out.push(`        <svg class="wires" id="wires" aria-hidden="true"></svg>`);
-  out.push(`        <div class="ln-model" id="lnmodel"><div class="lbl">The model</div>` +
+  out.push(`        <div class="ln-model" id="lnmodel"><div class="lbl" data-de="Das Modell">The model</div>` +
     `<div class="nm">${esc(name)}</div><div class="at mono">@${esc(data.commit.slice(0, 7))}</div></div>`);
   out.push(`        <ul class="ln-groups">`);
   for (const m of makers) {
     const who = m.hand
-      ? `<span>The owner</span><span class="how">by hand</span>`
-      : `${esc(m.repo.split("/").pop())}<span class="how">build</span>`;
+      ? `<span data-de="Der Inhaber">The owner</span><span class="how" data-de="von Hand">by hand</span>`
+      : `${esc(m.repo.split("/").pop())}<span class="how" data-de="Build">build</span>`;
     out.push(`          <li class="ln-group${m.hand ? " hand" : ""}">`);
     out.push(`            <div class="ln-maker" data-maker="${esc(m.key)}">${m.hand ? MARK_HAND : MARK_BUILD}` +
       `<span class="who">${who}</span></div>`);

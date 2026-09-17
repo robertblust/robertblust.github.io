@@ -185,6 +185,9 @@ const PAGES = [
   // The surfaces page. Where each surface sits is a claim about how the model says it is made,
   // so verify reads it off the page against the block rather than trusting the renderer.
   { path: "/surfaces/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Wie man es liest", "DIE SURFACES", "Keine Linie ist getippt"], hides: ["How to read it", "THE SURFACES", "No line is typed"],
+                  title: "Surfaces – Robert Blust",
+                  desc: "Jeder Ort, an dem das Modell ver\u00f6ffentlicht wird, und wie er aus ihm entsteht: von Hand geschrieben oder vom Build eines Repositorys aus einem gepinnten Commit gebaut." },
     contains: ["One model,", "every", "surface", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
