@@ -1,5 +1,5 @@
 {
-  "commit": "d26bc5732c5776f433f300b4df197a1f561decda",
+  "commit": "ee89cddcafcf86586f03a8caa884a99d1cbe8b51",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1129,7 +1129,7 @@
                 [
                   "Context engineering",
                   "Expert",
-                  "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
+                  "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026). Wrote the film Governance as data from the same files and published it under a description carrying no count, naming instead where the model states its own size (2026)."
                 ],
                 [
                   "Conversational AI",
@@ -1389,7 +1389,7 @@
                 [
                   "Storytelling",
                   "Proficient",
-                  "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
+                  "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026). Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description (2026)."
                 ],
                 [
                   "Technical writing",
@@ -1490,7 +1490,7 @@
               [
                 "Context engineering",
                 "Expert",
-                "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
+                "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026). Wrote the film Governance as data from the same files and published it under a description carrying no count, naming instead where the model states its own size (2026)."
               ],
               [
                 "Conversational AI",
@@ -1750,7 +1750,7 @@
               [
                 "Storytelling",
                 "Proficient",
-                "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
+                "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026). Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description (2026)."
               ],
               [
                 "Technical writing",
@@ -3906,6 +3906,37 @@
         "kind": "Community",
         "start": "2026-09-15",
         "end": "2026-09-15"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "type": "experience",
+      "name": "Governance as data",
+      "tagline": "A five-minute film on a company's knowledge as Markdown, written as a story before anything was generated and published under a description that says where the model reports its own size rather than repeating a number.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-18",
+        "end": "2026-09-18",
+        "url": "https://robertblust.substack.com/p/governance-as-data",
+        "skills": [
+          "Context engineering",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Ways of working\n\n- Wrote the story first, as the one source the notebook was given: sixteen scenes, then a section naming the facts the film may state and a section naming what it must not say. The failure this film was prone to was implying breadth, because the vocabulary it describes is wide and only part of it ships, and a reader who finds that gap themselves trusts nothing else in the piece afterward. One scene carries the three limits alone and was the first to check in the transcript.\n- Read the transcript against the sources and recorded four places where the narration left the story, none carried into the published description: a claim that data cannot be silently lost, where the sources say only that a broken reference is an error; an intensifier the voice rules forbid; culture, which appears nowhere in the sources; and two of the story's four questions going unspoken.\n- Found the film's figures already passed by the model within days of the render and wrote the description to carry no count at all — what exists, and where the model states its own size — rather than a fresher number that would go stale the same way. It was the first published piece written under the rule the model had adopted for itself the week before.\n\n### Sharing\n\n- Published it on Sep 18, 2026 as five minutes setting out one answer: a company's facts as Markdown given shape by a meta-model, where every role, rule, metric and decision is a page whose title is its name, a reference to something that does not exist is an error rather than a warning, and a governance gate becomes data — the role that signs, the criteria that have to hold and who decides when they cannot. The description states what does not ship, that the instance behind it is a company of one, and that there is nothing to buy, and it ends on the question the film exists to ask: where does your company not fit this shape?",
+          "tables": []
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-film-governance-as-data.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-18",
+        "end": "2026-09-18"
       }
     },
     {
@@ -9405,6 +9436,42 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust/experiences/2026-guestgraph",
       "to": "achievement-kinds/architecture",
       "via": "Achievements.Kind",
@@ -9695,7 +9762,7 @@
       "via": "Skills.Skill",
       "attrs": {
         "Level": "proficiency-levels/expert",
-        "Evidence": "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026)."
+        "Evidence": "Built the LIKE MAGIC Mental Model as the organization's shared context layer and shipped it as a skill into the company's Claude environment (2022–2026). Generalized the approach into CompanyGraph, a published meta-model for describing a company as a graph both people and agents can read (2026). Briefed a podcast episode on the career break from the model's own files and read the generated result against its sources before publishing it (2026). Briefed the film Build the model first from the same files, rebuilding the export bundle first because it stood five experiences behind the model (2026). Wrote the film Governance as data from the same files and published it under a description carrying no count, naming instead where the model states its own size (2026)."
       }
     },
     {
@@ -10163,7 +10230,7 @@
       "via": "Skills.Skill",
       "attrs": {
         "Level": "proficiency-levels/proficient",
-        "Evidence": "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026)."
+        "Evidence": "Briefed a podcast episode on the career break, fixing the story in outline and the threads the hosts had to cover before anything was generated, then holding the result to its sources and naming the one place it strayed (2026). Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays (2026). Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description (2026)."
       }
     },
     {
