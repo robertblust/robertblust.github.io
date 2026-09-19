@@ -20,7 +20,7 @@ stronger one is what the three copies have become.
 two lost**:
 
 | | companygraph | guestgraph | blust.ch |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | reduced-motion settling | ✅ | — | — |
 | `hash` — render a named view of a page | ✅ | — | — |
 | recipe/renderer agreement guard | — | ✅ | — |

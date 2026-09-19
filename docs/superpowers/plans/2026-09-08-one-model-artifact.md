@@ -61,7 +61,7 @@ verify/check.mjs      modify   one stale comment at line 128.
 All counted on 2026-09-08 and reproducible with the commands in each task.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | The data block | 299,759 bytes, identical in `model/index.html` and `timeline/index.html` |
 | `model.json` pretty-printed | 375,437 bytes |
 | Vision and values reproduce the principles page | all 25 generated lines appear verbatim |

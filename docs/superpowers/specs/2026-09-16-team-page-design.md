@@ -19,7 +19,7 @@ Counted on 2026-09-16 in `model.json` at `c43921f`, the commit `source.json` nam
 repository and `robertblust/design` at their `main`.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Role files under `model/roles/` | 8 |
 | Phase files under `model/processes/delivery/phases/` | 5 |
 | Processes | 1, Delivery, with two tracks: Code and Prose |

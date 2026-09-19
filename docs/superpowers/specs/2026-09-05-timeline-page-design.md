@@ -18,7 +18,7 @@ Counted on 2026-09-05 in `robertblust/mental-model` at `a535e43`, the commit `so
 names, and in this repository and `robertblust/design` at their `main`.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Experience files under `model/profiles/robert-blust/experiences/` | 31 |
 | Of kind Role · Project · Community · Education · Independent | 6 · 11 · 11 · 2 · 1 |
 | Earliest `start`, latest `start` | 1999-10, 2026-06 |

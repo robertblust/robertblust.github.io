@@ -17,7 +17,7 @@ level deeper and the line-based diff counts all of it.
 Compared by behaviour rather than by line, the three are identical:
 
 | | blust.ch | companygraph.io | guestgraph.io |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | viewport | `1280 × 720` | `1280 × 720` | `1280 × 720` |
 | `deviceScaleFactor` | 2 | 2 | 2 |
 | languages | `["de", "en"]` | `["de", "en"]` | `["de", "en"]` |

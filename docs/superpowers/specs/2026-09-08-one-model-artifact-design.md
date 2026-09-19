@@ -14,7 +14,7 @@ below was counted, not estimated.
 ## 1. What is true today, measured
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Scripts that build a page from the model | 3: `build/model.mjs` 112, `build/principles.mjs` 177, `build/sameas.mjs` 79 — 368 lines |
 | Independent readers of the pinned commit | 2, on different GitHub endpoints: `git/trees` + `raw` in `model.mjs`, `contents` in `principles.mjs` |
 | Markdown parsers | 2: `parseInstance` from `companygraph-meta-model` v0.14.0 and `parse()` at `build/principles.mjs:34`, 18 lines |

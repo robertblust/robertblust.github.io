@@ -19,7 +19,7 @@ reason is recorded, because the reason is the part that rots first.
 ## Decisions
 
 | # | Decision | Why |
-|---|---|---|
+| --- | --- | --- |
 | 1 | One repository, `robertblust.github.io` | GitHub serves a user site at a domain root only from `<username>.github.io`. Any other name serves at `blust.ch/<name>/`. Not a preference. |
 | 2 | Landing page **and** a `/talks/` index | The landing page grows with more about-me sections over time; the talks section within it stays a fixed-size teaser while `/talks/` absorbs growth. Also gives a stable URL meaning "Robert's talks". |
 | 3 | No shared deck engine | Three decks, two GitHub accounts, and the self-contained single-file rule makes a shared runtime awkward. Duplication is accepted deliberately. The GuestGraph intro deck is the reference copy. |
@@ -130,7 +130,7 @@ The landing page's talks section and `/talks/` must not become two copies of one
 They are split by what they contain:
 
 | | Landing page section | `/talks/` |
-|---|---|---|
+| --- | --- | --- |
 | Shows | title, length, languages, link | title, length, languages, link, **description** |
 | Answers | "has he given talks?" | "what is this talk about?" |
 

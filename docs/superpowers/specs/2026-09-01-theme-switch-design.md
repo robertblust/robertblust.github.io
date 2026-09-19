@@ -12,7 +12,7 @@ language already is.
 Taken 2026-09-01 across `main` of all three sites.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Pages in the family | 20 — 16 prose, 4 decks |
 | Design tokens in the shared block | 11, in `blocks/tokens.css`, fence `design tokens` v4 |
 | Deck-only tokens, declared per page outside the block | 3 — `--warn`, `--slab`, `--lcd` |
@@ -32,7 +32,7 @@ Keeping those four values and swapping only the surfaces **fails**, and not marg
 as WCAG 2.1 contrast against a light ground:
 
 | token | its stated job | on dark today | unchanged, on light |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `--c-mid` | anything interactive — links, controls | 7.48:1 AAA | **2.47:1 FAIL** |
 | `--c-firm` | the resolved thing — the thesis, the current page | 12.41:1 AAA | **1.49:1 FAIL** |
 | `--c-flag` | a reversal; at most one per page | 8.62:1 AAA | **2.14:1 FAIL** |
