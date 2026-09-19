@@ -35,14 +35,17 @@ function processOf(data) {
   return all[0];
 }
 
-// Phase order is the process's own numbered list, not the folder listing: the files sort
-// alphabetically and the phases are a sequence.
+// Phase order is the rows of the process's Phases table, not the folder listing: the files sort
+// alphabetically and the phases are a sequence. Core 0.30.0 made the section a table of names,
+// one row per phase in order, and left its text empty, so the rows are the only place the order
+// is written; the parser keeps them as they stand.
 export function phasesOf(data) {
   const proc = processOf(data);
   const sec = (proc.sections || []).find((s) => /^Phases$/i.test(s.heading));
   if (!sec) throw new Error(`${proc.path} has no Phases section`);
-  const names = [...sec.text.matchAll(/\[([^\]]+)\]\(/g)].map((m) => m[1]);
-  if (!names.length) throw new Error(`${proc.path}'s Phases section links to nothing`);
+  const table = (sec.tables || []).find((t) => t.columns.includes("Phase"));
+  const names = table ? table.rows.map((r) => r[table.columns.indexOf("Phase")]).filter(Boolean) : [];
+  if (!names.length) throw new Error(`${proc.path}'s Phases section lists no phase`);
   return names.map((n) => {
     const p = data.entities.find((e) => e.type === "phase" && e.name === n);
     if (!p) throw new Error(`${proc.path} names a phase the model does not hold: ${n}`);
