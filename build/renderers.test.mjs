@@ -181,7 +181,7 @@ const TEAM_FIXTURE = {
       path: "model/roles/checker.md", fields: { requires: [] }, sections: [] },
     { id: "processes/d", type: "process", name: "Doing", tagline: "How.",
       path: "model/processes/d/d.md", fields: { owner: "Boss" },
-      sections: [{ heading: "Phases", text: "1. [One](phases/one.md)\n2. [Two](phases/two.md)", tables: [] }] },
+      sections: [{ heading: "Phases", text: "", tables: [{ caption: null, columns: ["Phase"], rows: [["One"], ["Two"]] }] }] },
     { id: "processes/d/phases/one", type: "phase", name: "One", tagline: "First.",
       path: "model/processes/d/phases/one.md",
       fields: { owner: "Maker", "executed-by": ["Maker"], "supported-by": ["Checker"],
@@ -203,8 +203,14 @@ function renderTeamInto(fixture) {
   return fs.readFileSync(path.join(dir, "team/index.html"), "utf8");
 }
 
-test("phasesOf follows the process's numbered list, not the folder listing", () => {
+test("phasesOf follows the rows of the process's Phases table, not the folder listing", () => {
   assert.deepEqual(phasesOf(TEAM_FIXTURE).map((p) => p.name), ["One", "Two"]);
+});
+
+test("a Phases section with no table of phases is an error, not an empty board", () => {
+  const f = structuredClone(TEAM_FIXTURE);
+  f.entities.find((e) => e.type === "process").sections = [{ heading: "Phases", text: "", tables: [] }];
+  assert.throws(() => phasesOf(f), /lists no phase/);
 });
 
 test("seatsOf puts the human profile's seats first", () => {
