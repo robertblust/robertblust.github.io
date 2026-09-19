@@ -183,11 +183,11 @@ const TEAM_FIXTURE = {
       path: "model/processes/d/d.md", fields: { owner: "Boss" },
       sections: [{ heading: "Phases", text: "", tables: [{ caption: null, columns: ["Phase"], rows: [["One"], ["Two"]] }] }] },
     { id: "processes/d/phases/one", type: "phase", name: "One", tagline: "First.",
-      path: "model/processes/d/phases/one.md",
+      path: "model/processes/d/phases/one.md", owner: "processes/d",
       fields: { owner: "Maker", "executed-by": ["Maker"], "supported-by": ["Checker"],
                 "gate-approvers": ["Boss"], "gate-to": "Two" }, sections: [] },
     { id: "processes/d/phases/two", type: "phase", name: "Two", tagline: "Second.",
-      path: "model/processes/d/phases/two.md",
+      path: "model/processes/d/phases/two.md", owner: "processes/d",
       fields: { owner: "Boss", "executed-by": ["Boss", "Checker"], "gate-approvers": ["Boss"] },
       sections: [] },
   ],
@@ -211,6 +211,15 @@ test("a Phases section with no table of phases is an error, not an empty board",
   const f = structuredClone(TEAM_FIXTURE);
   f.entities.find((e) => e.type === "process").sections = [{ heading: "Phases", text: "", tables: [] }];
   assert.throws(() => phasesOf(f), /lists no phase/);
+});
+
+test("phasesOf reads a phase's name within its own process", () => {
+  // Core 0.31.0: a name of an owned type is unique within its owner, so another process may hold
+  // a phase of the same name. Placed first, it is what an unscoped lookup would find.
+  const f = structuredClone(TEAM_FIXTURE);
+  f.entities.unshift({ id: "processes/x/phases/one", type: "phase", name: "One", tagline: "Elsewhere.",
+    path: "model/processes/x/phases/one.md", owner: "processes/x", fields: {}, sections: [] });
+  assert.deepEqual(phasesOf(f).map((p) => p.id), ["processes/d/phases/one", "processes/d/phases/two"]);
 });
 
 test("seatsOf puts the human profile's seats first", () => {

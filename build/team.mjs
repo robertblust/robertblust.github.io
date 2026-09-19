@@ -46,8 +46,9 @@ export function phasesOf(data) {
   const table = (sec.tables || []).find((t) => t.columns.includes("Phase"));
   const names = table ? table.rows.map((r) => r[table.columns.indexOf("Phase")]).filter(Boolean) : [];
   if (!names.length) throw new Error(`${proc.path}'s Phases section lists no phase`);
+  // A phase's name is unique within its process only (core 0.31.0), so the row is read there.
   return names.map((n) => {
-    const p = data.entities.find((e) => e.type === "phase" && e.name === n);
+    const p = data.entities.find((e) => e.type === "phase" && e.owner === proc.id && e.name === n);
     if (!p) throw new Error(`${proc.path} names a phase the model does not hold: ${n}`);
     return p;
   });
