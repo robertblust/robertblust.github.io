@@ -32,7 +32,7 @@ Taken 2026-09-02 against the three `theme-switch` branches. Re-derive with
 `/private/tmp/claude-501/-Users-rob-git-robertblust/9d8e94dd-36d8-4964-8358-39b2f85b06a8/scratchpad/deck-colours.mjs` if they look wrong.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Literals the four decks paint, outside token declarations | **126** |
 | Distinct values | **24** |
 | Values all four decks share | **17 distinct, 100 occurrences** — these become tokens |
@@ -52,7 +52,7 @@ and becomes `--lcd-faint`, which does not. Two more invariant names, `--lcd-ink`
 correction found flipping against a surface that does not.
 
 | value | n | where | proposed name |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `#9db0ff` | 16 | `color`, `border-color`, `outline` | `--deck-accent` — brighter than `--c-mid`, the deck's own interactive tone. Verified not painted on the readout. |
 | `#f1ede4` | 13 | background, colour, border | `--deck-paper` — the warm off-white the slide canvas uses for inverted panels |
 | `#1b2231` | 12 | background | **already `--press`** |

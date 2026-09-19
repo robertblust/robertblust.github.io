@@ -29,7 +29,7 @@
 Taken 2026-09-01 on `main`. Re-derive if they look wrong.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Prose pages | 16 — blust.ch 6, companygraph 6, guestgraph 4 |
 | Literal colours outside `:root` on prose pages | **37**, and they are only three things |
 | — `#1b2231` | 16× — `.seg button[aria-pressed="true"]{background:…}`, one per page |

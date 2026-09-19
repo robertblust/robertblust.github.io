@@ -16,7 +16,7 @@ B as Rob chose it.
 Read on 2026-09-17 in `model.json` at `db44174`, the commit `source.json` names.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Surface files under `model/surfaces/` | 4 |
 | Of those, `production: written`, `production: built` | 1, 3 |
 | Distinct `built-by` repositories | 2 |

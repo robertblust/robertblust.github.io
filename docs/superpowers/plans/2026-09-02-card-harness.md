@@ -49,7 +49,7 @@ the package never imports it).
 **In `@robertblust/design` (new):**
 
 | file | responsibility |
-|---|---|
+| --- | --- |
 | `cards/recipe.mjs` | `sources`, `recipe`, `stampOf`, `state`, `stamp`, and `recipeFor(root)` which binds them |
 | `cards/check.mjs` | `checkCards(recipeModule)` — staleness and dark-background, plus the PNG decoder |
 | `cards/export.mjs` | `exportCards({ chromium, recipe })` — the union renderer |
@@ -499,7 +499,7 @@ Read all three:
 names. Take one name for each pair:
 
 | keep | drop |
-|---|---|
+| --- | --- |
 | `a stylesheet the page links with <link> is a source` | `a file the page links with <link> is a source` |
 | `reordering a card's keys does not change the recipe` | `the order the knobs are written in is not a change` |
 

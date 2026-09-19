@@ -28,7 +28,7 @@
 Taken 2026-09-01, on `main` of all three sites. Re-derive them if they look wrong; do not trust them blindly.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | `verify/design.mjs` | byte-identical in all three (`c0d4718a`), **472 lines** (450 non-blank) |
 | Check bodies identical in all three | **14** — `carriesLang contains footer headerBaseline landing lang links mobileNav navOrder noNewTab sameOrigin sourceLang storageKeys wayOut` (252 lines) |
 | Check bodies that differ | **5** — `card internalLinks sameTab seo title` |

@@ -26,7 +26,7 @@
 Taken 2026-09-02 on `main` of all three sites, after the theme work merged.
 
 | Fact | Value |
-|---|---|
+| --- | --- |
 | Significant lines identical in all three, **outside** `CHECKS` | **60** |
 | Significant lines identical in all three, **inside** `CHECKS` | **0** — the previous plan finished that job |
 | `check.mjs` size | blust.ch 288, companygraph 414, guestgraph 204 |
