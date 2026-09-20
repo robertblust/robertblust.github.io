@@ -1,5 +1,5 @@
 {
-  "commit": "4e4dda32e396147cf6ac16788856e2aef28487c4",
+  "commit": "4b7619315da227068a1811f3d6f21e21598cee93",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -85,6 +85,12 @@
       "type": "surface",
       "folder": "surfaces",
       "owner": null,
+      "singular": false
+    },
+    {
+      "type": "track",
+      "folder": "tracks",
+      "owner": "process",
       "singular": false
     },
     {
@@ -394,17 +400,14 @@
             {
               "caption": null,
               "columns": [
-                "Track",
-                "Produces"
+                "Track"
               ],
               "rows": [
                 [
-                  "Code",
-                  "A merged change to a repository of the family, with its checks green"
+                  "Code"
                 ],
                 [
-                  "Prose",
-                  "A published page or post in reviewed English, and the Swiss German where the place carries it"
+                  "Prose"
                 ]
               ]
             }
@@ -412,17 +415,14 @@
           "table": {
             "caption": null,
             "columns": [
-              "Track",
-              "Produces"
+              "Track"
             ],
             "rows": [
               [
-                "Code",
-                "A merged change to a repository of the family, with its checks green"
+                "Code"
               ],
               [
-                "Prose",
-                "A published page or post in reviewed English, and the Swiss German where the place carries it"
+                "Prose"
               ]
             ]
           }
@@ -968,6 +968,30 @@
       ],
       "owner": "processes/delivery",
       "path": "model/processes/delivery/phases/spec.md"
+    },
+    {
+      "id": "processes/delivery/tracks/code",
+      "type": "track",
+      "name": "Code",
+      "tagline": "A merged change to a repository of the family, with its checks green.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/tracks/code.md"
+    },
+    {
+      "id": "processes/delivery/tracks/prose",
+      "type": "track",
+      "name": "Prose",
+      "tagline": "A published page or post in reviewed English, and the Swiss German where the place carries it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/delivery",
+      "path": "model/processes/delivery/tracks/prose.md"
     },
     {
       "id": "proficiency-levels/competent",
@@ -8616,6 +8640,18 @@
     },
     {
       "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/implement",
       "to": "roles/owner",
       "via": "escalation-authority",
       "attrs": {}
@@ -8730,6 +8766,18 @@
     },
     {
       "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/plan",
       "to": "roles/owner",
       "via": "escalation-authority",
       "attrs": {}
@@ -8804,6 +8852,18 @@
       "from": "processes/delivery/phases/shape",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/tracks/code",
+      "via": "Activities.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/phases/spec",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Activities.Track",
       "attrs": {}
     },
     {
@@ -8849,6 +8909,18 @@
       "attrs": {}
     },
     {
+      "from": "processes/delivery/tracks/code",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery/tracks/prose",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "processes/delivery",
       "to": "processes/delivery/phases/implement",
       "via": "Phases.Phase",
@@ -8876,6 +8948,18 @@
       "from": "processes/delivery",
       "to": "processes/delivery/phases/spec",
       "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/code",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/delivery",
+      "to": "processes/delivery/tracks/prose",
+      "via": "Tracks.Track",
       "attrs": {}
     },
     {
