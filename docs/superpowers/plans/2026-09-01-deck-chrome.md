@@ -91,10 +91,12 @@ It also settles a question this plan cannot: `.lcd:has(.n.msg){display:flex}` ex
 ### Task 1: The checks the decks have never had
 
 **Files:**
+
 - Modify: each site's `verify/design.mjs` (add `opensFromFile`)
 - Modify: each site's `verify/check.mjs` (`storageKeys: true` and `opensFromFile: true` on every deck)
 
 **Interfaces:**
+
 - Consumes: `DESIGN_CHECKS`, and the `fences` check plan 4 added.
 - Produces: `opensFromFile` in `DESIGN_CHECKS`, keyed off `spec.opensFromFile`. Tasks 6–8 rely on it to prove the extraction did not break the one constraint a served page cannot test.
 
@@ -221,6 +223,7 @@ exists for. Demonstrated before this commit."
 ### Task 2: Close the fence, and cut it in two
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/deck-transport.css`
 - Create: `/Users/rob/git/robertblust/design/blocks/deck-lockup.css`
 - Create: `/Users/rob/git/robertblust/design/blocks/deck-lockup-two.css`
@@ -228,6 +231,7 @@ exists for. Demonstrated before this commit."
 - Test: `/Users/rob/git/robertblust/design/test/blocks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `blockFor(name, variant, params = {})` and the `parts` mechanism, both as plan 4 released them. A `parts` entry is `{ slot: { file, variants: [...] } }` and its content is spliced only for the named variants.
 - Produces: fences `"deck transport"` (`key: "transport"`, `variants: null`, `closes: null`) and `"deck lockup"` (`key: "lockup"`, `variants: ["one", "two"]`, `closes: null`, `parts: { second: { file: "blocks/deck-lockup-two.css", variants: ["two"] } }`). `versions.json` gains `"transport": "v1"` and `"lockup": "v1"`.
 
@@ -386,11 +390,13 @@ marker and a source."
 ### Task 3: The canvas scaler, and the comment that describes a bug that was fixed
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/deck-fit.js`
 - Modify: `/Users/rob/git/robertblust/design/lib/fences.mjs`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/blocks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `blockFor`, `FENCES` as Task 2 leaves them.
 - Produces: fence `"deck fit"` (`key: "fit"`, `source: "blocks/deck-fit.js"`, `variants: null`, `closes: null`). `versions.json` gains `"fit": "v1"`.
 
@@ -465,6 +471,7 @@ design."
 **Files:** `/Users/rob/git/robertblust/design/package.json`
 
 **Interfaces:**
+
 - Consumes: the three fences Tasks 2 and 3 added.
 - Produces: the commit Task 5 tags and Tasks 6–8 pin.
 
@@ -506,11 +513,13 @@ Tasks 6–8 pin `github:robertblust/design#v0.5.0`. A commit SHA is not acceptab
 ### Task 6: blust.ch's two decks adopt — lockup variant `one`
 
 **Files:**
+
 - Modify: `package.json`, `package-lock.json`
 - Modify: `talks/mental-model/index.html`, `talks/essential-complexity/index.html`
 - Modify: `verify/check.mjs`, `verify/design.mjs`
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design@0.5.0`; fences `deck transport`, `deck lockup · one`, `deck fit`; the `fences` and `opensFromFile` checks from Task 1.
 - Produces: nothing Tasks 7 and 8 consume.
 
@@ -603,9 +612,11 @@ Stage by name, including every `og.png` and `og.sha` that moved. Write the pull 
 ### Task 7: companygraph.io's deck adopts — lockup variant `two`
 
 **Files:**
+
 - Modify: `package.json`, `package-lock.json`, `talks/intro/index.html`, `verify/check.mjs`, `verify/design.mjs`
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design@0.5.0`; fences `deck transport`, `deck lockup · two`, `deck fit`.
 - Produces: nothing.
 
@@ -642,9 +653,11 @@ Same shape as Task 6, Steps 5–7. The pull request body should carry the `fit` 
 ### Task 8: guestgraph.io's deck adopts — lockup variant `two`
 
 **Files:**
+
 - Modify: `package.json`, `package-lock.json`, `talks/intro/index.html`, `verify/check.mjs`, `verify/design.mjs`
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design@0.5.0`; fences `deck transport`, `deck lockup · two`, `deck fit`.
 - Produces: the cross-site assertion in Step 6, which is this plan's success criterion.
 

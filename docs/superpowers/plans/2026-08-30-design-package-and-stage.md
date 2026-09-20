@@ -73,6 +73,7 @@ The three sites are separate clones. Absolute paths on this machine:
 ### Task 1: Scaffold the package and its manifest
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/package.json`
 - Create: `/Users/rob/git/robertblust/design/LICENSE`
 - Create: `/Users/rob/git/robertblust/design/.gitignore`
@@ -80,6 +81,7 @@ The three sites are separate clones. Absolute paths on this machine:
 - Test: `/Users/rob/git/robertblust/design/test/groups.test.mjs`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `GROUPS`, an object whose keys are group names (`"fonts"`, `"stage"`) and whose values are arrays of `[packageRelativePath, siteRelativePath]` string pairs. `GROUP_NAMES`, a frozen array of the keys. Both imported by Task 2's `lib/sync.mjs` and Task 3's CLI.
 
@@ -271,10 +273,12 @@ git commit -m "The package, and the manifest of what it hands a site"
 ### Task 2: The sync engine
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/lib/sync.mjs`
 - Test: `/Users/rob/git/robertblust/design/test/sync.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `GROUPS`, `GROUP_NAMES` from `lib/groups.mjs`.
 - Produces:
   - `readConfig(siteRoot: string): { groups: string[] }` — reads `design.config.json`; throws `Error` with a readable message if the file is missing or names an unknown group.
@@ -501,10 +505,12 @@ git commit -m "Plan, apply and check whole-file copies into a site"
 ### Task 3: The CLI
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/bin/design.mjs`
 - Test: `/Users/rob/git/robertblust/design/test/cli.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `readConfig`, `planSync`, `applySync` from `lib/sync.mjs`.
 - Produces: an executable `design` with two forms — `design sync [--check] [--site <dir>]`.
   Exit `0` when everything matches (or was written), `1` when `--check` finds drift,
@@ -709,6 +715,7 @@ git commit -m "The CLI: sync, and the check CI runs"
 ### Task 4: Vendor the assets, and prove the stage is the repaired one
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/assets/stage.js`
 - Create: `/Users/rob/git/robertblust/design/assets/stage.css`
 - Create: `/Users/rob/git/robertblust/design/assets/d3.v7.min.js`
@@ -716,6 +723,7 @@ git commit -m "The CLI: sync, and the check CI runs"
 - Test: `/Users/rob/git/robertblust/design/test/assets.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `GROUPS` from `lib/groups.mjs`.
 - Produces: the seven asset files that Tasks 1–3's tests already reference. No new exports.
 
@@ -839,11 +847,13 @@ git commit -m "Vendor the stage, the fonts and d3 — taking the repaired stage.
 ### Task 5: Move the two stage checks into the package
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/verify/stage.mjs`
 - Create: `/Users/rob/git/robertblust/design/README.md`
 - Test: `/Users/rob/git/robertblust/design/test/stage-checks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `STAGE_CHECKS`, an object with exactly two keys, `graph` and `divider`, each an
   `async (page, spec) => string | null` in the site suites' existing shape — return a
@@ -1032,13 +1042,16 @@ git commit -m "The stage's two checks, with the spine assertion that had not tra
 ```
 
 ---
+
 ### Task 6: The package's CI
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/.github/workflows/ci.yml`
 - Create: `/Users/rob/git/robertblust/design/.github/dependabot.yml`
 
 **Interfaces:**
+
 - Consumes: `npm test` from Task 1's `package.json`.
 - Produces: nothing other tasks import.
 
@@ -1125,9 +1138,11 @@ git commit -m "CI, and Dependabot for the actions"
 ### Task 7: Create the repository, push, and tag v0.1.0
 
 **Files:**
+
 - Modify: none.
 
 **Interfaces:**
+
 - Consumes: everything from Tasks 1-6.
 - Produces: `robertblust/design` on GitHub at tag `v0.1.0`. Tasks 8-10 install from it.
 
@@ -1239,12 +1254,14 @@ Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"`.
 ### Task 8: blust.ch adopts — the empty-diff proof
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/robertblust.github.io/design.config.json`
 - Modify: `/Users/rob/git/robertblust/robertblust.github.io/package.json`
 - Modify: `/Users/rob/git/robertblust/robertblust.github.io/verify/check.mjs`
 - Modify: `/Users/rob/git/robertblust/robertblust.github.io/.github/workflows/ci.yml`
 
 **Interfaces:**
+
 - Consumes: `STAGE_CHECKS` from `@robertblust/design/verify/stage`, and the `design` CLI.
 - Produces: nothing other repositories consume. This is the reference adoption — Tasks 9
   and 10 repeat its shape.
@@ -1397,11 +1414,13 @@ Stop here and wait for CI. Do not merge without an explicit go-ahead.
 ### Task 9: guestgraph.io adopts — fonts only
 
 **Files:**
+
 - Create: `/Users/rob/git/guestgraph/guestgraph.github.io/design.config.json`
 - Modify: `/Users/rob/git/guestgraph/guestgraph.github.io/package.json`
 - Modify: `/Users/rob/git/guestgraph/guestgraph.github.io/.github/workflows/ci.yml`
 
 **Interfaces:**
+
 - Consumes: the `design` CLI. **Not** `STAGE_CHECKS` — guestgraph.io draws no graph, has no
   `stage.js`, no `stage.css` and no vendored `d3`, and its `check.mjs` defines neither
   `graph` nor `divider`.
@@ -1502,6 +1521,7 @@ Stop and wait for CI. Do not merge without an explicit go-ahead.
 ### Task 10: companygraph.io adopts — and the spine bug is repaired
 
 **Files:**
+
 - Create: `/Users/rob/git/companygraph/companygraph.github.io/design.config.json`
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/package.json`
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/verify/check.mjs`
@@ -1509,6 +1529,7 @@ Stop and wait for CI. Do not merge without an explicit go-ahead.
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/.github/workflows/ci.yml`
 
 **Interfaces:**
+
 - Consumes: `STAGE_CHECKS` from `@robertblust/design/verify/stage`, and the `design` CLI.
 - Produces: nothing.
 

@@ -56,6 +56,7 @@ Record these in the ledger; they are decisions, not discoveries.
 ## File Structure
 
 **Created in `@robertblust/design`:**
+
 - `verify/http.mjs` — `httpStatus(url)`. Node 22's bundled undici asserts `assert(!this.paused)` in `Parser.finish` when a socket ends with an unread response body; this reads and discards the body. One responsibility: ask a URL for its status without crashing the runtime.
 - `verify/design.mjs` — moved verbatim from the sites. Exports `TOKEN_VERSION`, `TOKENS`, `SKY`, `SYSTEM_FACES`, `DESIGN_CHECKS`.
 - `verify/pages.mjs` — `pageChecks({ SITE, BASE })` returning the nineteen shared check bodies.
@@ -72,12 +73,14 @@ Record these in the ledger; they are decisions, not discoveries.
 ## Task 1: `httpStatus` and `design.mjs` move into the package
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/verify/http.mjs`
 - Create: `/Users/rob/git/robertblust/design/verify/design.mjs`
 - Modify: `/Users/rob/git/robertblust/design/package.json`
 - Test: `/Users/rob/git/robertblust/design/test/verify-exports.test.mjs`
 
 **Interfaces:**
+
 - Produces: `httpStatus(url: string) => Promise<number>` from `@robertblust/design/verify/http`; `DESIGN_CHECKS`, `SYSTEM_FACES`, `TOKENS`, `SKY`, `TOKEN_VERSION` from `@robertblust/design/verify/design`.
 
 - [ ] **Step 1: Copy both files in, unchanged except one import**
@@ -200,11 +203,13 @@ what makes this a move rather than a rewrite."
 ## Task 2: The three sites import `design.mjs` and `httpStatus`
 
 **Files:**
+
 - Modify: `verify/check.mjs` in all three sites (import lines; delete `httpStatus`)
 - Delete: `verify/design.mjs` in all three sites
 - Modify: `package.json`, `package-lock.json` in all three sites
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design/verify/design`, `@robertblust/design/verify/http` from Task 1.
 
 This is one task, not three: the same two-line edit in three repositories, reviewed as one diff.
@@ -284,6 +289,7 @@ the suite green again."
 ## Task 3: Reconcile the three genuinely drifted checks
 
 **Files:**
+
 - Modify: `verify/check.mjs` in all three sites
 
 Do this **before** moving the bodies, not after: a body cannot move until the three copies agree.
@@ -388,11 +394,13 @@ one site, sameTab by line wrapping alone."
 ## Task 4: The nineteen bodies move into the package
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/verify/pages.mjs`
 - Create: `/Users/rob/git/robertblust/design/test/verify-pages.test.mjs`
 - Modify: `/Users/rob/git/robertblust/design/package.json`
 
 **Interfaces:**
+
 - Consumes: `httpStatus` from `./http.mjs` (Task 1).
 - Produces: `pageChecks({ SITE, BASE })` from `@robertblust/design/verify/pages`, returning an object of nineteen `async (page, spec) => string | null` functions keyed by check name.
 
@@ -501,6 +509,7 @@ If Task 2 already shipped 0.9.0, this is **0.10.0**. Bump, commit, PR, merge wit
 ## Task 5: The three sites import `pageChecks`
 
 **Files:**
+
 - Modify: `verify/check.mjs` in all three sites
 - Modify: `package.json`, `package-lock.json` in all three sites
 

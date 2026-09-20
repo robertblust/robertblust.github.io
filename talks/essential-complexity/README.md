@@ -13,6 +13,7 @@ Same approach as the companion talk [mental-model](https://blust.ch/talks/mental
 A self-contained HTML deck (dark theme, bilingual DE/EN).
 
 ### Controls
+
 A transport bar along the bottom edge: back to start, previous, play/pause, next,
 fullscreen, then a DE/EN toggle and speaker notes. Swipe left or right on touch. Arrow,
 space, page and Home/End keys still drive the deck too — for a presenter remote — but
@@ -21,6 +22,7 @@ recorded clips in `audio/`, in whichever language is selected, and falls back to
 browser's own voice if a clip is missing.
 
 ## Contents
+
 - `index.html` – the presentation deck (self-contained except for the comic images)
 - `comic-1..6.png` – hand-drawn journey panels used as a side motif
 - `essential-complexity-de.pdf` / `essential-complexity-en.pdf` – the exported PDF fallback
@@ -29,7 +31,9 @@ The PDF and share-card exporters (`export-pdf.mjs`, `export-og.mjs`) live at the
 repository root and build both decks; there is no per-deck copy.
 
 ## Build the PDF fallback
+
 Run from the repository root:
+
 ```bash
 npm install
 npx playwright install chromium
@@ -37,7 +41,9 @@ npm run pdf        # → both decks, both languages: <slug>-de.pdf and <slug>-en
 ```
 
 ## Serve locally
+
 From the repository root:
+
 ```bash
 npm run serve      # → http://localhost:8000/talks/essential-complexity/
 ```

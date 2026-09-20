@@ -132,6 +132,7 @@ on decks. Inline SVG, because no external assets are permitted anywhere.
 ## What has to change
 
 **In the package**
+
 - `blocks/tokens.css` — add the `:root[data-theme="light"]` block. Fence `design tokens` → v5.
 - `blocks/theme.js` — new fence: storage, URL carry, first-paint application, control wiring.
 - `blocks/header.css` — the theme control's rules alongside `.seg`.
@@ -141,6 +142,7 @@ on decks. Inline SVG, because no external assets are permitted anywhere.
 - `lib/fences.mjs` — the new fence, and `themeKey` as a declared parameter.
 
 **In each site**
+
 - `design.config.json` gains `themeKey`.
 - `/privacy/` names `rb-theme`, or `storageKeys` fails — correctly.
 - The header (prose) and transport (deck) gain the control.

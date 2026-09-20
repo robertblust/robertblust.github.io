@@ -53,6 +53,7 @@ Both move into the shared runner, which means the other two sites gain them. **E
 ## File Structure
 
 **Created in `@robertblust/design`:**
+
 - `verify/suite.mjs` — `runSuite(...)`: the guards, the page loop, the site-wide blocks, and the reporting. One responsibility: run a site's checks against its pages and say what failed.
 - `test/suite.test.mjs` — drives `runSuite` with a fake browser and fake `fetch`.
 
@@ -65,11 +66,13 @@ Both move into the shared runner, which means the other two sites gain them. **E
 ## Task 1: `runSuite` in the package
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/verify/suite.mjs`
 - Modify: `/Users/rob/git/robertblust/design/package.json`
 - Test: `/Users/rob/git/robertblust/design/test/suite.test.mjs`
 
 **Interfaces:**
+
 - Produces: `runSuite({ browser, SITE, BASE, PAGES, CHECKS, systemFaces }) => Promise<number>` from `@robertblust/design/verify/suite`, returning the failure count. `browser` is a Playwright `Browser`; `systemFaces` is the `Set` the favicon check needs.
 
 - [ ] **Step 1: Move the runner verbatim**
@@ -223,6 +226,7 @@ Commit. Do not push or open a pull request — the release is the repository own
 **Files:** `verify/check.mjs` and `package.json` in each site.
 
 **Interfaces:**
+
 - Consumes: `runSuite({ browser, SITE, BASE, PAGES, CHECKS, systemFaces })` from Task 1.
 
 - [ ] **Step 1: Re-pin**
