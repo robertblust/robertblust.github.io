@@ -1,8 +1,6 @@
 # blust.ch
 
-Robert Blust's profile page and two talks. Self-contained, no bundler, no external
-assets. Working conventions and the traps that break this site silently are in
-`AGENTS.md`.
+Robert Blust's profile page and two talks. Self-contained, no bundler, no external assets. Working conventions and the traps that break this site silently are in `AGENTS.md`.
 
 ## Pages
 
@@ -16,12 +14,9 @@ assets. Working conventions and the traps that break this site silently are in
 /timeline/                       the experiences as a ledger — reads the same model.json as /model/
 ```
 
-A talk lives in one file. `talks/index.html` is the only page that names a talk; the
-profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore
-one edit, not two — see `AGENTS.md` for why the second one is gone.
+A talk lives in one file. `talks/index.html` is the only page that names a talk; the profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore one edit, not two — see `AGENTS.md` for why the second one is gone.
 
-Each deck is bilingual (English content, German via `data-de`), self-contained, and
-works from `file://` as well as a local server.
+Each deck is bilingual (English content, German via `data-de`), self-contained, and works from `file://` as well as a local server.
 
 ## Commands
 
@@ -47,15 +42,6 @@ npm run sitemap:check       # are those dates still what git says?
 ./tts/generate.py               # narration: generate what changed, both decks
 ```
 
-Run `npm run verify` after any change under `index.html`, `talks/`, or `verify/`. Run
-`npm run og` and `npm run pdf` after a visual change to either deck or to `index.html` /
-`talks/index.html` — the share cards and PDFs are rendered, committed files, not
-generated on demand. `npm run og:check` says when a card has fallen behind its page; CI
-runs it on every push, so forgetting is caught rather than shipped. Run `npm run model`
-then `npm run pages` after moving the pin in `source.json`; `model.json` and every page
-built from it are committed files, not generated on demand.
+Run `npm run verify` after any change under `index.html`, `talks/`, or `verify/`. Run `npm run og` and `npm run pdf` after a visual change to either deck or to `index.html` / `talks/index.html` — the share cards and PDFs are rendered, committed files, not generated on demand. `npm run og:check` says when a card has fallen behind its page; CI runs it on every push, so forgetting is caught rather than shipped. Run `npm run model` then `npm run pages` after moving the pin in `source.json`; `model.json` and every page built from it are committed files, not generated on demand.
 
-Narration is generated from the speaker notes themselves and cached on a content hash, so
-editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in
-`~/.zshrc` and is therefore invisible to a non-interactive shell — `AGENTS.md` has the
-one-liner that reaches it, and the rule about never printing it.
+Narration is generated from the speaker notes themselves and cached on a content hash, so editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in `~/.zshrc` and is therefore invisible to a non-interactive shell — `AGENTS.md` has the one-liner that reaches it, and the rule about never printing it.

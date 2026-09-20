@@ -1,20 +1,14 @@
 # blust.ch — a durable place to point at
 
-**Date:** 2026-08-22
-**Status:** design, awaiting review
+**Date:** 2026-08-22 **Status:** design, awaiting review
 
 ## The brief
 
-blust.ch is a profile page for Robert Blust, written for **peers**. It has no call to
-action: no "available for hire", no contact form, no conversion. Its job is permanence —
-a short, stable URL that says who he is, what he thinks, and what he has said, and that
-still works in five years.
+blust.ch is a profile page for Robert Blust, written for **peers**. It has no call to action: no "available for hire", no contact form, no conversion. Its job is permanence — a short, stable URL that says who he is, what he thinks, and what he has said, and that still works in five years.
 
-Two talks move under it. Both are currently served from their own repositories and both
-of those repositories are deleted once the move is verified.
+Two talks move under it. Both are currently served from their own repositories and both of those repositories are deleted once the move is verified.
 
-Everything below follows from the brief. Where a decision could have gone two ways, the
-reason is recorded, because the reason is the part that rots first.
+Everything below follows from the brief. Where a decision could have gone two ways, the reason is recorded, because the reason is the part that rots first.
 
 ## Decisions
 
@@ -63,14 +57,11 @@ robertblust.github.io/
   CLAUDE.md
 ```
 
-No build step for the site. Playwright is a dev dependency used only by the PDF and
-card exporters, never at serve time. Every page must work from `file://` and a plain
-local server, not only from the live domain.
+No build step for the site. Playwright is a dev dependency used only by the PDF and card exporters, never at serve time. Every page must work from `file://` and a plain local server, not only from the live domain.
 
 ### DNS at Hostpoint
 
-Replace the `A` record, add `AAAA` and `www`. **Leave `MX` and `TXT` untouched** — the
-domain's mail is live and removing those records silently stops incoming mail.
+Replace the `A` record, add `AAAA` and `www`. **Leave `MX` and `TXT` untouched** — the domain's mail is live and removing those records silently stops incoming mail.
 
 ```
 A      blust.ch    185.199.108.153        replaces 217.26.48.101
@@ -89,9 +80,7 @@ TXT    v=spf1 redirect=spf.mail…          DO NOT TOUCH
 
 The IPv6 addresses were read from a live GitHub Pages apex rather than from memory.
 
-After the records propagate, enable **Enforce HTTPS** in the repository's Pages
-settings. blust.ch currently serves an empty page over HTTP and has no valid
-certificate; this fixes both.
+After the records propagate, enable **Enforce HTTPS** in the repository's Pages settings. blust.ch currently serves an empty page over HTTP and has no valid certificate; this fixes both.
 
 ## URLs
 
@@ -121,22 +110,18 @@ Order is load-bearing. Each step is verifiable before the next begins.
 5. Verify every URL live, including the decks' assets and PDFs.
 6. **Only then** delete `robertblust/mental-model` and `robertblust/essential-complexity`.
 
-Both talks' `README.md` files cross-link to each other by GitHub URL. Those links break
-on deletion, so they are rewritten to the new blust.ch paths during step 2.
+Both talks' `README.md` files cross-link to each other by GitHub URL. Those links break on deletion, so they are rewritten to the new blust.ch paths during step 2.
 
 ## The two lists, doing two different jobs
 
-The landing page's talks section and `/talks/` must not become two copies of one list.
-They are split by what they contain:
+The landing page's talks section and `/talks/` must not become two copies of one list. They are split by what they contain:
 
 | | Landing page section | `/talks/` |
 | --- | --- | --- |
 | Shows | title, length, languages, link | title, length, languages, link, **description** |
 | Answers | "has he given talks?" | "what is this talk about?" |
 
-Adding a talk means editing `talks/index.html` (a full entry) and `index.html` (one
-line). That is a real duplication obligation, so `CLAUDE.md` names it explicitly —
-the same way guestgraph.io records that "12 minutes" is duplicated on purpose.
+Adding a talk means editing `talks/index.html` (a full entry) and `index.html` (one line). That is a real duplication obligation, so `CLAUDE.md` names it explicitly — the same way guestgraph.io records that "12 minutes" is duplicated on purpose.
 
 ## The profile page
 
@@ -158,28 +143,17 @@ One screen, quiet, no ask. In order:
 
 ### Identity mark and portrait
 
-Neither existing deck has a favicon or a mark of any kind, and GuestGraph's belongs to
-GuestGraph. So one is needed, and leaving it unspecified would mean deciding it by
-accident during the build.
+Neither existing deck has a favicon or a mark of any kind, and GuestGraph's belongs to GuestGraph. So one is needed, and leaving it unspecified would mean deciding it by accident during the build.
 
-`favicon.svg` is a **monogram**: the letters `rb` in IBM Plex Mono, cobalt on paper,
-matching the site's own type rather than introducing a logo. It carries to both decks,
-which currently have no icon at all.
+`favicon.svg` is a **monogram**: the letters `rb` in IBM Plex Mono, cobalt on paper, matching the site's own type rather than introducing a logo. It carries to both decks, which currently have no icon at all.
 
-**No portrait.** `rob-cv/assets/portrait.jpg` exists and would work, but a page whose
-brief is "no ask" reads differently with a face on it — a photograph makes it a personal
-brand page rather than a reference. This is the cheapest decision here to reverse: one
-image and one grid row.
+**No portrait.** `rob-cv/assets/portrait.jpg` exists and would work, but a page whose brief is "no ask" reads differently with a face on it — a photograph makes it a personal brand page rather than a reference. This is the cheapest decision here to reverse: one image and one grid row.
 
-Visual language matches the other three pages: `--paper:#0f1013`, `--ink:#f1ede4`,
-`--cobalt:#7aa0ff`, IBM Plex Sans and Mono, vmin-based full-bleed padding. A durable
-pointer should not look like a fourth unrelated thing.
+Visual language matches the other three pages: `--paper:#0f1013`, `--ink:#f1ede4`, `--cobalt:#7aa0ff`, IBM Plex Sans and Mono, vmin-based full-bleed padding. A durable pointer should not look like a fourth unrelated thing.
 
 ## The talks index
 
-Same structure as guestgraph.io/talks/ — brand link home, heading, lede, one row per
-talk with number, title, length, languages and description. Descriptions are drawn from
-each talk's existing README, which is where they are written today:
+Same structure as guestgraph.io/talks/ — brand link home, heading, lede, one row per talk with number, title, length, languages and description. Descriptions are drawn from each talk's existing README, which is where they are written today:
 
 - **The Mental Model** — a structured, machine-readable knowledge base that acts as the
   brain of a company: one source of truth for vision, strategy, processes, roles, KPIs,
@@ -189,9 +163,7 @@ each talk's existing README, which is where they are written today:
 
 ## Deck adaptation
 
-Both decks are the same shape as the GuestGraph intro deck — roughly 430 lines, ten
-slides, German markup with English in `data-en`, `applyLang()`, speaker notes in
-`data-notes`, their own `export-pdf.mjs`. What ports:
+Both decks are the same shape as the GuestGraph intro deck — roughly 430 lines, ten slides, German markup with English in `data-en`, `applyLang()`, speaker notes in `data-notes`, their own `export-pdf.mjs`. What ports:
 
 - **The transport bar.** Back to start, previous, play/pause, next, fullscreen, then
   DE/EN and speaker notes, with the slide counter in the display window. Keyboard
@@ -207,19 +179,13 @@ slides, German markup with English in `data-en`, `applyLang()`, speaker notes in
 - **Share cards.** `export-og.mjs`, rendering each deck's title slide at 1200×630 from a
   16:9 band. Declared `og:image:width`/`height` must match the file.
 
-What does not port: recorded narration (decision 9). The player's browser-voice
-fallback covers its absence.
+What does not port: recorded narration (decision 9). The player's browser-voice fallback covers its absence.
 
 ## Findability
 
-One flat `sitemap.xml` listing four URLs — no sitemap index, because one repository
-serves everything. `robots.txt` names it. Canonical and OG tags on all four pages, each
-with its own 1200×630 card. PDFs are excluded from the sitemap: they are the same talks
-in a second format and would compete with the decks for the same queries.
+One flat `sitemap.xml` listing four URLs — no sitemap index, because one repository serves everything. `robots.txt` names it. Canonical and OG tags on all four pages, each with its own 1200×630 card. PDFs are excluded from the sitemap: they are the same talks in a second format and would compete with the decks for the same queries.
 
-After deployment, a second Search Console **Domain** property for `blust.ch`, verified
-by DNS TXT — added alongside the existing SPF and GuestGraph verification records, never
-replacing them.
+After deployment, a second Search Console **Domain** property for `blust.ch`, verified by DNS TXT — added alongside the existing SPF and GuestGraph verification records, never replacing them.
 
 ## Conventions to record in `CLAUDE.md`
 

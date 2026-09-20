@@ -52,8 +52,7 @@ Copied from the spec and from plan 1. Every task's requirements implicitly inclu
 
 ## The two token variants, exactly
 
-This is the only non-uniform thing in the plan, and it is one line. A prose page closes its
-`:root` inside the fence; a deck leaves it open and adds its own tokens after the end marker.
+This is the only non-uniform thing in the plan, and it is one line. A prose page closes its `:root` inside the fence; a deck leaves it open and adds its own tokens after the end marker.
 
 **Prose page** (16 pages):
 
@@ -78,25 +77,18 @@ This is the only non-uniform thing in the plan, and it is one line. A prose page
   }
 ```
 
-Identical but for the `  }` line before the end marker. The package emits the shared body; the
-variant decides whether the closing brace is appended.
+Identical but for the `  }` line before the end marker. The package emits the shared body; the variant decides whether the closing brace is appended.
 
 ## The gate: what the first sync is allowed to change
 
-Plan 1's gate was an empty diff. **This plan's gate cannot be, and pretending otherwise would
-hide a real change.** The fence's own comment prose currently says *"keep in step across every
-repository that shares them"*, describing a habit that is being replaced; the spec requires it to
-say what to do instead. And the token fence gains a variant word so the tool knows which form to
-emit. Both are inside the fence, and both are the point of the plan.
+Plan 1's gate was an empty diff. **This plan's gate cannot be, and pretending otherwise would hide a real change.** The fence's own comment prose currently says *"keep in step across every repository that shares them"*, describing a habit that is being replaced; the spec requires it to say what to do instead. And the token fence gains a variant word so the tool knows which form to emit. Both are inside the fence, and both are the point of the plan.
 
 So the gate is sharper than "empty", and it is mechanically checkable:
 
 > **After `npm run design`, the diff may touch only lines inside a fence comment. Not one CSS
 > declaration — no property, no value, no selector — may change on any page.**
 
-Each adoption task (5, 6, 7) carries the exact command that proves it, plus a second check that
-compares the extracted `--token:value;` declarations against `git show HEAD:` for the same file.
-Any CSS movement means the rewriter is wrong and the task stops.
+Each adoption task (5, 6, 7) carries the exact command that proves it, plus a second check that compares the extracted `--token:value;` declarations against `git show HEAD:` for the same file. Any CSS movement means the rewriter is wrong and the task stops.
 
 ## File Structure
 
@@ -121,8 +113,7 @@ Any CSS movement means the rewriter is wrong and the task stops.
 | `bin/design.mjs` | reports fences as well as files; exit codes unchanged |
 | `README.md` | a section on what a fence is and how a page opts in |
 
-**Sites — modified:** only `package.json` and `package-lock.json` (the version bump) and the
-fenced HTML the tool rewrites. **No script and no CI change in any site.**
+**Sites — modified:** only `package.json` and `package-lock.json` (the version bump) and the fenced HTML the tool rewrites. **No script and no CI change in any site.**
 
 ---
 
@@ -141,10 +132,7 @@ fenced HTML the tool rewrites. **No script and no CI change in any site.**
   - `replaceFence(text: string, name: string, block: string): string` — returns the document with that fence's lines swapped for `block`. Throws if the fence is absent or unterminated.
   - `FenceError` — the Error subclass both throw, carrying `.name === "FenceError"`.
 
-**The format, stated once.** An opening line is `/* ─── <name> · <version> · <rest> ───`,
-indented by two spaces inside a `<style>`. A closing line is `/* ─── end <name> ─── */` with any
-run of box-drawing characters. `<version>` is `v` followed by digits. `<rest>` may name a variant
-as its first word (`page`, `deck`) or may be prose.
+**The format, stated once.** An opening line is `/* ─── <name> · <version> · <rest> ───`, indented by two spaces inside a `<style>`. A closing line is `/* ─── end <name> ─── */` with any run of box-drawing characters. `<version>` is `v` followed by digits. `<rest>` may name a variant as its first word (`page`, `deck`) or may be prose.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -261,8 +249,7 @@ test("a document with CRLF line endings round-trips without corrupting them", ()
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/rewrite.test.mjs`
-Expected: FAIL — `Cannot find module '../lib/rewrite.mjs'`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/rewrite.test.mjs` Expected: FAIL — `Cannot find module '../lib/rewrite.mjs'`.
 
 - [ ] **Step 3: Write the rewriter**
 
@@ -340,8 +327,7 @@ export function replaceFence(text, name, block) {
 
 - [ ] **Step 4: Run the test to verify it passes**
 
-Run: `npm test`
-Expected: PASS — 35 existing tests plus 11 new ones, 46 total, 0 failing.
+Run: `npm test` Expected: PASS — 35 existing tests plus 11 new ones, 46 total, 0 failing.
 
 - [ ] **Step 5: Commit**
 
@@ -378,15 +364,11 @@ git commit -m "Find a fenced block in a page, and swap it without touching the r
     with the version stamped from `versions.json` and the closing brace appended when the variant
     calls for it.
 
-**Extraction is mechanical, not retyped.** These are 30, 98 and 30 lines of intricate CSS with
-prose comments. (Do not confuse the 30-line `stage contract` *fence* with `assets/stage.css`, the
-198-line stage *stylesheet* plan 1 vendored — they are different things with similar names.) Extract them with the commands given; a transcription slip would change what
-three sites render.
+**Extraction is mechanical, not retyped.** These are 30, 98 and 30 lines of intricate CSS with prose comments. (Do not confuse the 30-line `stage contract` *fence* with `assets/stage.css`, the 198-line stage *stylesheet* plan 1 vendored — they are different things with similar names.) Extract them with the commands given; a transcription slip would change what three sites render.
 
 - [ ] **Step 1: Extract the three blocks from blust.ch**
 
-blust.ch carries all three and they are byte-identical to the other sites' copies, verified
-before this plan was written.
+blust.ch carries all three and they are byte-identical to the other sites' copies, verified before this plan was written.
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -409,29 +391,19 @@ wc -l blocks/*.css
 tail -3 blocks/tokens.css
 ```
 
-Expected: `tokens.css` 30 lines, `header.css` 98, `stage.css` 30. `tokens.css`'s last three
-lines must be `    --c-path:#B8D0FF;`, then the end-marker comment — **no bare `  }` between
-them.** If the brace is still there the awk did not strip it and the deck variant will be wrong.
+Expected: `tokens.css` 30 lines, `header.css` 98, `stage.css` 30. `tokens.css`'s last three lines must be `    --c-path:#B8D0FF;`, then the end-marker comment — **no bare `  }` between them.** If the brace is still there the awk did not strip it and the deck variant will be wrong.
 
 - [ ] **Step 2: Update the fence prose in each block**
 
-Each block's opening line currently ends with a habit that is being replaced. Edit the three
-files so each opening line reads, with its box-drawing run kept the same length:
+Each block's opening line currently ends with a habit that is being replaced. Edit the three files so each opening line reads, with its box-drawing run kept the same length:
 
 - `blocks/tokens.css`: `  /* ─── design tokens · v4 · {{variant}} ───────────────────────────────`
 - `blocks/header.css`: `  /* ─── header contract · v2 · shared ──────────────────────────────────`
 - `blocks/stage.css`: `  /* ─── stage contract · v2 · shared ───────────────────────────────────`
 
-`{{variant}}` is the one placeholder the tool substitutes; the other two carry the literal word
-`shared`, because those blocks have no variants and the slot must still be a single word.
+`{{variant}}` is the one placeholder the tool substitutes; the other two carry the literal word `shared`, because those blocks have no variants and the slot must still be a single word.
 
-Then, inside each block's comment prose, replace the sentence that says the copies must be kept
-in step by hand with what a reader should now do. In `blocks/tokens.css` the paragraph beginning
-*"These sites share no stylesheet by design…"* becomes a statement that the block is generated
-from `@robertblust/design`, that editing it here has no effect because the next `npm run design`
-will overwrite it, and that the place to change it is the package. Do the same in the other two.
-Keep every other line of prose — the four colour stops, the `--c-path` reasoning, the header
-contract's five rules — exactly as it is. **Change no CSS.**
+Then, inside each block's comment prose, replace the sentence that says the copies must be kept in step by hand with what a reader should now do. In `blocks/tokens.css` the paragraph beginning *"These sites share no stylesheet by design…"* becomes a statement that the block is generated from `@robertblust/design`, that editing it here has no effect because the next `npm run design` will overwrite it, and that the place to change it is the package. Do the same in the other two. Keep every other line of prose — the four colour stops, the `--c-path` reasoning, the header contract's five rules — exactly as it is. **Change no CSS.**
 
 Verify no declaration moved:
 
@@ -523,8 +495,7 @@ test("blockFor is stable — the same call twice gives the same bytes", () => {
 
 - [ ] **Step 4: Run the test to verify it fails**
 
-Run: `node --test test/fences.test.mjs`
-Expected: FAIL — `Cannot find module '../lib/fences.mjs'`.
+Run: `node --test test/fences.test.mjs` Expected: FAIL — `Cannot find module '../lib/fences.mjs'`.
 
 - [ ] **Step 5: Write `versions.json` and the manifest**
 
@@ -538,8 +509,7 @@ Create `versions.json`:
 }
 ```
 
-Each is one past what the sites carry today (`v3`, `v1`, `v1`). The bump is honest: the block's
-prose changes in this release, so a page carrying `v3` really is behind.
+Each is one past what the sites carry today (`v3`, `v1`, `v1`). The bump is honest: the block's prose changes in this release, so a page carrying `v3` really is behind.
 
 Create `lib/fences.mjs`:
 
@@ -618,8 +588,7 @@ Two edits in `package.json`, and nothing else:
 
 - [ ] **Step 7: Run the tests**
 
-Run: `npm test`
-Expected: PASS, 55 tests (46 from Task 1 plus 9), 0 failing.
+Run: `npm test` Expected: PASS, 55 tests (46 from Task 1 plus 9), 0 failing.
 
 Then confirm the emitted blocks really are what the sites carry today, modulo the fence lines:
 
@@ -686,10 +655,7 @@ git commit -m "The three fenced blocks, and the versions they carry"
     is `"differs"`, returns the changed page paths, sorted and de-duplicated.
 - The existing four exports keep their signatures exactly.
 
-**Discovery, not registration.** The tool walks the site's HTML and rewrites whatever fences it
-finds. A page that grows a fence is picked up with no list to maintain, and a page with no fence
-is untouched. The hole this leaves — a page that *should* carry a fence and does not — is already
-covered by the sites' own suites, which assert the marker on every page in `PAGES`.
+**Discovery, not registration.** The tool walks the site's HTML and rewrites whatever fences it finds. A page that grows a fence is picked up with no list to maintain, and a page with no fence is untouched. The hole this leaves — a page that *should* carry a fence and does not — is already covered by the sites' own suites, which assert the marker on every page in `PAGES`.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -792,8 +758,7 @@ test("an unterminated fence throws rather than being silently skipped", () => {
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `node --test test/sync-fences.test.mjs`
-Expected: FAIL — `findPages` is not exported from `lib/sync.mjs`.
+Run: `node --test test/sync-fences.test.mjs` Expected: FAIL — `findPages` is not exported from `lib/sync.mjs`.
 
 - [ ] **Step 3: Extend `lib/sync.mjs`**
 
@@ -868,8 +833,7 @@ Add `FenceError` to the existing `import` from `./rewrite.mjs` so the throw abov
 
 - [ ] **Step 4: Teach the CLI to report fences**
 
-In `bin/design.mjs`, import `planFences` and `applyFences` alongside the existing four, and
-report both kinds. Replace the `--check` branch and the write branch so that:
+In `bin/design.mjs`, import `planFences` and `applyFences` alongside the existing four, and report both kinds. Replace the `--check` branch and the write branch so that:
 
 - `--check` prints file mismatches as it does now, then a line per differing fence in the form
   `  ✗ <page>  <fence> is <pageVersion>, this release ships <ourVersion>`, and exits **1** if
@@ -882,8 +846,7 @@ report both kinds. Replace the `--check` branch and the write branch so that:
 - the remedy text after a failed `--check` gains one sentence: that a fence is generated, so a
   block edited by hand in a page will be overwritten, and the place to change it is the package.
 
-Exit codes stay exactly 0 / 1 / 2. A `FenceError` must exit **2** with its message, not crash
-with a stack trace — it means a page is malformed, which is a config-shaped problem, not drift.
+Exit codes stay exactly 0 / 1 / 2. A `FenceError` must exit **2** with its message, not crash with a stack trace — it means a page is malformed, which is a config-shaped problem, not drift.
 
 - [ ] **Step 5: Run the tests and exercise the CLI by hand**
 
@@ -908,8 +871,7 @@ node /Users/rob/git/robertblust/design/bin/design.mjs sync
 node /Users/rob/git/robertblust/design/bin/design.mjs sync --check; echo "  exit $?  (0 expected)"
 ```
 
-Expected: the first check names `index.html  design tokens is v1, this release ships v4` and exits
-1; the sync rewrites it; the second check exits 0.
+Expected: the first check names `index.html  design tokens is v1, this release ships v4` and exits 1; the sync rewrites it; the second check exits 0.
 
 - [ ] **Step 6: Commit**
 
@@ -957,8 +919,7 @@ npm test 2>&1 | grep -E "^ℹ (tests|pass|fail)"
 npm pack --dry-run 2>&1 | grep -E "blocks/|versions.json|total files"
 ```
 
-Expected: 64 passing; the tarball listing includes `blocks/tokens.css`, `blocks/header.css`,
-`blocks/stage.css` and `versions.json`, and still no `test/`.
+Expected: 64 passing; the tarball listing includes `blocks/tokens.css`, `blocks/header.css`, `blocks/stage.css` and `versions.json`, and still no `test/`.
 
 - [ ] **Step 3: Commit, tag and release**
 
@@ -970,16 +931,14 @@ git push
 gh run list --limit 3
 ```
 
-Watch the CI run by its id (`gh run watch <id> --exit-status --compact`) — `gh run watch` with no
-id fails non-interactively. Do not tag a red commit. Then:
+Watch the CI run by its id (`gh run watch <id> --exit-status --compact`) — `gh run watch` with no id fails non-interactively. Do not tag a red commit. Then:
 
 ```bash
 git tag v0.2.0 && git push origin v0.2.0
 gh release create v0.2.0 --title "v0.2.0 — the three fenced blocks" --notes-file <a file you write>
 ```
 
-The notes must say, because Dependabot renders them into the pull request it opens in three
-repositories and that PR is the only thing telling someone there what changed:
+The notes must say, because Dependabot renders them into the pull request it opens in three repositories and that PR is the only thing telling someone there what changed:
 
 - the package now rewrites `design tokens`, `header contract` and `stage contract` in place;
 - **`design:check` will go red in all three sites** until someone runs `npm run design` and commits;
@@ -1001,8 +960,7 @@ node -e '
 ' --input-type=module
 ```
 
-Expected: `fences: design tokens, header contract, stage contract` and `differ by: 1 line`.
-The `"./fences"` entry in the `exports` map was added in Task 2, Step 6.
+Expected: `fences: design tokens, header contract, stage contract` and `differ by: 1 line`. The `"./fences"` entry in the `exports` map was added in Task 2, Step 6.
 
 ---
 
@@ -1019,9 +977,7 @@ The `"./fences"` entry in the `exports` map was added in Task 2, Step 6.
 - Consumes: `@robertblust/design@v0.2.0`.
 - Produces: nothing other tasks consume.
 
-**No script and no CI change.** `design` and `design:check` already exist and already run in CI.
-That is the point of routing fences through the same commands: adopting a whole new *kind* of
-shared thing costs a version bump.
+**No script and no CI change.** `design` and `design:check` already exist and already run in CI. That is the point of routing fences through the same commands: adopting a whole new *kind* of shared thing costs a version bump.
 
 - [ ] **Step 1: Branch, and see the check go red before you change anything**
 
@@ -1032,12 +988,9 @@ npm install --save-dev "github:robertblust/design#v0.2.0"
 npm run design:check; echo "  exit $?  (1 expected)"
 ```
 
-Expected: **exit 1**, naming each page whose `design tokens` fence says `v3` where the release
-ships `v4`, and likewise `header contract` and `stage contract`. This is the tripwire working —
-record the output for the pull request body.
+Expected: **exit 1**, naming each page whose `design tokens` fence says `v3` where the release ships `v4`, and likewise `header contract` and `stage contract`. This is the tripwire working — record the output for the pull request body.
 
-If it exits 0, stop and report BLOCKED: either the install did not take or the fences are not
-being found, and everything after this rests on it.
+If it exits 0, stop and report BLOCKED: either the install did not take or the fences are not being found, and everything after this rests on it.
 
 - [ ] **Step 2: Sync, and prove no CSS moved**
 
@@ -1055,8 +1008,7 @@ git diff -U0 | grep -E "^[+-]" | grep -vE "^(\+\+\+|---)" \
   | grep -E ":|{|}" | sort -u
 ```
 
-Expected: **no output.** Every changed line is inside a comment. If a line containing a CSS
-declaration appears, the rewriter changed what the page renders — stop and report BLOCKED.
+Expected: **no output.** Every changed line is inside a comment. If a line containing a CSS declaration appears, the rewriter changed what the page renders — stop and report BLOCKED.
 
 Belt and braces, compare the computed token values rather than the source:
 
@@ -1087,8 +1039,7 @@ for f in talks/mental-model/index.html talks/essential-complexity/index.html; do
 done
 ```
 
-Expected: neither prints a bare `}`. A `}` here means the deck was emitted as a page and its own
-`--warn`/`--slab`/`--lcd` tokens now sit outside `:root`.
+Expected: neither prints a bare `}`. A `}` here means the deck was emitted as a page and its own `--warn`/`--slab`/`--lcd` tokens now sit outside `:root`.
 
 - [ ] **Step 4: Check, regenerate the cards, and run the suite**
 
@@ -1103,10 +1054,7 @@ sleep 2 && npm run verify
 kill %1
 ```
 
-Expected: `design:check` exits 0; `npm run verify` passes every page. The `tokenVersion` check
-reads the marker off the page and compares it with `verify/design.mjs`'s `TOKEN_VERSION`, which
-still says `v3` — **so `verify` is expected to FAIL here.** That is Task 8's job; note the failure
-and continue. If `verify` fails for any *other* reason, stop.
+Expected: `design:check` exits 0; `npm run verify` passes every page. The `tokenVersion` check reads the marker off the page and compares it with `verify/design.mjs`'s `TOKEN_VERSION`, which still says `v3` — **so `verify` is expected to FAIL here.** That is Task 8's job; note the failure and continue. If `verify` fails for any *other* reason, stop.
 
 - [ ] **Step 5: Commit and open the pull request**
 
@@ -1118,8 +1066,7 @@ git commit -m "Take the three fenced blocks from @robertblust/design v0.2.0"
 git push -u origin adopt-fences
 ```
 
-Do **not** open the pull request yet — Task 8 lands on this same branch and the suite is red until
-it does.
+Do **not** open the pull request yet — Task 8 lands on this same branch and the suite is red until it does.
 
 ---
 
@@ -1133,29 +1080,20 @@ it does.
 
 **Interfaces:** consumes `@robertblust/design@v0.2.0`; produces nothing other tasks consume.
 
-Identical in shape to Task 5. Repeated in full rather than referenced, because tasks may be read
-out of order.
+Identical in shape to Task 5. Repeated in full rather than referenced, because tasks may be read out of order.
 
 - [ ] **Step 1a: Declare the variant word on every `design tokens` fence — BEFORE anything else**
 
-This step was missing from an earlier draft and the plan does not work without it. `planFences`
-throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and
-**no page declares one yet**: they all still read `· keep in step across every repository that
-shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and
-the tool cannot bootstrap itself.
+This step was missing from an earlier draft and the plan does not work without it. `planFences` throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and **no page declares one yet**: they all still read `· keep in step across every repository that shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and the tool cannot bootstrap itself.
 
-Edit each page's `design tokens` opening line so the word after the version is the variant. It is a
-one-word prose edit inside a comment — change no CSS, and do not touch the version number, which
-the sync will move from `v3` to `v4`:
+Edit each page's `design tokens` opening line so the word after the version is the variant. It is a one-word prose edit inside a comment — change no CSS, and do not touch the version number, which the sync will move from `v3` to `v4`:
 
 ```
   /* ─── design tokens · v3 · page ───────────────────────────────────────
   /* ─── design tokens · v3 · deck ───────────────────────────────────────
 ```
 
-Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares
-`--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the
-fence. Confirm rather than assume:
+Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares `--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the fence. Confirm rather than assume:
 
 ```bash
 find . -name '*.html' -not -path './node_modules/*' -not -path './.git/*' \
@@ -1180,8 +1118,7 @@ npm install --save-dev "github:robertblust/design#v0.2.0"
 npm run design:check; echo "  exit $?  (1 expected)"
 ```
 
-Expected: exit 1, naming the stale fences. Record the output. If it exits 0, stop and report
-BLOCKED.
+Expected: exit 1, naming the stale fences. Record the output. If it exits 0, stop and report BLOCKED.
 
 - [ ] **Step 2: Sync, and prove no CSS moved**
 
@@ -1218,8 +1155,7 @@ sleep 2 && npm run verify
 kill %1
 ```
 
-`verify` is expected to fail on `tokenVersion` only, for the same reason as Task 5 — the suite's
-`TOKEN_VERSION` still says `v3`. Task 8 fixes it. Any other failure means stop.
+`verify` is expected to fail on `tokenVersion` only, for the same reason as Task 5 — the suite's `TOKEN_VERSION` still says `v3`. Task 8 fixes it. Any other failure means stop.
 
 - [ ] **Step 5: Commit and push, no pull request yet**
 
@@ -1243,30 +1179,20 @@ git push -u origin adopt-fences
 
 **Interfaces:** consumes `@robertblust/design@v0.2.0`; produces nothing other tasks consume.
 
-This site has no `stage contract` fence — it draws no graph. It has `design tokens` on all five
-pages and `header contract` on four. That asymmetry is correct and needs no configuration: the
-tool rewrites the fences it finds.
+This site has no `stage contract` fence — it draws no graph. It has `design tokens` on all five pages and `header contract` on four. That asymmetry is correct and needs no configuration: the tool rewrites the fences it finds.
 
 - [ ] **Step 1a: Declare the variant word on every `design tokens` fence — BEFORE anything else**
 
-This step was missing from an earlier draft and the plan does not work without it. `planFences`
-throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and
-**no page declares one yet**: they all still read `· keep in step across every repository that
-shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and
-the tool cannot bootstrap itself.
+This step was missing from an earlier draft and the plan does not work without it. `planFences` throws a `FenceError` — **exit 2, not 1** — when a `design tokens` fence declares no variant, and **no page declares one yet**: they all still read `· keep in step across every repository that shares them`. So `design:check` aborts on the first page it finds rather than reporting drift, and the tool cannot bootstrap itself.
 
-Edit each page's `design tokens` opening line so the word after the version is the variant. It is a
-one-word prose edit inside a comment — change no CSS, and do not touch the version number, which
-the sync will move from `v3` to `v4`:
+Edit each page's `design tokens` opening line so the word after the version is the variant. It is a one-word prose edit inside a comment — change no CSS, and do not touch the version number, which the sync will move from `v3` to `v4`:
 
 ```
   /* ─── design tokens · v3 · page ───────────────────────────────────────
   /* ─── design tokens · v3 · deck ───────────────────────────────────────
 ```
 
-Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares
-`--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the
-fence. Confirm rather than assume:
+Which page gets which is decided by one thing: **a deck leaves its `:root` open** and declares `--warn`, `--slab` and `--lcd` after the end marker, while a prose page closes the brace inside the fence. Confirm rather than assume:
 
 ```bash
 find . -name '*.html' -not -path './node_modules/*' -not -path './.git/*' \
@@ -1291,8 +1217,7 @@ npm install --save-dev "github:robertblust/design#v0.2.0"
 npm run design:check; echo "  exit $?  (1 expected)"
 ```
 
-Expected: exit 1, naming stale `design tokens` and `header contract` fences and **no
-`stage contract`**. Record the output. If it exits 0, stop and report BLOCKED.
+Expected: exit 1, naming stale `design tokens` and `header contract` fences and **no `stage contract`**. Record the output. If it exits 0, stop and report BLOCKED.
 
 - [ ] **Step 2: Sync, and prove no CSS moved**
 
@@ -1352,20 +1277,13 @@ git push -u origin adopt-fences
 
 **Interfaces:** consumes nothing; produces nothing.
 
-`verify/design.mjs` holds `TOKEN_VERSION = "v3"` and a `tokenVersion` check that fetches each page
-and compares its marker. That check exists because nothing could tell you a *sibling repository*
-was behind. Now something can: `design:check` compares the block itself, byte for byte, against
-the one source. The version comparison is the weaker of the two and is now failing for a reason
-that is not a defect.
+`verify/design.mjs` holds `TOKEN_VERSION = "v3"` and a `tokenVersion` check that fetches each page and compares its marker. That check exists because nothing could tell you a *sibling repository* was behind. Now something can: `design:check` compares the block itself, byte for byte, against the one source. The version comparison is the weaker of the two and is now failing for a reason that is not a defect.
 
-The file's own opening comment says this out loud — *"Across repositories the check is deliberate
-rather than automatic … That part is a habit, and this comment is the reminder."* That paragraph
-is what this task deletes.
+The file's own opening comment says this out loud — *"Across repositories the check is deliberate rather than automatic … That part is a habit, and this comment is the reminder."* That paragraph is what this task deletes.
 
 - [ ] **Step 1: Update `TOKEN_VERSION` and rewrite the habit paragraph**
 
-In each of the three `verify/design.mjs` files — they are byte-identical and must stay so — make
-the same two edits:
+In each of the three `verify/design.mjs` files — they are byte-identical and must stay so — make the same two edits:
 
 1. `export const TOKEN_VERSION = "v3";` becomes `export const TOKEN_VERSION = "v4";`
 2. Replace the opening paragraph that begins *"Across repositories the check is deliberate rather
@@ -1387,26 +1305,13 @@ Expected: `1`.
 
 - [ ] **Step 1b: Retire the intra-repo "token blocks in circulation" check**
 
-Also missing from an earlier draft. Each site's `verify/check.mjs` carries a block (search for
-`different token blocks are in circulation`) that fetches every page in `PAGES`, slices from the
-`design tokens` fence through `--c-path:#……;`, and asserts every page's slice is identical. It now
-fails legitimately, and reporting **`2 different token blocks are in circulation`** is the correct
-answer to the question it asks — the variant word `page`/`deck` sits on the opening line, inside
-the slice, so the two forms differ there by design.
+Also missing from an earlier draft. Each site's `verify/check.mjs` carries a block (search for `different token blocks are in circulation`) that fetches every page in `PAGES`, slices from the `design tokens` fence through `--c-path:#……;`, and asserts every page's slice is identical. It now fails legitimately, and reporting **`2 different token blocks are in circulation`** is the correct answer to the question it asks — the variant word `page`/`deck` sits on the opening line, inside the slice, so the two forms differ there by design.
 
 Do not teach it to group by variant. **Delete it**, and say why in the commit.
 
-Its own comment explains what it was for: *"The token block is a copy on every page, and until now
-only its version was checked… Compared against each other rather than a recorded hash, because a
-hash is a second thing to keep in step and would drift the same way."* It compared pages to each
-other because there was no single source to compare them against. There is one now, and
-`design:check` compares every page's fence **byte for byte against it** — strictly stronger than
-pages agreeing with one another, and it sees the two variants correctly because the package emits
-them. Keeping both would mean maintaining a weaker check that has to be taught about every variant
-the stronger one already handles.
+Its own comment explains what it was for: *"The token block is a copy on every page, and until now only its version was checked… Compared against each other rather than a recorded hash, because a hash is a second thing to keep in step and would drift the same way."* It compared pages to each other because there was no single source to compare them against. There is one now, and `design:check` compares every page's fence **byte for byte against it** — strictly stronger than pages agreeing with one another, and it sees the two variants correctly because the package emits them. Keeping both would mean maintaining a weaker check that has to be taught about every variant the stronger one already handles.
 
-This is the same reasoning that demotes `TOKEN_VERSION` in the next step, applied to the other
-half of the same habit.
+This is the same reasoning that demotes `TOKEN_VERSION` in the next step, applied to the other half of the same habit.
 
 - [ ] **Step 2: Run all three suites green**
 
@@ -1433,8 +1338,7 @@ for r in /Users/rob/git/robertblust/robertblust.github.io \
 done
 ```
 
-Expected: each prints a `design:` group with `patterns: ["@robertblust/design"]`. If one is
-missing, add it before the `minor-and-patch` group — first match wins.
+Expected: each prints a `design:` group with `patterns: ["@robertblust/design"]`. If one is missing, add it before the `minor-and-patch` group — first match wins.
 
 - [ ] **Step 4: Commit in each site, on the same `adopt-fences` branch**
 
@@ -1447,9 +1351,7 @@ git push
 
 - [ ] **Step 5: Open all three pull requests**
 
-Now the suites are green, open them. **Do not use `--fill`** — it takes the body from the commit
-body and these commits have single-line messages, which yields an empty description. Write each
-body yourself, carrying:
+Now the suites are green, open them. **Do not use `--fill`** — it takes the body from the commit body and these commits have single-line messages, which yields an empty description. Write each body yourself, carrying:
 
 - the **red `design:check` output from Step 1 of that site's adoption task**, pasted as real
   output — that is the tripwire firing for the first time and it is the thing worth showing;

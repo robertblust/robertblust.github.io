@@ -2,18 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Make one parse of the pinned model the only parse, written to a committed
-`model.json`, and render every derived page region as a pure function of that file.
+**Goal:** Make one parse of the pinned model the only parse, written to a committed `model.json`, and render every derived page region as a pure function of that file.
 
-**Architecture:** Two layers. `build/model.mjs` is alone in touching the network and the
-parser: it resolves the pin, reads the model's files through `build/read.mjs`, parses them
-with `parseInstance` and writes `model.json`. `build/pages.mjs` loads that file, refuses to
-run if it names a commit other than the one `source.json` pins, and calls three renderers
-that each write one kind of region and report which pages drifted.
+**Architecture:** Two layers. `build/model.mjs` is alone in touching the network and the parser: it resolves the pin, reads the model's files through `build/read.mjs`, parses them with `parseInstance` and writes `model.json`. `build/pages.mjs` loads that file, refuses to run if it names a commit other than the one `source.json` pins, and calls three renderers that each write one kind of region and report which pages drifted.
 
-**Tech Stack:** Node 22+ ESM, no framework. `companygraph-meta-model` v0.14.0 for the parser.
-`node --test` for unit tests, matching `tools/dupes.test.mjs`. Playwright only in
-`npm run verify`, which this plan does not change.
+**Tech Stack:** Node 22+ ESM, no framework. `companygraph-meta-model` v0.14.0 for the parser. `node --test` for unit tests, matching `tools/dupes.test.mjs`. Playwright only in `npm run verify`, which this plan does not change.
 
 **Spec:** `docs/superpowers/specs/2026-09-08-one-model-artifact-design.md`
 
@@ -73,8 +66,7 @@ All counted on 2026-09-08 and reproducible with the commands in each task.
 
 ### Task 1: One reader, one parse, one artifact
 
-Writes `model.json` and changes no page. The data block stays where it is, so nothing can
-regress yet — this task is proved by showing the artifact reproduces the block exactly.
+Writes `model.json` and changes no page. The data block stays where it is, so nothing can regress yet — this task is proved by showing the artifact reproduces the block exactly.
 
 **Files:**
 
@@ -202,23 +194,19 @@ if (process.argv.includes("--check")) {
 
 - [ ] **Step 3: Point the scripts at it**
 
-In `package.json`, leave `model` and `model:check` as they are — they already run
-`build/model.mjs`. Nothing to change in this step; confirm with:
+In `package.json`, leave `model` and `model:check` as they are — they already run `build/model.mjs`. Nothing to change in this step; confirm with:
 
-Run: `node -e 'const s=require("./package.json").scripts; console.log(s.model, "|", s["model:check"])'`
-Expected: `node build/model.mjs | node build/model.mjs --check`
+Run: `node -e 'const s=require("./package.json").scripts; console.log(s.model, "|", s["model:check"])'` Expected: `node build/model.mjs | node build/model.mjs --check`
 
 - [ ] **Step 4: Generate the artifact**
 
-Run: `npm run model`
-Expected: `wrote model.json: 123 entities, 517 edges from robertblust/mental-model@66cd79d`
+Run: `npm run model` Expected: `wrote model.json: 123 entities, 517 edges from robertblust/mental-model@66cd79d`
 
 This needs the network. If GitHub rate-limits, export `GITHUB_TOKEN` first; never echo it.
 
 - [ ] **Step 5: Prove the artifact reproduces the block byte-for-byte**
 
-This is the whole point of the task. The block currently in the pages was produced by the old
-code path; the artifact must serialize to exactly the same bytes.
+This is the whole point of the task. The block currently in the pages was produced by the old code path; the artifact must serialize to exactly the same bytes.
 
 Run:
 
@@ -240,11 +228,9 @@ If either differs, stop. It means the parser or the pin moved, and no later task
 
 - [ ] **Step 6: Confirm the check catches a broken artifact**
 
-Run: `printf '{}\n' >> model.json && npm run model:check; echo "exit: $?"`
-Expected: `✗ model.json is not what … parses to — run: npm run model`, exit 1
+Run: `printf '{}\n' >> model.json && npm run model:check; echo "exit: $?"` Expected: `✗ model.json is not what … parses to — run: npm run model`, exit 1
 
-Run: `npm run model && npm run model:check`
-Expected: `✓ model.json is robertblust/mental-model@66cd79d: 123 entities, 517 edges`
+Run: `npm run model && npm run model:check` Expected: `✓ model.json is robertblust/mental-model@66cd79d: 123 entities, 517 edges`
 
 - [ ] **Step 7: Commit**
 
@@ -275,8 +261,7 @@ MSG
 
 ### Task 2: The renderer layer, and the data block through it
 
-Introduces `pages.mjs`, the pin guard and the first renderer. Ends with the data block written
-from `model.json` and a clean `git diff`.
+Introduces `pages.mjs`, the pin guard and the first renderer. Ends with the data block written from `model.json` and a clean `git diff`.
 
 **Files:**
 
@@ -358,8 +343,7 @@ test("writeBlock reports nothing once the pages are written", () => {
 
 - [ ] **Step 2: Run it to make sure it fails**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: FAIL, `Cannot find module` for `./block.mjs`
+Run: `node --test build/renderers.test.mjs` Expected: FAIL, `Cannot find module` for `./block.mjs`
 
 - [ ] **Step 3: Write `build/block.mjs`**
 
@@ -400,8 +384,7 @@ export function writeBlock(data, { check = false, root = HERE } = {}) {
 
 - [ ] **Step 4: Run the test and make sure it passes**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 3 tests
+Run: `node --test build/renderers.test.mjs` Expected: PASS, 3 tests
 
 - [ ] **Step 5: Write `build/pages.mjs`**
 
@@ -463,12 +446,9 @@ In `package.json`, inside `scripts`, after the two `model` entries:
 
 - [ ] **Step 7: Prove the data block is unchanged**
 
-Run: `npm run pages && git diff --stat`
-Expected: no output from `git diff --stat`. The block was already correct, so rendering it
-again must change nothing.
+Run: `npm run pages && git diff --stat` Expected: no output from `git diff --stat`. The block was already correct, so rendering it again must change nothing.
 
-Run: `npm run pages:check`
-Expected: `✓ every derived region matches model.json at robertblust/mental-model@66cd79d`
+Run: `npm run pages:check` Expected: `✓ every derived region matches model.json at robertblust/mental-model@66cd79d`
 
 - [ ] **Step 8: Prove the pin guard**
 
@@ -525,11 +505,7 @@ MSG
 - Consumes: `writeBlock` pattern and the `pages.mjs` `RENDERERS` array from Task 2.
 - Produces: `writePrinciples(data, { check, root }) => string[]`, same contract as `writeBlock`.
 
-Background the implementer needs: `parseInstance` already yields the vision and every value as
-entities carrying `name`, `tagline` and `sections[].text`. A section's text holds paragraphs
-separated by a blank line, with hard-wrapped lines inside a paragraph. The old hand parser
-joined a paragraph's lines with a space, so the replacement must do the same. This was
-confirmed on 2026-09-08 to reproduce all 25 generated lines of the current page verbatim.
+Background the implementer needs: `parseInstance` already yields the vision and every value as entities carrying `name`, `tagline` and `sections[].text`. A section's text holds paragraphs separated by a blank line, with hard-wrapped lines inside a paragraph. The old hand parser joined a paragraph's lines with a space, so the replacement must do the same. This was confirmed on 2026-09-08 to reproduce all 25 generated lines of the current page verbatim.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -576,14 +552,11 @@ test("writePrinciples orders values by path, not by entity order", () => {
 
 - [ ] **Step 2: Run it to make sure it fails**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: FAIL, `writePrinciples is not exported` or a module resolution error
+Run: `node --test build/renderers.test.mjs` Expected: FAIL, `writePrinciples is not exported` or a module resolution error
 
 - [ ] **Step 3: Rewrite `build/principles.mjs`**
 
-Delete `parse()` (lines 34-51), `readModel()` (lines 54-79), the `execFileSync` import and the
-trailing write-or-check block. Keep `esc`, `inline`, `headline`, the two notes and the
-provenance paragraph. Replace the file's header comment and its entry points with:
+Delete `parse()` (lines 34-51), `readModel()` (lines 54-79), the `execFileSync` import and the trailing write-or-check block. Keep `esc`, `inline`, `headline`, the two notes and the provenance paragraph. Replace the file's header comment and its entry points with:
 
 ```js
 // Renders the vision and the values into principles/index.html from the artifact.
@@ -668,15 +641,11 @@ export function writePrinciples(data, { check = false, root = HERE } = {}) {
 }
 ```
 
-Move the provenance paragraph into a `derived(data)` function that takes `data.repo` and
-`data.commit` instead of the module-level `repo` and `commit` from `source.json`, so the
-renderer reads only the artifact. Its body is unchanged otherwise, including the single-quote
-convention inside `data-de` and the `escAttr` that does not run the German through `esc`.
+Move the provenance paragraph into a `derived(data)` function that takes `data.repo` and `data.commit` instead of the module-level `repo` and `commit` from `source.json`, so the renderer reads only the artifact. Its body is unchanged otherwise, including the single-quote convention inside `data-de` and the `escAttr` that does not run the German through `esc`.
 
 - [ ] **Step 4: Run the tests and make sure they pass**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 6 tests
+Run: `node --test build/renderers.test.mjs` Expected: PASS, 6 tests
 
 - [ ] **Step 5: Register the renderer**
 
@@ -689,13 +658,9 @@ const RENDERERS = [writeBlock, writePrinciples];
 
 - [ ] **Step 6: Prove the principles page is byte-identical**
 
-Run: `npm run pages && git diff --stat`
-Expected: no output. This is the task's whole claim — the hand parser and the pinned parser
-produce the same page.
+Run: `npm run pages && git diff --stat` Expected: no output. This is the task's whole claim — the hand parser and the pinned parser produce the same page.
 
-If `git diff` shows changes to `principles/index.html`, read them before doing anything else.
-A difference in a paragraph break means `paragraphs()` is wrong; a difference in order means
-the sort is.
+If `git diff` shows changes to `principles/index.html`, read them before doing anything else. A difference in a paragraph break means `paragraphs()` is wrong; a difference in order means the sort is.
 
 - [ ] **Step 7: Confirm the check catches a hand edit**
 
@@ -738,9 +703,7 @@ MSG
 
 ### Task 4: Invariant JSON-LD nodes come from one definition
 
-The one task that changes published output. Everything else in this plan is proved by an empty
-diff; this one is proved by a diff that contains exactly what the spec predicted and nothing
-else.
+The one task that changes published output. Everything else in this plan is proved by an empty diff; this one is proved by a diff that contains exactly what the spec predicted and nothing else.
 
 **Files:**
 
@@ -821,8 +784,7 @@ test("writeJsonLd replaces the leading three nodes and leaves the rest byte-iden
 
 - [ ] **Step 2: Run it to make sure it fails**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: FAIL, `Cannot find module` for `./jsonld.mjs`
+Run: `node --test build/renderers.test.mjs` Expected: FAIL, `Cannot find module` for `./jsonld.mjs`
 
 - [ ] **Step 3: Write `build/jsonld.mjs`**
 
@@ -939,8 +901,7 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
 
 - [ ] **Step 4: Run the tests and make sure they pass**
 
-Run: `node --test build/renderers.test.mjs`
-Expected: PASS, 9 tests
+Run: `node --test build/renderers.test.mjs` Expected: PASS, 9 tests
 
 - [ ] **Step 5: Register it and delete its predecessor**
 
@@ -957,15 +918,13 @@ Then:
 git rm build/sameas.mjs
 ```
 
-In `package.json`, delete the `principles`, `principles:check`, `sameas` and `sameas:check`
-entries. Leave `model`, `model:check`, `pages`, `pages:check` and `test:build`.
+In `package.json`, delete the `principles`, `principles:check`, `sameas` and `sameas:check` entries. Leave `model`, `model:check`, `pages`, `pages:check` and `test:build`.
 
 - [ ] **Step 6: Render, and read the diff line by line**
 
 Run: `npm run pages && git diff --stat`
 
-Expected: exactly nine files changed, all `index.html`, and no change to `model.json`,
-`model/index.html`'s data block or `principles/index.html`'s prose block.
+Expected: exactly nine files changed, all `index.html`, and no change to `model.json`, `model/index.html`'s data block or `principles/index.html`'s prose block.
 
 Run: `git diff -U0 -- '*.html' | grep '^[-+]' | grep -v '^[-+][-+]' | sort | uniq -c | sort -rn`
 
@@ -977,16 +936,13 @@ Expected, and nothing else:
 - nine pages expanding the inline `"creator"` and `"about"` objects onto three lines each
 - two pages — the decks — gaining `"https://substack.com/@robertblust"`
 
-If any other line appears, stop and read it. A changed `WebPage` or `BreadcrumbList` line means
-the slice index is wrong.
+If any other line appears, stop and read it. A changed `WebPage` or `BreadcrumbList` line means the slice index is wrong.
 
 - [ ] **Step 7: Confirm nothing but JSON-LD moved**
 
-Run: `git diff -- '*.html' | grep -c '^[-+]' && git diff --stat -- model.json`
-Expected: a count consistent with step 6, and no output for `model.json`.
+Run: `git diff -- '*.html' | grep -c '^[-+]' && git diff --stat -- model.json` Expected: a count consistent with step 6, and no output for `model.json`.
 
-Run: `npm run pages:check`
-Expected: `✓ every derived region matches model.json at robertblust/mental-model@66cd79d`
+Run: `npm run pages:check` Expected: `✓ every derived region matches model.json at robertblust/mental-model@66cd79d`
 
 - [ ] **Step 8: Confirm the check catches a single-page edit**
 
@@ -998,16 +954,11 @@ npm run pages:check; echo "exit: $?"
 git checkout talks/mental-model/index.html
 ```
 
-Expected: `✗ talks/mental-model/index.html no longer match model.json — run: npm run pages`,
-exit 1
+Expected: `✗ talks/mental-model/index.html no longer match model.json — run: npm run pages`, exit 1
 
 - [ ] **Step 9: Run the full suite**
 
-Run: `npm run verify`
-Expected: green. This matters more here than anywhere else in the plan, because the design
-package's page checks resolve every `@id` in the graph and fetch every on-site URL demanding
-HTTP 200 — so this run is what proves `https://blust.ch/model/` and `https://blust.ch/model.json`
-are both actually served.
+Run: `npm run verify` Expected: green. This matters more here than anywhere else in the plan, because the design package's page checks resolve every `@id` in the graph and fetch every on-site URL demanding HTTP 200 — so this run is what proves `https://blust.ch/model/` and `https://blust.ch/model.json` are both actually served.
 
 - [ ] **Step 10: Commit**
 
@@ -1084,8 +1035,7 @@ And replace the step at lines 78-88 with:
 
 Run: `python3 -c 'import yaml,sys; d=yaml.safe_load(open(".github/workflows/ci.yml")); [print("  ",s.get("name") or s.get("run","")[:60]) for s in d["jobs"]["verify"]["steps"]]'`
 
-Expected: `pages:check` appears before the `npm ci` step, `model:check` after it, and no step
-named for `principles` or `sameas` remains.
+Expected: `pages:check` appears before the `npm ci` step, `model:check` after it, and no step named for `principles` or `sameas` remains.
 
 - [ ] **Step 3: Rewrite the AGENTS.md section**
 
@@ -1126,19 +1076,15 @@ npm run pages:check       # do those pages still match model.json?
 npm run test:build         # unit tests for the three renderers
 ```
 
-And add one sentence after the paragraph that begins "Run `npm run verify` after any change":
-"Run `npm run model` then `npm run pages` after moving the pin in `source.json`; `model.json`
-and every page built from it are committed files, not generated on demand."
+And add one sentence after the paragraph that begins "Run `npm run verify` after any change": "Run `npm run model` then `npm run pages` after moving the pin in `source.json`; `model.json` and every page built from it are committed files, not generated on demand."
 
 - [ ] **Step 5: Fix the stale comment**
 
-In `verify/check.mjs:128`, change `npm run principles:check`'s business to
-`npm run pages:check`'s business.
+In `verify/check.mjs:128`, change `npm run principles:check`'s business to `npm run pages:check`'s business.
 
 - [ ] **Step 6: Hold the prose to the conventions**
 
-Run: `sh conventions/conventions-check`
-Expected: `✓ every Markdown file follows WRITING.md`
+Run: `sh conventions/conventions-check` Expected: `✓ every Markdown file follows WRITING.md`
 
 - [ ] **Step 7: Prove the whole thing from a clean slate**
 
@@ -1149,12 +1095,9 @@ rm -f model.json && npm run pages; echo "exit: $?"
 npm run model && npm run pages && npm run pages:check && npm run test:build && git diff --stat
 ```
 
-Expected: the first command fails with `model.json is missing — run: npm run model`, exit 1;
-then every command passes and `git diff --stat` is empty, because Task 4 already wrote what
-these produce.
+Expected: the first command fails with `model.json is missing — run: npm run model`, exit 1; then every command passes and `git diff --stat` is empty, because Task 4 already wrote what these produce.
 
-Run: `npm run verify`
-Expected: green.
+Run: `npm run verify` Expected: green.
 
 - [ ] **Step 8: Commit**
 
@@ -1221,27 +1164,16 @@ BODY
 )"
 ```
 
-Report the check result and stop. Merging is the owner's decision, and "open the pull request"
-is not approval to merge.
+Report the check result and stop. Merging is the owner's decision, and "open the pull request" is not approval to merge.
 
 ---
 
 ## Self-review
 
-**Spec coverage.** §2's artifact, its pretty-printing and the pages' minified block are Task 1.
-The two layers and the pin guard are Task 2. The parser becoming the only reading is Task 3.
-The page-invariant rule, the deck drift and the `Dataset` corrections are Task 4. §5's CI and
-§6's documents are Task 5. §7's acceptance test runs in Task 4 step 6 and Task 5 step 7. §6's
-follow-ons are recorded in the spec and are deliberately not tasks.
+**Spec coverage.** §2's artifact, its pretty-printing and the pages' minified block are Task 1. The two layers and the pin guard are Task 2. The parser becoming the only reading is Task 3. The page-invariant rule, the deck drift and the `Dataset` corrections are Task 4. §5's CI and §6's documents are Task 5. §7's acceptance test runs in Task 4 step 6 and Task 5 step 7. §6's follow-ons are recorded in the spec and are deliberately not tasks.
 
-**Placeholders.** None. Every code step carries the code, every check step carries the command
-and the expected output.
+**Placeholders.** None. Every code step carries the code, every check step carries the command and the expected output.
 
-**Type consistency.** All three renderers export `write*(data, { check, root }) => string[]`
-and are called identically from the `RENDERERS` array. `readInstance({ repo, commit, sub })`
-returns a `Map`, which is what `parseInstance` takes. `paragraphs` and `alsoAt` are exported
-for their tests and used internally by their own modules.
+**Type consistency.** All three renderers export `write*(data, { check, root }) => string[]` and are called identically from the `RENDERERS` array. `readInstance({ repo, commit, sub })` returns a `Map`, which is what `parseInstance` takes. `paragraphs` and `alsoAt` are exported for their tests and used internally by their own modules.
 
-**One risk worth naming.** Task 4 is the only task that cannot be proved by an empty diff, so
-its step 6 spells out every line the diff may contain. If a `WebPage` or `BreadcrumbList` line
-appears there, the slice index is wrong and the task should stop rather than be committed.
+**One risk worth naming.** Task 4 is the only task that cannot be proved by an empty diff, so its step 6 spells out every line the diff may contain. If a `WebPage` or `BreadcrumbList` line appears there, the slice index is wrong and the task should stop rather than be committed.

@@ -5,17 +5,13 @@
 > design package first, for the nav order and for the card it shares; then one pull request
 > here.
 
-Status: proposed. Decided on 2026-09-05 against a clickable prototype built on the 31
-experience files at the commit `source.json` pins. The prototype's words and behavior are
-what this file records; where it says "the prototype", it means the state Rob approved, and
-nothing in it survives except as this text.
+Status: proposed. Decided on 2026-09-05 against a clickable prototype built on the 31 experience files at the commit `source.json` pins. The prototype's words and behavior are what this file records; where it says "the prototype", it means the state Rob approved, and nothing in it survives except as this text.
 
 ---
 
 ## 1. What is true today, measured
 
-Counted on 2026-09-05 in `robertblust/mental-model` at `a535e43`, the commit `source.json`
-names, and in this repository and `robertblust/design` at their `main`.
+Counted on 2026-09-05 in `robertblust/mental-model` at `a535e43`, the commit `source.json` names, and in this repository and `robertblust/design` at their `main`.
 
 | Fact | Value |
 | --- | --- |
@@ -31,89 +27,41 @@ names, and in this repository and `robertblust/design` at their `main`.
 | Pages this site builds from the model | 2: `build/principles.mjs` renders HTML, `build/model.mjs` writes a JSON block |
 | Design release this site pins | v0.27.0; the page typography spec is queued as v0.28.0 |
 
-Two of those rows decide the shape of the work. The nav order is a contract byte-identical
-on sixteen pages across three sites, so a fifth item is a design release before it is a
-site change. And the card is a function inside the stage, so a second page that wants the
-same card either copies it or the package moves it: the prototype copied it, drifted from it
-in seven places within a day, and had to be rebuilt against the original. That is the
-finding this design turns on.
+Two of those rows decide the shape of the work. The nav order is a contract byte-identical on sixteen pages across three sites, so a fifth item is a design release before it is a site change. And the card is a function inside the stage, so a second page that wants the same card either copies it or the package moves it: the prototype copied it, drifted from it in seven places within a day, and had to be rebuilt against the original. That is the finding this design turns on.
 
 ## 2. What was decided
 
-**The ledger, not the lanes and not the years.** Three figures were prototyped over the same
-page. A horizontal axis with one lane per kind showed concurrency but ran wider than the
-page and hid most names; a row per year showed density but repeated a long role in nine
-rows. The ledger reads as the record it is, and it is the one where the card, the model
-page's own, opens under the row rather than beside a drawing. Rob picked it.
+**The ledger, not the lanes and not the years.** Three figures were prototyped over the same page. A horizontal axis with one lane per kind showed concurrency but ran wider than the page and hid most names; a row per year showed density but repeated a long role in nine rows. The ledger reads as the record it is, and it is the one where the card, the model page's own, opens under the row rather than beside a drawing. Rob picked it.
 
-**Timeline sits after Model.** Read right to left, the switcher is at the edge and each step
-left is more the site's own subject; the timeline is the person's record and belongs beside
-the model it is read from. The header contract's order becomes Ideas, Principles, Model,
-Timeline, Example, Talks, Billing, Privacy. The German label is Werdegang.
+**Timeline sits after Model.** Read right to left, the switcher is at the edge and each step left is more the site's own subject; the timeline is the person's record and belongs beside the model it is read from. The header contract's order becomes Ideas, Principles, Model, Timeline, Example, Talks, Billing, Privacy. The German label is Werdegang.
 
-**The card is shared, not copied.** `renderInto` leaves `stage.js` for a file of its own,
-`card.js`, in the package's `stage` group beside `stage.css` and `stage.js`. The stage calls
-it; the timeline calls it. A page that renders an entity's card renders it the way every
-other page does, or the package fails to sync. The cost is one `<script>` line on the two
-model pages that draw a stage, here and on companygraph.io, and the release notes say so.
+**The card is shared, not copied.** `renderInto` leaves `stage.js` for a file of its own, `card.js`, in the package's `stage` group beside `stage.css` and `stage.js`. The stage calls it; the timeline calls it. A page that renders an entity's card renders it the way every other page does, or the package fails to sync. The cost is one `<script>` line on the two model pages that draw a stage, here and on companygraph.io, and the release notes say so.
 
-**The data block is the model page's, written twice.** `build/model.mjs` already parses the
-pinned commit into one JSON block; it writes that block into `timeline/index.html` as well,
-under the same markers, and `npm run model:check` holds both. The two pages cannot show
-different states of the model, because they cannot be built from different ones.
+**The data block is the model page's, written twice.** `build/model.mjs` already parses the pinned commit into one JSON block; it writes that block into `timeline/index.html` as well, under the same markers, and `npm run model:check` holds both. The two pages cannot show different states of the model, because they cannot be built from different ones.
 
-**Nothing on the page is written for it.** The ledger's rows, stamps and cards come out of the
-block; the page's own words are the title, the tagline, the note, the caption, the hint, the
-three reading rules and the provenance line, in English with German in `data-de`, and that
-is the whole of what is written by hand.
+**Nothing on the page is written for it.** The ledger's rows, stamps and cards come out of the block; the page's own words are the title, the tagline, the note, the caption, the hint, the three reading rules and the provenance line, in English with German in `data-de`, and that is the whole of what is written by hand.
 
 ## 3. The page
 
-`/timeline/`, title "Timeline — Robert Blust", German "Werdegang — Robert Blust". Canonical,
-description, `og:` block, `twitter:card` and a JSON-LD graph as on `/model/`: the Person, the
-Dataset, the WebSite, a WebPage whose `about` is the Dataset, and a BreadcrumbList Home →
-Timeline. Its own share card at `/timeline/og.png`, rendered by `npm run og` from the page.
+`/timeline/`, title "Timeline — Robert Blust", German "Werdegang — Robert Blust". Canonical, description, `og:` block, `twitter:card` and a JSON-LD graph as on `/model/`: the Person, the Dataset, the WebSite, a WebPage whose `about` is the Dataset, and a BreadcrumbList Home → Timeline. Its own share card at `/timeline/og.png`, rendered by `npm run og` from the page.
 
-The skeleton is the model page's: header, title block, figure section, one prose section, the
-provenance line, footer. The words, English first and the `data-de` value after it:
+The skeleton is the model page's: header, title block, figure section, one prose section, the provenance line, footer. The words, English first and the `data-de` value after it:
 
-**Title.** "Twenty-five years," light, over "in order." heavy, with "in order" in `--c-firm`.
-German: "Fünfundzwanzig Jahre," over "der Reihe nach."
+**Title.** "Twenty-five years," light, over "in order." heavy, with "in order" in `--c-firm`. German: "Fünfundzwanzig Jahre," over "der Reihe nach."
 
-**Tagline.** "Every experience in the model, in the order it began — roles, projects, talks and
-qualifications, and what ran during what. Read from the same files as the model, at the same
-commit." German: "Jede Erfahrung im Modell, in der Reihenfolge, in der sie begann – Rollen,
-Projekte, Vorträge und Abschlüsse, und was während wessen lief. Gelesen aus denselben Dateien
-wie das Modell, am selben Commit."
+**Tagline.** "Every experience in the model, in the order it began — roles, projects, talks and qualifications, and what ran during what. Read from the same files as the model, at the same commit." German: "Jede Erfahrung im Modell, in der Reihenfolge, in der sie begann – Rollen, Projekte, Vorträge und Abschlüsse, und was während wessen lief. Gelesen aus denselben Dateien wie das Modell, am selben Commit."
 
-**Note**, the flag-bordered `.note` the model page carries under its tagline. "Nothing here was
-written for this page: every entry is the file in the model, at the commit named under the
-list — in the one language the model is written in. The rest of this page is bilingual."
-German: "Nichts davon wurde für diese Seite geschrieben: Jeder Eintrag ist die Datei im
-Modell, beim Commit, der unter der Liste steht – in der einen Sprache, in der das Modell
-geschrieben ist. Der Rest dieser Seite ist zweisprachig."
+**Note**, the flag-bordered `.note` the model page carries under its tagline. "Nothing here was written for this page: every entry is the file in the model, at the commit named under the list — in the one language the model is written in. The rest of this page is bilingual." German: "Nichts davon wurde für diese Seite geschrieben: Jeder Eintrag ist die Datei im Modell, beim Commit, der unter der Liste steht – in der einen Sprache, in der das Modell geschrieben ist. Der Rest dieser Seite ist zweisprachig."
 
-**Path line**, mono, in the `.stagehead` row: `experiences · 31 entries · 1999–2026`, the count
-in `--c-firm`, every number read from the block. Beside it the one control, "Open all" /
-"Alle öffnen", styled as the stage's `.expand`; it reads "Close all" / "Alle schliessen" while
-every row is open.
+**Path line**, mono, in the `.stagehead` row: `experiences · 31 entries · 1999–2026`, the count in `--c-firm`, every number read from the block. Beside it the one control, "Open all" / "Alle öffnen", styled as the stage's `.expand`; it reads "Close all" / "Alle schliessen" while every row is open.
 
 **The ledger**, §4.
 
-**Hint**, `.stagehint`: "Click an entry to open its card in place · the address remembers the
-last one opened." German: "Anklicken öffnet die Karte eines Eintrags an Ort und Stelle · die
-Adresse merkt sich den zuletzt geöffneten."
+**Hint**, `.stagehint`: "Click an entry to open its card in place · the address remembers the last one opened." German: "Anklicken öffnet die Karte eines Eintrags an Ort und Stelle · die Adresse merkt sich den zuletzt geöffneten."
 
-**Caption**, `.figcap`: "The years on the left are the span of an entry; the line under its name
-is its kind, where it was done and its exact period. A **large square** is a role or an
-independent period, a **small one** anything else. An entry **indented** under a role began
-while that role ran." German: "Die Jahre links sind die Spanne eines Eintrags; die Zeile unter
-dem Namen nennt seine Art, wo er stattfand und seine genaue Zeit. Ein **grosses Quadrat** ist
-eine Rolle oder eine unabhängige Zeit, ein **kleines** alles andere. Ein Eintrag, der unter
-einer Rolle **eingerückt** ist, begann, während diese Rolle lief."
+**Caption**, `.figcap`: "The years on the left are the span of an entry; the line under its name is its kind, where it was done and its exact period. A **large square** is a role or an independent period, a **small one** anything else. An entry **indented** under a role began while that role ran." German: "Die Jahre links sind die Spanne eines Eintrags; die Zeile unter dem Namen nennt seine Art, wo er stattfand und seine genaue Zeit. Ein **grosses Quadrat** ist eine Rolle oder eine unabhängige Zeit, ein **kleines** alles andere. Ein Eintrag, der unter einer Rolle **eingerückt** ist, begann, während diese Rolle lief."
 
-**How to read it** / "Wie man es liest", three paragraphs in the `.rules` grid, each opening
-with its bold rule:
+**How to read it** / "Wie man es liest", three paragraphs in the `.rules` grid, each opening with its bold rule:
 
 1. "**Five kinds, and the kind says what an entry is.** Role, Project, Community, Education and
    Independent are the model's experience kinds, as the model defines them: a role is a
@@ -138,29 +86,15 @@ with its bold rule:
    Liste; der Link am Fuss führt zu ihr, beim Commit, den diese Seite zeigt. Ein Datum, das hier
    falsch ist, ist dort falsch, und wird dort korrigiert."
 
-**Provenance**, `.derived`, mono end to end, in the model page's shape: "Generated from
-robertblust/mental-model@a535e43 — 31 files under `model/profiles/robert-blust/experiences/`,
-the same repository the model page is drawn from, and an instance of CompanyGraph." The
-commit, the count and the link's href are filled from the block into `#srclink`,
-`#srccommit` and `#srccount`; `#srclink` carries `data-src="model/profiles/robert-blust/experiences"`
-so the check reads the folder from the same place the page does. German: "Erzeugt aus … — 31
-Dateien unter …, dasselbe Repository, aus dem die Modell-Seite gezeichnet wird, und eine
-Instanz von CompanyGraph."
+**Provenance**, `.derived`, mono end to end, in the model page's shape: "Generated from robertblust/mental-model@a535e43 — 31 files under `model/profiles/robert-blust/experiences/`, the same repository the model page is drawn from, and an instance of CompanyGraph." The commit, the count and the link's href are filled from the block into `#srclink`, `#srccommit` and `#srccount`; `#srclink` carries `data-src="model/profiles/robert-blust/experiences"` so the check reads the folder from the same place the page does. German: "Erzeugt aus … — 31 Dateien unter …, dasselbe Repository, aus dem die Modell-Seite gezeichnet wird, und eine Instanz von CompanyGraph."
 
-**Nav.** The item reads "Timeline" / "Werdegang", `aria-current="page"` here, and it is added to
-the header of every prose page on this site. The root page's `translates` spec gains
-"WERDEGANG" beside the four words it already asserts.
+**Nav.** The item reads "Timeline" / "Werdegang", `aria-current="page"` here, and it is added to the header of every prose page on this site. The root page's `translates` spec gains "WERDEGANG" beside the four words it already asserts.
 
 ## 4. The ledger
 
-One ordered list, `ol.ledger`, one `li` per experience entity in the block, sorted by `start`
-and then by `end`, both read from the entity's `stamp`. A vertical 2 px rule in `--rule` runs
-down the list at the marks' column. After the last row, one mono line in `--dim` names the
-month of the visit, from the visitor's clock, and the word TODAY, so the open end of the
-ongoing entry has something to end at on the day it is read.
+One ordered list, `ol.ledger`, one `li` per experience entity in the block, sorted by `start` and then by `end`, both read from the entity's `stamp`. A vertical 2 px rule in `--rule` runs down the list at the marks' column. After the last row, one mono line in `--dim` names the month of the visit, from the visitor's clock, and the word TODAY, so the open end of the ongoing entry has something to end at on the day it is read.
 
-Each `li` holds a `details` whose `id` is the file's stem, `2015-3ap`, and whose `summary` is
-the row, a three-column grid: the gutter, the mark, the words.
+Each `li` holds a `details` whose `id` is the file's stem, `2015-3ap`, and whose `summary` is the row, a three-column grid: the gutter, the mark, the words.
 
 - **The gutter** is mono, `--dim`, tabular figures: the start year and the end year joined
   by a closed en-dash, `2015–2022`; one year alone when both are the same; `2026–now` while
@@ -179,67 +113,29 @@ the row, a three-column grid: the gutter, the mark, the words.
   the fact it states is "began while that role ran" and nothing deeper. The gutter stays
   flush: a ledger keeps its date column.
 
-Opening a row reveals the card, §5, below the words and indented with them, its width capped
-at 72 ch plus the indent; the rule runs on past it. Many rows may be open at once. Opening a
-row writes `#<id>` to the address without scrolling; closing the last open row clears it;
-arriving with `#<id>` opens that row and scrolls it into view; a `hashchange` does the same.
-"Open all" opens every `details`, "Close all" closes every one, and the control's label and
-`aria-pressed` follow the count of open rows.
+Opening a row reveals the card, §5, below the words and indented with them, its width capped at 72 ch plus the indent; the rule runs on past it. Many rows may be open at once. Opening a row writes `#<id>` to the address without scrolling; closing the last open row clears it; arriving with `#<id>` opens that row and scrolls it into view; a `hashchange` does the same. "Open all" opens every `details`, "Close all" closes every one, and the control's label and `aria-pressed` follow the count of open rows.
 
-Dates are parsed once, from the block's `stamp`: `YYYY`, `YYYY-MM` or `YYYY-MM-DD`, an absent
-`end` meaning ongoing. The sort key of a start is the first day it names; of an end, the day
-after the last day it names, so `2001-03` ends where `2001-04` begins and two adjacent roles
-touch without overlapping. Nothing here reads a kind to decide how a date is read; the
-experience-kind schema says so and the ledger holds to it.
+Dates are parsed once, from the block's `stamp`: `YYYY`, `YYYY-MM` or `YYYY-MM-DD`, an absent `end` meaning ongoing. The sort key of a start is the first day it names; of an end, the day after the last day it names, so `2001-03` ends where `2001-04` begins and two adjacent roles touch without overlapping. Nothing here reads a kind to decide how a date is read; the experience-kind schema says so and the ledger holds to it.
 
 Reduced motion is respected by having no motion: a `details` opens without transition.
 
 ## 5. The card, and where it lives
 
-`card.js` is a new whole-file asset in the design package's `stage` group, copied to `/card.js`
-beside `stage.js`, and loaded by a page with a plain `<script src="../card.js">` before the
-script that calls it. It defines one global, `rbCard`, with two functions, and nothing else on
-the page changes when it loads.
+`card.js` is a new whole-file asset in the design package's `stage` group, copied to `/card.js` beside `stage.js`, and loaded by a page with a plain `<script src="../card.js">` before the script that calls it. It defines one global, `rbCard`, with two functions, and nothing else on the page changes when it loads.
 
-`rbCard.render(entity, body, foot, opts)` is `renderInto`'s entity branch, moved without
-change of behavior: the eyebrow `type · id`, the name, the tagline, every frontmatter field in
-file order as a `dl`, a list field as `ul.items`, a URL as an `.ext` link with its scheme
-dropped, every section as its `h4`, its tables with captions in mono, its text with `- ` blocks
-as `ul.prose` and backticks as `code.mono`, and the foot link `<file> @ <commit>` with the
-"View this file on GitHub" label in the page's language. What it cannot know it takes from
-`opts`: `opts.data` is the block, for the commit and the repository; `opts.lang` is `en` or
-`de`; `opts.link(id)` returns the element for a reference that resolves to an entity, so the
-stage hands back its `goLink`, which focuses the node, and the timeline hands back an `a.go`
-whose href is `/model/#<id>`, which the model page reads on load and focuses. The root and
-folder branches of `renderInto` stay in `stage.js`; they are the drawing's business.
+`rbCard.render(entity, body, foot, opts)` is `renderInto`'s entity branch, moved without change of behavior: the eyebrow `type · id`, the name, the tagline, every frontmatter field in file order as a `dl`, a list field as `ul.items`, a URL as an `.ext` link with its scheme dropped, every section as its `h4`, its tables with captions in mono, its text with `- ` blocks as `ul.prose` and backticks as `code.mono`, and the foot link `<file> @ <commit>` with the "View this file on GitHub" label in the page's language. What it cannot know it takes from `opts`: `opts.data` is the block, for the commit and the repository; `opts.lang` is `en` or `de`; `opts.link(id)` returns the element for a reference that resolves to an entity, so the stage hands back its `goLink`, which focuses the node, and the timeline hands back an `a.go` whose href is `/model/#<id>`, which the model page reads on load and focuses. The root and folder branches of `renderInto` stay in `stage.js`; they are the drawing's business.
 
-`rbCard.fmtPeriod(stamp, lang)` is the stage's own date formatting, moved for the same reason:
-the ledger's stamps and the stage's have to read the same, and the page typography spec is
-about to change that function's range dash. One copy, one change.
+`rbCard.fmtPeriod(stamp, lang)` is the stage's own date formatting, moved for the same reason: the ledger's stamps and the stage's have to read the same, and the page typography spec is about to change that function's range dash. One copy, one change.
 
-`stage.js` drops both functions and calls `rbCard` instead. `stage.css` gains the `.ledger`
-rules, because the card's own rules are there and a ledger row's open card is the same
-`.card`, `.cbody` and `.cfoot`; a page that carries a ledger carries the stage's stylesheet as
-the model page does. The `stage contract` fence is unchanged: the timeline page needs exactly
-`.figure-section`, `.figcap`, `.stagehint` and `.derived`, and it has them.
+`stage.js` drops both functions and calls `rbCard` instead. `stage.css` gains the `.ledger` rules, because the card's own rules are there and a ledger row's open card is the same `.card`, `.cbody` and `.cfoot`; a page that carries a ledger carries the stage's stylesheet as the model page does. The `stage contract` fence is unchanged: the timeline page needs exactly `.figure-section`, `.figcap`, `.stagehint` and `.derived`, and it has them.
 
-**Why not leave the renderer in the stage and load `stage.js` on the timeline.** `stage.js`
-reads the block, expects `#fig`, `#card`, `#stagemodal` and the rest, and draws on load; a page
-without a drawing would carry a script that fails before it reaches the card. Guarding every
-step on the presence of a canvas would make the stage a library by accident. A file that is
-only the card is a library on purpose.
+**Why not leave the renderer in the stage and load `stage.js` on the timeline.** `stage.js` reads the block, expects `#fig`, `#card`, `#stagemodal` and the rest, and draws on load; a page without a drawing would carry a script that fails before it reaches the card. Guarding every step on the presence of a canvas would make the stage a library by accident. A file that is only the card is a library on purpose.
 
-**Why not a fence.** A fence is a block inside a page the package does not own; the card
-renderer is a hundred lines of script with no page around it, and the stage's own script is
-already a whole synced file. It takes the same form.
+**Why not a fence.** A fence is a block inside a page the package does not own; the card renderer is a hundred lines of script with no page around it, and the stage's own script is already a whole synced file. It takes the same form.
 
 ## 6. The design release
 
-One release, v0.29.0 if the typography spec lands as v0.28.0 first and v0.28.0 otherwise;
-the notes say it is breaking for a page that draws a stage, since that page adds one script
-line, and this is the reason `WORKING.md` gives for calling a release major. The family is
-below 1.0 and has not yet cut a major; the notes carry the word, the number follows the
-family's habit, and this is a decision for Rob to confirm before the release is tagged.
+One release, v0.29.0 if the typography spec lands as v0.28.0 first and v0.28.0 otherwise; the notes say it is breaking for a page that draws a stage, since that page adds one script line, and this is the reason `WORKING.md` gives for calling a release major. The family is below 1.0 and has not yet cut a major; the notes carry the word, the number follows the family's habit, and this is a decision for Rob to confirm before the release is tagged.
 
 In `robertblust/design`:
 
@@ -255,8 +151,7 @@ In `robertblust/design`:
 - Release notes: what a site does to take it, in this order. Sync; add `<script
   src="../card.js">` before `stage.js` on every page that draws a stage; run the suite.
 
-companygraph.io takes the release the same way, one pull request: the sync, the script line
-on its model and example pages, nothing else. guestgraph.io takes only the header order.
+companygraph.io takes the release the same way, one pull request: the sync, the script line on its model and example pages, nothing else. guestgraph.io takes only the header order.
 
 ## 7. This repository, one pull request after the release
 
@@ -287,19 +182,11 @@ on its model and example pages, nothing else. guestgraph.io takes only the heade
 
 ## 8. Not in this design
 
-A filter by kind: the indent already lets the roles read as chapters, and a control would be
-chrome on a page whose point is that it has none. The lanes and the years figures: prototyped,
-not chosen, not kept. Any change to the model: the page reads it. A second language for the
-model's own words: the note says why. An `hreflang`: there is still one URL per page.
+A filter by kind: the indent already lets the roles read as chapters, and a control would be chrome on a page whose point is that it has none. The lanes and the years figures: prototyped, not chosen, not kept. Any change to the model: the page reads it. A second language for the model's own words: the note says why. An `hreflang`: there is still one URL per page.
 
 ## 9. Testing
 
-The suite is the test. `npm run verify` after the page lands, with the `ledger` check above
-and every shared check the model page runs; `npm run model:check`, `npm run og:check`,
-`npm run design:check` and `npm run pin:check` in CI as today. In the design package, the
-existing tests hold the header version, the group's file list and the fence versions; a
-`card.js` that regresses shows on the model page's `graph` check here and on companygraph.io,
-which clicks into an entity and reads its card.
+The suite is the test. `npm run verify` after the page lands, with the `ledger` check above and every shared check the model page runs; `npm run model:check`, `npm run og:check`, `npm run design:check` and `npm run pin:check` in CI as today. In the design package, the existing tests hold the header version, the group's file list and the fence versions; a `card.js` that regresses shows on the model page's `graph` check here and on companygraph.io, which clicks into an entity and reads its card.
 
 Verified by rendering, never by reading the diff.
 
@@ -307,52 +194,22 @@ Verified by rendering, never by reading the diff.
 
 ## Amended 2026-09-06: the card, after a second look
 
-Decided against a prototype of the opened row, live beside the proposal, on 2026-09-06.
-Four things in §5 change, and the first of them is what made the other three visible.
+Decided against a prototype of the opened row, live beside the proposal, on 2026-09-06. Four things in §5 change, and the first of them is what made the other three visible.
 
-**The model and timeline pages carried a card grid they never had.** The rules from `.cols`
-through `.wide`, copied from the landing page, matched only the stage's `.card` and painted its
-title uppercase and dim, doubled its inset to 49 px and re-spaced its lists. Both pages drop
-that block; stage.css's card returns as written.
+**The model and timeline pages carried a card grid they never had.** The rules from `.cols` through `.wide`, copied from the landing page, matched only the stage's `.card` and painted its title uppercase and dim, doubled its inset to 49 px and re-spaced its lists. Both pages drop that block; stage.css's card returns as written.
 
-**The card draws every field but two.** `source` is not drawn: in an instance that masters
-itself it reads Local on every page, machinery rather than a fact. `skills` is not a field row:
-it is the card's last section, under its own heading, one closed group per category as the
-skill files' `group` names it, the group's name and count on the line and its skills as chips
-when opened. Groups and the chips inside them are both alphabetical: one rule at both levels, and one
-that knows no name from any page. A model whose skills carry no group gets the
-flat list under the heading. Two columns and bullets were considered and refused: columns for
-reading across a list that has no across, bullets for the reason stage.css already gives.
+**The card draws every field but two.** `source` is not drawn: in an instance that masters itself it reads Local on every page, machinery rather than a fact. `skills` is not a field row: it is the card's last section, under its own heading, one closed group per category as the skill files' `group` names it, the group's name and count on the line and its skills as chips when opened. Groups and the chips inside them are both alphabetical: one rule at both levels, and one that knows no name from any page. A model whose skills carry no group gets the flat list under the heading. Two columns and bullets were considered and refused: columns for reading across a list that has no across, bullets for the reason stage.css already gives.
 
-**The eyebrow is the type alone.** The path it carried was the card's longest line for the
-least information; the foot names the file, and the model page's path line says where you are.
+**The eyebrow is the type alone.** The path it carried was the card's longest line for the least information; the foot names the file, and the model page's path line says where you are.
 
-**Inside a ledger the card's title steps down** to 1.2 rem, so the row leads the card, the way
-the dialog sets the card's width. The card stays the same card.
+**Inside a ledger the card's title steps down** to 1.2 rem, so the row leads the card, the way the dialog sets the card's width. The card stays the same card.
 
-All four are design v0.31.0, a minor, since two synced files change and a site takes them with a
-sync. The `ledger` check reads the field list without the two fields and the eyebrow as the
-type, and counts the chips against the skills the file names.
+All four are design v0.31.0, a minor, since two synced files change and a site takes them with a sync. The `ledger` check reads the field list without the two fields and the eyebrow as the type, and counts the chips against the skills the file names.
 
 ## Amended 2026-09-06: the gutter on a phone
 
-The gutter carries the start year and the end year, and on a phone the open-ended entry's
-"present" or "heute" overran the 4.2 rem column in both languages, the German ranges sitting
-closest to the edge because WRITING.md sets their en-dash with spaces. Below 640 px the gutter
-shows the start year alone. The start year is what places a row on the axis, the full period is
-on the line under the name in the page's language, and four characters fit in any language on
-any phone. Above 640 px the range stays. Both forms are in the markup and the stylesheet shows
-one, so a rotation re-renders nothing. Widening the column was refused: it moves the edge to
-the next longer word and takes a fifth of a name's width on a 320 px phone.
+The gutter carries the start year and the end year, and on a phone the open-ended entry's "present" or "heute" overran the 4.2 rem column in both languages, the German ranges sitting closest to the edge because WRITING.md sets their en-dash with spaces. Below 640 px the gutter shows the start year alone. The start year is what places a row on the axis, the full period is on the line under the name in the page's language, and four characters fit in any language on any phone. Above 640 px the range stays. Both forms are in the markup and the stylesheet shows one, so a rotation re-renders nothing. Widening the column was refused: it moves the edge to the next longer word and takes a fifth of a name's width on a 320 px phone.
 
 ## Amended 2026-09-06: a skill opens the stage expanded
 
-A skill in a card links to the model page with `?stage=expanded` beside the hash that names
-the node. The stage reads the parameter on arrival, opens its dialog on the focused node and
-takes the parameter back out of the address, the way the pages take `lang` and `theme`; the hash
-stays, since a focus is a place with an address. A visitor who clicked a skill wants to read it
-with its references around it, and the dialog is where one node is read. Escape or the close
-button leaves them on the model page focused on that skill; the browser's back button returns
-them to the row they left. The page cannot know where a visitor came from and does not try;
-the link says what it wants. Design v0.34.0 carries the reading in stage.js and the check that
-holds it.
+A skill in a card links to the model page with `?stage=expanded` beside the hash that names the node. The stage reads the parameter on arrival, opens its dialog on the focused node and takes the parameter back out of the address, the way the pages take `lang` and `theme`; the hash stays, since a focus is a place with an address. A visitor who clicked a skill wants to read it with its references around it, and the dialog is where one node is read. Escape or the close button leaves them on the model page focused on that skill; the browser's back button returns them to the row they left. The page cannot know where a visitor came from and does not try; the link says what it wants. Design v0.34.0 carries the reading in stage.js and the check that holds it.

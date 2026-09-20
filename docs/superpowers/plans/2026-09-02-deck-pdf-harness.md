@@ -2,16 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Move the deck PDF exporter's machinery into `@robertblust/design`, leaving each site a
-deck list and a call, without changing a single rendered PDF page.
+**Goal:** Move the deck PDF exporter's machinery into `@robertblust/design`, leaving each site a deck list and a call, without changing a single rendered PDF page.
 
-**Architecture:** The package gains `decks/export.mjs` and one export subpath, `./decks/export`.
-It imports neither Playwright nor pdf-lib — the site hands both in, exactly as `cards/export.mjs`
-takes a `chromium`. Each site's `export-pdf.mjs` becomes the deck list plus the call, and sits at
-the repository root on all three.
+**Architecture:** The package gains `decks/export.mjs` and one export subpath, `./decks/export`. It imports neither Playwright nor pdf-lib — the site hands both in, exactly as `cards/export.mjs` takes a `chromium`. Each site's `export-pdf.mjs` becomes the deck list plus the call, and sits at the repository root on all three.
 
-**Tech Stack:** Node 22+, ESM, `node:test` + `node:assert/strict`. Playwright and pdf-lib stay
-site-side. `pymupdf` is used only as a local measuring tool for the proof and is added to nothing.
+**Tech Stack:** Node 22+, ESM, `node:test` + `node:assert/strict`. Playwright and pdf-lib stay site-side. `pymupdf` is used only as a local measuring tool for the proof and is added to nothing.
 
 **Spec:** [`docs/superpowers/specs/2026-09-02-deck-pdf-harness-design.md`](../specs/2026-09-02-deck-pdf-harness-design.md)
 
@@ -44,12 +39,9 @@ site-side. `pymupdf` is used only as a local measuring tool for the proof and is
 
 ## File Structure
 
-**In `robertblust/design` (new):** `decks/export.mjs`, `test/decks-export.test.mjs`.
-**Modified:** `package.json` (`files`, `exports`, `version`).
+**In `robertblust/design` (new):** `decks/export.mjs`, `test/decks-export.test.mjs`. **Modified:** `package.json` (`files`, `exports`, `version`).
 
-**In each of the three sites:** `export-pdf.mjs` — rewritten, and on companygraph.io and
-guestgraph.io `git mv`d from `talks/intro/` to the root. `package.json` — the `pdf` script path
-and the design pin.
+**In each of the three sites:** `export-pdf.mjs` — rewritten, and on companygraph.io and guestgraph.io `git mv`d from `talks/intro/` to the root. `package.json` — the `pdf` script path and the design pin.
 
 ## Interfaces
 
@@ -60,15 +52,9 @@ export async function exportDecks({ chromium, PDFDocument, root, decks,
                                     log = console.log, write = writeFileSync })
 ```
 
-`decks` is `[{ dir, slug }]` — `dir` is the deck folder relative to `root`, `slug` names the
-output file, because the two differ: guestgraph's deck lives in `talks/intro/` and its PDFs are
-`guestgraph-de.pdf` and `guestgraph-en.pdf`.
+`decks` is `[{ dir, slug }]` — `dir` is the deck folder relative to `root`, `slug` names the output file, because the two differ: guestgraph's deck lives in `talks/intro/` and its PDFs are `guestgraph-de.pdf` and `guestgraph-en.pdf`.
 
-**One deliberate deviation from the spec.** The spec wrote the signature as
-`exportDecks({ root, decks }, { chromium, PDFDocument })` — data in one argument, collaborators in
-another. This plan uses a single flat object instead, because `exportCards({ chromium, recipe,
-log })` in the same package already does, and two neighbouring exports that disagree about their
-own calling convention is a worse cost than the tidiness of the split. Same arguments, one object.
+**One deliberate deviation from the spec.** The spec wrote the signature as `exportDecks({ root, decks }, { chromium, PDFDocument })` — data in one argument, collaborators in another. This plan uses a single flat object instead, because `exportCards({ chromium, recipe, log })` in the same package already does, and two neighbouring exports that disagree about their own calling convention is a worse cost than the tidiness of the split. Same arguments, one object.
 
 ---
 
@@ -87,9 +73,7 @@ Work in `~/git/robertblust/design`, on a branch off `main`.
 
 - [ ] **Step 1: Write the failing test**
 
-Create `test/decks-export.test.mjs`. The fake browser and its in-flight guard are copied in shape
-from `test/cards-export.test.mjs` — read that file first; it explains why the recorder resolves on
-a later tick rather than recording in source order, and the reasoning applies here unchanged.
+Create `test/decks-export.test.mjs`. The fake browser and its in-flight guard are copied in shape from `test/cards-export.test.mjs` — read that file first; it explains why the recorder resolves on a later tick rather than recording in source order, and the reasoning applies here unchanged.
 
 ```js
 // exportDecks against a fake browser and a fake PDFDocument, never Playwright and never pdf-lib.
@@ -263,14 +247,11 @@ test("each written file is logged with its slide count", async () => {
 cd ~/git/robertblust/design && node --test test/decks-export.test.mjs
 ```
 
-Expected: every test fails with `Cannot find module '../decks/export.mjs'`. If any test passes,
-something else is on that path — stop and find out what.
+Expected: every test fails with `Cannot find module '../decks/export.mjs'`. If any test passes, something else is on that path — stop and find out what.
 
 - [ ] **Step 3: Write `decks/export.mjs`**
 
-This is `export-pdf.mjs` from blust.ch with `root` and `decks` taken as arguments, the writes
-collected into a return value, and `writeFileSync` kept — the site's exporter has always written
-its own files and nothing about this move changes that.
+This is `export-pdf.mjs` from blust.ch with `root` and `decks` taken as arguments, the writes collected into a return value, and `writeFileSync` kept — the site's exporter has always written its own files and nothing about this move changes that.
 
 ```js
 // Render each deck to a 16:9 PDF fallback, one slide per page, in both languages.
@@ -363,13 +344,11 @@ export async function exportDecks({ chromium, PDFDocument, root, decks,
 node --test test/decks-export.test.mjs
 ```
 
-Expected: 10 tests, 10 pass, 0 skipped. Then run the whole suite — `npm test` — and confirm
-nothing else moved.
+Expected: 10 tests, 10 pass, 0 skipped. Then run the whole suite — `npm test` — and confirm nothing else moved.
 
 - [ ] **Step 5: Prove three of the tests red by mutation**
 
-A test never seen to fail is not yet a gate. Make each change, run, confirm the named test fails,
-restore, and record the real counts:
+A test never seen to fail is not yet a gate. Make each change, run, confirm the named test fails, restore, and record the real counts:
 
 1. Change `deviceScaleFactor: 2` to `1` → *the frame is 1280x720…* fails.
 2. Change `waitForTimeout(500)` to `50` → *400ms settles the language switch…* fails.
@@ -377,12 +356,9 @@ restore, and record the real counts:
 
 - [ ] **Step 6: Ship it in the package**
 
-`package.json`: add `"decks"` to `files` (after `"cards"`), add
-`"./decks/export": "./decks/export.mjs"` to `exports` (after the `cards` entries), and set
-`"version": "0.14.0"` — a new capability is a minor under this package's own policy.
+`package.json`: add `"decks"` to `files` (after `"cards"`), add `"./decks/export": "./decks/export.mjs"` to `exports` (after the `cards` entries), and set `"version": "0.14.0"` — a new capability is a minor under this package's own policy.
 
-`versions.json` is **not** touched. It versions the fenced blocks that `design sync` writes;
-`cards/` has no entry there either.
+`versions.json` is **not** touched. It versions the fenced blocks that `design sync` writes; `cards/` has no entry there either.
 
 - [ ] **Step 7: Confirm the tarball carries it, and no dependency arrived**
 
@@ -395,10 +371,7 @@ node -e 'const p=require("./package.json");console.log("deps:",JSON.stringify(p.
 
 - [ ] **Step 8: Exercise it for real, both shapes, before releasing anything**
 
-Spec criterion 5. Fakes prove the contract; they cannot prove that a real deck renders. Tagging a
-release that three sites then pin, and only *then* pointing a browser at it, gets the order
-backwards — so run it from a **local path install** first, against the two-deck site and a
-one-deck site.
+Spec criterion 5. Fakes prove the contract; they cannot prove that a real deck renders. Tagging a release that three sites then pin, and only *then* pointing a browser at it, gets the order backwards — so run it from a **local path install** first, against the two-deck site and a one-deck site.
 
 ```bash
 cd ~/git/robertblust/robertblust.github.io          # the two-deck shape
@@ -411,11 +384,9 @@ PY
 npm install ~/git/robertblust/design --save-dev     # a path, not a tag
 ```
 
-Then rewrite `export-pdf.mjs` exactly as Task 2 Step 3 will, run `npm run pdf`, and hash again
-into `/tmp/pdf-post-blust.txt` with the same snippet. `diff` the two: they must be identical.
+Then rewrite `export-pdf.mjs` exactly as Task 2 Step 3 will, run `npm run pdf`, and hash again into `/tmp/pdf-post-blust.txt` with the same snippet. `diff` the two: they must be identical.
 
-Repeat the whole thing against `~/git/guestgraph/guestgraph.github.io` for the one-deck shape,
-using its own before/after files.
+Repeat the whole thing against `~/git/guestgraph/guestgraph.github.io` for the one-deck shape, using its own before/after files.
 
 **Restore both sites completely afterwards** — this is a rehearsal, not the adoption:
 
@@ -438,8 +409,7 @@ The standing merge-and-tag permission covers `robertblust/design`, so this one d
 
 - [ ] **Step 10: Tag v0.14.0 and write release notes**
 
-Not ceremony: Dependabot renders the notes into the pull request each site gets, and that pull
-request is the only thing telling a reader in another repository what changed.
+Not ceremony: Dependabot renders the notes into the pull request each site gets, and that pull request is the only thing telling a reader in another repository what changed.
 
 ---
 
@@ -447,8 +417,7 @@ request is the only thing telling a reader in another repository what changed.
 
 **Files:** modify `export-pdf.mjs`, `package.json`
 
-blust.ch is the site whose exporter the harness was taken from, and the only one with two decks.
-Do it first: if the harness is wrong, it is most visible here.
+blust.ch is the site whose exporter the harness was taken from, and the only one with two decks. Do it first: if the harness is wrong, it is most visible here.
 
 - [ ] **Step 1: Baseline the PDFs before touching anything**
 
@@ -472,9 +441,7 @@ npm install '@robertblust/design@github:robertblust/design#v0.14.0' --save-dev
 node -e 'import("node:fs").then(fs=>console.log(JSON.parse(fs.readFileSync("node_modules/@robertblust/design/package.json")).version))'
 ```
 
-Use this form, not `npm pkg set` followed by `npm install` — on these repositories that reports
-"up to date" and leaves the previous version on disk, because the lockfile pins the old commit.
-The `node -e` line is what tells you which version is actually there.
+Use this form, not `npm pkg set` followed by `npm install` — on these repositories that reports "up to date" and leaves the previous version on disk, because the lockfile pins the old commit. The `node -e` line is what tells you which version is actually there.
 
 - [ ] **Step 3: Rewrite `export-pdf.mjs`**
 
@@ -519,9 +486,7 @@ PY
 diff /tmp/pdf-before-blust.txt /tmp/pdf-after-blust.txt && echo "IDENTICAL"
 ```
 
-`diff` must print nothing and `IDENTICAL` must appear. **`git status` will report all four PDFs
-modified and that is expected** — the new `/CreationDate` and `/ID`. Restore them so the commit
-carries no PDF at all:
+`diff` must print nothing and `IDENTICAL` must appear. **`git status` will report all four PDFs modified and that is expected** — the new `/CreationDate` and `/ID`. Restore them so the commit carries no PDF at all:
 
 ```bash
 git checkout -- talks/mental-model/*.pdf talks/essential-complexity/*.pdf
@@ -535,9 +500,7 @@ npm run design:check && npm run og:check && npm run test:dupes
 (python3 -m http.server 8000 >/dev/null 2>&1 &) ; sleep 2; npm run verify; pkill -f "http.server 8000"
 ```
 
-All green. `og:check` matters here: `export-pdf.mjs` is a root file, and the card recipe walks
-what a *page* names, not the repository, so it must stay quiet — if it does not, the recipe is
-reading something it should not.
+All green. `og:check` matters here: `export-pdf.mjs` is a root file, and the card recipe walks what a *page* names, not the repository, so it must stay quiet — if it does not, the recipe is reading something it should not.
 
 - [ ] **Step 6: Commit, open a PR, stop**
 
@@ -552,8 +515,7 @@ Put both hash listings in the PR body. Do not merge.
 
 ### Task 3: companygraph.io adopts
 
-**Files:** `git mv talks/intro/export-pdf.mjs export-pdf.mjs`; modify `export-pdf.mjs`,
-`package.json`
+**Files:** `git mv talks/intro/export-pdf.mjs export-pdf.mjs`; modify `export-pdf.mjs`, `package.json`
 
 - [ ] **Step 1: Baseline**
 
@@ -583,8 +545,7 @@ node -e 'import("node:fs").then(fs=>console.log(JSON.parse(fs.readFileSync("node
 git mv talks/intro/export-pdf.mjs export-pdf.mjs
 ```
 
-It sits beside `export-og.mjs`, which is already at the root here. A file holding a *list* of
-decks does not belong inside one of them.
+It sits beside `export-og.mjs`, which is already at the root here. A file holding a *list* of decks does not belong inside one of them.
 
 - [ ] **Step 4: Rewrite it**
 
@@ -615,8 +576,7 @@ Note `dir` and `slug` differ — the deck is in `talks/intro/` and its files are
 
 - [ ] **Step 5: Fix the script**
 
-In `package.json`, `"pdf": "node talks/intro/export-pdf.mjs"` becomes `"pdf": "node export-pdf.mjs"`.
-Grep for the old path afterwards and confirm nothing else names it:
+In `package.json`, `"pdf": "node talks/intro/export-pdf.mjs"` becomes `"pdf": "node export-pdf.mjs"`. Grep for the old path afterwards and confirm nothing else names it:
 
 ```bash
 grep -rn "talks/intro/export-pdf" . --exclude-dir=node_modules --exclude-dir=.git || echo "(no references)"
@@ -651,18 +611,15 @@ git add export-pdf.mjs package.json package-lock.json
 git commit -m "The deck PDFs render through the shared harness"
 ```
 
-`git add` the rename by its new path; `git mv` has already staged the deletion. Put both hash
-listings in the PR body. Do not merge.
+`git add` the rename by its new path; `git mv` has already staged the deletion. Put both hash listings in the PR body. Do not merge.
 
 ---
 
 ### Task 4: guestgraph.io adopts
 
-**Files:** `git mv talks/intro/export-pdf.mjs export-pdf.mjs`; modify `export-pdf.mjs`,
-`package.json`
+**Files:** `git mv talks/intro/export-pdf.mjs export-pdf.mjs`; modify `export-pdf.mjs`, `package.json`
 
-Identical in shape to Task 3, and the slug is the one thing that differs. The steps are repeated
-rather than referenced, because this task may be read on its own.
+Identical in shape to Task 3, and the slug is the one thing that differs. The steps are repeated rather than referenced, because this task may be read on its own.
 
 - [ ] **Step 1: Baseline**
 
