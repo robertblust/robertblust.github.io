@@ -42,6 +42,7 @@ plan, which ships what this one takes, is `robertblust/design`,
 ### Task 1: Take design v0.30.0 and put Timeline in every header
 
 **Files:**
+
 - Modify: `package.json:25`
 - Modify: `model/index.html` (the script lines at the foot, ~line 850; the nav at ~line 583)
 - Modify: `index.html`, `ideas/index.html`, `principles/index.html`, `talks/index.html`, `privacy/index.html` (the nav)
@@ -50,6 +51,7 @@ plan, which ships what this one takes, is `robertblust/design`,
 - Regenerate: every `og.png`/`og.sha` the recipe reports stale
 
 **Interfaces:**
+
 - Produces: `card.js` at the site root; the header fence at v8 on every page; the nav item
   `<a href="…timeline/" data-de="Werdegang">Timeline</a>` after Model on six pages.
 
@@ -81,6 +83,7 @@ In each page's `.navlinks`, directly after the Model link, add the Timeline link
 same relative prefix that page's Model link uses:
 
 `index.html`:
+
 ```html
           <a href="model/" data-de="Modell">Model</a>
           <a href="timeline/" data-de="Werdegang">Timeline</a>
@@ -88,6 +91,7 @@ same relative prefix that page's Model link uses:
 
 `ideas/index.html`, `principles/index.html`, `talks/index.html`, `privacy/index.html` and
 `model/index.html`:
+
 ```html
           <a href="../timeline/" data-de="Werdegang">Timeline</a>
 ```
@@ -148,9 +152,11 @@ EOF
 ### Task 2: The page
 
 **Files:**
+
 - Create: `timeline/index.html` (copied from `model/index.html`, then edited)
 
 **Interfaces:**
+
 - Produces: the page's markup with the ids the script and the checks use: `#path`,
   `#openall`, `#ledger`, `#srclink[data-src]`, `#srccommit`, `#srccount`, the `model-data`
   block between the `model data` markers, the `[data-de]` words of §3 of the spec.
@@ -447,11 +453,13 @@ EOF
 ### Task 3: One block, two pages
 
 **Files:**
+
 - Modify: `build/model.mjs:84-105`
 - Modify: `AGENTS.md` (a new section before `## CI`)
 - Modify: `README.md` (the `## Pages` block)
 
 **Interfaces:**
+
 - Produces: `npm run model` writing the identical block into `model/index.html` and
   `timeline/index.html`; `npm run model:check` holding both.
 
@@ -554,11 +562,13 @@ EOF
 ### Task 4: The suite knows the page
 
 **Files:**
+
 - Modify: `verify/check.mjs` (the `PAGES` list after the `/model/` entry; the `CHECKS` object)
 - Modify: `og-recipe.mjs:52`
 - Create: `timeline/og.png`, `timeline/og.sha` (rendered)
 
 **Interfaces:**
+
 - Produces: the `/timeline/` entry in `PAGES`; the `ledger` check, keyed on the block's id.
 - Consumes: `#ledger`, `#openall`, `#srclink`, `#srccommit`, the `details` ids (Task 2).
 
@@ -689,10 +699,12 @@ EOF
 ### Task 5: The pin moves, and the pull request
 
 **Files:**
+
 - Modify: `source.json`
 - Regenerate: `model/index.html`, `timeline/index.html` (the block), `principles/index.html`, and the cards of all three
 
 **Interfaces:**
+
 - Consumes: Rob's word on the pin before this task's commit. The spec proposes
   `7ed3f65`, the merge of the community kind's corrected definition, and he merged the spec
   as written; ask once, in one line, before running Step 1, and stop if the answer is no.

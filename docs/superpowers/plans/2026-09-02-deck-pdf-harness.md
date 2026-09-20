@@ -75,10 +75,12 @@ own calling convention is a worse cost than the tidiness of the split. Same argu
 ### Task 1: The package gains the harness
 
 **Files:**
+
 - Create: `decks/export.mjs`, `test/decks-export.test.mjs`
 - Modify: `package.json`
 
 **Interfaces:**
+
 - Produces: `validate(decks)` and `exportDecks({...})` at `@robertblust/design/decks/export`.
 
 Work in `~/git/robertblust/design`, on a branch off `main`.

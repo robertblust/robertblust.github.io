@@ -101,12 +101,14 @@ that builds a fake tree.
 ### Task 1: `cards/recipe.mjs` — the machinery
 
 **Files:**
+
 - Create: `cards/recipe.mjs` (in `/Users/rob/git/robertblust/design`)
 - Create: `test/cards-recipe.test.mjs`
 - Create: `test/cards-packaging.test.mjs`
 - Modify: `package.json` — `files` and `exports`
 
 **Interfaces:**
+
 - Consumes: nothing from earlier tasks.
 - Produces: the six exports listed above. Tasks 2, 3 and 4 all import from here.
 
@@ -240,6 +242,7 @@ knob does, a stamp written after a page moves reports stale.
 - [ ] **Step 8: Prove the gates red**
 
 For each of the three tests above, mutate the code and confirm the test fails:
+
 - give `root` a default of `process.cwd()` → the first test must fail;
 - make `recipeFor` ignore its second argument → the second test must fail;
 - stop skipping `<a>` in the tag walk → the third test must fail.
@@ -263,10 +266,12 @@ Expected: 211 existing tests still pass, plus the new ones.
 ### Task 2: `cards/check.mjs` — staleness and the dark check
 
 **Files:**
+
 - Create: `cards/check.mjs`
 - Create: `test/cards-check.test.mjs`
 
 **Interfaces:**
+
 - Consumes: nothing at runtime — it takes the site's module, which supplies `state`.
 - Produces: `checkCards(recipeModule) -> number`.
 
@@ -337,10 +342,12 @@ git commit -m "The card check moves into the package"
 ### Task 3: `cards/export.mjs` — the union renderer
 
 **Files:**
+
 - Create: `cards/export.mjs`
 - Create: `test/cards-export.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `cards/recipe.mjs` is *not* imported — the site's module supplies `stamp`.
 - Produces: `exportCards({ chromium, recipe })`.
 
@@ -480,9 +487,11 @@ git commit -m "The card renderer moves into the package, as the union of three"
 ### Task 4: `cards/recipe-tests.mjs` — the shared assertions
 
 **Files:**
+
 - Create: `cards/recipe-tests.mjs`
 
 **Interfaces:**
+
 - Produces: `checkRecipe(recipeModule)`, registering 32 tests with `node:test`.
 
 - [ ] **Step 1: Build the union from all three files**
@@ -556,6 +565,7 @@ git commit -m "The shared recipe assertions move into the package"
 ### Task 5: Release v0.13.0
 
 **Files:**
+
 - Modify: `package.json` (version), `README.md` (the `cards/` section)
 
 - [ ] **Step 1: Run the whole suite.** Expect 211 + the new tests, zero failures.
@@ -573,6 +583,7 @@ git commit -m "The shared recipe assertions move into the package"
 ### Task 6: blust.ch adopts
 
 **Files:**
+
 - Modify: `og-recipe.mjs`, `export-og.mjs`, `og-check.mjs`, `verify/og-recipe.test.mjs`,
   `package.json`, `CLAUDE.md`
 

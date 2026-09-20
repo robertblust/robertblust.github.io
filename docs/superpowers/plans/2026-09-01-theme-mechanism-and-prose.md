@@ -53,6 +53,7 @@ Taken 2026-09-01 on `main`. Re-derive if they look wrong.
 ## File Structure
 
 **Created in `@robertblust/design`:**
+
 - `blocks/theme-boot.js` — the pre-paint script. One responsibility: set `data-theme` on `<html>` before anything paints.
 - `blocks/theme.js` — storage, cross-domain carry, control wiring. Mirrors `blocks/lang.js`.
 - `test/theme.test.mjs` — tests for both blocks and the token palette.
@@ -66,10 +67,12 @@ Taken 2026-09-01 on `main`. Re-derive if they look wrong.
 ## Task 1: The light palette and `--press`
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/tokens.css`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/theme.test.mjs`
 
 **Interfaces:**
+
 - Produces: the token set `--ground --raise --rule --sky --ink --dim --c-weak --c-mid --c-firm --c-flag --c-path --press`, defined for both themes. Fence `design tokens` at **v5**.
 
 - [ ] **Step 1: Add `--press` to the dark block and the light half**
@@ -210,6 +213,7 @@ Expected before Step 1: FAIL — no `:root[data-theme="light"]` rule. After: PAS
 - [ ] **Step 4: Prove each test can fail**
 
 Five mutations, each restored and re-confirmed green:
+
 1. Delete `--c-flag` from the light half → test 1 fails naming the mismatch.
 2. Set light `--c-mid` to `#7FA3D8` (the dark value) → test 2 fails at ~2.47:1.
 3. Swap light `--c-weak` and `--c-firm` → test 3 fails on the light ramp.
@@ -230,11 +234,13 @@ git commit -m "design tokens v5: a light half, and one name for a colour typed t
 ## Task 2: The `theme boot` and `theme` fences
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/theme-boot.js`, `/Users/rob/git/robertblust/design/blocks/theme.js`
 - Modify: `/Users/rob/git/robertblust/design/lib/fences.mjs`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/theme.test.mjs` (append)
 
 **Interfaces:**
+
 - Consumes: `--press` and the light palette from Task 1.
 - Produces: fences `theme boot` (v1) and `theme` (v1), both declaring `params: ["themeKey"]`. The page must provide `<button id="thLight">` and `<button id="thDark">`, and must declare `var theme` in scope before the `theme` fence.
 
@@ -431,10 +437,12 @@ git commit -m "Two fences for the theme: one in head to beat first paint, one in
 ## Task 3: The control's CSS, and the three checks
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/header.css`, `versions.json`, `verify/pages.mjs`, `package.json`
 - Test: `/Users/rob/git/robertblust/design/test/theme.test.mjs` (append)
 
 **Interfaces:**
+
 - Produces: `.seg.theme` rules in the `header contract` fence; `contrast` and `noFlash` checks in `pageChecks`; `storageKeys` extended to click `#thLight`/`#thDark`.
 
 - [ ] **Step 1: Add the control's rules to `blocks/header.css`**
@@ -563,6 +571,7 @@ Set `package.json` to `0.10.0` — new fences and new exports are a minor. Push 
 **Files:** in each of the three sites — `design.config.json`, `package.json`, `package-lock.json`, and each prose `index.html`.
 
 **Interfaces:**
+
 - Consumes: `design tokens` v5, `theme boot` v1, `theme` v1 from the package release.
 
 - [ ] **Step 1: Re-pin and add `themeKey`**
@@ -656,6 +665,7 @@ In `export-og.mjs`, before each screenshot, clear any stored theme so a card can
 Per site, with a static server running **inside that repository's directory** on port 8000 (only one repo can hold it — `pkill -f "http.server"` between them), run every CI script.
 
 Then prove the three new checks are live, restoring each after:
+
 1. Set light `--c-mid` to `#7FA3D8` in one page's generated block → `contrast` must fail. (`design:check` will also fail; that is expected and is the point of the fence.)
 2. Move the `theme boot` fence below the `<style>` element on one page → `noFlash` must fail.
 3. Remove `rb-theme` from one site's `/privacy/` → `storageKeys` must fail.
