@@ -1,5 +1,5 @@
 {
-  "commit": "4b7619315da227068a1811f3d6f21e21598cee93",
+  "commit": "0f84df7e016993cff495134081624534eb7cb783",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -8422,7 +8422,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then the commit and core\n  release the answers are read from.\n- **Tools** — listing the types, describing a schema, listing and returning entities, finding\n  evidence, searching and fetching, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
+          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying\n  that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other,\n  the rules the model is held to, listing and returning entities, finding evidence, searching\n  and fetching, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
           "tables": []
         }
       ],
