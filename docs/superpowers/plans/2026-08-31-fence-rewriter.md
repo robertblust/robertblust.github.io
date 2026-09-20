@@ -129,10 +129,12 @@ fenced HTML the tool rewrites. **No script and no CI change in any site.**
 ### Task 1: The fence rewriter — finding and replacing one block
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/lib/rewrite.mjs`
 - Test: `/Users/rob/git/robertblust/design/test/rewrite.test.mjs`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces, all pure and synchronous, imported by Tasks 2 and 3:
   - `findFence(text: string, name: string): {start: number, end: number, version: string, variant: string|null, body: string} | null` — line indices are 0-based and **inclusive** of both marker lines. Returns `null` when the page carries no such fence.
@@ -354,6 +356,7 @@ git commit -m "Find a fenced block in a page, and swap it without touching the r
 ### Task 2: The three canonical blocks, and their manifest
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/tokens.css`
 - Create: `/Users/rob/git/robertblust/design/blocks/header.css`
 - Create: `/Users/rob/git/robertblust/design/blocks/stage.css`
@@ -363,6 +366,7 @@ git commit -m "Find a fenced block in a page, and swap it without touching the r
 - Modify: `/Users/rob/git/robertblust/design/package.json` (add `blocks` and `versions.json` to `files`)
 
 **Interfaces:**
+
 - Consumes: `findFence` from `lib/rewrite.mjs`.
 - Produces, imported by Task 3:
   - `FENCES` — an object keyed by fence name. Each value is
@@ -662,11 +666,13 @@ git commit -m "The three fenced blocks, and the versions they carry"
 ### Task 3: Sync and check the fences alongside the files
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/lib/sync.mjs`
 - Modify: `/Users/rob/git/robertblust/design/bin/design.mjs`
 - Test: `/Users/rob/git/robertblust/design/test/sync-fences.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `FENCES`, `FENCE_NAMES`, `blockFor` from `lib/fences.mjs`; `findFence`,
   `replaceFence`, `FenceError` from `lib/rewrite.mjs`; the existing `readConfig`, `planSync`,
   `applySync`, `CONFIG_NAME` from `lib/sync.mjs`.
@@ -918,10 +924,12 @@ git commit -m "Sync and check fenced blocks beside the whole files"
 ### Task 4: Document the fence contract, and release v0.2.0
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/README.md`
 - Modify: `/Users/rob/git/robertblust/design/package.json` (version → `0.2.0`)
 
 **Interfaces:**
+
 - Consumes: everything from Tasks 1–3.
 - Produces: tag `v0.2.0` on `github.com/robertblust/design`. Tasks 5–7 install it.
 
@@ -1001,11 +1009,13 @@ The `"./fences"` entry in the `exports` map was added in Task 2, Step 6.
 ### Task 5: blust.ch adopts — and the tripwire fires for the first time
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/robertblust.github.io/package.json`, `package-lock.json`
 - Modify: 8 HTML files under `/Users/rob/git/robertblust/robertblust.github.io` (by the tool) —
   **15 fences**: `design tokens` ×8, `header contract` ×6, `stage contract` ×1
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design@v0.2.0`.
 - Produces: nothing other tasks consume.
 
@@ -1116,6 +1126,7 @@ it does.
 ### Task 6: companygraph.io adopts
 
 **Files:**
+
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/package.json`, `package-lock.json`
 - Modify: 7 HTML files (by the tool) — **15 fences**: `design tokens` ×7, `header contract` ×6,
   `stage contract` ×2
@@ -1225,6 +1236,7 @@ git push -u origin adopt-fences
 ### Task 7: guestgraph.io adopts
 
 **Files:**
+
 - Modify: `/Users/rob/git/guestgraph/guestgraph.github.io/package.json`, `package-lock.json`
 - Modify: 5 HTML files (by the tool) — **9 fences**: `design tokens` ×5, `header contract` ×4,
   `stage contract` ×0
@@ -1334,6 +1346,7 @@ git push -u origin adopt-fences
 ### Task 8: Retire the habit the fences no longer need
 
 **Files:**
+
 - Modify: `verify/design.mjs` in all three sites (byte-identical; the same edit three times)
 - Modify: `.github/dependabot.yml` in all three sites
 

@@ -86,6 +86,7 @@ correction found flipping against a surface that does not.
 ## File Structure
 
 **Modified in `@robertblust/design`:**
+
 - `blocks/tokens.css` — the seventeen deck tokens in both halves; `--lcd` declared invariant. Fence → v7.
 - `blocks/deck-transport.css` — its literals become tokens. Fence → v5.
 - `blocks/deck-lockup-one.css`, `blocks/deck-lockup-two.css` — same. Fences bump.
@@ -101,10 +102,12 @@ correction found flipping against a surface that does not.
 ## Task 1: The seventeen deck tokens
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/tokens.css`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/theme.test.mjs`
 
 **Interfaces:**
+
 - Produces: seventeen `--deck-*` tokens in both themes, plus `--lcd` declared in both with the same value. Fence `design tokens` at **v7**.
 
 - [ ] **Step 1: Add the deck group to both halves**
@@ -230,6 +233,7 @@ test("the deck tokens do not leak a light value into --lcd's neighbours by accid
 Run: `cd /Users/rob/git/robertblust/design && npm test`. Expected: FAIL before Step 1, PASS after.
 
 Four mutations, each restored and re-confirmed:
+
 1. Delete `--deck-ring` from the light half → test 1 fails naming it.
 2. Give light `--lcd` the value `#EDEAE2` → test 2 fails.
 3. Set light `--deck-quiet` to `#B9BCC6` → test 3 fails with a ratio under 4.5.
@@ -249,10 +253,12 @@ git commit -m "design tokens v7: the deck's own chrome, in both themes"
 ## Task 2: The transport and lockup blocks stop painting literals
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/deck-transport.css`, `blocks/deck-lockup-one.css`, `blocks/deck-lockup-two.css`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/blocks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: the seventeen tokens from Task 1.
 - Produces: `deck transport` and both `deck lockup` variants painting only `var(--…)`.
 
@@ -299,10 +305,12 @@ Run `npm test`. Then put one literal back — change a `var(--deck-ring)` to `#3
 ## Task 3: The theme fences gain a deck variant, and the control gets its transport styling
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/theme-boot.js`, `blocks/theme.js`, `blocks/deck-transport.css`, `lib/fences.mjs`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/theme.test.mjs`
 
 **Interfaces:**
+
 - Produces: `theme boot` and `theme` with `variants: ["page", "deck"]`; `.seg.theme` rules inside `deck transport`.
 
 - [ ] **Step 1: Give both theme fences a deck variant**
@@ -363,6 +371,7 @@ Bump `package.json` to **0.11.0** — new variants and new tokens are a minor. C
 **Files:** each site's deck `index.html`, and `verify/check.mjs`.
 
 **Interfaces:**
+
 - Consumes: the package release from Task 3.
 
 - [ ] **Step 0: Fix the stale variant word first — the sync tool will not run until you do**
@@ -398,6 +407,7 @@ npm run design && npm run design:check
 - [ ] **Step 2: Place the fences and the control**
 
 Per deck, mirroring what the prose pages already do:
+
 - `theme boot` in `<head>`, **above** the `<style>` element.
 - `theme` at the end of the body, immediately after the `language` fence, with `var theme` declared **after** the fence — the fence defines `themeFromUrl()`, so the shape is fence-then-var, exactly as `lang` does it.
 - The control in the transport bar, immediately after the existing `<div class="seg" id="lang">`, wrapped so the two sit together the way the prose pages' `#langind` wrapper does.

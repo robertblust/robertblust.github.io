@@ -99,10 +99,12 @@ Nothing in this phase is generated. It is four decks edited to agree, and it is 
 ### Task 1: companygraph's runtime loses what the other three never had
 
 **Files:**
+
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/talks/intro/index.html`
 - Modify: `/Users/rob/git/companygraph/companygraph.github.io/verify/check.mjs`
 
 **Interfaces:**
+
 - Consumes: nothing from earlier tasks.
 - Produces: a companygraph deck whose runtime differs from blust.ch's only in the four per-talk `UI` strings. Tasks 4 and 5 depend on that.
 
@@ -253,11 +255,13 @@ network request that neither version makes."
 ### Task 2: The other three get the ARIA, and all four get the boundary state
 
 **Files:**
+
 - Modify: `talks/mental-model/index.html`, `talks/essential-complexity/index.html` in `/Users/rob/git/robertblust/robertblust.github.io`
 - Modify: `talks/intro/index.html` in `/Users/rob/git/guestgraph/guestgraph.github.io`
 - Modify: all four decks' `render()`
 
 **Interfaces:**
+
 - Consumes: Task 1's aligned companygraph deck.
 - Produces: four decks whose runtime and language markup are identical but for the per-talk strings. Task 5 fences exactly that.
 
@@ -366,11 +370,13 @@ unlabelled buttons to one named control."
 ### Task 3: The transport learns a disabled state, and gains a rule two decks were missing
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/blocks/deck-transport.css`
 - Modify: `/Users/rob/git/robertblust/design/versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/blocks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `blockFor`, `FENCES` as released in v0.5.0.
 - Produces: `deck transport` at **v2**. Tasks 8–10 adopt it; blust.ch's decks must drop their own `.lcd:has(.n.msg)` when they do.
 
@@ -455,11 +461,13 @@ could never show a message on a narrow screen. It belongs to every deck."
 ### Task 4: `blocks/deck-runtime.js` — the shared runtime, and the payload it consumes
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/deck-runtime.js`
 - Modify: `/Users/rob/git/robertblust/design/lib/fences.mjs`, `versions.json`
 - Test: `/Users/rob/git/robertblust/design/test/blocks.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `blockFor(name, variant, params = {})`; the `parts` mechanism is **not** needed here.
 - Produces: fence `"deck runtime"` — `key: "runtime"`, `source: "blocks/deck-runtime.js"`, `variants: null`, `closes: null`, no `params`. `versions.json` gains `"runtime": "v1"`. The block reads a global `TALK` the page declares above the fence.
 
@@ -568,10 +576,12 @@ between markers, so the block states it in its own comment."
 ### Task 5: The fence-order assertion
 
 **Files:**
+
 - Modify: each site's `verify/design.mjs` (add `fenceOrder`)
 - Modify: each site's `verify/check.mjs` (`fenceOrder` per deck in `PAGES`)
 
 **Interfaces:**
+
 - Consumes: `DESIGN_CHECKS`, and the `fences` check an earlier plan added.
 - Produces: `fenceOrder` in `DESIGN_CHECKS`, reading `spec.fenceOrder` — an array of fence names in the order they must appear.
 
@@ -700,9 +710,11 @@ Tasks 8–10 pin `github:robertblust/design#v0.6.0`. A commit SHA is not accepta
 ### Task 8: blust.ch's two decks adopt
 
 **Files:**
+
 - Modify: `package.json`, `package-lock.json`, both decks, `verify/check.mjs`
 
 **Interfaces:**
+
 - Consumes: `@robertblust/design@0.6.0`; fences `deck runtime` and `deck transport` v2; `fenceOrder` from Task 5.
 - Produces: nothing Tasks 9 and 10 consume.
 

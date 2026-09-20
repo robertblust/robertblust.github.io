@@ -99,9 +99,11 @@ Every parameter the package has substituted so far comes **from the package**: `
 ### Task 1: Unify the two dialects
 
 **Files:**
+
 - Modify: 16 HTML pages across the three sites — every page carrying `var KEY = `
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: 20 pages whose language block uses one set of names — `LANG_KEY`, `langStored`, `langRemember`. Task 2 fences them; Task 3 stores the result as the canonical block.
 
@@ -265,9 +267,11 @@ Do **not** open a pull request — later tasks land on this branch.
 ### Task 2: Fence the block
 
 **Files:**
+
 - Modify: the same 20 HTML pages
 
 **Interfaces:**
+
 - Consumes: Task 1's unified naming.
 - Produces: 20 pages carrying `language · v1 · <variant> ─` … `end language ─` markers, which Task 5's `planFences` discovers.
 
@@ -348,6 +352,7 @@ git push
 ### Task 3: The canonical block, and the parameter mechanism
 
 **Files:**
+
 - Create: `/Users/rob/git/robertblust/design/blocks/lang.js`
 - Create: `/Users/rob/git/robertblust/design/lib/family.mjs`
 - Modify: `/Users/rob/git/robertblust/design/lib/fences.mjs`
@@ -367,9 +372,11 @@ written when three fences existed and encoded that as a fact:
   `FENCES[n].params` rather than a hardcoded name, so it keeps working when a fifth fence arrives.
 
 Nothing else in that file, and no other existing test file, may be touched.
+
 - Test: `/Users/rob/git/robertblust/design/test/params.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `findFence` from `lib/rewrite.mjs`.
 - Produces, for Task 4:
   - `FENCES["language"]` = `{ key: "lang", source: "blocks/lang.js", version, variants: ["page","deck"], closes: null, params: ["langKey"] }` — `params` is new and lists the slot names this block needs the *site* to supply.
@@ -556,11 +563,13 @@ git commit -m "The language block, and the first parameter that comes from the s
 ### Task 4: Teach `planFences` to read the site's config
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/lib/sync.mjs`
 - Modify: `/Users/rob/git/robertblust/design/bin/design.mjs`
 - Test: `/Users/rob/git/robertblust/design/test/sync-params.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `FENCES`, `blockFor` (three-argument form) from `lib/fences.mjs`; `readConfig` and the existing `planFences`/`applyFences` in `lib/sync.mjs`.
 - Produces: `planFences(siteRoot)` unchanged in signature but now reading `design.config.json` for the parameters a fence declares. `readConfig` returns `{ groups, langKey }`, with `langKey` optional and `undefined` when absent.
 
@@ -704,6 +713,7 @@ git commit -m "Read the site's own config for the parameters a fence declares"
 ### Task 5: Document and release v0.3.0
 
 **Files:**
+
 - Modify: `/Users/rob/git/robertblust/design/README.md`
 - Modify: `/Users/rob/git/robertblust/design/package.json` (version)
 
@@ -753,6 +763,7 @@ importable so `carriesLang` can stop hardcoding it; and the `npm run design && n
 ### Task 6: blust.ch adopts
 
 **Files:**
+
 - Modify: `design.config.json`, `package.json`, `package-lock.json`, `verify/check.mjs`, and the 8 pages the tool rewrites
 
 **Interfaces:** consumes `@robertblust/design@v0.3.0`; produces nothing other tasks consume.
@@ -844,6 +855,7 @@ lands on this branch.
 ### Task 7: companygraph.io adopts
 
 **Files:**
+
 - Modify: `design.config.json`, `package.json`, `package-lock.json`, `verify/check.mjs`, and the 7 pages the tool rewrites
 
 **Interfaces:** consumes `@robertblust/design@v0.3.0`; produces nothing other tasks consume.
@@ -914,6 +926,7 @@ request yet.**
 ### Task 8: guestgraph.io adopts
 
 **Files:**
+
 - Modify: `design.config.json`, `package.json`, `package-lock.json`, `verify/check.mjs`, and the 5 pages the tool rewrites
 
 **Interfaces:** consumes `@robertblust/design@v0.3.0`; produces nothing other tasks consume.
@@ -985,6 +998,7 @@ Expected: fully green. Commit, push. **No pull request yet.**
 ### Task 9: Prove the contract still holds across the three sites, and open the pull requests
 
 **Files:**
+
 - Modify: none, unless a check below fails.
 
 **Interfaces:** consumes Tasks 6–8; produces three open pull requests.

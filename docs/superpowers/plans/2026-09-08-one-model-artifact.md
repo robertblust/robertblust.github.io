@@ -77,12 +77,14 @@ Writes `model.json` and changes no page. The data block stays where it is, so no
 regress yet — this task is proved by showing the artifact reproduces the block exactly.
 
 **Files:**
+
 - Create: `build/read.mjs`
 - Modify: `build/model.mjs` (replace its fetching and its page writing)
 - Create: `model.json` (generated, committed)
 - Modify: `package.json:15-19`
 
 **Interfaces:**
+
 - Consumes: nothing from earlier tasks.
 - Produces: `readInstance({ repo, commit, sub }) => Promise<Map<string, string>>` from
   `build/read.mjs`. `model.json`, an object with keys `commit`, `root`, `rootId`, `types`,
@@ -219,6 +221,7 @@ This is the whole point of the task. The block currently in the pages was produc
 code path; the artifact must serialize to exactly the same bytes.
 
 Run:
+
 ```bash
 node --input-type=module -e '
 import fs from "node:fs";
@@ -230,6 +233,7 @@ for (const p of ["model/index.html", "timeline/index.html"]) {
   console.log(`  ${p}: ${mine === onPage ? "identical" : "DIFFERS"} (${onPage.length} bytes)`);
 }'
 ```
+
 Expected: `identical (299759 bytes)` for both.
 
 If either differs, stop. It means the parser or the pin moved, and no later task is safe.
@@ -275,12 +279,14 @@ Introduces `pages.mjs`, the pin guard and the first renderer. Ends with the data
 from `model.json` and a clean `git diff`.
 
 **Files:**
+
 - Create: `build/block.mjs`
 - Create: `build/pages.mjs`
 - Create: `build/renderers.test.mjs`
 - Modify: `package.json` (add `pages`, `pages:check`, `test:build`)
 
 **Interfaces:**
+
 - Consumes: `model.json` from Task 1.
 - Produces: `writeBlock(data, { check }) => string[]` from `build/block.mjs`, returning
   repository-relative paths that did not match. `build/pages.mjs` as the orchestrator every
@@ -467,12 +473,14 @@ Expected: `✓ every derived region matches model.json at robertblust/mental-mod
 - [ ] **Step 8: Prove the pin guard**
 
 Run:
+
 ```bash
 cp source.json source.json.bak
 node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("source.json","utf8"));s.commit="a".repeat(40);fs.writeFileSync("source.json",JSON.stringify(s)+"\n")'
 npm run pages:check; echo "exit: $?"
 mv source.json.bak source.json
 ```
+
 Expected: `✗ model.json is at 66cd79d, source.json pins aaaaaaa — run: npm run model`, exit 1
 
 Run: `git diff --stat` — expected: no output, the backup restored `source.json` exactly.
@@ -507,11 +515,13 @@ MSG
 ### Task 3: The principles page loses its own parser
 
 **Files:**
+
 - Modify: `build/principles.mjs` (delete `parse()` and `readModel()`, keep the rendering)
 - Modify: `build/pages.mjs` (register the renderer)
 - Modify: `build/renderers.test.mjs` (add coverage)
 
 **Interfaces:**
+
 - Consumes: `writeBlock` pattern and the `pages.mjs` `RENDERERS` array from Task 2.
 - Produces: `writePrinciples(data, { check, root }) => string[]`, same contract as `writeBlock`.
 
@@ -690,11 +700,13 @@ the sort is.
 - [ ] **Step 7: Confirm the check catches a hand edit**
 
 Run:
+
 ```bash
 node -e 'const fs=require("fs");const p="principles/index.html";fs.writeFileSync(p,fs.readFileSync(p,"utf8").replace("<p class=\"lede\">","<p class=\"lede\">EDITED "))'
 npm run pages:check; echo "exit: $?"
 git checkout principles/index.html
 ```
+
 Expected: `✗ principles/index.html no longer match model.json — run: npm run pages`, exit 1
 
 - [ ] **Step 8: Commit**
@@ -731,11 +743,13 @@ diff; this one is proved by a diff that contains exactly what the spec predicted
 else.
 
 **Files:**
+
 - Create: `build/jsonld.mjs`
 - Delete: `build/sameas.mjs`
 - Modify: `build/pages.mjs`, `build/renderers.test.mjs`, `package.json`
 
 **Interfaces:**
+
 - Consumes: the `write(data, { check, root }) => string[]` contract from Tasks 2 and 3.
 - Produces: `writeJsonLd(data, { check, root }) => string[]`, and `alsoAt(data) => string[]`
   for the person's addresses.
@@ -938,6 +952,7 @@ const RENDERERS = [writeBlock, writePrinciples, writeJsonLd];
 ```
 
 Then:
+
 ```bash
 git rm build/sameas.mjs
 ```
@@ -955,6 +970,7 @@ Expected: exactly nine files changed, all `index.html`, and no change to `model.
 Run: `git diff -U0 -- '*.html' | grep '^[-+]' | grep -v '^[-+][-+]' | sort | uniq -c | sort -rn`
 
 Expected, and nothing else:
+
 - nine pages gaining `"isBasedOn"` and a `"distribution"` object of three lines
 - nine pages losing `"encodingFormat": "text/markdown"` at node level
 - nine pages changing `Dataset.url` from the repository to `https://blust.ch/model/`
@@ -981,6 +997,7 @@ node -e 'const fs=require("fs");const p="talks/mental-model/index.html";fs.write
 npm run pages:check; echo "exit: $?"
 git checkout talks/mental-model/index.html
 ```
+
 Expected: `✗ talks/mental-model/index.html no longer match model.json — run: npm run pages`,
 exit 1
 
@@ -1027,6 +1044,7 @@ MSG
 ### Task 5: CI, and the documents that describe the mechanism
 
 **Files:**
+
 - Modify: `.github/workflows/ci.yml:42-54` and `:78-88`
 - Modify: `AGENTS.md:643-654`
 - Modify: `README.md` (the commands block)
@@ -1125,10 +1143,12 @@ Expected: `✓ every Markdown file follows WRITING.md`
 - [ ] **Step 7: Prove the whole thing from a clean slate**
 
 Run:
+
 ```bash
 rm -f model.json && npm run pages; echo "exit: $?"
 npm run model && npm run pages && npm run pages:check && npm run test:build && git diff --stat
 ```
+
 Expected: the first command fails with `model.json is missing — run: npm run model`, exit 1;
 then every command passes and `git diff --stat` is empty, because Task 4 already wrote what
 these produce.
