@@ -175,8 +175,7 @@ test("httpStatus reads the body it does not want", () => {
 
 - [ ] **Step 4: Run it and watch it fail before the export paths exist**
 
-Run: `cd /Users/rob/git/robertblust/design && npm test`
-Expected before step 2: FAIL on module resolution. After steps 1–2: PASS, with the suite total risen by 5.
+Run: `cd /Users/rob/git/robertblust/design && npm test` Expected before step 2: FAIL on module resolution. After steps 1–2: PASS, with the suite total risen by 5.
 
 - [ ] **Step 5: Prove the tests are not vacuous**
 
@@ -493,8 +492,7 @@ test("two independently built check sets do not share mutable state", () => {
 
 - [ ] **Step 3: Run and confirm it fails, then passes**
 
-Run: `cd /Users/rob/git/robertblust/design && npm test`
-Expected: FAIL before `verify/pages.mjs` exists; PASS after, suite total up by 6.
+Run: `cd /Users/rob/git/robertblust/design && npm test` Expected: FAIL before `verify/pages.mjs` exists; PASS after, suite total up by 6.
 
 - [ ] **Step 4: Prove non-vacuity by mutation**
 

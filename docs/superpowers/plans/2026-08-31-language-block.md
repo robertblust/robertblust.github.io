@@ -165,13 +165,9 @@ done
 
 Sixteen lines expected. `\b` is a word boundary, so `remembered` or `KEYS` would not match — but check, because a false match in prose would be an edit to page copy:
 
-**Do not use a check that filters out the new names.** `grep -vE "LANG_KEY|langStored|langRemember"`
-on added lines cannot catch this task's real failure mode, because the failure *is* one of those
-names appearing where it should not — every corrupted line contains one, so such a check passes by
-construction. It did, and it let corrupted prose through.
+**Do not use a check that filters out the new names.** `grep -vE "LANG_KEY|langStored|langRemember"` on added lines cannot catch this task's real failure mode, because the failure *is* one of those names appearing where it should not — every corrupted line contains one, so such a check passes by construction. It did, and it let corrupted prose through.
 
-Check instead that every occurrence of the new names is a JavaScript identifier — a call or a
-definition — which is the only place they belong:
+Check instead that every occurrence of the new names is a JavaScript identifier — a call or a definition — which is the only place they belong:
 
 ```bash
 cd /Users/rob/git
@@ -184,8 +180,7 @@ for r in robertblust/robertblust.github.io companygraph/companygraph.github.io g
 done
 ```
 
-Expected: **no output.** Anything printed is the rename having escaped into prose, a comment or
-data. And confirm nothing was left behind:
+Expected: **no output.** Anything printed is the rename having escaped into prose, a comment or data. And confirm nothing was left behind:
 
 ```bash
 grep -rlE "[^g](stored|remember)\(" /Users/rob/git/*/[a-z]*.github.io --include=*.html 2>/dev/null
@@ -281,10 +276,7 @@ Do **not** open a pull request — later tasks land on this branch.
 
 - [ ] **Step 1: Insert the markers**
 
-The block runs from `var LANG_KEY = ` through the line
-`document.addEventListener("click", carryLang, true);` (single-quoted on the four decks and on
-`guestgraph.io/talks/index.html`). Wrap exactly that range. The opening marker carries the fence
-name, a version and the variant; the closing marker names the fence:
+The block runs from `var LANG_KEY = ` through the line `document.addEventListener("click", carryLang, true);` (single-quoted on the four decks and on `guestgraph.io/talks/index.html`). Wrap exactly that range. The opening marker carries the fence name, a version and the variant; the closing marker names the fence:
 
 ```js
   /* ─── language · v1 · page ─────────────────────────────────────────────
@@ -334,8 +326,7 @@ Expected: `20`.
 
 - [ ] **Step 3: Run all three suites, and commit**
 
-Each site, port 8000 free between runs, `npm run verify` fully green. Then in each repository, on
-the same `lang-block` branch:
+Each site, port 8000 free between runs, `npm run verify` fully green. Then in each repository, on the same `lang-block` branch:
 
 ```bash
 git add $(git diff --name-only | grep '\.html$')
@@ -360,8 +351,7 @@ git push
 - Modify: `/Users/rob/git/robertblust/design/package.json` (`exports` only)
 - Modify: `/Users/rob/git/robertblust/design/test/fences.test.mjs` — **exactly two tests**
 
-**Two existing tests must change, and they are not force-passes.** `test/fences.test.mjs` was
-written when three fences existed and encoded that as a fact:
+**Two existing tests must change, and they are not force-passes.** `test/fences.test.mjs` was written when three fences existed and encoded that as a fact:
 
 - `"names exactly the three fences this release ships"` asserts the exact list. Its *purpose* is to
   fail when the fence set changes — a "did you mean to add this?" guard. Update it to four names
@@ -385,10 +375,7 @@ Nothing else in that file, and no other existing test file, may be touched.
 
 - [ ] **Step 1: Extract the canonical block**
 
-Take it from `blust.ch/index.html` — a prose page, double-quoted, and after Task 1 identical to
-fourteen others. **Keep the fence markers Task 2 added**: as with `blocks/tokens.css` and its
-siblings, the stored block *is* the whole fence, markers included, and `blockFor` returns it that
-way. Task 3's tests assert exactly that (`f.start === 0`, `f.end === lines - 1`).
+Take it from `blust.ch/index.html` — a prose page, double-quoted, and after Task 1 identical to fourteen others. **Keep the fence markers Task 2 added**: as with `blocks/tokens.css` and its siblings, the stored block *is* the whole fence, markers included, and `blockFor` returns it that way. Task 3's tests assert exactly that (`f.start === 0`, `f.end === lines - 1`).
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -397,8 +384,7 @@ awk '/language · v1/{on=1} on{print; if(/end language/)exit}' "$RB/index.html" 
 wc -l blocks/lang.js
 ```
 
-Then replace the site's own storage key with the slot the parameter fills, and the variant word
-with its slot:
+Then replace the site's own storage key with the slot the parameter fills, and the variant word with its slot:
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -406,9 +392,7 @@ perl -pi -e 's/"rb-lang"/"{{langKey}}"/; s/· v1 · page/· v1 · {{variant}}/;'
 grep -n "{{langKey}}\|{{variant}}" blocks/lang.js
 ```
 
-Expected: exactly one `{{langKey}}` and one `{{variant}}`. **If `{{langKey}}` appears twice the
-block references the key somewhere else and the substitution must be reviewed**, because a
-single-occurrence `replace` would fill only the first.
+Expected: exactly one `{{langKey}}` and one `{{variant}}`. **If `{{langKey}}` appears twice the block references the key somewhere else and the substitution must be reviewed**, because a single-occurrence `replace` would fill only the first.
 
 - [ ] **Step 2: Write the failing test**
 
@@ -496,8 +480,7 @@ test("the block carries FAMILY's source text, so page and check agree", () => {
 
 - [ ] **Step 3: Run it and watch it fail**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/params.test.mjs`
-Expected: FAIL — `lib/family.mjs` does not exist and `FENCES["language"]` is undefined.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/params.test.mjs` Expected: FAIL — `lib/family.mjs` does not exist and `FENCES["language"]` is undefined.
 
 - [ ] **Step 4: Write `lib/family.mjs`**
 
@@ -517,8 +500,7 @@ export const FAMILY = /^(www\.)?(blust\.ch|companygraph\.io|guestgraph\.io)$/;
 
 In `versions.json`, add `"lang": "v1"` beside the existing three.
 
-In `lib/fences.mjs`, add the entry — note `closes: null`, because unlike the token block this one
-has no brace to place, and `params`, which is new:
+In `lib/fences.mjs`, add the entry — note `closes: null`, because unlike the token block this one has no brace to place, and `params`, which is new:
 
 ```javascript
   // The first block whose substitution comes from the SITE rather than from this package.
@@ -532,8 +514,7 @@ has no brace to place, and `params`, which is new:
   },
 ```
 
-Then extend `blockFor` to take and validate a third argument. Keep the existing variant and
-`closes` behaviour exactly as it is; add, after the variant checks:
+Then extend `blockFor` to take and validate a third argument. Keep the existing variant and `closes` behaviour exactly as it is; add, after the variant checks:
 
 - if `spec.params` is set, every name in it must be present in the supplied object — otherwise
   throw an `Error` naming the fence and the missing parameter, and saying it comes from the
@@ -544,13 +525,11 @@ Then extend `blockFor` to take and validate a third argument. Keep the existing 
 
 - [ ] **Step 6: Run the tests**
 
-Run: `npm test`
-Expected: 68 existing plus 10 new — **78 passing, 0 failing.**
+Run: `npm test` Expected: 68 existing plus 10 new — **78 passing, 0 failing.**
 
 - [ ] **Step 7: Export `./family` and commit**
 
-In `package.json`, add `"./family": "./lib/family.mjs"` to `exports`. Change nothing else — the
-version bump is Task 5's.
+In `package.json`, add `"./family": "./lib/family.mjs"` to `exports`. Change nothing else — the version bump is Task 5's.
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -573,10 +552,7 @@ git commit -m "The language block, and the first parameter that comes from the s
 - Consumes: `FENCES`, `blockFor` (three-argument form) from `lib/fences.mjs`; `readConfig` and the existing `planFences`/`applyFences` in `lib/sync.mjs`.
 - Produces: `planFences(siteRoot)` unchanged in signature but now reading `design.config.json` for the parameters a fence declares. `readConfig` returns `{ groups, langKey }`, with `langKey` optional and `undefined` when absent.
 
-**The failure that must be loud.** A site whose pages carry a `language` fence but whose config has
-no `langKey` must exit **2** with a message naming the file and the key — not write an empty string
-into twenty pages' `localStorage` calls. That would not throw anywhere; it would quietly give every
-visitor a shared, nameless key.
+**The failure that must be loud.** A site whose pages carry a `language` fence but whose config has no `langKey` must exit **2** with a message naming the file and the key — not write an empty string into twenty pages' `localStorage` calls. That would not throw anywhere; it would quietly give every visitor a shared, nameless key.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -660,9 +636,7 @@ test("a second run reports same and writes nothing", () => {
 
 - [ ] **Step 2: Run it and watch it fail**
 
-Run: `node --test test/sync-params.test.mjs`
-Expected: FAIL — `readConfig` does not return `langKey`, and `planFences` calls `blockFor` with two
-arguments.
+Run: `node --test test/sync-params.test.mjs` Expected: FAIL — `readConfig` does not return `langKey`, and `planFences` calls `blockFor` with two arguments.
 
 - [ ] **Step 3: Implement**
 
@@ -677,13 +651,11 @@ In `lib/sync.mjs`:
   where it belongs.
 - Both `planFences` and `applyFences` pass the params through to `blockFor`.
 
-In `bin/design.mjs`, nothing changes: `readConfig` already throws with a readable message and the
-CLI already maps that to exit 2. Confirm by reading it rather than assuming.
+In `bin/design.mjs`, nothing changes: `readConfig` already throws with a readable message and the CLI already maps that to exit 2. Confirm by reading it rather than assuming.
 
 - [ ] **Step 4: Run the tests and exercise the CLI**
 
-Run: `npm test`
-Expected: **85 passing** (78 from Task 3 plus 7), 0 failing.
+Run: `npm test` Expected: **85 passing** (78 from Task 3 plus 7), 0 failing.
 
 Then the misconfiguration case by hand, because its message is what a person meets:
 
@@ -719,18 +691,11 @@ git commit -m "Read the site's own config for the parameters a fence declares"
 
 **Interfaces:** consumes Tasks 3 and 4; produces tag `v0.3.0`, which Tasks 6–8 install.
 
-**A minor, not a major.** A site must add `langKey` to its config — but only a site whose pages
-carry the new fence, and no page carries it until that site adds the markers, which they already
-did in Task 2. Adopting is `npm run design` plus one config line.
+**A minor, not a major.** A site must add `langKey` to its config — but only a site whose pages carry the new fence, and no page carries it until that site adds the markers, which they already did in Task 2. Adopting is `npm run design` plus one config line.
 
 - [ ] **Step 1: Add a parameters section to the README**
 
-After the existing Fences section, in the README's plain-prose voice, explain: that a block may
-declare parameters the *site* supplies through `design.config.json`; that `langKey` is the first
-and why it cannot be derived — `blust.ch` stores under `rb-lang`, and changing a storage key
-silently discards every visitor's saved language; that a fenced page with no key is an error, not
-a default; and that `FAMILY` is deliberately **not** a parameter, because the three domains are the
-same everywhere and live in `lib/family.mjs`.
+After the existing Fences section, in the README's plain-prose voice, explain: that a block may declare parameters the *site* supplies through `design.config.json`; that `langKey` is the first and why it cannot be derived — `blust.ch` stores under `rb-lang`, and changing a storage key silently discards every visitor's saved language; that a fenced page with no key is an error, not a default; and that `FAMILY` is deliberately **not** a parameter, because the three domains are the same everywhere and live in `lib/family.mjs`.
 
 - [ ] **Step 2: Bump, verify, commit**
 
@@ -752,11 +717,7 @@ gh run list --limit 3
 gh run watch <the CI run id> --exit-status --compact
 ```
 
-`gh run watch` with no id fails non-interactively — take the id from `gh run list`. Do not tag a
-red commit. Then tag `v0.3.0` and write release notes covering: the new fence and that
-`design:check` goes red in all three sites; that each site must add `langKey` to
-`design.config.json` and what happens if it does not (exit 2, not a default); that `FAMILY` is now
-importable so `carriesLang` can stop hardcoding it; and the `npm run design && npm run og` pair.
+`gh run watch` with no id fails non-interactively — take the id from `gh run list`. Do not tag a red commit. Then tag `v0.3.0` and write release notes covering: the new fence and that `design:check` goes red in all three sites; that each site must add `langKey` to `design.config.json` and what happens if it does not (exit 2, not a default); that `FAMILY` is now importable so `carriesLang` can stop hardcoding it; and the `npm run design && npm run og` pair.
 
 ---
 
@@ -776,8 +737,7 @@ npm install --save-dev "github:robertblust/design#v0.3.0"
 npm run design:check; echo "  exit $?"
 ```
 
-Expected: **exit 2**, naming `design.config.json` and `langKey` — the pages carry the fence and the
-config does not yet carry the key. That is the misconfiguration guard working. Record the output.
+Expected: **exit 2**, naming `design.config.json` and `langKey` — the pages carry the fence and the config does not yet carry the key. That is the misconfiguration guard working. Record the output.
 
 - [ ] **Step 2: Add the key, then see real drift**
 
@@ -793,8 +753,7 @@ cat design.config.json
 npm run design:check; echo "  exit $?  (1 expected)"
 ```
 
-Expected: `{"groups":["fonts","stage"],"langKey":"rb-lang"}` and **exit 1**, naming 8 stale
-`language` fences alongside the 15 that already match. Record it.
+Expected: `{"groups":["fonts","stage"],"langKey":"rb-lang"}` and **exit 1**, naming 8 stale `language` fences alongside the 15 that already match. Record it.
 
 - [ ] **Step 3: Sync, and prove behaviour did not move**
 
@@ -803,8 +762,7 @@ npm run design
 git diff --stat -- '*.html'
 ```
 
-The gate. Every changed line must be a comment, **and the storage key must still be `rb-lang` on
-every page**:
+The gate. Every changed line must be a comment, **and the storage key must still be `rb-lang` on every page**:
 
 ```bash
 git diff -U0 -- '*.html' | grep -E "^[+-]" | grep -vE "^(\+\+\+|---)" \
@@ -812,8 +770,7 @@ git diff -U0 -- '*.html' | grep -E "^[+-]" | grep -vE "^(\+\+\+|---)" \
 grep -rc 'var LANG_KEY = "rb-lang";' --include=*.html . 2>/dev/null | grep -v ':0' | wc -l
 ```
 
-Expected: the first prints nothing surprising — only lines belonging to the block; the second
-prints `8`, one per page. **A page whose key changed means the parameter did not reach it — stop.**
+Expected: the first prints nothing surprising — only lines belonging to the block; the second prints `8`, one per page. **A page whose key changed means the parameter did not reach it — stop.**
 
 - [ ] **Step 4: Import `FAMILY` in `carriesLang`**
 
@@ -823,17 +780,9 @@ In `verify/check.mjs`, add to the imports at the top:
 import { FAMILY } from "@robertblust/design/family";
 ```
 
-and in the `carriesLang` check, delete the inline
-`const FAMILY = /^(www\.)?(blust\.ch|companygraph\.io|guestgraph\.io)$/;` declared inside
-`page.evaluate`, passing the imported `FAMILY.source` in instead — `page.evaluate` runs in the
-browser, where the module does not exist, so the regex must cross as a **string** and be rebuilt
-with `new RegExp(src)` on the other side.
+and in the `carriesLang` check, delete the inline `const FAMILY = /^(www\.)?(blust\.ch|companygraph\.io|guestgraph\.io)$/;` declared inside `page.evaluate`, passing the imported `FAMILY.source` in instead — `page.evaluate` runs in the browser, where the module does not exist, so the regex must cross as a **string** and be rebuilt with `new RegExp(src)` on the other side.
 
-Note that `carriesLang`'s `page.evaluate(() => { … })` currently takes **no** argument, so you are
-changing its signature to `page.evaluate((src) => { … }, FAMILY.source)`. The `fontsAvailable`
-check in `verify/design.mjs` already does exactly this — it passes `[...SYSTEM_FACES]` in as a
-second argument — so read that one for the shape rather than the neighbouring `evaluate` calls,
-which take none.
+Note that `carriesLang`'s `page.evaluate(() => { … })` currently takes **no** argument, so you are changing its signature to `page.evaluate((src) => { … }, FAMILY.source)`. The `fontsAvailable` check in `verify/design.mjs` already does exactly this — it passes `[...SYSTEM_FACES]` in as a second argument — so read that one for the shape rather than the neighbouring `evaluate` calls, which take none.
 
 - [ ] **Step 5: Cards, suite, commit**
 
@@ -843,12 +792,9 @@ lsof -ti:8000 | xargs -r kill 2>/dev/null
 python3 -m http.server 8000 > /dev/null 2>&1 & sleep 2 && npm run verify ; kill %1
 ```
 
-Expected: `verify` fully green — `carriesLang` and `storageKeys` both exercise this block on every
-page, so a broken substitution fails here.
+Expected: `verify` fully green — `carriesLang` and `storageKeys` both exercise this block on every page, so a broken substitution fails here.
 
-Commit `design.config.json`, `package.json`, `package-lock.json`, `verify/check.mjs`, the rewritten
-pages and the regenerated cards, staging by name. Push. **Do not open a pull request yet** — Task 9
-lands on this branch.
+Commit `design.config.json`, `package.json`, `package-lock.json`, `verify/check.mjs`, the rewritten pages and the regenerated cards, staging by name. Push. **Do not open a pull request yet** — Task 9 lands on this branch.
 
 ---
 
@@ -860,8 +806,7 @@ lands on this branch.
 
 **Interfaces:** consumes `@robertblust/design@v0.3.0`; produces nothing other tasks consume.
 
-Identical in shape to Task 6, repeated in full because tasks may be read out of order. **This
-site's key is `cg-lang`.**
+Identical in shape to Task 6, repeated in full because tasks may be read out of order. **This site's key is `cg-lang`.**
 
 - [ ] **Step 1: Install, and watch it fail for the right reason**
 
@@ -898,17 +843,11 @@ git diff -U0 -- '*.html' | grep -E "^[+-]" | grep -vE "^(\+\+\+|---)" \
 grep -rc 'var LANG_KEY = "cg-lang";' --include=*.html . 2>/dev/null | grep -v ':0' | wc -l
 ```
 
-Expected: nothing surprising from the first; `7` from the second. **A page whose key changed means
-the parameter did not reach it — stop.**
+Expected: nothing surprising from the first; `7` from the second. **A page whose key changed means the parameter did not reach it — stop.**
 
 - [ ] **Step 4: Import `FAMILY` in `carriesLang`**
 
-In `verify/check.mjs`, add `import { FAMILY } from "@robertblust/design/family";` to the imports
-and delete the inline `const FAMILY = …` inside `carriesLang`'s `page.evaluate`. That callback
-currently takes **no** argument, so its signature becomes
-`page.evaluate((src) => { … }, FAMILY.source)` and the regex is rebuilt with `new RegExp(src)`
-inside the browser, where the module does not exist. `fontsAvailable` in `verify/design.mjs`
-already passes an argument this way — read that for the shape.
+In `verify/check.mjs`, add `import { FAMILY } from "@robertblust/design/family";` to the imports and delete the inline `const FAMILY = …` inside `carriesLang`'s `page.evaluate`. That callback currently takes **no** argument, so its signature becomes `page.evaluate((src) => { … }, FAMILY.source)` and the regex is rebuilt with `new RegExp(src)` inside the browser, where the module does not exist. `fontsAvailable` in `verify/design.mjs` already passes an argument this way — read that for the shape.
 
 - [ ] **Step 5: Cards, suite, commit**
 
@@ -918,8 +857,7 @@ lsof -ti:8000 | xargs -r kill 2>/dev/null
 python3 -m http.server 8000 > /dev/null 2>&1 & sleep 2 && npm run verify ; kill %1
 ```
 
-Expected: fully green. Commit the same six kinds of file, staging by name, and push. **No pull
-request yet.**
+Expected: fully green. Commit the same six kinds of file, staging by name, and push. **No pull request yet.**
 
 ---
 
@@ -931,10 +869,7 @@ request yet.**
 
 **Interfaces:** consumes `@robertblust/design@v0.3.0`; produces nothing other tasks consume.
 
-Identical in shape, repeated in full. **This site's key is `gg-lang`.** It also carries the one
-page whose block was single-quoted — `talks/index.html` — so expect its diff to be slightly larger
-than its siblings': the sync rewrites that block to the canonical double-quoted form. That is a
-correction, not drift, and it is the last of the cosmetic divergence this whole effort started with.
+Identical in shape, repeated in full. **This site's key is `gg-lang`.** It also carries the one page whose block was single-quoted — `talks/index.html` — so expect its diff to be slightly larger than its siblings': the sync rewrites that block to the canonical double-quoted form. That is a correction, not drift, and it is the last of the cosmetic divergence this whole effort started with.
 
 - [ ] **Step 1: Install, and watch it fail for the right reason**
 
@@ -971,17 +906,11 @@ git diff -U0 -- '*.html' | grep -E "^[+-]" | grep -vE "^(\+\+\+|---)" \
 grep -rc "var LANG_KEY = \"gg-lang\";" --include=*.html . 2>/dev/null | grep -v ':0' | wc -l
 ```
 
-Expected: nothing surprising from the first; `5` from the second — including `talks/index.html`,
-whose key line was single-quoted before and is double-quoted after.
+Expected: nothing surprising from the first; `5` from the second — including `talks/index.html`, whose key line was single-quoted before and is double-quoted after.
 
 - [ ] **Step 4: Import `FAMILY` in `carriesLang`**
 
-In `verify/check.mjs`, add `import { FAMILY } from "@robertblust/design/family";` to the imports
-and delete the inline `const FAMILY = …` inside `carriesLang`'s `page.evaluate`. That callback
-currently takes **no** argument, so its signature becomes
-`page.evaluate((src) => { … }, FAMILY.source)` and the regex is rebuilt with `new RegExp(src)`
-inside the browser, where the module does not exist. `fontsAvailable` in `verify/design.mjs`
-already passes an argument this way — read that for the shape.
+In `verify/check.mjs`, add `import { FAMILY } from "@robertblust/design/family";` to the imports and delete the inline `const FAMILY = …` inside `carriesLang`'s `page.evaluate`. That callback currently takes **no** argument, so its signature becomes `page.evaluate((src) => { … }, FAMILY.source)` and the regex is rebuilt with `new RegExp(src)` inside the browser, where the module does not exist. `fontsAvailable` in `verify/design.mjs` already passes an argument this way — read that for the shape.
 
 - [ ] **Step 5: Cards, suite, commit**
 
@@ -1003,9 +932,7 @@ Expected: fully green. Commit, push. **No pull request yet.**
 
 **Interfaces:** consumes Tasks 6–8; produces three open pull requests.
 
-The block's whole purpose is behaviour **between** sites: a reader switching to German on one
-domain and following a link to another arrives in German. No single site's suite can test that —
-each one only ever renders itself. This task checks the seam by hand, once, before the change ships.
+The block's whole purpose is behaviour **between** sites: a reader switching to German on one domain and following a link to another arrives in German. No single site's suite can test that — each one only ever renders itself. This task checks the seam by hand, once, before the change ships.
 
 - [ ] **Step 1: Confirm the three keys survived, and are still three**
 
@@ -1018,9 +945,7 @@ for r in robertblust/robertblust.github.io companygraph/companygraph.github.io g
 done
 ```
 
-Expected: `rb-lang`, `cg-lang`, `gg-lang` — each site's config key matching the one key its pages
-carry, and **three distinct keys**. Two sites sharing a key would mean one site's visitors reading
-another's stored preference on their own origin.
+Expected: `rb-lang`, `cg-lang`, `gg-lang` — each site's config key matching the one key its pages carry, and **three distinct keys**. Two sites sharing a key would mean one site's visitors reading another's stored preference on their own origin.
 
 - [ ] **Step 2: Confirm every page's `FAMILY` matches the package's**
 
@@ -1046,8 +971,7 @@ Expected: `20 pages carry FAMILY, 0 disagree`.
 
 - [ ] **Step 3: Drive the cross-domain hand-off in a browser**
 
-Serve all three at once on different ports and follow a link between them, which is the one thing
-no suite does:
+Serve all three at once on different ports and follow a link between them, which is the one thing no suite does:
 
 ```bash
 cd /Users/rob/git
@@ -1058,24 +982,15 @@ lsof -ti:8001,8002,8003 2>/dev/null | xargs -r kill 2>/dev/null
 sleep 2
 ```
 
-Then, with Playwright from any of the three site directories, load `http://localhost:8001/`,
-switch to German by clicking `#lde`, and assert three things: `document.documentElement.lang` is
-`de`; `localStorage.getItem("rb-lang")` is `"de"`; and pressing a link to a family domain rewrites
-its `href` to carry `?lang=de` — the `carryLang` behaviour, which fires on `mousedown` as well as
-`click` so a middle-click carries it too. Then load
-`http://localhost:8002/?lang=de` and assert its `documentElement.lang` becomes `de`, its
-`localStorage.getItem("cg-lang")` is `"de"`, and the query string has been cleaned out of the
-address bar by `replaceState`.
+Then, with Playwright from any of the three site directories, load `http://localhost:8001/`, switch to German by clicking `#lde`, and assert three things: `document.documentElement.lang` is `de`; `localStorage.getItem("rb-lang")` is `"de"`; and pressing a link to a family domain rewrites its `href` to carry `?lang=de` — the `carryLang` behaviour, which fires on `mousedown` as well as `click` so a middle-click carries it too. Then load `http://localhost:8002/?lang=de` and assert its `documentElement.lang` becomes `de`, its `localStorage.getItem("cg-lang")` is `"de"`, and the query string has been cleaned out of the address bar by `replaceState`.
 
 Kill all three servers afterwards.
 
-Expected: every assertion passes. **This is the behaviour the block exists for, and the only place
-in the whole plan where it is exercised end to end.**
+Expected: every assertion passes. **This is the behaviour the block exists for, and the only place in the whole plan where it is exercised end to end.**
 
 - [ ] **Step 4: Open the three pull requests**
 
-**Do not use `--fill`** — it takes the body from the commit body and these commits have single-line
-messages, which yields an empty description. Write each body with `--body-file`, carrying:
+**Do not use `--fill`** — it takes the body from the commit body and these commits have single-line messages, which yields an empty description. Write each body with `--body-file`, carrying:
 
 - the **exit 2** output from that site's Step 1, showing the misconfiguration guard firing before
   the key was added, and the **exit 1** output after — both pasted verbatim;

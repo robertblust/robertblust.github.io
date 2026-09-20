@@ -2,24 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** `/timeline/` on blust.ch: every experience in the model as a ledger in the order it
-began, each row opening into the model page's card, built from the same data block the
-model page carries, with the nav item on every page.
+**Goal:** `/timeline/` on blust.ch: every experience in the model as a ledger in the order it began, each row opening into the model page's card, built from the same data block the model page carries, with the nav item on every page.
 
-**Architecture:** The page is a copy of `model/index.html` with a different body: the stage's
-figure section becomes an `ol.ledger` the page's own inline script builds from the
-`model-data` block, calling `rbCard` from the design package for every card and every date.
-`build/model.mjs` writes the block into both pages. The suite gains a `/timeline/` entry and a
-`ledger` check local to this site. The design release v0.30.0 lands first; this plan starts by
-taking it.
+**Architecture:** The page is a copy of `model/index.html` with a different body: the stage's figure section becomes an `ol.ledger` the page's own inline script builds from the `model-data` block, calling `rbCard` from the design package for every card and every date. `build/model.mjs` writes the block into both pages. The suite gains a `/timeline/` entry and a `ledger` check local to this site. The design release v0.30.0 lands first; this plan starts by taking it.
 
-**Tech Stack:** static HTML with one inline script per page, no build; `@robertblust/design`
-v0.30.0 for the fences, `card.js` and `stage.css`; `companygraph-meta-model` v0.13.2 for the
-parser; Playwright through `npm run verify`.
+**Tech Stack:** static HTML with one inline script per page, no build; `@robertblust/design` v0.30.0 for the fences, `card.js` and `stage.css`; `companygraph-meta-model` v0.13.2 for the parser; Playwright through `npm run verify`.
 
-**Spec:** `docs/superpowers/specs/2026-09-05-timeline-page-design.md`. The design package's
-plan, which ships what this one takes, is `robertblust/design`,
-`docs/superpowers/plans/2026-09-05-card-and-timeline-nav.md`.
+**Spec:** `docs/superpowers/specs/2026-09-05-timeline-page-design.md`. The design package's plan, which ships what this one takes, is `robertblust/design`, `docs/superpowers/plans/2026-09-05-card-and-timeline-nav.md`.
 
 ## Global Constraints
 
@@ -64,8 +53,7 @@ npm run design
 git status --short
 ```
 
-Expected: `package.json` and `package-lock.json` changed; every prose page's header fence
-rewritten to v8; `card.js` new at the root. `npm run design:check` prints nothing wrong.
+Expected: `package.json` and `package-lock.json` changed; every prose page's header fence rewritten to v8; `card.js` new at the root. `npm run design:check` prints nothing wrong.
 
 - [ ] **Step 2: Load the card before the stage on the model page**
 
@@ -79,8 +67,7 @@ At the foot of `model/index.html`, the three script lines become:
 
 - [ ] **Step 3: The nav item, six pages**
 
-In each page's `.navlinks`, directly after the Model link, add the Timeline link with the
-same relative prefix that page's Model link uses:
+In each page's `.navlinks`, directly after the Model link, add the Timeline link with the same relative prefix that page's Model link uses:
 
 `index.html`:
 
@@ -89,15 +76,13 @@ same relative prefix that page's Model link uses:
           <a href="timeline/" data-de="Werdegang">Timeline</a>
 ```
 
-`ideas/index.html`, `principles/index.html`, `talks/index.html`, `privacy/index.html` and
-`model/index.html`:
+`ideas/index.html`, `principles/index.html`, `talks/index.html`, `privacy/index.html` and `model/index.html`:
 
 ```html
           <a href="../timeline/" data-de="Werdegang">Timeline</a>
 ```
 
-On `model/index.html` the Model link keeps its `aria-current="page"`; the Timeline link
-carries none.
+On `model/index.html` the Model link keeps its `aria-current="page"`; the Timeline link carries none.
 
 - [ ] **Step 4: The root page's German nav words, and the sitemap**
 
@@ -113,8 +98,7 @@ In `sitemap.xml`, after the `/model/` line:
   <url><loc>https://blust.ch/timeline/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 ```
 
-The suite compares the sitemap to `PAGES`, so it stays red until Task 4 adds the page's
-entry; that is expected through Tasks 2 and 3.
+The suite compares the sitemap to `PAGES`, so it stays red until Task 4 adds the page's entry; that is expected through Tasks 2 and 3.
 
 - [ ] **Step 5: Render the cards and run what can pass**
 
@@ -124,8 +108,7 @@ npm run og:check; echo "og exit $?"
 npm run design:check; echo "design exit $?"
 ```
 
-Expected: both exit 0. `npm run verify` reports one failure, the sitemap naming a page
-`PAGES` lacks; every other check on every page passes, `navOrder` included.
+Expected: both exit 0. `npm run verify` reports one failure, the sitemap naming a page `PAGES` lacks; every other check on every page passes, `navOrder` included.
 
 - [ ] **Step 6: Commit**
 
@@ -168,13 +151,11 @@ EOF
 mkdir timeline && cp model/index.html timeline/index.html
 ```
 
-The copy carries every fence and the `model data` block byte for byte; the fences stay,
-the block is rewritten by Task 3.
+The copy carries every fence and the `model data` block byte for byte; the fences stay, the block is rewritten by Task 3.
 
 - [ ] **Step 2: The head**
 
-In `timeline/index.html`, replace every occurrence as follows, leaving the fenced blocks
-untouched:
+In `timeline/index.html`, replace every occurrence as follows, leaving the fenced blocks untouched:
 
 - `<title>Model — Robert Blust</title>` → `<title>Timeline — Robert Blust</title>`
 - the `metadesc` content and the `og:description` content →
@@ -186,20 +167,15 @@ untouched:
 - in the JSON-LD `WebPage`, `"name": "Model"` → `"name": "Timeline"`; in the breadcrumb's
   second item, `"name": "Model"` → `"name": "Timeline"`
 
-The `Person`, `Dataset` and `WebSite` nodes stay as they are; the page is about the same
-dataset.
+The `Person`, `Dataset` and `WebSite` nodes stay as they are; the page is about the same dataset.
 
 - [ ] **Step 3: The page's own style**
 
-After the `stage contract` fence's closing marker and before `</style>`, the model page has
-nothing of its own; this page adds the note the model page defines in its first `<style>`
-and nothing else. Check that `.note` is already defined in the copied first style block (it
-is on the model page at the rule beginning `.note{margin-top:2rem`); if it is, add nothing.
+After the `stage contract` fence's closing marker and before `</style>`, the model page has nothing of its own; this page adds the note the model page defines in its first `<style>` and nothing else. Check that `.note` is already defined in the copied first style block (it is on the model page at the rule beginning `.note{margin-top:2rem`); if it is, add nothing.
 
 - [ ] **Step 4: The nav**
 
-In the copied `.navlinks`, move `aria-current="page"` from the Model link to the Timeline
-link, and make Model's href `../model/`:
+In the copied `.navlinks`, move `aria-current="page"` from the Model link to the Timeline link, and make Model's href `../model/`:
 
 ```html
           <a href="../ideas/" data-de="Ideen">Ideas</a>
@@ -251,8 +227,7 @@ Replace everything between `<main>` and `</main>` with:
 </main>
 ```
 
-The apostrophe in "the model’s experience kinds" is the curly one, U+2019; `typography`
-holds the page to it.
+The apostrophe in "the model’s experience kinds" is the curly one, U+2019; `typography` holds the page to it.
 
 - [ ] **Step 6: The page's script, and the scripts it loads**
 
@@ -267,11 +242,9 @@ Leave the copied language-and-theme `<script>` as it is, but change its `UI` obj
   };
 ```
 
-The German title's dash is the spaced en-dash; `translates` holds the German title and
-description to the German marks.
+The German title's dash is the spaced en-dash; `translates` holds the German title and description to the German marks.
 
-At the foot, replace the three `<script src>` lines with one, and add the page's own script
-after it:
+At the foot, replace the three `<script src>` lines with one, and add the page's own script after it:
 
 ```html
 <script src="../card.js"></script>
@@ -418,15 +391,7 @@ after it:
 npm run serve &
 ```
 
-Open `http://localhost:8000/timeline/`. Expected: the header with Timeline in `--c-firm`, the
-title, the note with its flag border, the path line `experiences · 31 entries · 1999–2026`,
-Open all, 31 rows on one rule with the education row and the talks indented, the TODAY line,
-the hint, the caption, the three rules, the provenance line reading `@a535e43 — 31 files
-under …`. Click the 3AP row: its card opens under it with the eyebrow
-`experience · profiles/robert-blust/experiences/2015-3ap`, the fields, the skills as links,
-Achievements, the foot `2015-3ap.md @ a535e43`; the address ends `#2015-3ap`. Press DE: the
-gutter reads `2015 – 2022`, the meta line `Role · 3AP AG · Feb 2015 – Mär 2022`, the control
-`Alle öffnen`. Then stop the server.
+Open `http://localhost:8000/timeline/`. Expected: the header with Timeline in `--c-firm`, the title, the note with its flag border, the path line `experiences · 31 entries · 1999–2026`, Open all, 31 rows on one rule with the education row and the talks indented, the TODAY line, the hint, the caption, the three rules, the provenance line reading `@a535e43 — 31 files under …`. Click the 3AP row: its card opens under it with the eyebrow `experience · profiles/robert-blust/experiences/2015-3ap`, the fields, the skills as links, Achievements, the foot `2015-3ap.md @ a535e43`; the address ends `#2015-3ap`. Press DE: the gutter reads `2015 – 2022`, the meta line `Role · 3AP AG · Feb 2015 – Mär 2022`, the control `Alle öffnen`. Then stop the server.
 
 - [ ] **Step 8: Commit**
 
@@ -465,8 +430,7 @@ EOF
 
 - [ ] **Step 1: Make the writer loop over the pages**
 
-In `build/model.mjs`, replace everything from `const PAGE = path.join(ROOT, "model", "index.html");`
-to the end of the file with:
+In `build/model.mjs`, replace everything from `const PAGE = path.join(ROOT, "model", "index.html");` to the end of the file with:
 
 ```js
 // Two pages carry the block, and it is one block: the model page draws it, the timeline
@@ -504,8 +468,7 @@ if (process.argv.includes("--check")) {
 MENTAL_MODEL=~/git/robertblust/mental-model npm run model:check; echo "exit $?"
 ```
 
-Expected: exit 0 — the copied block already matches. If `MENTAL_MODEL` is not at the pinned
-commit, drop the variable and let the script read GitHub. Then:
+Expected: exit 0 — the copied block already matches. If `MENTAL_MODEL` is not at the pinned commit, drop the variable and let the script read GitHub. Then:
 
 ```bash
 MENTAL_MODEL=~/git/robertblust/mental-model npm run model && git status --short
@@ -515,9 +478,7 @@ Expected: `wrote model/index.html and timeline/index.html: …` and no file chan
 
 - [ ] **Step 3: Say so where a reader looks**
 
-In `README.md`, the `## Pages` block names four URLs today, the root, the talks index and
-the two decks; it gains one line after the last deck's, and completing the list is not this
-plan's business:
+In `README.md`, the `## Pages` block names four URLs today, the root, the talks index and the two decks; it gains one line after the last deck's, and completing the list is not this plan's business:
 
 ```
 /timeline/                       the experiences as a ledger — built from the same block as /model/
@@ -671,9 +632,7 @@ Expected: `timeline/og.png` and `timeline/og.sha` written; exit 0.
 npm run verify; echo "exit $?"
 ```
 
-Expected: exit 0, every page green, the sitemap check green now that `PAGES` names the
-page. If `ledger` fails on the sort, the two ids it names share a start day and the check's
-tie rule is wrong, not the page; compare their `stamp.end` before touching either.
+Expected: exit 0, every page green, the sitemap check green now that `PAGES` names the page. If `ledger` fails on the sort, the two ids it names share a start day and the check's tie rule is wrong, not the page; compare their `stamp.end` before touching either.
 
 - [ ] **Step 5: Commit**
 
@@ -715,9 +674,7 @@ EOF
 cd ~/git/robertblust/mental-model && git checkout main && git pull && git rev-parse HEAD
 ```
 
-Expected: `7ed3f65…`. If `main` has moved past it, pin `7ed3f65` anyway — the pin is
-editorial and this is the commit the spec names. Then, in this repository, write the full
-SHA into `source.json`:
+Expected: `7ed3f65…`. If `main` has moved past it, pin `7ed3f65` anyway — the pin is editorial and this is the commit the spec names. Then, in this repository, write the full SHA into `source.json`:
 
 ```bash
 FULL=$(git -C ~/git/robertblust/mental-model rev-parse 7ed3f65)
@@ -728,10 +685,7 @@ MENTAL_MODEL=~/git/robertblust/mental-model npm run principles
 git status --short
 ```
 
-Expected: `source.json`, `model/index.html`, `timeline/index.html` and `principles/index.html`
-changed. `git diff principles/index.html` shows only the commit in the provenance line and
-nothing in the values, since no value changed between the two commits; if it shows more,
-read it before going on.
+Expected: `source.json`, `model/index.html`, `timeline/index.html` and `principles/index.html` changed. `git diff principles/index.html` shows only the commit in the provenance line and nothing in the values, since no value changed between the two commits; if it shows more, read it before going on.
 
 - [ ] **Step 2: Cards, checks, suite**
 

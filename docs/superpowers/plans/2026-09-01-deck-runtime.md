@@ -283,14 +283,9 @@ Nothing else in that block changes. The label is deliberately bilingual — the 
 
 - [ ] **Step 1b: guestgraph's `clipsSeen`, which this plan first missed**
 
-guestgraph carries the same eight-line lazy version companygraph had — `var clipsSeen = null` with a
-`hasClips()` that memoises `true` and probes nothing. Task 1 aligned companygraph and this plan said
-nothing about guestgraph, which was an omission: blust.ch's two decks and companygraph's now agree
-and guestgraph's does not.
+guestgraph carries the same eight-line lazy version companygraph had — `var clipsSeen = null` with a `hasClips()` that memoises `true` and probes nothing. Task 1 aligned companygraph and this plan said nothing about guestgraph, which was an omission: blust.ch's two decks and companygraph's now agree and guestgraph's does not.
 
-Replace it with blust.ch's form, **copied verbatim from `talks/mental-model/index.html`** rather than
-retyped, so all four end byte-identical. Confirm by grep afterwards that `clipsSeen = null` appears
-in no deck.
+Replace it with blust.ch's form, **copied verbatim from `talks/mental-model/index.html`** rather than retyped, so all four end byte-identical. Confirm by grep afterwards that `clipsSeen = null` appears in no deck.
 
 - [ ] **Step 2: Add the boundary state to `render()`, in all four decks**
 

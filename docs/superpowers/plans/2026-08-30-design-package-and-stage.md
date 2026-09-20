@@ -93,21 +93,13 @@ cd /Users/rob/git/robertblust/design
 git init -b main
 ```
 
-**The path is load-bearing, not a preference.** `~/.gitconfig` carries three `includeIf`
-blocks — `gitdir:~/git/robertblust/`, `~/git/guestgraph/`, `~/git/companygraph/` — that
-point at `~/.gitconfig-flatland`. A repository created inside `~/git/robertblust/`
-therefore authors as `robert.blust@flatland.ch`; one created anywhere else silently gets
-the global default, `rob@likemagic.tech`, with no warning. Nothing on GitHub enforces the
-author email — the ruleset rule that would is rejected on this plan — so confirm it before
-the first commit:
+**The path is load-bearing, not a preference.** `~/.gitconfig` carries three `includeIf` blocks — `gitdir:~/git/robertblust/`, `~/git/guestgraph/`, `~/git/companygraph/` — that point at `~/.gitconfig-flatland`. A repository created inside `~/git/robertblust/` therefore authors as `robert.blust@flatland.ch`; one created anywhere else silently gets the global default, `rob@likemagic.tech`, with no warning. Nothing on GitHub enforces the author email — the ruleset rule that would is rejected on this plan — so confirm it before the first commit:
 
 ```bash
 cd /Users/rob/git/robertblust/design && git config user.email
 ```
 
-Expected: `robert.blust@flatland.ch`. If it prints anything else, **stop and fix the path**
-rather than setting the email locally — a one-off `git config user.email` in this repository
-would work today and be missing from every fresh clone.
+Expected: `robert.blust@flatland.ch`. If it prints anything else, **stop and fix the path** rather than setting the email locally — a one-off `git config user.email` in this repository would work today and be missing from every fresh clone.
 
 Write `.gitignore`:
 
@@ -116,11 +108,7 @@ node_modules/
 *.tgz
 ```
 
-Write `package.json`. The `exports` map is what lets a site write
-`import { STAGE_CHECKS } from "@robertblust/design/verify/stage"`. The `files` allowlist
-keeps what a site installs to just the four directories — npm honours it when packing from a
-git install too. There is deliberately no `publishConfig`: `access` and `provenance` are
-registry-only, and nothing here is published to a registry.
+Write `package.json`. The `exports` map is what lets a site write `import { STAGE_CHECKS } from "@robertblust/design/verify/stage"`. The `files` allowlist keeps what a site installs to just the four directories — npm honours it when packing from a git install too. There is deliberately no `publishConfig`: `access` and `provenance` are registry-only, and nothing here is published to a registry.
 
 ```json
 {
@@ -216,8 +204,7 @@ test("the fonts group carries all four faces, under fonts/", () => {
 
 - [ ] **Step 3: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/groups.test.mjs`
-Expected: FAIL — `Cannot find module '../lib/groups.mjs'`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/groups.test.mjs` Expected: FAIL — `Cannot find module '../lib/groups.mjs'`.
 
 - [ ] **Step 4: Write the manifest**
 
@@ -256,9 +243,7 @@ export const GROUP_NAMES = Object.freeze(Object.keys(GROUPS));
 
 - [ ] **Step 5: Run the test — two should still fail**
 
-Run: `node --test test/groups.test.mjs`
-Expected: the four shape tests PASS; `every listed source file exists in the package` FAILS,
-because `assets/` is still empty. That is correct — Task 4 vendors the files in. Leave it red.
+Run: `node --test test/groups.test.mjs` Expected: the four shape tests PASS; `every listed source file exists in the package` FAILS, because `assets/` is still empty. That is correct — Task 4 vendors the files in. Leave it red.
 
 - [ ] **Step 6: Commit**
 
@@ -403,8 +388,7 @@ test("planSync sorts by destination, so output order is stable", () => {
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/sync.test.mjs`
-Expected: FAIL — `Cannot find module '../lib/sync.mjs'`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/sync.test.mjs` Expected: FAIL — `Cannot find module '../lib/sync.mjs'`.
 
 - [ ] **Step 3: Write the sync engine**
 
@@ -487,10 +471,7 @@ export function applySync(siteRoot, entries) {
 
 - [ ] **Step 4: Run the test to verify it passes**
 
-Run: `node --test test/sync.test.mjs`
-Expected: the tests that do not need real asset bytes PASS. Tests reading `pkgBody(...)` still
-FAIL with ENOENT because `assets/` is empty until Task 4. Confirm the failures are all ENOENT
-on `assets/`, and nothing else.
+Run: `node --test test/sync.test.mjs` Expected: the tests that do not need real asset bytes PASS. Tests reading `pkgBody(...)` still FAIL with ENOENT because `assets/` is empty until Task 4. Confirm the failures are all ENOENT on `assets/`, and nothing else.
 
 - [ ] **Step 5: Commit**
 
@@ -617,8 +598,7 @@ test("--site targets another directory", () => {
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/cli.test.mjs`
-Expected: FAIL — `Cannot find module .../bin/design.mjs`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/cli.test.mjs` Expected: FAIL — `Cannot find module .../bin/design.mjs`.
 
 - [ ] **Step 3: Write the CLI**
 
@@ -698,9 +678,7 @@ chmod +x /Users/rob/git/robertblust/design/bin/design.mjs
 
 - [ ] **Step 4: Run the test to verify it passes**
 
-Run: `node --test test/cli.test.mjs`
-Expected: as in Task 2, everything that does not need real asset bytes PASSES; the rest fail
-with ENOENT on `assets/` until Task 4. Confirm no other kind of failure.
+Run: `node --test test/cli.test.mjs` Expected: as in Task 2, everything that does not need real asset bytes PASSES; the rest fail with ENOENT on `assets/` until Task 4. Confirm no other kind of failure.
 
 - [ ] **Step 5: Commit**
 
@@ -727,11 +705,7 @@ git commit -m "The CLI: sync, and the check CI runs"
 - Consumes: `GROUPS` from `lib/groups.mjs`.
 - Produces: the seven asset files that Tasks 1–3's tests already reference. No new exports.
 
-**Why blust.ch is the source:** its `stage.js` is the repaired copy. companygraph.io's still
-ends every connector at a flat `R_NODE` while drawing folders 4px taller, so a spine runs two
-pixels inside every folder box and six inside the focused one. `stage.css`, `d3.v7.min.js` and
-all four fonts are already byte-identical across the repositories, so their source does not
-matter — but take them from the same place for one less thing to reason about.
+**Why blust.ch is the source:** its `stage.js` is the repaired copy. companygraph.io's still ends every connector at a flat `R_NODE` while drawing folders 4px taller, so a spine runs two pixels inside every folder box and six inside the focused one. `stage.css`, `d3.v7.min.js` and all four fonts are already byte-identical across the repositories, so their source does not matter — but take them from the same place for one less thing to reason about.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -789,8 +763,7 @@ test("the vendored d3 is the pinned 7.9.0 build", () => {
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/assets.test.mjs`
-Expected: FAIL — ENOENT on `assets/stage.js`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/assets.test.mjs` Expected: FAIL — ENOENT on `assets/stage.js`.
 
 - [ ] **Step 3: Vendor the files in**
 
@@ -808,8 +781,7 @@ cp "$RB/fonts/PlexMono-600.woff2"       assets/fonts/
 
 - [ ] **Step 4: Prove the vendored copies match what the sites already ship**
 
-The three files below must be byte-identical to companygraph.io's, or this is not a
-faithful extraction. `stage.js` must NOT match — companygraph's is the buggy one.
+The three files below must be byte-identical to companygraph.io's, or this is not a faithful extraction. `stage.js` must NOT match — companygraph's is the buggy one.
 
 ```bash
 CG=/Users/rob/git/companygraph/companygraph.github.io
@@ -826,13 +798,11 @@ cmp -s assets/stage.js "$CG/stage.js" \
   || echo "  ✓ stage.js differs from companygraph (expected: it is the repaired copy)"
 ```
 
-Expected: six `✓ identical` lines, then `✓ stage.js differs from companygraph`.
-If any line reports otherwise, stop — the assumption this plan rests on has changed.
+Expected: six `✓ identical` lines, then `✓ stage.js differs from companygraph`. If any line reports otherwise, stop — the assumption this plan rests on has changed.
 
 - [ ] **Step 5: Run the whole suite — it should now be green**
 
-Run: `node --test test/`
-Expected: PASS, all files, including the Task 1–3 tests that were red for want of assets.
+Run: `node --test test/` Expected: PASS, all files, including the Task 1–3 tests that were red for want of assets.
 
 - [ ] **Step 6: Commit**
 
@@ -861,15 +831,11 @@ git commit -m "Vendor the stage, the fonts and d3 — taking the repaired stage.
   page's JSON data element; `spec.divider` is a boolean. Task 8, 9 and 10 import this as
   `import { STAGE_CHECKS } from "@robertblust/design/verify/stage"`.
 
-**Source of truth:** blust.ch's `verify/check.mjs`. Its `graph` is companygraph's plus a
-single 27-line insertion (the spine assertion) and its `divider` is byte-identical to
-companygraph's. Neither references `SITE` or `BASE`, so both move unchanged.
+**Source of truth:** blust.ch's `verify/check.mjs`. Its `graph` is companygraph's plus a single 27-line insertion (the spine assertion) and its `divider` is byte-identical to companygraph's. Neither references `SITE` or `BASE`, so both move unchanged.
 
 - [ ] **Step 1: Write the failing test**
 
-The checks themselves need a browser and a served site, so they are exercised for real by the
-site suites in Tasks 8–10. What this package can assert alone is the *contract* — that both
-checks exist, take the runner's shape, and that the spine assertion actually travelled.
+The checks themselves need a browser and a served site, so they are exercised for real by the site suites in Tasks 8–10. What this package can assert alone is the *contract* — that both checks exist, take the runner's shape, and that the spine assertion actually travelled.
 
 Create `test/stage-checks.test.mjs`:
 
@@ -918,13 +884,11 @@ test("neither check hardcodes a site or a base URL", () => {
 
 - [ ] **Step 2: Run the test to verify it fails**
 
-Run: `cd /Users/rob/git/robertblust/design && node --test test/stage-checks.test.mjs`
-Expected: FAIL — `Cannot find module '../verify/stage.mjs'`.
+Run: `cd /Users/rob/git/robertblust/design && node --test test/stage-checks.test.mjs` Expected: FAIL — `Cannot find module '../verify/stage.mjs'`.
 
 - [ ] **Step 3: Extract the two checks**
 
-Copy them out of blust.ch verbatim, wrapped in a module. Do not retype them — extract the
-exact bytes, so the move cannot change behaviour:
+Copy them out of blust.ch verbatim, wrapped in a module. Do not retype them — extract the exact bytes, so the move cannot change behaviour:
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -1030,8 +994,7 @@ stale. A change needing a site edit beyond `npm run design` is a **major**.
 
 - [ ] **Step 6: Run the whole suite**
 
-Run: `node --test test/`
-Expected: PASS.
+Run: `node --test test/` Expected: PASS.
 
 - [ ] **Step 7: Commit**
 
@@ -1055,9 +1018,7 @@ git commit -m "The stage's two checks, with the spine assertion that had not tra
 - Consumes: `npm test` from Task 1's `package.json`.
 - Produces: nothing other tasks import.
 
-**There is no publish workflow.** Distribution is a git dependency, so a release is a tag and
-nothing runs to make it happen. That removes the whole class of things a release pipeline can
-get wrong — no OIDC, no token, no registry authentication, no tag-versus-manifest guard.
+**There is no publish workflow.** Distribution is a git dependency, so a release is a tag and nothing runs to make it happen. That removes the whole class of things a release pipeline can get wrong — no OIDC, no token, no registry authentication, no tag-versus-manifest guard.
 
 - [ ] **Step 1: Write the CI workflow**
 
@@ -1122,8 +1083,7 @@ grep -c "	" .github/workflows/ci.yml .github/dependabot.yml
 npm test 2>&1 | tail -6
 ```
 
-Expected: both `grep -c` counts are `0` — a stray tab makes YAML fail to parse — and
-`npm test` reports 35 passing, 0 failing.
+Expected: both `grep -c` counts are `0` — a stray tab makes YAML fail to parse — and `npm test` reports 35 passing, 0 failing.
 
 - [ ] **Step 4: Commit**
 
@@ -1146,17 +1106,9 @@ git commit -m "CI, and Dependabot for the actions"
 - Consumes: everything from Tasks 1-6.
 - Produces: `robertblust/design` on GitHub at tag `v0.1.0`. Tasks 8-10 install from it.
 
-**Why this task is now four steps rather than eight.** An earlier draft had this task claiming
-a permanent npm scope, creating an account, enabling 2FA, publishing a throwaway bootstrap
-version — npm cannot configure trusted publishing for a package that does not yet exist; its
-own `npm trust` documentation says "The package you're configuring must already exist on the
-npm registry" — deprecating that bootstrap, configuring OIDC, and only then publishing for
-real. All of it existed to serve a registry this project turned out not to need. Distribution
-is a git dependency now, so the release is a tag.
+**Why this task is now four steps rather than eight.** An earlier draft had this task claiming a permanent npm scope, creating an account, enabling 2FA, publishing a throwaway bootstrap version — npm cannot configure trusted publishing for a package that does not yet exist; its own `npm trust` documentation says "The package you're configuring must already exist on the npm registry" — deprecating that bootstrap, configuring OIDC, and only then publishing for real. All of it existed to serve a registry this project turned out not to need. Distribution is a git dependency now, so the release is a tag.
 
-**Nothing in this task is irreversible.** A tag can be moved or deleted; a repository can be
-made private or removed. That is a real change from the earlier draft, where a claimed npm
-scope and a published version could never be taken back.
+**Nothing in this task is irreversible.** A tag can be moved or deleted; a repository can be made private or removed. That is a real change from the earlier draft, where a claimed npm scope and a published version could never be taken back.
 
 - [ ] **Step 1: Create the GitHub repository and push**
 
@@ -1167,10 +1119,7 @@ gh repo create robertblust/design --public \
   --source . --remote origin --push
 ```
 
-The repository must be **public**. Not for discoverability — nobody else wants this — but
-because a private repository would make every install need a credential, in three separate
-GitHub owners. Public means `npm ci` fetches it anonymously, and the three sites' CI needs no
-secret of any kind.
+The repository must be **public**. Not for discoverability — nobody else wants this — but because a private repository would make every install need a credential, in three separate GitHub owners. Public means `npm ci` fetches it anonymously, and the three sites' CI needs no secret of any kind.
 
 - [ ] **Step 2: Confirm CI is green**
 
@@ -1182,15 +1131,11 @@ gh run watch <the CI run id> --exit-status --compact
 
 Expected: the `CI / test` job passes, 35 tests. Do not tag a red commit.
 
-`gh run watch` with no run id only works in an interactive terminal — non-interactively it
-exits with `run ID required when not running interactively`. Take the id from `gh run list`.
-Expect Dependabot Updates runs to appear alongside CI on the first push; they are not the run
-you are watching.
+`gh run watch` with no run id only works in an interactive terminal — non-interactively it exits with `run ID required when not running interactively`. Take the id from `gh run list`. Expect Dependabot Updates runs to appear alongside CI on the first push; they are not the run you are watching.
 
 - [ ] **Step 3: Tag and write the release notes**
 
-The tag is the release. The notes are the only thing that reaches a person in another
-repository — Dependabot renders them into the pull request body it opens there.
+The tag is the release. The notes are the only thing that reaches a person in another repository — Dependabot renders them into the pull request body it opens there.
 
 ```bash
 cd /Users/rob/git/robertblust/design
@@ -1226,20 +1171,9 @@ ls node_modules/@robertblust/design
 npx design sync --check ; echo "  exit $?  (2 expected — no design.config.json here)"
 ```
 
-Expected: `stage checks: divider, graph`; the installed directory contains `lib bin verify
-assets package.json README.md LICENSE NOTICE` — note **no `test/`**, so the `files` allowlist
-is honoured on a git install; and `design sync --check` exits **2** because this throwaway has
-no config, which is the right answer.
+Expected: `stage checks: divider, graph`; the installed directory contains `lib bin verify assets package.json README.md LICENSE NOTICE` — note **no `test/`**, so the `files` allowlist is honoured on a git install; and `design sync --check` exits **2** because this throwaway has no config, which is the right answer.
 
-**One thing to check in the lockfile, because it looks alarming and is fine.** npm records the
-resolution as `git+ssh://git@github.com/robertblust/design.git#<sha>` — an SSH URL — even
-though the specifier was the `github:` shorthand and even with local git config neutralised.
-GitHub Actions runners carry no SSH key for github.com, so this looks like it would break CI in
-all three sites. It does not: npm falls back to HTTPS for public hosted repositories. Verified
-with a cold cache and SSH forcibly broken —
-`GIT_SSH_COMMAND=/bin/false npm ci --cache /tmp/fresh` installs successfully. Do not "fix" this
-by rewriting the specifier to a `git+https://` URL; the shorthand is correct and the SHA in the
-lockfile is what makes the install reproducible.
+**One thing to check in the lockfile, because it looks alarming and is fine.** npm records the resolution as `git+ssh://git@github.com/robertblust/design.git#<sha>` — an SSH URL — even though the specifier was the `github:` shorthand and even with local git config neutralised. GitHub Actions runners carry no SSH key for github.com, so this looks like it would break CI in all three sites. It does not: npm falls back to HTTPS for public hosted repositories. Verified with a cold cache and SSH forcibly broken — `GIT_SSH_COMMAND=/bin/false npm ci --cache /tmp/fresh` installs successfully. Do not "fix" this by rewriting the specifier to a `git+https://` URL; the shorthand is correct and the SHA in the lockfile is what makes the install reproducible.
 
 Also confirm the dependency was written the way the plan expects:
 
@@ -1266,8 +1200,7 @@ Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"`.
 - Produces: nothing other repositories consume. This is the reference adoption — Tasks 9
   and 10 repeat its shape.
 
-**The gate:** blust.ch is where every asset was vendored from, so `npm run design` must
-produce an **empty** `git diff`. If it does not, the package is wrong and this task stops.
+**The gate:** blust.ch is where every asset was vendored from, so `npm run design` must produce an **empty** `git diff`. If it does not, the package is wrong and this task stops.
 
 - [ ] **Step 1: Work on a branch**
 
@@ -1278,9 +1211,7 @@ git checkout -b adopt-design-package
 
 - [ ] **Step 2: Install the package and declare what this site takes**
 
-The dependency is a git reference, not a registry version — `robertblust/design` is public, so
-this needs no npm account, no login and no token, here or in CI. `npm ci` will record the
-resolved commit SHA in the lockfile, so the install stays reproducible.
+The dependency is a git reference, not a registry version — `robertblust/design` is public, so this needs no npm account, no login and no token, here or in CI. `npm ci` will record the resolved commit SHA in the lockfile, so the install stays reproducible.
 
 ```bash
 cd /Users/rob/git/robertblust/robertblust.github.io
@@ -1288,16 +1219,13 @@ npm install --save-dev "github:robertblust/design#v0.1.0"
 printf '{\n  "groups": ["fonts", "stage"]\n}\n' > design.config.json
 ```
 
-Confirm the dependency was pinned exactly — a caret here would let a minor version arrive
-without a visible line in `package.json`:
+Confirm the dependency was pinned exactly — a caret here would let a minor version arrive without a visible line in `package.json`:
 
 ```bash
 grep '"@robertblust/design"' package.json
 ```
 
-Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not
-a `#semver:` range. `--save-exact` is not used because it means nothing for a git
-specifier; the exactness comes from naming the tag.
+Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not a `#semver:` range. `--save-exact` is not used because it means nothing for a git specifier; the exactness comes from naming the tag.
 
 - [ ] **Step 3: Add the two scripts**
 
@@ -1316,14 +1244,11 @@ npm run design
 git status --porcelain -- stage.js stage.css d3.v7.min.js fonts/
 ```
 
-Expected: **no output at all.** Every file already matched, so nothing was written.
-If any file is listed, stop: the vendored copy in the package differs from this site's, which
-means Task 4 took the wrong bytes.
+Expected: **no output at all.** Every file already matched, so nothing was written. If any file is listed, stop: the vendored copy in the package differs from this site's, which means Task 4 took the wrong bytes.
 
 - [ ] **Step 5: Verify `design:check` passes**
 
-Run: `npm run design:check`
-Expected: `✓ 7 file(s) match @robertblust/design`, exit 0.
+Run: `npm run design:check` Expected: `✓ 7 file(s) match @robertblust/design`, exit 0.
 
 - [ ] **Step 6: Import the stage checks instead of defining them**
 
@@ -1335,8 +1260,7 @@ import { DESIGN_CHECKS, SYSTEM_FACES } from "./design.mjs";
 import { STAGE_CHECKS } from "@robertblust/design/verify/stage";
 ```
 
-Delete the inline `graph(page, spec) { … }` and `divider(page, spec) { … }` bodies from the
-`CHECKS` object, and spread the imported pair in at the top of the object instead:
+Delete the inline `graph(page, spec) { … }` and `divider(page, spec) { … }` bodies from the `CHECKS` object, and spread the imported pair in at the top of the object instead:
 
 ```javascript
 const CHECKS = {
@@ -1344,8 +1268,7 @@ const CHECKS = {
   // …every other check in this file, unchanged…
 ```
 
-Then confirm nothing was lost — the object must still expose both keys, and the file must no
-longer define them itself:
+Then confirm nothing was lost — the object must still expose both keys, and the file must no longer define them itself:
 
 ```bash
 cd /Users/rob/git/robertblust/robertblust.github.io
@@ -1355,9 +1278,7 @@ grep -n "STAGE_CHECKS" verify/check.mjs
 
 Expected: the count prints `0`, and `STAGE_CHECKS` appears twice — once imported, once spread.
 
-Do **not** try to import `check.mjs` to verify it: the file launches Chromium and runs the
-whole page loop at module top level, so importing it runs the suite against whatever happens
-to be on port 8000. Step 7 runs it properly.
+Do **not** try to import `check.mjs` to verify it: the file launches Chromium and runs the whole page loop at module top level, so importing it runs the suite against whatever happens to be on port 8000. Step 7 runs it properly.
 
 - [ ] **Step 7: Run the full suite — it must be unchanged**
 
@@ -1369,19 +1290,13 @@ npm run verify
 kill %1
 ```
 
-Expected: every page `✓`, exactly as before this task. `graph` and `divider` now come from the
-package and must behave identically — blust.ch is where they came from.
+Expected: every page `✓`, exactly as before this task. `graph` and `divider` now come from the package and must behave identically — blust.ch is where they came from.
 
 - [ ] **Step 8: Wire `design:check` into CI**
 
-blust.ch's `/model/` also names `../stage.css`, `../d3.v7.min.js` and `../stage.js`, so those
-files are in its card recipe too. It does not matter for *this* task — the sync produced an
-empty diff, so no card moved — but it will on the first release that changes a stage file:
-`npm run design` and `npm run og` then belong in one commit. Leave the CI step order alone;
-`og:check` before `npm ci` is deliberate and correct (see Task 10, Step 7).
+blust.ch's `/model/` also names `../stage.css`, `../d3.v7.min.js` and `../stage.js`, so those files are in its card recipe too. It does not matter for *this* task — the sync produced an empty diff, so no card moved — but it will on the first release that changes a stage file: `npm run design` and `npm run og` then belong in one commit. Leave the CI step order alone; `og:check` before `npm ci` is deliberate and correct (see Task 10, Step 7).
 
-In `.github/workflows/ci.yml`, add a step immediately after `- run: npm ci` and before
-`- run: npx playwright install --with-deps chromium`:
+In `.github/workflows/ci.yml`, add a step immediately after `- run: npm ci` and before `- run: npx playwright install --with-deps chromium`:
 
 ```yaml
       # After npm ci because it needs the package; before the browser because a file that is
@@ -1400,12 +1315,7 @@ git push -u origin adopt-design-package
 gh pr create --title "<the commit subject>" --body-file <a body file you write>
 ```
 
-**Do not use `--fill`.** It takes the pull request body from the commit *body*, and these
-commits have single-line messages — so `--fill` yields a pull request with an empty description.
-Write the body yourself. It must carry: what the change adopts; **the empty-diff evidence pasted
-as actual command output** (that diff is the whole proof the extraction was faithful, and a
-reader cannot check an assertion); what moved and what deliberately did not; and a line on each
-file in the diff. This is the artefact someone reads before merging.
+**Do not use `--fill`.** It takes the pull request body from the commit *body*, and these commits have single-line messages — so `--fill` yields a pull request with an empty description. Write the body yourself. It must carry: what the change adopts; **the empty-diff evidence pasted as actual command output** (that diff is the whole proof the extraction was faithful, and a reader cannot check an assertion); what moved and what deliberately did not; and a line on each file in the diff. This is the artefact someone reads before merging.
 
 Stop here and wait for CI. Do not merge without an explicit go-ahead.
 
@@ -1438,9 +1348,7 @@ printf '{\n  "groups": ["fonts"]\n}\n' > design.config.json
 grep '"@robertblust/design"' package.json
 ```
 
-Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not
-a `#semver:` range. `--save-exact` is not used because it means nothing for a git
-specifier; the exactness comes from naming the tag.
+Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not a `#semver:` range. `--save-exact` is not used because it means nothing for a git specifier; the exactness comes from naming the tag.
 
 - [ ] **Step 2: Add the two scripts**
 
@@ -1471,8 +1379,7 @@ ls stage.js stage.css d3.v7.min.js 2>&1 | head -3
 npm run design:check
 ```
 
-Expected: three `No such file or directory` lines, then
-`✓ 4 file(s) match @robertblust/design`, exit 0.
+Expected: three `No such file or directory` lines, then `✓ 4 file(s) match @robertblust/design`, exit 0.
 
 - [ ] **Step 5: Run the full suite**
 
@@ -1507,12 +1414,7 @@ git push -u origin adopt-design-package
 gh pr create --title "<the commit subject>" --body-file <a body file you write>
 ```
 
-**Do not use `--fill`.** It takes the pull request body from the commit *body*, and these
-commits have single-line messages — so `--fill` yields a pull request with an empty description.
-Write the body yourself. It must carry: what the change adopts; **the empty-diff evidence pasted
-as actual command output** (that diff is the whole proof the extraction was faithful, and a
-reader cannot check an assertion); what moved and what deliberately did not; and a line on each
-file in the diff. This is the artefact someone reads before merging.
+**Do not use `--fill`.** It takes the pull request body from the commit *body*, and these commits have single-line messages — so `--fill` yields a pull request with an empty description. Write the body yourself. It must carry: what the change adopts; **the empty-diff evidence pasted as actual command output** (that diff is the whole proof the extraction was faithful, and a reader cannot check an assertion); what moved and what deliberately did not; and a line on each file in the diff. This is the artefact someone reads before merging.
 
 Stop and wait for CI. Do not merge without an explicit go-ahead.
 
@@ -1533,11 +1435,7 @@ Stop and wait for CI. Do not merge without an explicit go-ahead.
 - Consumes: `STAGE_CHECKS` from `@robertblust/design/verify/stage`, and the `design` CLI.
 - Produces: nothing.
 
-**This is the one task in the plan that deliberately produces a non-empty diff**, and the
-only one that changes what a visitor sees. The steps are ordered so the bug is *demonstrated*
-before it is fixed: import the check first, watch `/model/` and `/example/` go red, then sync
-`stage.js` and watch them go green. Do not reorder them — the red run is the evidence that the
-repair was needed and that the assertion works.
+**This is the one task in the plan that deliberately produces a non-empty diff**, and the only one that changes what a visitor sees. The steps are ordered so the bug is *demonstrated* before it is fixed: import the check first, watch `/model/` and `/example/` go red, then sync `stage.js` and watch them go green. Do not reorder them — the red run is the evidence that the repair was needed and that the assertion works.
 
 - [ ] **Step 1: Work on a branch and install**
 
@@ -1549,9 +1447,7 @@ printf '{\n  "groups": ["fonts", "stage"]\n}\n' > design.config.json
 grep '"@robertblust/design"' package.json
 ```
 
-Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not
-a `#semver:` range. `--save-exact` is not used because it means nothing for a git
-specifier; the exactness comes from naming the tag.
+Expected: `"@robertblust/design": "github:robertblust/design#v0.1.0"` — an exact tag, not a `#semver:` range. `--save-exact` is not used because it means nothing for a git specifier; the exactness comes from naming the tag.
 
 - [ ] **Step 2: Add the two scripts**
 
@@ -1572,8 +1468,7 @@ import { DESIGN_CHECKS, SYSTEM_FACES } from "./design.mjs";
 import { STAGE_CHECKS } from "@robertblust/design/verify/stage";
 ```
 
-Delete the inline `graph(page, spec) { … }` and `divider(page, spec) { … }` bodies from the
-`CHECKS` object and spread the imported pair in at the top instead:
+Delete the inline `graph(page, spec) { … }` and `divider(page, spec) { … }` bodies from the `CHECKS` object and spread the imported pair in at the top instead:
 
 ```javascript
 const CHECKS = {
@@ -1600,13 +1495,9 @@ npm run verify
 kill %1
 ```
 
-Expected: **FAIL on `/model/` and `/example/`**, with a message of the form
-`graph: a spine ends inside a node instead of at its edge: <id> (x,y)`.
+Expected: **FAIL on `/model/` and `/example/`**, with a message of the form `graph: a spine ends inside a node instead of at its edge: <id> (x,y)`.
 
-This is the live bug: `stage.js` here still terminates spines at a flat `R_NODE` while drawing
-folder boxes 4px taller. **If the suite passes at this step, stop** — either the import did
-not take effect, or the geometry is not what the spec measured, and the rest of this task is
-built on a premise that no longer holds.
+This is the live bug: `stage.js` here still terminates spines at a flat `R_NODE` while drawing folder boxes 4px taller. **If the suite passes at this step, stop** — either the import did not take effect, or the geometry is not what the spec measured, and the rest of this task is built on a premise that no longer holds.
 
 Record the failing output — it belongs in the pull request body.
 
@@ -1618,8 +1509,7 @@ npm run design
 git status --porcelain -- stage.js stage.css d3.v7.min.js fonts/
 ```
 
-Expected: exactly one line, ` M stage.js`. `stage.css`, `d3.v7.min.js` and the four fonts were
-already identical and must not appear.
+Expected: exactly one line, ` M stage.js`. `stage.css`, `d3.v7.min.js` and the four fonts were already identical and must not appear.
 
 Confirm the change is the ten lines the spec described, and nothing else:
 
@@ -1628,8 +1518,7 @@ git diff --stat -- stage.js
 git diff -- stage.js | grep -E "^[+-]" | grep -v "^[+-][+-]" | head -20
 ```
 
-Expected: the diff adds `function markH(p)` and its comment, and replaces two `R_NODE`
-terms in `shape()` with `markH(a)` / `markH(b)`. Nothing else.
+Expected: the diff adds `function markH(p)` and its comment, and replaces two `R_NODE` terms in `shape()` with `markH(a)` / `markH(b)`. Nothing else.
 
 - [ ] **Step 6: Run the suite again and watch it go GREEN**
 
@@ -1645,36 +1534,22 @@ Expected: every page `✓`, including `/model/` and `/example/`.
 
 - [ ] **Step 7: Restamp the share cards — they WILL be stale**
 
-An earlier draft of this plan said "`stage.js` is not part of any page's card recipe". **That
-was wrong.** `og-recipe.mjs` walks every `src=`/`href=` a page names, and `/model/` and
-`/example/` both carry `<link href="../stage.css">`, `<script src="../d3.v7.min.js">` and
-`<script src="../stage.js">`. All three are in the recipe hash, so changing `stage.js` marks
-those two cards stale by design.
+An earlier draft of this plan said "`stage.js` is not part of any page's card recipe". **That was wrong.** `og-recipe.mjs` walks every `src=`/`href=` a page names, and `/model/` and `/example/` both carry `<link href="../stage.css">`, `<script src="../d3.v7.min.js">` and `<script src="../stage.js">`. All three are in the recipe hash, so changing `stage.js` marks those two cards stale by design.
 
 ```bash
 cd /Users/rob/git/companygraph/companygraph.github.io
 npm run og:check
 ```
 
-Expected: `/model/` and `/example/` reported stale. Run `npm run og` and include the
-regenerated `og.png` and `og.sha` for both in **this same commit** — not a follow-up. The
-`design:check` message tells you to do this ("Then re-run the card check…"); doing it in one
-commit is what keeps it to a single CI round trip.
+Expected: `/model/` and `/example/` reported stale. Run `npm run og` and include the regenerated `og.png` and `og.sha` for both in **this same commit** — not a follow-up. The `design:check` message tells you to do this ("Then re-run the card check…"); doing it in one commit is what keeps it to a single CI round trip.
 
-Note the ordering this depends on, which is correct as it stands and must not be "fixed":
-`test:og` and `og:check` deliberately run *before* `npm ci` because they install nothing. At
-Dependabot time that is exactly right — a bump changes only `package.json` and the lockfile,
-which no page names, so `og:check` stays quiet and `design:check` is the step that goes red
-with the actionable message. The cards only go stale once you have actually run
-`npm run design`, which is this step.
+Note the ordering this depends on, which is correct as it stands and must not be "fixed": `test:og` and `og:check` deliberately run *before* `npm ci` because they install nothing. At Dependabot time that is exactly right — a bump changes only `package.json` and the lockfile, which no page names, so `og:check` stays quiet and `design:check` is the step that goes red with the actionable message. The cards only go stale once you have actually run `npm run design`, which is this step.
 
 - [ ] **Step 8: Verify `design:check` passes and wire it into CI**
 
-Run: `npm run design:check`
-Expected: `✓ 7 file(s) match @robertblust/design`, exit 0.
+Run: `npm run design:check` Expected: `✓ 7 file(s) match @robertblust/design`, exit 0.
 
-In `.github/workflows/ci.yml`, add a step immediately after `- run: npm ci` and before
-`- name: The vendored d3 is the pinned build`:
+In `.github/workflows/ci.yml`, add a step immediately after `- run: npm ci` and before `- name: The vendored d3 is the pinned build`:
 
 ```yaml
       # After npm ci because it needs the package; before the browser because a file that is
@@ -1730,42 +1605,16 @@ Stop and wait for CI. Do not merge without an explicit go-ahead.
 
 ## Carried into Tasks 8-10 from the final review
 
-Two things the whole-branch review surfaced that belong to the site adoptions, recorded here
-so they are not lost between plans.
+Two things the whole-branch review surfaced that belong to the site adoptions, recorded here so they are not lost between plans.
 
-**Give the design package its own Dependabot group.** The spec asks for this explicitly — "so
-a design change never arrives in the same pull request as a Playwright bump" — and the task
-steps above do not do it. All three sites currently group `minor-and-patch` into one pull
-request, and a design release is a **minor** by this package's own semver policy, so it would
-land bundled with exactly what the spec wanted it kept apart from. Add to each site's
-`.github/dependabot.yml`, inside the npm entry's `groups:`, a group matching
-`@robertblust/design` ahead of the catch-all `minor-and-patch` group. The tripwire fires
-either way; this is about the signal being readable.
+**Give the design package its own Dependabot group.** The spec asks for this explicitly — "so a design change never arrives in the same pull request as a Playwright bump" — and the task steps above do not do it. All three sites currently group `minor-and-patch` into one pull request, and a design release is a **minor** by this package's own semver policy, so it would land bundled with exactly what the spec wanted it kept apart from. Add to each site's `.github/dependabot.yml`, inside the npm entry's `groups:`, a group matching `@robertblust/design` ahead of the catch-all `minor-and-patch` group. The tripwire fires either way; this is about the signal being readable.
 
-**`d3.v7.min.js` gains a second owner on companygraph.io, and the two can deadlock.**
-companygraph.io pins `"d3": "7.9.0"` in `dependencies`, and its `verify/instance.test.mjs`
-asserts the committed `d3.v7.min.js` is byte-identical to `node_modules/d3/dist/d3.min.js`.
-After Task 10, `design:check` asserts that same file matches the package. Both agree today —
-verified — so adoption is safe. But afterwards: a Dependabot **d3** bump in companygraph.io
-cannot be cleared without a matching design release, and a design release that bumps d3
-cannot be cleared in companygraph.io without also editing its `package.json` — which by this
-plan's own semver rule makes any d3 bump a **major**, not a minor. Write that down in the
-package README's semver note when Task 10 lands, and expect the next d3 bump to be a
-two-repository change.
+**`d3.v7.min.js` gains a second owner on companygraph.io, and the two can deadlock.** companygraph.io pins `"d3": "7.9.0"` in `dependencies`, and its `verify/instance.test.mjs` asserts the committed `d3.v7.min.js` is byte-identical to `node_modules/d3/dist/d3.min.js`. After Task 10, `design:check` asserts that same file matches the package. Both agree today — verified — so adoption is safe. But afterwards: a Dependabot **d3** bump in companygraph.io cannot be cleared without a matching design release, and a design release that bumps d3 cannot be cleared in companygraph.io without also editing its `package.json` — which by this plan's own semver rule makes any d3 bump a **major**, not a minor. Write that down in the package README's semver note when Task 10 lands, and expect the next d3 bump to be a two-repository change.
 
 ## Not in this plan
 
-Named here so they are not attempted: the fence rewriter and the 111 shared blocks (tokens,
-header, language, head, prose kit); `verify/design.mjs` and the fourteen shared check bodies;
-the deck; the card harness. Each has its own plan, in the order the spec's phases give.
+Named here so they are not attempted: the fence rewriter and the 111 shared blocks (tokens, header, language, head, prose kit); `verify/design.mjs` and the fourteen shared check bodies; the deck; the card harness. Each has its own plan, in the order the spec's phases give.
 
-**One piece of the spec's phase 0 is deliberately deferred rather than done here:** the four
-deck footers still have no end fence. It is independent of everything in this plan — nothing here
-parses HTML.
+**One piece of the spec's phase 0 is deliberately deferred rather than done here:** the four deck footers still have no end fence. It is independent of everything in this plan — nothing here parses HTML.
 
-It is **not** plan 2's first task, as an earlier draft of this paragraph said. Measuring it
-showed the fence bundles two different things: a lockup contract that has *not* drifted (two
-forms, 9 and 31 lines, each internally byte-identical) and a transport bar that has, four ways.
-So it is not a reconciliation, and the transport half belongs with the deck runtime and markup it
-is part of. That is **plan 4**, where the deck is pulled apart and the cut can be placed rather
-than guessed. See the spec's fence table for the measurements.
+It is **not** plan 2's first task, as an earlier draft of this paragraph said. Measuring it showed the fence bundles two different things: a lockup contract that has *not* drifted (two forms, 9 and 31 lines, each internally byte-identical) and a transport bar that has, four ways. So it is not a reconciliation, and the transport half belongs with the deck runtime and markup it is part of. That is **plan 4**, where the deck is pulled apart and the cut can be placed rather than guessed. See the spec's fence table for the measurements.

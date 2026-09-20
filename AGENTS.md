@@ -12,9 +12,7 @@ Everything below this block is this repository's own. `sh conventions/convention
 
 # blust.ch — working conventions
 
-Robert Blust's profile page and two talks, self-contained, no bundler. What the pages
-are, the URL map and the commands live in `README.md`; this file is about the ways this
-site breaks silently.
+Robert Blust's profile page and two talks, self-contained, no bundler. What the pages are, the URL map and the commands live in `README.md`; this file is about the ways this site breaks silently.
 
 ## Build & verify
 
@@ -26,9 +24,7 @@ npm run og           # nine 1200×630 share cards
 npm run pdf            # both decks' PDFs
 ```
 
-**Verify by rendering, never by reading the diff.** A passing `npm run verify` after any
-change to `index.html`, `talks/index.html`, or a deck is not optional — it is the only
-check that catches a page that parses fine and renders wrong.
+**Verify by rendering, never by reading the diff.** A passing `npm run verify` after any change to `index.html`, `talks/index.html`, or a deck is not optional — it is the only check that catches a page that parses fine and renders wrong.
 
 ## Repository and DNS — get these wrong and there is no error message
 
@@ -62,30 +58,17 @@ check that catches a page that parses fine and renders wrong.
 
 ## Adding or editing a talk
 
-**A talk lives in one file.** `talks/index.html` is the only page that names a talk;
-the root `index.html` links to `/talks/` and lists nothing. It used to carry a teaser
-copy of the list, which meant every new talk was two edits and the second was the one
-that got forgotten. That teaser is gone, and this note exists so nobody helpfully adds
-it back.
+**A talk lives in one file.** `talks/index.html` is the only page that names a talk; the root `index.html` links to `/talks/` and lists nothing. It used to carry a teaser copy of the list, which meant every new talk was two edits and the second was the one that got forgotten. That teaser is gone, and this note exists so nobody helpfully adds it back.
 
-The root page's nav and its one button both point at `talks/` and neither needs
-touching when the talks change.
+The root page's nav and its one button both point at `talks/` and neither needs touching when the talks change.
 
 ## No external assets, anywhere
 
-Not a style preference. The brief for this site is durability, and a Google Fonts link
-would be the one third-party dependency an otherwise self-contained site has — it also
-sends every visitor's IP to Google from a site carrying no privacy policy, which German
-courts have held to be a GDPR breach on its own. All four pages fall back to the system
-sans stack. If a design pass ever wants a webfont, that is the conversation to have
-first, not a `<link>` to add and forgive later.
+Not a style preference. The brief for this site is durability, and a Google Fonts link would be the one third-party dependency an otherwise self-contained site has — it also sends every visitor's IP to Google from a site carrying no privacy policy, which German courts have held to be a GDPR breach on its own. All four pages fall back to the system sans stack. If a design pass ever wants a webfont, that is the conversation to have first, not a `<link>` to add and forgive later.
 
 ## Narration (`tts/`)
 
-`generate.py` reads the decks directly, so the speaker notes are the single source for
-what is said — there is no separate script to keep in step. Clips cache on a content
-hash of voice, model and text, so **editing one note regenerates exactly one clip** and
-costs a few hundred characters rather than a full run.
+`generate.py` reads the decks directly, so the speaker notes are the single source for what is said — there is no separate script to keep in step. Clips cache on a content hash of voice, model and text, so **editing one note regenerates exactly one clip** and costs a few hundred characters rather than a full run.
 
 ```bash
 ./tts/generate.py --dry-run                       # what would be billed, and for which slides
@@ -93,9 +76,7 @@ costs a few hundred characters rather than a full run.
 ./tts/generate.py --deck mental-model --only 04   # one slide of one deck
 ```
 
-One generator serves both talks rather than a copy per deck. The two copies of the PDF
-exporter this repository was assembled from had already drifted apart — different
-defaults, different comments — which is the argument for not repeating the pattern.
+One generator serves both talks rather than a copy per deck. The two copies of the PDF exporter this repository was assembled from had already drifted apart — different defaults, different comments — which is the argument for not repeating the pattern.
 
 - **`clipsSeen` is `true`, and that is now correct.** It was `false` while these decks
   had no audio, because browser speech synthesis was the only narration path and a
@@ -119,10 +100,7 @@ defaults, different comments — which is the argument for not repeating the pat
 
 ## Secrets
 
-`ELEVENLABS_API_KEY` is the only credential this repository needs, and it lives in
-`~/.zshrc`. Only an **interactive** zsh sources that file, so a tool shell starts without
-it — and so does a login shell, which is the surprising half. An empty variable is not
-evidence the key is missing. Pull it in for the one command that needs it:
+`ELEVENLABS_API_KEY` is the only credential this repository needs, and it lives in `~/.zshrc`. Only an **interactive** zsh sources that file, so a tool shell starts without it — and so does a login shell, which is the surprising half. An empty variable is not evidence the key is missing. Pull it in for the one command that needs it:
 
 ```bash
 export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/null)"
@@ -142,48 +120,25 @@ export ELEVENLABS_API_KEY="$(zsh -ic 'printf %s "$ELEVENLABS_API_KEY"' 2>/dev/nu
 
 ## Nothing opens in a new tab; every deck carries its own way out
 
-**Not one link on this site opens in a new tab**, outbound ones included — `github.com`,
-`linkedin.com`, `3ap.ch` and `likemagic.tech` are no exception. A new tab takes away the
-visitor's back button, and every deck carries its own way out, so nothing needs one.
-`noNewTab` asserts it on every page.
+**Not one link on this site opens in a new tab**, outbound ones included — `github.com`, `linkedin.com`, `3ap.ch` and `likemagic.tech` are no exception. A new tab takes away the visitor's back button, and every deck carries its own way out, so nothing needs one. `noNewTab` asserts it on every page.
 
-**The one exception, which this site does not use, is a link inside a slide.** A presenter who
-clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves that
-in front of a room. It keys on *where a link sits*, not where it points, so it needs no list of
-hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's has two,
-which is why the exception is written the same way in all three suites.
+**The one exception, which this site does not use, is a link inside a slide.** A presenter who clicks one mid-talk in the same tab loses the deck, and no back-button muscle memory saves that in front of a room. It keys on *where a link sits*, not where it points, so it needs no list of hrefs to maintain. Neither deck here has an outbound link in a slide; companygraph's has two, which is why the exception is written the same way in all three suites.
 
-Each deck's transport bar has an *All talks* control on the far side of the divider, beside
-the language and notes buttons rather than beside play and next: one button away from those,
-a misclick mid-talk would leave the deck instead of skipping a slide.
+Each deck's transport bar has an *All talks* control on the far side of the divider, beside the language and notes buttons rather than beside play and next: one button away from those, a misclick mid-talk would leave the deck instead of skipping a slide.
 
-The bottom-left corner carries two destinations, not one. The lockup goes to the **landing
-page** (`../../`) and *Talks* / *Vorträge* goes to the **index** (`../`) — the same place the
-transport control goes, which is the deliberate duplicate: the corner offers both levels of
-"out", and the corner is the one place nobody clicks by accident.
+The bottom-left corner carries two destinations, not one. The lockup goes to the **landing page** (`../../`) and *Talks* / *Vorträge* goes to the **index** (`../`) — the same place the transport control goes, which is the deliberate duplicate: the corner offers both levels of "out", and the corner is the one place nobody clicks by accident.
 
-`wayOut` covers the index link and is satisfied by either it or the transport control;
-`landing` covers the lockup and nothing else does, because a relative `../../` is invisible
-to the `links` check and a dead one looks like a working deck until somebody clicks it.
+`wayOut` covers the index link and is satisfied by either it or the transport control; `landing` covers the lockup and nothing else does, because a relative `../../` is invisible to the `links` check and a dead one looks like a working deck until somebody clicks it.
 
-Neither half is visible to the `links` check, which only inspects absolute `http` hrefs — a
-relative `mental-model/` slips straight past it. That blind spot is what the `sameTab` and
-`wayOut` checks exist to cover, and it is why flipping any of this means editing a check and
-not just an `href`.
+Neither half is visible to the `links` check, which only inspects absolute `http` hrefs — a relative `mental-model/` slips straight past it. That blind spot is what the `sameTab` and `wayOut` checks exist to cover, and it is why flipping any of this means editing a check and not just an `href`.
 
 ## The brand lockup is a mark plus a wordmark, and the mark is inlined
 
-Both pages open with the `rb` mark left of **Robert Blust**, the same shape guestgraph.io
-uses. The mark is `favicon.svg` reproduced as inline SVG rather than `<img src=...>`,
-because a linked asset renders as a broken box under `file://` — see *No external assets*
-above. It draws its colors from the CSS tokens instead of the favicon's hard-coded hexes,
-so a palette change moves both together; the favicon keeps its own hexes because it has to
-stand alone. `verify/check.mjs` asserts the inline mark on both pages.
+Both pages open with the `rb` mark left of **Robert Blust**, the same shape guestgraph.io uses. The mark is `favicon.svg` reproduced as inline SVG rather than `<img src=...>`, because a linked asset renders as a broken box under `file://` — see *No external assets* above. It draws its colors from the CSS tokens instead of the favicon's hard-coded hexes, so a palette change moves both together; the favicon keeps its own hexes because it has to stand alone. `verify/check.mjs` asserts the inline mark on both pages.
 
 ## Notes live inside HTML attributes, and that bites three specific ways
 
-Speaker notes are `data-notes` (English) / `data-notes-de` (German) attribute values, so anything that ends
-the attribute swallows the rest of the tag with it:
+Speaker notes are `data-notes` (English) / `data-notes-de` (German) attribute values, so anything that ends the attribute swallows the rest of the tag with it:
 
 - **Nested markup uses single quotes** — `<em class='cue'>`, never `class="cue"`.
 - **German quotes are guillemets**, `«…»` with `‹…›` inside — the Swiss form WRITING.md sets. They
@@ -194,42 +149,24 @@ the attribute swallows the rest of the tag with it:
 
 ## `generate.py` finds slides by a literal string, so attribute order matters
 
-`slides()` scans for `<section class="slide` — the exact characters, not a parse. Anything
-inserted between the tag name and `class` makes a slide stop being a slide, silently:
+`slides()` scans for `<section class="slide` — the exact characters, not a parse. Anything inserted between the tag name and `class` makes a slide stop being a slide, silently:
 
 ```html
 <section data-say-title="no" class="slide title-slide">   <!-- invisible to the generator -->
 <section class="slide title-slide" data-say-title="no">   <!-- correct -->
 ```
 
-Nothing errors. The deck still renders, the notes panel still works, and the only symptom
-is a clip that never gets generated — which looks exactly like a clip that was already up
-to date. `./generate.py --dry-run` is what catches it: the slide count drops. Check it
-against the number of slides in the deck before assuming a quiet run means a cached one.
+Nothing errors. The deck still renders, the notes panel still works, and the only symptom is a clip that never gets generated — which looks exactly like a clip that was already up to date. `./generate.py --dry-run` is what catches it: the slide count drops. Check it against the number of slides in the deck before assuming a quiet run means a cached one.
 
-**`data-say-title="no"` suppresses the spoken title** for slides whose note already
-delivers the headline: the title slides, whose notes open by naming the talk, and any
-slide whose first spoken sentence restates its `<h1>`. Without it the voice reads the
-line, takes a beat, and reads it again. Which slides those are is a question for the
-decks, not for a note like this one — it used to say "all three title slides do", and
-that count was wrong in both directions while three slides repeated themselves. To find
-them, compare each `<h1>` against its cue-stripped note in both languages. And per the note above, the flag is
-matched by a substring test over the whole slide block, so writing it in a comment sets it
-on the neighboring slide. Explaining a flag must never set it.
+**`data-say-title="no"` suppresses the spoken title** for slides whose note already delivers the headline: the title slides, whose notes open by naming the talk, and any slide whose first spoken sentence restates its `<h1>`. Without it the voice reads the line, takes a beat, and reads it again. Which slides those are is a question for the decks, not for a note like this one — it used to say "all three title slides do", and that count was wrong in both directions while three slides repeated themselves. To find them, compare each `<h1>` against its cue-stripped note in both languages. And per the note above, the flag is matched by a substring test over the whole slide block, so writing it in a comment sets it on the neighboring slide. Explaining a flag must never set it.
 
 ## `<em class='cue'>` is a stage direction; bare `<em>` is spoken
 
-Both decks originally used bare `<em>` for everything in the notes. Turning on narration
-turned every stage direction — *pause here*, *lean in*, *make it personal* — into
-something the synthesized voice read aloud along with the actual content. `class='cue'`
-marks a direction as silent; anything without it is spoken. Where a direction and spoken
-content shared one span, the fix was to split the span, not to pick a side — marking the
-whole thing drops the content, leaving it bare narrates the instruction.
+Both decks originally used bare `<em>` for everything in the notes. Turning on narration turned every stage direction — *pause here*, *lean in*, *make it personal* — into something the synthesized voice read aloud along with the actual content. `class='cue'` marks a direction as silent; anything without it is spoken. Where a direction and spoken content shared one span, the fix was to split the span, not to pick a side — marking the whole thing drops the content, leaving it bare narrates the instruction.
 
 ## Stripping a cue can leave a lowercase start or a verbless fragment — leave it
 
-`spokenText()` deletes `em.cue` elements outright before reading the rest of the note
-aloud. Two artifacts follow from that, and both are harmless, not bugs to fix:
+`spokenText()` deletes `em.cue` elements outright before reading the rest of the note aloud. Two artifacts follow from that, and both are harmless, not bugs to fix:
 
 - The sentence that follows a removed cue can end up starting lowercase (German nouns
   aside, this shows up more in English notes). A synthesized voice renders lowercase
@@ -239,83 +176,39 @@ aloud. Two artifacts follow from that, and both are harmless, not bugs to fix:
   gemacht habe:"* leaves "kanonische Datenmodelle bei der UBS, eigene DSLs bei 3AP und
   LIKE MAGIC." with no verb of its own.
 
-Both are harmless in practice because `spokenText()` always prepends the slide title
-before the note body — the title supplies the lead-in a stripped cue would otherwise
-have provided. Do not "fix" either symptom by inventing connecting words the author
-never wrote; that changes what is said, not just how it parses.
+Both are harmless in practice because `spokenText()` always prepends the slide title before the note body — the title supplies the lead-in a stripped cue would otherwise have provided. Do not "fix" either symptom by inventing connecting words the author never wrote; that changes what is said, not just how it parses.
 
 ## `lang` describes the source markup, not what a visitor sees
 
-Each deck's `<html lang>` is **`en`**, and that is right, because the source markup is
-English: `applyLang()` collects every `[data-de]` element and captures each one's existing
-`innerHTML` as its `data-en` before anything is swapped. German is the translation carried
-in the attribute, not the other way round. So a crawler that never runs JavaScript sees
-English under `lang="en"`, which is exactly what the file says. `applyLang()` then sets
-`documentElement.lang` to whichever language is showing.
+Each deck's `<html lang>` is **`en`**, and that is right, because the source markup is English: `applyLang()` collects every `[data-de]` element and captures each one's existing `innerHTML` as its `data-en` before anything is swapped. German is the translation carried in the attribute, not the other way round. So a crawler that never runs JavaScript sees English under `lang="en"`, which is exactly what the file says. `applyLang()` then sets `documentElement.lang` to whichever language is showing.
 
-Two consequences worth knowing before editing a deck: **new translatable text needs only a
-`data-de`** — writing a `data-en` by hand is redundant and will be overwritten on load —
-and `verify`'s `sourceLang` check fetches the raw file and fails unless the static
-attribute reads `en`.
+Two consequences worth knowing before editing a deck: **new translatable text needs only a `data-de`** — writing a `data-en` by hand is redundant and will be overwritten on load — and `verify`'s `sourceLang` check fetches the raw file and fails unless the static attribute reads `en`.
 
 ## A page is en-US; a `-de` attribute is de-CH
 
-One rule, positional, with no exceptions to remember: every word of a page is American
-English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`,
-and in a deck `data-notes-de`.
+One rule, positional, with no exceptions to remember: every word of a page is American English, and the value of any attribute whose name ends `-de` is Swiss German — `data-de`, and in a deck `data-notes-de`.
 
-It reads as one line now because the attributes were made to agree. Notes used to invert the
-page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so
-the base attribute meant a different language depending on which pair you were reading.
-Design v0.25.0 swapped them, which is what leaves nothing here to remember.
+It reads as one line now because the attributes were made to agree. Notes used to invert the page's convention: `data-notes` held German and English was the suffixed `data-notes-en`, so the base attribute meant a different language depending on which pair you were reading. Design v0.25.0 swapped them, which is what leaves nothing here to remember.
 
-It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is
-correct German, not a British spelling left behind, and renaming it produces German that is
-wrong in a way nothing here can catch: every DOM check reads the rendered page, and the
-rendered page is only ever one language. A sweep masks those two attributes and touches
-nothing else.
+It matters most to anything that rewrites text in bulk. `Organisation` inside a `data-de` is correct German, not a British spelling left behind, and renaming it produces German that is wrong in a way nothing here can catch: every DOM check reads the rendered page, and the rendered page is only ever one language. A sweep masks those two attributes and touches nothing else.
 
-This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says
-where it applies.
+This is core's R14 resolved for a bilingual page. R14 says what the spelling is; this says where it applies.
 
-Three more places carry German, and none of their names ends in `-de`. The `UI.de` object on
-every prose page and `TALK.de` in every deck hold the German `<title>` and description; a deck's
-`UI.de` also holds its control labels; and `data-de-href` on a talks index holds the German
-PDF's path, a URL rather than a sentence. A sweep that masks only the two attributes rewrites
-the first two, so mask the `de:` branches of those objects as well. The `translates` specs in
-`verify/check.mjs` quote German too, and are the one place it is quoted on purpose.
+Three more places carry German, and none of their names ends in `-de`. The `UI.de` object on every prose page and `TALK.de` in every deck hold the German `<title>` and description; a deck's `UI.de` also holds its control labels; and `data-de-href` on a talks index holds the German PDF's path, a URL rather than a sentence. A sweep that masks only the two attributes rewrites the first two, so mask the `de:` branches of those objects as well. The `translates` specs in `verify/check.mjs` quote German too, and are the one place it is quoted on purpose.
 
-`<html lang>` carries the bare language, `en` in the source and `de` after a switch, and the
-region rides in `og:locale` alone. The rule's name says where the spelling and the grammar come
-from, not what the attribute says: every check that reads the language compares against `en`
-and `de`, and a regional tag would tell a crawler nothing `og:locale` does not already.
+`<html lang>` carries the bare language, `en` in the source and `de` after a switch, and the region rides in `og:locale` alone. The rule's name says where the spelling and the grammar come from, not what the attribute says: every check that reads the language compares against `en` and `de`, and a regional tag would tell a crawler nothing `og:locale` does not already.
 
-A page generated from a pinned model — blust.ch's `/model/` and `/principles/`, companygraph.io's
-`/model/` and `/example/` — shows the model's own words in the one language the model is written
-in, and the German page shows them unchanged under `lang="de"`. Each of those pages says so in its
-note; the site's own words around them are bilingual like everything else. A translated copy would
-be a second thing to keep true, which is the argument the principles page makes against it.
+A page generated from a pinned model — blust.ch's `/model/` and `/principles/`, companygraph.io's `/model/` and `/example/` — shows the model's own words in the one language the model is written in, and the German page shows them unchanged under `lang="de"`. Each of those pages says so in its note; the site's own words around them are bilingual like everything else. A translated copy would be a second thing to keep true, which is the argument the principles page makes against it.
 
-`translates` is the check that clicks. Every other DOM check reads the page as it first renders,
-which is English; this one presses DE, asserts the German is there and the English is gone — body
-text, `<title>`, meta description and, on a talks index, the PDF link — then presses EN and requires
-the page back exactly as it was. It is shared, in `@robertblust/design`, and every page in `PAGES`
-declares a spec for it, because a page without one is a page whose German half no test has seen.
+`translates` is the check that clicks. Every other DOM check reads the page as it first renders, which is English; this one presses DE, asserts the German is there and the English is gone — body text, `<title>`, meta description and, on a talks index, the PDF link — then presses EN and requires the page back exactly as it was. It is shared, in `@robertblust/design`, and every page in `PAGES` declares a spec for it, because a page without one is a page whose German half no test has seen.
 
 ## A link check that trusts the DOM inspects half the site
 
-The rendered DOM is only ever **one language**. German lives in `data-de` as markup that does
-not exist until a visitor switches, so `noNewTab`, `sameTab`, `links` and `internalLinks` see
-the English half and nothing else.
+The rendered DOM is only ever **one language**. German lives in `data-de` as markup that does not exist until a visitor switches, so `noNewTab`, `sameTab`, `links` and `internalLinks` see the English half and nothing else.
 
-That is not hypothetical. The privacy page's German credit kept `target='_blank'` — in
-**single quotes**, because it is nested inside an attribute — and survived both a source-wide
-strip of `target="_blank"` and the check itself. It was found by reading the source, not by a
-failing test.
+That is not hypothetical. The privacy page's German credit kept `target='_blank'` — in **single quotes**, because it is nested inside an attribute — and survived both a source-wide strip of `target="_blank"` and the check itself. It was found by reading the source, not by a failing test.
 
-`noNewTab` now parses every `[data-de]` value into a template and inspects the links inside
-it, reporting them with a `[de]` suffix. **Any new link check must do the same.** Two things
-follow when editing translated markup:
+`noNewTab` now parses every `[data-de]` value into a template and inspects the links inside it, reporting them with a `[de]` suffix. **Any new link check must do the same.** Two things follow when editing translated markup:
 
 - nested markup uses single quotes, so a source-wide search for `target="_blank"` misses it;
 - a translated link and its English original must agree about opening in a new tab. They are
@@ -323,32 +216,17 @@ follow when editing translated markup:
 
 ## Slide numbers are zero-based everywhere the viewer can see them
 
-The kicker on the slide, the counter in the transport bar, and (for the reference deck
-this pattern comes from) the audio filename all agree on the same zero-based number.
-`npm run verify`'s `zeroBased` check exists because these two numbers drift independently
-the moment one of them is hand-edited.
+The kicker on the slide, the counter in the transport bar, and (for the reference deck this pattern comes from) the audio filename all agree on the same zero-based number. `npm run verify`'s `zeroBased` check exists because these two numbers drift independently the moment one of them is hand-edited.
 
 ## `guestgraph.github.io/talks/intro/` is the reference copy for deck features
 
-That deck is where the transport bar, the language toggle, and the narration scaffolding
-were worked out first. It lived in a repository of its own, `guestgraph/talks`, until the
-talks were merged into the site they are served from — the same move companygraph.io made,
-and the same one this repository has always had: decks are folders under the site, not a
-second repository copying its chrome. Duplication across these decks and that one is
-deliberate, not an oversight to fix later — a shared runtime between repositories would
-break the rule directly above it: a deck is one file that works from `file://`. Port a
-fix by hand; do not link the two.
+That deck is where the transport bar, the language toggle, and the narration scaffolding were worked out first. It lived in a repository of its own, `guestgraph/talks`, until the talks were merged into the site they are served from — the same move companygraph.io made, and the same one this repository has always had: decks are folders under the site, not a second repository copying its chrome. Duplication across these decks and that one is deliberate, not an oversight to fix later — a shared runtime between repositories would break the rule directly above it: a deck is one file that works from `file://`. Port a fix by hand; do not link the two.
 
 ## The design system, and why it is a copy
 
-Type and color are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`.
-They share no stylesheet and cannot: a deck has to open from `file://`, so there is
-nothing to import. Every page therefore carries its own copy of the token block, fenced
-by `design tokens · vN` markers.
+Type and color are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`. They share no stylesheet and cannot: a deck has to open from `file://`, so there is nothing to import. Every page therefore carries its own copy of the token block, fenced by `design tokens · vN` markers.
 
-**The copies have a source now.** They are generated from `@robertblust/design`, which this
-repository pins by tag, and `npm run design` writes them. What that changes about editing them is
-in *Changing a token* below, and it is the opposite of what this file said for most of its life.
+**The copies have a source now.** They are generated from `@robertblust/design`, which this repository pins by tag, and `npm run design` writes them. What that changes about editing them is in *Changing a token* below, and it is the opposite of what this file said for most of its life.
 
 - **Brightness is confidence, and each stop has exactly one job.** `--c-weak` a candidate
   considered and not accepted; `--c-mid` anything interactive — links, controls, the brand
@@ -393,15 +271,9 @@ in *Changing a token* below, and it is the opposite of what this file said for m
 
 ### Changing a token, or anything else the package owns
 
-**Do not edit a fenced block in place. The next `npm run design` overwrites it and nothing warns
-you.** This section used to say "edit the block, run `npm run verify`, bump `vN` in all three
-repositories". That was true while the blocks were maintained by hand. It is now the one
-instruction in this file that silently does nothing.
+**Do not edit a fenced block in place. The next `npm run design` overwrites it and nothing warns you.** This section used to say "edit the block, run `npm run verify`, bump `vN` in all three repositories". That was true while the blocks were maintained by hand. It is now the one instruction in this file that silently does nothing.
 
-Ten blocks are generated, and the fence markers name them: `design tokens`, `header contract`,
-`stage contract`, `language`, `prose reset`, `prose footer`, `deck transport`, `deck lockup`,
-`deck fit` and `deck runtime`. Everything between and including a pair of markers belongs to
-the package.
+Ten blocks are generated, and the fence markers name them: `design tokens`, `header contract`, `stage contract`, `language`, `prose reset`, `prose footer`, `deck transport`, `deck lockup`, `deck fit` and `deck runtime`. Everything between and including a pair of markers belongs to the package.
 
 ```bash
 npm run design         # rewrite every fenced block from the pinned release
@@ -419,56 +291,27 @@ To change one of them:
    The design package has its own Dependabot group so a design bump never arrives beside a
    Playwright one — it is the pull request that has to be read rather than merged on sight.
 
-`design:check` runs in CI, so a page that drifts from the pinned release goes red without anyone
-remembering to look. That is the guarantee the old habit-with-a-tripwire never was.
+`design:check` runs in CI, so a page that drifts from the pinned release goes red without anyone remembering to look. That is the guarantee the old habit-with-a-tripwire never was.
 
-**Two escape hatches that are decisions, not build fixes.** Removing a fence's name from a page's
-`fences` array in `PAGES`, or a group from `design.config.json`, each clears a red `design:check`
-with a one-line diff. Either one means this site has decided to own that block and diverge. That is
-a real choice; make it deliberately, in a commit that says so.
+**Two escape hatches that are decisions, not build fixes.** Removing a fence's name from a page's `fences` array in `PAGES`, or a group from `design.config.json`, each clears a red `design:check` with a one-line diff. Either one means this site has decided to own that block and diverge. That is a real choice; make it deliberately, in a commit that says so.
 
-**Not everything is generated.** The `<head>` contract is a copy with no fence at all — see
-below. The deck footer used to belong here too, hand-maintained; it doesn't any more — see
-below, where its old version marker was replaced rather than kept.
+**Not everything is generated.** The `<head>` contract is a copy with no fence at all — see below. The deck footer used to belong here too, hand-maintained; it doesn't any more — see below, where its old version marker was replaced rather than kept.
 
-Both decks under `talks/` carry the system too, and all four pages load their faces from the
-**one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
+Both decks under `talks/` carry the system too, and all four pages load their faces from the **one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
 
-**Do not give a deck its own `fonts/`.** Nobody is sent a deck folder; what ships is the PDF,
-which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with
-the root by hand, with nothing checking that it is.
+**Do not give a deck its own `fonts/`.** Nobody is sent a deck folder; what ships is the PDF, which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with the root by hand, with nothing checking that it is.
 
 ### The deck's chrome fences replaced the footer's version marker
 
-The deck footer used to be a hand-maintained copy across `blust.ch`, `guestgraph.io` and
-`companygraph.io`, fenced by its own `deck footer · vN` marker with a `footerVersion` check —
-because no suite can see a sibling, the same gap the token block has. Both are gone, not
-retargeted: that marker and that check were retired in a previous plan. The deck's whole
-chrome and runtime are generated fences now — `deck transport`, `deck lockup`, `deck fit` and
-`deck runtime` — exactly like the tokens above.
+The deck footer used to be a hand-maintained copy across `blust.ch`, `guestgraph.io` and `companygraph.io`, fenced by its own `deck footer · vN` marker with a `footerVersion` check — because no suite can see a sibling, the same gap the token block has. Both are gone, not retargeted: that marker and that check were retired in a previous plan. The deck's whole chrome and runtime are generated fences now — `deck transport`, `deck lockup`, `deck fit` and `deck runtime` — exactly like the tokens above.
 
-What the old marker covered was a **contract, not a look**: the lockup goes to the landing
-page, the person to `blust.ch`, the third link to the talks index, and none of them opens in a
-new tab. That contract still holds; `design:check` is what enforces it now, comparing each
-fence's bytes against the pinned release — strictly stronger than `footerVersion` ever was,
-because the constant had to be hand-edited in three repositories to stay true, which was the
-very drift it existed to catch.
+What the old marker covered was a **contract, not a look**: the lockup goes to the landing page, the person to `blust.ch`, the third link to the talks index, and none of them opens in a new tab. That contract still holds; `design:check` is what enforces it now, comparing each fence's bytes against the pinned release — strictly stronger than `footerVersion` ever was, because the constant had to be hand-edited in three repositories to stay true, which was the very drift it existed to catch.
 
-`verify/design.mjs` now lives in `@robertblust/design`, alongside the nineteen shared page
-checks — edited there, released as a tag, and taken here by re-pinning that tag in
-`package.json`, exactly like the fences above. `verify/check.mjs` imports it by package
-specifier, `@robertblust/design/verify/design`; a `verify/design.mjs` created in this
-repository is never resolved by that import and would be silently ignored — the suite would
-still report green, having run the pinned release's code instead of the one just edited.
+`verify/design.mjs` now lives in `@robertblust/design`, alongside the nineteen shared page checks — edited there, released as a tag, and taken here by re-pinning that tag in `package.json`, exactly like the fences above. `verify/check.mjs` imports it by package specifier, `@robertblust/design/verify/design`; a `verify/design.mjs` created in this repository is never resolved by that import and would be silently ignored — the suite would still report green, having run the pinned release's code instead of the one just edited.
 
 ## The header is a contract, and its copy carries a version
 
-The row across the top — wordmark, links, language control — is one design on three sites,
-and like the tokens it is a copy, because a deck opens from `file://` and there is no
-stylesheet to share. It is fenced in every page as `header contract · vN` and is
-**byte-identical on all sixteen pages** in the three repositories. It is generated, like the
-tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing
-it in this file does nothing — the next sync overwrites it.
+The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is a copy, because a deck opens from `file://` and there is no stylesheet to share. It is fenced in every page as `header contract · vN` and is **byte-identical on all sixteen pages** in the three repositories. It is generated, like the tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -491,18 +334,11 @@ What the contract says:
   still reads. The links are *wrapped*, not duplicated: one list presented two ways, so
   there is no second copy to drift.
 
-`navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they
-cannot do is see a sibling — that is the whole reason the block carries a version. Before
-this was written down there were five different mobile behaviors across the family and
-eight different wordings of the same CSS, and nothing failed anywhere.
+`navOrder`, `headerBaseline` and `mobileNav` assert all of it, per repository. What they cannot do is see a sibling — that is the whole reason the block carries a version. Before this was written down there were five different mobile behaviors across the family and eight different wordings of the same CSS, and nothing failed anywhere.
 
 ## Slides are a canvas, not a page
 
-A deck lays its slides out once at a fixed height of **900**, and the whole plane is scaled
-to the screen — the way a presentation tool does it, not the way a web page does. Two
-things that used to be worth re-testing are now guarantees: **a slide can never scroll**,
-because the canvas always fits, and **the composition is identical on every screen**,
-because there is only one composition.
+A deck lays its slides out once at a fixed height of **900**, and the whole plane is scaled to the screen — the way a presentation tool does it, not the way a web page does. Two things that used to be worth re-testing are now guarantees: **a slide can never scroll**, because the canvas always fits, and **the composition is identical on every screen**, because there is only one composition.
 
 - **Only the height is fixed.** The width follows the screen's aspect, so the canvas covers
   the viewport exactly and there are never letterbox bars. A fixed 16:9 canvas put 96px of
@@ -523,18 +359,11 @@ because there is only one composition.
   normal` — and the deck reflows into the scrolling reading view it always had. That is
   what "minimum supported width 1024" means in practice: canvas above, reflow below.
 
-The scale is driven by one `fit()` function at the end of each deck. Both exporters ride on
-it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case
-the canvas fills the frame exactly with no bars.
+The scale is driven by one `fit()` function at the end of each deck. Both exporters ride on it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case the canvas fills the frame exactly with no bars.
 
 ## Share cards go stale silently, and nothing on the page says so
 
-`og.png` is not a banner someone drew: `npm run og` renders it from the page itself — an
-index card is the page, a deck's card is its title slide — so a link preview shows what the
-visitor is about to land on. The cost of that is a copy that has to be re-rendered whenever
-the page moves, and nothing about a stale card looks wrong. Two of the four here advertised
-the site as it read two days earlier, through several commits, and every check passed the
-whole time.
+`og.png` is not a banner someone drew: `npm run og` renders it from the page itself — an index card is the page, a deck's card is its title slide — so a link preview shows what the visitor is about to land on. The cost of that is a copy that has to be re-rendered whenever the page moves, and nothing about a stale card looks wrong. Two of the four here advertised the site as it read two days earlier, through several commits, and every check passed the whole time.
 
 - **One file of knobs and three thin callers over a shared harness.** `og-recipe.mjs` holds
   the card list, the frame and the hide rules and nothing else, and binds the machinery with
@@ -590,9 +419,7 @@ whole time.
 
 ## The head is a contract, and `seo` is what holds it
 
-Canonical, description, the `og:` block, `twitter:card` and a JSON-LD graph, on every page.
-`verify`'s `seo` check asserts the lot. Three of its assertions exist because the thing they
-catch had already shipped green:
+Canonical, description, the `og:` block, `twitter:card` and a JSON-LD graph, on every page. `verify`'s `seo` check asserts the lot. Three of its assertions exist because the thing they catch had already shipped green:
 
 - **The canonical is compared against the page's own URL**, not merely against `og:url`.
   Agreeing with `og:url` proves two tags say the same thing, and both can say the same wrong
@@ -615,52 +442,19 @@ Two traps worth knowing before editing that check:
   matched nothing, so every graph URL was skipped and the check still printed ✓. Use the `SITE`
   constant.
 
-`PAGES` is the single list: the sitemap's expected URLs derive from it, and the suite fails if
-any page lacks `seo: true` — the runner skips a check whose key is undefined, so deleting that
-one line would otherwise turn the contract off in silence. The suite also asserts that whatever
-is on `BASE` is actually this site: a sibling repository left serving on `:8000` produced a full
-run of failures belonging to a site nobody was testing.
+`PAGES` is the single list: the sitemap's expected URLs derive from it, and the suite fails if any page lacks `seo: true` — the runner skips a check whose key is undefined, so deleting that one line would otherwise turn the contract off in silence. The suite also asserts that whatever is on `BASE` is actually this site: a sibling repository left serving on `:8000` produced a full run of failures belonging to a site nobody was testing.
 
-**`og:locale` is Open Graph only. No search engine reads it.** It is `en_US`, with
-`og:locale:alternate` `de_CH`, and the prose is American to match. Google reads `<html lang>`,
-which `sourceLang` fetches cold on every page — `lang` alone cannot, because it reads
-`documentElement.lang` after `applyLang()` has already corrected it.
+**`og:locale` is Open Graph only. No search engine reads it.** It is `en_US`, with `og:locale:alternate` `de_CH`, and the prose is American to match. Google reads `<html lang>`, which `sourceLang` fetches cold on every page — `lang` alone cannot, because it reads `documentElement.lang` after `applyLang()` has already corrected it.
 
-**No `hreflang`.** It names another address for the other language and there is none: one URL
-per page, German swapped in at runtime from `data-de`. It becomes correct the day `/de/` URLs
-ship, and not before.
+**No `hreflang`.** It names another address for the other language and there is none: one URL per page, German swapped in at runtime from `data-de`. It becomes correct the day `/de/` URLs ship, and not before.
 
-**The head contract is a third copy**, shared with `guestgraph.io` and `companygraph.io` and
-carrying no `· vN` tripwire, unlike the token block and the deck's other generated fences.
-Port changes by hand to all three.
+**The head contract is a third copy**, shared with `guestgraph.io` and `companygraph.io` and carrying no `· vN` tripwire, unlike the token block and the deck's other generated fences. Port changes by hand to all three.
 
 ## One artifact, and every derived page
 
-`model.json` is the parsed model at the commit `source.json` pins, committed like the share
-cards and the PDFs are. `npm run model` writes it and is the only script here that needs both
-GitHub and the parser; `npm run pages` renders it into every page derived from it and needs
-neither. So re-pinning is `source.json`, then `npm run model`, then `npm run pages`, and
-forgetting the last step is caught rather than shipped: `npm run pages` refuses to run when
-the artifact names a commit other than the one pinned, and `npm run pages:check` holds every
-page in CI before `npm ci` has run.
+`model.json` is the parsed model at the commit `source.json` pins, committed like the share cards and the PDFs are. `npm run model` writes it and is the only script here that needs both GitHub and the parser; `npm run pages` renders it into every page derived from it and needs neither. So re-pinning is `source.json`, then `npm run model`, then `npm run pages`, and forgetting the last step is caught rather than shipped: `npm run pages` refuses to run when the artifact names a commit other than the one pinned, and `npm run pages:check` holds every page in CI before `npm ci` has run.
 
-Ten regions are derived, and `/model/` and `/timeline/` are not among them. Those two draw the
-model, and they name it rather than carry it: one `<link rel="preload" as="fetch" href="../model.json"
-data-stage crossorigin>` in the head, which the stage and the ledger both find by the attribute
-and fetch. Nothing derives that link — its href and its marker never vary — so it is ordinary
-markup, and the page holds no commit at all. What holds those pages to the pin is that there is
-only one copy: `model.json`, which `pages:check` holds against `source.json`. A page that names
-no data does not fail quietly; the stage throws, and the suite reports it on every page through
-the listener it already has. The vision and the values are rendered as HTML into `/principles/`,
-because a crawler has to read them without running JS. And the JSON-LD nodes that do not vary
-from page to page — `Person`, `Dataset`, `WebSite` — are written into all nine pages that
-carry a graph, while `WebPage` and `BreadcrumbList` differ per page and stay by hand. That
-split is the rule: **a node that does not vary from page to page is written from one
-definition.** Nine hand-typed copies is nine chances for eight of them to be right, which is
-how two talk decks came to describe the person without an address the other seven pages
-carried. The renderer re-serializes the whole block rather than the three nodes alone, so it
-owns the formatting of the nodes that stay by hand too: compacting an `isPartOf` onto one line
-reports the page stale, and reads as a model change when nothing about the model moved.
+Ten regions are derived, and `/model/` and `/timeline/` are not among them. Those two draw the model, and they name it rather than carry it: one `<link rel="preload" as="fetch" href="../model.json" data-stage crossorigin>` in the head, which the stage and the ledger both find by the attribute and fetch. Nothing derives that link — its href and its marker never vary — so it is ordinary markup, and the page holds no commit at all. What holds those pages to the pin is that there is only one copy: `model.json`, which `pages:check` holds against `source.json`. A page that names no data does not fail quietly; the stage throws, and the suite reports it on every page through the listener it already has. The vision and the values are rendered as HTML into `/principles/`, because a crawler has to read them without running JS. And the JSON-LD nodes that do not vary from page to page — `Person`, `Dataset`, `WebSite` — are written into all nine pages that carry a graph, while `WebPage` and `BreadcrumbList` differ per page and stay by hand. That split is the rule: **a node that does not vary from page to page is written from one definition.** Nine hand-typed copies is nine chances for eight of them to be right, which is how two talk decks came to describe the person without an address the other seven pages carried. The renderer re-serializes the whole block rather than the three nodes alone, so it owns the formatting of the nodes that stay by hand too: compacting an `isPartOf` onto one line reports the page stale, and reads as a model change when nothing about the model moved.
 
 ## CI
 
@@ -711,9 +505,4 @@ reports the page stale, and reads as a model change when nothing about the model
 
 ## Checks
 
-Two jobs, both required by the ruleset on `main`: `verify`, this repository's own suite, and
-`conventions`, called from robertblust/conventions at the pinned tag and shown by GitHub as
-`conventions / conventions`. The prose check leaves out `node_modules`, third-party text;
-`.superpowers`, tooling scratch; and `docs/superpowers`, whose specs and plans quote the very
-words it scans for. Everything about how to write and how to work with git is in
-`conventions/`; this file is only what is this site's own.
+Two jobs, both required by the ruleset on `main`: `verify`, this repository's own suite, and `conventions`, called from robertblust/conventions at the pinned tag and shown by GitHub as `conventions / conventions`. The prose check leaves out `node_modules`, third-party text; `.superpowers`, tooling scratch; and `docs/superpowers`, whose specs and plans quote the very words it scans for. Everything about how to write and how to work with git is in `conventions/`; this file is only what is this site's own.

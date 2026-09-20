@@ -534,22 +534,11 @@ A real install, not `--package-lock-only` — that moves the lockfile and leaves
 
 - [ ] **Step 2: Replace the open-ended marker with three closed fences**
 
-**Where the markers go, and what must not move.** The old `deck footer · v1` marker never closed,
-so "the region it owned" is not a well-defined thing — its tail runs on into the speaker-notes
-drawer and the slide-layout classes that share the same mobile breakpoints. Measured on all three
-sites: between the marker and the next fence there are 81–91 CSS rules, of which the package emits
-67–70. The remainder is **not** a gap in the package; it is unrelated CSS the open marker swept up.
+**Where the markers go, and what must not move.** The old `deck footer · v1` marker never closed, so "the region it owned" is not a well-defined thing — its tail runs on into the speaker-notes drawer and the slide-layout classes that share the same mobile breakpoints. Measured on all three sites: between the marker and the next fence there are 81–91 CSS rules, of which the package emits 67–70. The remainder is **not** a gap in the package; it is unrelated CSS the open marker swept up.
 
-So do not wrap "everything after the old marker". Place each fence around **exactly the rules that
-fence emits**, and leave everything else where it is, outside all three fences. Concretely: the
-speaker-notes drawer (`.notes*`, `.deck.notes-open *`), the slide-layout rules, and
-`.lcd:has(.n.msg)` all stay per-deck and unfenced. Verify after syncing that they are still present
-and unchanged — a deleted notes drawer is the failure this instruction exists to prevent.
+So do not wrap "everything after the old marker". Place each fence around **exactly the rules that fence emits**, and leave everything else where it is, outside all three fences. Concretely: the speaker-notes drawer (`.notes*`, `.deck.notes-open *`), the slide-layout rules, and `.lcd:has(.n.msg)` all stay per-deck and unfenced. Verify after syncing that they are still present and unchanged — a deleted notes drawer is the failure this instruction exists to prevent.
 
-The old marker's own text is deleted along with the marker. Its claim that the block is copied
-"because a deck opens from `file://`, so there is nothing to import" is false — a relative `<link>`
-and a relative `@font-face` both work from `file://`, measured. Copies are a deliberate choice here,
-not a technical necessity, and the new blocks say so.
+The old marker's own text is deleted along with the marker. Its claim that the block is copied "because a deck opens from `file://`, so there is nothing to import" is false — a relative `<link>` and a relative `@font-face` both work from `file://`, measured. Copies are a deliberate choice here, not a technical necessity, and the new blocks say so.
 
 The marker is replaced by:
 

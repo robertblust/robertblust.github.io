@@ -1,23 +1,14 @@
 # The card harness
 
-Tier 4 of the shared design system: the four programs that render, stamp, check and test each
-site's social cards move into `@robertblust/design`. Each site keeps its card list and nothing
-else.
+Tier 4 of the shared design system: the four programs that render, stamp, check and test each site's social cards move into `@robertblust/design`. Each site keeps its card list and nothing else.
 
-**Supersedes** the tier 4 paragraph of
-[the shared design system spec](2026-08-30-shared-design-system-design.md), which scoped this
-work from a measurement that was wrong in two directions — see *What the earlier spec got
-wrong* below.
+**Supersedes** the tier 4 paragraph of [the shared design system spec](2026-08-30-shared-design-system-design.md), which scoped this work from a measurement that was wrong in two directions — see *What the earlier spec got wrong* below.
 
 ## Why this, and why now
 
-The measured duplication says the card toolchain is the largest cluster left in the family:
-`verify/og-recipe.test.mjs` at 302 lines across all three repositories, `og-check.mjs` at 141,
-`og-recipe.mjs` at 80, `export-og.mjs` at 18. But the line count is the weaker argument. The
-stronger one is what the three copies have become.
+The measured duplication says the card toolchain is the largest cluster left in the family: `verify/og-recipe.test.mjs` at 302 lines across all three repositories, `og-check.mjs` at 141, `og-recipe.mjs` at 80, `export-og.mjs` at 18. But the line count is the weaker argument. The stronger one is what the three copies have become.
 
-`export-og.mjs` has drifted into three variants, and **each one carries a capability the other
-two lost**:
+`export-og.mjs` has drifted into three variants, and **each one carries a capability the other two lost**:
 
 | | companygraph | guestgraph | blust.ch |
 | --- | --- | --- | --- |
@@ -26,32 +17,17 @@ two lost**:
 | recipe/renderer agreement guard | — | ✅ | — |
 | per-card `deviceScaleFactor` | — | ✅ | — |
 
-The recipe tests have drifted the same way. Blust.ch is missing *"changing how the render
-settles changes the recipe"* and *"two cards from the same page with the same frame agree"*,
-which the other two have; it alone has *"a fragment-only url() names nothing on disk"*.
-Companygraph is missing the key-ordering test that blust.ch and guestgraph both have, and
-alone has *"changing the state the card renders changes the recipe"*. The counts are **29, 30
-and 30, and no one of them is a superset of another** — there is no copy here to consolidate
-onto.
+The recipe tests have drifted the same way. Blust.ch is missing *"changing how the render settles changes the recipe"* and *"two cards from the same page with the same frame agree"*, which the other two have; it alone has *"a fragment-only url() names nothing on disk"*. Companygraph is missing the key-ordering test that blust.ch and guestgraph both have, and alone has *"changing the state the card renders changes the recipe"*. The counts are **29, 30 and 30, and no one of them is a superset of another** — there is no copy here to consolidate onto.
 
-This is the exact shape of the defect that nearly shipped in the suite runner consolidation:
-three copies of one thing, a premise that they were identical, and a consolidation onto one
-of them that silently deleted working checks from the other two. The lesson from that round
-is written into this one as a hard rule.
+This is the exact shape of the defect that nearly shipped in the suite runner consolidation: three copies of one thing, a premise that they were identical, and a consolidation onto one of them that silently deleted working checks from the other two. The lesson from that round is written into this one as a hard rule.
 
-**Rule: the package takes the union, never the intersection.** Every capability present in
-any copy is present in the shared one. Any capability deliberately dropped is named in this
-spec with its reason. A consolidation that reduces what a site checks is a regression wearing
-a refactor's clothes.
+**Rule: the package takes the union, never the intersection.** Every capability present in any copy is present in the shared one. Any capability deliberately dropped is named in this spec with its reason. A consolidation that reduces what a site checks is a regression wearing a refactor's clothes.
 
 ## What the earlier spec got wrong
 
-The tier 4 paragraph said the recipe *"stays local: the three sites genuinely render different
-cards, and 95 of its 148 lines differ for real reasons."*
+The tier 4 paragraph said the recipe *"stays local: the three sites genuinely render different cards, and 95 of its 148 lines differ for real reasons."*
 
-That is half right, and the wrong half is load-bearing. `og-recipe.mjs` is two things sharing a
-file: **machinery** — `sources`, `recipe`, `state`, `stamp`, `stampOf`, `cardFor` — and **the
-card list**. Diffing them apart:
+That is half right, and the wrong half is load-bearing. `og-recipe.mjs` is two things sharing a file: **machinery** — `sources`, `recipe`, `state`, `stamp`, `stampOf`, `cardFor` — and **the card list**. Diffing them apart:
 
 ```
 machinery   ~62 lines each, differing by 5 to 9 lines
@@ -60,26 +36,17 @@ machinery   ~62 lines each, differing by 5 to 9 lines
 card list   genuinely different, as the spec said
 ```
 
-So the recipe machinery is shared and the earlier estimate counted it as local. The spec also
-called this *"the smallest saving of the four"*; on the corrected measurement it is the
-largest cluster remaining in the family.
+So the recipe machinery is shared and the earlier estimate counted it as local. The spec also called this *"the smallest saving of the four"*; on the corrected measurement it is the largest cluster remaining in the family.
 
-Both errors came from the same place — the duplication sweep, which has now been wrong by
-construction three times and read as a clean result every time. It has tests as of this week.
-The numbers in this spec were taken after those tests existed.
+Both errors came from the same place — the duplication sweep, which has now been wrong by construction three times and read as a clean result every time. It has tests as of this week. The numbers in this spec were taken after those tests existed.
 
 ## The governing rule decides the mechanism
 
-The family's rule: *if a visitor downloads it and every copy is the same, generate it into the
-repository; if only CI runs it, import it from the package; if copies legitimately differ,
-share only the shape.*
+The family's rule: *if a visitor downloads it and every copy is the same, generate it into the repository; if only CI runs it, import it from the package; if copies legitimately differ, share only the shape.*
 
-A visitor never downloads any file in this tier. `npm run og`, `npm run og:check` and
-`node --test verify/og-recipe.test.mjs` are run by CI and by a developer, and nothing else.
+A visitor never downloads any file in this tier. `npm run og`, `npm run og:check` and `node --test verify/og-recipe.test.mjs` are run by CI and by a developer, and nothing else.
 
-**So this tier adds no fences and no generated bytes.** Every piece is an import. It is the
-first tier where the answer is imports throughout, and that is a consequence of the rule
-rather than a preference.
+**So this tier adds no fences and no generated bytes.** Every piece is an import. It is the first tier where the answer is imports throughout, and that is a consequence of the rule rather than a preference.
 
 ## What the package gains
 
@@ -98,16 +65,9 @@ stamp(card, root)    -> void       write the stamp beside the card
 recipeFor(root)      -> the five above, with root defaulted to the site's
 ```
 
-**`cardFor` is dropped rather than shared.** Companygraph and guestgraph both export it, which
-is what made it look like a union item; it is defined once in each and called nowhere, in
-either repository. The union rule protects capabilities a site would otherwise lose, and an
-export nothing imports is not one. Recording the decision here because the alternative — moving
-it quietly — would put dead code in the package and make the next reader think it matters.
+**`cardFor` is dropped rather than shared.** Companygraph and guestgraph both export it, which is what made it look like a union item; it is defined once in each and called nowhere, in either repository. The union rule protects capabilities a site would otherwise lose, and an export nothing imports is not one. Recording the decision here because the alternative — moving it quietly — would put dead code in the package and make the next reader think it matters.
 
-**`root` must stay a parameter.** The suite runner consolidation shipped a `SITE_ROOT` derived
-from `import.meta.url`, which pointed inside `node_modules` the moment the module moved into
-the package. The fix was `process.cwd()`. Here the site owns `REPO_ROOT` and passes it in, so
-the failure cannot recur — the package never asks where it is.
+**`root` must stay a parameter.** The suite runner consolidation shipped a `SITE_ROOT` derived from `import.meta.url`, which pointed inside `node_modules` the moment the module moved into the package. The fix was `process.cwd()`. Here the site owns `REPO_ROOT` and passes it in, so the failure cannot recur — the package never asks where it is.
 
 ### `cards/export.mjs`
 
@@ -115,9 +75,7 @@ the failure cannot recur — the package never asks where it is.
 exportCards({ chromium, cards, root, log }) -> Promise<void>
 ```
 
-Takes a `chromium` rather than importing Playwright, for the same reason `runSuite` takes a
-browser: the package has zero dependencies. The site's four-line `export-og.mjs` does the
-import.
+Takes a `chromium` rather than importing Playwright, for the same reason `runSuite` takes a browser: the package has zero dependencies. The site's four-line `export-og.mjs` does the import.
 
 It is the union of the three current renderers:
 
@@ -145,13 +103,9 @@ It is the union of the three current renderers:
 checkCards({ cards, root, log }) -> number   count of problems; the caller exits
 ```
 
-The staleness check and the dark-background check, including the hand-rolled PNG decoder that
-makes the second one possible without a dependency. Returns a count rather than calling
-`process.exit`, for the reason `runSuite` does: a library that terminates its caller's process
-cannot be tested.
+The staleness check and the dark-background check, including the hand-rolled PNG decoder that makes the second one possible without a dependency. Returns a count rather than calling `process.exit`, for the reason `runSuite` does: a library that terminates its caller's process cannot be tested.
 
-Two properties of the current check are preserved deliberately and stated here so that no
-future round mistakes them for defects:
+Two properties of the current check are preserved deliberately and stated here so that no future round mistakes them for defects:
 
 - **It imports nothing outside node's standard library,** so CI runs it *before* `npm ci`. A
   stale card is caught by the cheapest step in the job rather than by whoever notices the
@@ -166,15 +120,9 @@ future round mistakes them for defects:
 checkRecipe({ cards, recipe, sources, state, stampOf, root })
 ```
 
-Registers the shared assertions with `node:test` against the site's own recipe. The union of
-the three current files is **34 test names, which is 32 tests**: two pairs are the same
-assertion under different names, and the package picks one name for each. Every site gains —
-29, 30 and 30 today, 32 afterwards.
+Registers the shared assertions with `node:test` against the site's own recipe. The union of the three current files is **34 test names, which is 32 tests**: two pairs are the same assertion under different names, and the package picks one name for each. Every site gains — 29, 30 and 30 today, 32 afterwards.
 
-Where two sites name the same test differently, the package takes one name and the difference
-disappears: *"a file the page links with `<link>` is a source"* and *"a stylesheet the page
-links with `<link>` is a source"* are one test; *"the order the knobs are written in is not a
-change"* and *"reordering a card's keys does not change the recipe"* are one test.
+Where two sites name the same test differently, the package takes one name and the difference disappears: *"a file the page links with `<link>` is a source"* and *"a stylesheet the page links with `<link>` is a source"* are one test; *"the order the knobs are written in is not a change"* and *"reordering a card's keys does not change the recipe"* are one test.
 
 ## What each site keeps
 
@@ -189,40 +137,19 @@ export const cards = [ /* this site's cards, unchanged */ ];
 export const { sources, recipe, stampOf, state, stamp } = recipeFor(REPO_ROOT);
 ```
 
-**Every line of data is copied verbatim, `FRAME` included.** The three sites' frames are not
-the same and no two are interchangeable — blust.ch and companygraph carry `clipY` and no
-`deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`. The recipe hashes
-every key of a card, so adding or removing one moves every `og.sha` on that site. An earlier
-draft of this spec showed a plausible-looking `FRAME` that matched none of them; it was
-measured to move 8 of 8 stamps on blust.ch alone.
+**Every line of data is copied verbatim, `FRAME` included.** The three sites' frames are not the same and no two are interchangeable — blust.ch and companygraph carry `clipY` and no `deviceScaleFactor`; guestgraph carries `deviceScaleFactor` and no `clipY`. The recipe hashes every key of a card, so adding or removing one moves every `og.sha` on that site. An earlier draft of this spec showed a plausible-looking `FRAME` that matched none of them; it was measured to move 8 of 8 stamps on blust.ch alone.
 
-Two details about the last line, both of which fail loudly if got wrong. The specifier is
-`@robertblust/design/cards/recipe` — the `exports` map has no `.mjs` entry, so the suffixed
-form raises `ERR_PACKAGE_PATH_NOT_EXPORTED`. And it is `recipeFor(REPO_ROOT)`, not
-`export * from`: re-exporting the raw functions leaves `root` unbound, and `state()` then
-throws on the site's own callers.
+Two details about the last line, both of which fail loudly if got wrong. The specifier is `@robertblust/design/cards/recipe` — the `exports` map has no `.mjs` entry, so the suffixed form raises `ERR_PACKAGE_PATH_NOT_EXPORTED`. And it is `recipeFor(REPO_ROOT)`, not `export * from`: re-exporting the raw functions leaves `root` unbound, and `state()` then throws on the site's own callers.
 
-The other three become thin callers: `export-og.mjs` imports `chromium` and calls
-`exportCards`; `og-check.mjs` calls `checkCards` and exits on its count;
-`verify/og-recipe.test.mjs` imports its own recipe and calls `checkRecipe`.
+The other three become thin callers: `export-og.mjs` imports `chromium` and calls `exportCards`; `og-check.mjs` calls `checkCards` and exits on its count; `verify/og-recipe.test.mjs` imports its own recipe and calls `checkRecipe`.
 
 Roughly 1,100 of the cluster's ~1,600 lines become package-owned. Each site sheds about 370.
 
 ## Decisions
 
-**1. No card's bytes change.** The union makes `settle: "reduced-motion"` available everywhere,
-but it applies only where a recipe asks for it, and blust.ch's recipe does not. `npm run
-og:check` is a fixed point across this entire change on all three sites. This is what makes
-the change reviewable: any card whose bytes move is a defect, not a judgement call. Sites opt
-into the new capabilities later, per card, as their own change.
+**1. No card's bytes change.** The union makes `settle: "reduced-motion"` available everywhere, but it applies only where a recipe asks for it, and blust.ch's recipe does not. `npm run og:check` is a fixed point across this entire change on all three sites. This is what makes the change reviewable: any card whose bytes move is a defect, not a judgement call. Sites opt into the new capabilities later, per card, as their own change.
 
-**2. Guestgraph's guard becomes schema validation.** Today it throws unless every card is
-`from: "file"` and `settle: "wait:900"`. That was correct when its renderer supported nothing
-else; against the union it asserts a limitation and would reject the capabilities this work
-adds. It becomes validation of the card vocabulary — required fields, known `settle` values,
-types — which is the check it was reaching for. The intent it encodes is worth keeping: *the
-recipe must not describe a render the exporter does not perform,* because `og:check` hashes
-the recipe and a divergence there is a stale card that reports itself current.
+**2. Guestgraph's guard becomes schema validation.** Today it throws unless every card is `from: "file"` and `settle: "wait:900"`. That was correct when its renderer supported nothing else; against the union it asserts a limitation and would reject the capabilities this work adds. It becomes validation of the card vocabulary — required fields, known `settle` values, types — which is the check it was reaching for. The intent it encodes is worth keeping: *the recipe must not describe a render the exporter does not perform,* because `og:check` hashes the recipe and a divergence there is a stale card that reports itself current.
 
 **3. The card vocabulary is fixed and validated.**
 
@@ -230,29 +157,15 @@ the recipe and a divergence there is a stale card that reports itself current.
 dir  width  height  renderHeight  deviceScaleFactor  clipY  hide  titleSlide  settle  hash
 ```
 
-`settle` is `"wait:<ms>"` or `"reduced-motion"`. `hide`, `hash` and `titleSlide` are optional;
-`deviceScaleFactor` defaults to 1. An unknown key is an error rather than an ignored typo — a
-knob that silently does nothing is the failure mode `og:check` exists to prevent.
+`settle` is `"wait:<ms>"` or `"reduced-motion"`. `hide`, `hash` and `titleSlide` are optional; `deviceScaleFactor` defaults to 1. An unknown key is an error rather than an ignored typo — a knob that silently does nothing is the failure mode `og:check` exists to prevent.
 
-`from` is dropped. It exists only in guestgraph's recipe, only ever holds `"file"`, and only
-feeds the guard that decision 2 replaces. Every page in this family renders from `file://`
-because every page references its assets relatively; that is a property of the family, not a
-per-card knob. If a page ever needs a server, it needs a design decision, not a field.
+`from` is dropped. It exists only in guestgraph's recipe, only ever holds `"file"`, and only feeds the guard that decision 2 replaces. Every page in this family renders from `file://` because every page references its assets relatively; that is a property of the family, not a per-card knob. If a page ever needs a server, it needs a design decision, not a field.
 
-**4. Comment prose is generalised, not lost.** Where the three copies say the same thing about
-different content — *"it links four multi-megabyte PDFs"* against *"it links both
-multi-megabyte deck PDFs"* — the package says it about neither, and the fact it records
-survives: link targets are excluded from the hash because a page that links large generated
-files would otherwise report its card stale on every rebuild, over a page that has not moved a
-pixel.
+**4. Comment prose is generalised, not lost.** Where the three copies say the same thing about different content — *"it links four multi-megabyte PDFs"* against *"it links both multi-megabyte deck PDFs"* — the package says it about neither, and the fact it records survives: link targets are excluded from the hash because a page that links large generated files would otherwise report its card stale on every rebuild, over a page that has not moved a pixel.
 
-**5. `export-pdf.mjs` is out of scope.** Companygraph's and guestgraph's differ by 6 lines,
-but blust.ch's lives at the repository root rather than `talks/intro/` and differs by 73. It
-is a different job from cards, it is the smallest saving in the cluster, and folding it in
-doubles the review surface. It gets its own pass.
+**5. `export-pdf.mjs` is out of scope.** Companygraph's and guestgraph's differ by 6 lines, but blust.ch's lives at the repository root rather than `talks/intro/` and differs by 73. It is a different job from cards, it is the smallest saving in the cluster, and folding it in doubles the review surface. It gets its own pass.
 
-**6. The recipe stays local.** Unchanged from the earlier spec, and confirmed by measurement:
-the card lists genuinely differ, and no site's list belongs in the package.
+**6. The recipe stays local.** Unchanged from the earlier spec, and confirmed by measurement: the card lists genuinely differ, and no site's list belongs in the package.
 
 ## Success criteria
 

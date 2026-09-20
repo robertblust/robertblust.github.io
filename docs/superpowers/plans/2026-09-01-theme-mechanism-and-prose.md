@@ -207,8 +207,7 @@ test("--press exists in both themes and is not --raise", () => {
 
 - [ ] **Step 3: Run it and watch it fail, then pass**
 
-Run: `cd /Users/rob/git/robertblust/design && npm test`
-Expected before Step 1: FAIL — no `:root[data-theme="light"]` rule. After: PASS, suite up by 5.
+Run: `cd /Users/rob/git/robertblust/design && npm test` Expected before Step 1: FAIL — no `:root[data-theme="light"]` rule. After: PASS, suite up by 5.
 
 - [ ] **Step 4: Prove each test can fail**
 
