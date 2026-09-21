@@ -153,14 +153,14 @@
   /* ─── end theme boot ─────────────────────────────────────────────────── */
 </script>
 <style>
-/* Self-hosted inside the deck directory, exactly as audio/ and the images are: the
-   unit that has to survive being copied to someone else's machine is the folder,
-   not the file. Before this the deck named a face it never shipped, so every slide
-   rendered in whatever system-ui the room's laptop happened to have. */
-@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+/* Loaded from the site's one root fonts/, the same way every other page here does: nobody
+   is sent a deck folder on its own, and what ships is the PDF, which has the outlines baked
+   in and needs no font directory at all. Before this the deck named a face it never
+   shipped, so every slide rendered in whatever system-ui the room's laptop happened to have. */
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
 
   /* ─── design tokens · v11 · deck ───────────────────────────────
      These sites share no stylesheet by design — a deck has to open from
