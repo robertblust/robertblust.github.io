@@ -43,20 +43,23 @@ jobs:
       # only works on a developer's machine.
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
+      - run: npm ci
       # The renderers decide what every derived page says, and the check below only holds their
       # output against itself: a renderer that writes the wrong thing everywhere is green there
       # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.
-      # Above npm ci for the same reason as the sweep — they import nothing outside node:.
+      # They sat above npm ci while they imported nothing outside node:. The Principles, Team and
+      # Surfaces renderers now come from @robertblust/design, and the Surfaces tests import them,
+      # so left up there they fail every push with ERR_MODULE_NOT_FOUND — the same move the card
+      # harness made below.
       - name: The renderers still say what the model says
         run: npm run test:build
       # Every page this site derives from the model, held against the artifact it derives them
-      # from. Before npm ci because it installs nothing: pages.mjs and its renderers are node
-      # built-ins and one committed file, with no network. That is the whole reason the artifact
-      # is committed — the check that catches a page edited by hand is also the cheapest step
-      # in this job.
+      # from. It needs no network and no parser, only one committed file, which is the whole
+      # reason the artifact is committed: the check that catches a page edited by hand is still
+      # among the cheapest steps in this job. It runs after npm ci now because pages.mjs imports
+      # three of its renderers from @robertblust/design, which is not on disk until then.
       - name: The derived pages still match the model
         run: npm run pages:check
-      - run: npm ci
       # How far the model pin has fallen behind what it points at. Non-blocking on purpose:
       # the pin is editorial — it says which state of the model these pages publish — so a pin
       # behind its upstream is either deliberate or waiting to be looked at, and no script can

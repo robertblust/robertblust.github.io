@@ -1,9 +1,9 @@
 // Renders `model.json` into every region of this site derived from the model — `npm run pages`
 // and `npm run pages:check`.
 //
-// Node built-ins only, and no network. That is the property worth keeping: the parser is a
-// dependency and is not on disk until `npm ci` has run, so a check that needed it could not run
-// in the cheap half of CI. Everything here is a pure function of one committed file.
+// No network, and no parser: everything here is a pure function of one committed file. The
+// Principles, Team and Surfaces renderers come from @robertblust/design, which the other sites
+// that draw a model share, so this runs after `npm ci` has put the package on disk.
 //
 // The pin guard is what used to be a sentence in AGENTS.md saying which command to run first.
 // An artifact that declares its own commit cannot be rendered stale, so the order of `npm run
@@ -11,10 +11,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { writePrinciples } from "./principles.mjs";
+import { writePrinciples } from "@robertblust/design/render/principles";
+import { writeTeam } from "@robertblust/design/render/team";
+import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeJsonLd } from "./jsonld.mjs";
-import { writeTeam } from "./team.mjs";
-import { writeSurfaces } from "./surfaces.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { repo, commit } = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
@@ -33,7 +33,7 @@ if (data.commit !== commit) {
 const check = process.argv.includes("--check");
 const RENDERERS = [writePrinciples, writeTeam, writeSurfaces, writeJsonLd];
 
-const stale = RENDERERS.flatMap((write) => write(data, { check }));
+const stale = RENDERERS.flatMap((write) => write(data, { check, root: ROOT }));
 
 if (check) {
   if (stale.length) {

@@ -626,10 +626,26 @@
   .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
            letter-spacing:.06em; color:var(--dim)}
   /* ─── end stage contract ────────────────────────────────────────────────── */
-  /* The board. --cols is declared once and used by the head row and every summary, which is
-     what lines the columns up across rows without a table. */
   .lbl{font-family:"Plex Mono", ui-monospace, Menlo, monospace; font-size:.66rem;
        letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+  /* ─── team · v1 · shared ─────────────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
+
+     The board /team/ draws: the head rail with its Open-all button, the grid of seats and
+     phases, the drawer a seat's card opens into, the legend, and the phases block under it.
+     These are the rules for the markup lib/render/team.mjs writes, so they belong with the
+     renderer: a page that takes the board from this package and its styling from its own
+     copy is a page whose two halves can drift, and the renderer's next class would land on
+     every site unstyled. The page keeps its shell and the classes other pages share
+     (`.lbl`, `.nm`, `.note`), and the card's own prose measure (`.cbody`), which card.js
+     draws and this block does not.
+  */
+  /* The board. --cols (the seat column) and --phase (the width of each phase column) are
+     declared once and used by the head row and every summary, which is what lines the columns
+     up across rows without a table. Only the seat column is a template track: each cell after
+     it opens a column of its own at --phase, so the board has as many phase columns as the
+     process has phases and never an empty one or a wrapped one. */
+  /* blocks/surfaces.css declares this same base rule for its own .mk. */
   .mk{width:1.05em; height:1.05em; flex:none; vertical-align:-.16em}
   .mk.human{color:var(--c-firm)}
   .mk.agent{color:var(--c-mid)}
@@ -646,7 +662,7 @@
   .openall:hover, .openall:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
 
   /* Three cell marks, one hue. tokens.css allows one hue at four brightnesses and refuses a
-     second, so what a colour would have carried is carried by shape. */
+     second, so what a color would have carried is carried by shape. */
   .g{display:inline-block; width:10px; height:10px; margin:0 1px}
   .g.ex{background:var(--c-mid); border-radius:50%}
   .g.su{border:1.4px solid var(--c-weak); border-radius:50%}
@@ -656,8 +672,9 @@
           font-size:.76rem}
   .legend span{display:flex; align-items:center; gap:.45rem}
 
-  .grid{--cols:30% repeat(5,1fr); margin-top:0}
-  .ghead{display:grid; grid-template-columns:var(--cols); border-bottom:1px solid var(--rule);
+  .grid{--cols:30%; --phase:1fr; margin-top:0}
+  .ghead{display:grid; grid-template-columns:var(--cols); grid-auto-flow:column;
+         grid-auto-columns:var(--phase); border-bottom:1px solid var(--rule);
          padding:.9rem 0 .8rem}
   .ghead > span{text-align:center}
   .ghead > span:first-child{text-align:left}
@@ -666,7 +683,8 @@
   .phname{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
           font-weight:700; font-size:.9rem; color:var(--ink)}
   .grid details{border-bottom:1px solid var(--rule)}
-  .grid summary{display:grid; grid-template-columns:var(--cols); align-items:center;
+  .grid summary{display:grid; grid-template-columns:var(--cols); grid-auto-flow:column;
+                grid-auto-columns:var(--phase); align-items:center;
                 list-style:none; cursor:pointer; padding:.62rem 0}
   .grid summary::-webkit-details-marker{display:none}
   .grid summary:hover{background:var(--press)}
@@ -687,9 +705,8 @@
      narrower. The card's own prose keeps a measure inside it. */
   .grid .drawer{padding:.3rem 0 1.5rem}
   .grid .drawer .card{width:100%}
-  .cbody p, .cbody ul.prose{max-width:72ch}
   @media (prefers-reduced-motion: reduce){ .grid .sname::before{transition:none} }
-  /* The five phases in words, under the board that only names them. A grid rather than a
+  /* The phases in words, under the board that only names them. A grid rather than a
      table: two columns, the phase and its one line, and the phase column sized to the longest
      name so the sentences start on one edge. */
   .phases{margin-top:1.9rem; padding-top:1.5rem; border-top:1px solid var(--rule);
@@ -701,12 +718,12 @@
     .phases dd{margin-bottom:.9rem}
   }
   @media (max-width:900px){
-    /* The board stays a board. Its argument is a column — only the Owner's row carries a
-       triangle, and you read that off the shape of the column rather than off any one row —
-       so a form with no columns has no argument left to make. The phase names give way to
-       their numbers and the columns narrow; the block under the board is what says which
-       number is which phase, and it earns its place twice over here. */
-    .grid{--cols:minmax(0,1fr) repeat(5,2.1rem)}
+    /* The board stays a board. Its argument is a column — which seats carry a phase's gate,
+       say, is read off the shape of the column rather than off any one row — so a form with
+       no columns has no argument left to make. The phase names give way to their numbers
+       and the columns narrow; the block under the board is what says which number is which
+       phase, and it earns its place twice over here. */
+    .grid{--cols:minmax(0,1fr); --phase:2.1rem}
     .ghead .phname{display:none}
     .ghead .phnum{font-size:.74rem; color:var(--dim); letter-spacing:.08em}
     .grid summary{padding:.72rem 0}
@@ -717,14 +734,30 @@
     .whos{gap:1.4rem}
   }
   @media (max-width:640px){
-    /* Side by side, the two profiles wrapped "HUMAN · HOLDS 1 OF 8" onto a second line and put
-       the agent hard against the edge. One under the other, each reads on one line. */
+    /* Side by side, the head rail's profiles wrap their "holds … of …" line onto a second line
+       and put the last one hard against the edge. One under the other, each reads on one line. */
     .whos{flex-direction:column; gap:.9rem}
     .hdrail{align-items:flex-start}
-    .grid{--cols:minmax(0,1fr) repeat(5,1.8rem)}
+    .grid{--cols:minmax(0,1fr); --phase:1.8rem}
     .grid .sname{gap:.42rem}
     .grid .sname .tw{font-size:.8rem}
   }
+  /* One board per process when a model holds more than one: the process's name and tagline
+     head its board, one step below the section's h2 and in the title block's own terms: the
+     name in the display face at the weight the phase names use, the tagline in --dim as the
+     title block's is. `section.proc` is a <section>, so the page's own `section` rule would
+     put a section's full gap between the label and the first board; the first sits where
+     the head rail would, and each one after takes the figure section's gap. */
+  .proc{margin-top:.9rem}
+  .proc + .proc{margin-top:clamp(2rem,5vh,3.5rem)}
+  .procname{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+            font-weight:700; letter-spacing:-.02em; font-size:clamp(1.15rem,2.1vw,1.5rem);
+            color:var(--ink)}
+  .proctag{margin-top:.4rem; color:var(--dim); max-width:62ch}
+  /* ─── end team ──────────────────────────────────────────────────────────── */
+  /* The card's own prose keeps a measure inside the full-width drawer. card.js draws it, so
+     the team fence leaves it to the page. */
+  .cbody p, .cbody ul.prose{max-width:72ch}
 
 </style>
 <link rel="stylesheet" href="../stage.css">
@@ -1152,69 +1185,101 @@
 
 <script src="../card.js"></script>
 <script>
-// The seats are in the markup; the cards are not. Eight cards at rest would be eight copies of
-// the model's own words in a page that already serves the model as a file, and this site's
-// checks read the body at rest. So a card is rendered the first time its row opens, and again
-// when the language has changed since — the way the timeline renders an experience and the
-// stage renders a card on focus.
-(function(){
-  function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
-  rbCard.data("team", function (data) {
-    // The provenance line names the commit this was read from, as the timeline's does; the
-    // markup carries HEAD only until the data arrives.
-    var src = document.getElementById("srclink");
-    src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
-    document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
-    var byId = {};
-    data.entities.forEach(function (e) { byId[e.id] = e; });
-    // The href the timeline already builds: a visitor who clicked a skill wants to read it with
-    // its references around it, and the stage's dialog is where one node is read.
-    function goLink(id){
-      var a = document.createElement("a");
-      a.className = "go"; a.textContent = byId[id].name;
-      a.href = "../model/?stage=expanded#" + id;
-      return a;
-    }
-    var seen = {};
-    function ensure(d){
-      var id = d.getAttribute("data-role"), L = lang();
-      if (seen[id] === L) return;
-      rbCard.render(byId[id], d.querySelector(".cbody"), d.querySelector(".cfoot span"),
-        { data: data, lang: L, link: goLink });
-      seen[id] = L;
-    }
-    var rows = [].slice.call(document.querySelectorAll("#board details"));
-    rows.forEach(function (d) {
-      d.addEventListener("toggle", function(){ if (d.open) ensure(d); });
-    });
-    // A link must land: arriving on /team/#reviewer opens that seat rather than scrolling to a
-    // shut row whose name is all the visitor sees.
-    function fromHash(){
-      var id = location.hash.slice(1); if (!id) return;
-      var d = document.getElementById(id);
-      if (d && d.tagName === "DETAILS") { d.open = true; ensure(d); }
-    }
-    window.addEventListener("hashchange", fromHash);
-    fromHash();
-    // Re-render what is open when the language changes, and leave what is shut alone: a shut
-    // row renders on its next open, in whatever language is current then.
-    new MutationObserver(function(){
-      rows.forEach(function (d) { if (d.open) ensure(d); });
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+  var STAGE_PAGE = "../model/";   // the page that draws this model on the stage
+  var MODEL_CARD = "team";        // the name card.js reports a failed read under
+  /* ─── model card · v1 · shared ─────────────────────────────────────
+     Generated from @robertblust/design — edit it there and run `npm run design`.
 
-    var all = document.getElementById("openall");
-    function label(shut){
-      return shut ? (lang() === "de" ? "Alle schliessen" : "Close all")
-                  : (lang() === "de" ? "Alle öffnen" : "Open all");
-    }
-    all.addEventListener("click", function(){
-      var shut = rows.some(function (d) { return !d.open; });
-      rows.forEach(function (d) { d.open = shut; if (shut) ensure(d); });
-      all.textContent = label(shut);
-      all.setAttribute("data-de", shut ? "Alle schliessen" : "Alle öffnen");
+     The card glue for a board of seats: a seat's card is rendered by card.js the first time
+     its row opens, again when the language has changed since, and on arrival at a seat's
+     address. It moved here from /team/ with four things generalized and nothing else: where a
+     card's links go, the rows it wires (every board's, not one board's), the Open-all button
+     (one per board), and the name it gives card.js.
+
+     This block has a contract with the page around it that `design:check` cannot see, because
+     the check only compares bytes between the markers. The page must load card.js before it
+     and declare, above this fence in the same script:
+
+       var STAGE_PAGE = "../model/";   // the page that draws this model on the stage
+       var MODEL_CARD = "team";        // the name card.js reports a failed read under
+
+     and carry what lib/render/team.mjs writes, plus the provenance line
+     (`#srclink` with its `data-src`, and `#srccommit`) that every model page has.
+  */
+  // The seats are in the markup; the cards are not. A card per seat at rest would be a copy of
+  // the model's own words for every seat, in a page whose site already serves the model as a
+  // file, and a page check that reads the body at rest would read them all. So a card is rendered
+  // the first time its row opens, and again when the language has changed since — the way the
+  // timeline renders an experience and the stage renders a card on focus.
+  (function(){
+    function lang(){ return document.documentElement.lang === "de" ? "de" : "en"; }
+    rbCard.data(MODEL_CARD, function (data) {
+      // The provenance line names the commit this was read from, as the timeline's does; the
+      // markup carries HEAD only until the data arrives.
+      var src = document.getElementById("srclink");
+      src.href = "https://github.com/" + data.repo + "/tree/" + data.commit + "/" + src.getAttribute("data-src");
+      document.getElementById("srccommit").textContent = data.commit.slice(0, 7);
+      var byId = {};
+      data.entities.forEach(function (e) { byId[e.id] = e; });
+      // The href the timeline already builds: a visitor who clicked a skill wants to read it with
+      // its references around it, and the stage's dialog is where one node is read.
+      function goLink(id){
+        var a = document.createElement("a");
+        a.className = "go"; a.textContent = byId[id].name;
+        // Where a seat links: the page that draws this model on the stage. A site declares it,
+        // because on one site that is /model/ and on another the landing page, and a shared file
+        // carrying either would send the other site's visitors to the wrong page.
+        a.href = STAGE_PAGE + "?stage=expanded#" + id;
+        return a;
+      }
+      var seen = {};
+      function ensure(d){
+        var id = d.getAttribute("data-role"), L = lang();
+        if (seen[id] === L) return;
+        rbCard.render(byId[id], d.querySelector(".cbody"), d.querySelector(".cfoot span"),
+          { data: data, lang: L, link: goLink });
+        seen[id] = L;
+      }
+      // Every board's rows. One process draws one board and a model with several draws one per
+      // process, each a .grid; a card opens the same way on any of them.
+      var rows = [].slice.call(document.querySelectorAll(".grid details"));
+      rows.forEach(function (d) {
+        d.addEventListener("toggle", function(){ if (d.open) ensure(d); });
+      });
+      // A link must land: arriving on /team/#reviewer opens that seat rather than scrolling to a
+      // shut row whose name is all the visitor sees.
+      function fromHash(){
+        var id = location.hash.slice(1); if (!id) return;
+        var d = document.getElementById(id);
+        if (d && d.tagName === "DETAILS") { d.open = true; ensure(d); }
+      }
+      window.addEventListener("hashchange", fromHash);
+      fromHash();
+      // Re-render what is open when the language changes, and leave what is shut alone: a shut
+      // row renders on its next open, in whatever language is current then.
+      new MutationObserver(function(){
+        rows.forEach(function (d) { if (d.open) ensure(d); });
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+
+      function label(shut){
+        return shut ? (lang() === "de" ? "Alle schliessen" : "Close all")
+                    : (lang() === "de" ? "Alle öffnen" : "Open all");
+      }
+      // One Open-all per board, and it opens its own board only. The renderer writes each board's
+      // head rail immediately before its grid, so the rail's next sibling is the board it heads.
+      [].slice.call(document.querySelectorAll(".openall")).forEach(function (all) {
+        var board = all.closest(".hdrail").nextElementSibling;
+        var mine = [].slice.call(board.querySelectorAll("details"));
+        all.addEventListener("click", function(){
+          var shut = mine.some(function (d) { return !d.open; });
+          mine.forEach(function (d) { d.open = shut; if (shut) ensure(d); });
+          all.textContent = label(shut);
+          all.setAttribute("data-de", shut ? "Alle schliessen" : "Alle öffnen");
+        });
+      });
     });
-  });
-})();
+  })();
+  /* ─── end model card ──────────────────────────────────────────────────── */
 </script>
 </body>
 </html>
