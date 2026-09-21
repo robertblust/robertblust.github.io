@@ -3,6 +3,7 @@
 import { chromium } from "playwright";
 import { DESIGN_CHECKS, SYSTEM_FACES } from "@robertblust/design/verify/design";
 import { STAGE_CHECKS } from "@robertblust/design/verify/stage";
+import { MODEL_PAGE_CHECKS } from "@robertblust/design/verify/model-pages";
 import { pageChecks } from "@robertblust/design/verify/pages";
 import { runSuite } from "@robertblust/design/verify/suite";
 
@@ -197,6 +198,9 @@ const PAGES = [
 
 const CHECKS = {
   ...STAGE_CHECKS,
+  // The Team board and the Surfaces lineage, held to the artifact the page names and to where
+  // STAGE_PAGE sends a card.
+  ...MODEL_PAGE_CHECKS,
   ...DESIGN_CHECKS,
   ...pageChecks({ SITE, BASE }),
   async transport(page) {
@@ -227,113 +231,6 @@ const CHECKS = {
     const linked = await page.evaluate(() =>
       [...document.querySelectorAll(".brand img, .name .namemark img")].map(i => i.getAttribute("src")));
     return linked.length ? `the brand lockup links its mark instead of inlining it: ${linked.join(", ")}` : null;
-  },
-  // Local to this site until a second site has a board. The page's argument is that every gate
-  // in the company is approved by the only human in it; that is a claim about the model, so it
-  // is read off the rendered page rather than trusted. If it ever stops being true of the
-  // model, this is where that is found.
-  async board(page, spec) {
-    await page.goto(spec.absolute, { waitUntil: "networkidle" });
-    const problems = await page.evaluate(async () => {
-      const bad = [];
-      const rows = [...document.querySelectorAll("#board details")];
-      // The provenance line names the commit the board was read from, not the placeholder.
-      const data = await (await fetch(document.querySelector("link[data-stage]").href)).json();
-      await new Promise((r) => setTimeout(r, 300));
-      const said = document.getElementById("srccommit").textContent.trim();
-      if (said !== data.commit.slice(0, 7)) bad.push(`the provenance line reads @${said}, the block is at ${data.commit.slice(0, 7)}`);
-      if (!document.getElementById("srclink").href.includes("/tree/" + data.commit + "/")) bad.push("the provenance link is not pinned to the block's commit");
-      if (rows.length !== 8) bad.push(`the board has ${rows.length} rows, not 8`);
-
-      const heads = [...document.querySelectorAll("#board .ghead .phname")].map((e) => e.textContent.trim());
-      if (heads.join(" ") !== "Shape Spec Plan Implement Integrate")
-        bad.push(`the phase headings are ${heads.join(" \u00b7 ")}`);
-
-      rows.forEach((d) => {
-        const name = d.querySelector(".tw").textContent.trim();
-        const gates = d.querySelectorAll("summary > span:not(.sname) .g.ga").length;
-        if (name === "Owner" && gates !== 5) bad.push(`the Owner approves ${gates} gates, not 5`);
-        if (name !== "Owner" && gates) bad.push(`${name} carries ${gates} gate marks`);
-      });
-
-      // Every row says itself in words, because the grid is not a table: a tr cannot be
-      // wrapped in details, and a summary given role="row" would stop announcing that it opens.
-      rows.forEach((d) => {
-        const l = d.querySelector("summary").getAttribute("aria-label") || "";
-        const name = d.querySelector(".tw").textContent.trim();
-        if (!l.startsWith(name + ",")) bad.push(`${name}'s summary has no aria-label naming it`);
-        if (!/approves (the gate of|no gate)/.test(l)) bad.push(`${name}'s aria-label says nothing about gates`);
-      });
-
-      // A seat opens onto the card, rendered on demand and not before.
-      const rev = rows.find((d) => d.querySelector(".tw").textContent.trim() === "Reviewer");
-      if (!rev) return bad.concat("there is no Reviewer row");
-      if (rev.querySelector(".cbody").textContent.trim())
-        bad.push("a card is rendered before its row was opened");
-      rev.open = true;
-      await new Promise((r) => setTimeout(r, 300));
-      const h3 = rev.querySelector(".cbody h3");
-      if (!h3 || h3.textContent.trim() !== "Reviewer")
-        bad.push("opening the Reviewer row did not render the Reviewer card");
-      const go = rev.querySelector(".cbody a.go");
-      if (!go) bad.push("the Reviewer card has no resolved reference");
-      else if (!/\.\.\/model\/\?stage=expanded#/.test(go.getAttribute("href")))
-        bad.push(`a requires link points at ${go.getAttribute("href")}`);
-      return bad;
-    });
-    return problems.length ? problems.join("; ") : null;
-  },
-  // Local to this site until a second site draws a lineage. Every surface in the block is a node,
-  // under the maker its own production and built-by name; choosing one draws its card and lights
-  // its two wires, and nothing is rendered before a choice.
-  async lineage(page, spec) {
-    await page.goto(spec.absolute, { waitUntil: "networkidle" });
-    const problems = await page.evaluate(async () => {
-      const bad = [];
-      const data = await (await fetch(document.querySelector("link[data-stage]").href)).json();
-      const want = data.entities.filter((e) => e.type === "surface");
-      // The provenance line names the commit the drawing was read from, not the placeholder.
-      const said = document.getElementById("srccommit").textContent.trim();
-      if (said !== data.commit.slice(0, 7)) bad.push(`the provenance line reads @${said}, the block is at ${data.commit.slice(0, 7)}`);
-      if (!document.getElementById("srclink").href.includes("/tree/" + data.commit + "/")) bad.push("the provenance link is not pinned to the block's commit");
-      const btns = [...document.querySelectorAll("#lineage .ln-s")];
-      if (btns.length !== want.length) bad.push(`the drawing has ${btns.length} surfaces, the model ${want.length}`);
-      for (const s of want) {
-        const b = btns.find((x) => x.getAttribute("data-id") === s.id);
-        if (!b) { bad.push(`${s.name} is not drawn`); continue; }
-        const maker = s.fields.production === "written" ? "hand" : s.fields["built-by"];
-        if (b.getAttribute("data-maker") !== maker) bad.push(`${s.name} sits under ${b.getAttribute("data-maker")}, not ${maker}`);
-        const group = b.closest(".ln-group").querySelector(".ln-maker").getAttribute("data-maker");
-        if (group !== maker) bad.push(`${s.name} is nested under ${group}, not ${maker}`);
-        if (b.querySelector(".nm").textContent.trim() !== s.name) bad.push(`${s.id} is labeled ${b.querySelector(".nm").textContent}`);
-      }
-      const panel = document.getElementById("lnpanel");
-      if (!panel.hidden || panel.querySelector(".cbody").textContent.trim())
-        bad.push("a card is shown before a surface was chosen");
-      const wires = document.querySelectorAll("#wires path").length;
-      const makers = document.querySelectorAll(".ln-maker").length;
-      if (wires !== makers + btns.length) bad.push(`${wires} wires for ${makers} makers and ${btns.length} surfaces`);
-
-      const pick = btns.find((b) => b.getAttribute("data-maker") === "hand") || btns[0];
-      pick.click();
-      await new Promise((r) => setTimeout(r, 300));
-      const h3 = panel.querySelector(".cbody h3");
-      const name = pick.querySelector(".nm").textContent.trim();
-      if (panel.hidden || !h3 || h3.textContent.trim() !== name) bad.push(`choosing ${name} did not draw its card`);
-      if (/\*\*/.test(panel.querySelector(".cbody").textContent)) bad.push(`${name}'s card prints markdown asterisks`);
-      if (pick.getAttribute("aria-pressed") !== "true") bad.push(`${name} is not pressed once chosen`);
-      if (location.hash !== "#" + pick.id) bad.push(`choosing ${name} left the address at ${location.hash || "no hash"}`);
-      if (document.querySelectorAll("#wires path.on").length !== 2) bad.push(`choosing ${name} lit ${document.querySelectorAll("#wires path.on").length} wires, not 2`);
-      return bad;
-    });
-    // A link must land: arriving with a hash chooses that surface.
-    const id = await page.evaluate(() => document.querySelector("#lineage .ln-s").id);
-    await page.goto(spec.absolute + "#" + id, { waitUntil: "networkidle" });
-    await page.waitForTimeout(300);
-    const landed = await page.evaluate((id) => document.getElementById(id).getAttribute("aria-pressed") === "true"
-      && !!document.querySelector("#lnpanel .cbody h3"), id);
-    if (!landed) problems.push(`arriving on #${id} did not choose it`);
-    return problems.length ? problems.join("; ") : null;
   },
   // Local to this site until a second site has a ledger. Reads the file the page names
   // and holds the page to it: the rows are the model's experiences in the order they began,
