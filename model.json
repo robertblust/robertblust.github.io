@@ -1,5 +1,5 @@
 {
-  "commit": "0f84df7e016993cff495134081624534eb7cb783",
+  "commit": "4d14ec2431dd9de1c966e8ff9973c1d07e2808a1",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -119,7 +119,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "The shape of a system and its parts: a service cut, an interface or API, a data model or\nschema, a language or metamodel, an integration path, the platform a thing targets, and the\ntrade-off behind any of them. A decision that fixes how something is built, before it is built,\nbelongs here.\n\nIt is not the building, which is `Engineering`, and not the organization's shape, which is\n`Leadership`. Where a bullet names both the design and its implementation, it sits here when the\ndesign is what the claim rests on.",
+          "text": "The shape of a system and its parts: a service cut, an interface or API, a data model or schema, a language or metamodel, an integration path, the platform a thing targets, and the trade-off behind any of them. A decision that fixes how something is built, before it is built, belongs here.\n\nIt is not the building, which is `Engineering`, and not the organization's shape, which is `Leadership`. Where a bullet names both the design and its implementation, it sits here when the design is what the claim rests on.",
           "tables": []
         }
       ],
@@ -138,7 +138,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "The bullet that says what this period was: the product, the mandate, the event, the client or\nemployer it was for, where it came from and what part the person played in it. A one-off entry\nnames itself here — the talk given, the event organized, the article published — because what it\nwas is the first thing a reader needs.\n\nIt is not what the work achieved. A scale figure, an award or a spin-off belongs to `Results`,\nand a decision taken inside the period belongs to `Leadership` or `Architecture`. A period that\nhad no context worth stating skips the kind rather than restating its own title.",
+          "text": "The bullet that says what this period was: the product, the mandate, the event, the client or employer it was for, where it came from and what part the person played in it. A one-off entry names itself here — the talk given, the event organized, the article published — because what it was is the first thing a reader needs.\n\nIt is not what the work achieved. A scale figure, an award or a spin-off belongs to `Results`, and a decision taken inside the period belongs to `Leadership` or `Architecture`. A period that had no context worth stating skips the kind rather than restating its own title.",
           "tables": []
         }
       ],
@@ -157,7 +157,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "The work itself: code written, a platform stood up, a pipeline that releases it, the checks\nthat gate it, the data moved, the environment operated, the incidents answered. An automated\nmechanism belongs here even when it enforces a rule, because the mechanism is the thing that was\nbuilt.\n\nIt is not the decision that shaped the work, which is `Architecture`, and not the practice people\nfollow around it, which is `Ways of working`.",
+          "text": "The work itself: code written, a platform stood up, a pipeline that releases it, the checks that gate it, the data moved, the environment operated, the incidents answered. An automated mechanism belongs here even when it enforces a rule, because the mechanism is the thing that was built.\n\nIt is not the decision that shaped the work, which is `Architecture`, and not the practice people follow around it, which is `Ways of working`.",
           "tables": []
         }
       ],
@@ -176,7 +176,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Strategy, governance and the calls that bound other people: what the organization would build\nand would not, how teams and roles were cut, who decided what and through which forum, the\nbudget held, the standards and compliance a company was held to, and the client work of advising,\nbidding and negotiating.\n\nIt is not the design of a system, which is `Architecture`, and not a rule about how work is done,\nwhich is `Ways of working`. Growing an individual — coaching, mentoring, teaching — is\n`Leadership` only where the claim is about developing people; a session explaining a thing to an\naudience is `Sharing`.",
+          "text": "Strategy, governance and the calls that bound other people: what the organization would build and would not, how teams and roles were cut, who decided what and through which forum, the budget held, the standards and compliance a company was held to, and the client work of advising, bidding and negotiating.\n\nIt is not the design of a system, which is `Architecture`, and not a rule about how work is done, which is `Ways of working`. Growing an individual — coaching, mentoring, teaching — is `Leadership` only where the claim is about developing people; a session explaining a thing to an audience is `Sharing`.",
           "tables": []
         }
       ],
@@ -195,7 +195,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Adoption and scale, revenue and cost outcomes, awards and recognition, the verdict of a bid,\nwhat the work became afterward, what it settled, and what it failed to reach. A lesson the period\nproduced belongs here, and so does a plainly stated limit: what was not finished, and why.\n\nIt is not the work that produced the outcome, and it is not a figure that describes the thing\nrather than its effect. Where a bullet carries both the building and its result, it sits under\nthe kind of the work when the claim is the work, and here when the claim is the outcome.",
+          "text": "Adoption and scale, revenue and cost outcomes, awards and recognition, the verdict of a bid, what the work became afterward, what it settled, and what it failed to reach. A lesson the period produced belongs here, and so does a plainly stated limit: what was not finished, and why.\n\nIt is not the work that produced the outcome, and it is not a figure that describes the thing rather than its effect. Where a bullet carries both the building and its result, it sits under the kind of the work when the claim is the work, and here when the claim is the outcome.",
           "tables": []
         }
       ],
@@ -214,7 +214,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Talks and their content, articles and documentation written for a reader who was not there,\ncourses and workshops run, events organized for an audience, and communities built or led. The\nbullet that says what a talk argued, or what a document explains, belongs here.\n\nIt is not the work the talk describes, which sits under its own kind, and not the decision to\npublish, which is `Leadership`. A document written only for a machine — an agent file, a\nprompt — is `Ways of working`.",
+          "text": "Talks and their content, articles and documentation written for a reader who was not there, courses and workshops run, events organized for an audience, and communities built or led. The bullet that says what a talk argued, or what a document explains, belongs here.\n\nIt is not the work the talk describes, which sits under its own kind, and not the decision to publish, which is `Leadership`. A document written only for a machine — an agent file, a prompt — is `Ways of working`.",
           "tables": []
         }
       ],
@@ -233,7 +233,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "How the work was done rather than what was produced: the process followed, the specifications\nand briefs written before a build, the reviews and gates a change passed, the seats or roles that\ndid the work, the conventions everyone wrote to, and the rules held to on purpose.\n\nIt is not a rule enforced by a machine, which is `Engineering`, and not a decision about what the\norganization does, which is `Leadership`. A method taught to other people is `Sharing` when the\nclaim is the teaching and `Ways of working` when the claim is the method.",
+          "text": "How the work was done rather than what was produced: the process followed, the specifications and briefs written before a build, the reviews and gates a change passed, the seats or roles that did the work, the conventions everyone wrote to, and the rules held to on purpose.\n\nIt is not a rule enforced by a machine, which is `Engineering`, and not a decision about what the organization does, which is `Leadership`. A method taught to other people is `Sharing` when the claim is the teaching and `Ways of working` when the claim is the method.",
           "tables": []
         }
       ],
@@ -251,7 +251,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is addressed to a public rather than to one organization: a conference\ntalk, a board or committee seat, a user group, a case study published under someone else's\nname, a tool put out in the open. Who paid for the time does not decide the kind; an employer\ncan host a talk or publish an article and the period is still this kind, because the audience\nis. `organization` names the host where there is one — the conference, the group, the\npublisher, the employer when it published the work itself — and is absent when nobody hosted\nit.\n\nA talk writes `end` equal to `start`; a board seat held for years does not. Both are this kind:\nwhat makes it community work is the audience, not the duration.",
+          "text": "A period whose output is addressed to a public rather than to one organization: a conference talk, a board or committee seat, a user group, a case study published under someone else's name, a tool put out in the open. Who paid for the time does not decide the kind; an employer can host a talk or publish an article and the period is still this kind, because the audience is. `organization` names the host where there is one — the conference, the group, the publisher, the employer when it published the work itself — and is absent when nobody hosted it.\n\nA talk writes `end` equal to `start`; a board seat held for years does not. Both are this kind: what makes it community work is the audience, not the duration.",
           "tables": []
         }
       ],
@@ -269,7 +269,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is a qualification rather than a delivery. `organization` names the\nawarding body — the school, the certifying institute — the one case where the field does not\nname somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes\na period education is that the qualification is the point of it.",
+          "text": "A period whose output is a qualification rather than a delivery. `organization` names the awarding body — the school, the certifying institute — the one case where the field does not name somewhere work was done.\n\nLearning that happened during a role is not this kind. Every role teaches something; what makes a period education is that the qualification is the point of it.",
           "tables": []
         }
       ],
@@ -287,7 +287,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period worked for oneself: what to build and whether to build it were the same person's\ndecision, and nobody commissioned the result. `organization` is absent, because there is none —\nwhich is the difference a reader would otherwise have to infer from an empty field.\n\nIt is not a project: nobody asked for the delivery, and the period is not bounded by it. It is\nnot a role: there is no organization to hold a position in. Those two readings are what this\nkind exists to avoid having to choose between — a career break spent building products is\nneither, and saying so is cheaper than pretending it is one of them.",
+          "text": "A period worked for oneself: what to build and whether to build it were the same person's decision, and nobody commissioned the result. `organization` is absent, because there is none — which is the difference a reader would otherwise have to infer from an empty field.\n\nIt is not a project: nobody asked for the delivery, and the period is not bounded by it. It is not a role: there is no organization to hold a position in. Those two readings are what this kind exists to avoid having to choose between — a career break spent building products is neither, and saying so is cheaper than pretending it is one of them.",
           "tables": []
         }
       ],
@@ -305,7 +305,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period defined by what it produced rather than by whom it was spent with: a platform, a\nmigration, a launch. Client work and internal work alike. `organization` names the client, or\nwhoever the work was done for when that is not the employer. Where the client cannot be named,\nit names the employer the work was done through, and the body says the client is unnamed.\n\nIt ends when the delivery does. A project with no end and no deliverable is a role described by\nits current work.",
+          "text": "A period defined by what it produced rather than by whom it was spent with: a platform, a migration, a launch. Client work and internal work alike. `organization` names the client, or whoever the work was done for when that is not the employer. Where the client cannot be named, it names the employer the work was done through, and the body says the client is unnamed.\n\nIt ends when the delivery does. A project with no end and no deliverable is a role described by its current work.",
           "tables": []
         }
       ],
@@ -323,7 +323,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of\nwork: employment, a long contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role is a project of its own, and a role whose\nachievements describe one system is usually two periods written as one. The test is whether the\nperiod would have continued had the work changed: if it would, it is a role.",
+          "text": "A period spent working for an organization under an arrangement that outlasts any one piece of work: employment, a long contract, a partnership. `organization` names the employer.\n\nIt is not a delivery. What was built during a role is a project of its own, and a role whose achievements describe one system is usually two periods written as one. The test is whether the period would have continued had the work changed: if it would, it is a role.",
           "tables": []
         }
       ],
@@ -344,7 +344,7 @@
       "sections": [
         {
           "heading": "What it is",
-          "text": "One person, described in CompanyGraph as a company would be. The work is technology\nleadership, business architecture and model-driven engineering — lately turned on the business\nitself, so that a company is legible to the people who run it and to the agents that\nincreasingly work alongside them.\n\nThis instance is both the description and the proof: the same discipline sold to a company,\napplied first to its author.",
+          "text": "One person, described in CompanyGraph as a company would be. The work is technology leadership, business architecture and model-driven engineering — lately turned on the business itself, so that a company is legible to the people who run it and to the agents that increasingly work alongside them.\n\nThis instance is both the description and the proof: the same discipline sold to a company, applied first to its author.",
           "tables": []
         },
         {
@@ -740,7 +740,7 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A specification or brief the Owner has approved, and the repository the work lands in with the\nrules that bind it.",
+          "text": "A specification or brief the Owner has approved, and the repository the work lands in with the rules that bind it.",
           "tables": []
         },
         {
@@ -787,7 +787,7 @@
         },
         {
           "heading": "Gate",
-          "text": "To leave Plan, all of these hold:\n\n- The Owner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.\n\nWhere they cannot be met, the Owner decides whether the plan is recut or the specification\nreopened.",
+          "text": "To leave Plan, all of these hold:\n\n- The Owner has read the plan and approved it.\n- Every brief states how its holder can tell the task is done.\n- The order is one the briefs can actually be worked in.\n\nWhere they cannot be met, the Owner decides whether the plan is recut or the specification reopened.",
           "tables": []
         }
       ],
@@ -814,7 +814,7 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A request in whatever words it arrived in, and the part of the model or the repository it will\nhave to agree with, read rather than remembered.",
+          "text": "A request in whatever words it arrived in, and the part of the model or the repository it will have to agree with, read rather than remembered.",
           "tables": []
         },
         {
@@ -1005,7 +1005,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize\nthe common failure modes, having run into them.",
+          "text": "Someone at this level works with it unsupervised and the result is predictable. They recognize the common failure modes, having run into them.",
           "tables": []
         }
       ],
@@ -1024,7 +1024,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked\nbelow its surface, shaped it, or taught it.",
+          "text": "Someone at this level knows where it breaks down and where it is simply wrong. They have worked below its surface, shaped it, or taught it.",
           "tables": []
         }
       ],
@@ -1043,7 +1043,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can\nfollow a conversation about it and make sense of other people's work in it.",
+          "text": "Someone at this level has used it on real work, with guidance or frequent reference. They can follow a conversation about it and make sense of other people's work in it.",
           "tables": []
         }
       ],
@@ -1062,7 +1062,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are\nworse. Other people bring them their questions.",
+          "text": "Someone at this level makes judgment calls in it and can explain why the alternatives are worse. Other people bring them their questions.",
           "tables": []
         }
       ],
@@ -1090,7 +1090,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into,\nthe dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the\nEnglish of every page and the Swiss German of every reviewed element. Whichever model runs it,\nthe rulebooks are the same and the Owner's word ends every question it parks.",
+          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into, the dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the English of every page and the Swiss German of every reviewed element. Whichever model runs it, the rulebooks are the same and the Owner's word ends every question it parks.",
           "tables": []
         }
       ],
@@ -4215,7 +4215,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left in January 2015 after 15 years and four roles — the IT-Developer program, engineering, methodology, then architecture.\nEnough to back myself as a founder, and probably a little naive about what founding takes; I\nwanted to find out. We had founded 3AP that November; I went operative there the month after.",
+          "text": "Left in January 2015 after 15 years and four roles — the IT-Developer program, engineering, methodology, then architecture. Enough to back myself as a founder, and probably a little naive about what founding takes; I wanted to find out. We had founded 3AP that November; I went operative there the month after.",
           "tables": []
         }
       ],
@@ -4708,7 +4708,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left it in March 2022 with 3AP, whose organization was the model it served. The repository\nstays public as it is, and the idea came back four years later as CompanyGraph, in Markdown\nrather than on a server.",
+          "text": "Left it in March 2022 with 3AP, whose organization was the model it served. The repository stays public as it is, and the idea came back four years later as CompanyGraph, in Markdown rather than on a server.",
           "tables": []
         },
         {
@@ -4797,7 +4797,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left in March 2022 after seven years. Seven years of client platforms had settled what I wanted\nnext: to lead technology in a product company, and to stay with one product long enough to see\nit through. The SV Group hospitality platform spinning out as LIKE MAGIC was that chance.",
+          "text": "Left in March 2022 after seven years. Seven years of client platforms had settled what I wanted next: to lead technology in a product company, and to stay with one product long enough to see it through. The SV Group hospitality platform spinning out as LIKE MAGIC was that chance.",
           "tables": []
         },
         {
@@ -5026,7 +5026,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left it after the last rebrand in November 2021, running and selling tags without me. Five\nyears on one product was the closest 3AP's client business came to product work, and\nLIKE MAGIC was the chance to do it fully.",
+          "text": "Left it after the last rebrand in November 2021, running and selling tags without me. Five years on one product was the closest 3AP's client business came to product work, and LIKE MAGIC was the chance to do it fully.",
           "tables": []
         }
       ],
@@ -5685,7 +5685,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Left in May 2026 after four years, with the platform mature at 90+ customers and 16,000+ units,\nto focus on where my own work was heading: modeling and AI, built in the open.",
+          "text": "Left in May 2026 after four years, with the platform mature at 90+ customers and 16,000+ units, to focus on where my own work was heading: modeling and AI, built in the open.",
           "tables": []
         },
         {
@@ -6296,12 +6296,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "An approved plan, the repository's own agent file, and a place to keep each task's brief, report\nand findings.",
+          "text": "An approved plan, the repository's own agent file, and a place to keep each task's brief, report and findings.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "One dispatched brief at a time; a decision after each report — fix, accept, or park for the\nOwner; review ordered on the diff rather than on the report; and a branch whose tasks are done\nin the plan's order, each committed as it lands.",
+          "text": "One dispatched brief at a time; a decision after each report — fix, accept, or park for the Owner; review ordered on the diff rather than on the report; and a branch whose tasks are done in the plan's order, each committed as it lands.",
           "tables": []
         },
         {
@@ -6377,12 +6377,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A task brief that is the whole of its requirements, the interfaces earlier tasks produced, the\nrepository's own agent file and a path for the report. Where the brief is unclear the seat\nasks before starting.",
+          "text": "A task brief that is the whole of its requirements, the interfaces earlier tasks produced, the repository's own agent file and a path for the report. Where the brief is unclear the seat asks before starting.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "The change the brief specifies, test first where the brief says so; the commit in the git\nregister; a report naming what was built, what was run and what it doubts; and a short status\nthe Controller acts on.",
+          "text": "The change the brief specifies, test first where the brief says so; the commit in the git register; a report naming what was built, what was run and what it doubts; and a short status the Controller acts on.",
           "tables": []
         },
         {
@@ -6459,12 +6459,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "The model, read before deciding: the vision, the objectives and the strategies under them, and\nthe values a decision is weighed against. A draft or a pull request to review, on the branch\nand on the rendered page. The signals a strategy names as showing whether it is working.",
+          "text": "The model, read before deciding: the vision, the objectives and the strategies under them, and the values a decision is weighed against. A draft or a pull request to review, on the branch and on the rendered page. The signals a strategy names as showing whether it is working.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "Decisions, recorded where they bind: a merge, a tag, a release, a signed contract, a corrected\nmodel. The proposals and pitches the company lives on, and the advice a client pays for, since\nin a company of one the seat that decides is the seat that sells and delivers. The reviewed\nEnglish every translation is made from. The word that ends a question an agent has parked.",
+          "text": "Decisions, recorded where they bind: a merge, a tag, a release, a signed contract, a corrected model. The proposals and pitches the company lives on, and the advice a client pays for, since in a company of one the seat that decides is the seat that sells and delivers. The reviewed English every translation is made from. The word that ends a question an agent has parked.",
           "tables": []
         },
         {
@@ -6524,12 +6524,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A specification the Owner has approved, and the repository the work lands in, including the\nrules that bind it.",
+          "text": "A specification the Owner has approved, and the repository the work lands in, including the rules that bind it.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "An ordered set of task briefs. Each is the whole of its own requirements, names the interfaces\nthe briefs around it produce and consume, and states how its holder can tell it is done. The\norder is the order they can be worked in, not the order they were thought of.",
+          "text": "An ordered set of task briefs. Each is the whole of its own requirements, names the interfaces the briefs around it produce and consume, and states how its holder can tell it is done. The order is the order they can be worked in, not the order they were thought of.",
           "tables": []
         },
         {
@@ -6612,12 +6612,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "The brief the work was done from, the implementer's report read as unverified claims, the\ndiff as one file with its commits and context, and the constraints that bind the task.",
+          "text": "The brief the work was done from, the implementer's report read as unverified claims, the diff as one file with its commits and context, and the constraints that bind the task.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is\nwrong, why it matters and how to fix it, ranked by severity, with the strengths named first. A\nfinding is an input to whoever merges and never a verdict: it does not decide, and it is not\npassed on a person.",
+          "text": "Two verdicts, spec compliance and quality, and findings each with a file and a line, what is wrong, why it matters and how to fix it, ranked by severity, with the strengths named first. A finding is an input to whoever merges and never a verdict: it does not decide, and it is not passed on a person.",
           "tables": []
         },
         {
@@ -6709,12 +6709,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A request already classified, the model it must not contradict, and the code or the pages it\nwill touch, read rather than remembered. Where the request is ambiguous the seat asks before\nwriting.",
+          "text": "A request already classified, the model it must not contradict, and the code or the pages it will touch, read rather than remembered. Where the request is ambiguous the seat asks before writing.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "A specification that is the whole of the requirements: the gap it closes, the approaches\nconsidered with the one chosen and why, the decisions taken, and what is explicitly not being\ndone. Where a decision is the Owner's, the seat names the options and parks the question.",
+          "text": "A specification that is the whole of the requirements: the gap it closes, the approaches considered with the one chosen and why, the decisions taken, and what is explicitly not being done. Where a decision is the Owner's, the seat names the options and parks the question.",
           "tables": []
         },
         {
@@ -6796,12 +6796,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "The reviewed English of the elements the task names, and the glossary. Reviewed means the\nOwner has said the English is done; a draft is not reviewed, and the seat says so. Where the\ntask names no elements, the seat names the gap and writes nothing.",
+          "text": "The reviewed English of the elements the task names, and the glossary. Reviewed means the Owner has said the English is done; a draft is not reviewed, and the seat says so. Where the task names no elements, the seat names the gap and writes nothing.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "The German in the element's own place, de-CH in the forms Switzerland uses, and beside each\nelement a back-translation in English, so a reviewer with a minute can read what the German\nsays.",
+          "text": "The German in the element's own place, de-CH in the forms Switzerland uses, and beside each element a back-translation in English, so a reviewer with a minute can read what the German says.",
           "tables": []
         },
         {
@@ -6876,12 +6876,12 @@
       "sections": [
         {
           "heading": "What it takes",
-          "text": "A brief naming the audience, the one point, the facts the text may claim and where each is\nshown, and the file and the place the text lands. The rulebook and the glossary. Where the\nbrief lacks the audience, the point or a fact's source, the seat names the gap and writes\nnothing.",
+          "text": "A brief naming the audience, the one point, the facts the text may claim and where each is shown, and the file and the place the text lands. The rulebook and the glossary. Where the brief lacks the audience, the point or a fact's source, the seat names the gap and writes nothing.",
           "tables": []
         },
         {
           "heading": "What it produces",
-          "text": "The text in its file on the current branch, in the register the place calls for, and a reply\nnaming what was written, what changed and which claims could not be traced to the brief or\nthe repository.",
+          "text": "The text in its file on the current branch, in the register the place calls for, and a reply naming what was written, what changed and which claims could not be traced to the brief or the repository.",
           "tables": []
         },
         {
@@ -6953,7 +6953,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design the goals, tools and guardrails an AI agent can use to complete a task autonomously.\nBuild the loop that lets the agent plan, act, observe results and adjust its next action. Test\nfor failure modes specific to autonomous behavior, such as getting stuck in loops or taking\nunintended actions, and add safeguards to contain them.",
+          "text": "Design the goals, tools and guardrails an AI agent can use to complete a task autonomously. Build the loop that lets the agent plan, act, observe results and adjust its next action. Test for failure modes specific to autonomous behavior, such as getting stuck in loops or taking unintended actions, and add safeguards to contain them.",
           "tables": []
         }
       ],
@@ -6972,7 +6972,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Facilitate the planning, review and retrospective events that structure iterative delivery.\nManage a backlog, track flow or velocity and remove impediments that block the team. Adapt the\nchosen framework's ceremonies and artifacts to fit the team and the scale of the work. Typical\ntools: Jira, Azure DevOps, Trello.",
+          "text": "Facilitate the planning, review and retrospective events that structure iterative delivery. Manage a backlog, track flow or velocity and remove impediments that block the team. Adapt the chosen framework's ceremonies and artifacts to fit the team and the scale of the work. Typical tools: Jira, Azure DevOps, Trello.",
           "tables": []
         }
       ],
@@ -6991,7 +6991,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define who may deploy which kind of AI system for which purpose, and under what human\noversight. Set the guardrails for data use, model providers and cost, and the review that\nchecks they hold. Keep the record regulators and customers will ask for, and adjust the rules\nwhen the law or the technology changes.",
+          "text": "Define who may deploy which kind of AI system for which purpose, and under what human oversight. Set the guardrails for data use, model providers and cost, and the review that checks they hold. Keep the record regulators and customers will ask for, and adjust the rules when the law or the technology changes.",
           "tables": []
         }
       ],
@@ -7010,7 +7010,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Assess which business activities AI can change materially and which it cannot yet. Set the\ndirection for adoption across plan, change and run, with the platforms, data and skills it\nrequires. Choose between building, buying and partnering per use case, and revisit the choices\nas the models and the market move.",
+          "text": "Assess which business activities AI can change materially and which it cannot yet. Set the direction for adoption across plan, change and run, with the platforms, data and skills it requires. Choose between building, buying and partnering per use case, and revisit the choices as the models and the market move.",
           "tables": []
         }
       ],
@@ -7029,7 +7029,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Build or configure servers that expose a system's capabilities as tools an AI agent can call.\nDefine the interface, permissions and error handling for each exposed tool so the agent can use\nit safely. Test how the agent selects and sequences tool calls and adjust the tool definitions\nto make behavior more predictable. Typical tools: Model Context Protocol (MCP).",
+          "text": "Build or configure servers that expose a system's capabilities as tools an AI agent can call. Define the interface, permissions and error handling for each exposed tool so the agent can use it safely. Test how the agent selects and sequences tool calls and adjust the tool definitions to make behavior more predictable. Typical tools: Model Context Protocol (MCP).",
           "tables": []
         }
       ],
@@ -7048,7 +7048,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define the resources, operations and data contracts an interface exposes and document them so\nconsumers can integrate against them. Make decisions about versioning, error handling and\nconsistency that keep the interface usable as it evolves. Review real usage patterns and\nfeedback from consumers to refine the design over time. Typical tools: REST, GraphQL, OpenAPI.",
+          "text": "Define the resources, operations and data contracts an interface exposes and document them so consumers can integrate against them. Make decisions about versioning, error handling and consistency that keep the interface usable as it evolves. Review real usage patterns and feedback from consumers to refine the design over time. Typical tools: REST, GraphQL, OpenAPI.",
           "tables": []
         }
       ],
@@ -7067,7 +7067,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Identify and map the capabilities, value streams and organizational structures a business\nrelies on. Use those models to assess where capabilities are duplicated, missing or misaligned\nwith strategy. Connect the business view to technology and process decisions so investment\ntargets the right capabilities.",
+          "text": "Identify and map the capabilities, value streams and organizational structures a business relies on. Use those models to assess where capabilities are duplicated, missing or misaligned with strategy. Connect the business view to technology and process decisions so investment targets the right capabilities.",
           "tables": []
         }
       ],
@@ -7086,7 +7086,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Map process flows and decision rules using notations such as BPMN for process steps and DMN for\ndecision logic. Work with process owners to validate that the model reflects how work actually\nhappens rather than how it is assumed to happen. Use the resulting models to identify\ninefficiencies or to hand off to process automation tooling. Typical tools: BPMN, DMN, Camunda.",
+          "text": "Map process flows and decision rules using notations such as BPMN for process steps and DMN for decision logic. Work with process owners to validate that the model reflects how work actually happens rather than how it is assumed to happen. Use the resulting models to identify inefficiencies or to hand off to process automation tooling. Typical tools: BPMN, DMN, Camunda.",
           "tables": []
         }
       ],
@@ -7105,7 +7105,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Assess the impact of a change on affected groups and build a plan to communicate, train and\nsupport them through it. Identify sources of resistance and work with sponsors and managers to\naddress them. Track adoption after go-live and reinforce the change until it becomes the new\nnormal.",
+          "text": "Assess the impact of a change on affected groups and build a plan to communicate, train and support them through it. Identify sources of resistance and work with sponsors and managers to address them. Track adoption after go-live and reinforce the change until it becomes the new normal.",
           "tables": []
         }
       ],
@@ -7124,7 +7124,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Configure pipelines that build and test code automatically on every change and gate progression\non those results. Automate packaging and deployment so releases happen consistently and can be\nrepeated or rolled back reliably. Monitor pipeline health and adjust stages as the codebase,\ntests or release process change. Typical tools: Jenkins, GitHub Actions, GitLab CI.",
+          "text": "Configure pipelines that build and test code automatically on every change and gate progression on those results. Automate packaging and deployment so releases happen consistently and can be repeated or rolled back reliably. Monitor pipeline health and adjust stages as the codebase, tests or release process change. Typical tools: Jenkins, GitHub Actions, GitLab CI.",
           "tables": []
         }
       ],
@@ -7143,7 +7143,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Select cloud services and design patterns that meet a system's scalability, resilience and cost\nrequirements. Design for elasticity, fault tolerance across availability zones or regions and\nsecure use of managed services. Review cost and usage patterns to right-size the architecture\nas workloads change. Typical tools: AWS, Azure, Google Cloud Platform.",
+          "text": "Select cloud services and design patterns that meet a system's scalability, resilience and cost requirements. Design for elasticity, fault tolerance across availability zones or regions and secure use of managed services. Review cost and usage patterns to right-size the architecture as workloads change. Typical tools: AWS, Azure, Google Cloud Platform.",
           "tables": []
         }
       ],
@@ -7162,7 +7162,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Start with a recurring occasion — a meetup, a working group, a community of practice — and a\nreason to come that is not you. Hand roles to members early so the group survives your\nabsence. Connect the community outward, to the projects, vendors and standards bodies it\ndepends on, and measure it by what members do for each other.",
+          "text": "Start with a recurring occasion — a meetup, a working group, a community of practice — and a reason to come that is not you. Hand roles to members early so the group survives your absence. Connect the community outward, to the projects, vendors and standards bodies it depends on, and measure it by what members do for each other.",
           "tables": []
         }
       ],
@@ -7181,7 +7181,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Say what the company is for in a sentence people repeat without you. Choose the markets,\nproducts and capabilities it will commit to, and name the ones it will not. Turn the choice\ninto a plan with owners, money and dates, and read the market back into it every quarter.\nCarry the vision into hiring, funding and partnership conversations until it is the company's,\nnot the founders'.",
+          "text": "Say what the company is for in a sentence people repeat without you. Choose the markets, products and capabilities it will commit to, and name the ones it will not. Turn the choice into a plan with owners, money and dates, and read the market back into it every quarter. Carry the vision into hiring, funding and partnership conversations until it is the company's, not the founders'.",
           "tables": []
         }
       ],
@@ -7200,7 +7200,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Diagnose a client's problem through structured analysis, interviews and data review. Develop\nand present recommendations, weighing options against the client's constraints and priorities.\nSupport the client through implementation or handoff, adjusting recommendations as new\ninformation emerges.",
+          "text": "Diagnose a client's problem through structured analysis, interviews and data review. Develop and present recommendations, weighing options against the client's constraints and priorities. Support the client through implementation or handoff, adjusting recommendations as new information emerges.",
           "tables": []
         }
       ],
@@ -7219,7 +7219,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define how containerized workloads are packaged, scheduled and scaled across a cluster.\nConfigure networking, storage and access controls that let services run reliably alongside each\nother. Monitor cluster health and respond to failures so workloads recover automatically rather\nthan needing manual intervention. Typical tools: Kubernetes, Helm, Docker.",
+          "text": "Define how containerized workloads are packaged, scheduled and scaled across a cluster. Configure networking, storage and access controls that let services run reliably alongside each other. Monitor cluster health and respond to failures so workloads recover automatically rather than needing manual intervention. Typical tools: Kubernetes, Helm, Docker.",
           "tables": []
         }
       ],
@@ -7238,7 +7238,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decide what an agent needs to know for a task and shape it into something a model can load:\ncurated documents rather than raw dumps, explicit definitions rather than implied ones, rules\nwritten where the work happens. Keep the context where the people who own the facts can edit\nit, so it stays true without becoming a maintenance project of its own. Package and distribute\nit so every assistant works from the same version instead of a private copy. Test what the\nmodel does when context is missing or stale, and constrain it so a gap surfaces as a failure\nrather than as an invention.",
+          "text": "Decide what an agent needs to know for a task and shape it into something a model can load: curated documents rather than raw dumps, explicit definitions rather than implied ones, rules written where the work happens. Keep the context where the people who own the facts can edit it, so it stays true without becoming a maintenance project of its own. Package and distribute it so every assistant works from the same version instead of a private copy. Test what the model does when context is missing or stale, and constrain it so a gap surfaces as a failure rather than as an invention.",
           "tables": []
         }
       ],
@@ -7257,7 +7257,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decide whether to build the conversational layer or integrate a specialist vendor, and design\nthe boundary either way: which channels are unified, what the AI may answer on its own, and\nwhen a person takes over. Feed it the messaging history, identity and operational data it needs\nto answer specifically rather than generically. Keep the handover visible in one inbox so no\nconversation is dropped between the agent and the staff member. Watch what it does at the edge\nof what it knows, and make it escalate rather than guess.",
+          "text": "Decide whether to build the conversational layer or integrate a specialist vendor, and design the boundary either way: which channels are unified, what the AI may answer on its own, and when a person takes over. Feed it the messaging history, identity and operational data it needs to answer specifically rather than generically. Keep the handover visible in one inbox so no conversation is dropped between the agent and the staff member. Watch what it does at the edge of what it knows, and make it escalate rather than guess.",
           "tables": []
         }
       ],
@@ -7276,7 +7276,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design and build pipelines that extract, transform and load data from source systems into\nstorage or analytics platforms. Handle data quality, schema changes and failure recovery so\ndownstream consumers can trust the data they receive. Optimize pipelines for throughput, cost\nand freshness as data volumes and requirements grow. Typical tools: Apache Spark, Airflow, dbt.",
+          "text": "Design and build pipelines that extract, transform and load data from source systems into storage or analytics platforms. Handle data quality, schema changes and failure recovery so downstream consumers can trust the data they receive. Optimize pipelines for throughput, cost and freshness as data volumes and requirements grow. Typical tools: Apache Spark, Airflow, dbt.",
           "tables": []
         }
       ],
@@ -7295,7 +7295,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define who owns and is accountable for different data domains and set standards for quality,\ndefinitions and lifecycle. Establish policies for access, retention and use of data, including\nmaster or reference data that many systems share. Run processes that monitor data quality and\nresolve inconsistencies across systems.",
+          "text": "Define who owns and is accountable for different data domains and set standards for quality, definitions and lifecycle. Establish policies for access, retention and use of data, including master or reference data that many systems share. Run processes that monitor data quality and resolve inconsistencies across systems.",
           "tables": []
         }
       ],
@@ -7314,7 +7314,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define the entities, attributes and relationships that describe the data an organization holds.\nBuild models at different levels of abstraction, from conceptual business terms to physical\nschema, and keep them consistent with each other. Review and update models as the\norganization's data and understanding of it evolve.",
+          "text": "Define the entities, attributes and relationships that describe the data an organization holds. Build models at different levels of abstraction, from conceptual business terms to physical schema, and keep them consistent with each other. Review and update models as the organization's data and understanding of it evolve.",
           "tables": []
         }
       ],
@@ -7333,7 +7333,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Assess how personal data is collected, used and stored and identify where processing needs a\nlegal basis or additional safeguards. Run or support data protection impact assessments and\nmaintain records of processing activities. Handle data subject requests and breach\nnotifications and advise other parts of the organization on compliant data handling.",
+          "text": "Assess how personal data is collected, used and stored and identify where processing needs a legal basis or additional safeguards. Run or support data protection impact assessments and maintain records of processing activities. Handle data subject requests and breach notifications and advise other parts of the organization on compliant data handling.",
           "tables": []
         }
       ],
@@ -7352,7 +7352,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Model entities, relationships and constraints and turn them into a schema that supports the\napplication's queries. Make trade-offs between normalization, performance and flexibility based\non how the data will be read and written. Review and adjust the schema as usage patterns or\nrequirements change.",
+          "text": "Model entities, relationships and constraints and turn them into a schema that supports the application's queries. Make trade-offs between normalization, performance and flexibility based on how the data will be read and written. Review and adjust the schema as usage patterns or requirements change.",
           "tables": []
         }
       ],
@@ -7371,7 +7371,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Build and maintain the automation, tooling and shared practices that let development and\noperations teams collaborate on the same pipeline. Work to shorten the cycle between writing\ncode and running it reliably in production, often owning both the build process and aspects of\nlive operation. Use feedback from production, such as incidents or performance data, to improve\nthe development process itself. Typical tools: Docker, Kubernetes, GitHub Actions.",
+          "text": "Build and maintain the automation, tooling and shared practices that let development and operations teams collaborate on the same pipeline. Work to shorten the cycle between writing code and running it reliably in production, often owning both the build process and aspects of live operation. Use feedback from production, such as incidents or performance data, to improve the development process itself. Typical tools: Docker, Kubernetes, GitHub Actions.",
           "tables": []
         }
       ],
@@ -7390,7 +7390,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Work with domain experts to build a shared vocabulary and model of the business domain.\nIdentify bounded contexts and use them to draw system and team boundaries that mirror the\ndomain's natural divisions. Keep the code's structure and terminology aligned with that domain\nmodel as understanding deepens.",
+          "text": "Work with domain experts to build a shared vocabulary and model of the business domain. Identify bounded contexts and use them to draw system and team boundaries that mirror the domain's natural divisions. Keep the code's structure and terminology aligned with that domain model as understanding deepens.",
           "tables": []
         }
       ],
@@ -7409,7 +7409,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Identify the concepts a domain's experts actually reason in and fix them as a metamodel. Give\nthe language a concrete syntax, textual or graphical, with the constraints that make an invalid\nmodel unwritable. Build the editor, validation and generators around it, and evolve the\nlanguage with the domain without breaking existing models. Typical tools: EMF, Ecore, Xtext,\nSirius, MPS.",
+          "text": "Identify the concepts a domain's experts actually reason in and fix them as a metamodel. Give the language a concrete syntax, textual or graphical, with the constraints that make an invalid model unwritable. Build the editor, validation and generators around it, and evolve the language with the domain without breaking existing models. Typical tools: EMF, Ecore, Xtext, Sirius, MPS.",
           "tables": []
         }
       ],
@@ -7428,7 +7428,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Set technical direction and standards across one or more engineering teams and grow the\norganization's structure to match. Hire, coach and develop engineers and managers, and build\nthe processes that let teams deliver reliably at scale. Balance long-term technical investment\nagainst short-term delivery pressure and represent engineering priorities to the rest of the\norganization.",
+          "text": "Set technical direction and standards across one or more engineering teams and grow the organization's structure to match. Hire, coach and develop engineers and managers, and build the processes that let teams deliver reliably at scale. Balance long-term technical investment against short-term delivery pressure and represent engineering priorities to the rest of the organization.",
           "tables": []
         }
       ],
@@ -7447,7 +7447,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Map current business capabilities, data and technology landscapes and define target-state\narchitectures that close identified gaps. Set architecture principles and standards that guide\nindividual projects and technology choices. Review proposed initiatives for alignment with the\ntarget architecture and adjust it as strategy or constraints change.",
+          "text": "Map current business capabilities, data and technology landscapes and define target-state architectures that close identified gaps. Set architecture principles and standards that guide individual projects and technology choices. Review proposed initiatives for alignment with the target architecture and adjust it as strategy or constraints change.",
           "tables": []
         }
       ],
@@ -7466,7 +7466,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Identify the events that matter to a system and design the producers, consumers and channels\nthat carry events between them. Make decisions about ordering, delivery guarantees and how\ncomponents stay decoupled while still working together. Design for failure modes specific to\nasynchronous systems, such as duplicate or out-of-order events. Typical tools: Kafka, RabbitMQ,\nAWS EventBridge.",
+          "text": "Identify the events that matter to a system and design the producers, consumers and channels that carry events between them. Make decisions about ordering, delivery guarantees and how components stay decoupled while still working together. Design for failure modes specific to asynchronous systems, such as duplicate or out-of-order events. Typical tools: Kafka, RabbitMQ, AWS EventBridge.",
           "tables": []
         }
       ],
@@ -7485,7 +7485,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design topics or streams, partitioning and retention policies that fit how data will be\nproduced and consumed. Build producers and consumers that handle ordering, delivery guarantees\nand backpressure correctly. Monitor stream throughput and lag to catch consumers falling behind\nbefore it affects downstream systems. Typical tools: Kafka, Kinesis, Pulsar.",
+          "text": "Design topics or streams, partitioning and retention policies that fit how data will be produced and consumed. Build producers and consumers that handle ordering, delivery guarantees and backpressure correctly. Monitor stream throughput and lag to catch consumers falling behind before it affects downstream systems. Typical tools: Kafka, Kinesis, Pulsar.",
           "tables": []
         }
       ],
@@ -7504,7 +7504,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Track cloud and technology spend against budgets and attribute it to the teams or products\nresponsible. Identify opportunities to reduce waste, such as underused resources or inefficient\npricing commitments, and work with engineering teams to act on them. Build reporting and\nforecasts that let the organization make informed trade-offs between cost and performance.\nTypical tools: AWS Cost Explorer, CloudHealth, Kubecost.",
+          "text": "Track cloud and technology spend against budgets and attribute it to the teams or products responsible. Identify opportunities to reduce waste, such as underused resources or inefficient pricing commitments, and work with engineering teams to act on them. Build reporting and forecasts that let the organization make informed trade-offs between cost and performance. Typical tools: AWS Cost Explorer, CloudHealth, Kubecost.",
           "tables": []
         }
       ],
@@ -7523,7 +7523,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Build user interface components and manage application state so the interface reflects\nunderlying data correctly. Choose a framework for the work in front of you and follow it where\nit goes, including into a version or a language that a later one replaces, and structure code\nso components remain reusable and testable. Reach for static typing where it catches errors\nbefore runtime. Optimize rendering performance and handle browser compatibility and\naccessibility concerns as the application grows. Typical tools: React, Angular, AngularJS,\nTypeScript, Ionic, Redux.",
+          "text": "Build user interface components and manage application state so the interface reflects underlying data correctly. Choose a framework for the work in front of you and follow it where it goes, including into a version or a language that a later one replaces, and structure code so components remain reusable and testable. Reach for static typing where it catches errors before runtime. Optimize rendering performance and handle browser compatibility and accessibility concerns as the application grows. Typical tools: React, Angular, AngularJS, TypeScript, Ionic, Redux.",
           "tables": []
         }
       ],
@@ -7542,7 +7542,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design and configure authentication and authorization mechanisms, including protocols such as\nOAuth or OIDC, that verify identity and grant access. Define roles, permissions and access\npolicies and review them to keep access aligned with actual need. Investigate access-related\nincidents and remove or adjust access as roles change. Typical tools: OAuth, OIDC, Okta.",
+          "text": "Design and configure authentication and authorization mechanisms, including protocols such as OAuth or OIDC, that verify identity and grant access. Define roles, permissions and access policies and review them to keep access aligned with actual need. Investigate access-related incidents and remove or adjust access as roles change. Typical tools: OAuth, OIDC, Okta.",
           "tables": []
         }
       ],
@@ -7561,7 +7561,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Triage incoming alerts to assess severity and impact and coordinate the people needed to\ninvestigate and restore service. Communicate status to affected stakeholders throughout the\nincident and decide when it can be declared resolved. Run or contribute to a post-incident\nreview that captures root cause and follow-up actions.",
+          "text": "Triage incoming alerts to assess severity and impact and coordinate the people needed to investigate and restore service. Communicate status to affected stakeholders throughout the incident and decide when it can be declared resolved. Run or contribute to a post-incident review that captures root cause and follow-up actions.",
           "tables": []
         }
       ],
@@ -7580,7 +7580,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Identify information assets and assess the risks they face, then define policies and controls\nto treat those risks. Run an ongoing management system, such as one aligned to ISO 27001, that\nincludes audits, incident handling and continuous improvement. Report security posture and\nresidual risk to leadership and adjust controls as threats or the organization change.",
+          "text": "Identify information assets and assess the risks they face, then define policies and controls to treat those risks. Run an ongoing management system, such as one aligned to ISO 27001, that includes audits, incident handling and continuous improvement. Report security posture and residual risk to leadership and adjust controls as threats or the organization change.",
           "tables": []
         }
       ],
@@ -7599,7 +7599,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write declarative or scripted definitions of infrastructure and apply them through an automated\npipeline. Version those definitions alongside application code and review changes before they\nreach live environments. Use the same definitions to reproduce environments consistently and to\nroll back when a change causes problems. Typical tools: Terraform, CloudFormation, Pulumi.",
+          "text": "Write declarative or scripted definitions of infrastructure and apply them through an automated pipeline. Version those definitions alongside application code and review changes before they reach live environments. Use the same definitions to reproduce environments consistently and to roll back when a change causes problems. Typical tools: Terraform, CloudFormation, Pulumi.",
           "tables": []
         }
       ],
@@ -7618,7 +7618,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Map the systems that need to exchange data and design the integration patterns, message formats\nand middleware that connect them. Decide between approaches such as point-to-point connections,\nan enterprise service bus or event-based integration based on the scale and coupling required.\nDesign for failure handling, data consistency and monitoring across integration points.",
+          "text": "Map the systems that need to exchange data and design the integration patterns, message formats and middleware that connect them. Decide between approaches such as point-to-point connections, an enterprise service bus or event-based integration based on the scale and coupling required. Design for failure handling, data consistency and monitoring across integration points.",
           "tables": []
         }
       ],
@@ -7637,7 +7637,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Choose the sensing and the radio for the device's power, range and cost, not for the\ndemo. Design the ingestion so that unreliable, bursty telemetry becomes a clean stream the\nbusiness systems can consume. Prototype with real devices in the real environment before\ncommitting to a platform. Typical tools: LoRaWAN, RFID, MQTT.",
+          "text": "Choose the sensing and the radio for the device's power, range and cost, not for the demo. Design the ingestion so that unreliable, bursty telemetry becomes a clean stream the business systems can consume. Prototype with real devices in the real environment before committing to a platform. Typical tools: LoRaWAN, RFID, MQTT.",
           "tables": []
         }
       ],
@@ -7656,7 +7656,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define who can make which technology decisions and set the policies, standards and controls\nthose decisions must follow. Run governance forums that review risk, compliance and investment\nchoices, and track adherence to agreed frameworks. Adjust the governance structure as the\norganization and its regulatory context evolve.",
+          "text": "Define who can make which technology decisions and set the policies, standards and controls those decisions must follow. Run governance forums that review risk, compliance and investment choices, and track adherence to agreed frameworks. Adjust the governance structure as the organization and its regulatory context evolve.",
           "tables": []
         }
       ],
@@ -7675,7 +7675,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Assess market and technology trends, current capability gaps and business priorities to set a\nforward-looking direction for technology investment. Translate that direction into principles,\nroadmaps and target architectures that guide subsequent decisions. Engage executive\nstakeholders to secure buy-in and funding, and revisit the strategy as conditions change.",
+          "text": "Assess market and technology trends, current capability gaps and business priorities to set a forward-looking direction for technology investment. Translate that direction into principles, roadmaps and target architectures that guide subsequent decisions. Engage executive stakeholders to secure buy-in and funding, and revisit the strategy as conditions change.",
           "tables": []
         }
       ],
@@ -7694,7 +7694,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write and maintain Java code, applying its object-oriented features and concurrency model to\nsolve application problems. Use the surrounding ecosystem, such as build tools, frameworks and\nlibraries, to structure and package applications. Tune and debug applications running on the\nJava virtual machine, including memory and performance issues specific to that runtime. Typical\ntools: Spring, Maven, JUnit.",
+          "text": "Write and maintain Java code, applying its object-oriented features and concurrency model to solve application problems. Use the surrounding ecosystem, such as build tools, frameworks and libraries, to structure and package applications. Tune and debug applications running on the Java virtual machine, including memory and performance issues specific to that runtime. Typical tools: Spring, Maven, JUnit.",
           "tables": []
         }
       ],
@@ -7713,7 +7713,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Capture knowledge from people and projects and organize it so others can find and reuse it.\nDesign processes and tools that make contributing and searching knowledge easy enough that\npeople actually do it. Review content over time for accuracy and relevance and retire or update\nmaterial that has gone stale.",
+          "text": "Capture knowledge from people and projects and organize it so others can find and reuse it. Design processes and tools that make contributing and searching knowledge easy enough that people actually do it. Review content over time for accuracy and relevance and retire or update material that has gone stale.",
           "tables": []
         }
       ],
@@ -7732,7 +7732,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Wrap the legacy system in a stable interface before touching its inside. Generate rather\nthan hand-write the bridging code where the interfaces are numerous and regular. Replace one\nlayer at a time, keeping the old path alive until the new one has carried production load.",
+          "text": "Wrap the legacy system in a stable interface before touching its inside. Generate rather than hand-write the bridging code where the interfaces are numerous and regular. Replace one layer at a time, keeping the old path alive until the new one has carried production load.",
           "tables": []
         }
       ],
@@ -7751,7 +7751,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Prepare and explore data, select and train models and evaluate them against relevant\nperformance metrics. Tune model architecture and hyperparameters and validate results against\nheld-out data to avoid overfitting. Monitor deployed models for drift or degraded performance\nand retrain as needed.",
+          "text": "Prepare and explore data, select and train models and evaluate them against relevant performance metrics. Tune model architecture and hyperparameters and validate results against held-out data to avoid overfitting. Monitor deployed models for drift or degraded performance and retrain as needed.",
           "tables": []
         }
       ],
@@ -7770,7 +7770,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Give people problems slightly beyond them and stay close enough that failing is safe. Ask before\ntelling, and tell when asking would waste their week. Review work for the thinking behind it,\nnot only the result, and say what was good as precisely as what was not. Build the places —\ncommunities of practice, pairing, retrospectives — where people teach each other without you.",
+          "text": "Give people problems slightly beyond them and stay close enough that failing is safe. Ask before telling, and tell when asking would waste their week. Review work for the thinking behind it, not only the result, and say what was good as precisely as what was not. Build the places — communities of practice, pairing, retrospectives — where people teach each other without you.",
           "tables": []
         }
       ],
@@ -7789,7 +7789,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decompose a system into services with clear boundaries and define how those services\ncommunicate and share data. Design for independent deployment, resilience to partial failure\nand observability across service boundaries. Weigh the added operational complexity against the\nflexibility gained from decoupling services. Typical tools: Kubernetes, Docker, Istio.",
+          "text": "Decompose a system into services with clear boundaries and define how those services communicate and share data. Design for independent deployment, resilience to partial failure and observability across service boundaries. Weigh the added operational complexity against the flexibility gained from decoupling services. Typical tools: Kubernetes, Docker, Istio.",
           "tables": []
         }
       ],
@@ -7808,7 +7808,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Build pipelines that automate data preparation, training, validation and deployment of models.\nVersion models, data and experiments so results are reproducible, and monitor deployed models\nfor performance and drift. Coordinate rollbacks and retraining when a model's behavior degrades\nin production. Typical tools: MLflow, Kubeflow, SageMaker.",
+          "text": "Build pipelines that automate data preparation, training, validation and deployment of models. Version models, data and experiments so results are reproducible, and monitor deployed models for performance and drift. Coordinate rollbacks and retraining when a model's behavior degrades in production. Typical tools: MLflow, Kubeflow, SageMaker.",
           "tables": []
         }
       ],
@@ -7827,7 +7827,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define metamodels or domain-specific languages that capture a problem in a structured, formal\nway. Build or configure generators that transform those models into code, configuration or\ndocumentation. Keep the models as the source of truth, regenerating downstream artifacts as the\nmodels change rather than editing generated output directly.",
+          "text": "Define metamodels or domain-specific languages that capture a problem in a structured, formal way. Build or configure generators that transform those models into code, configuration or documentation. Keep the models as the source of truth, regenerating downstream artifacts as the models change rather than editing generated output directly.",
           "tables": []
         }
       ],
@@ -7846,7 +7846,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decide how tenants share or are isolated from underlying compute, storage and configuration.\nDesign for per-tenant data isolation, customization and scaling so one tenant's usage cannot\naffect another's experience. Plan onboarding, billing and upgrade paths that work across the\nwhole tenant base rather than one customer at a time.",
+          "text": "Decide how tenants share or are isolated from underlying compute, storage and configuration. Design for per-tenant data isolation, customization and scaling so one tenant's usage cannot affect another's experience. Plan onboarding, billing and upgrade paths that work across the whole tenant base rather than one customer at a time.",
           "tables": []
         }
       ],
@@ -7865,7 +7865,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Instrument applications and infrastructure to emit logs, metrics and traces that reveal what is\nhappening inside a system. Build dashboards and alerts that surface meaningful signals and\nreduce noise from irrelevant ones. Use that telemetry to diagnose the root cause of incidents\nand to spot degradation before it becomes an outage. Typical tools: Prometheus, Grafana,\nDatadog.",
+          "text": "Instrument applications and infrastructure to emit logs, metrics and traces that reveal what is happening inside a system. Build dashboards and alerts that surface meaningful signals and reduce noise from irrelevant ones. Use that telemetry to diagnose the root cause of incidents and to spot degradation before it becomes an outage. Typical tools: Prometheus, Grafana, Datadog.",
           "tables": []
         }
       ],
@@ -7884,7 +7884,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Choose the license for the outcome you want and say what is open and what could ever be\npaid for. Write the README for the adopter, the conventions for the contributor and the\nspec for the person who will disagree with you later. Release on a contract — versions,\ntags, a manifest — so that nobody depends on a moving target. Keep the decisions and the\nrejected alternatives in the repository, where the next maintainer can find them.",
+          "text": "Choose the license for the outcome you want and say what is open and what could ever be paid for. Write the README for the adopter, the conventions for the contributor and the spec for the person who will disagree with you later. Release on a contract — versions, tags, a manifest — so that nobody depends on a moving target. Keep the decisions and the rejected alternatives in the repository, where the next maintainer can find them.",
           "tables": []
         }
       ],
@@ -7903,7 +7903,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Draw the teams around the products or domains they own, not around the technologies they\nuse. Decide what a team may decide alone and what needs the room. Design for the next size,\nnot the current one — including where a distributed or near-shore team fits — and recruit\nand develop the leaders each new shape requires.",
+          "text": "Draw the teams around the products or domains they own, not around the technologies they use. Decide what a team may decide alone and what needs the room. Design for the next size, not the current one — including where a distributed or near-shore team fits — and recruit and develop the leaders each new shape requires.",
           "tables": []
         }
       ],
@@ -7922,7 +7922,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design and build the golden paths, templates and self-service tools that other engineering\nteams use to provision infrastructure and deploy applications. Gather requirements from those\ninternal teams and treat the platform itself as a product with its own roadmap. Balance\nstandardization, which reduces support burden, against flexibility for teams with unusual\nneeds.",
+          "text": "Design and build the golden paths, templates and self-service tools that other engineering teams use to provision infrastructure and deploy applications. Gather requirements from those internal teams and treat the platform itself as a product with its own roadmap. Balance standardization, which reduces support burden, against flexibility for teams with unusual needs.",
           "tables": []
         }
       ],
@@ -7941,7 +7941,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Model processes as executable workflows and configure an engine to run, track and recover them\nacross their lifecycle. Integrate process steps with the underlying systems and services that\nperform the actual work. Monitor running process instances and handle failures or exceptions so\nprocesses complete correctly. Typical tools: Camunda, Zeebe, AWS Step Functions.",
+          "text": "Model processes as executable workflows and configure an engine to run, track and recover them across their lifecycle. Integrate process steps with the underlying systems and services that perform the actual work. Monitor running process instances and handle failures or exceptions so processes complete correctly. Typical tools: Camunda, Zeebe, AWS Step Functions.",
           "tables": []
         }
       ],
@@ -7960,7 +7960,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write the idea down as a claim that can be wrong: who has the problem, what they pay for\ntoday, what would make them switch. Put the smallest real thing in front of them — a talk, a\nmodel, a worked example — and collect the objections rather than the compliments. Set the\noutcome you will accept before you start, including a clean no, and publish what you\nlearned either way.",
+          "text": "Write the idea down as a claim that can be wrong: who has the problem, what they pay for today, what would make them switch. Put the smallest real thing in front of them — a talk, a model, a worked example — and collect the objections rather than the compliments. Set the outcome you will accept before you start, including a clean no, and publish what you learned either way.",
           "tables": []
         }
       ],
@@ -7979,7 +7979,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Gather user and market insight to define product vision, priorities and roadmap. Translate that\nvision into requirements and backlog items, working closely with design and engineering to ship\nincrements. Track outcomes after release and adjust priorities based on what is learned.",
+          "text": "Gather user and market insight to define product vision, priorities and roadmap. Translate that vision into requirements and backlog items, working closely with design and engineering to ship increments. Track outcomes after release and adjust priorities based on what is learned.",
           "tables": []
         }
       ],
@@ -7998,7 +7998,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Pick the one idea the audience should take home and build the talk backward from it. Show\nthe real system, the real numbers and the real mistake, not the slide version. Rehearse until\nthe timing is yours, then leave room for the questions that tell you what landed.",
+          "text": "Pick the one idea the audience should take home and build the talk backward from it. Show the real system, the real numbers and the real mistake, not the slide version. Rehearse until the timing is yours, then leave room for the questions that tell you what landed.",
           "tables": []
         }
       ],
@@ -8017,7 +8017,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Elicit needs from stakeholders through interviews, workshops or observation and turn them into\nclear, testable requirements. Organize and prioritize those requirements, trace them through\ndesign and delivery and manage changes as understanding evolves. Validate delivered\nfunctionality against the original requirements to confirm the need was actually met.",
+          "text": "Elicit needs from stakeholders through interviews, workshops or observation and turn them into clear, testable requirements. Organize and prioritize those requirements, trace them through design and delivery and manage changes as understanding evolves. Validate delivered functionality against the original requirements to confirm the need was actually met.",
           "tables": []
         }
       ],
@@ -8036,7 +8036,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define service level objectives and error budgets and use them to decide when to prioritize\nreliability work over new features. Automate operational tasks that would otherwise require\nrepetitive manual effort and build tooling that makes systems easier to diagnose and recover.\nLead or contribute to incident response and follow up with changes that reduce the chance of\nrecurrence.",
+          "text": "Define service level objectives and error budgets and use them to decide when to prioritize reliability work over new features. Automate operational tasks that would otherwise require repetitive manual effort and build tooling that makes systems easier to diagnose and recover. Lead or contribute to incident response and follow up with changes that reduce the chance of recurrence.",
           "tables": []
         }
       ],
@@ -8055,7 +8055,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decompose a system into components and define the interfaces and interactions between them.\nMake and document decisions about structure, technology choices and trade-offs such as\nperformance, maintainability and scalability. Review implementation to confirm it stays\nconsistent with the intended structure as the system evolves.",
+          "text": "Decompose a system into components and define the interfaces and interactions between them. Make and document decisions about structure, technology choices and trade-offs such as performance, maintainability and scalability. Review implementation to confirm it stays consistent with the intended structure as the system evolves.",
           "tables": []
         }
       ],
@@ -8074,7 +8074,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Translate requirements into working code, choosing algorithms, data structures and patterns\nthat fit the problem. Write automated tests, review code with peers and refactor to keep the\ncodebase maintainable as it grows. Debug and fix defects across the lifecycle, from initial\ndevelopment through production support.",
+          "text": "Translate requirements into working code, choosing algorithms, data structures and patterns that fit the problem. Write automated tests, review code with peers and refactor to keep the codebase maintainable as it grows. Debug and fix defects across the lifecycle, from initial development through production support.",
           "tables": []
         }
       ],
@@ -8093,7 +8093,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Choose a notation appropriate to the audience and purpose, such as UML for software structure,\nSysML for systems engineering or C4 for architecture at different zoom levels. Produce diagrams\nthat capture components, interactions or processes and keep them consistent with the system as\nit evolves. Use the models to communicate design intent to other engineers or stakeholders and\nto reason about a design before it is built.",
+          "text": "Choose a notation appropriate to the audience and purpose, such as UML for software structure, SysML for systems engineering or C4 for architecture at different zoom levels. Produce diagrams that capture components, interactions or processes and keep them consistent with the system as it evolves. Use the models to communicate design intent to other engineers or stakeholders and to reason about a design before it is built.",
           "tables": []
         }
       ],
@@ -8112,7 +8112,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Define the disciplines, artifacts and roles a delivery process needs, and write them down\nwhere teams will find them. Replace a home-grown method with a standard one where a standard\nexists. Build the toolchain that makes the process the easy path, and coach teams until it is\nhow they work rather than what they were told. Typical tools: Rational Method Composer, Jira,\nConfluence, Jenkins, SonarQube.",
+          "text": "Define the disciplines, artifacts and roles a delivery process needs, and write them down where teams will find them. Replace a home-grown method with a standard one where a standard exists. Build the toolchain that makes the process the easy path, and coach teams until it is how they work rather than what they were told. Typical tools: Rational Method Composer, Jira, Confluence, Jenkins, SonarQube.",
           "tables": []
         }
       ],
@@ -8131,7 +8131,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Design test cases that cover expected behavior, edge cases and failure conditions at unit,\nintegration or end-to-end levels. Execute those tests manually or through automation and\ninvestigate failures to distinguish real defects from flaky tests. Track coverage and defect\ntrends to focus testing effort where risk is highest. Typical tools: JUnit, Selenium, Cypress.",
+          "text": "Design test cases that cover expected behavior, edge cases and failure conditions at unit, integration or end-to-end levels. Execute those tests manually or through automation and investigate failures to distinguish real defects from flaky tests. Track coverage and defect trends to focus testing effort where risk is highest. Typical tools: JUnit, Selenium, Cypress.",
           "tables": []
         }
       ],
@@ -8150,7 +8150,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Translate business and functional requirements into a technical design spanning applications,\nintegrations and infrastructure. Evaluate design options against constraints such as\nperformance, security and cost, and choose an approach that fits the surrounding architecture.\nGuide implementation teams through the design and adjust it as issues surface during build.",
+          "text": "Translate business and functional requirements into a technical design spanning applications, integrations and infrastructure. Evaluate design options against constraints such as performance, security and cost, and choose an approach that fits the surrounding architecture. Guide implementation teams through the design and adjust it as issues surface during build.",
           "tables": []
         }
       ],
@@ -8169,7 +8169,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Read the tender or the brief for the problem behind the requirements. Shape a solution\narchitecture that answers it, price it honestly and present it as the people who will build\nit. Lead the bid across proposal, pitch and negotiation, and walk away from work that cannot\nbe delivered as promised.",
+          "text": "Read the tender or the brief for the problem behind the requirements. Shape a solution architecture that answers it, price it honestly and present it as the people who will build it. Lead the bid across proposal, pitch and negotiation, and walk away from work that cannot be delivered as promised.",
           "tables": []
         }
       ],
@@ -8188,7 +8188,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Write the specification first: purpose, decisions, the alternatives rejected and why, what is\nout of scope. Get it reviewed by the people who will disagree later, then derive the plan and\nthe tests from it rather than from the code. Keep the spec in the repository beside the code\nit governs and change it before changing the behavior. Let agents and people build from the\nsame text. Typical tools: spec-kit.",
+          "text": "Write the specification first: purpose, decisions, the alternatives rejected and why, what is out of scope. Get it reviewed by the people who will disagree later, then derive the plan and the tests from it rather than from the code. Keep the spec in the repository beside the code it governs and change it before changing the behavior. Let agents and people build from the same text. Typical tools: spec-kit.",
           "tables": []
         }
       ],
@@ -8207,7 +8207,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Identify stakeholders and understand their interests, concerns and level of influence.\nCommunicate progress, negotiate expectations and resolve conflicting priorities across those\ngroups. Keep relationships productive over time so decisions get the input and support they\nneed.",
+          "text": "Identify stakeholders and understand their interests, concerns and level of influence. Communicate progress, negotiate expectations and resolve conflicting priorities across those groups. Keep relationships productive over time so decisions get the input and support they need.",
           "tables": []
         }
       ],
@@ -8226,7 +8226,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decide the one claim the whole story has to land, and cut what does not carry it. Order the\npieces so each stands alone and still carries the through-line — the first earns attention,\nthe last asks for something. Fix what may be said before drafting starts, so the shape\nsurvives a co-author or a generating tool. Keep the claim checkable, because an audience\nthat can verify one thing will grant the rest.",
+          "text": "Decide the one claim the whole story has to land, and cut what does not carry it. Order the pieces so each stands alone and still carries the through-line — the first earns attention, the last asks for something. Fix what may be said before drafting starts, so the shape survives a co-author or a generating tool. Keep the claim checkable, because an audience that can verify one thing will grant the rest.",
           "tables": []
         }
       ],
@@ -8245,7 +8245,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Decide what the reader needs to do after reading, and cut everything that does not serve\nit. State decisions, the alternatives that lost and the reasons, so the text survives its\nauthor. Keep one term per concept and the same term throughout. Show the real example\nrather than the generic one, and read the text back as the person who was not in the\nroom.",
+          "text": "Decide what the reader needs to do after reading, and cut everything that does not serve it. State decisions, the alternatives that lost and the reasons, so the text survives its author. Keep one term per concept and the same term throughout. Show the real example rather than the generic one, and read the text back as the person who was not in the room.",
           "tables": []
         }
       ],
@@ -8264,7 +8264,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Work out who uses the product and what each of them came to do, then decide the structure that\nserves it: which pages or screens exist, what each one is for and what leads to what. Turn that\ninto layouts, a type scale, color and components kept in one design system, so every page is\nbuilt from the same parts and reads as one product. Prefer a design that holds for content not\nyet written over a screen drawn for each case. Review the result where it is used, rendered at\nthe widths and themes people have, and hold it to legibility and accessibility as it grows.\nTypical tools: design tokens, component libraries, Figma, browser testing.",
+          "text": "Work out who uses the product and what each of them came to do, then decide the structure that serves it: which pages or screens exist, what each one is for and what leads to what. Turn that into layouts, a type scale, color and components kept in one design system, so every page is built from the same parts and reads as one product. Prefer a design that holds for content not yet written over a screen drawn for each case. Review the result where it is used, rendered at the widths and themes people have, and hold it to legibility and accessibility as it grows. Typical tools: design tokens, component libraries, Figma, browser testing.",
           "tables": []
         }
       ],
@@ -8283,7 +8283,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "Evaluate and select suppliers, negotiate contracts and service levels and monitor ongoing\nperformance against them. Manage the relationship day to day, resolving issues and\nrenegotiating terms as needs change. Balance cost, quality and risk across the supplier base.",
+          "text": "Evaluate and select suppliers, negotiate contracts and service levels and monitor ongoing performance against them. Manage the relationship day to day, resolving issues and renegotiating terms as needs change. Balance cost, quality and risk across the supplier base.",
           "tables": []
         }
       ],
@@ -8314,7 +8314,7 @@
       "sections": [
         {
           "heading": "What it makes true",
-          "text": "The conversation starts in the wrong place today. Someone deciding whether to hire me or to buy\nhelp spends the first hour establishing what I have done, from a CV I wrote about myself, and\nthe model — which holds the same facts with their evidence attached, and is public — is reached\nonly if they go looking. When this holds, that hour goes to their company instead, because the\nbackground question was answered before the call.\n\nIt holds when the answer survives the check. A claim in the model names the document it rests\non, so a decider can verify it without asking me, and what they verify is the same thing a\nsearch engine and an agent would have told them. That is the whole of the vision, pointed at the\none moment where being true everywhere costs something if it is not.\n\nWhat falls outside: how many people arrive, and whether they decide yes. This is not a reach\ntarget and no volume makes it truer — a single decision made from the model and against me\nsatisfies it, and a room full of people who enjoyed the conversation does not. Also outside: the\ndecisions I make about them. What I need in order to choose well is a different question and\nnothing here serves it.",
+          "text": "The conversation starts in the wrong place today. Someone deciding whether to hire me or to buy help spends the first hour establishing what I have done, from a CV I wrote about myself, and the model — which holds the same facts with their evidence attached, and is public — is reached only if they go looking. When this holds, that hour goes to their company instead, because the background question was answered before the call.\n\nIt holds when the answer survives the check. A claim in the model names the document it rests on, so a decider can verify it without asking me, and what they verify is the same thing a search engine and an agent would have told them. That is the whole of the vision, pointed at the one moment where being true everywhere costs something if it is not.\n\nWhat falls outside: how many people arrive, and whether they decide yes. This is not a reach target and no volume makes it truer — a single decision made from the model and against me satisfies it, and a room full of people who enjoyed the conversation does not. Also outside: the decisions I make about them. What I need in order to choose well is a different question and nothing here serves it.",
           "tables": []
         }
       ],
@@ -8340,17 +8340,17 @@
       "sections": [
         {
           "heading": "The approach",
-          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and\neverything below exists to hold it: the constraint moved from building quickly to deciding\ncorrectly, so the scarce thing is judgment, and judgment is protected by making every decision\nleave a written artifact that a person put their name to. A fact enters the model from me or\nfrom a document, never from a model's recall, and nothing goes out under my name that I have not\nread against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it\nmay claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one\nstill leaves a pull request, which is where its reason is written. Agents draft against those\nand against the schemas; I review on the branch, in the diff and on the rendered page. The\nconventions the agents work under are themselves files — how I write, how I work with git, what\neach repository is — vendored into every repository at a pinned release, so a rule improves in\none place and reaches all of them. Roles are files too, in `model/roles/`: one seat held by me\nand every other by an agent, each saying what it takes, what it produces and what it never does.\nThe Implementer commits what its brief specifies and never on its own initiative; none of the\nother agent-held seats commits at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error\nrather than a warning, a pin that drifts fails a build, and the instance checker ends by naming\nwhat it did not reach — because the failure mode of an agent-written repository is a green check\nover an unread claim.",
+          "text": "AI drafts and it checks; it never decides and it never publishes. That is the position, and everything below exists to hold it: the constraint moved from building quickly to deciding correctly, so the scarce thing is judgment, and judgment is protected by making every decision leave a written artifact that a person put their name to. A fact enters the model from me or from a document, never from a model's recall, and nothing goes out under my name that I have not read against its sources.\n\nA change of consequence starts as a written thing: a brief naming the audience and the facts it may claim, a spec that keeps the finding that led to the decision, then a plan. A smaller one still leaves a pull request, which is where its reason is written. Agents draft against those and against the schemas; I review on the branch, in the diff and on the rendered page. The conventions the agents work under are themselves files — how I write, how I work with git, what each repository is — vendored into every repository at a pinned release, so a rule improves in one place and reaches all of them. Roles are files too, in `model/roles/`: one seat held by me and every other by an agent, each saying what it takes, what it produces and what it never does. The Implementer commits what its brief specifies and never on its own initiative; none of the other agent-held seats commits at all.\n\nChecks carry the load I would otherwise carry by reading. An unresolvable reference is an error rather than a warning, a pin that drifts fails a build, and the instance checker ends by naming what it did not reach — because the failure mode of an agent-written repository is a green check over an unread claim.",
           "tables": []
         },
         {
           "heading": "What it rules out",
-          "text": "No agent commits on its own initiative, and no agent merges at all. Work that leaves no artifact\nis not done: a decision reached in conversation and never written to a spec will be re-opened,\nso the conversation is not where it lives. Nothing is hand-maintained that could be derived — a\nsecond copy of a fact is the thing this model exists to end. No tool enters the chain before the\nconvention it works under is written, because a tool adopted first sets the rules by what it\nhappens to do. And no fact reaches a published surface because a model produced it fluently: a\nclaim arrives from me or from a document or it does not arrive, and an agent that cannot find\nits source says so instead of writing around the gap.",
+          "text": "No agent commits on its own initiative, and no agent merges at all. Work that leaves no artifact is not done: a decision reached in conversation and never written to a spec will be re-opened, so the conversation is not where it lives. Nothing is hand-maintained that could be derived — a second copy of a fact is the thing this model exists to end. No tool enters the chain before the convention it works under is written, because a tool adopted first sets the rules by what it happens to do. And no fact reaches a published surface because a model produced it fluently: a claim arrives from me or from a document or it does not arrive, and an agent that cannot find its source says so instead of writing around the gap.",
           "tables": []
         },
         {
           "heading": "What would show it is working",
-          "text": "A change to a published surface that bypassed the path — hand-edited, no spec, no pull request —\nis countable in git, and it has been zero since this strategy was adopted. A correction made\ntwice is countable the same way: if the same fact has to be fixed in two places, a derivation is\nmissing and the model has grown a second master. Both are visible the week they happen, which is\nthe point; a strategy about how the work is done cannot wait for the horizon to be judged.",
+          "text": "A change to a published surface that bypassed the path — hand-edited, no spec, no pull request — is countable in git, and it has been zero since this strategy was adopted. A correction made twice is countable the same way: if the same fact has to be fixed in two places, a derivation is missing and the model has grown a second master. Both are visible the week they happen, which is the point; a strategy about how the work is done cannot wait for the horizon to be judged.",
           "tables": []
         }
       ],
@@ -8422,7 +8422,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying\n  that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other,\n  the rules the model is held to, listing and returning entities, finding evidence, searching\n  and fetching, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
+          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying\n  that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other\n  and what they constrain, the rules the model is held to and the checks that hold it, listing\n  and returning entities, finding evidence, searching and fetching, over every entity in the\n  model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
           "tables": []
         }
       ],
@@ -8461,7 +8461,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I do not publish a criticism until I have built the thing that answers it, and then the working\nalternative is what I lead with — the argument comes second and can be lost without the point\ncollapsing. Where I cannot build it, I say the problem is real and leave the criticism unmade.\n\nI never let a complaint stand as a position.",
+          "text": "I do not publish a criticism until I have built the thing that answers it, and then the working alternative is what I lead with — the argument comes second and can be lost without the point collapsing. Where I cannot build it, I say the problem is real and leave the criticism unmade.\n\nI never let a complaint stand as a position.",
           "tables": []
         }
       ],
@@ -8479,7 +8479,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I write the decision down before the code — with the alternatives that lost and why — so the\nnext person can disagree with a reason rather than a rewrite. I spend the time that fast\nbuilding saves on choosing well, because the constraint moved there.\n\nI never ship a feature in a day and argue about it for a quarter because nobody can say what\nit was for.",
+          "text": "I write the decision down before the code — with the alternatives that lost and why — so the next person can disagree with a reason rather than a rewrite. I spend the time that fast building saves on choosing well, because the constraint moved there.\n\nI never ship a feature in a day and argue about it for a quarter because nobody can say what it was for.",
           "tables": []
         }
       ],
@@ -8497,7 +8497,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I grow the organization as deliberately as the platform — hiring, practices, ownership — so\nthat every part of the system has someone who could be woken up for it and would know what\nto do. I judge a platform by the team that can run it without me.\n\nI never let five people know everything while twenty wait for them.",
+          "text": "I grow the organization as deliberately as the platform — hiring, practices, ownership — so that every part of the system has someone who could be woken up for it and would know what to do. I judge a platform by the team that can run it without me.\n\nI never let five people know everything while twenty wait for them.",
           "tables": []
         }
       ],
@@ -8515,7 +8515,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I keep a written model — domains, capabilities, processes, rules — that the code, the org\nchart and the agents all refer back to, and I keep it where the people who own the facts can\nedit it. I build from the model, not beside it.\n\nI never let the model live in three heads and a slide deck, with every system encoding a\nslightly different version of it.",
+          "text": "I keep a written model — domains, capabilities, processes, rules — that the code, the org chart and the agents all refer back to, and I keep it where the people who own the facts can edit it. I build from the model, not beside it.\n\nI never let the model live in three heads and a slide deck, with every system encoding a slightly different version of it.",
           "tables": []
         }
       ],
@@ -8533,7 +8533,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I own reliability, incident management and the audit trail as part of building the thing. I\ntreat ISO 27001 and GDPR as design inputs, not a form to fill in after. I call it done when it\nruns for customers under real obligations, not when the demo works.\n\nI never meet a launch date with a system nobody is on call for.",
+          "text": "I own reliability, incident management and the audit trail as part of building the thing. I treat ISO 27001 and GDPR as design inputs, not a form to fill in after. I call it done when it runs for customers under real obligations, not when the demo works.\n\nI never meet a launch date with a system nobody is on call for.",
           "tables": []
         }
       ],
@@ -8551,7 +8551,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "Everything public about my work is derived rather than maintained. One model holds the facts:\nwhat I have built, the capabilities I claim with their evidence and what I hold to. The CV\nand its per-application dossiers, the website and its talks, the LinkedIn profile and the\nloadable skill bundle are outputs of it. When two of them disagree the model is what gets\ncorrected and the surfaces are rebuilt; none of them is edited on its own.\n\nThe claim is not that any single surface is good. It is that they agree — because someone\nasking about me increasingly asks a machine, and a machine assembling an answer from\ncontradictory sources produces either mush or a confident error. I would know this holds when\nthe same question put to a person, to a search engine and to an agent comes back the same.\n\nThe scope is the work. Private life is out of scope by design rather than by omission: the\nschemas have nowhere to put it, which is a stronger guarantee than a promise.",
+          "text": "Everything public about my work is derived rather than maintained. One model holds the facts: what I have built, the capabilities I claim with their evidence and what I hold to. The CV and its per-application dossiers, the website and its talks, the LinkedIn profile and the loadable skill bundle are outputs of it. When two of them disagree the model is what gets corrected and the surfaces are rebuilt; none of them is edited on its own.\n\nThe claim is not that any single surface is good. It is that they agree — because someone asking about me increasingly asks a machine, and a machine assembling an answer from contradictory sources produces either mush or a confident error. I would know this holds when the same question put to a person, to a search engine and to an agent comes back the same.\n\nThe scope is the work. Private life is out of scope by design rather than by omission: the schemas have nowhere to put it, which is a stronger guarantee than a promise.",
           "tables": []
         }
       ],
