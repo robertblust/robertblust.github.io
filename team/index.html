@@ -30,6 +30,7 @@
       "name": "Robert Blust",
       "url": "https://blust.ch/",
       "jobTitle": "Software Engineer & Architect",
+      "image": "https://blust.ch/images/profiles/robert-blust.jpg",
       "sameAs": [
         "https://github.com/robertblust",
         "https://www.linkedin.com/in/robertblust/",
@@ -767,7 +768,7 @@
      attribute and fetch the href, so the page names its data once and neither carries a
      copy. crossorigin is not decoration: without it the browser will not use the preload
      for the fetch and asks for the file twice. -->
-<link rel="preload" as="fetch" href="../model.json" data-stage crossorigin>
+<link rel="preload" as="fetch" href="../model.json" data-stage data-images="../images/" crossorigin>
 </head>
 
 <body>

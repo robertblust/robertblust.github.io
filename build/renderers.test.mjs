@@ -17,7 +17,7 @@ const FIXTURE = {
   edges: [],
 };
 
-import { writeJsonLd, alsoAt } from "./jsonld.mjs";
+import { writeJsonLd, alsoAt, imageOf } from "./jsonld.mjs";
 
 const PROFILE_FIXTURE = {
   ...FIXTURE,
@@ -219,4 +219,32 @@ test("the surfaces page missing either marker is an error, not a page half-gener
   fs.writeFileSync(path.join(dir, "surfaces/index.html"),
     "<html><body><!-- surfaces:start -->\n<!-- surfaces:end --></body></html>");
   assert.throws(() => writeSurfaces(SURFACES_FIXTURE, { root: dir }), /surfaces-note:start/);
+});
+
+// The person's picture is this site's own copy, addressed as `npm run model` writes it: the
+// profile's id and the extension the profile's `image` names.
+test("imageOf is the address of the site's copy, and null where the profile names no image", () => {
+  assert.equal(imageOf(PROFILE_FIXTURE), null);
+  const pictured = { ...PROFILE_FIXTURE, entities: PROFILE_FIXTURE.entities.map((e) =>
+    e.type === "profile" ? { ...e, fields: { image: "someone.jpg" } } : e) };
+  assert.equal(imageOf(pictured), "https://blust.ch/images/profiles/someone.jpg");
+});
+
+test("the Person node carries image only where the profile names one", () => {
+  const graphOf = (data) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+    const doc = { "@context": "https://schema.org", "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website" } ] };
+    fs.writeFileSync(path.join(dir, "index.html"),
+      `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+    writeJsonLd(data, { check: false, root: dir, pages: ["index.html"] });
+    return JSON.parse(fs.readFileSync(path.join(dir, "index.html"), "utf8")
+      .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
+  };
+  assert.ok(!("image" in graphOf(PROFILE_FIXTURE)[0]));
+  const pictured = { ...PROFILE_FIXTURE, entities: PROFILE_FIXTURE.entities.map((e) =>
+    e.type === "profile" ? { ...e, fields: { image: "someone.png" } } : e) };
+  assert.equal(graphOf(pictured)[0].image, "https://blust.ch/images/profiles/someone.png");
 });

@@ -34,11 +34,26 @@ const PAGES = ["index.html", "ideas/index.html", "model/index.html", "principles
 // that is not drift, and nothing here reconciles them.
 // The site's own address is left out: the Person node states it as `url`, and sameAs names the
 // other places that are the same person, which the site itself is not.
-export function alsoAt(data) {
+function personOf(data) {
   const root = data.entities.find((e) => e.id === data.rootId);
   if (!root) throw new Error("the model has no entity at its rootId");
   const profile = data.entities.find((e) => e.type === "profile" && e.name === root.name);
   if (!profile) throw new Error(`the model holds no profile named ${root.name}`);
+  return profile;
+}
+
+// The person's picture, where the profile carries one: the address of this site's own copy,
+// which `npm run model` writes at `images/<entity id>.<extension>`. Absent where the profile
+// names none, since a node that claimed a picture the site does not serve would be a claim
+// with nothing behind it.
+export function imageOf(data) {
+  const profile = personOf(data);
+  const name = profile.fields?.image;
+  return typeof name === "string" && name ? `${SITE}/images/${profile.id}.${name.split(".").pop()}` : null;
+}
+
+export function alsoAt(data) {
+  const profile = personOf(data);
   const urls = (profile.sections || [])
     .filter((s) => s.heading === "Also at")
     .flatMap((s) => s.tables || [])
@@ -57,6 +72,7 @@ function invariant(data) {
       name: "Robert Blust",
       url: `${SITE}/`,
       jobTitle: "Software Engineer & Architect",
+      ...(imageOf(data) ? { image: imageOf(data) } : {}),
       sameAs: alsoAt(data),
       subjectOf: { "@id": `${SITE}/#model` },
     },
