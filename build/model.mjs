@@ -18,7 +18,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseInstance } from "companygraph-meta-model/instance";
+import { parseInstance, imagesOf } from "companygraph-meta-model/instance";
+import { syncImages } from "@robertblust/design/images";
 import { readInstance } from "./read.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -44,6 +45,10 @@ const [files, schemas] = await Promise.all([
 // the file on GitHub.
 const data = { ...parseInstance(files, { sub: SUB, schemas }), commit, repo };
 const text = JSON.stringify(data, null, 2) + "\n";
+// The pictures the model names, copied beside model.json at `images/<entity id>.<extension>`
+// and pinned exactly as it is: the site serves its own copy, so a visitor's browser asks no
+// third party for one, which is what the privacy page says.
+const images = imagesOf(files, data, { sub: SUB, schemas });
 
 if (process.argv.includes("--check")) {
   const current = fs.existsSync(OUT) ? fs.readFileSync(OUT, "utf8") : "";
@@ -51,8 +56,14 @@ if (process.argv.includes("--check")) {
     console.log(`  ✗ model.json is not what ${repo}@${commit.slice(0, 7)} parses to — run: npm run model`);
     process.exit(1);
   }
-  console.log(`  ✓ model.json is ${repo}@${commit.slice(0, 7)}: ${data.entities.length} entities, ${data.edges.length} edges`);
+  const { problems } = syncImages({ root: ROOT, images, check: true });
+  if (problems.length) {
+    for (const p of problems) console.log(`  ✗ ${p} — run: npm run model`);
+    process.exit(1);
+  }
+  console.log(`  ✓ model.json is ${repo}@${commit.slice(0, 7)}: ${data.entities.length} entities, ${data.edges.length} edges, ${images.length} image(s)`);
 } else {
   fs.writeFileSync(OUT, text);
+  syncImages({ root: ROOT, images });
   console.log(`  wrote model.json: ${data.entities.length} entities, ${data.edges.length} edges from ${repo}@${commit.slice(0, 7)}`);
 }
