@@ -1,5 +1,5 @@
 {
-  "commit": "74747b3cfb298cdc0bea250603493935934e95df",
+  "commit": "6df2c30aba2e020979a94af2575c1a3a3022d207",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -9012,12 +9012,33 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "model/surfaces/blust-ch-website.md"
+    },
+    {
+      "id": "surfaces/chat-blust-ch-chat",
+      "type": "surface",
+      "name": "chat.blust.ch chat",
+      "tagline": "The chat a visitor opens on blust.ch to ask about the owner's work, answered from what the mcp.blust.ch MCP server says at its pinned commit, and the page a person reaches at the same address.",
+      "fields": {
+        "source": "Local",
+        "production": "built",
+        "built-by": "https://github.com/robertblust/mcp-blust-ch",
+        "url": "https://chat.blust.ch"
+      },
+      "sections": [
+        {
+          "heading": "What it shows",
+          "text": "- **Endpoint** — `/chat` on this address, which a page of blust.ch posts a visitor's conversation to and which answers it as a stream of events.\n- **Answer** — the text a language model writes from what the MCP server's tools returned for the visitor's question, in the language of the visitor's message, naming the entity each claim rests on.\n- **From the model** — a link to each entity a tool returned on its own, opening it on the model page of blust.ch.\n- **Refusals** — the sentences a visitor reads instead of an answer when the day's or the month's share is spent, when one address has sent too many messages in an hour, when the host does not answer or when the chat is switched off.\n- **Page** — what a browser gets at the chat's own address: the host's name, the vision's and the identity's taglines, the paths and the events the endpoint answers, the fence that bounds what it spends, and the commit of the model it answers from.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/surfaces/chat-blust-ch-chat.md"
     },
     {
       "id": "surfaces/linkedin-profile",
@@ -16122,6 +16143,12 @@
     },
     {
       "from": "surfaces/blust-ch-website",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "surfaces/chat-blust-ch-chat",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
