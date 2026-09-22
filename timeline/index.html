@@ -631,6 +631,7 @@
   /* ─── end stage contract ────────────────────────────────────────────────── */
 </style>
 <link rel="stylesheet" href="../stage.css">
+<link rel="stylesheet" href="../chat.css">
 <!-- The model this page draws. The stage and the ledger both find it by the data-stage
      attribute and fetch the href, so the page names its data once and neither carries a
      copy. crossorigin is not decoration: without it the browser will not use the preload
@@ -1243,5 +1244,8 @@ function rbLedger(data) {
   });
 })();
 </script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.blust.ch/chat" data-model="/model/" defer></script>
 </body>
 </html>
