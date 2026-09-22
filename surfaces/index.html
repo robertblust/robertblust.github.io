@@ -1090,7 +1090,14 @@
   document.getElementById("len").addEventListener("click", function(){ if (lang !== "en") toggle(); });
   document.getElementById("thLight").addEventListener("click", function(){ setTheme("light"); });
   document.getElementById("thDark").addEventListener("click", function(){ setTheme("dark"); });
-  document.addEventListener("keydown", function(e){ if(e.key === "l" || e.key === "L") toggle(); });
+  // L switches the language, but never while the visitor is typing: a letter typed into a field,
+  // the chat's among them, is text, and the language changes only when the visitor asks for it.
+  document.addEventListener("keydown", function(e){
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target;
+    if (t && t.closest && t.closest("input, textarea, select, [contenteditable=''], [contenteditable='true']")) return;
+    if (e.key === "l" || e.key === "L") toggle();
+  });
 
   applyLang();
   applyTheme();
