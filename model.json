@@ -1,5 +1,5 @@
 {
-  "commit": "ee15d0bf656563fcd25ede5f4983004981681288",
+  "commit": "74747b3cfb298cdc0bea250603493935934e95df",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -882,7 +882,7 @@
       "id": "features/the-model-is-read-on-the-web",
       "type": "feature",
       "name": "The model is read on the web",
-      "tagline": "Anyone reads my work in a browser, in English or Swiss German, without cloning a repository and without asking me.",
+      "tagline": "Anyone reads my work in a browser, in English or Swiss Standard German, without cloning a repository and without asking me.",
       "fields": {
         "source": "Local",
         "products": [
@@ -1142,7 +1142,7 @@
         },
         {
           "heading": "Activities",
-          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built,\n   what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line\n   and a severity, strengths named first.\n4. The Controller decides: fix, accept, or park for the Owner.\n5. The task is committed before the next one is dispatched.\n6. A finding against a task already committed comes back as its own brief; the commit\n   stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it\n   could not trace to the brief or the repository.\n2. The Owner reviews on the branch, in the diff and on the rendered page.\n3. The Translator makes the Swiss German from the reviewed English only, one element at a time,\n   with the glossary open, and hands back a back-translation beside each element.\n4. An English edit re-runs the Translator on that element alone.",
+          "text": "### Code\n\n1. The Controller dispatches one brief.\n2. The Implementer works it, test first where the brief says so, and reports what was built,\n   what was run and what it doubts.\n3. The Reviewer reads the diff against the brief and returns findings, each with a file, a line\n   and a severity, strengths named first.\n4. The Controller decides: fix, accept, or park for the Owner.\n5. The task is committed before the next one is dispatched.\n6. A finding against a task already committed comes back as its own brief; the commit\n   stands and the fix is a new one.\n\n### Prose\n\n1. The Writer drafts the English from the brief, on the branch, and reports which claims it\n   could not trace to the brief or the repository.\n2. The Owner reviews on the branch, in the diff and on the rendered page.\n3. The Translator makes the Swiss Standard German from the reviewed English only, one element at a time,\n   with the glossary open, and hands back a back-translation beside each element.\n4. An English edit re-runs the Translator on that element alone.",
           "tables": []
         },
         {
@@ -1165,7 +1165,7 @@
                   "For prose: the draft the Owner has read on the branch and on the page"
                 ],
                 [
-                  "Swiss German",
+                  "Swiss Standard German",
                   "For prose: made from the reviewed English, with its back-translation"
                 ]
               ]
@@ -1187,7 +1187,7 @@
                 "For prose: the draft the Owner has read on the branch and on the page"
               ],
               [
-                "Swiss German",
+                "Swiss Standard German",
                 "For prose: made from the reviewed English, with its back-translation"
               ]
             ]
@@ -1558,7 +1558,7 @@
       "id": "processes/delivery/tracks/prose",
       "type": "track",
       "name": "Prose",
-      "tagline": "A published page or post in reviewed English, and the Swiss German where the place carries it.",
+      "tagline": "A published page or post in reviewed English, and the Swiss Standard German where the place carries it.",
       "fields": {
         "source": "Local"
       },
@@ -1676,7 +1676,7 @@
       "sections": [
         {
           "heading": "Summary",
-          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into, the dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the English of every page and the Swiss German of every reviewed element. Whichever model runs it, the rulebooks are the same and the Owner's word ends every question it parks.",
+          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into, the dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the English of every page and the Swiss Standard German of every reviewed element. Whichever model runs it, the rulebooks are the same and the Owner's word ends every question it parks.",
           "tables": []
         }
       ],
@@ -7427,7 +7427,7 @@
       "id": "roles/translator",
       "type": "role",
       "name": "Translator",
-      "tagline": "The seat that makes the Swiss German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
+      "tagline": "The seat that makes the Swiss Standard German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
       "fields": {
         "source": "Local",
         "requires": [
@@ -7442,7 +7442,7 @@
         },
         {
           "heading": "What it produces",
-          "text": "The German in the element's own place, de-CH in the forms Switzerland uses, and beside each element a back-translation in English, so a reviewer with a minute can read what the German says.",
+          "text": "The German in the element's own place, Swiss Standard German, de-CH, in the forms Switzerland uses, and beside each element a back-translation in English, so a reviewer with a minute can read what the German says.",
           "tables": []
         },
         {
@@ -9002,7 +9002,7 @@
       "id": "surfaces/blust-ch-website",
       "type": "surface",
       "name": "blust.ch website",
-      "tagline": "The owner's own site, in English and Swiss German, that a visitor, a search engine or an agent reaches at the owner's address, rebuilt from a pinned commit of the model.",
+      "tagline": "The owner's own site, in English and Swiss Standard German, that a visitor, a search engine or an agent reaches at the owner's address, rebuilt from a pinned commit of the model.",
       "fields": {
         "source": "Local",
         "production": "built",
