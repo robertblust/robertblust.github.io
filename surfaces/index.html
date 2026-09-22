@@ -30,6 +30,7 @@
       "name": "Robert Blust",
       "url": "https://blust.ch/",
       "jobTitle": "Software Engineer & Architect",
+      "image": "https://blust.ch/images/profiles/robert-blust.jpg",
       "sameAs": [
         "https://github.com/robertblust",
         "https://www.linkedin.com/in/robertblust/",
@@ -301,7 +302,7 @@
   .brand .rb{fill:var(--c-mid)}
   .brand b{font-weight:600; font-size:1.06rem; letter-spacing:-.01em}
   .brand b span{color:var(--c-mid)}
-  /* ─── header contract · v13 · shared ──────────────────────────────────
+  /* ─── header contract · v14 · shared ──────────────────────────────────
      One row, three sites, and no stylesheet between them — a deck opens from file://, so
      this is a copy, generated from @robertblust/design. Editing it here has no effect — the
      next `npm run design` overwrites it. Change it in the package.
@@ -312,10 +313,12 @@
      not that every site declares it the same way, and `mobileNav` asserts the outcome.
 
      The contract:
-       · order      Team, Principles, Surfaces, API, Ideas, Model, Timeline, Example, Talks,
-                    Billing, Privacy, then the language control. A site skips what it does
-                    not have and reorders nothing. Read right to left, the switcher is at the
-                    edge and each step left is more the site's own subject. Principles is
+       · order      CLI, Team, Principles, Surfaces, API, Ideas, Model, Timeline, Example,
+                    Talks, Billing, Privacy, then the language control. A site skips what it
+                    does not have and reorders nothing. Read right to left, the switcher is at
+                    the edge and each step left is more the site's own subject. CLI is the
+                    one exception and leads, because a reader who came to set the thing up
+                    wants the command before anything the site says about it. Principles is
                     second because what the work is held to belongs to a site as closely as
                     who does it, and comes before where any of it is published. API was
                     missing from this list for one release while the check enforced it; the
@@ -706,7 +709,7 @@
      attribute and fetch the href, so the page names its data once and neither carries a
      copy. crossorigin is not decoration: without it the browser will not use the preload
      for the fetch and asks for the file twice. -->
-<link rel="preload" as="fetch" href="../model.json" data-stage crossorigin>
+<link rel="preload" as="fetch" href="../model.json" data-stage data-images="../images/" crossorigin>
 </head>
 
 <body>
@@ -766,7 +769,7 @@
       <!-- surfaces:start -->
       <div class="lineage" id="lineage">
         <svg class="wires" id="wires" aria-hidden="true"></svg>
-        <div class="ln-model" id="lnmodel"><div class="lbl" data-de="Das Modell">The model</div><div class="nm">mental-model</div><div class="at mono">@9db0cc9</div></div>
+        <div class="ln-model" id="lnmodel"><div class="lbl" data-de="Das Modell">The model</div><div class="nm">mental-model</div><div class="at mono">@1d23718</div></div>
         <ul class="ln-groups">
           <li class="ln-group hand">
             <div class="ln-maker" data-maker="hand"><svg class="mk hand" aria-hidden="true"><use href="#m-hand"/></svg><span class="who"><span data-de="Der Owner">The owner</span><span class="how" data-de="von Hand">by hand</span></span></div>

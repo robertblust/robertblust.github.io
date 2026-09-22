@@ -157,7 +157,7 @@ const PAGES = [
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], picture: true,
     card: true, internalLinks: true, graph: true, divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
   // opening into the card card.js renders. `ledger` is the check that the rows are the block's
   // experiences in the order they began and that a card is the entity, field for field.
@@ -203,6 +203,35 @@ const CHECKS = {
   ...MODEL_PAGE_CHECKS,
   ...DESIGN_CHECKS,
   ...pageChecks({ SITE, BASE }),
+  // The card's picture is drawn at runtime from a file the model build copied, so nothing in
+  // the markup fails when the copy is missing, the page forgot `data-images` or the card stopped
+  // drawing it: the page would show a broken box or no face, and every other check stays green.
+  // This opens the card of the first entity the model gives an image and asks the browser
+  // whether the picture arrived. blust.ch's profile carries one, so a model with none fails too.
+  async picture(page, spec) {
+    const found = await page.evaluate(async () => {
+      const link = document.querySelector("link[data-stage]");
+      const data = await (await fetch(link.href)).json();
+      const e = data.entities.find((x) => x.fields && x.fields.image);
+      return { id: e ? e.id : null, declared: link.getAttribute("data-images") };
+    });
+    if (!found.id) return "the model gives no entity an image, and this page shows the person's";
+    if (!found.declared) return "the data link declares no data-images, so no card draws a picture";
+    await page.goto(BASE + spec.path + "?stage=expanded#" + found.id);
+    try { await page.waitForSelector(".cbody .avatar", { timeout: 8000 }); }
+    catch { return `the card of ${found.id} drew no picture`; }
+    await page.waitForFunction(() => document.querySelector(".cbody .avatar").complete);
+    const drawn = await page.evaluate(() => {
+      const i = document.querySelector(".cbody .avatar"), r = i.getBoundingClientRect();
+      return { natural: i.naturalWidth, w: r.width, h: r.height, alt: i.alt, src: i.getAttribute("src"),
+               listed: [...document.querySelectorAll(".cbody dt")].some((d) => d.textContent === "image") };
+    });
+    if (!drawn.natural) return `${drawn.src} did not load`;
+    if (drawn.w !== 64 || drawn.h !== 64) return `the picture is ${drawn.w}×${drawn.h}, expected 64×64`;
+    if (!drawn.alt) return "the picture has no alt text";
+    if (drawn.listed) return "the card lists `image` as a field under the picture it names";
+    return null;
+  },
   async transport(page) {
     const missing = await page.evaluate(() =>
       ["tFirst","tPrev","tPlay","tNext","tFull","tNotes","langDe","langEn","chrome"]

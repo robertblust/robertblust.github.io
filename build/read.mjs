@@ -9,6 +9,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { IMAGE_FILE } from "companygraph-meta-model/instance";
 
 function readLocal(dir, commit, sub) {
   const head = execFileSync("git", ["-C", dir, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
@@ -21,7 +22,8 @@ function readLocal(dir, commit, sub) {
     for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, ent.name);
       if (ent.isDirectory()) walk(p);
-      else files.set(path.relative(root, p).split(path.sep).join("/"), fs.readFileSync(p, "utf8"));
+      // An image is bytes: read as text it is corrupted before the copy step sees it.
+      else files.set(path.relative(root, p).split(path.sep).join("/"), fs.readFileSync(p, IMAGE_FILE.test(p) ? undefined : "utf8"));
     }
   };
   walk(root);
@@ -40,7 +42,7 @@ async function readRemote(repo, commit, sub) {
     if (e.type !== "blob" || !e.path.startsWith(sub)) continue;
     const raw = await fetch(`https://raw.githubusercontent.com/${repo}/${commit}/${e.path}`, { headers });
     if (!raw.ok) throw new Error(`${e.path}: HTTP ${raw.status}`);
-    files.set(e.path.slice(sub.length), await raw.text());
+    files.set(e.path.slice(sub.length), IMAGE_FILE.test(e.path) ? new Uint8Array(await raw.arrayBuffer()) : await raw.text());
   }
   return files;
 }
