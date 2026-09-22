@@ -608,6 +608,7 @@
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 
 </style>
+<link rel="stylesheet" href="../chat.css">
 </head>
 <body>
 
@@ -657,12 +658,18 @@
           <ul>
             <li><b data-de="Cookies">Cookies</b><i data-de="Keine, keiner Art. Es gibt kein Banner, weil es nichts zuzustimmen gibt.">None, of any kind. There is no banner because there is nothing to consent to.</i></li>
             <li><b data-de="Statistik und Tracking">Analytics</b><i data-de="Nichts zählt Sie, und niemandem wird gemeldet, dass Sie hier waren.">Nothing counts you, and nobody is told that you were here.</i></li>
-            <li><b data-de="Anfragen an Dritte">Third-party requests</b><i data-de="Schriften, Bilder und Stile kommen alle von diesem Ursprung. Kein CDN sieht Ihre Adresse.">Fonts, images and styles all come from this origin. No CDN sees your address.</i></li>
+            <li><b data-de="Anfragen an Dritte">Third-party requests</b><i data-de="Schriften, Bilder und Stile kommen alle von diesem Ursprung. Kein CDN sieht Ihre Adresse.">Fonts, images and styles all come from this origin. No CDN sees your address. The one exception is the chat, and only once you have opened it and pressed send: that message goes to chat.blust.ch and from there to Anthropic.</i></li>
             <li><b data-de="Formulare und Konten">Forms and accounts</b><i data-de="Nichts auszufüllen, nichts anzumelden, nichts zu speichern.">Nothing to fill in, nothing to sign up for, nothing to store.</i></li>
             <li><b data-de="Wiedererkennung">Fingerprinting</b><i data-de="Es wird nicht versucht, Sie über Besuche hinweg wiederzuerkennen. Der Sprachschlüssel ist kein Merkmal dafür.">No attempt is made to recognize you across visits. The language key is not an identifier.</i></li>
           </ul>
         </div>
       </div>
+    </section>
+
+    <section>
+      <h2>The chat</h2>
+      <p class="lede">The button at the foot of each page opens a chat with the model. Nothing happens until you open it and press send. Then your message, and the messages before it in that conversation, go to chat.blust.ch, a service of this site, which asks the model at mcp.blust.ch through its tools and asks Claude, Anthropic's language model, through Anthropic's API in the United States, to write the answer from what the tools said. Anthropic keeps what it receives for up to thirty days under its own terms; this site keeps nothing of it. The service counts what an answer cost and stores no word of what was said, and the browser stores nothing either: closing the page ends the conversation.</p>
+      <p class="lede">What the chat answers comes from the model and names the entries it rests on; it is written by a language model and can be wrong. The service refuses a message before asking the model when the day's share of answers is spent, when an address sends too many in an hour, or when the chat is switched off, and a refusal costs nothing and reaches nobody.</p>
     </section>
 
     <section>
@@ -966,5 +973,8 @@
   applyTheme();
 })();
 </script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.blust.ch/chat" data-model="/model/" defer></script>
 </body>
 </html>

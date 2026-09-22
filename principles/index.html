@@ -626,6 +626,7 @@
   .derived{margin-top:2.6rem; font-family:"Plex Mono",monospace; font-size:.78rem;
            letter-spacing:.06em; color:var(--dim)}
 </style>
+<link rel="stylesheet" href="../chat.css">
 </head>
 
 <body>
@@ -991,5 +992,8 @@
   applyTheme();
 })();
 </script>
+
+<!-- The chat: one tag, the design package's widget. It loads nothing and sends nothing until a visitor opens it; the privacy page says what leaves the browser then. -->
+<script src="../chat.js" data-chat="https://chat.blust.ch/chat" data-model="/model/" defer></script>
 </body>
 </html>
