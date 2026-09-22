@@ -30,8 +30,10 @@ export const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 // A share card should not advertise a progress bar and a play button that do nothing inside a
 // PNG. `.bar` is two different things by the same name — a deck's transport bar and the header
 // bar on the profile and talks pages — and hiding both is what a card wants, but the overlap is
-// accidental: rename either one and the other's rule here stops applying, silently.
-const HIDE = `.chrome,.bar,.notes,.langind,.hint{display:none!important}
+// accidental: rename either one and the other's rule here stops applying, silently. `.rbchat-open`
+// is the chat's button, fixed to the corner of every prose page by the design package's widget;
+// a picture of a button that cannot be pressed is the same wrong advertisement as the play button.
+const HIDE = `.chrome,.bar,.notes,.langind,.hint,.rbchat-open{display:none!important}
   /* a still image should not be waiting out a transition it does not want */
   .slide.active > *{animation:none!important}`;
 
