@@ -1,11 +1,23 @@
 {
-  "commit": "00c49272d30595582a5f3fb79e9664b471dc6233",
+  "commit": "9db0cc9ba4e58425757d742591fc967129922844",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
     {
       "type": "achievement-kind",
       "folder": "achievement-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "concept",
+      "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "domain",
+      "folder": "domains",
       "owner": null,
       "singular": false
     },
@@ -18,6 +30,12 @@
     {
       "type": "experience-kind",
       "folder": "experience-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "feature",
+      "folder": "features",
       "owner": null,
       "singular": false
     },
@@ -36,6 +54,12 @@
     {
       "type": "process",
       "folder": "processes",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product",
+      "folder": "products",
       "owner": null,
       "singular": false
     },
@@ -241,6 +265,428 @@
       "path": "model/achievement-kinds/ways-of-working.md"
     },
     {
+      "id": "concepts/claim",
+      "type": "concept",
+      "name": "Claim",
+      "tagline": "A skill at a level that a profile asserts of its holder, written as one row, which stands in the model only with something concrete under it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Anspruch",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Anspruch",
+                "translation"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Evidence",
+                  "one to many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Evidence",
+                "one to many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/claim.md"
+    },
+    {
+      "id": "concepts/company-of-one",
+      "type": "concept",
+      "name": "Company of one",
+      "tagline": "One person described as a company would be, with an identity, a vision, a strategy, roles and processes, where the work is the whole scope and private life is outside it by design.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/concepts/company-of-one.md"
+    },
+    {
+      "id": "concepts/decider",
+      "type": "concept",
+      "name": "Decider",
+      "tagline": "Someone deciding whether to work with me, a client buying help or an employer hiring, who needs what I have done established before the conversation and not during it.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/concepts/decider.md"
+    },
+    {
+      "id": "concepts/document",
+      "type": "concept",
+      "name": "Document",
+      "tagline": "Something written or recorded outside the model that a fact in it rests on — a recording, a deck, a published page, an employment reference, a diploma — linked where it is public and kept out of the model where it is private.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "reference",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "reference",
+                "synonym"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/document.md"
+    },
+    {
+      "id": "concepts/evidence",
+      "type": "concept",
+      "name": "Evidence",
+      "tagline": "One sentence naming a thing done, concrete enough that a reader could check it, and the period of work it comes from where there is one.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "Beleg",
+                  "translation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "Beleg",
+                "translation"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/evidence.md"
+    },
+    {
+      "id": "concepts/master",
+      "type": "concept",
+      "name": "Master",
+      "tagline": "The one place a fact is corrected, so that every other place showing it is rebuilt from there and never edited on its own.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "source of truth",
+                  "synonym"
+                ],
+                [
+                  "mastership",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "source of truth",
+                "synonym"
+              ],
+              [
+                "mastership",
+                "synonym"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/master.md"
+    },
+    {
+      "id": "concepts/mental-model",
+      "type": "concept",
+      "name": "Mental Model",
+      "tagline": "The written model of a company that the people who run it and the agents beside them both read: its facts as Markdown files, structured by a meta-model and versioned like code. Mine describes a company of one.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "knowledge base",
+                  "synonym"
+                ],
+                [
+                  "instance",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "knowledge base",
+                "synonym"
+              ],
+              [
+                "instance",
+                "synonym"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Relations",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Concept",
+                "Cardinality",
+                "As"
+              ],
+              "rows": [
+                [
+                  "Company of one",
+                  "one",
+                  "described company"
+                ],
+                [
+                  "Master",
+                  "one",
+                  ""
+                ],
+                [
+                  "Claim",
+                  "many",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Concept",
+              "Cardinality",
+              "As"
+            ],
+            "rows": [
+              [
+                "Company of one",
+                "one",
+                "described company"
+              ],
+              [
+                "Master",
+                "one",
+                ""
+              ],
+              [
+                "Claim",
+                "many",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/mental-model.md"
+    },
+    {
+      "id": "concepts/own-account",
+      "type": "concept",
+      "name": "Own account",
+      "tagline": "What I say of my own work from having done it, which enters the model as a fact and not as a claim awaiting a source, because in a model of one person the person is where the measurement comes from.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [
+        {
+          "heading": "Also known as",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Term",
+                "Kind"
+              ],
+              "rows": [
+                [
+                  "first-hand testimony",
+                  "synonym"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Term",
+              "Kind"
+            ],
+            "rows": [
+              [
+                "first-hand testimony",
+                "synonym"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/concepts/own-account.md"
+    },
+    {
+      "id": "domains/portfolio",
+      "type": "domain",
+      "name": "Portfolio",
+      "tagline": "The account of my work, and the words I mean something exact by when I give it: what is claimed, what a claim rests on, where a fact is kept and who reads it. What a model is made of — entity, type, reference, pin — is CompanyGraph's vocabulary and is left to its Core domain, and how the work gets made is left to the conventions the Delivery process names.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/domains/portfolio.md"
+    },
+    {
       "id": "experience-kinds/community",
       "type": "experience-kind",
       "name": "Community",
@@ -329,6 +775,133 @@
       ],
       "owner": null,
       "path": "model/experience-kinds/role.md"
+    },
+    {
+      "id": "features/a-career-is-read-in-order",
+      "type": "feature",
+      "name": "A career is read in order",
+      "tagline": "A reader follows over twenty-five years of work period by period: what was done in each, in what kind of engagement, and why it ended.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Mental Model"
+        ],
+        "concepts": [
+          "Own account",
+          "Document"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Each period of work is one experience, with its dates, its kind, what was achieved in it and, where it ended, an ending that says why and what it left. A talk, a film and a course are experiences too, each with its address where it has one. It stops at what happened. What a period shows about a capability is said once, as evidence under a claim, and not again here. And it is my own account: what someone else published about a period stands in that experience's references, never in its prose.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-career-is-read-in-order.md"
+    },
+    {
+      "id": "features/a-claim-is-checked-against-its-evidence",
+      "type": "feature",
+      "name": "A claim is checked against its evidence",
+      "tagline": "Someone deciding about me reads what I say I can do, and at which level, and finds under each claim the work it rests on, without asking me.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Mental Model"
+        ],
+        "concepts": [
+          "Claim",
+          "Evidence",
+          "Document",
+          "Decider"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "Every skill the profile claims carries a level from a ladder whose rungs are defined, and under it at least one row of evidence: one sentence naming a thing done, and the experience it comes from. An experience links the public documents it rests on — a talk's recording, a published case study, a commercial register entry — so a reader opens them for themselves. It stops at what can be shown in public: employment references, diplomas and certifications are read when a page is written, stay with me and are shown on request, so an entry resting on them carries the fact and no link. It gives no verdict either. Whether the evidence is enough for the decision at hand is the reader's to judge.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/a-claim-is-checked-against-its-evidence.md"
+    },
+    {
+      "id": "features/an-agent-answers-from-the-model",
+      "type": "feature",
+      "name": "An agent answers from the model",
+      "tagline": "Someone asks their own agent about my work and gets what the model says at one commit, named in the answer, instead of what the agent recalls.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Mental Model"
+        ],
+        "concepts": [
+          "Mental Model",
+          "Claim",
+          "Evidence"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "An agent connects over the Model Context Protocol and asks which types the model declares, what one entity says and what evidence a claim rests on, and every answer names the commit it was read from. It only reads, and it adds nothing of its own. It stops at this model: the server is CompanyGraph's, and what it can do is described there; where it runs and what its own page shows belong to the mcp.blust.ch MCP server.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/an-agent-answers-from-the-model.md"
+    },
+    {
+      "id": "features/the-model-is-carried-into-a-conversation",
+      "type": "feature",
+      "name": "The model is carried into a conversation",
+      "tagline": "Someone loads the whole model into the assistant they already use and asks it there, with no server in between.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Mental Model"
+        ],
+        "concepts": [
+          "Mental Model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The model is exported as bundles — a skill an agent loads, and a set of sources with a reading guide for a notebook — and each is held to being the model whole. It stops at the handing over. A bundle is given on request and published nowhere, and it is as old as its export, so it answers for the day it was made and not for today.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/the-model-is-carried-into-a-conversation.md"
+    },
+    {
+      "id": "features/the-model-is-read-on-the-web",
+      "type": "feature",
+      "name": "The model is read on the web",
+      "tagline": "Anyone reads my work in a browser, in English or Swiss German, without cloning a repository and without asking me.",
+      "fields": {
+        "source": "Local",
+        "products": [
+          "Mental Model"
+        ],
+        "concepts": [
+          "Mental Model",
+          "Master"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Description",
+          "text": "The pages are drawn from one pinned commit of the model, so a page shows what the model says and a corrected fact is one commit in one place; the parsed model is published beside them as one file anyone may fetch. It stops at reading: nothing on the web writes to the model. What the site must show and how it is built belong to the blust.ch website, and that site's talks and its ideas page are written by hand and are no part of this.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/features/the-model-is-read-on-the-web.md"
     },
     {
       "id": "identity",
@@ -992,6 +1565,19 @@
       "sections": [],
       "owner": "processes/delivery",
       "path": "model/processes/delivery/tracks/prose.md"
+    },
+    {
+      "id": "products/mental-model",
+      "type": "product",
+      "name": "Mental Model",
+      "tagline": "My work written down once, as a graph of Markdown files — what I have built, the capabilities I claim with their evidence and what I hold to — opened by whoever is deciding whether to work with me, and by the search engine or the agent they ask instead.",
+      "fields": {
+        "source": "Local",
+        "domain": "Portfolio"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/products/mental-model.md"
     },
     {
       "id": "proficiency-levels/competent",
@@ -2307,7 +2893,7 @@
                 [
                   "Java",
                   "Built UBS's web portals in Java Portlets and JSP on IBM Portal Server.",
-                  "Software Engineer / IT Developer"
+                  "Application Engineer"
                 ],
                 [
                   "Java",
@@ -2622,7 +3208,7 @@
                 [
                   "Software architecture",
                   "Created the software architecture of UBS's WPS Portal application and led its development and delivery.",
-                  "Software Engineer / IT Developer"
+                  "Application Engineer"
                 ],
                 [
                   "Software architecture",
@@ -2652,7 +3238,7 @@
                 [
                   "Software engineering",
                   "Built UBS's intranet and internet portals and developed features of the ACE Foundation beneath UBS Quotes.",
-                  "Software Engineer / IT Developer"
+                  "Application Engineer"
                 ],
                 [
                   "Software engineering",
@@ -3443,7 +4029,7 @@
               [
                 "Java",
                 "Built UBS's web portals in Java Portlets and JSP on IBM Portal Server.",
-                "Software Engineer / IT Developer"
+                "Application Engineer"
               ],
               [
                 "Java",
@@ -3758,7 +4344,7 @@
               [
                 "Software architecture",
                 "Created the software architecture of UBS's WPS Portal application and led its development and delivery.",
-                "Software Engineer / IT Developer"
+                "Application Engineer"
               ],
               [
                 "Software architecture",
@@ -3788,7 +4374,7 @@
               [
                 "Software engineering",
                 "Built UBS's intranet and internet portals and developed features of the ACE Foundation beneath UBS Quotes.",
-                "Software Engineer / IT Developer"
+                "Application Engineer"
               ],
               [
                 "Software engineering",
@@ -4073,7 +4659,7 @@
     {
       "id": "profiles/robert-blust/experiences/2001-ubs-engineer",
       "type": "experience",
-      "name": "Software Engineer / IT Developer",
+      "name": "Application Engineer",
       "tagline": "Built UBS's intranet and internet web portals on IBM Portal Server, and led delivery of the WPS Portal application.",
       "fields": {
         "source": "Local",
@@ -4175,6 +4761,60 @@
         "kind": "Role",
         "start": "2004-08",
         "end": "2009-09"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2008-ubs-project-management",
+      "type": "experience",
+      "name": "Project Management Advanced Skills",
+      "tagline": "UBS's eight-day program for leaders of projects of medium complexity, part of its 2008 training series.",
+      "fields": {
+        "source": "Local",
+        "kind": "Education",
+        "start": "2008",
+        "end": "2008",
+        "organization": "UBS AG"
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Completed UBS's Project Management Advanced Skills program over two to three months: leading and managing project teams, project initiation, planning and control, stakeholder management, risk management and strategy alignment.",
+          "tables": []
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2008-ubs-project-management.md",
+      "stamp": {
+        "kind": "Education",
+        "start": "2008",
+        "end": "2008"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
+      "type": "experience",
+      "name": "Eclipse Code Camp Modeling",
+      "tagline": "Four days in Munich on the Eclipse Modeling Framework, trained by Eike Stepper and Ed Merks.",
+      "fields": {
+        "source": "Local",
+        "kind": "Education",
+        "start": "2009-10-12",
+        "end": "2009-10-15",
+        "organization": "entwickler akademie"
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Completed the Eclipse Code Camp Modeling in Munich: EMF's architecture and Ecore, code generation and its customization, the persistence framework, containment and cross references, distribution and transactions, and data binding for user interfaces.",
+          "tables": []
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2009-eclipse-code-camp.md",
+      "stamp": {
+        "kind": "Education",
+        "start": "2009-10-12",
+        "end": "2009-10-15"
       }
     },
     {
@@ -8371,7 +9011,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
           "tables": []
         }
       ],
@@ -8603,6 +9243,144 @@
       "attrs": {}
     },
     {
+      "from": "concepts/claim",
+      "to": "concepts/evidence",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one to many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/claim",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/claim",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/company-of-one",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/company-of-one",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/decider",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/decider",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/document",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/document",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/evidence",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/evidence",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/master",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/master",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/mental-model",
+      "to": "concepts/claim",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "many",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/mental-model",
+      "to": "concepts/company-of-one",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": "described company"
+      }
+    },
+    {
+      "from": "concepts/mental-model",
+      "to": "concepts/master",
+      "via": "Relations.Concept",
+      "attrs": {
+        "Cardinality": "one",
+        "As": ""
+      }
+    },
+    {
+      "from": "concepts/mental-model",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/mental-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/own-account",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "concepts/own-account",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "domains/portfolio",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "experience-kinds/community",
       "to": "sources/local",
       "via": "source",
@@ -8628,6 +9406,138 @@
     },
     {
       "from": "experience-kinds/role",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-career-is-read-in-order",
+      "to": "concepts/document",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-career-is-read-in-order",
+      "to": "concepts/own-account",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-career-is-read-in-order",
+      "to": "products/mental-model",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-career-is-read-in-order",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "concepts/claim",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "concepts/decider",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "concepts/document",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "concepts/evidence",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "products/mental-model",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/a-claim-is-checked-against-its-evidence",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-answers-from-the-model",
+      "to": "concepts/claim",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-answers-from-the-model",
+      "to": "concepts/evidence",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-answers-from-the-model",
+      "to": "concepts/mental-model",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-answers-from-the-model",
+      "to": "products/mental-model",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/an-agent-answers-from-the-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-carried-into-a-conversation",
+      "to": "concepts/mental-model",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-carried-into-a-conversation",
+      "to": "products/mental-model",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-carried-into-a-conversation",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-read-on-the-web",
+      "to": "concepts/master",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-read-on-the-web",
+      "to": "concepts/mental-model",
+      "via": "concepts",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-read-on-the-web",
+      "to": "products/mental-model",
+      "via": "products",
+      "attrs": {}
+    },
+    {
+      "from": "features/the-model-is-read-on-the-web",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -8975,6 +9885,18 @@
       "attrs": {}
     },
     {
+      "from": "products/mental-model",
+      "to": "domains/portfolio",
+      "via": "domain",
+      "attrs": {}
+    },
+    {
+      "from": "products/mental-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "proficiency-levels/competent",
       "to": "sources/local",
       "via": "source",
@@ -9288,6 +10210,42 @@
     },
     {
       "from": "profiles/robert-blust/experiences/2004-ubs-solution-manager",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2008-ubs-project-management",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2008-ubs-project-management",
+      "to": "experience-kinds/education",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2008-ubs-project-management",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
+      "to": "experience-kinds/education",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
