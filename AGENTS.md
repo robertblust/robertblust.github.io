@@ -301,8 +301,6 @@ To change one of them:
    The design package has its own Dependabot group so a design bump never arrives beside a
    Playwright one — it is the pull request that has to be read rather than merged on sight.
 
-**Four pages still need their version comment bumped by hand.** `/model/`, `/timeline/`, `/team/` and `/surfaces/` each still fence their own `stage contract`, so `fences` on those four is never `[]` and `tokenVersion`'s fenceless branch — the one that reads the release straight out of `tokens.css` — never applies to them; each keeps the one-line `<!-- design tokens · vN, … -->` comment the other seven pages dropped, and step 3 above has to update it on those four or `npm run verify` goes red on a release that otherwise landed clean.
-
 `design:check` runs in CI, so a page that drifts from the pinned release goes red without anyone remembering to look. That is the guarantee the old habit-with-a-tripwire never was.
 
 **A page and the files it links are never on the same release by the same commit, and that gap is accepted, not a bug to close.** The pin here names a tag already cut in `robertblust/design`; this repository's own commit that takes it — running `npm run design`, committing what changed — always lands after. So no release may ask for both halves at once: a rule renamed, a class dropped, or a selector a page starts relying on that the current pinned tag does not yet carry is two releases, never one — the file first, tagged in `robertblust/design`, and the page after, once that tag is pinned here. Writing a page against a rule the pinned tag has not shipped yet is writing against a file that is not there.

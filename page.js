@@ -1,4 +1,4 @@
-// @robertblust/design v0.80.2 — page.js, assembled from the shared blocks
+// @robertblust/design v0.80.3 — page.js, assembled from the shared blocks
 // and copied into this site by `npm run design`. Editing it here does nothing: the
 // next `npm run design` overwrites it from the package. Change it there instead.
 
@@ -32,12 +32,27 @@ function langFromUrl(){
   } catch (e) {}
   return m[1];
 }
+/* `lang` above is read once, when this script runs. That is fine for the fenced form, where
+   it is the page's own variable and the page's own toggle mutates it directly — but a copy
+   loaded as `page.js` or `deck.js` runs inside its own closure, so its `lang` is a private
+   snapshot nothing after load ever updates. A visitor who switches language after the file
+   has already run kept having every family link decorated with the language the page
+   arrived with, forever after — measured on blust.ch's /ideas/, where a link to a sibling
+   site carried the stale value once the file shape shipped there.
+
+   `document.documentElement.lang` is the live truth instead: every page's own `applyLang`
+   sets it, fenced or filed, so reading it at click time sees a switch the instant it
+   happens. The captured `lang` is kept only as a fallback, for the one case the attribute
+   cannot answer — a page that has not called `applyLang` at all, or set the attribute to
+   something outside the two languages the family carries. */
 function carryLang(e){
   var a = e.target && e.target.closest && e.target.closest("a[href]");
   if (!a) return;
   var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
   if (u.origin === location.origin || !FAMILY.test(u.hostname)) return;
-  u.searchParams.set("lang", lang);
+  var docLang = document.documentElement.lang;
+  var live = (docLang === "de" || docLang === "en") ? docLang : lang;
+  u.searchParams.set("lang", live);
   a.href = u.toString();
 }
 // mousedown as well as click, so a middle-click or a cmd-click opening a new tab
