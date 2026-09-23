@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Team — Robert Blust</title>
-<meta id="metadesc" name="description" content="The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate.">
+<meta id="metadesc" name="description" content="The two profiles the model holds and the seats between them: who executes each phase of each process, who supports it, and who approves its gate.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://blust.ch/team/">
 
 <meta property="og:title" content="Team — Robert Blust">
-<meta property="og:description" content="The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate.">
+<meta property="og:description" content="The two profiles the model holds and the seats between them: who executes each phase of each process, who supports it, and who approves its gate.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Robert Blust">
 <meta property="og:url" content="https://blust.ch/team/">
@@ -302,7 +302,7 @@
 
     <div class="title">
       <h1 data-de="<span class='r70'>Eine Firma aus einer Person,</span><span class='rcl'><em>besetzt</em>.</span>"><span class="r70">A company of one,</span><span class="rcl"><em>staffed</em>.</span></h1>
-      <p class="tagline" data-de="Zwei Profile halten acht Sitze. Eines davon ist ein Mensch, und dieses entscheidet.">Two profiles hold eight seats. One of them is a person, and that one decides.</p>
+      <p class="tagline" data-de="Zwei Profile halten jeden Sitz. Eines davon ist ein Mensch, und dieses entscheidet.">Two profiles hold every seat. One of them is a person, and that one decides.</p>
       <!-- team-note:start -->
       <p class="note" data-de="Aus dem Modell erzeugt: Die Worte unten sind seine eigenen – und in der einen Sprache, in der es geschrieben ist. Der Rest dieser Seite ist zweisprachig; eine übersetzte Zweitfassung wäre eine zweite Sache, die wahr bleiben muss – genau das, wogegen diese Seite argumentiert.">Generated from the model, so the words below are its own — and in the one language it is written in. The rest of this site is bilingual; a translated copy would be a second thing to keep true, which is what this page argues against.</p>
     <!-- team-note:end -->
@@ -311,41 +311,44 @@
     <section class="figure-section">
       <div class="lbl" data-de="Das Team">The team</div>
       <!-- team:start -->
+      <section class="proc" id="delivery">
+        <h3 class="procname">Delivery</h3>
+        <p class="proctag">How anything the company ships is shaped, specified, planned, made and merged, in code and in prose.</p>
       <div class="hdrail"><div class="whos">
         <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 8</div></div></div>
         <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 7 of 8</div></div></div>
-      </div><button class="openall" id="openall" type="button" data-de="Alle öffnen">Open all</button></div>
-      <div class="grid" id="board">
+      </div><button class="openall" id="delivery-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="delivery-board">
         <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Shape</span></span><span><span class="phnum">02</span><span class="phname">Spec</span></span><span><span class="phnum">03</span><span class="phname">Plan</span></span><span><span class="phnum">04</span><span class="phname">Implement</span></span><span><span class="phnum">05</span><span class="phname">Integrate</span></span></div>
-        <details class="human" id="owner" data-role="roles/owner">
+        <details class="human" id="delivery-owner" data-role="roles/owner">
           <summary aria-label="Owner, human. executes Shape, Implement, Integrate. approves the gate of Shape, Spec, Plan, Implement, Integrate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span><span><i class="g ex"></i><i class="g ga"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="specifier" data-role="roles/specifier">
+        <details id="delivery-specifier" data-role="roles/specifier">
           <summary aria-label="Specifier, agent. executes Spec. supports Plan. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Specifier</span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="planner" data-role="roles/planner">
+        <details id="delivery-planner" data-role="roles/planner">
           <summary aria-label="Planner, agent. executes Plan. supports Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Planner</span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g su"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="controller" data-role="roles/controller">
+        <details id="delivery-controller" data-role="roles/controller">
           <summary aria-label="Controller, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Controller</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="implementer" data-role="roles/implementer">
+        <details id="delivery-implementer" data-role="roles/implementer">
           <summary aria-label="Implementer, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Implementer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="reviewer" data-role="roles/reviewer">
+        <details id="delivery-reviewer" data-role="roles/reviewer">
           <summary aria-label="Reviewer, agent. executes Implement, Integrate. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Reviewer</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span><i class="g ex"></i></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="writer" data-role="roles/writer">
+        <details id="delivery-writer" data-role="roles/writer">
           <summary aria-label="Writer, agent. executes Implement. supports Spec. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Writer</span></span><span></span><span><i class="g su"></i></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
-        <details id="translator" data-role="roles/translator">
+        <details id="delivery-translator" data-role="roles/translator">
           <summary aria-label="Translator, agent. executes Implement. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Translator</span></span><span></span><span></span><span></span><span><i class="g ex"></i></span><span></span></summary>
           <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
         </details>
@@ -363,6 +366,36 @@
         <dt><span class="phnum">05</span><span class="phname">Integrate</span></dt>
         <dd>Put the change where it binds, and move everything that names it.</dd>
       </dl>
+      </section>
+      <section class="proc" id="answering">
+        <h3 class="procname">Answering</h3>
+        <p class="proctag">How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.</p>
+      <div class="hdrail"><div class="whos">
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 3</div></div></div>
+        <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 1 of 3</div></div></div>
+        <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 1 of 3</div></div></div>
+      </div><button class="openall" id="answering-openall" type="button" data-de="Alle öffnen">Open all</button></div>
+      <div class="grid" id="answering-board">
+        <div class="ghead"><span class="lbl">Seat</span><span><span class="phnum">01</span><span class="phname">Answer</span></span></div>
+        <details class="human" id="answering-owner" data-role="roles/owner">
+          <summary aria-label="Owner, human. approves the gate of Answer."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Owner</span></span><span><i class="g ga"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details class="human" id="answering-visitor" data-role="roles/visitor">
+          <summary aria-label="Visitor, human. supports Answer. approves no gate."><span class="sname"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><span class="tw">Visitor</span></span><span><i class="g su"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+        <details id="answering-answerer" data-role="roles/answerer">
+          <summary aria-label="Answerer, agent. executes Answer. approves no gate."><span class="sname"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><span class="tw">Answerer</span></span><span><i class="g ex"></i></span></summary>
+          <div class="drawer"><div class="card"><div class="cbody"></div><div class="cfoot"><span></span></div></div></div>
+        </details>
+      </div>
+      <div class="legend"><span><i class="g ex"></i> <span data-de="führt die Phase aus">executes the phase</span></span><span><i class="g su"></i> <span data-de="unterstützt sie">supports it</span></span><span><i class="g ga"></i> <span data-de="gibt ihr Gate frei">approves its gate</span></span><span><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg> <span data-de="Mensch">human</span></span><span><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg> <span data-de="Agent">agent</span></span></div>
+      <dl class="phases">
+        <dt><span class="phnum">01</span><span class="phname">Answer</span></dt>
+        <dd>Give the visitor what the model says, in their words, and not a claim more.</dd>
+      </dl>
+      </section>
       <!-- team:end -->
       <p class="figcap" data-de="Eine Zeile zeigt, was ein Sitz über die Arbeit hinweg tut, eine Spalte, wer eine Phase berührt. Die Dreiecksspalte ist das Argument: Jedes Gate im Unternehmen gibt der einzige Mensch darin frei, und keine Agentenzeile trägt eines. Ein Sitz öffnet die Karte, die die Modellseite und der Werdegang bereits zeichnen.">Read a row for what a seat does across the work, and a column for who touches a phase. The triangle column is the argument: every gate in the company is approved by the only human in it, and no agent row carries one. A seat opens onto the card the model page and the timeline already draw.</p>
     </section>
@@ -370,10 +403,10 @@
     <section>
       <h2 data-de="Wie man es liest">How to read it</h2>
       <div class="rules">
-        <p data-de="<b>Ein Sitz ist eine Rolle, keine Person.</b> Das Modell beschreibt, was ein Sitz nimmt, produziert und niemals tut; ein Profil hält ihn. Sitze und Personen werden nicht gleichgesetzt: Hier hält ein Profil einen Sitz und eines sieben.">
-          <b>A seat is a role, not a person.</b> The model says what a seat takes, produces and never does; a profile holds it. Seats and people are not the same count — here one profile holds one seat and one holds seven.</p>
-        <p data-de="<b>Ein Gate ist das, ohne das eine Phase nicht verlassen wird.</b> Alle fünf gibt derselbe Sitz frei, und dieser Sitz wird von dem einzigen Menschen gehalten.">
-          <b>A gate is what a phase cannot be left without.</b> All five are approved by the same seat, and that seat is held by the only human.</p>
+        <p data-de="<b>Ein Sitz ist eine Rolle, keine Person.</b> Das Modell beschreibt, was ein Sitz nimmt, produziert und niemals tut; ein Profil hält ihn. Sitze und Personen werden nicht gleichgesetzt: Hier hält ein Profil in jedem Prozess einen einzigen Sitz, das andere die übrigen, und der Sitz des Besuchers hat gar kein Profil.">
+          <b>A seat is a role, not a person.</b> The model says what a seat takes, produces and never does; a profile holds it. Seats and people are not the same count — here one profile holds a single seat in each process, the other holds the rest, and the visitor's seat has no profile at all.</p>
+        <p data-de="<b>Ein Gate ist das, ohne das eine Phase nicht verlassen wird.</b> Jedes gibt derselbe Sitz frei, und dieser Sitz wird von dem einzigen Menschen gehalten.">
+          <b>A gate is what a phase cannot be left without.</b> Every one is approved by the same seat, and that seat is held by the only human.</p>
         <p data-de="<b>Kein Zeichen ist getippt.</b> Jede Zelle wird aus der Phasendatei selbst gelesen, daher kann die Tafel dem Prozess, den sie zeichnet, nicht widersprechen.">
           <b>No mark is typed.</b> Every cell is read off the phase's own file, so the board cannot disagree with the process it draws.</p>
       </div>
@@ -455,9 +488,9 @@
 
   var UI = {
     de:{ title:"Team – Robert Blust",
-         desc:"Die zwei Profile des Modells und die acht Sitze dazwischen: wer welche Phase des Lieferprozesses ausführt, wer sie unterstützt und wer ihr Gate freigibt." },
+         desc:"Die zwei Profile des Modells und die Sitze dazwischen: wer welche Phase jedes Prozesses ausführt, wer sie unterstützt und wer ihr Gate freigibt." },
     en:{ title:"Team — Robert Blust",
-         desc:"The two profiles the model holds and the eight seats between them: who executes each phase of the delivery process, who supports it, and who approves its gate." }
+         desc:"The two profiles the model holds and the seats between them: who executes each phase of each process, who supports it, and who approves its gate." }
   };
 
   function applyLang(){
