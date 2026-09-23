@@ -75,19 +75,11 @@ const PAGES = [
     // readoutInvariant exists to catch, per its own header in @robertblust/design. Dropping
     // it because the fence is gone would drop the one check that reads this deck's own CSS.
     //
-    // Armed, it currently fails `npm run verify` on both decks with "no :root /
-    // :root[data-theme=\"light\"] pair found in the page's own <style>" — not the invariant
-    // firing, but the check's own gap: it still only reads the page's inline <style> for
-    // that pair, the way the design-tokens fence used to carry it there, and never grew the
-    // fenceless branch tokenVersion got in v0.80.1 to read tokens.css instead. Read by hand
-    // against the correct oracle — the same lcdVarReferences scanner the check is built
-    // from, fed tokens.css's own :root pair for which tokens flip and this deck's own
-    // <style> for what to scan — neither deck's own CSS holds a single rule that targets
-    // `.lcd` at all, so the invariant itself holds; this is a check that cannot currently
-    // prove that on its own, not a broken deck. A follow-up release of @robertblust/design
-    // giving readoutInvariant the same tokens.css branch tokenVersion has is owed; until
-    // then this stays armed and red rather than dropped, because armed-and-explained is the
-    // only state that keeps the next person from re-introducing the rule it exists to catch.
+    // Armed, and green since @robertblust/design v0.80.2: the check reads the :root pair from
+    // the linked tokens.css where a page's own <style> carries none, and goes on scanning this
+    // deck's own <style> for a `.lcd` rule that names a token differing between the themes,
+    // which is the half no byte comparison sees. Proved to still bite by adding such a rule to
+    // a copy of this deck and reading the failure it reports.
     // lockupCollapses stays armed: @robertblust/design v0.80.0 shipped deck.css with deck
     // transport assembled before deck lockup, the reverse of the order the fenced form
     // always declared, which flipped which .name rule won the cascade at equal specificity;

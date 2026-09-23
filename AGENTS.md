@@ -68,7 +68,7 @@ npm run pdf            # both decks' PDFs
 
 ## Adding or editing a talk
 
-**A talk lives in one file.** `talks/index.html` is the only page that names a talk; the root `index.html` links to `/talks/` and lists nothing. It used to carry a teaser copy of the list, which meant every new talk was two edits and the second was the one that got forgotten. That teaser is gone, and this note exists so nobody helpfully adds it back.
+**A talk is named in one place.** `talks/index.html` is the only page that names a talk; the root `index.html` links to `/talks/` and lists nothing. It used to carry a teaser copy of the list, which meant every new talk was two edits and the second was the one that got forgotten. That teaser is gone, and this note exists so nobody helpfully adds it back.
 
 The root page's nav and its one button both point at `talks/` and neither needs touching when the talks change.
 

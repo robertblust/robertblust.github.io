@@ -14,7 +14,7 @@ Robert Blust's profile page and two talks. Self-contained, no bundler, no extern
 /timeline/                       the experiences as a ledger — reads the same model.json as /model/
 ```
 
-A talk lives in one file. `talks/index.html` is the only page that names a talk; the profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore one edit, not two — see `AGENTS.md` for why the second one is gone.
+A talk is named in one place. `talks/index.html` is the only page that names a talk; the profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore one edit, not two — see `AGENTS.md` for why the second one is gone.
 
 Each deck is bilingual (English content, German via `data-de`), links `../../tokens.css`, `../../deck.css`, `../../deck.js` and the root `fonts/` rather than standing alone, and works from `file://` as well as a local server.
 
@@ -23,7 +23,7 @@ Each deck is bilingual (English content, German via `data-de`), links `../../tok
 ```bash
 npm install && npx playwright install chromium
 npm run serve      # python3 -m http.server 8000
-npm run verify      # Playwright DOM assertions against all four pages, plus the sitemap
+npm run verify      # Playwright DOM assertions against every page, plus the sitemap
 npm run og           # regenerate the 1200×630 og:image share cards
 npm run og:check      # do those cards still show the pages they were rendered from?
 npm run test:og        # unit tests for the card recipe the check compares
