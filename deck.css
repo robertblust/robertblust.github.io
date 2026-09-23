@@ -1,6 +1,24 @@
-/* @robertblust/design v0.80.0 — deck.css, assembled from the shared blocks
+/* @robertblust/design v0.80.1 — deck.css, assembled from the shared blocks
    and copied into this site by `npm run design`. Editing it here does nothing: the
    next `npm run design` overwrites it from the package. Change it there instead. */
+
+.name{grid-column:1; justify-self:start;
+      font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:.72rem;
+      display:flex; align-items:center; gap:.5em}
+.name .lockup{display:flex; align-items:center; gap:.6em}
+.name .namemark{display:flex}
+.name .namemark svg{width:16px; height:16px; display:block}
+.name .lockup:hover b em, .name .lockup:focus-visible b em{color:var(--ink)}
+.name .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+.name .rb{fill:var(--c-mid)}
+.name b{color:var(--ink); font-weight:600; letter-spacing:.01em; text-transform:none}
+.name b em{font-style:normal; color:var(--c-mid)}
+/* "Talks" is a nav item, so it takes the nav treatment the pages use — dim until
+   pointed at. The separators are not links and must not read as one. */
+.name .nsep{color:var(--dim)}
+.name .nlink{color:var(--dim)}
+.name a{text-decoration:none; color:inherit; pointer-events:auto}
+.name a:hover, .name a:focus-visible{color:var(--ink)}
 
 .transport{
   grid-column:2; justify-self:center;
@@ -160,21 +178,3 @@ a.tbtn{text-decoration:none}
   .seg.theme button{padding:.1rem .1rem}
   .seg.theme svg{width:8px; height:8px}
 }
-
-.name{grid-column:1; justify-self:start;
-      font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:.72rem;
-      display:flex; align-items:center; gap:.5em}
-.name .lockup{display:flex; align-items:center; gap:.6em}
-.name .namemark{display:flex}
-.name .namemark svg{width:16px; height:16px; display:block}
-.name .lockup:hover b em, .name .lockup:focus-visible b em{color:var(--ink)}
-.name .plate{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
-.name .rb{fill:var(--c-mid)}
-.name b{color:var(--ink); font-weight:600; letter-spacing:.01em; text-transform:none}
-.name b em{font-style:normal; color:var(--c-mid)}
-/* "Talks" is a nav item, so it takes the nav treatment the pages use — dim until
-   pointed at. The separators are not links and must not read as one. */
-.name .nsep{color:var(--dim)}
-.name .nlink{color:var(--dim)}
-.name a{text-decoration:none; color:inherit; pointer-events:auto}
-.name a:hover, .name a:focus-visible{color:var(--ink)}

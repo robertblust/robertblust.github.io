@@ -44,7 +44,7 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry: this page links tokens.css and page.css instead of
     // fencing design tokens, header contract, prose reset and prose footer, so fences is
-    // empty and tokenVersion's marker survives as a plain comment near the top of the page.
+    // empty; tokenVersion reads tokens.css's own opening comment instead of a page marker.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
   // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
@@ -67,17 +67,17 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // This deck links tokens.css and deck.css instead of fencing design tokens, deck
     // transport and deck lockup, so fences is empty (fenceOrder no longer applies — there
-    // is nothing left to order) and tokenVersion's marker survives as a plain comment,
+    // is nothing left to order) and tokenVersion reads tokens.css's own opening comment,
     // exactly as /privacy/'s note explains. readoutInvariant reads a page's own inline
     // <style> for the :root / :root[data-theme="light"] pair the design-tokens fence used
     // to carry there; tokens.css carries the identical pair now, verified byte-for-byte by
     // design:check, so the site-level duplicate of that invariant is dropped rather than
     // pointed at a file this check was never taught to fetch. lockupCollapses stays armed:
-    // @robertblust/design v0.80.0 ships deck.css with deck transport assembled before deck
-    // lockup, the reverse of the order the fenced form always declared, which flips which
-    // .name rule wins the cascade at equal specificity — this page carries a small,
-    // clearly-commented override restoring the previous, correct behavior until the
-    // package's own ordering is fixed.
+    // @robertblust/design v0.80.0 shipped deck.css with deck transport assembled before
+    // deck lockup, the reverse of the order the fenced form always declared, which flipped
+    // which .name rule won the cascade at equal specificity; v0.80.1 assembles lockup
+    // before transport, the fenced form's own order, so the collapse is correct again with
+    // no page-level override.
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
     fences: [],
     lockupCollapses: true,
@@ -128,14 +128,13 @@ const PAGES = [
     // design tokens, header contract, title contract, prose reset and prose footer are
     // what tokens.css and page.css supply instead. An empty list satisfies the per-page
     // check (nothing named is missing) and runSuite's own gate, which only asks that every
-    // page in PAGES carry the key at all (an empty array is truthy). tokenVersion's gate
-    // is the same shape but the check itself has no such escape — it unconditionally
-    // re-reads the page for `design tokens · vN`, a fence-era assumption
-    // @robertblust/design has not caught up to for a page that links the file instead — so
-    // the page keeps a one-line comment naming the version, which doubles as the note a
-    // reader would want anyway about where the block went. tokens, sky, header, monoScope,
-    // monoDefined and contrast read computed style, which a linked stylesheet satisfies
-    // exactly as a fenced one did, and stay declared.
+    // page in PAGES carry the key at all (an empty array is truthy). tokenVersion's gate is
+    // the same shape, and since @robertblust/design v0.80.1 the check itself reads it the
+    // same way: an empty fences list sends it to tokens.css's own opening comment instead
+    // of the page for a `design tokens · vN` marker, so the page needs no hand-written
+    // comment naming the version. tokens, sky, header, monoScope, monoDefined and contrast
+    // read computed style, which a linked stylesheet satisfies exactly as a fenced one did,
+    // and stay declared.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
   // The ideas page. Two claims make it worth reading and both are checkable: that each
@@ -182,6 +181,13 @@ const PAGES = [
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // fences is not empty here — this page keeps stage contract, its own glue to the model,
+    // fenced as it always was. tokenVersion's fenceless branch in @robertblust/design
+    // v0.80.1 reads tokens.css instead of a page marker only when fences is exactly [],
+    // the signal that a page has moved to the whole-file shape entirely; a page that still
+    // declares any fence, even one of its own that assemble.mjs never touched, falls to the
+    // marker-reading branch instead. So this page, and /timeline/, /team/ and /surfaces/
+    // below, keep the one-line `design tokens · vN` comment that /privacy/'s note explains.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], picture: true,
     card: true, internalLinks: true, graph: true, divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
   // opening into the card card.js renders. `ledger` is the check that the rows are the block's
