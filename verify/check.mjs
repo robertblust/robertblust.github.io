@@ -42,7 +42,10 @@ const PAGES = [
     // fragment that stops matching an id fails silently — the page just lands at the top.
     sameTab: ["talks/", "ideas/", "ideas/#guestgraph", "ideas/#companygraph"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "language", "prose reset", "prose footer"],
+    // See the note on /privacy/'s entry: this page links tokens.css and page.css instead of
+    // fencing design tokens, header contract, prose reset and prose footer, so fences is
+    // empty and tokenVersion's marker survives as a plain comment near the top of the page.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
   // opensFromFile resolves its file:// probe against process.cwd(), which npm sets to this
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
@@ -62,11 +65,21 @@ const PAGES = [
     transportBaseline: [320, 360, 430, 500, 900, 1280],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
-    // fences is presence-only and order-blind — deck runtime landing last here while
-    // fenceOrder places it third, two lines down, is not the pair disagreeing.
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
-    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
+    // This deck links tokens.css and deck.css instead of fencing design tokens, deck
+    // transport and deck lockup, so fences is empty (fenceOrder no longer applies — there
+    // is nothing left to order) and tokenVersion's marker survives as a plain comment,
+    // exactly as /privacy/'s note explains. readoutInvariant reads a page's own inline
+    // <style> for the :root / :root[data-theme="light"] pair the design-tokens fence used
+    // to carry there; tokens.css carries the identical pair now, verified byte-for-byte by
+    // design:check, so the site-level duplicate of that invariant is dropped rather than
+    // pointed at a file this check was never taught to fetch. lockupCollapses stays armed:
+    // @robertblust/design v0.80.0 ships deck.css with deck transport assembled before deck
+    // lockup, the reverse of the order the fenced form always declared, which flips which
+    // .name rule wins the cascade at equal specificity — this page carries a small,
+    // clearly-commented override restoring the previous, correct behavior until the
+    // package's own ordering is fixed.
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
+    fences: [],
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
@@ -83,11 +96,9 @@ const PAGES = [
     transportBaseline: [320, 360, 430, 500, 900, 1280],
     landing: "../../",
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true, readoutInvariant: true,
-    // fences is presence-only and order-blind — deck runtime landing last here while
-    // fenceOrder places it third, two lines down, is not the pair disagreeing.
-    fences: ["design tokens", "language", "deck transport", "deck lockup", "deck fit", "deck runtime"],
-    fenceOrder: ["design tokens", "deck lockup", "deck transport", "deck runtime", "language", "deck fit"],
+    // See the note on /talks/mental-model/'s entry.
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
+    fences: [],
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
@@ -101,7 +112,8 @@ const PAGES = [
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"],
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
@@ -137,7 +149,8 @@ const PAGES = [
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"],
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     card: true, internalLinks: true },
   // Generated from the model, so what it asserts is the shape of the page and one line of the
   // content — the words themselves are `npm run pages:check`'s business, and asserting
@@ -152,7 +165,7 @@ const PAGES = [
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer"],
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     card: true, internalLinks: true },
   // The model page draws the same graph the example on companygraph.io draws, from this
   // person's own instance rather than the fictional one. `stage` is the check that the
@@ -169,7 +182,7 @@ const PAGES = [
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"], picture: true,
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], picture: true,
     card: true, internalLinks: true, graph: true, divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
   // opening into the card card.js renders. `ledger` is the check that the rows are the block's
   // experiences in the order they began and that a card is the entity, field for field.
@@ -181,7 +194,7 @@ const PAGES = [
     links: ["https://companygraph.io/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"],
     card: true, internalLinks: true, ledger: true },
   // The team page. Its claims are checkable, so verify checks them rather than trusting the
   // prose: a page that says every gate is approved by the only human in the company must show
@@ -193,7 +206,7 @@ const PAGES = [
     contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"],
     card: true, internalLinks: true, board: true },
   // The surfaces page. Where each surface sits is a claim about how the model says it is made,
   // so verify reads it off the page against the block rather than trusting the renderer.
@@ -204,7 +217,7 @@ const PAGES = [
     contains: ["One model,", "every", "surface", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["design tokens", "header contract", "title contract", "language", "prose reset", "prose footer", "stage contract"],
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"],
     card: true, internalLinks: true, lineage: true },
 ];
 
