@@ -18,9 +18,9 @@ Robert Blust's profile page and two talks, self-contained, no bundler. What the 
 
 ```bash
 npm install && npx playwright install chromium
-npm run serve      # → localhost:8000, all four pages
+npm run serve      # → localhost:8000, every page
 npm run verify      # Playwright DOM assertions — the tests
-npm run og           # nine 1200×630 share cards
+npm run og           # every page's 1200×630 share card, listed in og-recipe.mjs
 npm run pdf            # both decks' PDFs
 ```
 
@@ -57,9 +57,14 @@ npm run pdf            # both decks' PDFs
 
   The relative paths this leaves behind — `../../tokens.css`, `../../deck.css`,
   `../../fonts/` — happen to still resolve under `file://` too, and `verify`'s
-  `opensFromFile` still opens each deck that way and asserts it renders, so that is checked
-  rather than assumed. It is no longer the requirement the deck is built to, only a property
-  it still has.
+  `opensFromFile` still opens each deck that way. What it actually covers is `deck.js`'s own
+  runtime, not the chrome the linked files carry: measured against a copy of a deck with
+  `tokens.css` and `deck.css` both unlinked, it still renders every slide, still reports a
+  loaded font and a scaled canvas, and still throws no error — because slide rendering,
+  `fit()` and the font-loaded check all run from `deck.js` alone, with no dependency on
+  either linked stylesheet. So it is a `file://` smoke test of the deck's own script, real
+  coverage as far as it goes, and it is left armed for that; it does not check that `tokens.css`
+  or `deck.css` resolved.
 
 ## Adding or editing a talk
 
@@ -69,7 +74,7 @@ The root page's nav and its one button both point at `talks/` and neither needs 
 
 ## No external assets, anywhere
 
-Not a style preference. The brief for this site is durability, and a Google Fonts link would be the one third-party dependency an otherwise self-contained site has — it also sends every visitor's IP to Google from a site carrying no privacy policy, which German courts have held to be a GDPR breach on its own. All four pages fall back to the system sans stack. If a design pass ever wants a webfont, that is the conversation to have first, not a `<link>` to add and forgive later.
+Not a style preference. The brief for this site is durability, and a Google Fonts link would be the one third-party dependency an otherwise self-contained site has — it also sends every visitor's IP to Google from a site carrying no privacy policy, which German courts have held to be a GDPR breach on its own. Every page falls back to the system sans stack. If a design pass ever wants a webfont, that is the conversation to have first, not a `<link>` to add and forgive later.
 
 ## Narration (`tts/`)
 
@@ -229,7 +234,7 @@ That deck is where the transport bar, the language toggle, and the narration sca
 
 ## The design system, and why it is a copy
 
-Type, color and chrome are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`, and the sharing is a copy rather than an import: each site pins `@robertblust/design` by tag and `npm run design` writes what it names into the repository, so nothing is fetched across an origin at request time. It used to have to be a copy pasted into every page's own `<style>` and `<script>`, fenced by markers, because a deck had to open from `file://` with nothing to import. That requirement is dropped: five names — `tokens.css`, `page.css`, `page.js`, `deck.css` and `deck.js` — are whole files now, written once at the repository root and linked or loaded by every page, prose and deck alike, exactly as they already linked `chat.css`.
+Type, color and chrome are shared across `blust.ch`, `guestgraph.io` and `companygraph.io`, and the sharing is a copy rather than an import: each site pins `@robertblust/design` by tag and `npm run design` writes what it names into the repository, so nothing is fetched across an origin at request time. It used to have to be a copy pasted into every page's own `<style>` and `<script>`, fenced by markers, because a deck had to open from `file://` with nothing to import. That requirement is dropped: five names — `tokens.css`, `page.css`, `page.js`, `deck.css` and `deck.js` — are whole files now, written once at the repository root. A prose page links or loads three of them, `tokens.css`, `page.css` and `page.js`; a deck links or loads the other three, `tokens.css`, `deck.css` and `deck.js`. Neither is a new pattern for a prose page: it already linked `chat.css` the same way. A deck never linked `chat.css` — the chat widget is a prose-page feature — so for a deck this is the first file it has ever linked rather than fenced.
 
 **The copies have a source now.** They are generated from `@robertblust/design`, which this repository pins by tag, and `npm run design` writes them. What that changes about editing them is in *Changing a token* below, and it is the opposite of what this file said for most of its life.
 
@@ -250,7 +255,7 @@ Type, color and chrome are shared across `blust.ch`, `guestgraph.io` and `compan
   is `Plex Mono` — the name the `@font-face` blocks actually declare. `IBM Plex Mono` is
   what it is called upstream, it is declared nowhere, and no machine has it, so naming it
   first meant the browser fell straight through to whatever mono the visitor's OS had. It
-  survived on all four pages and in `favicon.svg` for months, because `fontsLoaded` only
+  survived on every page and in `favicon.svg` for months, because `fontsLoaded` only
   measures the families a page's spec *lists*, and this one was hiding in an SVG
   `font-family` attribute on the brand mark. `fontsAvailable` is the general rule that
   replaces looking: every family named anywhere on a page — stylesheet or attribute — must
@@ -296,7 +301,11 @@ To change one of them:
    The design package has its own Dependabot group so a design bump never arrives beside a
    Playwright one — it is the pull request that has to be read rather than merged on sight.
 
+**Four pages still need their version comment bumped by hand.** `/model/`, `/timeline/`, `/team/` and `/surfaces/` each still fence their own `stage contract`, so `fences` on those four is never `[]` and `tokenVersion`'s fenceless branch — the one that reads the release straight out of `tokens.css` — never applies to them; each keeps the one-line `<!-- design tokens · vN, … -->` comment the other seven pages dropped, and step 3 above has to update it on those four or `npm run verify` goes red on a release that otherwise landed clean.
+
 `design:check` runs in CI, so a page that drifts from the pinned release goes red without anyone remembering to look. That is the guarantee the old habit-with-a-tripwire never was.
+
+**A page and the files it links are never on the same release by the same commit, and that gap is accepted, not a bug to close.** The pin here names a tag already cut in `robertblust/design`; this repository's own commit that takes it — running `npm run design`, committing what changed — always lands after. So no release may ask for both halves at once: a rule renamed, a class dropped, or a selector a page starts relying on that the current pinned tag does not yet carry is two releases, never one — the file first, tagged in `robertblust/design`, and the page after, once that tag is pinned here. Writing a page against a rule the pinned tag has not shipped yet is writing against a file that is not there.
 
 **Two escape hatches that are decisions, not build fixes.** Removing a fence's name from a page's `fences` array in `PAGES`, or a group from `design.config.json`, each clears a red `design:check` with a one-line diff. Neither describes a page that links the `files` group and declares an empty `fences: []` — that page has nothing left to fence, which is the point, and `design:check`'s comparison of the generated files it does carry is what still holds it to the release. The escape hatch is a fence whose name comes off a page's list while the fence itself stays in its markup, unread by the suite: that is a real choice to diverge, and it belongs in a commit that says so.
 
@@ -316,7 +325,7 @@ What the files cover is a **contract, not a look**: the lockup goes to the landi
 
 ## The header is a contract, and its copy carries a version
 
-The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is a copy: each site pins the same release and takes what it writes rather than importing it live. It used to be fenced in every page as `header contract · vN`; `page.css` carries it now, one of the blocks `assemble()` folds into that file, and it is still **byte-identical on all sixteen pages** in the three repositories, because the file is. It is generated, like the tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
+The row across the top — wordmark, links, language control — is one design on three sites, and like the tokens it is a copy: each site pins the same release and takes what it writes rather than importing it live. It is fenced in every page as `header contract · vN` on `guestgraph.io` and `companygraph.io`, which have not taken the whole-file shape; here, `page.css` carries it, one of the blocks `assemble()` folds into that file. Fence or file, it is **byte-identical wherever a page carries it**, because both forms are the same pinned release's own bytes. It is generated, like the tokens: change it in `robertblust/design`, tag a release, then run `npm run design` here. Editing it in this file does nothing — the next sync overwrites it.
 
 What the contract says:
 
@@ -364,7 +373,7 @@ A deck lays its slides out once at a fixed height of **900**, and the whole plan
   normal` — and the deck reflows into the scrolling reading view it always had. That is
   what "minimum supported width 1024" means in practice: canvas above, reflow below.
 
-The scale is driven by one `fit()` function at the end of each deck. Both exporters ride on it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case the canvas fills the frame exactly with no bars.
+The scale is driven by one `fit()` function in `deck.js` now, not at the end of each deck's own script — no deck's own `<script>` contains it any more. Both exporters ride on it unchanged: the share card renders at 1200×675 and the PDF at 1280×720, and in each case the canvas fills the frame exactly with no bars.
 
 ## Share cards go stale silently, and nothing on the page says so
 
@@ -404,8 +413,8 @@ The scale is driven by one `fit()` function at the end of each deck. Both export
   on the machine. `npm run test:dupes` imports nothing outside `node:` and still runs first.
 - **The recipe is the page plus every local file the page names plus the exporter's own
   frame.** Fonts and images count: a font swap changes every card while no HTML changes at
-  all. Every page names the root `fonts/`, so perturbing it marks **all four** cards stale —
-  the layout described above, observable.
+  all. Every page names the root `fonts/`, so perturbing it marks every card stale — the
+  layout described above, observable.
 - **A link is not an asset.** The walk skips `<a href>`. The shared comment states the rule
   in the family's terms — a talks index links each deck's multi-megabyte PDF — and this is the
   site it was learned on: the four PDFs of the two talks here reported that card stale on

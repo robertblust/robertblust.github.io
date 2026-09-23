@@ -16,7 +16,7 @@ Robert Blust's profile page and two talks. Self-contained, no bundler, no extern
 
 A talk lives in one file. `talks/index.html` is the only page that names a talk; the profile page links to `/talks/` and lists nothing. Adding or editing a talk is therefore one edit, not two — see `AGENTS.md` for why the second one is gone.
 
-Each deck is bilingual (English content, German via `data-de`), self-contained, and works from `file://` as well as a local server.
+Each deck is bilingual (English content, German via `data-de`), links `../../tokens.css`, `../../deck.css`, `../../deck.js` and the root `fonts/` rather than standing alone, and works from `file://` as well as a local server.
 
 ## Commands
 

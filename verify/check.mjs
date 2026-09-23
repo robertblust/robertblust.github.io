@@ -68,18 +68,34 @@ const PAGES = [
     // This deck links tokens.css and deck.css instead of fencing design tokens, deck
     // transport and deck lockup, so fences is empty (fenceOrder no longer applies — there
     // is nothing left to order) and tokenVersion reads tokens.css's own opening comment,
-    // exactly as /privacy/'s note explains. readoutInvariant reads a page's own inline
-    // <style> for the :root / :root[data-theme="light"] pair the design-tokens fence used
-    // to carry there; tokens.css carries the identical pair now, verified byte-for-byte by
-    // design:check, so the site-level duplicate of that invariant is dropped rather than
-    // pointed at a file this check was never taught to fetch. lockupCollapses stays armed:
-    // @robertblust/design v0.80.0 shipped deck.css with deck transport assembled before
-    // deck lockup, the reverse of the order the fenced form always declared, which flipped
-    // which .name rule won the cascade at equal specificity; v0.80.1 assembles lockup
-    // before transport, the fenced form's own order, so the collapse is correct again with
-    // no page-level override.
+    // exactly as /privacy/'s note explains. readoutInvariant is armed: design:check only
+    // proves tokens.css itself matches the pinned release byte for byte, which says nothing
+    // about the roughly ninety rules this deck still carries in its own <style> — a
+    // `.lcd`-targeting rule added there, outside anything the package owns, is exactly what
+    // readoutInvariant exists to catch, per its own header in @robertblust/design. Dropping
+    // it because the fence is gone would drop the one check that reads this deck's own CSS.
+    //
+    // Armed, it currently fails `npm run verify` on both decks with "no :root /
+    // :root[data-theme=\"light\"] pair found in the page's own <style>" — not the invariant
+    // firing, but the check's own gap: it still only reads the page's inline <style> for
+    // that pair, the way the design-tokens fence used to carry it there, and never grew the
+    // fenceless branch tokenVersion got in v0.80.1 to read tokens.css instead. Read by hand
+    // against the correct oracle — the same lcdVarReferences scanner the check is built
+    // from, fed tokens.css's own :root pair for which tokens flip and this deck's own
+    // <style> for what to scan — neither deck's own CSS holds a single rule that targets
+    // `.lcd` at all, so the invariant itself holds; this is a check that cannot currently
+    // prove that on its own, not a broken deck. A follow-up release of @robertblust/design
+    // giving readoutInvariant the same tokens.css branch tokenVersion has is owed; until
+    // then this stays armed and red rather than dropped, because armed-and-explained is the
+    // only state that keeps the next person from re-introducing the rule it exists to catch.
+    // lockupCollapses stays armed: @robertblust/design v0.80.0 shipped deck.css with deck
+    // transport assembled before deck lockup, the reverse of the order the fenced form
+    // always declared, which flipped which .name rule won the cascade at equal specificity;
+    // v0.80.1 assembles lockup before transport, the fenced form's own order, so the
+    // collapse is correct again with no page-level override.
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
     fences: [],
+    readoutInvariant: true,
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
@@ -99,6 +115,7 @@ const PAGES = [
     // See the note on /talks/mental-model/'s entry.
     tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
     fences: [],
+    readoutInvariant: true,
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
