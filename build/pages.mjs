@@ -31,7 +31,15 @@ if (data.commit !== commit) {
 }
 
 const check = process.argv.includes("--check");
-const RENDERERS = [writePrinciples, writeTeam, writeSurfaces, writeJsonLd];
+// The order the boards argue in: the work first, then how a stranger is answered. Core gives a
+// process no rank, so the site names the order, and the renderer refuses the build if a name
+// leaves the model.
+const RENDERERS = [
+  writePrinciples,
+  (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering"] }),
+  writeSurfaces,
+  writeJsonLd,
+];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check, root: ROOT }));
 

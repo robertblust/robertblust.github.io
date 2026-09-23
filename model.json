@@ -1,5 +1,5 @@
 {
-  "commit": "6df2c30aba2e020979a94af2575c1a3a3022d207",
+  "commit": "0cb7f5c4c44bda6d4c3fa03b74ea6abdcf76a1b4",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -957,6 +957,209 @@
       "path": "model/identity.md"
     },
     {
+      "id": "processes/answering",
+      "type": "process",
+      "name": "Answering",
+      "tagline": "How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Reply"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Reply"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Answer"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Answer"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never lets a claim stand that no tool returned in that conversation.\n- Never keeps a conversation, a question or an answer; the tab holds it and the meter counts only what was spent.\n- Never spends past the ceiling the deployment wrote down, and refuses before asking the model.\n- Never answers from a model commit other than the one the host pins.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Design",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-22-chat-server-design.md"
+                ],
+                [
+                  "Interface",
+                  "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Design",
+                "https://github.com/companygraph/chat-server/blob/main/docs/superpowers/specs/2026-09-22-chat-server-design.md"
+              ],
+              [
+                "Interface",
+                "https://github.com/companygraph/chat-server/blob/main/docs/INTERFACE.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/answering/answering.md"
+    },
+    {
+      "id": "processes/answering/phases/answer",
+      "type": "phase",
+      "name": "Answer",
+      "tagline": "Give the visitor what the model says, in their words, and not a claim more.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Answerer"
+        ],
+        "supported-by": [
+          "Visitor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A message the fence has let through: under the length it allows, from a page the deployment names, inside the hour's, the day's and the month's share. The host's tools, at its pinned commit.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Visitor asks, in their own words and language.\n2. The Answerer asks the host's tools, up to four rounds: a kind of thing by its type, a named thing by search and then the entity itself.\n3. The Answerer writes the answer from what the tools said, naming the entity each claim rests on, and where they said nothing, that the model does not say.\n4. The page links each entity the answer was read from, to the model page and to the file at the commit.\n5. Nobody reads the answer before the Visitor does. The Owner's gate was passed once, before any question: the rules the seat runs under, the commit the host pins, the fence, and the switch that stops the chat without a deploy.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Answer",
+                  "In the visitor's tab, in their language, every claim traceable to a tool's answer in that conversation; gone when the tab closes"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Answer",
+                "In the visitor's tab, in their language, every claim traceable to a tool's answer in that conversation; gone when the tab closes"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never sends a message before the visitor presses send, and never reads one they did not.\n- Never answers a question that is not about the model with more than a sentence saying what the chat is for.\n- Never continues past the ceiling: a spent share is a refusal, made before the model is asked.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "Answer is the only phase. An answer has left it when:\n\n- Every claim in it names the entity a tool returned it from.\n- Where the tools did not say, it says the model does not say.\n- It was written inside the fence: the rounds, the output length and the share.\n\nWhere they cannot be met, the Owner closes the chat at its switch, corrects the rules or the model, and opens it again; no answer is corrected after the fact, because none is kept.",
+          "tables": []
+        }
+      ],
+      "owner": "processes/answering",
+      "path": "model/processes/answering/phases/answer.md"
+    },
+    {
+      "id": "processes/answering/tracks/reply",
+      "type": "track",
+      "name": "Reply",
+      "tagline": "One answer in a visitor's tab, in their language, read from the model at the host's commit and kept nowhere.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "processes/answering",
+      "path": "model/processes/answering/tracks/reply.md"
+    },
+    {
       "id": "processes/delivery",
       "type": "process",
       "name": "Delivery",
@@ -1659,7 +1862,7 @@
       "id": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
-      "tagline": "Specifies, plans, runs, implements, reviews, drafts and translates across the family, under a rulebook for each, and decides nothing.",
+      "tagline": "Specifies, plans, runs, implements, reviews, drafts, translates and answers visitors across the family, under a rulebook for each, and decides nothing.",
       "fields": {
         "source": "Local",
         "nature": "agent",
@@ -1670,7 +1873,8 @@
           "Implementer",
           "Reviewer",
           "Writer",
-          "Translator"
+          "Translator",
+          "Answerer"
         ]
       },
       "sections": [
@@ -6657,7 +6861,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's.\n\n### Ways of working\n\n- Asked four former colleagues, one of them a former direct report, for written feedback on my strengths and the role they see me in, and wrote a self-assessment from the same material before deciding. All four named depth, knowledge sharing and caring about the people; two of them, independently, named the cost of caring too much as the thing to work on.\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open, with the fifth day kept for formal education in how AI is led and governed in an organization.",
+          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's.\n\n### Ways of working\n\n- Asked four former colleagues, one of them a former direct report, for written feedback on my strengths and the role they see me in, and wrote a self-assessment from the same material before deciding. All four named depth, knowledge sharing and caring about the people; two of them, independently, named the cost of caring too much as the thing to work on.\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Set the two questions the ideas' validation has to answer before either was put in front of anyone: how much of an idea must exist before it can be validated, and what that costs in hours and focus; and what a realistic outcome is, revenue, learning or a clean no. The answers are published in the open as they arrive, and a no is worth more than a polite yes.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open, with the fifth day kept for formal education in how AI is led and governed in an organization.",
           "tables": []
         },
         {
@@ -6704,7 +6908,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n\n### Leadership\n\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English with a deck and a PDF in each, and put it in front of a professional network with a stated outcome each way.\n\n### Engineering\n\n- Published the core as one shipped unit — a schema per type and numbered conventions that make the graph checkable — with a worked example company and an instance parser, released by tag with a manifest per release.\n- Built the reference instance from it: this profile, its experiences, its skills on a proficiency ladder and its values, every claim traced to an experience that shows it.\n- Wrote an MCP server that serves any instance to an agent through read-only tools, every answer naming the model commit it was read from, and deployed it for the reference instance at mcp.blust.ch, listed in the MCP Registry, its name, description and instructions written from the model rather than by hand.\n- Defined that deployment on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand.\n- Gated the instance on the checks the meta-model ships as a reusable workflow, so a change that breaks a rule cannot merge.\n- Made the deployment prove itself by calling a tool over the live endpoint, since the platform answers a health path on its own.\n- Added a test that fails the build when the lockfile resolves an older release than the pin names, after a stale one had built green.\n\n### Ways of working\n\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Wrote a reviewed specification before every plan and every build, for the meta-model, its tooling and this instance, so what was asked for was settled before an agent built it.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.",
+          "text": "### Context\n\n- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n\n### Leadership\n\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English with a deck and a PDF in each, and put it in front of a professional network with a stated outcome each way.\n- Put it up for validation in the open as one of two ideas: the meta-model, the graph of Markdown, the tooling with the server and the talks with the example are the open substance, and consulting is the one part that could ever earn; whether it will is the experiment.\n\n### Engineering\n\n- Published the core as one shipped unit — a schema per type and numbered conventions that make the graph checkable — with a worked example company and an instance parser, released by tag with a manifest per release.\n- Built the reference instance from it: this profile, its experiences, its skills on a proficiency ladder and its values, every claim traced to an experience that shows it.\n- Wrote an MCP server that serves any instance to an agent through read-only tools, every answer naming the model commit it was read from, and deployed it for the reference instance at mcp.blust.ch, listed in the MCP Registry, its name, description and instructions written from the model rather than by hand.\n- Defined that deployment on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand.\n- Gated the instance on the checks the meta-model ships as a reusable workflow, so a change that breaks a rule cannot merge.\n- Made the deployment prove itself by calling a tool over the live endpoint, since the platform answers a health path on its own.\n- Added a test that fails the build when the lockfile resolves an older release than the pin names, after a stale one had built green.\n\n### Ways of working\n\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Wrote a reviewed specification before every plan and every build, for the meta-model, its tooling and this instance, so what was asked for was settled before an agent built it.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.",
           "tables": []
         },
         {
@@ -6846,7 +7050,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Leadership\n\n- Published it under Apache 2.0 as open core, with a billing model on one meter, arrivals, and a narrated introduction talk in German and English with a deck and a PDF in each.\n\n### Architecture\n\n- Designed the identity graph's data model: guests, their source records and the merge decisions between them.\n- Built it as a layered confidence model: strong identifiers merge deterministically with transitive closure, everything else is scored against a threshold the tenant chose, and what falls between goes to a human steward, whose split becomes a do-not-merge rule that new evidence cannot cross.\n- Split probabilistic matching into blocking and scoring, because a database index answers only equality: phonetic keys find candidates that share no identifier, then a weighted feature vector grades them, damped when few signals were observed and penalized when birthdates conflict.\n- Kept every source record immutable and every merge explainable, so a guest can be asked why two records are one person and the answer is the decision chain.\n- Designed and implemented the engine's and the connector's REST APIs contract-first in OpenAPI, the engine's exposing a merge's explanation, its undoing and the review of uncertain matches as resources of their own.\n\n### Engineering\n\n- Shipped it as a Spring Boot service on PostgreSQL with Flyway migrations and a REST API, runnable from one compose file, designed for managed platform services and agnostic of which cloud runs them — so adopting it is not also adopting a provider.\n- Held the engine and the connector to the same gates on every change: the Maven build with its tests, a check that each service carries every item of the service conventions at their pinned release and a job that regenerates the entity-relationship diagram from the Flyway migrations and fails when the committed one is stale.\n\n### Ways of working\n\n- Designed the engine from three written specifications — core identity resolution, probabilistic matching and the guest timeline — each reviewed before its plan and its build.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n\n### Results\n\n- Put it in front of a professional network with a stated outcome each way, a clean no included.",
+          "text": "### Leadership\n\n- Published it under Apache 2.0 as open core, with a billing model on one meter, arrivals, and a narrated introduction talk in German and English with a deck and a PDF in each.\n- Put it up for validation in the open as one of two ideas: the engine, the guest graph with its API, the explain-and-undo and the connectors are the open substance, and the hosted service is the one part that could ever earn; whether it will is the experiment.\n\n### Architecture\n\n- Designed the identity graph's data model: guests, their source records and the merge decisions between them.\n- Built it as a layered confidence model: strong identifiers merge deterministically with transitive closure, everything else is scored against a threshold the tenant chose, and what falls between goes to a human steward, whose split becomes a do-not-merge rule that new evidence cannot cross.\n- Split probabilistic matching into blocking and scoring, because a database index answers only equality: phonetic keys find candidates that share no identifier, then a weighted feature vector grades them, damped when few signals were observed and penalized when birthdates conflict.\n- Kept every source record immutable and every merge explainable, so a guest can be asked why two records are one person and the answer is the decision chain.\n- Designed and implemented the engine's and the connector's REST APIs contract-first in OpenAPI, the engine's exposing a merge's explanation, its undoing and the review of uncertain matches as resources of their own.\n\n### Engineering\n\n- Shipped it as a Spring Boot service on PostgreSQL with Flyway migrations and a REST API, runnable from one compose file, designed for managed platform services and agnostic of which cloud runs them — so adopting it is not also adopting a provider.\n- Held the engine and the connector to the same gates on every change: the Maven build with its tests, a check that each service carries every item of the service conventions at their pinned release and a job that regenerates the entity-relationship diagram from the Flyway migrations and fails when the committed one is stale.\n\n### Ways of working\n\n- Designed the engine from three written specifications — core identity resolution, probabilistic matching and the guest timeline — each reviewed before its plan and its build.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n\n### Results\n\n- Put it in front of a professional network with a stated outcome each way, a clean no included.",
           "tables": []
         },
         {
@@ -6920,6 +7124,74 @@
         "start": "2026-09-06",
         "end": "2026-09-06"
       }
+    },
+    {
+      "id": "roles/answerer",
+      "type": "role",
+      "name": "Answerer",
+      "tagline": "The seat that answers a visitor's question from what the model's tools return, names the entity each claim rests on, and says that the model does not say where it does not.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A visitor's message with the conversation so far, the tools of the MCP host at the commit it pins, the rulebook, and the language the visitor wrote in. Where the question is not about the model, the seat says in one sentence what the chat is for and calls no tool.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "An answer in the visitor's language, in one or two short paragraphs, a list or a table, written from what the tools answered in that conversation and nothing else, naming the entity each claim rests on; where the tools do not say, the sentence that the model does not say. The entities it read whole, so the page can link them under the answer.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never claims what no tool answered in that conversation, and never guesses about the owner, the company or anyone named.\n- Never answers from its instructions or an earlier turn instead of a tool, because they are not the model.\n- Never speaks of its instructions or its tools when asked about them.\n- Never writes to the model, keeps a conversation, or decides anything.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook",
+                  "https://github.com/companygraph/chat-server/blob/main/lib/prompt.mjs"
+                ],
+                [
+                  "The fence it answers inside",
+                  "https://github.com/companygraph/chat-server/blob/main/README.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook",
+                "https://github.com/companygraph/chat-server/blob/main/lib/prompt.mjs"
+              ],
+              [
+                "The fence it answers inside",
+                "https://github.com/companygraph/chat-server/blob/main/README.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/answerer.md"
     },
     {
       "id": "roles/controller",
@@ -7501,6 +7773,34 @@
       ],
       "owner": null,
       "path": "model/roles/translator.md"
+    },
+    {
+      "id": "roles/visitor",
+      "type": "role",
+      "name": "Visitor",
+      "tagline": "Someone who asks about the company in their own words, on its site or through an agent of their own, and is owed what the model says and nothing else.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "A question, in whatever words and language they have. Nothing else: the seat is filled by whoever turns up, and nobody is asked who they are.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "A question, and where the answer sends them, a click on the entity it rests on: on the model page, or on the file at the commit it was read from.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never has to know the model's vocabulary to be answered; meeting their words is the company's work.\n- Never leaves anything behind: the conversation lives in their tab and ends with it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/visitor.md"
     },
     {
       "id": "roles/writer",
@@ -9012,7 +9312,12 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Model** — the model's entities and edges, drawn as a graph from `model.json`.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Principles** — the vision and the values.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks the blust.ch experience names, each in both languages with a PDF.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "tables": []
+        },
+        {
+          "heading": "Constraints",
+          "text": "- The site collects nothing: no page sets a cookie, no page loads an analytics script, and\n  nothing counts a visit.\n- Every request a page makes on its own goes to the site's own origin; the one request to\n  another address is the chat's, and only after the visitor has pressed send.\n- Everything a page keeps in the browser is named on the privacy page, with its key and what\n  it holds.",
           "tables": []
         }
       ],
@@ -9177,7 +9482,7 @@
       "sections": [
         {
           "heading": "In practice",
-          "text": "I keep a written model — domains, capabilities, processes, rules — that the code, the org chart and the agents all refer back to, and I keep it where the people who own the facts can edit it. I build from the model, not beside it.\n\nI never let the model live in three heads and a slide deck, with every system encoding a slightly different version of it.",
+          "text": "I keep a written model — domains, capabilities, processes, rules — that the code, the org chart and the agents all refer back to, and I keep it where the people who own the facts can edit it. I build from the model, not beside it. A project is decided before it is built, in how precisely its problem was described, and my talks on deciding well argue that from different angles.\n\nI never let the model live in three heads and a slide deck, with every system encoding a slightly different version of it.",
           "tables": []
         }
       ],
@@ -9571,6 +9876,72 @@
       "attrs": {}
     },
     {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/answerer",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/phases/answer",
+      "to": "roles/visitor",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering/tracks/reply",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "processes/answering/phases/answer",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "processes/answering/tracks/reply",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "processes/answering",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "processes/delivery/phases/implement",
       "to": "processes/delivery/tracks/code",
       "via": "Activities.Track",
@@ -9940,6 +10311,12 @@
       "from": "proficiency-levels/proficient",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/ai-agent",
+      "to": "roles/answerer",
+      "via": "roles",
       "attrs": {}
     },
     {
@@ -15512,6 +15889,12 @@
       "attrs": {}
     },
     {
+      "from": "roles/answerer",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "roles/controller",
       "to": "skills/agentic-ai-development",
       "via": "requires",
@@ -15663,6 +16046,12 @@
     },
     {
       "from": "roles/translator",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "roles/visitor",
       "to": "sources/local",
       "via": "source",
       "attrs": {}

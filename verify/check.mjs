@@ -217,7 +217,7 @@ const PAGES = [
   { path: "/team/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"],
                   title: "Team – Robert Blust",
-                  desc: "Die zwei Profile des Modells und die acht Sitze dazwischen: wer welche Phase des Lieferprozesses ausf\u00fchrt, wer sie unterst\u00fctzt und wer ihr Gate freigibt." },
+                  desc: "Die zwei Profile des Modells und die Sitze dazwischen: wer welche Phase jedes Prozesses ausf\u00fchrt, wer sie unterst\u00fctzt und wer ihr Gate freigibt." },
     contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
