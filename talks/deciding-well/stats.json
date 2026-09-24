@@ -1,5 +1,5 @@
 {
- "cutoff": "2026-09-24T23:59:59+02:00",
+ "cutoff": "2026-09-24T22:21:00+02:00",
  "start": "2026-06-09",
  "repos": [
   {
@@ -45,20 +45,20 @@
   {
    "repo": "guestgraph/guestgraph.github.io",
    "created": "2026-08-21",
-   "commits": 373,
-   "nonMerge": 248,
-   "claude": 213,
-   "merged": 116,
+   "commits": 378,
+   "nonMerge": 251,
+   "claude": 216,
+   "merged": 118,
    "closedUnmerged": 5,
    "releases": 0
   },
   {
    "repo": "robertblust/robertblust.github.io",
    "created": "2026-08-22",
-   "commits": 709,
-   "nonMerge": 451,
-   "claude": 378,
-   "merged": 247,
+   "commits": 715,
+   "nonMerge": 455,
+   "claude": 382,
+   "merged": 249,
    "closedUnmerged": 13,
    "releases": 0
   },
@@ -69,17 +69,17 @@
    "nonMerge": 408,
    "claude": 393,
    "merged": 146,
-   "closedUnmerged": 2,
+   "closedUnmerged": 3,
    "releases": 50
   },
   {
    "repo": "companygraph/companygraph.github.io",
    "created": "2026-08-23",
-   "commits": 602,
-   "nonMerge": 385,
-   "claude": 317,
-   "merged": 201,
-   "closedUnmerged": 13,
+   "commits": 608,
+   "nonMerge": 388,
+   "claude": 320,
+   "merged": 204,
+   "closedUnmerged": 14,
    "releases": 0
   },
   {
@@ -95,10 +95,10 @@
   {
    "repo": "robertblust/mental-model",
    "created": "2026-08-26",
-   "commits": 545,
-   "nonMerge": 357,
-   "claude": 357,
-   "merged": 178,
+   "commits": 549,
+   "nonMerge": 360,
+   "claude": 360,
+   "merged": 179,
    "closedUnmerged": 3,
    "releases": 0
   },
@@ -115,12 +115,12 @@
   {
    "repo": "robertblust/design",
    "created": "2026-08-31",
-   "commits": 466,
-   "nonMerge": 325,
-   "claude": 257,
-   "merged": 132,
+   "commits": 472,
+   "nonMerge": 328,
+   "claude": 260,
+   "merged": 134,
    "closedUnmerged": 3,
-   "releases": 107
+   "releases": 109
   },
   {
    "repo": "robertblust/conventions",
@@ -165,10 +165,10 @@
   {
    "repo": "robertblust/mcp-blust-ch",
    "created": "2026-09-16",
-   "commits": 202,
-   "nonMerge": 120,
-   "claude": 118,
-   "merged": 77,
+   "commits": 204,
+   "nonMerge": 121,
+   "claude": 119,
+   "merged": 78,
    "closedUnmerged": 4,
    "releases": 0
   },
@@ -185,69 +185,69 @@
   {
    "repo": "companygraph/mental-model",
    "created": "2026-09-21",
-   "commits": 69,
-   "nonMerge": 35,
-   "claude": 35,
-   "merged": 32,
+   "commits": 73,
+   "nonMerge": 37,
+   "claude": 37,
+   "merged": 34,
    "closedUnmerged": 0,
    "releases": 0
   },
   {
    "repo": "companygraph/mcp-companygraph-io",
    "created": "2026-09-21",
-   "commits": 97,
-   "nonMerge": 50,
-   "claude": 49,
-   "merged": 42,
+   "commits": 101,
+   "nonMerge": 52,
+   "claude": 51,
+   "merged": 44,
    "closedUnmerged": 4,
    "releases": 0
   },
   {
    "repo": "companygraph/chat-server",
    "created": "2026-09-22",
-   "commits": 98,
-   "nonMerge": 75,
-   "claude": 75,
-   "merged": 23,
+   "commits": 100,
+   "nonMerge": 76,
+   "claude": 76,
+   "merged": 24,
    "closedUnmerged": 0,
-   "releases": 18
+   "releases": 19
   },
   {
    "repo": "guestgraph/mental-model",
    "created": "2026-09-24",
-   "commits": 12,
-   "nonMerge": 9,
-   "claude": 9,
-   "merged": 3,
+   "commits": 14,
+   "nonMerge": 10,
+   "claude": 10,
+   "merged": 4,
    "closedUnmerged": 0,
    "releases": 0
   },
   {
    "repo": "guestgraph/mcp-guestgraph-io",
    "created": "2026-09-24",
-   "commits": 13,
-   "nonMerge": 8,
-   "claude": 8,
-   "merged": 5,
+   "commits": 17,
+   "nonMerge": 10,
+   "claude": 10,
+   "merged": 7,
    "closedUnmerged": 0,
    "releases": 0
   }
  ],
  "totals": {
-  "commits": 5020,
-  "nonMerge": 3280,
-  "claude": 2999,
-  "merged": 1621,
+  "commits": 5065,
+  "nonMerge": 3305,
+  "claude": 3024,
+  "merged": 1640,
   "mergedByBots": 22,
-  "closedUnmerged": 68,
-  "releases": 269,
+  "closedUnmerged": 70,
+  "releases": 272,
   "specs": 95,
   "plans": 105,
   "decisionSections": 35,
   "reverts": 1,
   "repos": 23,
   "owners": 3,
-  "claudeShare": 0.914
+  "claudeShare": 0.915
  },
  "busiestDay": {
   "date": "2026-09-21",
@@ -333,7 +333,7 @@
   {
    "week": "2026-W39",
    "monday": "2026-09-21",
-   "commits": 1510
+   "commits": 1555
   }
  ],
  "daily": [
@@ -767,7 +767,7 @@
   },
   {
    "date": "2026-09-24",
-   "commits": 301
+   "commits": 346
   }
  ],
  "births": [
@@ -871,24 +871,24 @@
  "tokens": {
   "window": [
    "2026-08-18",
-   "2026-09-24T23:59:59+02:00"
+   "2026-09-24T22:21:00+02:00"
   ],
-  "messages": 69718,
-  "input": 522215,
-  "output": 50058730,
-  "cacheRead": 16017305681,
-  "cacheWrite": 258214176,
-  "total": 16326100802,
+  "messages": 70323,
+  "input": 523465,
+  "output": 50592122,
+  "cacheRead": 16169100171,
+  "cacheWrite": 260367217,
+  "total": 16480582975,
   "byModel": {
    "claude-opus-4-8": 21687953,
    "claude-opus-5": 9603138422,
    "claude-fable-5": 247650510,
-   "claude-sonnet-5": 2699649124,
+   "claude-sonnet-5": 2704328491,
    "claude-haiku-4-5-20251001": 100168813,
    "claude-fable-5-1": 2809640833,
-   "claude-opus-5-5": 844165147
+   "claude-opus-5-5": 993967953
   },
-  "listPriceUsd": 9835,
+  "listPriceUsd": 9888,
   "unpriced": {}
  }
 }

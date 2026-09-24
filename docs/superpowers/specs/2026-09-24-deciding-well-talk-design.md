@@ -8,7 +8,7 @@ Status: proposed. The outline was decided with the owner on 2026-09-24, one ques
 
 ## 1. What was measured
 
-Every figure was counted on 2026-09-24 and is stated in the talk as of that date. A dated figure describes a closed day, so it does not move, which is the form `WRITING.md` allows for a number. The values below are `stats.py`'s run on the evening of 2026-09-24, before the cutoff had passed; the script is run once more after midnight, and a figure that comes out different is corrected here and in `stats.json` before a slide carries it.
+Every figure was counted on 2026-09-24 and is stated in the talk as of that date. A dated figure describes a closed day, so it does not move, which is the form `WRITING.md` allows for a number. The values below are `stats.py`'s run with its cutoff at 22:21 Swiss time on 2026-09-24, the moment the owner took the snapshot: the overall picture is what counts, and a few more commits before midnight would not change it.
 
 | Fact | Value | How it was counted |
 | --- | --- | --- |
@@ -16,19 +16,19 @@ Every figure was counted on 2026-09-24 and is stated in the talk as of that date
 | First public commit | 2026-07-09, guestgraph/engine `fbeff99` | earliest commit over every public repository |
 | First commit of blust.ch | 2026-08-17, `7d23000` | `git log --reverse` here |
 | Public repositories | 23, across robertblust, companygraph and guestgraph, none archived | `gh repo list`; robertblust/xiny is private, archived and outside the family, and is left out |
-| Commits on default branches, public repositories | 5,013, of which 3,275 are not merge commits | blobless bare clones, `git log HEAD`, 2026-06-09 to 2026-09-24 |
-| Merged pull requests | 1,619, of which 22 are Dependabot's | `gh pr list --state merged`, by `mergedAt` |
-| Releases published | 269 | `gh api repos/O/R/releases`, by `published_at` |
-| Non-merge commits carrying `Co-Authored-By: Claude` | 2,994 of 3,275, 91% | the trailer matched over every message, not sampled |
+| Commits on default branches, public repositories | 5,065, of which 3,305 are not merge commits | blobless bare clones, `git log HEAD`, 2026-06-09 to 2026-09-24 |
+| Merged pull requests | 1,640, of which 22 are Dependabot's | `gh pr list --state merged`, by `mergedAt` |
+| Releases published | 272 | `gh api repos/O/R/releases`, by `published_at` |
+| Non-merge commits carrying `Co-Authored-By: Claude` | 3,024 of 3,305, 91% | the trailer matched over every message, not sampled |
 | Busiest day | 2026-09-21: 695 commits, 214 merged pull requests | daily buckets by author date |
 | Hosts answering 200 | 9: blust.ch, companygraph.io, guestgraph.io, and `mcp.` and `chat.` on each | `curl -sI`, status only |
 | Specs, plans | 95, 105, none ever deleted | files under `docs/superpowers/specs`, `docs/superpowers/plans`, `docs/specs` and engine's spec-kit folders |
 | Decisions the specs record | 1,360: 1,258 standing, 72 revised, 30 dropped or parked | agents read all 95 specs at the cutoff and listed each decision with a status and a quote; `decisions.py` keeps a decision only where its quote is in the spec, and counts a decision a later spec replaces as revised; `decisions.json` holds every one |
 | Specs carrying a decision section | 35 | headings "What was decided", "The decision", "Decisions taken", "Decisions" |
 | Reverts | 1, companygraph.github.io, 2026-08-23 | `git log --grep '^Revert'` over every repository |
-| Pull requests closed without merging | 68, of which 12 are one release wave closed on 2026-09-20 and replaced the same day | `gh pr list --state closed`, unmerged |
-| Tokens used by Claude Code, 2026-08-18 to 2026-09-24 | about 16.3 billion: 16.0 billion read from cache, 258 million written to cache, 50 million written by the model | `usage` of every assistant message in `~/.claude/projects/**/*.jsonl`, deduplicated by message id |
-| The same tokens at API list price | about $9,825 | per model, at the list rates of the Claude API skill's table dated 2026-06-24; cache writes at the lifetime each message records |
+| Pull requests closed without merging | 70, of which 12 are one release wave closed on 2026-09-20 and replaced the same day | `gh pr list --state closed`, unmerged |
+| Tokens used by Claude Code, 2026-08-18 to 2026-09-24 | about 16.5 billion: 16.2 billion read from cache, 50.6 million written by the model | `usage` of every assistant message in `~/.claude/projects/**/*.jsonl`, deduplicated by message id |
+| The same tokens at API list price | about $9,900 | per model, at the list rates of the Claude API skill's table dated 2026-06-24; cache writes at the lifetime each message records |
 | What was paid | the subscription, about $200 a month | the owner's plan |
 
 Three rows decide the shape of the talk.
@@ -60,7 +60,7 @@ Headlines are the English source; the German is made afterwards by the pipeline 
 | 00 | Building fast is solved. *Deciding well is not.* | The title, the name, "a talk on a career break, 2026" | The talk's one point, and that everything in it can be checked |
 | 01 | The constraint moved | The value *Decide well over build fast*, quoted from the model | AI moved the scarce thing from building quickly to deciding correctly; the decision is the work, written down before the code with the alternatives that lost |
 | 02 | One question, four months | June to September 2026; what to do next, tested by building in the open | The break ended with a decision, not only an offer, in the model's own words; the employer is not named |
-| 03 | Building fast, measured | 23 repositories, 3 organizations, 5,013 commits, 1,619 merged pull requests, 269 releases, 9 live hosts, one person; 91% of the commits written with Claude | How each is counted, and that the figures are as of 24 Sep 2026 |
+| 03 | Building fast, measured | 23 repositories, 3 organizations, 5,065 commits, 1,640 merged pull requests, 272 releases, 9 live hosts, one person; 91% of the commits written with Claude | How each is counted, and that the figures are as of 24 Sep 2026 |
 | 04 | The curve | Commits per ISO week from W24 to W39, each repository's birth marked on the axis; the climb from 17 Aug and the peak on 21 Sep | That the climb begins when the model does, not when the tools changed |
 | 05 | Building is not the expensive part any more | About $200 a month; about $10,000 of compute at list price; 16 billion tokens, most of them context read again | The window and what it leaves out; then the risk: this rests on Anthropic, Google, OpenAI and their terms; the knowledge is portable, the speed is not yet; ways out are the research of 2027 |
 | 06 | Where the time went instead | 95 specs and 105 plans; the five gates of the delivery process — Shape, Spec, Plan, Implement, Integrate — and the Owner who merges | An agent opens and reports; the Owner decides; no phase begins before its predecessor's gate is approved |

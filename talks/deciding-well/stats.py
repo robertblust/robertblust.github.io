@@ -12,7 +12,7 @@ import collections, datetime, glob, json, os, pathlib, re, subprocess
 
 HERE = pathlib.Path(__file__).resolve().parent
 START = "2026-06-09"
-CUTOFF = "2026-09-24T23:59:59+02:00"
+CUTOFF = "2026-09-24T22:21:00+02:00"
 TOKENS_FROM = "2026-08-18"
 OWNERS = ["robertblust", "companygraph", "guestgraph"]
 EXCLUDE = {"robertblust/xiny"}

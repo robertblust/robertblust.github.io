@@ -24,7 +24,7 @@ A transport bar along the bottom edge: back to start, previous, play/pause, next
 
 ## The figures
 
-Every number on a slide is read from `stats.json`, and `stats.py` wrote it: commits, pull requests and releases from GitHub, the first date and commit count of the local application tooling, and the token usage of the Claude Code logs. Each count is filtered by a fixed cutoff, the end of Sep 24, 2026, so a later run gives the same figures.
+Every number on a slide is read from `stats.json`, and `stats.py` wrote it: commits, pull requests and releases from GitHub, the first date and commit count of the local application tooling, and the token usage of the Claude Code logs. Each count is filtered by a fixed cutoff, Sep 24, 2026 at 22:21 Swiss time, so a later run gives the same figures.
 
 The decisions on slide 07 are not in the model, which has no decision type yet. Agents read the 95 specs at the cutoff and listed each decision with a status (taken, revised, dropped) and a quote; `decisions.py` keeps only a decision whose quote is found in its spec and writes `decisions.json`. The count is of that list, so it is a reading of the prose, and the slide says so.
 

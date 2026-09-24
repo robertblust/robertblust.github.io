@@ -49,7 +49,7 @@ def main(out_dir, specs_dir):
             specs[(item["repo"], item["spec"])] = open(item["path"]).read()
     outs = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(out_dir, "out*.json")))]
     r = merge(outs, specs)
-    r = {"cutoff": "2026-09-24T23:59:59+02:00", "specsRead": len(specs), **r}
+    r = {"cutoff": "2026-09-24T22:21:00+02:00", "specsRead": len(specs), **r}
     (HERE / "decisions.json").write_text(json.dumps(r, indent=1, ensure_ascii=False) + "\n")
     print(r["counts"], "unverified", len(r["unverified"]), "pointers", len(r["revisedByLaterSpecs"]))
 

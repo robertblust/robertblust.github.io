@@ -36,7 +36,7 @@ class Figures(unittest.TestCase):
                 self.assertIn(de(n), GERMAN)
 
     def test_the_share_of_commits_written_with_claude(self):
-        share = round(STATS["totals"]["claudeShare"] * 100)
+        share = round(100 * STATS["totals"]["claude"] / STATS["totals"]["nonMerge"])
         self.assertRegex(HTML, rf"<b[^>]*>{share}%</b>")
         self.assertRegex(GERMAN, rf"{share}[\u00a0\u202f ]%")
 
