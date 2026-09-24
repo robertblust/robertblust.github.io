@@ -6,7 +6,7 @@
  "yearHours": 1800,
  "employerLoad": 1.30,
  "agenticMonths": 3.5,
- "licenceChfPerPersonMonth": 60,
+ "licenseChfPerPersonMonth": 60,
  "scenarios": {
   "default": "expected",
   "lean": {"factor": 0.7, "months": 7},

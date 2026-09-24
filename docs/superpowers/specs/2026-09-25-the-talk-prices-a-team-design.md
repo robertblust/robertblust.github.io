@@ -27,7 +27,7 @@ The page mixes two kinds of figure, and it marks each one as one or the other. A
 | API usage for the chats | the owner's figure | USD 20 of Anthropic API credit for Sonnet 5, plus 8.1% VAT, about CHF 17 |
 | Domains | estimated | CHF 90: companygraph.io and guestgraph.io for a year |
 | USD to CHF | sourced | 0.80: the 2026 average to 23 Sep was 0.794 and early September about 0.81 |
-| The team's tools | estimated | licences at CHF 60 per person-month; hosting at CHF 0 on both sides, in the same free tier |
+| The team's tools | estimated | licenses at CHF 60 per person-month; hosting at CHF 0 on both sides, in the same free tier |
 | Closing the gaps | estimated | external code and security review CHF 15,000, usability and accessibility study CHF 12,000, a month onboarding a second maintainer CHF 20,000 |
 
 Every number the page prints is read from a file, never typed into the markup, the rule the deck already follows. The counts go into `stats.json`; the estimates go into a new `cost.json` beside it, dated, each with its basis in a field of its own. The page's script computes the totals from the two files, so a changed assumption is one edit to `cost.json` and every figure on the page follows.

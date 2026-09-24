@@ -120,6 +120,18 @@ const PAGES = [
     readoutInvariant: true,
     lockupCollapses: true,
     internalLinks: true },
+  // The deciding-well talk's cost page. Every figure it prints is computed from stats.json,
+  // decisions.json and cost.json by talks/deciding-well/cost/cost.mjs, whose arithmetic
+  // `npm run test:cost` holds; this holds what the page does with it: no slot left empty in
+  // either language, the defaults shown, and a failed load said rather than shown blank.
+  { path: "/talks/deciding-well/cost/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /would have cost/i, lang: "en", sourceLang: "en", card: true,
+    contains: ["What a team", "Would both approaches produce the same result?"],
+    slotsFilled: { en: ["CHF 1,235,443", "CHF 57,216", "22"], de: ["CHF 1’235’443", "CHF 57’216"] },
+    sameOrigin: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
+    internalLinks: true },
   { path: "/talks/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     // The German PDF is reached by data-de-href, which `sameTab` cannot see: it reads the href as
     // delivered, and the swap happens only after a click. `dlHref` reads the first such link.
@@ -237,6 +249,34 @@ const CHECKS = {
   ...MODEL_PAGE_CHECKS,
   ...DESIGN_CHECKS,
   ...pageChecks({ SITE, BASE }),
+  // The cost page computes every number it prints after three fetches land, so a figure the
+  // page lost is an empty slot, and a figure in the wrong language form is a slot the switch
+  // never re-rendered. Both render fine and pass every other check.
+  async slotsFilled(page, spec) {
+    const read = () => page.evaluate(() => ({
+      empty: [...document.querySelectorAll("[data-v]")].filter(e => !e.textContent.trim()).map(e => e.dataset.v),
+      text: document.querySelector("main").innerText }));
+    await page.waitForFunction(() => document.querySelector('[data-v="ag"]').textContent.trim() !== "");
+    let r = await read();
+    if (r.empty.length) return `empty slots in English: ${r.empty.join(", ")}`;
+    for (const f of spec.slotsFilled.en) if (!r.text.includes(f)) return `the English page does not show ${f}`;
+    await page.click("#lde");
+    await page.$eval("#peak", e => { e.value = "14"; e.dispatchEvent(new Event("input")); });
+    await page.$eval("#peak", e => { e.value = "8"; e.dispatchEvent(new Event("input")); });
+    r = await read();
+    if (r.empty.length) return `empty slots in German after a slider moved: ${r.empty.join(", ")}`;
+    for (const f of spec.slotsFilled.de) if (!r.text.includes(f)) return `the German page does not show ${f}`;
+    await page.click("#len");
+    // A broken file rather than an aborted request: the suite reports every failed request as a
+    // fault of the page, and a file that arrives unreadable fails the page's load the same way.
+    await page.route("**/cost.json", route => route.fulfill({ status: 200, contentType: "application/json", body: "{" }));
+    await page.goto(BASE + spec.path);
+    try { await page.waitForFunction(() => !document.getElementById("costerr").hidden, null, { timeout: 5000 }); }
+    catch { return "with cost.json unavailable the page did not say so"; }
+    await page.unroute("**/cost.json");
+    await page.goto(BASE + spec.path);
+    return null;
+  },
   // The card's picture is drawn at runtime from a file the model build copied, so nothing in
   // the markup fails when the copy is missing, the page forgot `data-images` or the card stopped
   // drawing it: the page would show a broken box or no face, and every other check stays green.
