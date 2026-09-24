@@ -1,45 +1,51 @@
 #!/usr/bin/env python3
 """Draws slide 04's chart from stats.json into the deck, between its markers.
 
-One series, so no legend: the slide's line names it. Values are labeled only where the story
-turns, the first week past a tenth of the peak and the peak itself, and every bar carries its
-count as a hover title. Bars are the interactive tone, the peak the resolved one, and text
-wears the text token, never the bar's.
+One bar per day, from the first commit to the cutoff, with the months named on the axis: a
+room reads dates, not week numbers. One series, so no legend; the slide's line names it. Only
+the busiest day carries a number, every bar carries its count as a hover title, and a tick
+under the axis marks the day each repository was born. Bars are the interactive tone, the peak
+the resolved one, and text wears the text token, never the bar's.
 
   ./chart.py        # rewrites the region in index.html
 """
 import datetime, pathlib, re
-from stats import load_stats, iso_week
+from stats import load_stats
 
 HERE = pathlib.Path(__file__).resolve().parent
 REGION = re.compile(r"(<!-- chart:begin -->)(.*?)(<!-- chart:end -->)", re.S)
-W, H, L, B = 1200, 400, 24, 64   # frame, left inset, bottom band for week labels and birth ticks
+W, H, L, B = 1200, 400, 24, 64   # frame, left inset, bottom band for month labels and birth ticks
+MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+
+def label(d, year=False):
+    return f"{MONTHS[d.month - 1]} {d.day}" + (f", {d.year}" if year else "")
 
 def render(s):
-    weeks = s["weekly"]
-    top = max(w["commits"] for w in weeks) or 1
-    peak = iso_week(s["busiestDay"]["date"])
-    turn = next((w["week"] for w in weeks if w["commits"] >= top / 10), None)
-    step = (W - 2 * L) / len(weeks)
+    days = s["daily"]
+    top = max(d["commits"] for d in days) or 1
+    peak = s["busiestDay"]["date"]
+    step = (W - 2 * L) / len(days)
     base = H - B
-    out = [f'<svg class="chart" viewBox="0 0 {W} {H}" role="img" aria-label="Commits per week, '
-           f'{weeks[0]["monday"]} to {weeks[-1]["monday"]}">']
+    first = datetime.date.fromisoformat(days[0]["date"])
+    out = [f'<svg class="chart" viewBox="0 0 {W} {H}" role="img" aria-label="Commits per day, '
+           f'{label(first, True)} to {label(datetime.date.fromisoformat(days[-1]["date"]), True)}">']
     out.append(f'<line class="axis" x1="{L}" x2="{W - L}" y1="{base}" y2="{base}"></line>')
-    for i, w in enumerate(weeks):
-        h = max((base - 36) * w["commits"] / top, 0)
+    for i, d in enumerate(days):
+        day = datetime.date.fromisoformat(d["date"])
+        h = max((base - 36) * d["commits"] / top, 0)
         x = L + i * step
-        cls = "col peak" if w["week"] == peak else "col"
-        out.append(f'<rect class="{cls}" x="{x + step * .18:.1f}" y="{base - h:.1f}" width="{step * .64:.1f}" '
-                   f'height="{h:.1f}" rx="4"><title>{w["week"]}: {w["commits"]:,} commits</title></rect>')
-        out.append(f'<text class="wk" x="{x + step / 2:.1f}" y="{base + 24}">{w["week"][-3:]}</text>')
-        if w["week"] in (turn, peak):
-            out.append(f'<text class="n" x="{x + step / 2:.1f}" y="{base - h - 10:.1f}">{w["commits"]:,}</text>')
-    first = datetime.date.fromisoformat(weeks[0]["monday"])
+        cls = "col peak" if d["date"] == peak else "col"
+        out.append(f'<rect class="{cls}" x="{x + step * .12:.1f}" y="{base - h:.1f}" width="{step * .76:.1f}" '
+                   f'height="{h:.1f}" rx="1.5"><title>{label(day, True)}: {d["commits"]:,} commits</title></rect>')
+        if day.day == 1 or i == 0:
+            out.append(f'<text class="mo" x="{x:.1f}" y="{base + 24}">{MONTHS[day.month - 1]}</text>')
+        if d["date"] == peak:
+            out.append(f'<text class="n" x="{x + step / 2:.1f}" y="{base - h - 10:.1f}">{label(day)} · {d["commits"]:,}</text>')
     for b in s["births"]:
         d = datetime.date.fromisoformat(b["date"])
         if d < first:
             continue
-        x = L + (d - first).days / 7 * step
+        x = L + ((d - first).days + .5) * step
         out.append(f'<line class="birth" x1="{x:.1f}" x2="{x:.1f}" y1="{base + 38}" y2="{base + 52}"></line>')
     out.append("</svg>")
     return "".join(out)

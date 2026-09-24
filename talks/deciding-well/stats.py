@@ -144,11 +144,19 @@ def price(per):
         usd += (c["input"] * i + c["output"] * o + c["cacheRead"] * cr + c["write5m"] * 1.25 * i + c["write1h"] * 2 * i) / 1e6
     return round(usd, 6), unpriced
 
+def daily_series(counts, start, cutoff):
+    day, end, out = datetime.date.fromisoformat(start), ts(cutoff).date(), []
+    while day <= end:
+        out.append({"date": day.isoformat(), "commits": counts.get(day.isoformat(), 0)})
+        day += datetime.timedelta(days=1)
+    return out
+
 def load_stats(path=HERE / "stats.json"):
     return json.loads(pathlib.Path(path).read_text())
 
 def main():
     rows, days, dmerged, weekly = [], collections.Counter(), collections.Counter(), collections.Counter()
+    alldays = collections.Counter()
     t = collections.Counter()
     for r in repos():
         name = r["nameWithOwner"]
@@ -159,6 +167,7 @@ def main():
         s, p, d = docs(g)
         for c in cs:
             days[c["date"][:10]] += 1
+            alldays[c["date"][:10]] += 1
             weekly[iso_week(c["date"])] += 1
         for m in merged:
             dmerged[m["mergedAt"][:10]] += 1
@@ -172,6 +181,7 @@ def main():
     robcv = commits(str(ROBCV / ".git"))
     for c in robcv:
         weekly[iso_week(c["date"])] += 1
+        alldays[c["date"][:10]] += 1
     first = run("git", "-C", str(ROBCV), "log", "--reverse", "--format=%aI", "HEAD").split("\n")[0]
     weeks, day = [], datetime.date.fromisoformat(START)
     while day <= ts(CUTOFF).date():
@@ -183,7 +193,7 @@ def main():
     out = {"cutoff": CUTOFF, "start": START, "repos": rows,
            "totals": dict(t, repos=len(rows), owners=len(OWNERS), claudeShare=round(t["claude"] / t["nonMerge"], 3)),
            "busiestDay": {"date": busiest, "commits": days[busiest], "merged": dmerged[busiest]},
-           "weekly": weeks, "births": [{"repo": r["repo"], "date": r["created"]} for r in rows],
+           "weekly": weeks, "daily": daily_series(alldays, START, CUTOFF), "births": [{"repo": r["repo"], "date": r["created"]} for r in rows],
            "robcv": {"first": first[:10], "commits": len(robcv)},
            "tokens": tokens(str(pathlib.Path.home() / ".claude/projects"), TOKENS_FROM, CUTOFF)}
     (HERE / "stats.json").write_text(json.dumps(out, indent=1) + "\n")

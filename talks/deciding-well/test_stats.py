@@ -28,6 +28,11 @@ class Stats(unittest.TestCase):
         self.assertEqual(usd, 0)
         self.assertEqual(unpriced, {"claude-unknown-9": 1_000_000})
 
+    def test_daily_series_fills_every_day_from_start_to_cutoff(self):
+        d = stats.daily_series({"2026-06-10": 3}, "2026-06-09", "2026-06-11T23:59:59+02:00")
+        self.assertEqual(d, [{"date": "2026-06-09", "commits": 0}, {"date": "2026-06-10", "commits": 3},
+                             {"date": "2026-06-11", "commits": 0}])
+
     def test_price_uses_cache_multipliers(self):
         per = {"claude-sonnet-5": {"input": 0, "output": 0, "cacheRead": 1_000_000, "write5m": 1_000_000, "write1h": 1_000_000}}
         usd, _ = stats.price(per)
