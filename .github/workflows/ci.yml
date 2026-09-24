@@ -44,6 +44,15 @@ jobs:
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
       - run: npm ci
+      # Nothing on a page says when its German was made, so an English sentence reworded in a
+      # pull request keeps a German that now says something else, and every check that reads
+      # the rendered page reads one language and passes. This compares the pull request's pages
+      # with its base by German value and fails where the German stayed and the English moved.
+      - name: No German left behind an English edit
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch -q origin "${{ github.base_ref }}"
+          npx design german stale "origin/${{ github.base_ref }}" HEAD
       # The renderers decide what every derived page says, and the check below only holds their
       # output against itself: a renderer that writes the wrong thing everywhere is green there
       # and wrong on nine pages. These are unit tests on fixtures, so they read no real page.
