@@ -19,5 +19,6 @@ await exportDecks({
   decks: [
     { dir: "talks/mental-model", slug: "mental-model" },
     { dir: "talks/essential-complexity", slug: "essential-complexity" },
+    { dir: "talks/deciding-well", slug: "deciding-well" },
   ],
 });

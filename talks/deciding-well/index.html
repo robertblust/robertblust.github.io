@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://blust.ch/talks/deciding-well/">
+
+<!-- lang="en" is the truth about this file: the slides are English markup, and German
+     lives in data-de until applyLang() swaps it. This comment said the reverse until
+     2026-08-26, describing an arrangement that had already been inverted — `sourceLang`
+     now fetches this file cold on every run and fails if the attribute ever says otherwise.
+     The speaker notes are the one place the old story still holds: those are authored in
+     English in data-notes, with German in data-notes-de. -->
+<title>Building fast is solved. Deciding well is not. · Robert Blust</title>
+<meta id="metadesc" name="description" content="A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Robert Blust">
+<meta property="og:url" content="https://blust.ch/talks/deciding-well/">
+<meta property="og:title" content="Building fast is solved. Deciding well is not. · Robert Blust">
+<meta property="og:description" content="A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.">
+<meta property="og:image" content="https://blust.ch/talks/deciding-well/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Building fast is solved. Deciding well is not. — Robert Blust.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. Each page carries
+     the whole graph it references — Google resolves @graph within one document, so a bare
+     { "@id": ... } pointing at a node defined on another page resolves to nothing. That was
+     the bug this replaced, alongside a logo.svg this site has never served. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://blust.ch/#person",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "jobTitle": "Software Engineer & Architect",
+      "image": "https://blust.ch/images/profiles/robert-blust.jpg",
+      "sameAs": [
+        "https://github.com/robertblust",
+        "https://www.linkedin.com/in/robertblust/",
+        "https://substack.com/@robertblust"
+      ],
+      "subjectOf": {
+        "@id": "https://blust.ch/#model"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://blust.ch/#model",
+      "name": "Robert Blust — mental model",
+      "description": "One person described in CompanyGraph: the profile, its experiences, the skills it claims and the evidence under each.",
+      "url": "https://blust.ch/model/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@id": "https://blust.ch/#person"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "isBasedOn": "https://github.com/robertblust/mental-model",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://blust.ch/model.json",
+        "encodingFormat": "application/json"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blust.ch/#website",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://blust.ch/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/talks/deciding-well/#webpage",
+      "name": "Building fast is solved. Deciding well is not.",
+      "url": "https://blust.ch/talks/deciding-well/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://blust.ch/#website"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://blust.ch/talks/deciding-well/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blust.ch/talks/deciding-well/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://blust.ch/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://blust.ch/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Building fast is solved. Deciding well is not.",
+          "item": "https://blust.ch/talks/deciding-well/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
+<script>
+  /* ─── theme boot · v3 · deck ────────────────────────────────────
+     Set the theme before anything paints. Generated from @robertblust/design —
+     editing it here does nothing, because the next `npm run design` overwrites it.
+
+     This is the only script on these pages that runs in <head>, and it has to: every other
+     script sits at the end of the body, which is after first paint. Language arriving late
+     costs a flash of English; a palette arriving late repaints the whole page in the wrong
+     one, on every navigation.
+
+     It duplicates the storage key and the URL pattern that `theme` also carries. That is
+     deliberate — nothing is in scope up here, and the block must stand alone. Both blocks are
+     generated from the same package, so the duplicate cannot drift.
+
+     Dark is the default and `prefers-color-scheme` is never read: dark is the design, and
+     light is something a visitor asks for. A visitor whose system is set to light still
+     arrives on dark until they say otherwise.
+  */
+  (function(){
+    try {
+      var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+      var t = m ? m[1] : localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+  })();
+  /* ─── end theme boot ─────────────────────────────────────────────────── */
+</script>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../deck.css">
+<style>
+/* Loaded from the site's one root fonts/, the same way every other page here does: nobody
+   is sent a deck folder on its own, and what ships is the PDF, which has the outlines baked
+   in and needs no font directory at all. Before this the deck named a face it never
+   shipped, so every slide rendered in whatever system-ui the room's laptop happened to have. */
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at a fixed height of 900 and the whole plane is
+     scaled to the screen, the way a presentation tool does it. Two things
+     follow that were previously worth re-testing rather than guaranteed: a
+     slide can never scroll, because the canvas always fits; and the
+     composition is identical on every screen, because there is only one.
+
+     Only the height is fixed. The width follows the screen's aspect, so the
+     canvas covers the viewport exactly and there are never letterbox bars —
+     a fixed 16:9 canvas on a 4:3 screen put 96px of black top and bottom.
+     Every length below is in cqmin, 1% of the canvas's shorter side, which
+     is therefore a constant 9px on any landscape screen: type keeps its
+     size, and a wider screen buys real width instead of margin. Sizing by
+     cqmin did the opposite — it derived width from viewport height. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    /* No sky of its own. The canvas used to paint one — a slightly different one —
+       which meant the deck was lit unlike every page on the site, and an opaque fixed
+       canvas hides whatever sky the body sets anyway. Transparent lets --sky through,
+       so the deck and the pages get the same one. */
+    background:transparent;
+  }
+
+  /* A slide can never be taller than the canvas, so anything that scales with
+     width needs a ceiling. A square 300×300 diagram in a half-width column was
+     780px tall on an ultrawide screen — inside a 900px frame that already held a
+     kicker and a headline. The cap is well above any inline icon, so it only ever
+     bites on a figure that was about to overflow. */
+  .slide svg, .slide img{max-height:60cqmin}
+  /* Slide 04's chart, drawn by chart.py from stats.json. One series in the interactive tone,
+     its peak in the resolved one; text in the text token, the week labels mono because they
+     are data. */
+  .chart{width:100%; height:auto; max-height:44cqmin; margin-top:2cqmin}
+  .chart .col{fill:var(--c-mid)}
+  .chart .peak{fill:var(--c-firm)}
+  .chart .axis{stroke:var(--rule); stroke-width:2}
+  .chart .birth{stroke:var(--c-firm); stroke-width:2}
+  .chart text{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; font-size:15px; fill:var(--dim); text-anchor:middle}
+  .chart .n{fill:var(--ink); font-weight:600}
+  .chart .mo{text-anchor:start}
+  .chart .end{text-anchor:end}
+  /* Slide 11's reading list: a cell is one link, its title in the slide's ink and its address
+     in mono, because the address is data. The group names head the first row only. */
+  .reads .grp{display:block; font-style:normal; font-size:clamp(.8rem,1.4cqmin,1rem); letter-spacing:.14em; text-transform:uppercase; color:var(--c-mid); margin-bottom:1.2cqmin}
+  .reads a{display:block; color:inherit; text-decoration:none}
+  .reads a:hover b{text-decoration:underline; text-underline-offset:.2em}
+  .reads a span{display:block; margin-top:.6cqmin; font-size:clamp(.8rem,1.45cqmin,1.05rem); color:var(--c-mid)}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  /* Every direct child of the active slide rises, in order. This used to require a
+     hand-applied .rise class, which meant a slide animated only if someone remembered —
+     one deck had it on all fifty-five children, another on nine, a third on two. The rule
+     now applies itself, so a new slide cannot be forgotten.
+     The stagger ran out at four children while slides carry up to six, and the fifth and
+     sixth inherited animation-delay:0 — firing before the first four rather than after.
+     Hence steps to six and a catch-all beyond. */
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  .note{
+    margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
+    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+  }
+
+  /* people / agents split */
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6cqmin; margin-top:3cqmin}
+  .col h4{
+    font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-bottom:2cqmin;
+    padding-bottom:1.2cqmin; border-bottom:2px solid var(--rule);
+  }
+  .col.now h4{color:var(--c-mid); border-color:var(--c-mid)}
+  .col p{font-size:clamp(1.25rem,2.9cqmin,2rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1rem,2.1cqmin,1.45rem); color:var(--dim); font-weight:400; margin-top:1.4cqmin; line-height:1.4}
+  .verdict{margin-top:4cqmin; font-size:clamp(1.25rem,2.9cqmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--c-mid)}
+
+  /* breadth left, example diagram right */
+  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:5cqmin; align-items:center; margin-top:2.4cqmin}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8cqmin}
+  .blist li{border-top:2px solid var(--rule); padding-top:1.2cqmin}
+  .blist b{display:block; font-size:clamp(1.2rem,2.6cqmin,1.85rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85cqmin,1.35rem); color:var(--dim)}
+  .diagram svg{width:100%; height:auto; display:block}
+  .caption{margin-top:1.6cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.82rem,1.6cqmin,1.15rem); color:var(--dim); letter-spacing:.02em}
+  .caption b{color:var(--c-mid); font-weight:600}
+  .stamp{
+    margin-top:3.4cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    color:var(--dim); letter-spacing:.02em;
+  }
+  .stamp b{color:var(--c-mid); font-weight:600}
+
+  /* breadth grid (domains overview) */
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 5cqmin; margin-top:4.4cqmin}
+  .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
+  .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
+  .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
+
+  /* example – diagram + list */
+  .split.even{grid-template-columns:1fr 1.05fr; gap:6cqmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5cqmin; margin:0}
+  .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
+  .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
+  .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
+
+  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
+
+  /* title slide */
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:20ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  /* SVG diagram tokens */
+  .node{fill:var(--raise); stroke:var(--c-mid); stroke-width:1.5}
+  .node.center{fill:var(--rule); stroke-width:2.2}
+  .edge{stroke:var(--rule); stroke-width:1.5}
+  .edge.live{stroke:var(--c-mid); stroke-width:1.5; opacity:.7}
+  .nlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  .nlabel.c{fill:var(--c-mid); font-weight:700; font-size:14px}
+  .flowbox{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .flowbox.hot{stroke:var(--c-mid)}
+  .flowlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
+  .gate{fill:var(--rule); stroke:var(--c-mid); stroke-width:2}
+  .arrow{stroke:var(--c-mid); stroke-width:1.6; marker-end:url(#ah)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ----------
+     One instrument along the bottom edge instead of four fixed corners competing for
+     the same pixels. The counter lives inside the transport's display window: on the
+     device this borrows from, the track number and the transport are one thing.
+     --chromeH is measured in JS, because the notes sheet and the mobile progress bar
+     both have to sit exactly on top of whatever height this row ends up at. */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  /* Mono, uppercase and .14em tracking used to live here, when the credit was the words
+     "Robert Blust" and nothing else. Every one of them is wrong for a lockup, and not
+     harmlessly: uppercase inherits into the mark's <text> and renders the plate as "RB"
+     instead of the "rb" the favicon and the header both show, and .14em pulls the two
+     letters apart inside it. Mono was the deeper error — this is a navigation link, and
+     mono on this site means data. The sibling decks still render their wordmark in mono;
+     that is the half of the pattern not worth porting. */
+
+
+  /* page-owned: groups the language and theme controls in the transport, exactly as
+     the prose header's #langind wrapper groups the same pair. */
+  .switchers{display:flex; align-items:center; gap:.45rem}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:var(--deck-well); color:var(--deck-paper); border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--deck-accent); margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Zwei Rollen, klar getrennt: eine Regie-Instruktion wird nicht gesprochen,
+     eine Betonung schon. Vorher war beides <em> und die Vertonung verschluckte Wörter. */
+  .notes em.cue{font-style:italic; color:var(--deck-quiet)}
+  .notes em{font-style:normal; font-weight:600; color:var(--deck-paper)}
+  .notes .time{float:right; color:var(--deck-accent); font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid var(--deck-edge); border-radius:8px; padding:.5em .9em;
+                color:var(--deck-warm); font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:var(--deck-paper); border-color:var(--deck-accent)}
+  .notes .close:focus-visible{outline:2px solid var(--deck-accent); outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+  .deck.notes-open .split{align-items:start; margin-top:1.6cqmin}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    /* the deck progress bar sits on the transport's top edge, not behind it */
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .kicker{margin-bottom:5vw}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. The slide headline carries the
+     same face the site's does; everything else on a slide is a label or a
+     value, and stays where it was. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--deck-mark)"></path>
+  </marker>
+</defs></svg>
+
+<div class="deck" id="deck">
+
+  <!-- 00 · Title -->
+  <section class="slide title-slide" data-say-title="no"
+    data-time="0:30"
+    data-notes="<em class='cue'>The title stays up while I greet the room and say my name, then → to the first slide.</em> Building fast is solved. Deciding well is not. I spent a career break, from June to September 2026, testing that line by building in the open. Everything in this talk can be checked: the figures come from git and were counted on September 24, 2026."
+    data-notes-de="<em class='cue'>Der Titel bleibt stehen, während ich das Publikum begrüsse und meinen Namen nenne, dann gehe ich mit → zur ersten Folie.</em> Schnell bauen ist gelöst. Gut entscheiden nicht. In einer Auszeit von Juni bis September 2026 habe ich diesen Satz geprüft, indem ich öffentlich Software entwickelt habe. Alles in diesem Vortrag lässt sich nachprüfen: Die Zahlen stammen aus git und wurden am 24. September 2026 gezählt.">
+    <div class="kicker mono" data-n="00" data-de="Ein Vortrag">A talk</div>
+    <h1 data-de="Schnell bauen ist gelöst. <em>Gut entscheiden nicht.</em>">Building fast is solved. <em>Deciding well is not.</em></h1>
+    <p class="sub" data-de="Ein Vortrag über eine Auszeit, 2026.">A talk on a career break, 2026.</p>
+    <p class="byline" data-de="Robert Blust · <span>Software Engineer &amp; Architect</span>">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <!-- 01 · The constraint -->
+  <section class="slide" data-say-title="no"
+    data-time="1:00"
+    data-notes="<em class='cue'>Calm. This is the claim the rest of the talk proves.</em> AI moved the constraint from building quickly to deciding correctly. That sentence is one of the values in my model, and the model says what it means in practice: I write the decision down before the code, with the alternatives that lost and why, so the next person can disagree with a reason rather than a rewrite. <em class='cue'>Short pause.</em> The time that fast building saves is spent on choosing well, because that is where the constraint went."
+    data-notes-de="<em class='cue'>Ruhig. Das ist die These, die der Rest des Vortrags belegt.</em> KI hat den Engpass vom schnellen Bauen zum richtigen Entscheiden verschoben. Dieser Satz ist einer der Werte in meinem Modell, und das Modell sagt auch, was er in der Praxis heisst: Ich halte den Entscheid fest, bevor ich den Code schreibe, mit den verworfenen Alternativen und dem Grund dafür. So kann die nächste Person mit einem Argument widersprechen, statt alles neu zu schreiben. <em class='cue'>Kurze Pause.</em> Die Zeit, die schnelles Bauen spart, gehört dem guten Entscheiden, denn dort liegt jetzt der Engpass.">
+    <div class="kicker mono" data-n="01" data-de="Die These">The claim</div>
+    <h1 data-de="Der Engpass hat sich <em>verschoben</em>.">The constraint <em>moved</em>.</h1>
+    <p class="stamp" data-de="Gut entscheiden vor schnell bauen: «KI hat den Engpass vom schnellen Bauen zum richtigen Entscheiden verschoben; <b>der Entscheid ist die Arbeit.</b>»">Decide well over build fast: “AI moved the constraint from building quickly to deciding correctly; <b>the decision is the work.</b>”</p>
+    <p class="note" data-de="Ein Wert aus dem Modell, sinngemäss übersetzt.">A value in the model, quoted as it stands there.</p>
+  </section>
+
+  <!-- 02 · The break -->
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Personal, and brief.</em> The break had one question: what I like doing, rather than what I am used to being hired for. I tested it by building two products in the open, CompanyGraph and GuestGraph. The first commit was on June 9. <em class='cue'>Do not name the employer.</em> In the model’s own words, the break ended in September with a decision, not only an offer."
+    data-notes-de="<em class='cue'>Persönlich, und kurz.</em> Die Auszeit stand unter einer einzigen Frage: Was mache ich gern – und nicht: Wofür werde ich üblicherweise eingestellt? Geprüft habe ich das, indem ich zwei Produkte öffentlich entwickelt habe, CompanyGraph und GuestGraph. Der erste Commit war am 9. Juni. <em class='cue'>Den Arbeitgeber nicht nennen.</em> In den Worten des Modells endete die Auszeit im September mit einem Entscheid, nicht nur mit einem Angebot.">
+    <div class="kicker mono" data-n="02" data-de="Die Auszeit">The break</div>
+    <h1 data-de="Eine Frage, <em>vier Monate</em>.">One question, <em>four months</em>.</h1>
+    <p class="sub" data-de="Juni bis September 2026: die Frage, was als Nächstes kommt – geprüft an zwei Produkten, öffentlich entwickelt.">June to September 2026: what to do next, tested by building in the open.</p>
+    <p class="note" data-de="Die Auszeit endete mit einem Entscheid, nicht nur mit einem Angebot.">It ended with a decision, not only an offer.</p>
+  </section>
+
+  <!-- 03 · Building fast, measured -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Let the numbers stand; read two or three, not all six.</em> Twenty-three public repositories in three organizations, and one person. Five thousand and sixty-five commits on their default branches, sixteen hundred and forty merged pull requests, two hundred and seventy-two releases, and nine hosts that answer: blust.ch, companygraph.io and guestgraph.io, each with an MCP server and a chat. <em class='cue'>For the engineers:</em> ninety-one percent of the commits that are not merges carry a co-author trailer naming Claude, matched over every message, not sampled. Twenty-two of the merged pull requests are Dependabot’s. Every figure is as of September 24, 2026."
+    data-notes-de="<em class='cue'>Die Zahlen wirken lassen; zwei oder drei vorlesen, nicht alle sechs.</em> Dreiundzwanzig öffentliche Repositories in drei Organisationen, und eine Person. Fünftausendfünfundsechzig Commits auf ihren Standard-Branches, sechzehnhundertvierzig gemergte Pull-Requests, zweihundertzweiundsiebzig Releases und neun Hosts, die antworten: blust.ch, companygraph.io und guestgraph.io, jeweils mit einem MCP-Server und einem Chat. <em class='cue'>Für die Entwickler:</em> Einundneunzig Prozent der Commits, die keine Merges sind, enthalten einen Co-Author-Trailer, der Claude nennt – geprüft an jeder einzelnen Nachricht, nicht an einer Stichprobe. Zweiundzwanzig der gemergten Pull-Requests stammen von Dependabot. Alle Zahlen haben den Stand vom 24. September 2026.">
+    <div class="kicker mono" data-n="03" data-de="Die erste Hälfte">The first half</div>
+    <h1 data-de="Schnell bauen, <em>gemessen</em>.">Building fast, <em>measured</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="23">23</b><span data-de="öffentliche Repositories in 3 Organisationen">public repositories in 3 organizations</span></div>
+      <div class="cell"><b data-de="5’065">5,065</b><span data-de="Commits auf Standard-Branches">commits on default branches</span></div>
+      <div class="cell"><b data-de="1’640">1,640</b><span data-de="gemergte Pull-Requests">merged pull requests</span></div>
+      <div class="cell"><b data-de="272">272</b><span data-de="Releases">releases</span></div>
+      <div class="cell"><b data-de="9">9</b><span data-de="laufende Hosts">live hosts</span></div>
+      <div class="cell"><b data-de="91 %">91%</b><span data-de="der Commits ausser Merges mit Claude als Co-Autor">of non-merge commits co-authored with Claude</span></div>
+    </div>
+    <p class="stamp" data-de="Eine Person. <b>Stand 24. Sept. 2026.</b>">One person. <b>As of Sep 24, 2026.</b></p>
+  </section>
+
+  <!-- 04 · The curve -->
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Point at the climb, then at the peak.</em> Each bar is one day of commits, and each mark under the axis is the day a repository was born. The climb begins when the model does, in the week of August 17, not when the tools changed. The busiest day was September 21: six hundred and ninety-five commits and two hundred and fourteen merged pull requests in one day."
+    data-notes-de="<em class='cue'>Ich zeige auf den Anstieg, dann auf die Spitze.</em> Jeder Balken zeigt die Commits eines Tages, und jeder Strich unter der Achse markiert den Tag, an dem ein Repository entstand. Der Anstieg beginnt mit dem Modell, in der Woche vom 17. August – nicht dann, als sich die Werkzeuge änderten. Der Tag mit den meisten Commits war der 21. September: sechshundertfünfundneunzig Commits und zweihundertvierzehn gemergte Pull-Requests an einem einzigen Tag.">
+    <div class="kicker mono" data-n="04" data-de="Die Kurve">The curve</div>
+    <h1 data-de="Die <em>Kurve</em>.">The <em>curve</em>.</h1>
+    <!-- chart:begin --><svg class="chart" viewBox="0 0 1200 400" role="img" aria-label="Commits per day, Jun 9, 2026 to Sep 24, 2026" data-de-aria="Commits pro Tag, 9. Juni 2026 bis 24. Sept. 2026"><line class="axis" x1="24" x2="1176" y1="336" y2="336"></line><rect class="col" x="25.3" y="333.8" width="8.1" height="2.2" rx="1.5"><title data-de="9. Juni 2026: 5 Commits">Jun 9, 2026: 5 commits</title></rect><text class="mo" x="24.0" y="360" data-de="Juni">Jun</text><rect class="col" x="35.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="10. Juni 2026: 0 Commits">Jun 10, 2026: 0 commits</title></rect><rect class="col" x="46.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="11. Juni 2026: 0 Commits">Jun 11, 2026: 0 commits</title></rect><rect class="col" x="57.3" y="334.7" width="8.1" height="1.3" rx="1.5"><title data-de="12. Juni 2026: 3 Commits">Jun 12, 2026: 3 commits</title></rect><rect class="col" x="67.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="13. Juni 2026: 0 Commits">Jun 13, 2026: 0 commits</title></rect><rect class="col" x="78.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="14. Juni 2026: 0 Commits">Jun 14, 2026: 0 commits</title></rect><rect class="col" x="89.3" y="330.8" width="8.1" height="5.2" rx="1.5"><title data-de="15. Juni 2026: 12 Commits">Jun 15, 2026: 12 commits</title></rect><rect class="col" x="99.9" y="333.8" width="8.1" height="2.2" rx="1.5"><title data-de="16. Juni 2026: 5 Commits">Jun 16, 2026: 5 commits</title></rect><rect class="col" x="110.6" y="334.3" width="8.1" height="1.7" rx="1.5"><title data-de="17. Juni 2026: 4 Commits">Jun 17, 2026: 4 commits</title></rect><rect class="col" x="121.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="18. Juni 2026: 0 Commits">Jun 18, 2026: 0 commits</title></rect><rect class="col" x="131.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="19. Juni 2026: 0 Commits">Jun 19, 2026: 0 commits</title></rect><rect class="col" x="142.6" y="333.4" width="8.1" height="2.6" rx="1.5"><title data-de="20. Juni 2026: 6 Commits">Jun 20, 2026: 6 commits</title></rect><rect class="col" x="153.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="21. Juni 2026: 0 Commits">Jun 21, 2026: 0 commits</title></rect><rect class="col" x="163.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="22. Juni 2026: 0 Commits">Jun 22, 2026: 0 commits</title></rect><rect class="col" x="174.6" y="333.0" width="8.1" height="3.0" rx="1.5"><title data-de="23. Juni 2026: 7 Commits">Jun 23, 2026: 7 commits</title></rect><rect class="col" x="185.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="24. Juni 2026: 0 Commits">Jun 24, 2026: 0 commits</title></rect><rect class="col" x="195.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="25. Juni 2026: 0 Commits">Jun 25, 2026: 0 commits</title></rect><rect class="col" x="206.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="26. Juni 2026: 0 Commits">Jun 26, 2026: 0 commits</title></rect><rect class="col" x="217.3" y="335.1" width="8.1" height="0.9" rx="1.5"><title data-de="27. Juni 2026: 2 Commits">Jun 27, 2026: 2 commits</title></rect><rect class="col" x="227.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="28. Juni 2026: 0 Commits">Jun 28, 2026: 0 commits</title></rect><rect class="col" x="238.6" y="332.1" width="8.1" height="3.9" rx="1.5"><title data-de="29. Juni 2026: 9 Commits">Jun 29, 2026: 9 commits</title></rect><rect class="col" x="249.3" y="331.3" width="8.1" height="4.7" rx="1.5"><title data-de="30. Juni 2026: 11 Commits">Jun 30, 2026: 11 commits</title></rect><rect class="col" x="259.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="1. Juli 2026: 0 Commits">Jul 1, 2026: 0 commits</title></rect><text class="mo" x="258.7" y="360" data-de="Juli">Jul</text><rect class="col" x="270.6" y="334.7" width="8.1" height="1.3" rx="1.5"><title data-de="2. Juli 2026: 3 Commits">Jul 2, 2026: 3 commits</title></rect><rect class="col" x="281.3" y="334.3" width="8.1" height="1.7" rx="1.5"><title data-de="3. Juli 2026: 4 Commits">Jul 3, 2026: 4 commits</title></rect><rect class="col" x="291.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="4. Juli 2026: 0 Commits">Jul 4, 2026: 0 commits</title></rect><rect class="col" x="302.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="5. Juli 2026: 0 Commits">Jul 5, 2026: 0 commits</title></rect><rect class="col" x="313.3" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="6. Juli 2026: 1 Commits">Jul 6, 2026: 1 commits</title></rect><rect class="col" x="323.9" y="335.1" width="8.1" height="0.9" rx="1.5"><title data-de="7. Juli 2026: 2 Commits">Jul 7, 2026: 2 commits</title></rect><rect class="col" x="334.6" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="8. Juli 2026: 1 Commits">Jul 8, 2026: 1 commits</title></rect><rect class="col" x="345.3" y="327.4" width="8.1" height="8.6" rx="1.5"><title data-de="9. Juli 2026: 20 Commits">Jul 9, 2026: 20 commits</title></rect><rect class="col" x="355.9" y="323.5" width="8.1" height="12.5" rx="1.5"><title data-de="10. Juli 2026: 29 Commits">Jul 10, 2026: 29 commits</title></rect><rect class="col" x="366.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="11. Juli 2026: 0 Commits">Jul 11, 2026: 0 commits</title></rect><rect class="col" x="377.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="12. Juli 2026: 0 Commits">Jul 12, 2026: 0 commits</title></rect><rect class="col" x="387.9" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="13. Juli 2026: 1 Commits">Jul 13, 2026: 1 commits</title></rect><rect class="col" x="398.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="14. Juli 2026: 0 Commits">Jul 14, 2026: 0 commits</title></rect><rect class="col" x="409.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="15. Juli 2026: 0 Commits">Jul 15, 2026: 0 commits</title></rect><rect class="col" x="419.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="16. Juli 2026: 0 Commits">Jul 16, 2026: 0 commits</title></rect><rect class="col" x="430.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="17. Juli 2026: 0 Commits">Jul 17, 2026: 0 commits</title></rect><rect class="col" x="441.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="18. Juli 2026: 0 Commits">Jul 18, 2026: 0 commits</title></rect><rect class="col" x="451.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="19. Juli 2026: 0 Commits">Jul 19, 2026: 0 commits</title></rect><rect class="col" x="462.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="20. Juli 2026: 0 Commits">Jul 20, 2026: 0 commits</title></rect><rect class="col" x="473.3" y="335.1" width="8.1" height="0.9" rx="1.5"><title data-de="21. Juli 2026: 2 Commits">Jul 21, 2026: 2 commits</title></rect><rect class="col" x="483.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="22. Juli 2026: 0 Commits">Jul 22, 2026: 0 commits</title></rect><rect class="col" x="494.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="23. Juli 2026: 0 Commits">Jul 23, 2026: 0 commits</title></rect><rect class="col" x="505.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="24. Juli 2026: 0 Commits">Jul 24, 2026: 0 commits</title></rect><rect class="col" x="515.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="25. Juli 2026: 0 Commits">Jul 25, 2026: 0 commits</title></rect><rect class="col" x="526.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="26. Juli 2026: 0 Commits">Jul 26, 2026: 0 commits</title></rect><rect class="col" x="537.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="27. Juli 2026: 0 Commits">Jul 27, 2026: 0 commits</title></rect><rect class="col" x="547.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="28. Juli 2026: 0 Commits">Jul 28, 2026: 0 commits</title></rect><rect class="col" x="558.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="29. Juli 2026: 0 Commits">Jul 29, 2026: 0 commits</title></rect><rect class="col" x="569.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="30. Juli 2026: 0 Commits">Jul 30, 2026: 0 commits</title></rect><rect class="col" x="579.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="31. Juli 2026: 0 Commits">Jul 31, 2026: 0 commits</title></rect><rect class="col" x="590.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="1. Aug. 2026: 0 Commits">Aug 1, 2026: 0 commits</title></rect><text class="mo" x="589.3" y="360" data-de="Aug.">Aug</text><rect class="col" x="601.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="2. Aug. 2026: 0 Commits">Aug 2, 2026: 0 commits</title></rect><rect class="col" x="611.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="3. Aug. 2026: 0 Commits">Aug 3, 2026: 0 commits</title></rect><rect class="col" x="622.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="4. Aug. 2026: 0 Commits">Aug 4, 2026: 0 commits</title></rect><rect class="col" x="633.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="5. Aug. 2026: 0 Commits">Aug 5, 2026: 0 commits</title></rect><rect class="col" x="643.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="6. Aug. 2026: 0 Commits">Aug 6, 2026: 0 commits</title></rect><rect class="col" x="654.6" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="7. Aug. 2026: 1 Commits">Aug 7, 2026: 1 commits</title></rect><rect class="col" x="665.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="8. Aug. 2026: 0 Commits">Aug 8, 2026: 0 commits</title></rect><rect class="col" x="675.9" y="335.1" width="8.1" height="0.9" rx="1.5"><title data-de="9. Aug. 2026: 2 Commits">Aug 9, 2026: 2 commits</title></rect><rect class="col" x="686.6" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="10. Aug. 2026: 1 Commits">Aug 10, 2026: 1 commits</title></rect><rect class="col" x="697.3" y="333.0" width="8.1" height="3.0" rx="1.5"><title data-de="11. Aug. 2026: 7 Commits">Aug 11, 2026: 7 commits</title></rect><rect class="col" x="707.9" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="12. Aug. 2026: 0 Commits">Aug 12, 2026: 0 commits</title></rect><rect class="col" x="718.6" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="13. Aug. 2026: 0 Commits">Aug 13, 2026: 0 commits</title></rect><rect class="col" x="729.3" y="329.1" width="8.1" height="6.9" rx="1.5"><title data-de="14. Aug. 2026: 16 Commits">Aug 14, 2026: 16 commits</title></rect><rect class="col" x="739.9" y="334.7" width="8.1" height="1.3" rx="1.5"><title data-de="15. Aug. 2026: 3 Commits">Aug 15, 2026: 3 commits</title></rect><rect class="col" x="750.6" y="335.6" width="8.1" height="0.4" rx="1.5"><title data-de="16. Aug. 2026: 1 Commits">Aug 16, 2026: 1 commits</title></rect><rect class="col" x="761.3" y="334.7" width="8.1" height="1.3" rx="1.5"><title data-de="17. Aug. 2026: 3 Commits">Aug 17, 2026: 3 commits</title></rect><rect class="col" x="771.9" y="328.2" width="8.1" height="7.8" rx="1.5"><title data-de="18. Aug. 2026: 18 Commits">Aug 18, 2026: 18 commits</title></rect><rect class="col" x="782.6" y="328.7" width="8.1" height="7.3" rx="1.5"><title data-de="19. Aug. 2026: 17 Commits">Aug 19, 2026: 17 commits</title></rect><rect class="col" x="793.3" y="331.7" width="8.1" height="4.3" rx="1.5"><title data-de="20. Aug. 2026: 10 Commits">Aug 20, 2026: 10 commits</title></rect><rect class="col" x="803.9" y="321.3" width="8.1" height="14.7" rx="1.5"><title data-de="21. Aug. 2026: 34 Commits">Aug 21, 2026: 34 commits</title></rect><rect class="col" x="814.6" y="303.6" width="8.1" height="32.4" rx="1.5"><title data-de="22. Aug. 2026: 75 Commits">Aug 22, 2026: 75 commits</title></rect><rect class="col" x="825.3" y="302.8" width="8.1" height="33.2" rx="1.5"><title data-de="23. Aug. 2026: 77 Commits">Aug 23, 2026: 77 commits</title></rect><rect class="col" x="835.9" y="313.6" width="8.1" height="22.4" rx="1.5"><title data-de="24. Aug. 2026: 52 Commits">Aug 24, 2026: 52 commits</title></rect><rect class="col" x="846.6" y="264.3" width="8.1" height="71.7" rx="1.5"><title data-de="25. Aug. 2026: 166 Commits">Aug 25, 2026: 166 commits</title></rect><rect class="col" x="857.3" y="312.3" width="8.1" height="23.7" rx="1.5"><title data-de="26. Aug. 2026: 55 Commits">Aug 26, 2026: 55 commits</title></rect><rect class="col" x="867.9" y="310.5" width="8.1" height="25.5" rx="1.5"><title data-de="27. Aug. 2026: 59 Commits">Aug 27, 2026: 59 commits</title></rect><rect class="col" x="878.6" y="275.6" width="8.1" height="60.4" rx="1.5"><title data-de="28. Aug. 2026: 140 Commits">Aug 28, 2026: 140 commits</title></rect><rect class="col" x="889.3" y="307.1" width="8.1" height="28.9" rx="1.5"><title data-de="29. Aug. 2026: 67 Commits">Aug 29, 2026: 67 commits</title></rect><rect class="col" x="899.9" y="315.3" width="8.1" height="20.7" rx="1.5"><title data-de="30. Aug. 2026: 48 Commits">Aug 30, 2026: 48 commits</title></rect><rect class="col" x="910.6" y="283.8" width="8.1" height="52.2" rx="1.5"><title data-de="31. Aug. 2026: 121 Commits">Aug 31, 2026: 121 commits</title></rect><rect class="col" x="921.3" y="267.4" width="8.1" height="68.6" rx="1.5"><title data-de="1. Sept. 2026: 159 Commits">Sep 1, 2026: 159 commits</title></rect><text class="mo" x="920.0" y="360" data-de="Sept.">Sep</text><rect class="col" x="931.9" y="240.2" width="8.1" height="95.8" rx="1.5"><title data-de="2. Sept. 2026: 222 Commits">Sep 2, 2026: 222 commits</title></rect><rect class="col" x="942.6" y="270.8" width="8.1" height="65.2" rx="1.5"><title data-de="3. Sept. 2026: 151 Commits">Sep 3, 2026: 151 commits</title></rect><rect class="col" x="953.3" y="283.8" width="8.1" height="52.2" rx="1.5"><title data-de="4. Sept. 2026: 121 Commits">Sep 4, 2026: 121 commits</title></rect><rect class="col" x="963.9" y="263.9" width="8.1" height="72.1" rx="1.5"><title data-de="5. Sept. 2026: 167 Commits">Sep 5, 2026: 167 commits</title></rect><rect class="col" x="974.6" y="237.6" width="8.1" height="98.4" rx="1.5"><title data-de="6. Sept. 2026: 228 Commits">Sep 6, 2026: 228 commits</title></rect><rect class="col" x="985.3" y="279.5" width="8.1" height="56.5" rx="1.5"><title data-de="7. Sept. 2026: 131 Commits">Sep 7, 2026: 131 commits</title></rect><rect class="col" x="995.9" y="295.9" width="8.1" height="40.1" rx="1.5"><title data-de="8. Sept. 2026: 93 Commits">Sep 8, 2026: 93 commits</title></rect><rect class="col" x="1006.6" y="314.4" width="8.1" height="21.6" rx="1.5"><title data-de="9. Sept. 2026: 50 Commits">Sep 9, 2026: 50 commits</title></rect><rect class="col" x="1017.3" y="285.1" width="8.1" height="50.9" rx="1.5"><title data-de="10. Sept. 2026: 118 Commits">Sep 10, 2026: 118 commits</title></rect><rect class="col" x="1027.9" y="263.9" width="8.1" height="72.1" rx="1.5"><title data-de="11. Sept. 2026: 167 Commits">Sep 11, 2026: 167 commits</title></rect><rect class="col" x="1038.6" y="323.1" width="8.1" height="12.9" rx="1.5"><title data-de="12. Sept. 2026: 30 Commits">Sep 12, 2026: 30 commits</title></rect><rect class="col" x="1049.3" y="336.0" width="8.1" height="0.0" rx="1.5"><title data-de="13. Sept. 2026: 0 Commits">Sep 13, 2026: 0 commits</title></rect><rect class="col" x="1059.9" y="327.8" width="8.1" height="8.2" rx="1.5"><title data-de="14. Sept. 2026: 19 Commits">Sep 14, 2026: 19 commits</title></rect><rect class="col" x="1070.6" y="278.6" width="8.1" height="57.4" rx="1.5"><title data-de="15. Sept. 2026: 133 Commits">Sep 15, 2026: 133 commits</title></rect><rect class="col" x="1081.3" y="264.8" width="8.1" height="71.2" rx="1.5"><title data-de="16. Sept. 2026: 165 Commits">Sep 16, 2026: 165 commits</title></rect><rect class="col" x="1091.9" y="270.4" width="8.1" height="65.6" rx="1.5"><title data-de="17. Sept. 2026: 152 Commits">Sep 17, 2026: 152 commits</title></rect><rect class="col" x="1102.6" y="265.2" width="8.1" height="70.8" rx="1.5"><title data-de="18. Sept. 2026: 164 Commits">Sep 18, 2026: 164 commits</title></rect><rect class="col" x="1113.3" y="241.0" width="8.1" height="95.0" rx="1.5"><title data-de="19. Sept. 2026: 220 Commits">Sep 19, 2026: 220 commits</title></rect><rect class="col" x="1123.9" y="247.1" width="8.1" height="88.9" rx="1.5"><title data-de="20. Sept. 2026: 206 Commits">Sep 20, 2026: 206 commits</title></rect><rect class="col peak" x="1134.6" y="36.0" width="8.1" height="300.0" rx="1.5"><title data-de="21. Sept. 2026: 695 Commits">Sep 21, 2026: 695 commits</title></rect><text class="n end" x="1144.0" y="26.0" data-de="21. Sept. · 695">Sep 21 · 695</text><rect class="col" x="1145.3" y="205.6" width="8.1" height="130.4" rx="1.5"><title data-de="22. Sept. 2026: 302 Commits">Sep 22, 2026: 302 commits</title></rect><rect class="col" x="1155.9" y="244.5" width="8.1" height="91.5" rx="1.5"><title data-de="23. Sept. 2026: 212 Commits">Sep 23, 2026: 212 commits</title></rect><rect class="col" x="1166.6" y="186.6" width="8.1" height="149.4" rx="1.5"><title data-de="24. Sept. 2026: 346 Commits">Sep 24, 2026: 346 commits</title></rect><line class="birth" x1="349.3" x2="349.3" y1="374" y2="388"></line><line class="birth" x1="349.3" x2="349.3" y1="374" y2="388"></line><line class="birth" x1="808.0" x2="808.0" y1="374" y2="388"></line><line class="birth" x1="818.7" x2="818.7" y1="374" y2="388"></line><line class="birth" x1="829.3" x2="829.3" y1="374" y2="388"></line><line class="birth" x1="829.3" x2="829.3" y1="374" y2="388"></line><line class="birth" x1="840.0" x2="840.0" y1="374" y2="388"></line><line class="birth" x1="861.3" x2="861.3" y1="374" y2="388"></line><line class="birth" x1="872.0" x2="872.0" y1="374" y2="388"></line><line class="birth" x1="914.7" x2="914.7" y1="374" y2="388"></line><line class="birth" x1="957.3" x2="957.3" y1="374" y2="388"></line><line class="birth" x1="1021.3" x2="1021.3" y1="374" y2="388"></line><line class="birth" x1="1032.0" x2="1032.0" y1="374" y2="388"></line><line class="birth" x1="1085.3" x2="1085.3" y1="374" y2="388"></line><line class="birth" x1="1085.3" x2="1085.3" y1="374" y2="388"></line><line class="birth" x1="1106.7" x2="1106.7" y1="374" y2="388"></line><line class="birth" x1="1138.7" x2="1138.7" y1="374" y2="388"></line><line class="birth" x1="1138.7" x2="1138.7" y1="374" y2="388"></line><line class="birth" x1="1149.3" x2="1149.3" y1="374" y2="388"></line><line class="birth" x1="1170.7" x2="1170.7" y1="374" y2="388"></line><line class="birth" x1="1170.7" x2="1170.7" y1="374" y2="388"></line></svg><!-- chart:end -->
+    <p class="note" data-de="Commits pro Tag; jeder Strich markiert den Tag, an dem ein Repository entstand.">Commits per day; each tick marks the day a repository was born.</p>
+  </section>
+
+  <!-- 05 · The cost -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about two hundred dollars a month. The same work, priced at the API’s list price, would have been about ten thousand dollars of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window is August 18 to September 24, 2026, and Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027."
+    data-notes-de="<em class='cue'>Zuerst das Geld, dann das Risiko.</em> Bezahlt habe ich das Abonnement, rund zweihundert Dollar im Monat. Dieselbe Arbeit hätte zum Listenpreis der API etwa zehntausend Dollar an Rechenleistung gekostet: rund sechzehn Milliarden Tokens, die meisten davon Kontext, der erneut aus dem Cache gelesen wurde. <em class='cue'>Für die Entwickler:</em> Der Zeitraum reicht vom 18. August bis zum 24. September 2026 und umfasst nur Claude Code. Seine Logs werden nach dreissig Tagen gelöscht, deshalb ist nichts Früheres erhalten, und Chats ausserhalb von Claude Code waren nie darin. <em class='cue'>Jetzt langsamer.</em> Das ist das Risiko. All das hängt an einigen wenigen Anbietern – Anthropic, Google und OpenAI – und an ihren Preisen und Bedingungen. Das Wissen ist portabel: reines Markdown in git, bereitgestellt über MCP, ein offenes Protokoll, das jedes Modell lesen kann. Die Geschwindigkeit ist es nicht, jedenfalls noch nicht. Die Auswege sind ein Forschungsthema für 2027.">
+    <div class="kicker mono" data-n="05" data-de="Die Kosten">The cost</div>
+    <h1 data-de="Bauen ist nicht mehr <em>das Teure</em>.">Building is not <em>the expensive part</em> any more.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="rund 200 Dollar">about $200</b><span data-de="im Monat, bezahlt">a month, paid</span></div>
+      <div class="cell"><b data-de="rund 10’000 Dollar">about $10,000</b><span data-de="Rechenleistung zum Listenpreis der API">of compute at API list price</span></div>
+      <div class="cell"><b data-de="rund 16 Milliarden">about 16 billion</b><span data-de="Tokens, die meisten davon erneut gelesener Kontext">tokens, most of them context read again</span></div>
+    </div>
+    <p class="stamp" data-de="Das alles hängt an den Preisen und Bedingungen einiger weniger Anbieter. Das Wissen ist portabel; <b>die Geschwindigkeit noch nicht.</b>">It rests on a few providers’ prices and terms. The knowledge is portable; <b>the speed is not yet.</b></p>
+  </section>
+
+  <!-- 06 · Where the time went -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>The turn to the second half.</em> The time went into writing things down before they were built: ninety-five specs and a hundred and five plans. Every change runs through five phases, Shape, Spec, Plan, Implement and Integrate, and no phase begins before the Owner has approved its predecessor’s gate. <em class='cue'>Key line:</em> an agent opens and reports; the Owner merges, and never delegates a merge."
+    data-notes-de="<em class='cue'>Die Wende zur zweiten Hälfte.</em> Die Zeit verwendete ich darauf, Dinge aufzuschreiben, bevor sie gebaut wurden: fünfundneunzig Specs und hundertfünf Pläne. Jede Änderung durchläuft fünf Phasen – Shape, Spec, Plan, Implement und Integrate –, und keine Phase beginnt, bevor der Owner das Gate der vorherigen freigegeben hat. <em class='cue'>Kernsatz:</em> Ein Agent eröffnet den Pull-Request und berichtet; den Merge macht der Owner, und er delegiert ihn nie.">
+    <div class="kicker mono" data-n="06" data-de="Die zweite Hälfte">The second half</div>
+    <h1 data-de="Wohin die Zeit <em>stattdessen</em> ging.">Where the time went <em>instead</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="95">95</b><span data-de="Specs">specs</span></div>
+      <div class="cell"><b data-de="105">105</b><span data-de="Pläne">plans</span></div>
+      <div class="cell"><b data-de="5">5</b><span data-de="Phasen, jede hinter einem Gate">phases, each behind a gate</span></div>
+    </div>
+    <p class="stamp" data-de="Shape · Spec · Plan · Implement · Integrate – <b>den Merge macht der Owner.</b>">Shape · Spec · Plan · Implement · Integrate — <b>the Owner merges.</b></p>
+  </section>
+
+  <!-- 07 · Taken, revised, dropped -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>First the count, then how it was made.</em> Ninety-five specs record thirteen hundred and sixty decisions. Twelve hundred and fifty-eight still stand as written, seventy-two were revised later and thirty were dropped or parked. Around them: one revert in five thousand and sixty-five commits, and a release wave across twelve repositories that was closed and replaced on the day it went out. <em class='cue'>For the engineers:</em> the model has no type for a decision, so no query returns this number. Agents read every spec and listed each decision with a quote from it as evidence; a script kept only the decisions whose quote is in the spec, and a sample of twenty was read against the sources by hand. <em class='cue'>Pause, then the closing line.</em> An agent had to read the decisions out of prose. The next step is to make them part of the model."
+    data-notes-de="<em class='cue'>Zuerst die Zahl, dann wie sie entstand.</em> Fünfundneunzig Specs halten dreizehnhundertsechzig Entscheide fest. Zwölfhundertachtundfünfzig gelten noch so, wie sie geschrieben wurden, zweiundsiebzig wurden später überarbeitet und dreissig verworfen oder zurückgestellt. Daneben stehen ein einziger Revert in fünftausendfünfundsechzig Commits und eine Release-Welle über zwölf Repositories, die noch am selben Tag zurückgezogen und ersetzt wurde. <em class='cue'>Für die Entwickler:</em> Das Modell hat keinen Typ für einen Entscheid, deshalb liefert keine Abfrage diese Zahl. Agenten haben jede Spec gelesen und jeden Entscheid mit einem Zitat daraus als Beleg aufgelistet. Ein Skript behielt nur die Entscheide, deren Zitat tatsächlich in der Spec steht, und eine Stichprobe von zwanzig wurde von Hand an den Quellen geprüft. <em class='cue'>Pause, dann der Schlusssatz.</em> Ein Agent musste die Entscheide aus Fliesstext herauslesen. Der nächste Schritt ist, sie zum Teil des Modells zu machen.">
+    <div class="kicker mono" data-n="07" data-de="Die Entscheide">The decisions</div>
+    <h1 data-de="Getroffen, überarbeitet, <em>verworfen</em>.">Taken, revised, <em>dropped</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="1’360">1,360</b><span data-de="Entscheide, festgehalten in 95 Specs">decisions written down in 95 specs</span></div>
+      <div class="cell"><b data-de="72">72</b><span data-de="später überarbeitet">revised later</span></div>
+      <div class="cell"><b data-de="30">30</b><span data-de="verworfen oder zurückgestellt">dropped or parked</span></div>
+      <div class="cell"><b data-de="1’258">1,258</b><span data-de="gelten noch wie geschrieben">still standing as written</span></div>
+      <div class="cell"><b data-de="1">1</b><span data-de="Revert in 5’065 Commits">revert in 5,065 commits</span></div>
+      <div class="cell"><b data-de="12">12</b><span data-de="Repositories in einer Release-Welle, am selben Tag ersetzt">repositories in one release wave, replaced the same day</span></div>
+    </div>
+    <p class="note" data-de="Ein Agent musste die Entscheide aus Fliesstext herauslesen. Als Nächstes werden sie Teil des Modells.">An agent had to read them out of prose. Next, decisions become part of the model.</p>
+  </section>
+
+  <!-- 08 · One graph -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>The answer, stated plainly.</em> Agents build fast. What they lack is what was decided and why. CompanyGraph writes a company’s knowledge down once, as one graph: its vision and strategy, its roles and processes, its rules and the evidence under each claim, read by people and by agents alike. <em class='cue'>For the engineers:</em> it is Markdown in git, checked on every change and served over MCP, so no provider owns it."
+    data-notes-de="<em class='cue'>Die Antwort, klar gesagt.</em> Agenten bauen schnell. Was ihnen fehlt, ist das Wissen, was entschieden wurde und warum. CompanyGraph schreibt das Wissen einer Firma einmal auf, als einen einzigen Graphen: ihre Vision und Strategie, ihre Rollen und Prozesse, ihre Regeln und den Beleg zu jedem Anspruch – gelesen von Menschen wie von Agenten. <em class='cue'>Für die Entwickler:</em> Es ist Markdown in git, bei jeder Änderung geprüft und über MCP bereitgestellt, sodass es keinem Anbieter gehört.">
+    <div class="kicker mono" data-n="08" data-de="Die Antwort">The answer</div>
+    <h1 data-de="Die Antwort: <em>ein einziger Graph</em>.">The answer: <em>one graph</em>.</h1>
+    <p class="sub" data-de="CompanyGraph: Vision, Strategie, Rollen, Prozesse, Regeln und ihre Belege als ein einziger Graph, für Menschen und Agenten.">CompanyGraph: vision, strategy, roles, processes, rules and their evidence as one graph, for people and agents.</p>
+    <p class="stamp" data-de="Reines Markdown in git, über MCP bereitgestellt – <b>kein Anbieter besitzt es.</b>">Plain Markdown in git, served over MCP — <b>no provider owns it.</b></p>
+  </section>
+
+  <!-- 09 · It runs -->
+  <section class="slide"
+    data-time="0:45"
+    data-notes="<em class='cue'>Short. Point at the three addresses.</em> There are three instances, and each runs on a mental model of its own: blust.ch on mine, a company of one; companygraph.io on CompanyGraph’s, the product describing itself; guestgraph.io on GuestGraph’s, and beside that model sits the product itself in code: the engine, which is the open core, and the connector to Apaleo. Each model is a repository of Markdown in git, and each is served three ways: as a site, as an MCP server and as a chat. <em class='cue'>The invitation:</em> open one of the chats and ask it a question the model can answer."
+    data-notes-de="<em class='cue'>Kurz. Ich zeige auf die drei Adressen.</em> Es gibt drei Instanzen, und jede läuft auf einem eigenen Mental Model: blust.ch auf meinem, dem einer Ein-Personen-Firma; companygraph.io auf dem von CompanyGraph, mit dem das Produkt sich selbst beschreibt; guestgraph.io auf dem von GuestGraph, und neben diesem Modell steht das Produkt selbst als Code: die Engine, also der Open Core, und der Apaleo-Connector. Jedes Modell ist ein Repository aus Markdown in git, und jedes wird auf drei Wegen bereitgestellt: als Website, als MCP-Server und als Chat. <em class='cue'>Die Einladung:</em> Öffnen Sie einen der Chats und stellen Sie ihm eine Frage, die das Modell beantworten kann.">
+    <div class="kicker mono" data-n="09" data-de="Es läuft">It runs</div>
+    <h1 data-de="Es <em>läuft</em>.">It <em>runs</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b data-de="blust.ch">blust.ch</b><span data-de="das Mental Model von Robert Blust, einer Ein-Personen-Firma<br>Website · MCP-Server · Chat">the mental model of Robert Blust, a company of one<br>site · MCP server · chat</span></div>
+      <div class="cell"><b data-de="companygraph.io">companygraph.io</b><span data-de="das Mental Model von CompanyGraph, das sich selbst beschreibt<br>Website · MCP-Server · Chat">the mental model of CompanyGraph, describing itself<br>site · MCP server · chat</span></div>
+      <div class="cell"><b data-de="guestgraph.io">guestgraph.io</b><span data-de="das Mental Model von GuestGraph<br>Website · MCP-Server · Chat<br>und das Produkt als Code: die Open-Core-Engine und der Apaleo-Connector">the mental model of GuestGraph<br>site · MCP server · chat<br>and the product in code: the open-core engine and the Apaleo connector</span></div>
+    </div>
+    <p class="note" data-de="Drei Mental Models, jedes in git, jedes auf drei Wegen bereitgestellt. Stellen Sie einem Chat eine Frage, die sein Modell beantworten kann.">Three mental models, each in git, each served three ways. Ask a chat a question its model can answer.</p>
+  </section>
+
+  <!-- 10 · Deciding well is the work -->
+  <section class="slide"
+    data-time="0:45"
+    data-notes="<em class='cue'>Slow down for the close.</em> Building fast is solved; the numbers show it. Deciding well is not, and the same numbers show that too. What comes next: from October, an IT architect role, and from 2027, education in how AI is led and governed in an organization, with the provider question in it. <em class='cue'>Short pause, then the thanks.</em> Thank you."
+    data-notes-de="<em class='cue'>Langsamer werden für den Schluss.</em> Schnell bauen ist gelöst; die Zahlen zeigen es. Gut entscheiden nicht, und dieselben Zahlen zeigen auch das. Was als Nächstes kommt: ab Oktober eine Rolle als IT-Architekt und ab 2027 Weiterbildung darin, wie KI in einer Organisation geführt und gesteuert wird – die Frage nach den Anbietern eingeschlossen. <em class='cue'>Kurze Pause, dann der Dank.</em> Danke.">
+    <div class="kicker mono" data-n="10" data-de="Was als Nächstes kommt">What comes next</div>
+    <h1 class="big-punch" data-de="Gut entscheiden ist <em>die Arbeit</em>.">Deciding well is <em>the work</em>.</h1>
+    <p class="sub" data-de="Schnell bauen ist gelöst. Gut entscheiden nicht.">Building fast is solved. Deciding well is not.</p>
+    <p class="stamp" data-de="blust.ch · companygraph.io · guestgraph.io – ab Oktober eine Rolle als IT-Architekt; ab 2027 <b>Weiterbildung darin, wie KI geführt und gesteuert wird.</b>">blust.ch · companygraph.io · guestgraph.io — from October, an IT architect role; from 2027, <b>education in how AI is led and governed.</b></p>
+  </section>
+
+
+  <!-- 11 · Read more -->
+  <section class="slide"
+    data-time="0:30"
+    data-notes="<em class='cue'>Leave this up while questions come.</em> Six places to start reading, in the order of the talk: the argument, the proof and the answer."
+    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Sechs Stellen, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
+    <div class="kicker mono" data-n="11" data-de="Weiterlesen">Read more</div>
+    <h1 data-de="Wo Sie <em>weiterlesen</em> können.">Where to <em>start reading</em>.</h1>
+    <div class="grid reads">
+      <div class="cell"><i class="grp" data-de="Die These">The argument</i><a href="https://blust.ch/principles/" target="_blank" rel="noopener"><b data-de="Die Werte">The values</b><span class="mono">blust.ch/principles</span></a></div>
+      <div class="cell"><i class="grp" data-de="Die Belege">The proof</i><a href="https://blust.ch/model/" target="_blank" rel="noopener"><b data-de="Jeder Anspruch mit seinem Beleg">Every claim, with its evidence</b><span class="mono">blust.ch/model</span></a></div>
+      <div class="cell"><i class="grp" data-de="Die Antwort">The answer</i><a href="https://companygraph.io/" target="_blank" rel="noopener"><b data-de="Alles, was eine Firma weiss, in einem einzigen Graphen">Everything a company knows, one graph</b><span class="mono">companygraph.io</span></a></div>
+      <div class="cell"><a href="https://blust.ch/team/" target="_blank" rel="noopener"><b data-de="Wer was entscheidet">Who decides what</b><span class="mono">blust.ch/team</span></a></div>
+      <div class="cell"><a href="https://blust.ch/timeline/" target="_blank" rel="noopener"><b data-de="Die Laufbahn, Eintrag für Eintrag">The career as a ledger</b><span class="mono">blust.ch/timeline</span></a></div>
+      <div class="cell"><a href="https://companygraph.io/surfaces/" target="_blank" rel="noopener"><b data-de="Wo das Modell veröffentlicht ist">Where the model is published</b><span class="mono">companygraph.io/surfaces</span></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="chrome" id="chrome">
+
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n"><b id="cur">00</b><span class="sep">/</span><span id="tot">10</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <div class="switchers" id="langind">
+    <div class="seg" id="lang" role="group" aria-label="switch language" data-de-aria="Sprache wechseln">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg theme" id="thmind" role="group" aria-label="switch appearance" data-de-aria="Erscheinungsbild wechseln">
+      <button type="button" id="thLight" aria-pressed="false" aria-label="Light" data-de-aria="Hell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="thDark" aria-pressed="true" aria-label="Dark" data-de-aria="Dunkel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+
+<script>
+  /* This talk's own strings. Everything else about the deck's chrome comes from
+     @robertblust/design — it is in deck.js now. */
+  var TALK = {
+    de:{ title:'Schnell bauen ist gelöst. Gut entscheiden nicht. · Robert Blust', desc:'Eine Auszeit in Zahlen: was Bauen mit KI heute kostet, warum gutes Entscheiden weiterhin die Arbeit ist – und der eine Graph, der die Entscheide für Menschen und Agenten festhält.' },
+    en:{ title:'Building fast is solved. Deciding well is not. · Robert Blust', desc:'A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.' }
+  };
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:TALK.de.title, desc:TALK.de.desc,
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:TALK.en.title, desc:TALK.en.desc,
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', up:'Back to all talks' }
+  };
+
+
+  var THEME_KEY = "theme";
+  function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
+  function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
+  function themeFromUrl(){
+    var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+    if (!m) return null;
+    try {
+      var q = location.search.replace(/([?&])theme=(light|dark)(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    return m[1];
+  }
+  function applyTheme(){
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+    var l = document.getElementById("thLight"), d = document.getElementById("thDark");
+    if (l) l.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    if (d) d.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  function setTheme(v){ theme = v; themeRemember(v); applyTheme(); }
+
+  var urlTheme = themeFromUrl();
+  if (urlTheme) themeRemember(urlTheme);
+  var theme = urlTheme || (themeStored() === 'light' ? 'light' : 'dark');
+
+  document.getElementById('thLight').addEventListener('click', function(){ setTheme('light'); });
+  document.getElementById('thDark').addEventListener('click', function(){ setTheme('dark'); });
+  applyTheme();
+
+  // deck.js reads TALK and UI off this object, and calls applyLang() itself; nothing here
+  // calls it. This script is not wrapped in an IIFE — TALK, UI and theme are plain top-level
+  // declarations, exactly as "deck runtime" and "theme" left them — so this hook is a bare
+  // statement too, not a return from a closure.
+  window.rbDeck = { talk: TALK, ui: UI };
+</script>
+<script src="../../deck.js" defer></script>
+
+</body>
+</html>

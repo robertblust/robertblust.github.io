@@ -13,7 +13,7 @@ Everything below this block is this repository's own. `sh conventions/convention
 
 # blust.ch — working conventions
 
-Robert Blust's profile page and two talks, self-contained, no bundler. What the pages are, the URL map and the commands live in `README.md`; this file is about the ways this site breaks silently.
+Robert Blust's profile page and its talks, self-contained, no bundler. What the pages are, the URL map and the commands live in `README.md`; this file is about the ways this site breaks silently.
 
 ## Build & verify
 
@@ -22,7 +22,7 @@ npm install && npx playwright install chromium
 npm run serve      # → localhost:8000, every page
 npm run verify      # Playwright DOM assertions — the tests
 npm run og           # every page's 1200×630 share card, listed in og-recipe.mjs
-npm run pdf            # both decks' PDFs
+npm run pdf            # every deck's PDFs
 ```
 
 **Verify by rendering, never by reading the diff.** A passing `npm run verify` after any change to `index.html`, `talks/index.html`, or a deck is not optional — it is the only check that catches a page that parses fine and renders wrong.
@@ -83,11 +83,11 @@ Not a style preference. The brief for this site is durability, and a Google Font
 
 ```bash
 ./tts/generate.py --dry-run                       # what would be billed, and for which slides
-./tts/generate.py                                 # both decks
+./tts/generate.py                                 # every deck
 ./tts/generate.py --deck mental-model --only 04   # one slide of one deck
 ```
 
-One generator serves both talks rather than a copy per deck. The two copies of the PDF exporter this repository was assembled from had already drifted apart — different defaults, different comments — which is the argument for not repeating the pattern.
+One generator serves every talk rather than a copy per deck. The two copies of the PDF exporter this repository was assembled from had already drifted apart — different defaults, different comments — which is the argument for not repeating the pattern.
 
 - **`clipsSeen` is `true`, and that is now correct.** It was `false` while these decks
   had no audio, because browser speech synthesis was the only narration path and a

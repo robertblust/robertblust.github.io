@@ -28,7 +28,7 @@ import argparse, hashlib, html, json, math, os, pathlib, re, shutil, subprocess,
 import array
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DECKS = ["mental-model", "essential-complexity"]
+DECKS = ["mental-model", "essential-complexity", "deciding-well"]
 # the same voice the GuestGraph talk uses, so all three talks sound like one series
 # The narrating voices for blust.ch — one per language, not one per repository.
 #
