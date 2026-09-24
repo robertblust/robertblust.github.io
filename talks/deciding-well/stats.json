@@ -1,0 +1,460 @@
+{
+ "cutoff": "2026-09-24T23:59:59+02:00",
+ "start": "2026-06-09",
+ "repos": [
+  {
+   "repo": "robertblust/cdo-server",
+   "created": "2014-08-29",
+   "commits": 2,
+   "nonMerge": 1,
+   "claude": 1,
+   "merged": 1,
+   "closedUnmerged": 0,
+   "releases": 0
+  },
+  {
+   "repo": "robertblust/cdo-web",
+   "created": "2015-01-27",
+   "commits": 2,
+   "nonMerge": 1,
+   "claude": 1,
+   "merged": 1,
+   "closedUnmerged": 2,
+   "releases": 0
+  },
+  {
+   "repo": "guestgraph/engine",
+   "created": "2026-07-09",
+   "commits": 230,
+   "nonMerge": 150,
+   "claude": 139,
+   "merged": 74,
+   "closedUnmerged": 8,
+   "releases": 0
+  },
+  {
+   "repo": "guestgraph/.github",
+   "created": "2026-07-09",
+   "commits": 63,
+   "nonMerge": 36,
+   "claude": 35,
+   "merged": 27,
+   "closedUnmerged": 1,
+   "releases": 0
+  },
+  {
+   "repo": "guestgraph/guestgraph.github.io",
+   "created": "2026-08-21",
+   "commits": 368,
+   "nonMerge": 244,
+   "claude": 209,
+   "merged": 115,
+   "closedUnmerged": 5,
+   "releases": 0
+  },
+  {
+   "repo": "robertblust/robertblust.github.io",
+   "created": "2026-08-22",
+   "commits": 709,
+   "nonMerge": 451,
+   "claude": 378,
+   "merged": 247,
+   "closedUnmerged": 13,
+   "releases": 0
+  },
+  {
+   "repo": "companygraph/meta-model",
+   "created": "2026-08-23",
+   "commits": 577,
+   "nonMerge": 408,
+   "claude": 393,
+   "merged": 146,
+   "closedUnmerged": 2,
+   "releases": 50
+  },
+  {
+   "repo": "companygraph/companygraph.github.io",
+   "created": "2026-08-23",
+   "commits": 602,
+   "nonMerge": 385,
+   "claude": 317,
+   "merged": 201,
+   "closedUnmerged": 13,
+   "releases": 0
+  },
+  {
+   "repo": "companygraph/.github",
+   "created": "2026-08-24",
+   "commits": 73,
+   "nonMerge": 40,
+   "claude": 39,
+   "merged": 33,
+   "closedUnmerged": 1,
+   "releases": 0
+  },
+  {
+   "repo": "robertblust/mental-model",
+   "created": "2026-08-26",
+   "commits": 545,
+   "nonMerge": 357,
+   "claude": 357,
+   "merged": 178,
+   "closedUnmerged": 3,
+   "releases": 0
+  },
+  {
+   "repo": "robertblust/field-notes",
+   "created": "2026-08-27",
+   "commits": 53,
+   "nonMerge": 28,
+   "claude": 25,
+   "merged": 25,
+   "closedUnmerged": 1,
+   "releases": 0
+  },
+  {
+   "repo": "robertblust/design",
+   "created": "2026-08-31",
+   "commits": 466,
+   "nonMerge": 325,
+   "claude": 257,
+   "merged": 132,
+   "closedUnmerged": 3,
+   "releases": 107
+  },
+  {
+   "repo": "robertblust/conventions",
+   "created": "2026-09-04",
+   "commits": 150,
+   "nonMerge": 101,
+   "claude": 101,
+   "merged": 49,
+   "closedUnmerged": 0,
+   "releases": 35
+  },
+  {
+   "repo": "guestgraph/connector-apaleo",
+   "created": "2026-09-10",
+   "commits": 98,
+   "nonMerge": 58,
+   "claude": 57,
+   "merged": 40,
+   "closedUnmerged": 3,
+   "releases": 1
+  },
+  {
+   "repo": "guestgraph/service-conventions",
+   "created": "2026-09-11",
+   "commits": 78,
+   "nonMerge": 44,
+   "claude": 43,
+   "merged": 33,
+   "closedUnmerged": 2,
+   "releases": 12
+  },
+  {
+   "repo": "companygraph/mcp-server",
+   "created": "2026-09-16",
+   "commits": 220,
+   "nonMerge": 153,
+   "claude": 152,
+   "merged": 59,
+   "closedUnmerged": 1,
+   "releases": 29
+  },
+  {
+   "repo": "robertblust/mcp-blust-ch",
+   "created": "2026-09-16",
+   "commits": 202,
+   "nonMerge": 120,
+   "claude": 118,
+   "merged": 77,
+   "closedUnmerged": 4,
+   "releases": 0
+  },
+  {
+   "repo": "companygraph/obsidian-plugin",
+   "created": "2026-09-18",
+   "commits": 288,
+   "nonMerge": 197,
+   "claude": 197,
+   "merged": 77,
+   "closedUnmerged": 2,
+   "releases": 17
+  },
+  {
+   "repo": "companygraph/mental-model",
+   "created": "2026-09-21",
+   "commits": 69,
+   "nonMerge": 35,
+   "claude": 35,
+   "merged": 32,
+   "closedUnmerged": 0,
+   "releases": 0
+  },
+  {
+   "repo": "companygraph/mcp-companygraph-io",
+   "created": "2026-09-21",
+   "commits": 97,
+   "nonMerge": 50,
+   "claude": 49,
+   "merged": 42,
+   "closedUnmerged": 4,
+   "releases": 0
+  },
+  {
+   "repo": "companygraph/chat-server",
+   "created": "2026-09-22",
+   "commits": 98,
+   "nonMerge": 75,
+   "claude": 75,
+   "merged": 23,
+   "closedUnmerged": 0,
+   "releases": 18
+  },
+  {
+   "repo": "guestgraph/mental-model",
+   "created": "2026-09-24",
+   "commits": 12,
+   "nonMerge": 9,
+   "claude": 9,
+   "merged": 3,
+   "closedUnmerged": 0,
+   "releases": 0
+  },
+  {
+   "repo": "guestgraph/mcp-guestgraph-io",
+   "created": "2026-09-24",
+   "commits": 11,
+   "nonMerge": 7,
+   "claude": 7,
+   "merged": 4,
+   "closedUnmerged": 0,
+   "releases": 0
+  }
+ ],
+ "totals": {
+  "commits": 5013,
+  "nonMerge": 3275,
+  "claude": 2994,
+  "merged": 1619,
+  "mergedByBots": 22,
+  "closedUnmerged": 68,
+  "releases": 269,
+  "specs": 95,
+  "plans": 105,
+  "decisionSections": 35,
+  "reverts": 1,
+  "repos": 23,
+  "owners": 3,
+  "claudeShare": 0.914
+ },
+ "busiestDay": {
+  "date": "2026-09-21",
+  "commits": 695,
+  "merged": 214
+ },
+ "weekly": [
+  {
+   "week": "2026-W24",
+   "monday": "2026-06-08",
+   "commits": 8
+  },
+  {
+   "week": "2026-W25",
+   "monday": "2026-06-15",
+   "commits": 27
+  },
+  {
+   "week": "2026-W26",
+   "monday": "2026-06-22",
+   "commits": 9
+  },
+  {
+   "week": "2026-W27",
+   "monday": "2026-06-29",
+   "commits": 27
+  },
+  {
+   "week": "2026-W28",
+   "monday": "2026-07-06",
+   "commits": 53
+  },
+  {
+   "week": "2026-W29",
+   "monday": "2026-07-13",
+   "commits": 1
+  },
+  {
+   "week": "2026-W30",
+   "monday": "2026-07-20",
+   "commits": 2
+  },
+  {
+   "week": "2026-W31",
+   "monday": "2026-07-27",
+   "commits": 0
+  },
+  {
+   "week": "2026-W32",
+   "monday": "2026-08-03",
+   "commits": 3
+  },
+  {
+   "week": "2026-W33",
+   "monday": "2026-08-10",
+   "commits": 28
+  },
+  {
+   "week": "2026-W34",
+   "monday": "2026-08-17",
+   "commits": 234
+  },
+  {
+   "week": "2026-W35",
+   "monday": "2026-08-24",
+   "commits": 587
+  },
+  {
+   "week": "2026-W36",
+   "monday": "2026-08-31",
+   "commits": 1169
+  },
+  {
+   "week": "2026-W37",
+   "monday": "2026-09-07",
+   "commits": 589
+  },
+  {
+   "week": "2026-W38",
+   "monday": "2026-09-14",
+   "commits": 1059
+  },
+  {
+   "week": "2026-W39",
+   "monday": "2026-09-21",
+   "commits": 1503
+  }
+ ],
+ "births": [
+  {
+   "repo": "robertblust/cdo-server",
+   "date": "2014-08-29"
+  },
+  {
+   "repo": "robertblust/cdo-web",
+   "date": "2015-01-27"
+  },
+  {
+   "repo": "guestgraph/engine",
+   "date": "2026-07-09"
+  },
+  {
+   "repo": "guestgraph/.github",
+   "date": "2026-07-09"
+  },
+  {
+   "repo": "guestgraph/guestgraph.github.io",
+   "date": "2026-08-21"
+  },
+  {
+   "repo": "robertblust/robertblust.github.io",
+   "date": "2026-08-22"
+  },
+  {
+   "repo": "companygraph/meta-model",
+   "date": "2026-08-23"
+  },
+  {
+   "repo": "companygraph/companygraph.github.io",
+   "date": "2026-08-23"
+  },
+  {
+   "repo": "companygraph/.github",
+   "date": "2026-08-24"
+  },
+  {
+   "repo": "robertblust/mental-model",
+   "date": "2026-08-26"
+  },
+  {
+   "repo": "robertblust/field-notes",
+   "date": "2026-08-27"
+  },
+  {
+   "repo": "robertblust/design",
+   "date": "2026-08-31"
+  },
+  {
+   "repo": "robertblust/conventions",
+   "date": "2026-09-04"
+  },
+  {
+   "repo": "guestgraph/connector-apaleo",
+   "date": "2026-09-10"
+  },
+  {
+   "repo": "guestgraph/service-conventions",
+   "date": "2026-09-11"
+  },
+  {
+   "repo": "companygraph/mcp-server",
+   "date": "2026-09-16"
+  },
+  {
+   "repo": "robertblust/mcp-blust-ch",
+   "date": "2026-09-16"
+  },
+  {
+   "repo": "companygraph/obsidian-plugin",
+   "date": "2026-09-18"
+  },
+  {
+   "repo": "companygraph/mental-model",
+   "date": "2026-09-21"
+  },
+  {
+   "repo": "companygraph/mcp-companygraph-io",
+   "date": "2026-09-21"
+  },
+  {
+   "repo": "companygraph/chat-server",
+   "date": "2026-09-22"
+  },
+  {
+   "repo": "guestgraph/mental-model",
+   "date": "2026-09-24"
+  },
+  {
+   "repo": "guestgraph/mcp-guestgraph-io",
+   "date": "2026-09-24"
+  }
+ ],
+ "robcv": {
+  "first": "2026-06-09",
+  "commits": 286
+ },
+ "tokens": {
+  "window": [
+   "2026-08-18",
+   "2026-09-24T23:59:59+02:00"
+  ],
+  "messages": 69578,
+  "input": 521923,
+  "output": 49983813,
+  "cacheRead": 15986205363,
+  "cacheWrite": 257859237,
+  "total": 16294570336,
+  "byModel": {
+   "claude-opus-4-8": 21687953,
+   "claude-opus-5": 9603138422,
+   "claude-fable-5": 247650510,
+   "claude-sonnet-5": 2693499515,
+   "claude-haiku-4-5-20251001": 100168813,
+   "claude-fable-5-1": 2809640833,
+   "claude-opus-5-5": 818784290
+  },
+  "listPriceUsd": 9825,
+  "unpriced": {}
+ }
+}
