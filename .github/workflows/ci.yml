@@ -32,6 +32,12 @@ jobs:
             echo "::error::narration is stale — run ./tts/generate.py and commit the clips"
             exit 1
           fi
+      # Also before anything is installed, for the same reason as the narration check: a slide
+      # whose figure drifted from the snapshot renders fine and passes every DOM check. The
+      # deciding-well talk's tests hold its slides to stats.json and decisions.json, and hold
+      # the scripts that wrote them; they read files and need no network.
+      - name: The deciding-well talk shows the snapshot's figures
+        run: python3 -m unittest discover -s talks/deciding-well -p 'test_*.py'
       - uses: actions/setup-node@v7
         with:
           node-version: "22"

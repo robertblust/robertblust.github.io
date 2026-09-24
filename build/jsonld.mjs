@@ -24,7 +24,8 @@ const SITE = "https://blust.ch";
 // Every page whose graph defines the person, rather than merely pointing at them.
 const PAGES = ["index.html", "ideas/index.html", "model/index.html", "principles/index.html",
   "privacy/index.html", "surfaces/index.html", "talks/index.html", "team/index.html", "timeline/index.html",
-  "talks/mental-model/index.html", "talks/essential-complexity/index.html"];
+  "talks/mental-model/index.html", "talks/essential-complexity/index.html",
+  "talks/deciding-well/index.html"];
 
 // The person is the profile whose name is the root's — the company of one — and the addresses
 // are the URL column of that profile's Also at table. The identity carries an Also at table of

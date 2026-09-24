@@ -104,14 +104,30 @@ const PAGES = [
     readoutInvariant: true,
     lockupCollapses: true,
     internalLinks: true },
+  // The figures on slides 03, 05 and 07 come from talks/deciding-well/stats.json and
+  // decisions.json. `contains` cannot hold them — it reads visible text, and a deck shows one
+  // slide at a time — so talks/deciding-well/test_deck.py reads the source instead, in CI.
+  { path: "/talks/deciding-well/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Deciding well is not/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["EIN VORTRAG", "Schnell bauen"], hides: ["A TALK"], id: "langDe", backId: "langEn" },
+    transport: true, zeroBased: true,  card: true, brandMark: true,
+    transportFits: [320, 350, 360, 390, 393, 414, 430],
+    transportBaseline: [320, 360, 430, 500, 900, 1280],
+    landing: "../../",
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // See the note on /talks/mental-model/'s entry.
+    tokens: true, sky: true, monoScope: true, contrast: true, noFlash: "theme", tokenVersion: true,
+    fences: [],
+    readoutInvariant: true,
+    lockupCollapses: true,
+    internalLinks: true },
   { path: "/talks/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /talks/i, lang: "en", sourceLang: "en",
     // The German PDF is reached by data-de-href, which `sameTab` cannot see: it reads the href as
     // delivered, and the swap happens only after a click. `dlHref` reads the first such link.
     translates: { lang: "de", shows: ["Vorträge über", "Vortrag ansehen", "PDF herunterladen"], hides: ["Watch the talk", "Download PDF"],
                   dlHref: { de: "mental-model/mental-model-de.pdf", en: "mental-model/mental-model-en.pdf" } },
-    contains: ["The Mental Model", "Essential Complexity",
+    contains: ["The Mental Model", "Essential Complexity", "Building fast is solved. Deciding well is not.",
                "machine-readable knowledge base", "essential complexity"], card: true,
-    sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
+    sameTab: ["mental-model/", "essential-complexity/", "deciding-well/", "./"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],

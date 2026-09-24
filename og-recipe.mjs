@@ -60,6 +60,7 @@ export const cards = [
   { dir: "privacy", ...FRAME, hide: HIDE, titleSlide: false },
   { dir: "talks/mental-model", ...FRAME, hide: HIDE, titleSlide: true },
   { dir: "talks/essential-complexity", ...FRAME, hide: HIDE, titleSlide: true },
+  { dir: "talks/deciding-well", ...FRAME, hide: HIDE, titleSlide: true },
 ];
 
 // Bound to this site's root, so every caller here keeps calling `state(card)` with one
