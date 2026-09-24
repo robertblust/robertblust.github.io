@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://blust.ch/talks/deciding-well/">
+
+<!-- lang="en" is the truth about this file: the slides are English markup, and German
+     lives in data-de until applyLang() swaps it. This comment said the reverse until
+     2026-08-26, describing an arrangement that had already been inverted — `sourceLang`
+     now fetches this file cold on every run and fails if the attribute ever says otherwise.
+     The speaker notes are the one place the old story still holds: those are authored in
+     English in data-notes, with German in data-notes-de. -->
+<title>Building fast is solved. Deciding well is not. · a talk by Robert Blust</title>
+<meta id="metadesc" name="description" content="A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Robert Blust">
+<meta property="og:url" content="https://blust.ch/talks/deciding-well/">
+<meta property="og:title" content="Building fast is solved. Deciding well is not. · a talk by Robert Blust">
+<meta property="og:description" content="A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.">
+<meta property="og:image" content="https://blust.ch/talks/deciding-well/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Building fast is solved. Deciding well is not. — Robert Blust.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="de_CH">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. Each page carries
+     the whole graph it references — Google resolves @graph within one document, so a bare
+     { "@id": ... } pointing at a node defined on another page resolves to nothing. That was
+     the bug this replaced, alongside a logo.svg this site has never served. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://blust.ch/#person",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "jobTitle": "Software Engineer & Architect",
+      "image": "https://blust.ch/images/profiles/robert-blust.jpg",
+      "sameAs": [
+        "https://github.com/robertblust",
+        "https://www.linkedin.com/in/robertblust/",
+        "https://substack.com/@robertblust"
+      ],
+      "subjectOf": {
+        "@id": "https://blust.ch/#model"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://blust.ch/#model",
+      "name": "Robert Blust — mental model",
+      "description": "One person described in CompanyGraph: the profile, its experiences, the skills it claims and the evidence under each.",
+      "url": "https://blust.ch/model/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@id": "https://blust.ch/#person"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "isBasedOn": "https://github.com/robertblust/mental-model",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://blust.ch/model.json",
+        "encodingFormat": "application/json"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://blust.ch/#website",
+      "name": "Robert Blust",
+      "url": "https://blust.ch/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://blust.ch/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://blust.ch/talks/deciding-well/#webpage",
+      "name": "Building fast is solved. Deciding well is not.",
+      "url": "https://blust.ch/talks/deciding-well/",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://blust.ch/#website"
+      },
+      "about": {
+        "@id": "https://blust.ch/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://blust.ch/talks/deciding-well/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://blust.ch/talks/deciding-well/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://blust.ch/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Talks",
+          "item": "https://blust.ch/talks/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Building fast is solved. Deciding well is not.",
+          "item": "https://blust.ch/talks/deciding-well/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<meta name="author" content="Robert Blust">
+<script>
+  /* ─── theme boot · v3 · deck ────────────────────────────────────
+     Set the theme before anything paints. Generated from @robertblust/design —
+     editing it here does nothing, because the next `npm run design` overwrites it.
+
+     This is the only script on these pages that runs in <head>, and it has to: every other
+     script sits at the end of the body, which is after first paint. Language arriving late
+     costs a flash of English; a palette arriving late repaints the whole page in the wrong
+     one, on every navigation.
+
+     It duplicates the storage key and the URL pattern that `theme` also carries. That is
+     deliberate — nothing is in scope up here, and the block must stand alone. Both blocks are
+     generated from the same package, so the duplicate cannot drift.
+
+     Dark is the default and `prefers-color-scheme` is never read: dark is the design, and
+     light is something a visitor asks for. A visitor whose system is set to light still
+     arrives on dark until they say otherwise.
+  */
+  (function(){
+    try {
+      var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+      var t = m ? m[1] : localStorage.getItem("theme");
+      if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+  })();
+  /* ─── end theme boot ─────────────────────────────────────────────────── */
+</script>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../deck.css">
+<style>
+/* Loaded from the site's one root fonts/, the same way every other page here does: nobody
+   is sent a deck folder on its own, and what ships is the PDF, which has the outlines baked
+   in and needs no font directory at all. Before this the deck named a face it never
+   shipped, so every slide rendered in whatever system-ui the room's laptop happened to have. */
+@font-face{font-family:"Instrument Sans";src:url(../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Plex Mono";src:url(../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(../../fonts/Bricolage-var.woff2) format("woff2-variations"),url(../../fonts/Bricolage-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:var(--ground); color:var(--ink);
+    background-image:var(--sky); background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased; overflow:hidden;
+  }
+  .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+
+  /* ─── the canvas ──────────────────────────────────────────────────────
+     Slides are laid out once at a fixed height of 900 and the whole plane is
+     scaled to the screen, the way a presentation tool does it. Two things
+     follow that were previously worth re-testing rather than guaranteed: a
+     slide can never scroll, because the canvas always fits; and the
+     composition is identical on every screen, because there is only one.
+
+     Only the height is fixed. The width follows the screen's aspect, so the
+     canvas covers the viewport exactly and there are never letterbox bars —
+     a fixed 16:9 canvas on a 4:3 screen put 96px of black top and bottom.
+     Every length below is in cqmin, 1% of the canvas's shorter side, which
+     is therefore a constant 9px on any landscape screen: type keeps its
+     size, and a wider screen buys real width instead of margin. Sizing by
+     cqmin did the opposite — it derived width from viewport height. */
+  .deck{
+    position:fixed; top:0; left:0;
+    width:1600px; height:900px;   /* width is overwritten per screen, see fit() */
+    transform-origin:0 0;
+    container-type:size;
+    /* No sky of its own. The canvas used to paint one — a slightly different one —
+       which meant the deck was lit unlike every page on the site, and an opaque fixed
+       canvas hides whatever sky the body sets anyway. Transparent lets --sky through,
+       so the deck and the pages get the same one. */
+    background:transparent;
+  }
+
+  /* A slide can never be taller than the canvas, so anything that scales with
+     width needs a ceiling. A square 300×300 diagram in a half-width column was
+     780px tall on an ultrawide screen — inside a 900px frame that already held a
+     kicker and a headline. The cap is well above any inline icon, so it only ever
+     bites on a figure that was about to overflow. */
+  .slide svg, .slide img{max-height:60cqmin}
+
+  .slide{
+    position:absolute; inset:0;
+    display:none; flex-direction:column; justify-content:center;
+    padding:6.5cqmin max(10cqmin, (100% - 1620px) / 2);
+    opacity:0; transition:opacity .35s ease;
+  }
+  .slide.active{display:flex; opacity:1}
+  /* Every direct child of the active slide rises, in order. This used to require a
+     hand-applied .rise class, which meant a slide animated only if someone remembered —
+     one deck had it on all fifty-five children, another on nine, a third on two. The rule
+     now applies itself, so a new slide cannot be forgotten.
+     The stagger ran out at four children while slides carry up to six, and the fifth and
+     sixth inherited animation-delay:0 — firing before the first four rather than after.
+     Hence steps to six and a catch-all beyond. */
+  .slide.active > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active > *:nth-child(1){animation-delay:.05s}
+  .slide.active > *:nth-child(2){animation-delay:.14s}
+  .slide.active > *:nth-child(3){animation-delay:.24s}
+  .slide.active > *:nth-child(4){animation-delay:.34s}
+  .slide.active > *:nth-child(5){animation-delay:.43s}
+  .slide.active > *:nth-child(6){animation-delay:.51s}
+  .slide.active > *:nth-child(n+7){animation-delay:.58s}
+  @media (prefers-reduced-motion: reduce){
+    .slide.active > *{animation:none}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  .kicker{
+    font-family:"Plex Mono", ui-monospace, monospace;
+    font-size:clamp(.82rem,1.6cqmin,1.15rem); letter-spacing:.22em; text-transform:uppercase;
+    color:var(--c-mid); margin-bottom:3.2cqmin; display:flex; align-items:center; gap:1.1em;
+  }
+  .kicker::before{content:attr(data-n); color:var(--dim)}
+  .kicker::after{content:""; flex:0 0 8cqmin; height:2px; background:var(--c-mid); opacity:.5}
+
+  h1{
+    font-weight:600; line-height:1.07; letter-spacing:-.02em;
+    font-size:clamp(2.3rem,8.4cqmin,5.6rem); max-width:26ch;
+  }
+  h1 em{font-style:normal; color:var(--c-mid)}
+  .sub{
+    margin-top:3.4cqmin; font-size:clamp(1.25rem,3.1cqmin,2.5rem);
+    color:var(--dim); max-width:48ch; line-height:1.4; font-weight:400;
+  }
+  .note{
+    margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
+    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+  }
+
+  /* people / agents split */
+  .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6cqmin; margin-top:3cqmin}
+  .col h4{
+    font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    letter-spacing:.16em; text-transform:uppercase; color:var(--dim); margin-bottom:2cqmin;
+    padding-bottom:1.2cqmin; border-bottom:2px solid var(--rule);
+  }
+  .col.now h4{color:var(--c-mid); border-color:var(--c-mid)}
+  .col p{font-size:clamp(1.25rem,2.9cqmin,2rem); line-height:1.3; font-weight:500}
+  .col .small{font-size:clamp(1rem,2.1cqmin,1.45rem); color:var(--dim); font-weight:400; margin-top:1.4cqmin; line-height:1.4}
+  .verdict{margin-top:4cqmin; font-size:clamp(1.25rem,2.9cqmin,2.1rem); font-weight:600}
+  .verdict em{font-style:normal; color:var(--c-mid)}
+
+  /* breadth left, example diagram right */
+  .split{display:grid; grid-template-columns:0.9fr 1.1fr; gap:5cqmin; align-items:center; margin-top:2.4cqmin}
+  .blist{list-style:none; display:flex; flex-direction:column; gap:1.8cqmin}
+  .blist li{border-top:2px solid var(--rule); padding-top:1.2cqmin}
+  .blist b{display:block; font-size:clamp(1.2rem,2.6cqmin,1.85rem); font-weight:600}
+  .blist span{font-size:clamp(.98rem,1.85cqmin,1.35rem); color:var(--dim)}
+  .diagram svg{width:100%; height:auto; display:block}
+  .caption{margin-top:1.6cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.82rem,1.6cqmin,1.15rem); color:var(--dim); letter-spacing:.02em}
+  .caption b{color:var(--c-mid); font-weight:600}
+  .stamp{
+    margin-top:3.4cqmin; font-family:"Plex Mono",monospace; font-size:clamp(.9rem,1.7cqmin,1.25rem);
+    color:var(--dim); letter-spacing:.02em;
+  }
+  .stamp b{color:var(--c-mid); font-weight:600}
+
+  /* breadth grid (domains overview) */
+  .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 5cqmin; margin-top:4.4cqmin}
+  .cell{border-top:2px solid var(--rule); padding-top:1.4cqmin}
+  .cell b{display:block; font-size:clamp(1.1rem,2.3cqmin,1.65rem); font-weight:600}
+  .cell span{font-size:clamp(.88rem,1.6cqmin,1.15rem); color:var(--dim)}
+
+  /* example – diagram + list */
+  .split.even{grid-template-columns:1fr 1.05fr; gap:6cqmin}
+  .glossary{display:flex; flex-direction:column; gap:1.5cqmin; margin:0}
+  .glossary div{border-top:2px solid var(--rule); padding-top:1.1cqmin}
+  .glossary dt{font-family:"Plex Mono",monospace; color:var(--c-mid); font-weight:600; font-size:clamp(1.05rem,2.1cqmin,1.5rem)}
+  .glossary dd{color:var(--dim); font-size:clamp(1rem,1.9cqmin,1.4rem); line-height:1.34; margin:.3cqmin 0 0}
+
+  .big-punch{font-size:clamp(2.3rem,7.2cqmin,5.8rem)}
+
+  /* title slide */
+  .title-slide{justify-content:center}
+  .title-slide h1{font-size:clamp(2.8rem,11cqmin,7.2rem); max-width:20ch; line-height:1.02}
+  .title-slide .sub{margin-top:4.2cqmin; max-width:54ch; font-size:clamp(1.3rem,3.4cqmin,2.6rem); color:var(--dim)}
+  .title-slide .byline{margin-top:6cqmin; font-weight:500; font-size:clamp(.85rem,1.8cqmin,1.25rem); letter-spacing:.14em; color:var(--ink)}
+  .title-slide .byline span{color:var(--dim)}
+
+  /* SVG diagram tokens */
+  .node{fill:var(--raise); stroke:var(--c-mid); stroke-width:1.5}
+  .node.center{fill:var(--rule); stroke-width:2.2}
+  .edge{stroke:var(--rule); stroke-width:1.5}
+  .edge.live{stroke:var(--c-mid); stroke-width:1.5; opacity:.7}
+  .nlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:13px; text-anchor:middle; dominant-baseline:middle}
+  .nlabel.c{fill:var(--c-mid); font-weight:700; font-size:14px}
+  .flowbox{fill:var(--raise); stroke:var(--rule); stroke-width:1.5}
+  .flowbox.hot{stroke:var(--c-mid)}
+  .flowlabel{fill:var(--ink); font-family:"Plex Mono",monospace; font-size:14px; text-anchor:middle; dominant-baseline:middle}
+  .gate{fill:var(--rule); stroke:var(--c-mid); stroke-width:2}
+  .arrow{stroke:var(--c-mid); stroke-width:1.6; marker-end:url(#ah)}
+
+  .bar{position:fixed; left:0; bottom:0; height:4px; background:var(--c-mid); width:0; transition:width .35s ease; z-index:5}
+
+  /* ---------- transport ----------
+     One instrument along the bottom edge instead of four fixed corners competing for
+     the same pixels. The counter lives inside the transport's display window: on the
+     device this borrows from, the track number and the transport are one thing.
+     --chromeH is measured in JS, because the notes sheet and the mobile progress bar
+     both have to sit exactly on top of whatever height this row ends up at. */
+  .chrome{
+    position:fixed; left:0; right:0; bottom:0; z-index:21;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+    padding:0 4cqmin 2.6cqmin; pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto}
+
+  /* Mono, uppercase and .14em tracking used to live here, when the credit was the words
+     "Robert Blust" and nothing else. Every one of them is wrong for a lockup, and not
+     harmlessly: uppercase inherits into the mark's <text> and renders the plate as "RB"
+     instead of the "rb" the favicon and the header both show, and .14em pulls the two
+     letters apart inside it. Mono was the deeper error — this is a navigation link, and
+     mono on this site means data. The sibling decks still render their wordmark in mono;
+     that is the half of the pattern not worth porting. */
+
+
+  /* page-owned: groups the language and theme controls in the transport, exactly as
+     the prose header's #langind wrapper groups the same pair. */
+  .switchers{display:flex; align-items:center; gap:.45rem}
+
+  .notes{position:fixed; inset:auto 0 0 0; background:var(--deck-well); color:var(--deck-paper); border-top:2px solid var(--c-mid); padding:3cqmin 4cqmin calc(var(--chromeH,0px) + 2cqmin); transform:translateY(101%); transition:transform .3s ease; z-index:20; max-height:56vh; overflow:auto}
+  .notes.show{transform:none}
+  .notes h3{font-family:"Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--deck-accent); margin-bottom:1.4cqmin}
+  .notes p{font-size:clamp(.95rem,2cqmin,1.3rem); line-height:1.5; max-width:82ch}
+  /* Zwei Rollen, klar getrennt: eine Regie-Instruktion wird nicht gesprochen,
+     eine Betonung schon. Vorher war beides <em> und die Vertonung verschluckte Wörter. */
+  .notes em.cue{font-style:italic; color:var(--deck-quiet)}
+  .notes em{font-style:normal; font-weight:600; color:var(--deck-paper)}
+  .notes .time{float:right; color:var(--deck-accent); font-family:"Plex Mono",monospace}
+  .notes .close{display:inline-block; margin-top:1.8cqmin; background:none; cursor:pointer;
+                border:1px solid var(--deck-edge); border-radius:8px; padding:.5em .9em;
+                color:var(--deck-warm); font-family:"Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+                text-transform:uppercase; transition:color .15s ease, border-color .15s ease}
+  .notes .close:hover{color:var(--deck-paper); border-color:var(--deck-accent)}
+  .notes .close:focus-visible{outline:2px solid var(--deck-accent); outline-offset:2px}
+  /* notes open: JS scales the active slide to fit above the panel */
+  .deck.notes-open .slide.active{justify-content:flex-start; padding:4cqmin 10cqmin; transform-origin:top center}
+  .deck.notes-open .split{align-items:start; margin-top:1.6cqmin}
+
+  /* mobile / portrait */
+  @media (max-width: 860px), (max-aspect-ratio: 4/5){
+    .chrome{
+      grid-template-columns:1fr; padding:0;
+      background:var(--slab); border-top:1px solid var(--rule);
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .notes{bottom:var(--chromeH,0px); padding-bottom:3cqmin;
+           transform:translateY(calc(101% + var(--chromeH,0px)))}
+    /* the deck progress bar sits on the transport's top edge, not behind it */
+    .bar{bottom:var(--chromeH,0px)}
+    .deck{inset:0; width:auto; height:auto; transform:none; container-type:normal}
+    .slide{justify-content:flex-start; overflow-y:auto;
+           padding:14cqmin 7vw calc(var(--chromeH,0px) + 5vh)}
+    h1{font-size:clamp(1.7rem,7.5vw,3rem); max-width:100%}
+    .big-punch{font-size:clamp(1.8rem,8vw,3.2rem); max-width:100%}
+    .sub{font-size:clamp(1rem,4.4vw,1.5rem); max-width:100%}
+    .note{font-size:clamp(.9rem,3.6vw,1.2rem); max-width:100%}
+    .thennow, .split, .split.even, .grid{grid-template-columns:1fr; gap:5vw; max-width:100%}
+    .kicker{margin-bottom:5vw}
+  }
+
+  /* ─── display face ────────────────────────────────────────────────────
+     Set last so it wins over the rules above. The slide headline carries the
+     same face the site's does; everything else on a slide is a label or a
+     value, and stays where it was. */
+  h1{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; letter-spacing:-.028em}
+  h1 em{color:var(--c-firm)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--deck-mark)"></path>
+  </marker>
+</defs></svg>
+
+<div class="deck" id="deck">
+
+  <!-- 00 · Title -->
+  <section class="slide title-slide" data-say-title="no"
+    data-time="0:30"
+    data-notes="<em class='cue'>The title stays up while I greet the room and say my name, then → to the first slide.</em> Building fast is solved. Deciding well is not. I spent a career break, from June to September 2026, testing that line by building in the open. Everything in this talk can be checked: the figures come from git and were counted on September 24, 2026.">
+    <div class="kicker mono" data-n="00">A talk</div>
+    <h1>Building fast is solved. <em>Deciding well is not.</em></h1>
+    <p class="sub">A talk on a career break, 2026.</p>
+    <p class="byline">Robert Blust · <span>Software Engineer &amp; Architect</span></p>
+  </section>
+
+  <!-- 01 · The constraint -->
+  <section class="slide" data-say-title="no"
+    data-time="1:00"
+    data-notes="<em class='cue'>Calm. This is the claim the rest of the talk proves.</em> AI moved the constraint from building quickly to deciding correctly. That sentence is one of the values in my model, and the model says what it means in practice: I write the decision down before the code, with the alternatives that lost and why, so the next person can disagree with a reason rather than a rewrite. <em class='cue'>Short pause.</em> The time that fast building saves is spent on choosing well, because that is where the constraint went.">
+    <div class="kicker mono" data-n="01">The claim</div>
+    <h1>The constraint <em>moved</em>.</h1>
+    <p class="stamp">Decide well over build fast: “AI moved the constraint from building quickly to deciding correctly; <b>the decision is the work.</b>”</p>
+    <p class="note">A value in the model, quoted as it stands there.</p>
+  </section>
+
+  <!-- 02 · The break -->
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Personal, and brief.</em> The break had one question: what I like doing, rather than what I am used to being hired for. I tested it by building two products in the open, CompanyGraph and GuestGraph. The first commit was on June 9. <em class='cue'>Do not name the employer.</em> In the model’s own words, the break ended in September with a decision, not only an offer.">
+    <div class="kicker mono" data-n="02">The break</div>
+    <h1>One question, <em>four months</em>.</h1>
+    <p class="sub">June to September 2026: what to do next, tested by building in the open.</p>
+    <p class="note">It ended with a decision, not only an offer.</p>
+  </section>
+
+  <!-- 03 · Building fast, measured -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>Let the numbers stand; read two or three, not all six.</em> Twenty-three public repositories in three organizations, and one person. Five thousand and thirteen commits on their default branches, sixteen hundred and nineteen merged pull requests, two hundred and sixty-nine releases, and nine hosts that answer: blust.ch, companygraph.io and guestgraph.io, each with an MCP server and a chat. <em class='cue'>For the engineers:</em> ninety-one percent of the commits that are not merges carry a co-author trailer naming Claude, matched over every message, not sampled. Twenty-two of the merged pull requests are Dependabot’s. Every figure is as of September 24, 2026.">
+    <div class="kicker mono" data-n="03">The first half</div>
+    <h1>Building fast, <em>measured</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b>23</b><span>public repositories in 3 organizations</span></div>
+      <div class="cell"><b>5,013</b><span>commits on default branches</span></div>
+      <div class="cell"><b>1,619</b><span>merged pull requests</span></div>
+      <div class="cell"><b>269</b><span>releases</span></div>
+      <div class="cell"><b>9</b><span>live hosts</span></div>
+      <div class="cell"><b>91%</b><span>of non-merge commits co-authored with Claude</span></div>
+    </div>
+    <p class="stamp">One person. <b>As of Sep 24, 2026.</b></p>
+  </section>
+
+  <!-- 04 · The curve -->
+  <section class="slide"
+    data-time="0:50"
+    data-notes="<em class='cue'>Point at the climb, then at the peak.</em> Each bar is one week of commits, and each mark on the axis is the day a repository was born. The climb begins when the model does, in the week of August 17, not when the tools changed. The busiest day was September 21: six hundred and ninety-five commits and two hundred and fourteen merged pull requests in one day.">
+    <div class="kicker mono" data-n="04">The curve</div>
+    <h1>The <em>curve</em>.</h1>
+    <!-- chart:begin --><!-- chart:end -->
+    <p class="note">Commits per week, June to September 2026.</p>
+  </section>
+
+  <!-- 05 · The cost -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about two hundred dollars a month. The same work, priced at the API’s list price, would have been about ten thousand dollars of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window is August 18 to September 24, 2026, and Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027.">
+    <div class="kicker mono" data-n="05">The cost</div>
+    <h1>Building is not <em>the expensive part</em> any more.</h1>
+    <div class="grid">
+      <div class="cell"><b>about $200</b><span>a month, paid</span></div>
+      <div class="cell"><b>about $10,000</b><span>of compute at API list price</span></div>
+      <div class="cell"><b>about 16 billion</b><span>tokens, most of them context read again</span></div>
+    </div>
+    <p class="stamp">It rests on a few providers’ prices and terms. The knowledge is portable; <b>the speed is not yet.</b></p>
+  </section>
+
+  <!-- 06 · Where the time went -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>The turn to the second half.</em> The time went into writing things down before they were built: ninety-five specs and a hundred and five plans. Every change runs through five phases, Shape, Spec, Plan, Implement and Integrate, and no phase begins before the Owner has approved its predecessor’s gate. <em class='cue'>Key line:</em> an agent opens and reports; the Owner merges, and never delegates a merge.">
+    <div class="kicker mono" data-n="06">The second half</div>
+    <h1>Where the time went <em>instead</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b>95</b><span>specs</span></div>
+      <div class="cell"><b>105</b><span>plans</span></div>
+      <div class="cell"><b>5</b><span>phases, each behind a gate</span></div>
+    </div>
+    <p class="stamp">Shape · Spec · Plan · Implement · Integrate — <b>the Owner merges.</b></p>
+  </section>
+
+  <!-- 07 · Taken, revised, dropped -->
+  <section class="slide"
+    data-time="1:10"
+    data-notes="<em class='cue'>What can be counted, then what cannot.</em> Thirty-five specs carry a section on what was decided. There is one revert in five thousand and thirteen commits. On September 20, a release wave across twelve repositories was closed and replaced the same day. And some ideas were prototyped and then declined. <em class='cue'>For the engineers:</em> the model has no type for a decision; a decision lives in the prose of a spec, a pull request or a merge, so any count of them would be an estimate. <em class='cue'>Pause, then the closing line.</em> The model cannot yet count its own decisions. Deciding well is not solved, not even here.">
+    <div class="kicker mono" data-n="07">The decisions</div>
+    <h1>Taken, revised, <em>dropped</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b>35</b><span>specs with a section on what was decided</span></div>
+      <div class="cell"><b>1</b><span>revert in 5,013 commits</span></div>
+      <div class="cell"><b>12</b><span>repositories in one release wave, closed and replaced the same day</span></div>
+    </div>
+    <p class="note">The model cannot yet count its own decisions — deciding well is not solved, not even here.</p>
+  </section>
+
+  <!-- 08 · One graph -->
+  <section class="slide"
+    data-time="1:00"
+    data-notes="<em class='cue'>The answer, stated plainly.</em> Agents build fast. What they lack is what was decided and why. CompanyGraph writes a company’s knowledge down once, as one graph: its vision and strategy, its roles and processes, its rules and the evidence under each claim, read by people and by agents alike. <em class='cue'>For the engineers:</em> it is Markdown in git, checked on every change and served over MCP, so no provider owns it.">
+    <div class="kicker mono" data-n="08">The answer</div>
+    <h1>The answer: <em>one graph</em>.</h1>
+    <p class="sub">CompanyGraph: vision, strategy, roles, processes, rules and their evidence as one graph, for people and agents.</p>
+    <p class="stamp">Plain Markdown in git, served over MCP — <b>no provider owns it.</b></p>
+  </section>
+
+  <!-- 09 · It runs -->
+  <section class="slide"
+    data-time="0:45"
+    data-notes="<em class='cue'>Short. Point at the three addresses.</em> There are three instances: blust.ch, companygraph.io and guestgraph.io. Each has a site, an MCP server and a chat. <em class='cue'>The invitation:</em> open one of the chats and ask it a question the model can answer.">
+    <div class="kicker mono" data-n="09">It runs</div>
+    <h1>It <em>runs</em>.</h1>
+    <div class="grid">
+      <div class="cell"><b>blust.ch</b><span>site, MCP server, chat</span></div>
+      <div class="cell"><b>companygraph.io</b><span>site, MCP server, chat</span></div>
+      <div class="cell"><b>guestgraph.io</b><span>site, MCP server, chat</span></div>
+    </div>
+    <p class="note">Ask the chat a question the model can answer.</p>
+  </section>
+
+  <!-- 10 · Deciding well is the work -->
+  <section class="slide"
+    data-time="0:45"
+    data-notes="<em class='cue'>Slow down for the close.</em> Building fast is solved; the numbers show it. Deciding well is not, and the same numbers show that too. What comes next: from October, an IT architect role, and from 2027, education in how AI is led and governed in an organization, with the provider question in it. <em class='cue'>Short pause, then the thanks.</em> Thank you.">
+    <div class="kicker mono" data-n="10">What comes next</div>
+    <h1 class="big-punch">Deciding well is <em>the work</em>.</h1>
+    <p class="sub">Building fast is solved. Deciding well is not.</p>
+    <p class="stamp">blust.ch · companygraph.io · guestgraph.io — from October, an IT architect role; from 2027, <b>education in how AI is led and governed.</b></p>
+  </section>
+
+</div>
+
+<div class="chrome" id="chrome">
+
+  <div class="name">
+    <a class="lockup" href="../../"><span class="namemark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="plate" x=".75" y=".75" width="30.5" height="30.5" rx="7"/><text class="rb" x="16" y="22.5" text-anchor="middle" font-family="Plex Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17" font-weight="600">rb</text></svg></span><b>Robert <em>Blust</em></b></a>
+    <span class="nsep" aria-hidden="true">·</span>
+    <a class="nlink" href="../" data-de="Vorträge">Talks</a>
+  </div>
+
+  <div class="transport" id="transport" role="group" aria-label="Deck controls">
+
+    <div class="lcd" aria-hidden="true">
+      <div class="n"><b id="cur">00</b><span class="sep">/</span><span id="tot">10</span></div>
+      <div class="clip"><i id="cliplen"></i></div>
+    </div>
+
+    <div class="tmain">
+
+    <button class="tbtn" id="tFirst" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.4" y="5" width="2.3" height="14" rx="1"/><path d="M13.2 5.4v13.2L7.6 12z"/><path d="M21 5.4v13.2L13.6 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tPrev" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 4.6v14.8L6 12z"/></svg>
+    </button>
+
+    <button class="tbtn play" id="tPlay" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="iplay"><path d="M7 4.4L19.2 12 7 19.6z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ipause"><rect x="6.4" y="4.8" width="3.7" height="14.4" rx="1.1"/><rect x="13.9" y="4.8" width="3.7" height="14.4" rx="1.1"/></svg>
+    </button>
+
+    <button class="tbtn" id="tNext" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 4.6v14.8L18 12z"/></svg>
+    </button>
+
+    <button class="tbtn" id="tFull" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked iexpand"><path d="M9.5 4.5H4.5V9.5M14.5 4.5H19.5V9.5M14.5 19.5H19.5V14.5M9.5 19.5H4.5V14.5"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked icontract"><path d="M4.5 9.5H9.5V4.5M19.5 9.5H14.5V4.5M19.5 14.5H14.5V19.5M4.5 14.5H9.5V19.5"/></svg>
+    </button>
+
+    </div>
+
+    <div class="tside">
+    <div class="tdiv"></div>
+
+    <div class="switchers" id="langind">
+    <div class="seg" id="lang" role="group" aria-label="switch language" data-de-aria="Sprache wechseln">
+      <button type="button" id="langDe" aria-pressed="false">DE</button>
+      <button type="button" id="langEn" aria-pressed="true">EN</button>
+    </div>
+
+    <div class="seg theme" id="thmind" role="group" aria-label="switch appearance" data-de-aria="Erscheinungsbild wechseln">
+      <button type="button" id="thLight" aria-pressed="false" aria-label="Light" data-de-aria="Hell"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" id="thDark" aria-pressed="true" aria-label="Dark" data-de-aria="Dunkel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+    </div>
+
+    <div class="tdiv"></div>
+
+    <a class="tbtn" id="tUp" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="1.4"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="1.4"/><rect x="13" y="13" width="7.5" height="7.5" rx="1.4"/></svg>
+    </a>
+
+    <button class="tbtn" id="tNotes" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="stroked"><rect x="3.5" y="4.5" width="17" height="11" rx="1.5"/><path d="M7 8.5h10M7 11.8h6M8.5 19.2h7"/></svg>
+    </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bar" id="bar"></div>
+
+<div class="notes" id="notes">
+  <h3><span id="noteslabel">Sprecher-Notiz</span> <span class="time" id="ntime"></span></h3>
+  <p id="ntext"></p>
+  <button class="close" type="button" id="notesclose">Notizen schliessen</button>
+</div>
+
+<script>
+  /* This talk's own strings. Everything else about the deck's chrome comes from
+     @robertblust/design — it is in deck.js now. */
+  var TALK = {
+    de:{ title:'Building fast is solved. Deciding well is not. · a talk by Robert Blust', desc:'A career break, counted: what building with AI costs now, why deciding well is still the work, and the one graph that carries the decisions for people and agents.' },
+    en:{ title:'Building fast is solved. Deciding well is not. · a talk by Robert Blust', desc:'A career break, counted: what building with AI costs now, why deciding well is still the work and the one graph that carries the decisions for people and agents.' }
+  };
+  var UI = {
+    de:{ label:'Sprecher-Notiz', close:'Notizen schliessen',
+         title:TALK.de.title, desc:TALK.de.desc,
+         play:'Vortrag abspielen', pause:'Vortrag pausieren', first:'Zurück zum Anfang',
+         prev:'Vorherige Folie', next:'Nächste Folie', full:'Vollbild', unfull:'Vollbild verlassen',
+         notes:'Sprecher-Notizen', de:'Auf Deutsch', en:'Auf Englisch', up:'Zurück zu allen Vorträgen' },
+    en:{ label:'Speaker note', close:'Close notes',
+         title:TALK.en.title, desc:TALK.en.desc,
+         play:'Play the talk', pause:'Pause the talk', first:'Back to the start',
+         prev:'Previous slide', next:'Next slide', full:'Fullscreen', unfull:'Leave fullscreen',
+         notes:'Speaker notes', de:'In German', en:'In English', up:'Back to all talks' }
+  };
+
+
+  var THEME_KEY = "theme";
+  function themeStored(){ try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } }
+  function themeRemember(v){ try { localStorage.setItem(THEME_KEY, v); } catch (e) {} }
+  function themeFromUrl(){
+    var m = /[?&]theme=(light|dark)(&|$)/.exec(location.search);
+    if (!m) return null;
+    try {
+      var q = location.search.replace(/([?&])theme=(light|dark)(&|$)/, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    return m[1];
+  }
+  function applyTheme(){
+    if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+    var l = document.getElementById("thLight"), d = document.getElementById("thDark");
+    if (l) l.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
+    if (d) d.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  }
+  function setTheme(v){ theme = v; themeRemember(v); applyTheme(); }
+
+  var urlTheme = themeFromUrl();
+  if (urlTheme) themeRemember(urlTheme);
+  var theme = urlTheme || (themeStored() === 'light' ? 'light' : 'dark');
+
+  document.getElementById('thLight').addEventListener('click', function(){ setTheme('light'); });
+  document.getElementById('thDark').addEventListener('click', function(){ setTheme('dark'); });
+  applyTheme();
+
+  // deck.js reads TALK and UI off this object, and calls applyLang() itself; nothing here
+  // calls it. This script is not wrapped in an IIFE — TALK, UI and theme are plain top-level
+  // declarations, exactly as "deck runtime" and "theme" left them — so this hook is a bare
+  // statement too, not a return from a closure.
+  window.rbDeck = { talk: TALK, ui: UI };
+</script>
+<script src="../../deck.js" defer></script>
+
+</body>
+</html>
