@@ -26,9 +26,7 @@ const FOOTER = ["GitHub", "License", "Privacy", "model.json"];
 const PAGES = [
   { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
-                  hides: ["See the talks", "See the ideas"],
-                  title: "Robert Blust – Software Engineer & Architekt",
-                  desc: "Der Engpass hat sich vom schnellen Bauen zum guten Entscheiden verschoben. Über fünfundzwanzig Jahre Plattformen – und die Vorträge, die das begründen." },
+                  hides: ["See the talks", "See the ideas"] },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
     // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
     // anchors, so keeping it here would fail on a link the page no longer renders.
@@ -51,10 +49,8 @@ const PAGES = [
   // repo's root — so the suite must be run with `npm run verify` from here, not from elsewhere.
   { path: "/talks/mental-model/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Mental Model/, lang: "en", sourceLang: "en",
     // The deck's German is the whole second half of the talk, including every speaker note.
-    // "Architekt"/"Architect" is the pair: one letter apart, present in exactly one language each.
-    translates: { lang: "de", shows: ["Architekt", "Das Mental Model"], hides: ["Architect"], id: "langDe", backId: "langEn",
-                  title: "Das Mental Model · ein Vortrag von Robert Blust",
-                  desc: "Eine strukturierte, maschinenlesbare Wissensbasis als Gehirn eines Unternehmens – eine einzige Quelle der Wahrheit für Vision, Strategie, Prozesse, Rollen, KPIs, Regeln und Entscheidungen." },
+    // "ÜBERBLICK"/"EXPLAINED" is the pair: the title slide's kicker, set in capitals and read as shown, present in exactly one language each.
+    translates: { lang: "de", shows: ["ÜBERBLICK", "Das Mental Model"], hides: ["EXPLAINED"], id: "langDe", backId: "langEn" },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     // One width per tier of the transport's own breakpoints, plus two above them. The
@@ -91,9 +87,7 @@ const PAGES = [
     lockupCollapses: true,
     internalLinks: true },
   { path: "/talks/essential-complexity/", typography: true, storageKeys: true, opensFromFile: true, carriesLang: true, seo: true, noNewTab: true, wayOut: "../", title: /Essential Complexity/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Architekt", "Essenzielle"], hides: ["Architect"], id: "langDe", backId: "langEn",
-                  title: "Essenzielle Komplexität · ein Vortrag von Robert Blust",
-                  desc: "Ein Problem in seiner essenziellen Komplexität beschreiben – nicht mehr und nicht weniger. Der Massstab ist derselbe wie vor fünfzehn Jahren; was sich geändert hat, sind die Kosten." },
+    translates: { lang: "de", shows: ["ÜBERBLICK", "Essenzielle"], hides: ["EXPLAINED"], id: "langDe", backId: "langEn" },
     transport: true, zeroBased: true,  card: true, brandMark: true,
     transportFits: [320, 350, 360, 390, 393, 414, 430],
     // One width per tier of the transport's own breakpoints, plus two above them. The
@@ -114,9 +108,7 @@ const PAGES = [
     // The German PDF is reached by data-de-href, which `sameTab` cannot see: it reads the href as
     // delivered, and the swap happens only after a click. `dlHref` reads the first such link.
     translates: { lang: "de", shows: ["Vorträge über", "Vortrag ansehen", "PDF herunterladen"], hides: ["Watch the talk", "Download PDF"],
-                  dlHref: { de: "mental-model/mental-model-de.pdf", en: "mental-model/mental-model-en.pdf" },
-                  title: "Robert Blust – Vorträge",
-                  desc: "Vorträge über gutes Entscheiden: Jedes Projekt ist entschieden, bevor es gebaut wird – dadurch, wie präzise das Problem beschrieben wurde." },
+                  dlHref: { de: "mental-model/mental-model-de.pdf", en: "mental-model/mental-model-en.pdf" } },
     contains: ["The Mental Model", "Essential Complexity",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "./"], brandMark: true,
@@ -127,9 +119,7 @@ const PAGES = [
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
   { path: "/privacy/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
-    translates: { lang: "de", shows: ["Was diese Seite tut", "Wer das betreibt"], hides: ["What this site does", "Who runs this"],
-                  title: "Datenschutz – Robert Blust",
-                  desc: "Diese Seite setzt keine Cookies, führt keine Statistik und stellt keine Anfragen an Dritte. Was den Browser verlässt, ist kurz genug, um es hier abzudrucken." },
+    translates: { lang: "de", shows: ["Was diese Website tut", "Wer das betreibt"], hides: ["What this site does", "Who runs this"] },
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -150,9 +140,7 @@ const PAGES = [
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
   { path: "/ideas/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Ideas/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["offen geprüft", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"],
-                  title: "Ideen – Robert Blust",
-                  desc: "Zwei Ideen, zur Prüfung gestellt: GuestGraph und CompanyGraph. Je fünf Teile – was quelloffen ist, was je Geld verdienen könnte, und wie weit es ist." },
+    translates: { lang: "de", shows: ["öffentlich geprüft", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"] },
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
     sameOrigin: true,
@@ -166,9 +154,7 @@ const PAGES = [
   { path: "/principles/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
     // The page's own words swap; the model's stay English, which its note says. `shows` names
     // the note, `hides` the English note — never a principle, which is the same in both views.
-    translates: { lang: "de", shows: ["Aus dem Modell erzeugt", "Werte"], hides: ["Generated from the model, so"],
-                  title: "Prinzipien – Robert Blust",
-                  desc: "Wohin diese Arbeit geht und woran sie sich hält. Erzeugt aus dem Modell, das sie beschreibt – nicht zweimal geschrieben." },
+    translates: { lang: "de", shows: ["Aus dem Modell erzeugt", "Werte"], hides: ["Generated from the model, so"] },
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
@@ -179,9 +165,7 @@ const PAGES = [
   // person's own instance rather than the fictional one. `stage` is the check that the
   // drawing actually drew: the data block alone proves nothing rendered.
   { path: "/model/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Model/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Was hier steht", "Dieselbe Form wie das Beispiel"], hides: ["What is in it", "The same shape as the example"],
-                  title: "Modell – Robert Blust",
-                  desc: "Die Firma aus einer Person, gezeichnet: meine eigene Arbeit, in CompanyGraph beschrieben und als der Graph gezeichnet, den ihre Dateien bilden." },
+    translates: { lang: "de", shows: ["Was hier steht", "Dieselbe Form wie das Beispiel"], hides: ["What is in it", "The same shape as the example"] },
     contains: ["A company of one", "drawn", "What is in it", "Generated from"],
     // The source link is not asserted here. The stage rewrites its href from the block's own
     // commit, so any literal in this list would be either the markup's placeholder (gone by
@@ -202,9 +186,7 @@ const PAGES = [
   // opening into the card card.js renders. `ledger` is the check that the rows are the block's
   // experiences in the order they began and that a card is the entity, field for field.
   { path: "/timeline/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Timeline/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Wie man es liest", "Alle öffnen", "Nichts davon wurde für diese Seite geschrieben"], hides: ["How to read it", "Open all", "Nothing here was written for this page"],
-                  title: "Werdegang – Robert Blust",
-                  desc: "Über fünfundzwanzig Jahre der Reihe nach: jede Erfahrung im Modell als Verzeichnis, jede Zeile die Datei, aus der sie gelesen wird, beim Commit, den die Seite nennt." },
+    translates: { lang: "de", shows: ["Wie man es liest", "Alle öffnen", "Nichts hier wurde für diese Seite geschrieben"], hides: ["How to read it", "Open all", "Nothing here was written for this page"] },
     contains: ["Over 25 years,", "in order", "How to read it", "Generated from"],
     links: ["https://companygraph.io/"],
     sameOrigin: true,
@@ -215,9 +197,7 @@ const PAGES = [
   // prose: a page that says every gate is approved by the only human in the company must show
   // exactly that, and must still show it the day the model changes.
   { path: "/team/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"],
-                  title: "Team – Robert Blust",
-                  desc: "Die zwei Profile des Modells und die Sitze dazwischen: wer welche Phase jedes Prozesses ausf\u00fchrt, wer sie unterst\u00fctzt und wer ihr Gate freigibt." },
+    translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"] },
     contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -226,9 +206,7 @@ const PAGES = [
   // The surfaces page. Where each surface sits is a claim about how the model says it is made,
   // so verify reads it off the page against the block rather than trusting the renderer.
   { path: "/surfaces/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Surfaces/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Wie man es liest", "DIE SURFACES", "Keine Linie ist getippt"], hides: ["How to read it", "THE SURFACES", "No line is typed"],
-                  title: "Surfaces – Robert Blust",
-                  desc: "Jeder Ort, an dem das Modell ver\u00f6ffentlicht wird, und wie er aus ihm entsteht: von Hand geschrieben oder vom Build eines Repositorys aus einem gepinnten Commit gebaut." },
+    translates: { lang: "de", shows: ["Wie man es liest", "DIE SURFACES", "Keine Linie ist von Hand eingetragen"], hides: ["How to read it", "THE SURFACES", "No line is typed"] },
     contains: ["One model,", "every", "surface", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
