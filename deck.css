@@ -1,6 +1,5 @@
-/* @robertblust/design v0.83.0 — deck.css, assembled from the shared blocks
-   and copied into this site by `npm run design`. Editing it here does nothing: the
-   next `npm run design` overwrites it from the package. Change it there instead. */
+/* @robertblust/design — deck.css, assembled from the shared blocks: lockup v1 · transport v9.
+   Editing this file in a site does nothing: the next npm run design overwrites it. */
 
 .name{grid-column:1; justify-self:start;
       font-family:"Instrument Sans", ui-sans-serif, system-ui, sans-serif; font-size:.72rem;
