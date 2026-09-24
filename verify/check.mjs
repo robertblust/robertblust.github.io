@@ -124,7 +124,7 @@ const PAGES = [
     // The German PDF is reached by data-de-href, which `sameTab` cannot see: it reads the href as
     // delivered, and the swap happens only after a click. `dlHref` reads the first such link.
     translates: { lang: "de", shows: ["Vorträge über", "Vortrag ansehen", "PDF herunterladen"], hides: ["Watch the talk", "Download PDF"],
-                  dlHref: { de: "mental-model/mental-model-de.pdf", en: "mental-model/mental-model-en.pdf" } },
+                  dlHref: { de: "deciding-well/deciding-well-de.pdf", en: "deciding-well/deciding-well-en.pdf" } },
     contains: ["The Mental Model", "Essential Complexity", "Building fast is solved. Deciding well is not.",
                "machine-readable knowledge base", "essential complexity"], card: true,
     sameTab: ["mental-model/", "essential-complexity/", "deciding-well/", "./"], brandMark: true,
