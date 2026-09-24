@@ -12,7 +12,7 @@ Every figure was counted on 2026-09-24 and is stated in the talk as of that date
 
 | Fact | Value | How it was counted |
 | --- | --- | --- |
-| First commit of the effort | 2026-06-09, rob-cv `e213a585`, "Initial commit: markdown-sourced CV with HTML/PDF build" | `git log --reverse` in the local rob-cv clone, which has no remote |
+| First commit of the effort | 2026-06-09, in rob-cv, the local application tooling | `git log --reverse` in the local rob-cv clone, which has no remote; only its date and commit count are used |
 | First public commit | 2026-07-09, guestgraph/engine `fbeff99` | earliest commit over every public repository |
 | First commit of blust.ch | 2026-08-17, `7d23000` | `git log --reverse` here |
 | Public repositories | 23, across robertblust, companygraph and guestgraph, none archived | `gh repo list`; robertblust/xiny is private, archived and outside the family, and is left out |

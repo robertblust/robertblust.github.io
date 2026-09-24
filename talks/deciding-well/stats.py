@@ -67,9 +67,18 @@ def bare(name):
         run("git", "clone", "-q", "--bare", "--filter=blob:none", f"https://github.com/{name}.git", str(d))
     return str(d)
 
-def commits(gitdir):
+def tip(gitdir, cutoff=CUTOFF):
+    """The default branch as it stood at the cutoff. First parents only, because a merge's own
+    commit time is when its branch arrived: a commit authored before the cutoff but merged after
+    it was not on the branch yet, and a later run must not find it there."""
+    return run("git", "--git-dir", gitdir, "rev-list", "-1", "--first-parent", f"--before={cutoff}", "HEAD").strip()
+
+def commits(gitdir, cutoff=CUTOFF):
+    ref = tip(gitdir, cutoff)
+    if not ref:
+        return []
     fmt = "%H%x1f%aI%x1f%P%x1f%B%x1e"
-    out = run("git", "--git-dir", gitdir, "log", "HEAD", f"--format={fmt}")
+    out = run("git", "--git-dir", gitdir, "log", ref, f"--format={fmt}")
     cs = []
     for rec in out.split("\x1e"):
         rec = rec.strip("\n")
@@ -77,10 +86,10 @@ def commits(gitdir):
             sha, date, parents, body = rec.split("\x1f", 3)
             cs.append({"date": date, "merge": len(parents.split()) > 1, "claude": bool(TRAILER.search(body)),
                        "revert": body.startswith("Revert")})
-    return before_cutoff(cs, CUTOFF, key=lambda c: c["date"], since=START)
+    return before_cutoff(cs, cutoff, key=lambda c: c["date"], since=START)
 
 def docs(gitdir):
-    ref = run("git", "--git-dir", gitdir, "rev-list", "-1", f"--before={CUTOFF}", "HEAD").strip()
+    ref = tip(gitdir)
     if not ref:
         return 0, 0, 0
     files = run("git", "--git-dir", gitdir, "ls-tree", "-r", "--name-only", ref).split("\n")

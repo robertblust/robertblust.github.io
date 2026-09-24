@@ -33,6 +33,22 @@ class Stats(unittest.TestCase):
         self.assertEqual(d, [{"date": "2026-06-09", "commits": 0}, {"date": "2026-06-10", "commits": 3},
                              {"date": "2026-06-11", "commits": 0}])
 
+    def test_commits_merged_after_the_cutoff_are_not_counted(self):
+        import subprocess
+        def git(d, *a, date):
+            env = dict(os.environ, GIT_AUTHOR_DATE=date, GIT_COMMITTER_DATE=date,
+                       GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@t", GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@t")
+            subprocess.run(["git", "-C", d, *a], check=True, capture_output=True, env=env)
+        with tempfile.TemporaryDirectory() as d:
+            git(d, "init", "-q", "-b", "main", date="2026-09-01T10:00:00+02:00")
+            git(d, "commit", "-q", "--allow-empty", "-m", "on main", date="2026-09-01T10:00:00+02:00")
+            git(d, "checkout", "-q", "-b", "side", date="2026-09-01T10:00:00+02:00")
+            git(d, "commit", "-q", "--allow-empty", "-m", "authored before, merged after", date="2026-09-24T20:00:00+02:00")
+            git(d, "checkout", "-q", "main", date="2026-09-25T09:00:00+02:00")
+            git(d, "merge", "-q", "--no-ff", "side", "-m", "merge after the cutoff", date="2026-09-25T09:00:00+02:00")
+            cs = stats.commits(os.path.join(d, ".git"), CUT)
+        self.assertEqual(len(cs), 1)
+
     def test_price_uses_cache_multipliers(self):
         per = {"claude-sonnet-5": {"input": 0, "output": 0, "cacheRead": 1_000_000, "write5m": 1_000_000, "write1h": 1_000_000}}
         usd, _ = stats.price(per)
