@@ -219,6 +219,12 @@
   .chart .n{fill:var(--ink); font-weight:600}
   .chart .mo{text-anchor:start}
   .chart .end{text-anchor:end}
+  /* Slide 11's reading list: a cell is one link, its title in the slide's ink and its address
+     in mono, because the address is data. The group names head the first row only. */
+  .reads .grp{display:block; font-style:normal; font-size:clamp(.8rem,1.4cqmin,1rem); letter-spacing:.14em; text-transform:uppercase; color:var(--c-mid); margin-bottom:1.2cqmin}
+  .reads a{display:block; color:inherit; text-decoration:none}
+  .reads a:hover b{text-decoration:underline; text-underline-offset:.2em}
+  .reads a span{display:block; margin-top:.6cqmin; font-size:clamp(.8rem,1.45cqmin,1.05rem); color:var(--c-mid)}
 
   .slide{
     position:absolute; inset:0;
@@ -566,6 +572,23 @@
     <p class="stamp" data-de="blust.ch · companygraph.io · guestgraph.io – ab Oktober eine Rolle als IT-Architekt; ab 2027 <b>Weiterbildung darin, wie KI geführt und gesteuert wird.</b>">blust.ch · companygraph.io · guestgraph.io — from October, an IT architect role; from 2027, <b>education in how AI is led and governed.</b></p>
   </section>
 
+
+  <!-- 11 · Read more -->
+  <section class="slide"
+    data-time="0:30"
+    data-notes="<em class='cue'>Leave this up while questions come.</em> Six places to start reading, in the order of the talk: the argument, the proof and the answer."
+    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Sechs Stellen, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
+    <div class="kicker mono" data-n="11" data-de="Weiterlesen">Read more</div>
+    <h1 data-de="Wo Sie <em>weiterlesen</em> können.">Where to <em>start reading</em>.</h1>
+    <div class="grid reads">
+      <div class="cell"><i class="grp" data-de="Die These">The argument</i><a href="https://blust.ch/principles/" target="_blank" rel="noopener"><b data-de="Die Werte">The values</b><span class="mono">blust.ch/principles</span></a></div>
+      <div class="cell"><i class="grp" data-de="Die Belege">The proof</i><a href="https://blust.ch/model/" target="_blank" rel="noopener"><b data-de="Jeder Anspruch mit seinem Beleg">Every claim, with its evidence</b><span class="mono">blust.ch/model</span></a></div>
+      <div class="cell"><i class="grp" data-de="Die Antwort">The answer</i><a href="https://companygraph.io/" target="_blank" rel="noopener"><b data-de="Alles, was eine Firma weiss, in einem einzigen Graphen">Everything a company knows, one graph</b><span class="mono">companygraph.io</span></a></div>
+      <div class="cell"><a href="https://blust.ch/team/" target="_blank" rel="noopener"><b data-de="Wer was entscheidet">Who decides what</b><span class="mono">blust.ch/team</span></a></div>
+      <div class="cell"><a href="https://blust.ch/timeline/" target="_blank" rel="noopener"><b data-de="Die Laufbahn, Eintrag für Eintrag">The career as a ledger</b><span class="mono">blust.ch/timeline</span></a></div>
+      <div class="cell"><a href="https://companygraph.io/surfaces/" target="_blank" rel="noopener"><b data-de="Wo das Modell veröffentlicht ist">Where the model is published</b><span class="mono">companygraph.io/surfaces</span></a></div>
+    </div>
+  </section>
 </div>
 
 <div class="chrome" id="chrome">

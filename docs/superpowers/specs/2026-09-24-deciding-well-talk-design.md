@@ -1,6 +1,6 @@
 # The deciding-well talk — design
 
-> A third talk at `/talks/deciding-well/`, eleven slides and about ten minutes, in the same form as the two already here: bilingual, narrated, with a PDF in each language. It sums up the career break under the site's own line, *Building fast is solved. Deciding well is not.* The half about building fast is proven with numbers git recorded; the half about deciding well is shown by how far the same work can be counted, and CompanyGraph is offered as the answer to the gap.
+> A third talk at `/talks/deciding-well/`, twelve slides and about ten minutes, in the same form as the two already here: bilingual, narrated, with a PDF in each language. It sums up the career break under the site's own line, *Building fast is solved. Deciding well is not.* The half about building fast is proven with numbers git recorded; the half about deciding well is shown by how far the same work can be counted, and CompanyGraph is offered as the answer to the gap.
 
 Status: proposed. The outline was decided with the owner on 2026-09-24, one question at a time: a mixed room and argument first, numbers as a dated snapshot of that day, the story starting on 9 Jun 2026, and the provider dependency named as the risk the cost figure carries.
 
@@ -47,7 +47,9 @@ Only the counts of rob-cv are used. Its content is private job-search material a
 
 **The cost is a slide of its own, and it carries the risk.** About $200 a month paid, about $10,000 at list price: building is not the expensive part any more. The same sentence says what the four months rest on — a few providers' prices and terms. The talk names that dependency, shows the part already answered, the graph in git over an open protocol that any model can read, and points to the rest as research for 2027. It does not claim a solution it does not have.
 
-**The gap folds into the decisions slide** as its closing line rather than standing alone, which keeps the talk at eleven slides and keeps the turn where the numbers are.
+**The gap folds into the decisions slide** as its closing line rather than standing alone, which keeps the turn where the numbers are.
+
+**A closing slide lists where to read on**, six pages in the talk's three parts and no repository links, which the owner found too technical for the room; the talk's own snapshot files are not linked, because a talk citing itself proves nothing.
 
 **The slug is `deciding-well`**, for the half of the line the talk is about; the title is the whole line.
 
@@ -68,6 +70,7 @@ Headlines are the English source; the German is made afterwards by the pipeline 
 | 08 | The answer: one graph | CompanyGraph: vision, strategy, roles, processes, rules and their evidence as one graph, for people and agents | Agents build fast; the graph tells them what was decided and why; it is Markdown in git, served over MCP, so no provider owns it |
 | 09 | It runs | Three instances, each on a mental model of its own — blust.ch on Robert Blust's, companygraph.io on CompanyGraph's, guestgraph.io on GuestGraph's — each model in git and served as a site, an MCP server and a chat | An invitation: ask the chat a question the model can answer |
 | 10 | Deciding well is the work | The line again, the three addresses, what comes next | From October an IT architect role; from 2027 AI governance, and the provider question with it |
+| 11 | Where to start reading | A reading list in the talk's three parts, pages only: the values and who decides what (blust.ch/principles, /team), every claim with its evidence and the career as a ledger (blust.ch/model, /timeline), the answer and where its model is published (companygraph.io, /surfaces); links open in a new tab, the exception AGENTS.md allows inside a slide | Left up while questions come |
 
 Slide 04's chart is inline SVG, drawn from the snapshot of §4 and committed as markup, so the deck fetches nothing and the PDF bakes it in. It follows the site's tokens: bars in `--c-mid`, the peak in `--c-firm`, no second hue, the axis labels in mono because they are data.
 
