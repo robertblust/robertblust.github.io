@@ -20,10 +20,15 @@ A transport bar along the bottom edge: back to start, previous, play/pause, next
 - `deciding-well-de.pdf` / `deciding-well-en.pdf` – the exported PDF fallback
 - `stats.json` – every figure the slides show, as a snapshot of Sep 24, 2026
 - `stats.py` – the script that counts them, and `chart.py`, which draws slide 04 from them
+- `decisions.json` – every decision the specs record, with its status and a quote from its spec, and `decisions.py`, which checks the quotes and counts them
 
 ## The figures
 
-Every number on a slide is read from `stats.json`, and `stats.py` wrote it: commits, pull requests and releases from GitHub, the first date and commit count of the local application tooling, and the token usage of the Claude Code logs. Each count is filtered by a fixed cutoff, the end of Sep 24, 2026, so a later run gives the same figures. The script is run by hand, never in CI, because it needs `gh` signed in and files that exist only on the author's machine.
+Every number on a slide is read from `stats.json`, and `stats.py` wrote it: commits, pull requests and releases from GitHub, the first date and commit count of the local application tooling, and the token usage of the Claude Code logs. Each count is filtered by a fixed cutoff, the end of Sep 24, 2026, so a later run gives the same figures.
+
+The decisions on slide 07 are not in the model, which has no decision type yet. Agents read the 95 specs at the cutoff and listed each decision with a status (taken, revised, dropped) and a quote; `decisions.py` keeps only a decision whose quote is found in its spec and writes `decisions.json`. The count is of that list, so it is a reading of the prose, and the slide says so.
+
+The scripts are run by hand, never in CI, because `stats.py` needs `gh` signed in and files that exist only on the author’s machine.
 
 ```bash
 talks/deciding-well/stats.py    # writes stats.json

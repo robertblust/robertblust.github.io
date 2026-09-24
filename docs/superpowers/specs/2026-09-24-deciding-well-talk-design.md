@@ -23,6 +23,7 @@ Every figure was counted on 2026-09-24 and is stated in the talk as of that date
 | Busiest day | 2026-09-21: 695 commits, 214 merged pull requests | daily buckets by author date |
 | Hosts answering 200 | 9: blust.ch, companygraph.io, guestgraph.io, and `mcp.` and `chat.` on each | `curl -sI`, status only |
 | Specs, plans | 95, 105, none ever deleted | files under `docs/superpowers/specs`, `docs/superpowers/plans`, `docs/specs` and engine's spec-kit folders |
+| Decisions the specs record | 1,360: 1,258 standing, 72 revised, 30 dropped or parked | agents read all 95 specs at the cutoff and listed each decision with a status and a quote; `decisions.py` keeps a decision only where its quote is in the spec, and counts a decision a later spec replaces as revised; `decisions.json` holds every one |
 | Specs carrying a decision section | 35 | headings "What was decided", "The decision", "Decisions taken", "Decisions" |
 | Reverts | 1, companygraph.github.io, 2026-08-23 | `git log --grep '^Revert'` over every repository |
 | Pull requests closed without merging | 68, of which 12 are one release wave closed on 2026-09-20 and replaced the same day | `gh pr list --state closed`, unmerged |
@@ -34,7 +35,7 @@ Three rows decide the shape of the talk.
 
 The building figures are exact because git records every build. The token figures cover a window only: Claude Code deletes a session's log after thirty days, so nothing before 18 Aug survives, and chats on claude.ai were never in these logs. The slide names the window.
 
-**The decisions cannot be counted, and the talk says so rather than estimating.** The model has no decision type; a decision lives in the prose of a spec, a pull request or a merge. A heuristic over the decision sections gives anything between 170 and 250, which is an estimate, and `WRITING.md` quotes a number only after it was counted. So the slide carries what is exact — the specs, the sections, the one revert, the wave reversed within a day — and the gap itself becomes the argument.
+**The decisions are counted by reading, because the model cannot count them.** The model has no decision type; a decision lives in the prose of a spec, a pull request or a merge, so no query returns the number. A heuristic over the decision sections gave anything between 170 and 250, which is an estimate. The owner chose on 2026-09-24 to have agents read every spec instead: each decision is listed with its status and a quote from the spec, a script keeps only those whose quote is found, and a sample of twenty was read against the sources — nineteen held as decisions, one was a state of affairs. The result is a count of a committed list, not an estimate, and the slide says how it was made. Most of the thirty not taken were deferred rather than abandoned, so the slide says dropped or parked.
 
 Only the counts of rob-cv are used. Its content is private job-search material and appears nowhere in the talk, in its notes or in the stats file.
 
@@ -63,7 +64,7 @@ Headlines are the English source; the German is made afterwards by the pipeline 
 | 04 | The curve | Commits per ISO week from W24 to W39, each repository's birth marked on the axis; the climb from 17 Aug and the peak on 21 Sep | That the climb begins when the model does, not when the tools changed |
 | 05 | Building is not the expensive part any more | About $200 a month; about $10,000 of compute at list price; 16 billion tokens, most of them context read again | The window and what it leaves out; then the risk: this rests on Anthropic, Google, OpenAI and their terms; the knowledge is portable, the speed is not yet; ways out are the research of 2027 |
 | 06 | Where the time went instead | 95 specs and 105 plans; the five gates of the delivery process — Shape, Spec, Plan, Implement, Integrate — and the Owner who merges | An agent opens and reports; the Owner decides; no phase begins before its predecessor's gate is approved |
-| 07 | Taken, revised, dropped | 35 specs with a section on what was decided; one revert in almost 5,000 commits; a release wave across twelve repositories reversed within the day; ideas declined after a prototype | Closing line: the model cannot yet count its own decisions — deciding well is not solved, not even here |
+| 07 | Taken, revised, dropped | 1,360 decisions in 95 specs, 1,258 standing, 72 revised, 30 dropped or parked; one revert; a release wave across twelve repositories replaced within the day | How the count was made; closing line: an agent had to read them out of prose, and the next step is to make decisions part of the model |
 | 08 | The answer: one graph | CompanyGraph: vision, strategy, roles, processes, rules and their evidence as one graph, for people and agents | Agents build fast; the graph tells them what was decided and why; it is Markdown in git, served over MCP, so no provider owns it |
 | 09 | It runs | Three instances — blust.ch, companygraph.io, guestgraph.io — each with a site, an MCP server and a chat | An invitation: ask the chat a question the model can answer |
 | 10 | Deciding well is the work | The line again, the three addresses, what comes next | From October an IT architect role; from 2027 AI governance, and the provider question with it |
@@ -88,4 +89,4 @@ Done means `npm run verify`, `npm run og:check`, `npm run pages:check`, `npm run
 
 ## 6. What this is not
 
-Not a claim about what the tokens cost Anthropic. Not a number of decisions. Not a teaser on the landing page — a talk is named on the talks index alone. Not a solution to the provider dependency; that is named and left to 2027.
+Not a claim about what the tokens cost Anthropic. Not a count of decisions the model itself holds: it holds none yet, and the count on slide 07 is a reading of the specs. Not a teaser on the landing page — a talk is named on the talks index alone. Not a solution to the provider dependency; that is named and left to 2027.
