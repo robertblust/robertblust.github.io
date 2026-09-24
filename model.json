@@ -1,5 +1,5 @@
 {
-  "commit": "0cb7f5c4c44bda6d4c3fa03b74ea6abdcf76a1b4",
+  "commit": "6941176a45879634b54261c5e4c6c2d64da86cd0",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -72,6 +72,12 @@
     {
       "type": "profile",
       "folder": "profiles",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question",
+      "folder": "questions",
       "owner": null,
       "singular": false
     },
@@ -6861,7 +6867,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's.\n\n### Ways of working\n\n- Asked four former colleagues, one of them a former direct report, for written feedback on my strengths and the role they see me in, and wrote a self-assessment from the same material before deciding. All four named depth, knowledge sharing and caring about the people; two of them, independently, named the cost of caring too much as the thing to work on.\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Set the two questions the ideas' validation has to answer before either was put in front of anyone: how much of an idea must exist before it can be validated, and what that costs in hours and focus; and what a realistic outcome is, revenue, learning or a clean no. The answers are published in the open as they arrive, and a no is worth more than a polite yes.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open, with the fifth day kept for formal education in how AI is led and governed in an organization.",
+          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's.\n\n### Ways of working\n\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Set the two questions the ideas' validation has to answer before either was put in front of anyone: how much of an idea must exist before it can be validated, and what that costs in hours and focus; and what a realistic outcome is, revenue, learning or a clean no. The answers are published in the open as they arrive, and a no is worth more than a polite yes.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open, with the fifth day kept for formal education in how AI is led and governed in an organization.",
           "tables": []
         },
         {
@@ -7124,6 +7130,1243 @@
         "start": "2026-09-06",
         "end": "2026-09-06"
       }
+    },
+    {
+      "id": "questions/can-i-build-a-model-like-this-of-myself",
+      "type": "question",
+      "name": "Can I build a model like this of myself?",
+      "tagline": "CompanyGraph is the open meta-model this one is written in, and the Mental Model product is the worked example.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "CompanyGraph",
+                  "Robert Blust",
+                  "the meta-model to write it in"
+                ],
+                [
+                  "product",
+                  "Mental Model",
+                  "",
+                  "the worked example"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "CompanyGraph",
+                "Robert Blust",
+                "the meta-model to write it in"
+              ],
+              [
+                "product",
+                "Mental Model",
+                "",
+                "the worked example"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-i-build-a-model-like-this-of-myself.md"
+    },
+    {
+      "id": "questions/can-robert-still-write-code-himself",
+      "type": "question",
+      "name": "Can Robert still write code himself?",
+      "tagline": "The Software engineering and Java claims on his profile say how deep his code goes, and CompanyGraph and the career break's agentic work say what he has built with his own hands lately.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "profile",
+                  "Robert Blust",
+                  "",
+                  "the Software engineering, Java and Agentic AI development claims"
+                ],
+                [
+                  "experience",
+                  "CompanyGraph",
+                  "Robert Blust",
+                  "what he builds now"
+                ],
+                [
+                  "experience",
+                  "Career break",
+                  "Robert Blust",
+                  "the products built in the break"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "profile",
+                "Robert Blust",
+                "",
+                "the Software engineering, Java and Agentic AI development claims"
+              ],
+              [
+                "experience",
+                "CompanyGraph",
+                "Robert Blust",
+                "what he builds now"
+              ],
+              [
+                "experience",
+                "Career break",
+                "Robert Blust",
+                "the products built in the break"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-robert-still-write-code-himself.md"
+    },
+    {
+      "id": "questions/has-robert-built-ai-into-a-real-business",
+      "type": "question",
+      "name": "Has Robert built AI into a real business?",
+      "tagline": "His last role says how AI was rolled out across a company under governance he wrote, Conperi says where applied machine learning came first, and his profile's AI claims say at what level.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Co-Founder & Head of Technology",
+                  "Robert Blust",
+                  "the company-wide AI rollout"
+                ],
+                [
+                  "experience",
+                  "Conperi",
+                  "Robert Blust",
+                  "the earlier machine-learning work"
+                ],
+                [
+                  "profile",
+                  "Robert Blust",
+                  "",
+                  "the AI skills and their levels"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Co-Founder & Head of Technology",
+                "Robert Blust",
+                "the company-wide AI rollout"
+              ],
+              [
+                "experience",
+                "Conperi",
+                "Robert Blust",
+                "the earlier machine-learning work"
+              ],
+              [
+                "profile",
+                "Robert Blust",
+                "",
+                "the AI skills and their levels"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/has-robert-built-ai-into-a-real-business.md"
+    },
+    {
+      "id": "questions/has-robert-worked-in-banking",
+      "type": "question",
+      "name": "Has Robert worked in banking?",
+      "tagline": "His roles at UBS say what he did inside a bank, from the developer program to the architect's role, and two later projects say what he built for Swisscard and Credit Suisse.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "UBS IT-Developer Program",
+                  "Robert Blust",
+                  "where it began"
+                ],
+                [
+                  "experience",
+                  "IT Architect — Software Development Lifecycle Toolchain",
+                  "Robert Blust",
+                  "the last role at UBS"
+                ],
+                [
+                  "experience",
+                  "Swisscard data integration rewrite",
+                  "Robert Blust",
+                  "a later project"
+                ],
+                [
+                  "experience",
+                  "Credit Suisse Master Data Repository",
+                  "Robert Blust",
+                  "a later project"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "UBS IT-Developer Program",
+                "Robert Blust",
+                "where it began"
+              ],
+              [
+                "experience",
+                "IT Architect — Software Development Lifecycle Toolchain",
+                "Robert Blust",
+                "the last role at UBS"
+              ],
+              [
+                "experience",
+                "Swisscard data integration rewrite",
+                "Robert Blust",
+                "a later project"
+              ],
+              [
+                "experience",
+                "Credit Suisse Master Data Repository",
+                "Robert Blust",
+                "a later project"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/has-robert-worked-in-banking.md"
+    },
+    {
+      "id": "questions/has-robert-worked-in-insurance",
+      "type": "question",
+      "name": "Has Robert worked in insurance?",
+      "tagline": "Two projects at 3AP say it: the AXA Health platform for complementary health insurance, and Conperi, which read health-insurance invoices into claims.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "AXA Health digital insurance platform",
+                  "Robert Blust",
+                  "the insurance platform"
+                ],
+                [
+                  "experience",
+                  "Conperi",
+                  "Robert Blust",
+                  "the claims proof of concept"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "AXA Health digital insurance platform",
+                "Robert Blust",
+                "the insurance platform"
+              ],
+              [
+                "experience",
+                "Conperi",
+                "Robert Blust",
+                "the claims proof of concept"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/has-robert-worked-in-insurance.md"
+    },
+    {
+      "id": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "type": "question",
+      "name": "How can I use this model from my own AI agent?",
+      "tagline": "The MCP server is where an agent connects, the registry listing is how a client finds it, and the feature says how to load the whole model into an assistant without a server.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "surface",
+                  "mcp.blust.ch MCP server",
+                  "",
+                  "where an agent connects"
+                ],
+                [
+                  "surface",
+                  "MCP Registry listing",
+                  "",
+                  "how a client finds it"
+                ],
+                [
+                  "feature",
+                  "The model is carried into a conversation",
+                  "",
+                  "using it without a server"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "surface",
+                "mcp.blust.ch MCP server",
+                "",
+                "where an agent connects"
+              ],
+              [
+                "surface",
+                "MCP Registry listing",
+                "",
+                "how a client finds it"
+              ],
+              [
+                "feature",
+                "The model is carried into a conversation",
+                "",
+                "using it without a server"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-can-i-use-this-model-from-my-own-ai-agent.md"
+    },
+    {
+      "id": "questions/how-do-i-know-a-claim-here-is-true",
+      "type": "question",
+      "name": "How do I know a claim here is true?",
+      "tagline": "The concepts say what a claim is and what must stand under it, and the feature says how a reader checks one against the other.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "concept",
+                  "Claim",
+                  "",
+                  "what a claim is"
+                ],
+                [
+                  "concept",
+                  "Evidence",
+                  "",
+                  "what stands under it"
+                ],
+                [
+                  "feature",
+                  "A claim is checked against its evidence",
+                  "",
+                  "how a reader checks it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "concept",
+                "Claim",
+                "",
+                "what a claim is"
+              ],
+              [
+                "concept",
+                "Evidence",
+                "",
+                "what stands under it"
+              ],
+              [
+                "feature",
+                "A claim is checked against its evidence",
+                "",
+                "how a reader checks it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-do-i-know-a-claim-here-is-true.md"
+    },
+    {
+      "id": "questions/is-what-i-type-here-stored",
+      "type": "question",
+      "name": "Is what I type here stored?",
+      "tagline": "The Answerer keeps no conversation, and the website's privacy page lists in full what leaves a visitor's browser and what happens to it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Answerer",
+                  "",
+                  "that the seat keeps nothing"
+                ],
+                [
+                  "surface",
+                  "blust.ch website",
+                  "",
+                  "where the privacy page lists the rest"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "role",
+                "Answerer",
+                "",
+                "that the seat keeps nothing"
+              ],
+              [
+                "surface",
+                "blust.ch website",
+                "",
+                "where the privacy page lists the rest"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-what-i-type-here-stored.md"
+    },
+    {
+      "id": "questions/what-did-robert-study",
+      "type": "question",
+      "name": "What did Robert study?",
+      "tagline": "The degree entry says what he studied and where, and the other education entries name the trainings and certifications that followed.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Business Information Systems UAS",
+                  "Robert Blust",
+                  "the degree"
+                ],
+                [
+                  "experience-kind",
+                  "Education",
+                  "",
+                  "the trainings and certifications"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Business Information Systems UAS",
+                "Robert Blust",
+                "the degree"
+              ],
+              [
+                "experience-kind",
+                "Education",
+                "",
+                "the trainings and certifications"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-did-robert-study.md"
+    },
+    {
+      "id": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "type": "question",
+      "name": "What does \"over twenty-five years, in order\" mean?",
+      "tagline": "It is the timeline's heading: the feature it names says what a reader follows there, and the website says where the timeline is drawn from.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "feature",
+                  "A career is read in order",
+                  "",
+                  "what the heading means"
+                ],
+                [
+                  "surface",
+                  "blust.ch website",
+                  "",
+                  "where the timeline is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "feature",
+                "A career is read in order",
+                "",
+                "what the heading means"
+              ],
+              [
+                "surface",
+                "blust.ch website",
+                "",
+                "where the timeline is"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-does-over-twenty-five-years-in-order-mean.md"
+    },
+    {
+      "id": "questions/what-does-robert-do",
+      "type": "question",
+      "name": "What does Robert do?",
+      "tagline": "The identity says what he does in one line, and the company of one says what kind of company does it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "identity",
+                  "Robert Blust",
+                  "",
+                  "what he does"
+                ],
+                [
+                  "concept",
+                  "Company of one",
+                  "",
+                  "what kind of company it is"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "identity",
+                "Robert Blust",
+                "",
+                "what he does"
+              ],
+              [
+                "concept",
+                "Company of one",
+                "",
+                "what kind of company it is"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-does-robert-do.md"
+    },
+    {
+      "id": "questions/what-has-robert-led",
+      "type": "question",
+      "name": "What has Robert led?",
+      "tagline": "The leadership achievements of his two co-founder roles say what he decided and owned for other people, and the earlier roles say where it started.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Co-Founder & Head of Technology",
+                  "Robert Blust",
+                  "the most recent and largest"
+                ],
+                [
+                  "experience",
+                  "Co-Founder & CTO",
+                  "Robert Blust",
+                  "the first company"
+                ],
+                [
+                  "experience",
+                  "Solution Manager, Software Engineering — Analysis & Design",
+                  "Robert Blust",
+                  "where it started"
+                ],
+                [
+                  "achievement-kind",
+                  "Leadership",
+                  "",
+                  "what counts as leading"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Co-Founder & Head of Technology",
+                "Robert Blust",
+                "the most recent and largest"
+              ],
+              [
+                "experience",
+                "Co-Founder & CTO",
+                "Robert Blust",
+                "the first company"
+              ],
+              [
+                "experience",
+                "Solution Manager, Software Engineering — Analysis & Design",
+                "Robert Blust",
+                "where it started"
+              ],
+              [
+                "achievement-kind",
+                "Leadership",
+                "",
+                "what counts as leading"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-has-robert-led.md"
+    },
+    {
+      "id": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "type": "question",
+      "name": "What is Robert's history with Eclipse and modeling?",
+      "tagline": "The working group and the user group's board say where he took part, and the CDO server says what he built and kept running.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Eclipse Modeling Platform Working Group",
+                  "Robert Blust",
+                  "taking part"
+                ],
+                [
+                  "experience",
+                  "Swiss Eclipse User Group board",
+                  "Robert Blust",
+                  "the board"
+                ],
+                [
+                  "experience",
+                  "Flatland CDO Server",
+                  "Robert Blust",
+                  "what he built"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Eclipse Modeling Platform Working Group",
+                "Robert Blust",
+                "taking part"
+              ],
+              [
+                "experience",
+                "Swiss Eclipse User Group board",
+                "Robert Blust",
+                "the board"
+              ],
+              [
+                "experience",
+                "Flatland CDO Server",
+                "Robert Blust",
+                "what he built"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-is-robert-s-history-with-eclipse-and-modeling.md"
+    },
+    {
+      "id": "questions/what-is-robert-strongest-at",
+      "type": "question",
+      "name": "What is Robert strongest at?",
+      "tagline": "The skills his profile claims at Expert are his strongest, each with the evidence it rests on, and the Expert level says what that claim means.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "profile",
+                  "Robert Blust",
+                  "",
+                  "the skills and their levels"
+                ],
+                [
+                  "proficiency-level",
+                  "Expert",
+                  "",
+                  "what the level means"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "profile",
+                "Robert Blust",
+                "",
+                "the skills and their levels"
+              ],
+              [
+                "proficiency-level",
+                "Expert",
+                "",
+                "what the level means"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-is-robert-strongest-at.md"
+    },
+    {
+      "id": "questions/what-problem-does-modeling-a-company-solve",
+      "type": "question",
+      "name": "What problem does modeling a company solve?",
+      "tagline": "The value says why a business is modeled before it is built, and the film on governance as data shows what the model makes possible.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "value",
+                  "Model it before you build it",
+                  "",
+                  "why model first"
+                ],
+                [
+                  "experience",
+                  "Governance as data",
+                  "Robert Blust",
+                  "what it makes possible"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "value",
+                "Model it before you build it",
+                "",
+                "why model first"
+              ],
+              [
+                "experience",
+                "Governance as data",
+                "Robert Blust",
+                "what it makes possible"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-problem-does-modeling-a-company-solve.md"
+    },
+    {
+      "id": "questions/who-answers-this-chat",
+      "type": "question",
+      "name": "Who answers this chat?",
+      "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says what it reads from.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Answerer",
+                  "",
+                  "who answers, and what it may never do"
+                ],
+                [
+                  "process",
+                  "Answering",
+                  "",
+                  "how an answer is made"
+                ],
+                [
+                  "surface",
+                  "chat.blust.ch chat",
+                  "",
+                  "what it reads from"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "role",
+                "Answerer",
+                "",
+                "who answers, and what it may never do"
+              ],
+              [
+                "process",
+                "Answering",
+                "",
+                "how an answer is made"
+              ],
+              [
+                "surface",
+                "chat.blust.ch chat",
+                "",
+                "what it reads from"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/who-answers-this-chat.md"
+    },
+    {
+      "id": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "type": "question",
+      "name": "Why is there a career break, and what happened in it?",
+      "tagline": "The career break says why it was taken and what it found, and CompanyGraph and GuestGraph are the two products it built in the open.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Career break",
+                  "Robert Blust",
+                  "why, and what it found"
+                ],
+                [
+                  "experience",
+                  "CompanyGraph",
+                  "Robert Blust",
+                  "the first product"
+                ],
+                [
+                  "experience",
+                  "GuestGraph",
+                  "Robert Blust",
+                  "the second product"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Career break",
+                "Robert Blust",
+                "why, and what it found"
+              ],
+              [
+                "experience",
+                "CompanyGraph",
+                "Robert Blust",
+                "the first product"
+              ],
+              [
+                "experience",
+                "GuestGraph",
+                "Robert Blust",
+                "the second product"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/why-is-there-a-career-break-and-what-happened-in-it.md"
     },
     {
       "id": "roles/answerer",
@@ -15884,6 +17127,558 @@
     },
     {
       "from": "profiles/robert-blust",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-i-build-a-model-like-this-of-myself",
+      "to": "products/mental-model",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "product",
+        "Owner": "",
+        "For": "the worked example"
+      }
+    },
+    {
+      "from": "questions/can-i-build-a-model-like-this-of-myself",
+      "to": "profiles/robert-blust/experiences/2026-companygraph",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the meta-model to write it in"
+      }
+    },
+    {
+      "from": "questions/can-i-build-a-model-like-this-of-myself",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-robert-still-write-code-himself",
+      "to": "profiles/robert-blust",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "the Software engineering, Java and Agentic AI development claims"
+      }
+    },
+    {
+      "from": "questions/can-robert-still-write-code-himself",
+      "to": "profiles/robert-blust/experiences/2026-career-break",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the products built in the break"
+      }
+    },
+    {
+      "from": "questions/can-robert-still-write-code-himself",
+      "to": "profiles/robert-blust/experiences/2026-companygraph",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "what he builds now"
+      }
+    },
+    {
+      "from": "questions/can-robert-still-write-code-himself",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/has-robert-built-ai-into-a-real-business",
+      "to": "profiles/robert-blust",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "the AI skills and their levels"
+      }
+    },
+    {
+      "from": "questions/has-robert-built-ai-into-a-real-business",
+      "to": "profiles/robert-blust/experiences/2018-conperi-automated-claims",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the earlier machine-learning work"
+      }
+    },
+    {
+      "from": "questions/has-robert-built-ai-into-a-real-business",
+      "to": "profiles/robert-blust/experiences/2022-likemagic",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the company-wide AI rollout"
+      }
+    },
+    {
+      "from": "questions/has-robert-built-ai-into-a-real-business",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
+      "to": "profiles/robert-blust/experiences/1999-ubs-trainee",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "where it began"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
+      "to": "profiles/robert-blust/experiences/2009-ubs-architect",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the last role at UBS"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
+      "to": "profiles/robert-blust/experiences/2015-swisscard-data-integration",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "a later project"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
+      "to": "profiles/robert-blust/experiences/2016-credit-suisse-mdr",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "a later project"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/has-robert-worked-in-insurance",
+      "to": "profiles/robert-blust/experiences/2017-axa-health-platform",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the insurance platform"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-insurance",
+      "to": "profiles/robert-blust/experiences/2018-conperi-automated-claims",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the claims proof of concept"
+      }
+    },
+    {
+      "from": "questions/has-robert-worked-in-insurance",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "to": "features/the-model-is-carried-into-a-conversation",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "using it without a server"
+      }
+    },
+    {
+      "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "to": "surfaces/mcp-blust-ch-mcp-server",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where an agent connects"
+      }
+    },
+    {
+      "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "to": "surfaces/mcp-registry-listing",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "how a client finds it"
+      }
+    },
+    {
+      "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "concepts/claim",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what a claim is"
+      }
+    },
+    {
+      "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "concepts/evidence",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what stands under it"
+      }
+    },
+    {
+      "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "features/a-claim-is-checked-against-its-evidence",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "how a reader checks it"
+      }
+    },
+    {
+      "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-what-i-type-here-stored",
+      "to": "roles/answerer",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "For": "that the seat keeps nothing"
+      }
+    },
+    {
+      "from": "questions/is-what-i-type-here-stored",
+      "to": "surfaces/blust-ch-website",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where the privacy page lists the rest"
+      }
+    },
+    {
+      "from": "questions/is-what-i-type-here-stored",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-did-robert-study",
+      "to": "experience-kinds/education",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience-kind",
+        "Owner": "",
+        "For": "the trainings and certifications"
+      }
+    },
+    {
+      "from": "questions/what-did-robert-study",
+      "to": "profiles/robert-blust/experiences/2002-wirtschaftsinformatik-fh",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the degree"
+      }
+    },
+    {
+      "from": "questions/what-did-robert-study",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "to": "features/a-career-is-read-in-order",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "feature",
+        "Owner": "",
+        "For": "what the heading means"
+      }
+    },
+    {
+      "from": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "to": "surfaces/blust-ch-website",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where the timeline is"
+      }
+    },
+    {
+      "from": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-robert-do",
+      "to": "concepts/company-of-one",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "concept",
+        "Owner": "",
+        "For": "what kind of company it is"
+      }
+    },
+    {
+      "from": "questions/what-does-robert-do",
+      "to": "identity",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "identity",
+        "Owner": "",
+        "For": "what he does"
+      }
+    },
+    {
+      "from": "questions/what-does-robert-do",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-has-robert-led",
+      "to": "achievement-kinds/leadership",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "achievement-kind",
+        "Owner": "",
+        "For": "what counts as leading"
+      }
+    },
+    {
+      "from": "questions/what-has-robert-led",
+      "to": "profiles/robert-blust/experiences/2004-ubs-solution-manager",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "where it started"
+      }
+    },
+    {
+      "from": "questions/what-has-robert-led",
+      "to": "profiles/robert-blust/experiences/2015-3ap",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the first company"
+      }
+    },
+    {
+      "from": "questions/what-has-robert-led",
+      "to": "profiles/robert-blust/experiences/2022-likemagic",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the most recent and largest"
+      }
+    },
+    {
+      "from": "questions/what-has-robert-led",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "to": "profiles/robert-blust/experiences/2010-eclipse-modeling-platform",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "taking part"
+      }
+    },
+    {
+      "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "to": "profiles/robert-blust/experiences/2011-jugs-board",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the board"
+      }
+    },
+    {
+      "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "to": "profiles/robert-blust/experiences/2014-flatland-cdo-server",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "what he built"
+      }
+    },
+    {
+      "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-robert-strongest-at",
+      "to": "proficiency-levels/expert",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "proficiency-level",
+        "Owner": "",
+        "For": "what the level means"
+      }
+    },
+    {
+      "from": "questions/what-is-robert-strongest-at",
+      "to": "profiles/robert-blust",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "the skills and their levels"
+      }
+    },
+    {
+      "from": "questions/what-is-robert-strongest-at",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-problem-does-modeling-a-company-solve",
+      "to": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "what it makes possible"
+      }
+    },
+    {
+      "from": "questions/what-problem-does-modeling-a-company-solve",
+      "to": "values/model-it-before-you-build-it",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "why model first"
+      }
+    },
+    {
+      "from": "questions/what-problem-does-modeling-a-company-solve",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "processes/answering",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "how an answer is made"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "roles/answerer",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "For": "who answers, and what it may never do"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "surfaces/chat-blust-ch-chat",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "what it reads from"
+      }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "profiles/robert-blust/experiences/2026-career-break",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "why, and what it found"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "profiles/robert-blust/experiences/2026-companygraph",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the first product"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "profiles/robert-blust/experiences/2026-guestgraph",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the second product"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
