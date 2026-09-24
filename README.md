@@ -45,3 +45,7 @@ npm run sitemap:check       # are those dates still what git says?
 Run `npm run verify` after any change under `index.html`, `talks/`, or `verify/`. Run `npm run og` and `npm run pdf` after a visual change to either deck or to `index.html` / `talks/index.html` — the share cards and PDFs are rendered, committed files, not generated on demand. `npm run og:check` says when a card has fallen behind its page; CI runs it on every push, so forgetting is caught rather than shipped. Run `npm run model` then `npm run pages` after moving the pin in `source.json`; `model.json` and every page built from it are committed files, not generated on demand.
 
 Narration is generated from the speaker notes themselves and cached on a content hash, so editing one note regenerates one clip. It needs `ELEVENLABS_API_KEY`, which lives in `~/.zshrc` and is therefore invisible to a non-interactive shell — `AGENTS.md` has the one-liner that reaches it, and the rule about never printing it.
+
+## License
+
+[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, the picture, and the scripts that build and check them. Use it, quote it, build on it; credit it. Three kinds of file are not written here and keep their own licenses, each in a text beside it: the faces under `fonts/`, `d3.v7.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: the rb mark and the name stay mine.
