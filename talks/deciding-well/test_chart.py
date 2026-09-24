@@ -24,7 +24,25 @@ class Chart(unittest.TestCase):
         self.assertIn("Jul 2 · 40", svg)
 
     def test_bars_carry_a_hover_title(self):
-        self.assertIn("<title>Jul 1, 2026: 9 commits</title>", chart.render(S))
+        self.assertIn(">Jul 1, 2026: 9 commits</title>", chart.render(S))
+
+    def test_labels_carry_their_swiss_german(self):
+        svg = chart.render(S)
+        self.assertIn('data-de="Juni"', svg)
+        self.assertIn('data-de="Juli"', svg)
+        self.assertIn('data-de="2. Juli · 40"', svg)
+        self.assertIn('data-de-aria="Commits pro Tag, 29. Juni 2026 bis 2. Juli 2026"', svg)
+        self.assertIn('data-de="1. Juli 2026: 9 Commits"', svg)
+
+    def test_german_groups_thousands_by_the_typographic_apostrophe(self):
+        self.assertEqual(chart.de_number(1503), "1’503")
+
+    def test_a_peak_label_near_the_right_edge_ends_at_its_bar(self):
+        import datetime
+        days = [{"date": (datetime.date(2026, 6, 1) + datetime.timedelta(d)).isoformat(), "commits": d} for d in range(60)]
+        edge = {"daily": days, "births": [], "busiestDay": {"date": days[-1]["date"]}}
+        self.assertIn('class="n end"', chart.render(edge))
+        self.assertNotIn('class="n end"', chart.render(S))
 
     def test_write_replaces_only_the_region(self):
         html = "a<!-- chart:begin -->old<!-- chart:end -->b"
