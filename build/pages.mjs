@@ -36,7 +36,7 @@ const check = process.argv.includes("--check");
 // leaves the model.
 const RENDERERS = [
   writePrinciples,
-  (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering"] }),
+  (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering", "Narrating"] }),
   writeSurfaces,
   writeJsonLd,
 ];
