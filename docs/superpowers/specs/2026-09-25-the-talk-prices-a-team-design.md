@@ -27,6 +27,7 @@ The page mixes two kinds of figure, and it marks each one as one or the other. A
 | API usage for the chats | the owner's figure | USD 20 of Anthropic API credit for Sonnet 5, plus 8.1% VAT, about CHF 17 |
 | Domains | estimated | CHF 90: companygraph.io and guestgraph.io for a year |
 | USD to CHF | sourced | 0.80: the 2026 average to 23 Sep was 0.794 and early September about 0.81 |
+| The team's tools | estimated | licences at CHF 60 per person-month; hosting at CHF 0 on both sides, in the same free tier |
 | Closing the gaps | estimated | external code and security review CHF 15,000, usability and accessibility study CHF 12,000, a month onboarding a second maintainer CHF 20,000 |
 
 Every number the page prints is read from a file, never typed into the markup, the rule the deck already follows. The counts go into `stats.json`; the estimates go into a new `cost.json` beside it, dated, each with its basis in a field of its own. The page's script computes the totals from the two files, so a changed assumption is one edit to `cost.json` and every figure on the page follows.
@@ -35,7 +36,7 @@ With the expected case, employer cost and 8 hours a day, the result is a convent
 
 ## 2. What was decided
 
-**A companion page, not a slide.** The deck is ten minutes with narration in two languages; the page is reference material read afterwards. The deck gains one line on slide 05 and one entry in slide 11's reading list, both linking here. Changing slide 05's note re-records one clip in each language; the PDFs are exported again.
+**A companion page, not a slide.** The deck is ten minutes with narration in two languages; the page is reference material read afterwards. The deck gains one line on slide 05 and one entry in slide 11's reading list, in the proof column, which then flows by column, both linking here. Changing slide 05's note re-records one clip in each language; the PDFs are exported again.
 
 **The owner's hours count on both sides.** In the conventional case the owner is product owner and chief architect for a share of the team's months, 60% by default; in the agentic case his hours are the active days times the hours per day. That both sides are close is the page's point, and it is the talk's: the time building saved went into deciding.
 
@@ -43,7 +44,7 @@ With the expected case, employer cost and 8 hours a day, the result is a convent
 
 **Money on blust.ch is a deliberate exception, and it is scoped.** The page states costs and an estimate of what a team would have cost. It states no revenue, no margin and no income. The decisions not to claim ARR or a P&L stand.
 
-**The assumptions are adjustable on the page.** Two switches, employer cost or contractor rates and lean, expected or conservative, and two sliders, hours per day in the peak phase and the owner's share in the team case. For estimates this is the honest form: the reader sees the result move with the assumption. The defaults are the figures above; nothing the reader changes is stored except the choices themselves, per visitor, under the family's storage rules.
+**The assumptions are adjustable on the page.** Two switches, employer cost or contractor rates and lean, expected or conservative, and two sliders, hours per day in the peak phase and the owner's share in the team case. For estimates this is the honest form: the reader sees the result move with the assumption. The defaults are the figures above, and the page stores nothing: every visit starts from them, so the privacy page's list of what is stored stays as it is.
 
 **"Would both approaches produce the same result?" stays, and is the owner's judgement.** Ten dimensions, each with its evidence from the repositories, whether a human team could do the same, and a rating: agentic ahead, even, or team ahead. The ratings are the owner's, reviewed by him row by row before the page ships. The page states that the evidence is counts from git, not an audit, and that nobody outside the project has reviewed the code.
 
@@ -58,7 +59,7 @@ In the order it reads:
 | Title block | The family's title contract; a tagline naming the two bills and that the owner's hours count in both; the snapshot date |
 | Assumptions | The two switches and two sliders |
 | The verdict | Three figures side by side: the team's total and shape, the agentic total and shape, the difference in cost and in months |
-| What was built | Ten counted facts in a grid |
+| What was built | Ten counted facts in a grid, each read from `stats.json` or `decisions.json` |
 | The two bills | One stacked bar per approach on one scale, owner, team, tools; the table under it |
 | Time | Calendar months, and the owner's hours, per approach |
 | The team | The roster with FTE, person-months, rate and cost, the owner's row marked as on both sides; the person-months per workstream as bars, each with its measured size |
