@@ -134,7 +134,9 @@ def prefetch(gitdir, oids):
 def tree_texts(gitdir, ref):
     """Every text file of the tree at ref, read in one cat-file batch. Blobless clones fetch the
     blobs they lack on first read, which is slow once and cached after."""
-    tree = [l.split("\t", 1) for l in run("git", "--git-dir", gitdir, "ls-tree", "-r", ref).split("\n") if l]
+    # -z, because without it git quotes a path with a non-ASCII character, and a quoted name's
+    # extension ends in a quote mark, so the file would drop out of the count without a word.
+    tree = [r.split("\t", 1) for r in run("git", "--git-dir", gitdir, "ls-tree", "-r", "-z", ref).split("\0") if r]
     oids = {path: meta.split()[2] for meta, path in tree if meta.split()[1] == "blob"}
     wanted = [f for f in oids if os.path.splitext(f)[1].lower() in CODE | {".md"} and not SKIP.search(f)]
     prefetch(gitdir, [oids[f] for f in wanted])
@@ -144,7 +146,10 @@ def tree_texts(gitdir, ref):
     texts, i = {}, 0
     for f in wanted:
         header_end = out.index(b"\n", i)
-        size = int(out[i:header_end].split()[2])
+        header = out[i:header_end].split()
+        if header[-1] == b"missing":
+            raise RuntimeError(f"{gitdir}: {f} is in the tree at {ref} but its content could not be read")
+        size = int(header[2])
         texts[f] = out[header_end + 1:header_end + 1 + size].decode("utf-8", "ignore")
         i = header_end + 1 + size + 1
     return texts

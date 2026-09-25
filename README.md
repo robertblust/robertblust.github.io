@@ -10,6 +10,7 @@ Robert Blust's profile page and its talks. Self-contained, no bundler, no extern
 /talks/mental-model/             deck: The Mental Model
 /talks/essential-complexity/     deck: Essential Complexity
 /talks/deciding-well/            deck: Building fast is solved. Deciding well is not.
+/talks/deciding-well/cost/       what a team would have cost — computed from the talk's stats.json and cost.json
 /surfaces/                       every place the model is published and how each is made — reads the same model.json as /model/
 /team/                           the two profiles and the eight seats they hold — reads the same model.json as /model/
 /timeline/                       the experiences as a ledger — reads the same model.json as /model/
