@@ -184,10 +184,10 @@
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
 
-  /* The page's one reversal, and the only honest place for it: the headline says nothing
-     leaves, and one thing does — the request itself, to whoever serves the file. */
+  /* The family's title note, in its one flag line: the headline prices a team, and the note
+     says which figures are counted and which are estimates. */
   .note{margin-top:2rem; max-width:54ch; padding-left:1rem;
-        border-left:2px solid var(--rule); color:var(--dim); font-size:1rem}
+        border-left:2px solid var(--c-flag); color:var(--ink); font-size:1rem}
 
   section{margin-top:clamp(3rem,8vh,5.5rem)}
   h2{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
@@ -258,6 +258,7 @@
   .lean.ag::before{background:var(--c-firm); border-radius:50%}
   .lean.tm::before{background:var(--c-weak)}
   .lean.ev::before{border:1.5px solid var(--dim); border-radius:50%; width:.4rem; height:.4rem}
+  .caveat{color:var(--dim); font-size:.9rem; max-width:62ch; margin-block:1rem}
   p.rule{border-left:3px solid var(--c-firm); padding-left:1rem; margin-block:1rem; max-width:62ch}
 </style>
 <link rel="stylesheet" href="../../../chat.css">
@@ -433,7 +434,7 @@
         </tbody>
       </table></div>
       <p class="rule" data-de="Wo das Team vorne liegt, lassen sich die Lücken schliessen: mit einem externen Code- und Security-Review, einer Studie zu Usability und Barrierefreiheit und einem Monat, um einen zweiten Maintainer einzuarbeiten. Das kostet rund <span data-v='gaps'></span> zusätzlich. Das agentische Total läge dann bei <span data-v='gapAg'></span>, immer noch <span data-v='gapRatio'></span>× günstiger.">Closing the gaps where the team is ahead — an external code and security review, a usability and accessibility study, a month to bring in a second maintainer — adds about <span data-v="gaps"></span>. The agentic total would then be <span data-v="gapAg"></span>, still <span data-v="gapRatio"></span>× cheaper.</p>
-      <p class="note" data-de="Das sind Zählungen aus git, kein Audit. Niemand ausserhalb des Projekts hat den Code geprüft. Die Zeile «Implementierung» vergleicht deshalb Fähigkeiten, kein gemessenes Ergebnis.">These are counts from git, not an audit. Nobody outside the project has reviewed the code, so the implementation row compares capability, not a measured outcome.</p>
+      <p class="caveat" data-de="Das sind Zählungen aus git, kein Audit. Niemand ausserhalb des Projekts hat den Code geprüft. Die Zeile «Implementierung» vergleicht deshalb Fähigkeiten, kein gemessenes Ergebnis.">These are counts from git, not an audit. Nobody outside the project has reviewed the code, so the implementation row compares capability, not a measured outcome.</p>
     </section>
 
     <section>
