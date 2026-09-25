@@ -1,4 +1,4 @@
-<!-- conventions · v1.31.0 -->
+<!-- conventions · v1.32.0 -->
 Shared conventions of the robertblust, guestgraph and companygraph organizations live in `conventions/`, vendored from robertblust/conventions at the release `conventions.json` names. Read them before writing or committing anything here.
 
 - `conventions/WRITING.md` — how we write: one voice, three registers, English and German.
@@ -101,9 +101,12 @@ One generator serves every talk rather than a copy per deck. The two copies of t
   between separate clips, owned by the player. Don't re-litigate this by feel.
 - **Audio is committed, not LFS.** GitHub Pages does not resolve LFS objects — it would
   serve the pointer text where the audio should be. `.gitattributes` records why.
-- **Narrated runs shorter than live.** Each deck is about ten minutes presented; narrated
-  it is roughly half that, because a recording takes none of the pauses a speaker does.
-  Measure before quoting a figure — these are the only two numbers here that are not.
+- **The length quoted is the one a visitor plays.** Each deck is about ten minutes presented
+  live, but a visitor hears the narration: every clip plus the player's pause between slides
+  (`SETTLE_MS` and `READ_MS` in `deck.js`), rounded to the minute and stated per language on
+  /talks/ and in each talk's README. The live figure was quoted until Sep 25, 2026, when the
+  owner chose the one a visitor hears. Measure before quoting, and re-measure when a clip is
+  regenerated.
 - **Slide 00 speaks only its title.** Its whole note is a stage direction about greeting
   the room, so cue-stripping leaves nothing but the heading — about two seconds against
   thirty for every other slide. That is honest to what was written; the greeting was
