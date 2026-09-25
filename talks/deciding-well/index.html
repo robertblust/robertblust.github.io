@@ -225,6 +225,8 @@
   .reads a{display:block; color:inherit; text-decoration:none}
   .reads a:hover b{text-decoration:underline; text-underline-offset:.2em}
   .reads a span{display:block; margin-top:.6cqmin; font-size:clamp(.8rem,1.45cqmin,1.05rem); color:var(--c-mid)}
+  /* The proof column holds a third reading; the other two keep two. */
+  .reads .below{grid-column:2; grid-row:3}
 
   .slide{
     position:absolute; inset:0;
@@ -302,6 +304,8 @@
     color:var(--dim); letter-spacing:.02em;
   }
   .stamp b{color:var(--c-mid); font-weight:600}
+  .stamp a{color:var(--c-mid); text-decoration:none}
+  .stamp a:hover{text-decoration:underline; text-underline-offset:.2em}
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 5cqmin; margin-top:4.4cqmin}
@@ -490,8 +494,8 @@
   <!-- 05 · The cost -->
   <section class="slide"
     data-time="1:10"
-    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about two hundred dollars a month. The same work, priced at the API’s list price, would have been about ten thousand dollars of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window is August 18 to September 24, 2026, and Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027."
-    data-notes-de="<em class='cue'>Zuerst das Geld, dann das Risiko.</em> Bezahlt habe ich das Abonnement, rund zweihundert Dollar im Monat. Dieselbe Arbeit hätte zum Listenpreis der API etwa zehntausend Dollar an Rechenleistung gekostet: rund sechzehn Milliarden Tokens, die meisten davon Kontext, der erneut aus dem Cache gelesen wurde. <em class='cue'>Für die Entwickler:</em> Der Zeitraum reicht vom 18. August bis zum 24. September 2026 und umfasst nur Claude Code. Seine Logs werden nach dreissig Tagen gelöscht, deshalb ist nichts Früheres erhalten, und Chats ausserhalb von Claude Code waren nie darin. <em class='cue'>Jetzt langsamer.</em> Das ist das Risiko. All das hängt an einigen wenigen Anbietern – Anthropic, Google und OpenAI – und an ihren Preisen und Bedingungen. Das Wissen ist portabel: reines Markdown in git, bereitgestellt über MCP, ein offenes Protokoll, das jedes Modell lesen kann. Die Geschwindigkeit ist es nicht, jedenfalls noch nicht. Die Auswege sind ein Forschungsthema für 2027.">
+    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about two hundred dollars a month. The same work, priced at the API’s list price, would have been about ten thousand dollars of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window is August 18 to September 24, 2026, and Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027. What a Swiss team would have cost for the same result, with my own hours counted in both bills, is on the page for this talk."
+    data-notes-de="<em class='cue'>Zuerst das Geld, dann das Risiko.</em> Bezahlt habe ich das Abonnement, rund zweihundert Dollar im Monat. Dieselbe Arbeit hätte zum Listenpreis der API etwa zehntausend Dollar an Rechenleistung gekostet: rund sechzehn Milliarden Tokens, die meisten davon Kontext, der erneut aus dem Cache gelesen wurde. <em class='cue'>Für die Entwickler:</em> Der Zeitraum reicht vom 18. August bis zum 24. September 2026 und umfasst nur Claude Code. Seine Logs werden nach dreissig Tagen gelöscht, deshalb ist nichts Früheres erhalten, und Chats ausserhalb von Claude Code waren nie darin. <em class='cue'>Jetzt langsamer.</em> Das ist das Risiko. All das hängt an einigen wenigen Anbietern – Anthropic, Google und OpenAI – und an ihren Preisen und Bedingungen. Das Wissen ist portabel: reines Markdown in git, bereitgestellt über MCP, ein offenes Protokoll, das jedes Modell lesen kann. Die Geschwindigkeit ist es nicht, jedenfalls noch nicht. Die Auswege sind ein Forschungsthema für 2027. Was ein Schweizer Team für dasselbe Ergebnis gekostet hätte, meine eigenen Stunden in beiden Rechnungen eingerechnet, steht auf der Seite zu diesem Vortrag.">
     <div class="kicker mono" data-n="05" data-de="Die Kosten">The cost</div>
     <h1 data-de="Bauen ist nicht mehr <em>das Teure</em>.">Building is not <em>the expensive part</em> any more.</h1>
     <div class="grid">
@@ -500,6 +504,7 @@
       <div class="cell"><b data-de="rund 16 Milliarden">about 16 billion</b><span data-de="Tokens, die meisten davon erneut gelesener Kontext">tokens, most of them context read again</span></div>
     </div>
     <p class="stamp" data-de="Das alles hängt an den Preisen und Bedingungen einiger weniger Anbieter. Das Wissen ist portabel; <b>die Geschwindigkeit noch nicht.</b>">It rests on a few providers’ prices and terms. The knowledge is portable; <b>the speed is not yet.</b></p>
+    <p class="stamp" data-de="Was ein Schweizer Team für dasselbe Ergebnis gekostet hätte: <a href='https://blust.ch/talks/deciding-well/cost/' target='_blank' rel='noopener'>blust.ch/talks/deciding-well/cost</a>">What the same result would have cost a Swiss team: <a href="https://blust.ch/talks/deciding-well/cost/" target="_blank" rel="noopener">blust.ch/talks/deciding-well/cost</a></p>
   </section>
 
   <!-- 06 · Where the time went -->
@@ -576,8 +581,8 @@
   <!-- 11 · Read more -->
   <section class="slide"
     data-time="0:30"
-    data-notes="<em class='cue'>Leave this up while questions come.</em> Six places to start reading, in the order of the talk: the argument, the proof and the answer."
-    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Sechs Stellen, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
+    data-notes="<em class='cue'>Leave this up while questions come.</em> Seven places to start reading, in the order of the talk: the argument, the proof and the answer."
+    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Sieben Orte, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
     <div class="kicker mono" data-n="11" data-de="Weiterlesen">Read more</div>
     <h1 data-de="Wo Sie <em>weiterlesen</em> können.">Where to <em>start reading</em>.</h1>
     <div class="grid reads">
@@ -586,6 +591,7 @@
       <div class="cell"><i class="grp" data-de="Die Antwort">The answer</i><a href="https://companygraph.io/" target="_blank" rel="noopener"><b data-de="Alles, was eine Firma weiss, in einem einzigen Graphen">Everything a company knows, one graph</b><span class="mono">companygraph.io</span></a></div>
       <div class="cell"><a href="https://blust.ch/team/" target="_blank" rel="noopener"><b data-de="Wer was entscheidet">Who decides what</b><span class="mono">blust.ch/team</span></a></div>
       <div class="cell"><a href="https://blust.ch/timeline/" target="_blank" rel="noopener"><b data-de="Die Laufbahn, Eintrag für Eintrag">The career as a ledger</b><span class="mono">blust.ch/timeline</span></a></div>
+      <div class="cell below"><a href="https://blust.ch/talks/deciding-well/cost/" target="_blank" rel="noopener"><b data-de="Was ein Team gekostet hätte">What a team would have cost</b><span class="mono">blust.ch/talks/deciding-well/cost</span></a></div>
       <div class="cell"><a href="https://companygraph.io/surfaces/" target="_blank" rel="noopener"><b data-de="Wo das Modell veröffentlicht ist">Where the model is published</b><span class="mono">companygraph.io/surfaces</span></a></div>
     </div>
   </section>

@@ -28,6 +28,8 @@ Every number on a slide is read from `stats.json`, and `stats.py` wrote it: comm
 
 The decisions on slide 07 are not in the model, which has no decision type yet. Agents read the 95 specs at the cutoff and listed each decision with a status (taken, revised, dropped) and a quote; `decisions.py` keeps only a decision whose quote is found in its spec and writes `decisions.json`. The count is of that list, so it is a reading of the prose, and the slide says so.
 
+The cost page at `/talks/deciding-well/cost/` prices the same result as a Swiss delivery team and as it happened, with the owner's hours counted in both. It computes every figure in the browser from `stats.json`, `decisions.json` and `cost.json`; `cost.json` holds every estimate and every figure the owner gave, dated, and `test_cost.py` and `npm run test:cost` hold it and the arithmetic together. `./stats.py --extend` adds the lines of code and the active days the page reads to a `stats.json` that already exists, without counting anything else again.
+
 The scripts are run by hand, never in CI, because `stats.py` needs `gh` signed in and files that exist only on the author’s machine.
 
 ```bash
