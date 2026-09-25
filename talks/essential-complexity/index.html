@@ -254,8 +254,11 @@
   }
   .note{
     margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
-    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+    max-width:54ch; line-height:1.45;
   }
+  /* A line beside a note means what it means on every page of the family: green is a conclusion.
+     A note that only frames or captions carries no line, because the family has no meaning for a blue one. */
+  .note.conclusion{padding-left:1.4cqmin; border-left:3px solid var(--c-sum)}
 
   /* then / now split */
   .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6cqmin; margin-top:3cqmin}
@@ -546,7 +549,7 @@
     data-time="1:00">
     <div class="kicker" data-n="07" data-de="Warum das jetzt wichtig ist">Why it matters now</div>
     <h1 class="big-punch" data-de="Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.">The right context makes AI <em>far more reliable</em>.</h1>
-    <p class="note" data-de="Ein Modell wie das <em>Mental Model</em> gibt der KI den richtigen Kontext. Halluzinationen verschwinden damit nicht, aber das Modell verkleinert den Raum, in dem die KI raten muss, und führt sie vom Raten zu fundiertem Schliessen. Je sauberer die Struktur, desto besser der Kontext. In der Praxis: das Mental Model als Kontextschicht für KI-Assistenten.">A model like the <em>Mental Model</em> gives AI the right context: it does not eliminate hallucinations — but it shrinks the space where AI has to guess, moving it from guessing to grounded reasoning. The cleaner the structure, the better the context. In practice: the Mental Model as a context layer for AI assistants.</p>
+    <p class="note conclusion" data-de="Ein Modell wie das <em>Mental Model</em> gibt der KI den richtigen Kontext. Halluzinationen verschwinden damit nicht, aber das Modell verkleinert den Raum, in dem die KI raten muss, und führt sie vom Raten zu fundiertem Schliessen. Je sauberer die Struktur, desto besser der Kontext. In der Praxis: das Mental Model als Kontextschicht für KI-Assistenten.">A model like the <em>Mental Model</em> gives AI the right context: it does not eliminate hallucinations — but it shrinks the space where AI has to guess, moving it from guessing to grounded reasoning. The cleaner the structure, the better the context. In practice: the Mental Model as a context layer for AI assistants.</p>
   </section>
 
   <!-- 8 · Wohin es geht -->
@@ -557,7 +560,7 @@
     <div class="kicker" data-n="08" data-de="Wohin es geht">Where it is heading</div>
     <h1 data-de="Das Pendel schlägt zurück – hin zu <em>Spec-Driven Development</em>.">The pendulum swings — back to <em>spec-driven development</em>.</h1>
     <p class="sub" data-de="Von «no big design up front» zu spec-first – weil KI Spezifikationen schnell und bezahlbar macht.">From “no big design up front” to spec-first — because AI makes specifications fast and affordable.</p>
-    <p class="note" data-de="Jahrelang war das Modellieren im Voraus zu teuer, also verzichtete die agile Bewegung bewusst darauf. Diese Rechnung hat sich geändert.">For years upfront modeling was too expensive, so agile deliberately dropped it. That math has changed.</p>
+    <p class="note conclusion" data-de="Jahrelang war das Modellieren im Voraus zu teuer, also verzichtete die agile Bewegung bewusst darauf. Diese Rechnung hat sich geändert.">For years upfront modeling was too expensive, so agile deliberately dropped it. That math has changed.</p>
   </section>
 
   <!-- 9 · Takeaway -->
@@ -568,7 +571,7 @@
     <div class="kicker" data-n="09" data-de="Fazit">Takeaway</div>
     <h1 data-de="Werkzeuge kommen und gehen – <em>das Modell bleibt</em>.">Tools come and go — <em>the model stays</em>.</h1>
     <p class="sub" data-de="Der Massstab bleibt: die essenzielle Komplexität erfassen. Nur steht der Weg heute allen offen.">The standard stays: capture essential complexity. Only now the path is open to everyone.</p>
-    <p class="note" data-de="So baue ich bis heute: nah am Code, aber mit dem Modell im Kopf. Danke.">That is how I still build today: close to the code, but with the model in mind. Thank you.</p>
+    <p class="note conclusion" data-de="So baue ich bis heute: nah am Code, aber mit dem Modell im Kopf. Danke.">That is how I still build today: close to the code, but with the model in mind. Thank you.</p>
   </section>
 
 </div>
