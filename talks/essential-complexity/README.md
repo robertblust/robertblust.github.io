@@ -1,6 +1,6 @@
 # Essential Complexity
 
-A short (10-minute) talk by **Robert Blust** on describing a problem in its *essential complexity* — no more, no less. The standard stays the same as 15 years ago; what changed is the cost: with AI and the right meta-model you reach the same clarity with far less friction.
+A short talk, five minutes played (six in German), by **Robert Blust** on describing a problem in its *essential complexity* — no more, no less. The standard stays the same as 15 years ago; what changed is the cost: with AI and the right meta-model you reach the same clarity with far less friction.
 
 Same approach as the companion talk [mental-model](https://blust.ch/talks/mental-model/).
 

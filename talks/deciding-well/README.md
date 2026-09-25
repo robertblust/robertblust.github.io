@@ -1,6 +1,6 @@
 # Building fast is solved. Deciding well is not.
 
-A short (10-minute) talk by **Robert Blust** that sums up a career break, June to September 2026, under the line this site opens with. Building with agentic AI turned out fast and cheap, and that half is shown in numbers git recorded; deciding well stayed the work, and that half is shown by how far the same work can be counted. CompanyGraph, a company's knowledge as one graph for people and agents, is offered as the answer to the gap.
+A short talk, eight minutes played (nine in German), by **Robert Blust** that sums up a career break, June to September 2026, under the line this site opens with. Building with agentic AI turned out fast and cheap, and that half is shown in numbers git recorded; deciding well stayed the work, and that half is shown by how far the same work can be counted. CompanyGraph, a company's knowledge as one graph for people and agents, is offered as the answer to the gap.
 
 Same approach as the companion talks [mental-model](https://blust.ch/talks/mental-model/) and [essential-complexity](https://blust.ch/talks/essential-complexity/).
 
