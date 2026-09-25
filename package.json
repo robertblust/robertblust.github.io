@@ -20,12 +20,13 @@
     "test:build": "node --test build/renderers.test.mjs",
     "dupes": "node tools/dupes.mjs",
     "test:dupes": "node --test tools/dupes.test.mjs",
+    "test:cost": "node --test talks/deciding-well/cost/cost.test.mjs",
     "sitemap": "design sitemap",
     "sitemap:check": "design sitemap --check",
     "pin:check": "node pin-check.mjs"
   },
   "devDependencies": {
-    "@robertblust/design": "github:robertblust/design#v0.87.0",
+    "@robertblust/design": "github:robertblust/design#v0.88.0",
     "companygraph-meta-model": "github:companygraph/meta-model#v0.46.1",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.63.0"

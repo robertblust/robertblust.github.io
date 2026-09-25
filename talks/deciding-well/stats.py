@@ -7,6 +7,7 @@ on a later day gives the same numbers. rob-cv contributes its first date and its
 and nothing else, because its content is private.
 
   ./stats.py            # writes stats.json beside this file
+  ./stats.py --extend   # adds lines of code and active days to the stats.json already there
 """
 import collections, datetime, glob, json, os, pathlib, re, subprocess
 
@@ -97,6 +98,78 @@ def docs(gitdir):
     plans = [f for f in files if PLAN.match(f)]
     decided = sum(1 for f in specs if DECIDED.search(run("git", "--git-dir", gitdir, "show", f"{ref}:{f}")))
     return len(specs), len(plans), decided
+
+CODE = {".js", ".mjs", ".cjs", ".ts", ".tsx", ".py", ".java", ".kt", ".css", ".sh", ".go", ".sql",
+        ".yml", ".yaml", ".html", ".svelte", ".vue"}
+SKIP = re.compile(r"(^|/)(vendor|dist|node_modules)/|package-lock\.json$|pnpm-lock|yarn\.lock$|\.min\.js$")
+TESTISH = re.compile(r"test|e2e", re.I)
+PEAK_FROM = "2026-08-17"
+
+def line_counts(files):
+    """Non-blank lines by kind. A path naming a test or e2e counts as test; lockfiles, vendored
+    and built files count as nothing, because nobody wrote them."""
+    c = collections.Counter({"code": 0, "test": 0, "markdown": 0})
+    for path, text in files.items():
+        if SKIP.search(path):
+            continue
+        ext = os.path.splitext(path)[1].lower()
+        n = sum(1 for l in text.split("\n") if l.strip())
+        if ext == ".md":
+            c["markdown"] += n
+        elif ext in CODE:
+            c["test" if TESTISH.search(path) else "code"] += n
+    return dict(c)
+
+def prefetch(gitdir, oids):
+    """A blobless clone fetches a missing blob on first read, one round trip each, which took
+    over ten minutes for one repository. This asks for every missing blob in one fetch."""
+    check = subprocess.run(["git", "--git-dir", gitdir, "cat-file", "--batch-check"], input="\n".join(oids).encode(),
+                           capture_output=True, check=True, env=dict(os.environ, GIT_NO_LAZY_FETCH="1")).stdout.decode()
+    missing = [l.split()[0] for l in check.split("\n") if l.endswith(" missing")]
+    if missing:
+        subprocess.run(["git", "--git-dir", gitdir, "-c", "fetch.negotiationAlgorithm=noop", "fetch", "-q", "--no-tags",
+                        "--no-write-fetch-head", "--filter=blob:none", "--stdin", "origin"],
+                       input="\n".join(missing).encode(), capture_output=True, check=True)
+
+def tree_texts(gitdir, ref):
+    """Every text file of the tree at ref, read in one cat-file batch. Blobless clones fetch the
+    blobs they lack on first read, which is slow once and cached after."""
+    tree = [l.split("\t", 1) for l in run("git", "--git-dir", gitdir, "ls-tree", "-r", ref).split("\n") if l]
+    oids = {path: meta.split()[2] for meta, path in tree if meta.split()[1] == "blob"}
+    wanted = [f for f in oids if os.path.splitext(f)[1].lower() in CODE | {".md"} and not SKIP.search(f)]
+    prefetch(gitdir, [oids[f] for f in wanted])
+    batch = "".join(f"{ref}:{f}\n" for f in wanted)
+    out = subprocess.run(["git", "--git-dir", gitdir, "cat-file", "--batch"], input=batch.encode(),
+                         capture_output=True, check=True).stdout
+    texts, i = {}, 0
+    for f in wanted:
+        header_end = out.index(b"\n", i)
+        size = int(out[i:header_end].split()[2])
+        texts[f] = out[header_end + 1:header_end + 1 + size].decode("utf-8", "ignore")
+        i = header_end + 1 + size + 1
+    return texts
+
+def active_days(daily, peak_from=PEAK_FROM):
+    early = [d for d in daily if d["date"] < peak_from]
+    peak = [d for d in daily if d["date"] >= peak_from]
+    return {"peakFrom": peak_from, "early": sum(1 for d in early if d["commits"]),
+            "peak": sum(1 for d in peak if d["commits"]), "peakDays": len(peak)}
+
+def extend(old, code):
+    return dict(old, code=code, activeDays=active_days(old["daily"]))
+
+def count_code():
+    """Only the repositories this effort created: two older ones predate START and are not its work."""
+    rows, tot = [], collections.Counter()
+    for r in repos():
+        if r["createdAt"][:10] < START:
+            continue
+        g = bare(r["nameWithOwner"])
+        ref = tip(g)
+        c = line_counts(tree_texts(g, ref)) if ref else {"code": 0, "test": 0, "markdown": 0}
+        rows.append(dict(repo=r["nameWithOwner"], **c))
+        tot.update(c)
+    return {"repos": rows, "totals": dict(tot)}
 
 def prs(name):
     ps = gh_json("pr", "list", "-R", name, "--state", "all", "--limit", "3000", "--json", "state,mergedAt,closedAt,author")
@@ -204,9 +277,17 @@ def main():
            "busiestDay": {"date": busiest, "commits": days[busiest], "merged": dmerged[busiest]},
            "weekly": weeks, "daily": daily_series(alldays, START, CUTOFF), "births": [{"repo": r["repo"], "date": r["created"]} for r in rows],
            "robcv": {"first": first[:10], "commits": len(robcv)},
-           "tokens": tokens(str(pathlib.Path.home() / ".claude/projects"), TOKENS_FROM, CUTOFF)}
+           "tokens": tokens(str(pathlib.Path.home() / ".claude/projects"), TOKENS_FROM, CUTOFF),
+           "activeDays": active_days(daily_series(alldays, START, CUTOFF))}
+    out["code"] = count_code()
     (HERE / "stats.json").write_text(json.dumps(out, indent=1) + "\n")
     print(json.dumps(out["totals"], indent=1), out["busiestDay"], out["tokens"]["listPriceUsd"], out["tokens"]["unpriced"])
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--extend" in sys.argv:
+        out = extend(load_stats(), count_code())
+        (HERE / "stats.json").write_text(json.dumps(out, indent=1) + "\n")
+        print(out["code"]["totals"], out["activeDays"])
+    else:
+        main()

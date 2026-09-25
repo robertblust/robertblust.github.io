@@ -890,5 +890,146 @@
   },
   "listPriceUsd": 9888,
   "unpriced": {}
+ },
+ "code": {
+  "repos": [
+   {
+    "repo": "guestgraph/engine",
+    "code": 12553,
+    "test": 6558,
+    "markdown": 9331
+   },
+   {
+    "repo": "guestgraph/.github",
+    "code": 106,
+    "test": 0,
+    "markdown": 443
+   },
+   {
+    "repo": "guestgraph/guestgraph.github.io",
+    "code": 10542,
+    "test": 11,
+    "markdown": 894
+   },
+   {
+    "repo": "robertblust/robertblust.github.io",
+    "code": 11373,
+    "test": 283,
+    "markdown": 13203
+   },
+   {
+    "repo": "companygraph/meta-model",
+    "code": 5735,
+    "test": 4565,
+    "markdown": 19356
+   },
+   {
+    "repo": "companygraph/companygraph.github.io",
+    "code": 11289,
+    "test": 274,
+    "markdown": 5634
+   },
+   {
+    "repo": "companygraph/.github",
+    "code": 123,
+    "test": 0,
+    "markdown": 534
+   },
+   {
+    "repo": "robertblust/mental-model",
+    "code": 931,
+    "test": 0,
+    "markdown": 7542
+   },
+   {
+    "repo": "robertblust/field-notes",
+    "code": 178,
+    "test": 0,
+    "markdown": 436
+   },
+   {
+    "repo": "robertblust/design",
+    "code": 10415,
+    "test": 8440,
+    "markdown": 6372
+   },
+   {
+    "repo": "robertblust/conventions",
+    "code": 152,
+    "test": 449,
+    "markdown": 4168
+   },
+   {
+    "repo": "guestgraph/connector-apaleo",
+    "code": 5631,
+    "test": 3845,
+    "markdown": 403
+   },
+   {
+    "repo": "guestgraph/service-conventions",
+    "code": 764,
+    "test": 354,
+    "markdown": 404
+   },
+   {
+    "repo": "companygraph/mcp-server",
+    "code": 2060,
+    "test": 3073,
+    "markdown": 6423
+   },
+   {
+    "repo": "robertblust/mcp-blust-ch",
+    "code": 395,
+    "test": 113,
+    "markdown": 1768
+   },
+   {
+    "repo": "companygraph/obsidian-plugin",
+    "code": 6021,
+    "test": 5306,
+    "markdown": 5339
+   },
+   {
+    "repo": "companygraph/mental-model",
+    "code": 908,
+    "test": 0,
+    "markdown": 3232
+   },
+   {
+    "repo": "companygraph/mcp-companygraph-io",
+    "code": 409,
+    "test": 91,
+    "markdown": 431
+   },
+   {
+    "repo": "companygraph/chat-server",
+    "code": 1484,
+    "test": 1892,
+    "markdown": 3443
+   },
+   {
+    "repo": "guestgraph/mental-model",
+    "code": 908,
+    "test": 0,
+    "markdown": 3073
+   },
+   {
+    "repo": "guestgraph/mcp-guestgraph-io",
+    "code": 415,
+    "test": 91,
+    "markdown": 437
+   }
+  ],
+  "totals": {
+   "code": 82392,
+   "test": 35345,
+   "markdown": 92866
+  }
+ },
+ "activeDays": {
+  "peakFrom": "2026-08-17",
+  "early": 26,
+  "peak": 38,
+  "peakDays": 39
  }
 }

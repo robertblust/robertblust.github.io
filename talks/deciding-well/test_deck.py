@@ -10,6 +10,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 HTML = (HERE / "index.html").read_text()
 STATS = json.loads((HERE / "stats.json").read_text())
 DECISIONS = json.loads((HERE / "decisions.json").read_text())
+COST = json.loads((HERE / "cost.json").read_text())
 GERMAN = re.findall(r'data-de="([^"]*)"', HTML)
 NOTES = " ".join(re.findall(r'data-notes="([^"]*)"', HTML))
 
@@ -47,15 +48,20 @@ class Figures(unittest.TestCase):
         self.assertRegex(HTML, rf"<b[^>]*>{STATS['totals']['reverts']}</b><span[^>]*>revert in")
 
     def test_the_cost_slide_rounds_the_snapshot(self):
-        t = STATS["tokens"]
+        # In francs, as the cost page counts them: dollars plus Swiss VAT, at cost.json's rate.
+        t, c = STATS["tokens"], COST
         self.assertEqual(t["unpriced"], {}, "a model with no price would make the list price too low")
-        usd = f"about ${round(t['listPriceUsd'], -3):,}"
+        chf = lambda usd, vat: usd * (1 + c["vat"] if vat else 1) * c["usdChf"]
+        paid = int(round(chf(c["tools"]["subscription"]["usd"], c["tools"]["subscription"]["vat"]) / 50) * 50)
+        listed = int(round(chf(t["listPriceUsd"], True), -3))
         billions = f"about {round(t['total'] / 1e9)} billion"
-        for text in (usd, billions):
+        for text in (f"about CHF {paid:,}", f"about CHF {listed:,}", billions):
             with self.subTest(text):
                 self.assertRegex(HTML, rf"<b[^>]*>{re.escape(text)}</b>")
-        self.assertIn(f"rund {de(round(t['listPriceUsd'], -3))} Dollar", GERMAN)
+        self.assertIn(f"rund CHF {de(paid)}", GERMAN)
+        self.assertIn(f"rund CHF {de(listed)}", GERMAN)
         self.assertIn(f"rund {round(t['total'] / 1e9)} Milliarden", GERMAN)
+        self.assertNotIn("$", " ".join(re.findall(r"<b[^>]*>[^<]*</b>", HTML)), "a figure on a slide is still in dollars")
 
     def test_the_organizations(self):
         self.assertIn(f"public repositories in {STATS['totals']['owners']} organizations", HTML)

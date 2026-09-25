@@ -50,6 +50,10 @@ jobs:
       - name: The duplication sweep still knows what the package owns
         run: npm run test:dupes
       - run: npm ci
+      # The cost page computes every figure it prints; this holds the arithmetic to the figures
+      # the spec was approved with. It reads two JSON files and needs no browser.
+      - name: The cost page's arithmetic
+        run: npm run test:cost
       # Nothing on a page says when its German was made, so an English sentence reworded in a
       # pull request keeps a German that now says something else, and every check that reads
       # the rendered page reads one language and passes. This compares the pull request's pages

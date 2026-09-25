@@ -1,6 +1,6 @@
 # Building fast is solved. Deciding well is not.
 
-A short talk, seven minutes played (eight in German), by **Robert Blust** that sums up a career break, June to September 2026, under the line this site opens with. Building with agentic AI turned out fast and cheap, and that half is shown in numbers git recorded; deciding well stayed the work, and that half is shown by how far the same work can be counted. CompanyGraph, a company's knowledge as one graph for people and agents, is offered as the answer to the gap.
+A short talk, nine minutes played (ten in German), by **Robert Blust** that sums up a career break, June to September 2026, under the line this site opens with. Building with agentic AI turned out fast and cheap, and that half is shown in numbers git recorded; deciding well stayed the work, and that half is shown by how far the same work can be counted. CompanyGraph, a company's knowledge as one graph for people and agents, is offered as the answer to the gap.
 
 Same approach as the companion talks [mental-model](https://blust.ch/talks/mental-model/) and [essential-complexity](https://blust.ch/talks/essential-complexity/).
 
@@ -27,6 +27,8 @@ A transport bar along the bottom edge: back to start, previous, play/pause, next
 Every number on a slide is read from `stats.json`, and `stats.py` wrote it: commits, pull requests and releases from GitHub, the first date and commit count of the local application tooling, and the token usage of the Claude Code logs. Each count is filtered by a fixed cutoff, Sep 24, 2026 at 22:21 Swiss time, so a later run gives the same figures.
 
 The decisions on slide 07 are not in the model, which has no decision type yet. Agents read the 95 specs at the cutoff and listed each decision with a status (taken, revised, dropped) and a quote; `decisions.py` keeps only a decision whose quote is found in its spec and writes `decisions.json`. The count is of that list, so it is a reading of the prose, and the slide says so.
+
+The cost page at `/talks/deciding-well/cost/` prices the same result as a Swiss delivery team and as it happened, with the owner's hours counted in both. It computes every figure in the browser from `stats.json`, `decisions.json` and `cost.json`; `cost.json` holds every estimate and every figure the owner gave, dated, and `test_cost.py` and `npm run test:cost` hold it and the arithmetic together. `./stats.py --extend` adds the lines of code and the active days the page reads to a `stats.json` that already exists, without counting anything else again.
 
 The scripts are run by hand, never in CI, because `stats.py` needs `gh` signed in and files that exist only on the author’s machine.
 
