@@ -292,161 +292,161 @@
 <main>
   <div class="shell">
     <div class="title">
-      <h1><span class="r70">What a team</span><span class="rcl">would have <em>cost</em>.</span></h1>
-      <p class="tagline">The talk’s result priced twice: as a Swiss delivery team, and as it happened with agentic AI. The owner’s hours count in both.</p>
-      <p class="note">Counts are from git as of Sep 24, 2026, like every figure in <a href="../">the talk</a>. Estimates are marked, stated with their basis, and can be changed below.</p>
+      <h1 data-de="<span class='r70'>Was ein Team</span><span class='rcl'><em>gekostet</em> hätte.</span>"><span class="r70">What a team</span><span class="rcl">would have <em>cost</em>.</span></h1>
+      <p class="tagline" data-de="Die Arbeit hinter dem Vortrag, zweimal durchgerechnet: einmal mit einem Schweizer Umsetzungsteam, einmal so, wie sie tatsächlich entstand – mit agentischer KI. Die Stunden des Owners zählen in beiden Rechnungen.">The talk’s result priced twice: as a Swiss delivery team, and as it happened with agentic AI. The owner’s hours count in both.</p>
+      <p class="note" data-de="Die Zählungen stammen aus git, Stand 24. September 2026, wie jede Zahl im <a href='../'>Vortrag</a>. Schätzungen sind gekennzeichnet, nennen ihre Grundlage und lassen sich unten ändern.">Counts are from git as of Sep 24, 2026, like every figure in <a href="../">the talk</a>. Estimates are marked, stated with their basis, and can be changed below.</p>
     </div>
 
-    <p class="costerr" id="costerr" hidden>The figures did not load, so this page shows none. Reload it, or read them in stats.json and cost.json beside the talk.</p>
+    <p class="costerr" id="costerr" hidden data-de="Die Zahlen wurden nicht geladen, deshalb zeigt diese Seite keine. Laden Sie die Seite neu, oder lesen Sie die Zahlen in stats.json und cost.json beim Vortrag nach.">The figures did not load, so this page shows none. Reload it, or read them in stats.json and cost.json beside the talk.</p>
 
-    <section class="assume" aria-label="Assumptions">
-      <div class="ctl"><span class="lbl">Price labor as</span>
-        <div class="seg" role="group" id="lens"><button type="button" data-v-lens="inhouse" aria-pressed="true">Employer cost</button><button type="button" data-v-lens="contract" aria-pressed="false">Contractor rates</button></div></div>
-      <div class="ctl"><span class="lbl">Team estimate</span>
-        <div class="seg" role="group" id="scen"><button type="button" data-v-scen="lean" aria-pressed="false">Lean</button><button type="button" data-v-scen="expected" aria-pressed="true">Expected</button><button type="button" data-v-scen="conservative" aria-pressed="false">Conservative</button></div></div>
-      <div class="ctl"><label class="lbl" for="peak">Owner’s hours a day, from Aug 17</label>
+    <section class="assume" aria-label="Assumptions" data-de-aria="Annahmen">
+      <div class="ctl"><span class="lbl" data-de="Arbeit bewerten nach">Price labor as</span>
+        <div class="seg" role="group" id="lens"><button type="button" data-v-lens="inhouse" aria-pressed="true" data-de="Arbeitgeberkosten">Employer cost</button><button type="button" data-v-lens="contract" aria-pressed="false" data-de="Freelancer-Ansätze">Contractor rates</button></div></div>
+      <div class="ctl"><span class="lbl" data-de="Schätzung für das Team">Team estimate</span>
+        <div class="seg" role="group" id="scen"><button type="button" data-v-scen="lean" aria-pressed="false" data-de="Schlank">Lean</button><button type="button" data-v-scen="expected" aria-pressed="true" data-de="Erwartet">Expected</button><button type="button" data-v-scen="conservative" aria-pressed="false" data-de="Konservativ">Conservative</button></div></div>
+      <div class="ctl"><label class="lbl" for="peak" data-de="Stunden des Owners pro Tag, ab 17. Aug.">Owner’s hours a day, from Aug 17</label>
         <span class="rng"><input type="range" id="peak" min="6" max="14" step="1" value="8"><output for="peak" id="peakOut"></output></span></div>
-      <div class="ctl"><label class="lbl" for="share">Owner’s share of the team’s months</label>
+      <div class="ctl"><label class="lbl" for="share" data-de="Pensum des Owners">Owner’s share of the team’s months</label>
         <span class="rng"><input type="range" id="share" min="0.3" max="1" step="0.1" value="0.6"><output for="share" id="shareOut"></output></span></div>
     </section>
 
     <section class="verdict">
-      <div><span class="lbl">Conventional team <i class="kind est">estimated</i></span><b data-v="conv"></b><span><span data-v="convFte"></span> FTE on average for <span data-v="convMonths"></span> months, plus the owner</span></div>
-      <div><span class="lbl">Agentic AI, as it happened</span><b data-v="ag"></b><span>One person and agents, about <span data-v="agMonths"></span> months, <span data-v="agHours"></span> owner hours</span></div>
-      <div><span class="lbl">Difference</span><b><span data-v="ratio"></span>× cheaper</b><span><span data-v="saved"></span> less, about <span data-v="faster"></span>× faster</span></div>
+      <div><span class="lbl" data-de="Konventionelles Team <i class='kind est'>geschätzt</i>">Conventional team <i class="kind est">estimated</i></span><b data-v="conv"></b><span data-de="Im Schnitt <span data-v='convFte'></span> FTE während <span data-v='convMonths'></span> Monaten, dazu der Owner"><span data-v="convFte"></span> FTE on average for <span data-v="convMonths"></span> months, plus the owner</span></div>
+      <div><span class="lbl" data-de="Agentische KI, wie es tatsächlich lief">Agentic AI, as it happened</span><b data-v="ag"></b><span data-de="Eine Person mit Agenten, rund <span data-v='agMonths'></span> Monate, <span data-v='agHours'></span> Stunden des Owners">One person and agents, about <span data-v="agMonths"></span> months, <span data-v="agHours"></span> owner hours</span></div>
+      <div><span class="lbl" data-de="Unterschied">Difference</span><b data-de="<span data-v='ratio'></span>× günstiger"><span data-v="ratio"></span>× cheaper</b><span data-de="<span data-v='saved'></span> weniger, rund <span data-v='faster'></span>× schneller"><span data-v="saved"></span> less, about <span data-v="faster"></span>× faster</span></div>
     </section>
 
     <section>
-      <h2>What was built</h2>
-      <p class="lede">Both bills buy the same result: two products, CompanyGraph and GuestGraph, and this site on a model of its own. Every figure here is counted.</p>
+      <h2 data-de="Was entstanden ist">What was built</h2>
+      <p class="lede" data-de="Beide Rechnungen betreffen dasselbe Ergebnis: zwei Produkte, CompanyGraph und GuestGraph, und diese Website, die auf einem eigenen Modell aufbaut. Jede Zahl hier wurde gezählt.">Both bills buy the same result: two products, CompanyGraph and GuestGraph, and this site on a model of its own. Every figure here is counted.</p>
       <div class="facts">
-        <div><b data-v="fRepos"></b><span>public repositories</span></div>
-        <div><b data-v="fCommits"></b><span>commits on default branches</span></div>
-        <div><b data-v="fMerged"></b><span>merged pull requests</span></div>
-        <div><b data-v="fReleases"></b><span>releases</span></div>
-        <div><b data-v="fClaude"></b><span>of the commits written with Claude</span></div>
-        <div><b data-v="fCode"></b><span>lines of code</span></div>
-        <div><b data-v="fTest"></b><span>lines of tests</span></div>
-        <div><b data-v="fMarkdown"></b><span>lines of Markdown</span></div>
-        <div><b data-v="fSpecs"></b><span>specs</span></div>
-        <div><b data-v="fDecisions"></b><span>decisions recorded in them</span></div>
+        <div><b data-v="fRepos"></b><span data-de="öffentliche Repositories">public repositories</span></div>
+        <div><b data-v="fCommits"></b><span data-de="Commits auf den Default-Branches">commits on default branches</span></div>
+        <div><b data-v="fMerged"></b><span data-de="gemergte Pull-Requests">merged pull requests</span></div>
+        <div><b data-v="fReleases"></b><span data-de="Releases">releases</span></div>
+        <div><b data-v="fClaude"></b><span data-de="der Commits mit Claude geschrieben">of the commits written with Claude</span></div>
+        <div><b data-v="fCode"></b><span data-de="Zeilen Code">lines of code</span></div>
+        <div><b data-v="fTest"></b><span data-de="Zeilen Tests">lines of tests</span></div>
+        <div><b data-v="fMarkdown"></b><span data-de="Zeilen Markdown">lines of Markdown</span></div>
+        <div><b data-v="fSpecs"></b><span data-de="Specs">specs</span></div>
+        <div><b data-v="fDecisions"></b><span data-de="darin festgehaltene Entscheide">decisions recorded in them</span></div>
       </div>
     </section>
 
     <section>
-      <h2>The two bills</h2>
-      <p class="lede">One scale for both. The owner’s hours are the same color in both, because they are paid in both.</p>
-      <div class="legend"><span><i class="sw owner"></i>The owner’s hours</span><span><i class="sw team"></i>The delivery team</span><span><i class="sw tools"></i>Tools, AI and hosting</span></div>
+      <h2 data-de="Die zwei Rechnungen">The two bills</h2>
+      <p class="lede" data-de="Eine gemeinsame Skala für beide. Die Stunden des Owners haben in beiden dieselbe Farbe, weil sie in beiden bezahlt werden.">One scale for both. The owner’s hours are the same color in both, because they are paid in both.</p>
+      <div class="legend"><span data-de="<i class='sw owner'></i>Die Stunden des Owners"><i class="sw owner"></i>The owner’s hours</span><span data-de="<i class='sw team'></i>Das Umsetzungsteam"><i class="sw team"></i>The delivery team</span><span data-de="<i class='sw tools'></i>Tools, KI und Hosting"><i class="sw tools"></i>Tools, AI and hosting</span></div>
       <div class="bars" id="bills">
-        <div class="row"><span class="name">Conventional</span><div class="track"><i class="owner" data-w="convOwner"></i><i class="team" data-w="team"></i><i class="tools" data-w="convTools"></i></div><b data-v="bConvTotal"></b></div>
-        <div class="row"><span class="name">Agentic AI</span><div class="track"><i class="owner" data-w="agOwner"></i><i class="tools" data-w="agTools"></i></div><b data-v="bAgTotal"></b></div>
+        <div class="row"><span class="name" data-de="Konventionell">Conventional</span><div class="track"><i class="owner" data-w="convOwner"></i><i class="team" data-w="team"></i><i class="tools" data-w="convTools"></i></div><b data-v="bConvTotal"></b></div>
+        <div class="row"><span class="name" data-de="Agentische KI">Agentic AI</span><div class="track"><i class="owner" data-w="agOwner"></i><i class="tools" data-w="agTools"></i></div><b data-v="bAgTotal"></b></div>
       </div>
       <div class="tbl"><table>
-        <thead><tr><th>Line</th><th class="n">Conventional</th><th class="n">Agentic AI</th></tr></thead>
+        <thead><tr><th data-de="Posten">Line</th><th class="n" data-de="Konventionell">Conventional</th><th class="n" data-de="Agentische KI">Agentic AI</th></tr></thead>
         <tbody>
-          <tr><td><i class="sw owner"></i>The owner’s hours</td><td class="n"><span data-v="bConvOwner"></span><small><span data-v="bConvOwnerH"></span> h</small></td><td class="n"><span data-v="bAgOwner"></span><small><span data-v="bAgOwnerH"></span> h</small></td></tr>
-          <tr><td><i class="sw team"></i>The delivery team</td><td class="n"><span data-v="bTeam"></span><small><span data-v="bTeamPm"></span> person-months</small></td><td class="n">—</td></tr>
-          <tr><td><i class="sw tools"></i>Tools, AI and hosting</td><td class="n"><span data-v="bConvTools"></span><small>licenses</small></td><td class="n"><span data-v="bAgTools"></span><small>as paid</small></td></tr>
+          <tr><td data-de="<i class='sw owner'></i>Die Stunden des Owners"><i class="sw owner"></i>The owner’s hours</td><td class="n"><span data-v="bConvOwner"></span><small><span data-v="bConvOwnerH"></span> h</small></td><td class="n"><span data-v="bAgOwner"></span><small><span data-v="bAgOwnerH"></span> h</small></td></tr>
+          <tr><td data-de="<i class='sw team'></i>Das Umsetzungsteam"><i class="sw team"></i>The delivery team</td><td class="n"><span data-v="bTeam"></span><small data-de="<span data-v='bTeamPm'></span> Personenmonate"><span data-v="bTeamPm"></span> person-months</small></td><td class="n">—</td></tr>
+          <tr><td data-de="<i class='sw tools'></i>Tools, KI und Hosting"><i class="sw tools"></i>Tools, AI and hosting</td><td class="n"><span data-v="bConvTools"></span><small data-de="Lizenzen">licenses</small></td><td class="n"><span data-v="bAgTools"></span><small data-de="effektiv bezahlt">as paid</small></td></tr>
         </tbody>
       </table></div>
     </section>
 
     <section>
-      <h2>Time, and the owner’s time</h2>
-      <p class="lede">The team takes longer from start to live. The owner’s hours barely change, which is the talk’s point: the time building saved went into deciding.</p>
+      <h2 data-de="Die Dauer und die Zeit des Owners">Time, and the owner’s time</h2>
+      <p class="lede" data-de="Das Team braucht vom Start bis zum Livegang länger. Die Stunden des Owners ändern sich kaum, und genau das ist die Kernaussage des Vortrags: Die Zeit, die beim Bauen wegfiel, ging ins Entscheiden.">The team takes longer from start to live. The owner’s hours barely change, which is the talk’s point: the time building saved went into deciding.</p>
       <div class="bars" id="owner">
-        <div class="row"><span class="name">Conventional</span><div class="track"><i class="owner" data-w="convOwnerHours"></i></div><b><span data-v="oConvH"></span> h</b></div>
-        <div class="row"><span class="name">Agentic AI</span><div class="track"><i class="owner" data-w="agHours"></i></div><b><span data-v="oAgH"></span> h</b></div>
+        <div class="row"><span class="name" data-de="Konventionell">Conventional</span><div class="track"><i class="owner" data-w="convOwnerHours"></i></div><b><span data-v="oConvH"></span> h</b></div>
+        <div class="row"><span class="name" data-de="Agentische KI">Agentic AI</span><div class="track"><i class="owner" data-w="agHours"></i></div><b><span data-v="oAgH"></span> h</b></div>
       </div>
     </section>
 
     <section>
-      <h2>The team it would take</h2>
-      <p class="lede">A Swiss team at market rates, available from the first day. Its person-months are estimated per workstream below; the conservative case matches the measured code at about <span data-v="locPerPm"></span> lines of tested code per person-month.</p>
+      <h2 data-de="Das Team, das es bräuchte">The team it would take</h2>
+      <p class="lede" data-de="Ein Schweizer Team zu Marktpreisen, verfügbar ab dem ersten Tag. Seine Personenmonate sind unten pro Arbeitspaket geschätzt. Der konservative Fall passt zum gemessenen Code: rund <span data-v='locPerPm'></span> Zeilen getesteter Code pro Personenmonat.">A Swiss team at market rates, available from the first day. Its person-months are estimated per workstream below; the conservative case matches the measured code at about <span data-v="locPerPm"></span> lines of tested code per person-month.</p>
       <div class="tbl"><table>
-        <thead><tr><th>Role</th><th class="n">FTE</th><th class="n">Person-months</th><th class="n">CHF an hour</th><th class="n">Cost</th></tr></thead>
+        <thead><tr><th data-de="Rolle">Role</th><th class="n">FTE</th><th class="n" data-de="Personenmonate">Person-months</th><th class="n" data-de="CHF pro Stunde">CHF an hour</th><th class="n" data-de="Kosten">Cost</th></tr></thead>
         <tbody>
-          <tr><td>Tech lead and solution architect</td><td class="n" data-role="lead" data-c="fte"></td><td class="n" data-role="lead" data-c="pm"></td><td class="n" data-role="lead" data-c="rate"></td><td class="n" data-role="lead" data-c="cost"></td></tr>
-          <tr><td>Senior backend engineers</td><td class="n" data-role="backend" data-c="fte"></td><td class="n" data-role="backend" data-c="pm"></td><td class="n" data-role="backend" data-c="rate"></td><td class="n" data-role="backend" data-c="cost"></td></tr>
-          <tr><td>Senior frontend engineers</td><td class="n" data-role="frontend" data-c="fte"></td><td class="n" data-role="frontend" data-c="pm"></td><td class="n" data-role="frontend" data-c="rate"></td><td class="n" data-role="frontend" data-c="cost"></td></tr>
-          <tr><td>UX and UI designer</td><td class="n" data-role="ux" data-c="fte"></td><td class="n" data-role="ux" data-c="pm"></td><td class="n" data-role="ux" data-c="rate"></td><td class="n" data-role="ux" data-c="cost"></td></tr>
-          <tr><td>DevOps and platform engineer</td><td class="n" data-role="devops" data-c="fte"></td><td class="n" data-role="devops" data-c="pm"></td><td class="n" data-role="devops" data-c="rate"></td><td class="n" data-role="devops" data-c="cost"></td></tr>
-          <tr><td>QA and test engineer</td><td class="n" data-role="qa" data-c="fte"></td><td class="n" data-role="qa" data-c="pm"></td><td class="n" data-role="qa" data-c="rate"></td><td class="n" data-role="qa" data-c="cost"></td></tr>
-          <tr><td>Business analyst and knowledge modeler</td><td class="n" data-role="analyst" data-c="fte"></td><td class="n" data-role="analyst" data-c="pm"></td><td class="n" data-role="analyst" data-c="rate"></td><td class="n" data-role="analyst" data-c="cost"></td></tr>
-          <tr><td>Technical writer and translator</td><td class="n" data-role="writer" data-c="fte"></td><td class="n" data-role="writer" data-c="pm"></td><td class="n" data-role="writer" data-c="rate"></td><td class="n" data-role="writer" data-c="cost"></td></tr>
-          <tr><td>Delivery manager</td><td class="n" data-role="delivery" data-c="fte"></td><td class="n" data-role="delivery" data-c="pm"></td><td class="n" data-role="delivery" data-c="rate"></td><td class="n" data-role="delivery" data-c="cost"></td></tr>
-          <tr class="own"><td>Owner and lead, at a lead architect’s market rate <i class="kind">in both</i></td><td class="n" data-v="rOwnerShare"></td><td class="n" data-v="rOwnerPm"></td><td class="n" data-v="rOwnerRate"></td><td class="n" data-v="rOwnerCost"></td></tr>
+          <tr><td data-de="Tech Lead und Solution Architect">Tech lead and solution architect</td><td class="n" data-role="lead" data-c="fte"></td><td class="n" data-role="lead" data-c="pm"></td><td class="n" data-role="lead" data-c="rate"></td><td class="n" data-role="lead" data-c="cost"></td></tr>
+          <tr><td data-de="Senior Backend Engineers">Senior backend engineers</td><td class="n" data-role="backend" data-c="fte"></td><td class="n" data-role="backend" data-c="pm"></td><td class="n" data-role="backend" data-c="rate"></td><td class="n" data-role="backend" data-c="cost"></td></tr>
+          <tr><td data-de="Senior Frontend Engineers">Senior frontend engineers</td><td class="n" data-role="frontend" data-c="fte"></td><td class="n" data-role="frontend" data-c="pm"></td><td class="n" data-role="frontend" data-c="rate"></td><td class="n" data-role="frontend" data-c="cost"></td></tr>
+          <tr><td data-de="UX- und UI-Designer">UX and UI designer</td><td class="n" data-role="ux" data-c="fte"></td><td class="n" data-role="ux" data-c="pm"></td><td class="n" data-role="ux" data-c="rate"></td><td class="n" data-role="ux" data-c="cost"></td></tr>
+          <tr><td data-de="DevOps und Platform Engineer">DevOps and platform engineer</td><td class="n" data-role="devops" data-c="fte"></td><td class="n" data-role="devops" data-c="pm"></td><td class="n" data-role="devops" data-c="rate"></td><td class="n" data-role="devops" data-c="cost"></td></tr>
+          <tr><td data-de="QA und Test Engineer">QA and test engineer</td><td class="n" data-role="qa" data-c="fte"></td><td class="n" data-role="qa" data-c="pm"></td><td class="n" data-role="qa" data-c="rate"></td><td class="n" data-role="qa" data-c="cost"></td></tr>
+          <tr><td data-de="Business Analyst und Wissensmodellierer">Business analyst and knowledge modeler</td><td class="n" data-role="analyst" data-c="fte"></td><td class="n" data-role="analyst" data-c="pm"></td><td class="n" data-role="analyst" data-c="rate"></td><td class="n" data-role="analyst" data-c="cost"></td></tr>
+          <tr><td data-de="Technischer Redaktor und Übersetzer">Technical writer and translator</td><td class="n" data-role="writer" data-c="fte"></td><td class="n" data-role="writer" data-c="pm"></td><td class="n" data-role="writer" data-c="rate"></td><td class="n" data-role="writer" data-c="cost"></td></tr>
+          <tr><td data-de="Delivery Manager">Delivery manager</td><td class="n" data-role="delivery" data-c="fte"></td><td class="n" data-role="delivery" data-c="pm"></td><td class="n" data-role="delivery" data-c="rate"></td><td class="n" data-role="delivery" data-c="cost"></td></tr>
+          <tr class="own"><td data-de="Owner und Lead, zum Marktpreis eines Lead Architects <i class='kind'>in beiden</i>">Owner and lead, at a lead architect’s market rate <i class="kind">in both</i></td><td class="n" data-v="rOwnerShare"></td><td class="n" data-v="rOwnerPm"></td><td class="n" data-v="rOwnerRate"></td><td class="n" data-v="rOwnerCost"></td></tr>
         </tbody>
-        <tfoot><tr><td>The delivery team</td><td class="n" data-v="rTeamFte"></td><td class="n" data-v="rTeamPm"></td><td></td><td class="n" data-v="rTeamCost"></td></tr></tfoot>
+        <tfoot><tr><td data-de="Das Umsetzungsteam">The delivery team</td><td class="n" data-v="rTeamFte"></td><td class="n" data-v="rTeamPm"></td><td></td><td class="n" data-v="rTeamCost"></td></tr></tfoot>
       </table></div>
-      <h3>Where the person-months go</h3>
+      <h3 data-de="Worauf sich die Personenmonate verteilen">Where the person-months go</h3>
       <div class="bars ws">
-        <div class="row" data-ws="engine"><span class="name">GuestGraph engine and Apaleo connector</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="design"><span class="name">Design system</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="sites"><span class="name">Three bilingual sites and the talks</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="metamodel"><span class="name">Meta-model, command line and checks</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="plugin"><span class="name">Obsidian plugin and its end-to-end tests</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="ws-qa"><span class="name">Quality assurance</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="ws-delivery"><span class="name">Delivery management</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="mcp"><span class="name">MCP server on three hosts</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="platform"><span class="name">Conventions, CI and the cloud platform</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="chat"><span class="name">Chat server on three hosts</span><div class="track"><i class="team"></i></div><b></b></div>
-        <div class="row" data-ws="models"><span class="name">Three models, as content</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="engine"><span class="name" data-de="GuestGraph-Engine und Apaleo-Connector">GuestGraph engine and Apaleo connector</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="design"><span class="name" data-de="Designsystem">Design system</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="sites"><span class="name" data-de="Drei zweisprachige Websites und die Vorträge">Three bilingual sites and the talks</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="metamodel"><span class="name" data-de="Meta-Modell, CLI und Prüfungen">Meta-model, command line and checks</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="plugin"><span class="name" data-de="Obsidian-Plugin und seine End-to-End-Tests">Obsidian plugin and its end-to-end tests</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="ws-qa"><span class="name" data-de="Qualitätssicherung">Quality assurance</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="ws-delivery"><span class="name" data-de="Delivery Management">Delivery management</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="mcp"><span class="name" data-de="MCP-Server auf drei Hosts">MCP server on three hosts</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="platform"><span class="name" data-de="Konventionen, CI und die Cloud-Plattform">Conventions, CI and the cloud platform</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="chat"><span class="name" data-de="Chat-Server auf drei Hosts">Chat server on three hosts</span><div class="track"><i class="team"></i></div><b></b></div>
+        <div class="row" data-ws="models"><span class="name" data-de="Inhalt der drei Modelle">Three models, as content</span><div class="track"><i class="team"></i></div><b></b></div>
       </div>
     </section>
 
     <section>
-      <h2>What it actually took</h2>
-      <p class="lede">One person with Claude Code, from the first commit on Jun 9 to Sep 24. The hours are the days git shows work, times the hours a day the owner gives.</p>
+      <h2 data-de="Was es tatsächlich brauchte">What it actually took</h2>
+      <p class="lede" data-de="Eine Person mit Claude Code, vom ersten Commit am 9. Juni bis zum 24. September. Gezählt sind die Tage, an denen git Arbeit zeigt, multipliziert mit den Stunden pro Tag, die der Owner angibt.">One person with Claude Code, from the first commit on Jun 9 to Sep 24. The hours are the days git shows work, times the hours a day the owner gives.</p>
       <div class="tbl"><table>
-        <thead><tr><th>Line</th><th>Basis</th><th class="n">CHF</th></tr></thead>
+        <thead><tr><th data-de="Posten">Line</th><th data-de="Grundlage">Basis</th><th class="n">CHF</th></tr></thead>
         <tbody>
-          <tr><td>The owner, from Aug 17</td><td><span data-v="aPeakDays"></span> days with commits × <span data-v="aPeakH"></span> h</td><td class="n" data-v="aPeak"></td></tr>
-          <tr><td>The owner, before Aug 17</td><td><span data-v="aEarlyDays"></span> days with commits × <span data-v="aEarlyH"></span> h</td><td class="n" data-v="aEarly"></td></tr>
-          <tr><td>Claude subscription <i class="kind">as paid</i></td><td>Max 5x until mid-June, then Max 20x: USD <span data-v="uSub"></span>, plus <span data-v="vat"></span> Swiss VAT</td><td class="n" data-v="aSub"></td></tr>
-          <tr><td>Narration voice <i class="kind">as paid</i></td><td>USD <span data-v="uVoice"></span> of ElevenLabs credit</td><td class="n" data-v="aVoice"></td></tr>
-          <tr><td>The chats’ API <i class="kind">as paid</i></td><td>USD <span data-v="uChat"></span> of Anthropic credit for Sonnet 5, plus VAT</td><td class="n" data-v="aChat"></td></tr>
-          <tr><td>Google Cloud hosting <i class="kind">counted</i></td><td>Six services that scale to zero, inside the free tier</td><td class="n" data-v="aHosting"></td></tr>
-          <tr><td>Two domains <i class="kind est">estimated</i></td><td>companygraph.io and guestgraph.io for a year</td><td class="n" data-v="aDomains"></td></tr>
+          <tr><td data-de="Der Owner, ab 17. Aug.">The owner, from Aug 17</td><td data-de="<span data-v='aPeakDays'></span> Tage mit Commits × <span data-v='aPeakH'></span> h"><span data-v="aPeakDays"></span> days with commits × <span data-v="aPeakH"></span> h</td><td class="n" data-v="aPeak"></td></tr>
+          <tr><td data-de="Der Owner, vor dem 17. Aug.">The owner, before Aug 17</td><td data-de="<span data-v='aEarlyDays'></span> Tage mit Commits × <span data-v='aEarlyH'></span> h"><span data-v="aEarlyDays"></span> days with commits × <span data-v="aEarlyH"></span> h</td><td class="n" data-v="aEarly"></td></tr>
+          <tr><td data-de="Claude-Abonnement <i class='kind'>effektiv bezahlt</i>">Claude subscription <i class="kind">as paid</i></td><td data-de="Max 5x bis Mitte Juni, danach Max 20x: USD <span data-v='uSub'></span>, zuzüglich <span data-v='vat'></span> Schweizer MWST">Max 5x until mid-June, then Max 20x: USD <span data-v="uSub"></span>, plus <span data-v="vat"></span> Swiss VAT</td><td class="n" data-v="aSub"></td></tr>
+          <tr><td data-de="Sprecherstimme <i class='kind'>effektiv bezahlt</i>">Narration voice <i class="kind">as paid</i></td><td data-de="USD <span data-v='uVoice'></span> Guthaben bei ElevenLabs">USD <span data-v="uVoice"></span> of ElevenLabs credit</td><td class="n" data-v="aVoice"></td></tr>
+          <tr><td data-de="Chat-API <i class='kind'>effektiv bezahlt</i>">The chats’ API <i class="kind">as paid</i></td><td data-de="USD <span data-v='uChat'></span> Guthaben bei Anthropic für Sonnet 5, zuzüglich MWST">USD <span data-v="uChat"></span> of Anthropic credit for Sonnet 5, plus VAT</td><td class="n" data-v="aChat"></td></tr>
+          <tr><td data-de="Hosting auf Google Cloud <i class='kind'>gezählt</i>">Google Cloud hosting <i class="kind">counted</i></td><td data-de="Sechs Dienste, die auf null skalieren, innerhalb des Gratiskontingents">Six services that scale to zero, inside the free tier</td><td class="n" data-v="aHosting"></td></tr>
+          <tr><td data-de="Zwei Domains <i class='kind est'>geschätzt</i>">Two domains <i class="kind est">estimated</i></td><td data-de="companygraph.io und guestgraph.io für ein Jahr">companygraph.io and guestgraph.io for a year</td><td class="n" data-v="aDomains"></td></tr>
         </tbody>
-        <tfoot><tr><td>Agentic total</td><td></td><td class="n" data-v="aTotal"></td></tr></tfoot>
+        <tfoot><tr><td data-de="Total mit agentischer KI">Agentic total</td><td></td><td class="n" data-v="aTotal"></td></tr></tfoot>
       </table></div>
-      <p class="rule">The AI was the smallest line: <span data-v="toolsShare"></span> of the total. At the API’s list price instead of the subscription, USD <span data-v="listUsd"></span>, the total would be <span data-v="listAg"></span>, still <span data-v="listRatio"></span>× cheaper. The cost moved to the owner’s hours, which is where the deciding is.</p>
+      <p class="rule" data-de="Die KI war der kleinste Posten: <span data-v='toolsShare'></span> des Totals. Zum Listenpreis der API von USD <span data-v='listUsd'></span> statt im Abonnement läge das Total bei <span data-v='listAg'></span>, immer noch <span data-v='listRatio'></span>× günstiger. Die Kosten verlagerten sich auf die Stunden des Owners, also dorthin, wo entschieden wird.">The AI was the smallest line: <span data-v="toolsShare"></span> of the total. At the API’s list price instead of the subscription, USD <span data-v="listUsd"></span>, the total would be <span data-v="listAg"></span>, still <span data-v="listRatio"></span>× cheaper. The cost moved to the owner’s hours, which is where the deciding is.</p>
     </section>
 
     <section>
-      <h2>Would both approaches produce the same result?</h2>
-      <p class="lede">Not quite. A good Swiss team could match each bar here, spec by spec and test by test. At this pace it would deliver less scope and write down less of its reasoning, and it would bring what one person with agents lacks: independent review, real users and shared ownership. The evidence is counted; the rating is the owner’s judgment.</p>
+      <h2 data-de="Kämen beide Wege zum selben Ergebnis?">Would both approaches produce the same result?</h2>
+      <p class="lede" data-de="Nicht ganz. Ein gutes Schweizer Team könnte jeden Massstab hier erfüllen, Spec für Spec und Test für Test. In diesem Tempo würde es aber weniger umsetzen und weniger von seinen Überlegungen festhalten. Dafür brächte es mit, was einer Person mit Agenten fehlt: unabhängige Reviews, echte Nutzer und geteilte Verantwortung. Die Belege sind gezählt, die Bewertung ist das Urteil des Owners.">Not quite. A good Swiss team could match each bar here, spec by spec and test by test. At this pace it would deliver less scope and write down less of its reasoning, and it would bring what one person with agents lacks: independent review, real users and shared ownership. The evidence is counted; the rating is the owner’s judgment.</p>
       <div class="tbl"><table class="q">
-        <thead><tr><th>Dimension</th><th>Evidence from this build</th><th>Could a team do the same?</th><th>Outcome</th></tr></thead>
+        <thead><tr><th data-de="Dimension">Dimension</th><th data-de="Belege aus diesem Projekt">Evidence from this build</th><th data-de="Könnte ein Team dasselbe?">Could a team do the same?</th><th data-de="Wertung">Outcome</th></tr></thead>
         <tbody>
-          <tr><td>Specification</td><td><span data-v="qSpecs"></span> specs and <span data-v="qPlans"></span> plans, written before the code, with <span data-v="qDecisions"></span> decisions each traced to a quote; <span data-v="qRevised"></span> revised later and <span data-v="qDropped"></span> dropped, so they were used.</td><td>Yes. The decisions are the owner’s either way, but writing them down at this depth costs an architect weeks a quarter, and most teams cut it first.</td><td><span class="lean ag">Agentic ahead</span></td></tr>
-          <tr><td>Implementation</td><td><span data-v="qReverts"></span> revert in <span data-v="qCommits"></span> commits, and <span data-v="qClosed"></span> pull requests closed without merging: the gate turned work away.</td><td>Yes. Senior engineers write code like this and bring judgment from years in production, which an agent has only when the owner supplies it.</td><td><span class="lean ev">Even</span></td></tr>
-          <tr><td>Tests</td><td><span data-v="qTestShare"></span> lines of tests for every ten of code; the plugin tested end to end in a real Obsidian; CI on every change.</td><td>Yes, and the team includes a QA engineer for it. Under a deadline, tests are the second thing a team trims.</td><td><span class="lean ag">Agentic ahead</span></td></tr>
-          <tr><td>Consistency</td><td>One set of conventions in every repository, rolled out in release waves.</td><td>Hard. Style and wording drift between people; linting gets a team close.</td><td><span class="lean ag">Agentic ahead</span></td></tr>
-          <tr><td>Scope and iteration</td><td>Ideas prototyped and declined within a day; two products and three models in about fifteen weeks.</td><td>A team runs fewer experiments, since each costs a sprint, and scopes smaller. Often healthy, but a different product.</td><td><span class="lean ag">Agentic ahead</span></td></tr>
-          <tr><td>German and English</td><td>Every page in both, with a translator’s review and a glossary.</td><td>Yes. A professional translator is the standard for Swiss Standard German.</td><td><span class="lean ev">Even</span></td></tr>
-          <tr><td>Independent review</td><td>The owner is the only human reviewer; agents review agents, and the owner merges.</td><td>Better: two people on every change, and security review by someone who did not write it.</td><td><span class="lean tm">Team ahead</span></td></tr>
-          <tr><td>Design with users</td><td>One person’s judgment, refined in review; no usability or accessibility study with real users.</td><td>Better: a designer with user research sees what the builder cannot.</td><td><span class="lean tm">Team ahead</span></td></tr>
-          <tr><td>Ownership</td><td>One person holds the context; the specs write the reasoning down, which lowers the risk without removing it.</td><td>Better: the knowledge is spread across the team.</td><td><span class="lean tm">Team ahead</span></td></tr>
-          <tr><td>Operations</td><td>Every host deploys through CI; there is no on-call and no service level.</td><td>Better with a DevOps engineer. Neither side’s running costs are counted.</td><td><span class="lean tm">Team ahead</span></td></tr>
+          <tr><td data-de="Spezifikation">Specification</td><td data-de="<span data-v='qSpecs'></span> Specs und <span data-v='qPlans'></span> Pläne, vor dem Code geschrieben, mit <span data-v='qDecisions'></span> Entscheiden, jeder auf ein Zitat zurückgeführt; <span data-v='qRevised'></span> davon später revidiert und <span data-v='qDropped'></span> verworfen – sie wurden also genutzt."><span data-v="qSpecs"></span> specs and <span data-v="qPlans"></span> plans, written before the code, with <span data-v="qDecisions"></span> decisions each traced to a quote; <span data-v="qRevised"></span> revised later and <span data-v="qDropped"></span> dropped, so they were used.</td><td data-de="Ja. Die Entscheide liegen so oder so beim Owner. Sie aber in dieser Tiefe festzuhalten, kostet einen Architekten Wochen pro Quartal, und die meisten Teams streichen das als Erstes.">Yes. The decisions are the owner’s either way, but writing them down at this depth costs an architect weeks a quarter, and most teams cut it first.</td><td><span class="lean ag" data-de="Agentisch vorne">Agentic ahead</span></td></tr>
+          <tr><td data-de="Implementierung">Implementation</td><td data-de="<span data-v='qReverts'></span> Revert in <span data-v='qCommits'></span> Commits und <span data-v='qClosed'></span> Pull-Requests, die ohne Merge geschlossen wurden: Das Gate hat Arbeit abgewiesen."><span data-v="qReverts"></span> revert in <span data-v="qCommits"></span> commits, and <span data-v="qClosed"></span> pull requests closed without merging: the gate turned work away.</td><td data-de="Ja. Senior Engineers schreiben solchen Code und bringen Urteilsvermögen aus Jahren im Produktivbetrieb mit. Ein Agent hat es nur, wenn der Owner es beisteuert.">Yes. Senior engineers write code like this and bring judgment from years in production, which an agent has only when the owner supplies it.</td><td><span class="lean ev" data-de="Gleichauf">Even</span></td></tr>
+          <tr><td data-de="Tests">Tests</td><td data-de="<span data-v='qTestShare'></span> Zeilen Tests auf je zehn Zeilen Code; das Plugin End-to-End in einem echten Obsidian getestet; CI bei jeder Änderung."><span data-v="qTestShare"></span> lines of tests for every ten of code; the plugin tested end to end in a real Obsidian; CI on every change.</td><td data-de="Ja, und dafür hat das Team einen QA Engineer. Unter Termindruck sind Tests das Zweite, was ein Team kürzt.">Yes, and the team includes a QA engineer for it. Under a deadline, tests are the second thing a team trims.</td><td><span class="lean ag" data-de="Agentisch vorne">Agentic ahead</span></td></tr>
+          <tr><td data-de="Einheitlichkeit">Consistency</td><td data-de="Dieselben Konventionen in jedem Repository, in Release-Wellen ausgerollt.">One set of conventions in every repository, rolled out in release waves.</td><td data-de="Schwierig. Stil und Wortwahl unterscheiden sich von Person zu Person; mit Linting kommt ein Team nahe heran.">Hard. Style and wording drift between people; linting gets a team close.</td><td><span class="lean ag" data-de="Agentisch vorne">Agentic ahead</span></td></tr>
+          <tr><td data-de="Umfang und Iteration">Scope and iteration</td><td data-de="Ideen innert eines Tages als Prototyp gebaut und verworfen; zwei Produkte und drei Modelle in rund fünfzehn Wochen.">Ideas prototyped and declined within a day; two products and three models in about fifteen weeks.</td><td data-de="Ein Team macht weniger Experimente, weil jedes einen Sprint kostet, und plant einen kleineren Umfang. Das ist oft vernünftig, ergibt aber ein anderes Produkt.">A team runs fewer experiments, since each costs a sprint, and scopes smaller. Often healthy, but a different product.</td><td><span class="lean ag" data-de="Agentisch vorne">Agentic ahead</span></td></tr>
+          <tr><td data-de="Deutsch und Englisch">German and English</td><td data-de="Jede Seite in beiden Sprachen, von einem Übersetzer geprüft und auf ein Glossar gestützt.">Every page in both, with a translator’s review and a glossary.</td><td data-de="Ja. Für Schweizer Hochdeutsch ist ein professioneller Übersetzer der Massstab.">Yes. A professional translator is the standard for Swiss Standard German.</td><td><span class="lean ev" data-de="Gleichauf">Even</span></td></tr>
+          <tr><td data-de="Unabhängiges Review">Independent review</td><td data-de="Der Owner ist der einzige menschliche Reviewer; Agenten prüfen Agenten, und der Owner macht den Merge.">The owner is the only human reviewer; agents review agents, and the owner merges.</td><td data-de="Besser: das Vier-Augen-Prinzip bei jeder Änderung und ein Security-Review durch jemanden, der den Code nicht geschrieben hat.">Better: two people on every change, and security review by someone who did not write it.</td><td><span class="lean tm" data-de="Team vorne">Team ahead</span></td></tr>
+          <tr><td data-de="Design mit Nutzern">Design with users</td><td data-de="Das Urteil einer Person, im Review geschärft; keine Studie zu Usability oder Barrierefreiheit mit echten Nutzern.">One person’s judgment, refined in review; no usability or accessibility study with real users.</td><td data-de="Besser: Ein Designer mit User Research sieht, was der Entwickler selbst nicht sehen kann.">Better: a designer with user research sees what the builder cannot.</td><td><span class="lean tm" data-de="Team vorne">Team ahead</span></td></tr>
+          <tr><td data-de="Verantwortung">Ownership</td><td data-de="Eine einzige Person kennt den Kontext. Die Specs halten die Überlegungen fest; das senkt das Risiko, beseitigt es aber nicht.">One person holds the context; the specs write the reasoning down, which lowers the risk without removing it.</td><td data-de="Besser: Das Wissen ist im Team verteilt.">Better: the knowledge is spread across the team.</td><td><span class="lean tm" data-de="Team vorne">Team ahead</span></td></tr>
+          <tr><td data-de="Betrieb">Operations</td><td data-de="Jeder Host wird über CI deployt; es gibt keinen Pikettdienst und kein Service-Level.">Every host deploys through CI; there is no on-call and no service level.</td><td data-de="Besser mit einem DevOps Engineer. Die Betriebskosten sind auf keiner Seite gezählt.">Better with a DevOps engineer. Neither side’s running costs are counted.</td><td><span class="lean tm" data-de="Team vorne">Team ahead</span></td></tr>
         </tbody>
       </table></div>
-      <p class="rule">Closing the gaps where the team is ahead — an external code and security review, a usability and accessibility study, a month to bring in a second maintainer — adds about <span data-v="gaps"></span>. The agentic total would then be <span data-v="gapAg"></span>, still <span data-v="gapRatio"></span>× cheaper.</p>
-      <p class="note">These are counts from git, not an audit. Nobody outside the project has reviewed the code, so the implementation row compares capability, not a measured outcome.</p>
+      <p class="rule" data-de="Wo das Team vorne liegt, lassen sich die Lücken schliessen: mit einem externen Code- und Security-Review, einer Studie zu Usability und Barrierefreiheit und einem Monat, um einen zweiten Maintainer einzuarbeiten. Das kostet rund <span data-v='gaps'></span> zusätzlich. Das agentische Total läge dann bei <span data-v='gapAg'></span>, immer noch <span data-v='gapRatio'></span>× günstiger.">Closing the gaps where the team is ahead — an external code and security review, a usability and accessibility study, a month to bring in a second maintainer — adds about <span data-v="gaps"></span>. The agentic total would then be <span data-v="gapAg"></span>, still <span data-v="gapRatio"></span>× cheaper.</p>
+      <p class="note" data-de="Das sind Zählungen aus git, kein Audit. Niemand ausserhalb des Projekts hat den Code geprüft. Die Zeile «Implementierung» vergleicht deshalb Fähigkeiten, kein gemessenes Ergebnis.">These are counts from git, not an audit. Nobody outside the project has reviewed the code, so the implementation row compares capability, not a measured outcome.</p>
     </section>
 
     <section>
-      <h2>How the figures are made</h2>
+      <h2 data-de="Wie die Zahlen entstehen">How the figures are made</h2>
       <div class="rules">
-        <p><b>Employer cost</b> is the salary × <span data-v="mLoad"></span> for social charges and workplace, over <span data-v="mYearH"></span> productive hours a year. Salaries sit at the Zurich market middle, a senior engineer at <span data-v="mSenior"></span> against a reported average of about CHF 137,000 (<a href="https://www.levels.fyi/t/software-engineer/levels/senior/locations/zurich-che">Levels.fyi</a>, <a href="https://www.glassdoor.com/Salaries/zurich-switzerland-senior-software-engineer-salary-SRCH_IL.0,18_IM1144_KO19,43.htm">Glassdoor</a>).</p>
-        <p><b>Contractor rates</b> are CHF <span data-v="mRateLo"></span>–<span data-v="mRateHi"></span> an hour, inside the reported day rates of CHF 850–1,500 for Swiss IT contractors (<a href="https://salary2freelance.com/ch/it-contractor-rate-switzerland">salary2freelance</a>).</p>
-        <p><b>The owner</b> is priced as a lead architect at market rate, <span data-v="mOwnerSalary"></span> on the employer basis or CHF <span data-v="mOwnerRate"></span> an hour, not at what he earns or charges.</p>
-        <p><b>Dollars</b> are converted at <span data-v="mFx"></span>, near the 2026 average. Anthropic bills Switzerland in dollars, plus <span data-v="vat"></span> VAT.</p>
+        <p data-de="<b>Arbeitgeberkosten</b> sind der Lohn × <span data-v='mLoad'></span> für Sozialabgaben und Arbeitsplatz, verteilt auf <span data-v='mYearH'></span> produktive Stunden im Jahr. Die Löhne liegen in der Mitte des Zürcher Markts, ein Senior Engineer bei <span data-v='mSenior'></span>, gegenüber einem publizierten Durchschnitt von rund CHF 137’000 (<a href='https://www.levels.fyi/t/software-engineer/levels/senior/locations/zurich-che'>Levels.fyi</a>, <a href='https://www.glassdoor.com/Salaries/zurich-switzerland-senior-software-engineer-salary-SRCH_IL.0,18_IM1144_KO19,43.htm'>Glassdoor</a>)."><b>Employer cost</b> is the salary × <span data-v="mLoad"></span> for social charges and workplace, over <span data-v="mYearH"></span> productive hours a year. Salaries sit at the Zurich market middle, a senior engineer at <span data-v="mSenior"></span> against a reported average of about CHF 137,000 (<a href="https://www.levels.fyi/t/software-engineer/levels/senior/locations/zurich-che">Levels.fyi</a>, <a href="https://www.glassdoor.com/Salaries/zurich-switzerland-senior-software-engineer-salary-SRCH_IL.0,18_IM1144_KO19,43.htm">Glassdoor</a>).</p>
+        <p data-de="<b>Freelancer-Ansätze</b> betragen CHF <span data-v='mRateLo'></span>–<span data-v='mRateHi'></span> pro Stunde und liegen damit innerhalb der publizierten Tagessätze von CHF 850–1’500 für IT-Freelancer in der Schweiz (<a href='https://salary2freelance.com/ch/it-contractor-rate-switzerland'>salary2freelance</a>)."><b>Contractor rates</b> are CHF <span data-v="mRateLo"></span>–<span data-v="mRateHi"></span> an hour, inside the reported day rates of CHF 850–1,500 for Swiss IT contractors (<a href="https://salary2freelance.com/ch/it-contractor-rate-switzerland">salary2freelance</a>).</p>
+        <p data-de="<b>Der Owner</b> ist als Lead Architect zum Marktpreis bewertet: <span data-v='mOwnerSalary'></span> auf Basis der Arbeitgeberkosten oder CHF <span data-v='mOwnerRate'></span> pro Stunde, nicht zu dem, was er verdient oder verrechnet."><b>The owner</b> is priced as a lead architect at market rate, <span data-v="mOwnerSalary"></span> on the employer basis or CHF <span data-v="mOwnerRate"></span> an hour, not at what he earns or charges.</p>
+        <p data-de="<b>Dollar</b> werden zu <span data-v='mFx'></span> umgerechnet, nahe am Durchschnitt 2026. Anthropic verrechnet Kunden in der Schweiz in Dollar, zuzüglich <span data-v='vat'></span> MWST."><b>Dollars</b> are converted at <span data-v="mFx"></span>, near the 2026 average. Anthropic bills Switzerland in dollars, plus <span data-v="vat"></span> VAT.</p>
       </div>
-      <h3>What this leaves out</h3>
+      <h3 data-de="Was nicht eingerechnet ist">What this leaves out</h3>
       <div class="rules">
-        <p>Hiring the team, which in Switzerland usually takes three to six months before the months above begin. The meetings and handovers a larger team needs. Running costs on either side. The risk the talk names: the speed rests on a few providers’ prices and terms.</p>
+        <p data-de="Die Rekrutierung des Teams, die in der Schweiz meist drei bis sechs Monate dauert, bevor die obigen Monate beginnen. Die Meetings und Übergaben, die ein grösseres Team braucht. Die Betriebskosten auf beiden Seiten. Das Risiko, das der Vortrag nennt: Das Tempo hängt an den Preisen und Bedingungen einiger weniger Anbieter.">Hiring the team, which in Switzerland usually takes three to six months before the months above begin. The meetings and handovers a larger team needs. Running costs on either side. The risk the talk names: the speed rests on a few providers’ prices and terms.</p>
       </div>
     </section>
   </div>
@@ -518,8 +518,8 @@
   i18n.forEach(function(el){ el.setAttribute("data-en", el.innerHTML); });
 
   var UI = {
-    de:{ title:"What a team would have cost – Robert Blust",
-         desc:"The deciding-well talk’s result priced twice: as a Swiss delivery team and as it happened with agentic AI, with the owner’s hours counted in both." },
+    de:{ title:"Was ein Team gekostet hätte – Robert Blust",
+         desc:"Die Arbeit hinter dem Vortrag über gutes Entscheiden, zweimal durchgerechnet: mit einem Schweizer Umsetzungsteam und so, wie sie mit agentischer KI tatsächlich entstand. Die Stunden des Owners zählen in beiden Rechnungen." },
     en:{ title:"What a team would have cost — Robert Blust",
          desc:"The deciding-well talk’s result priced twice: as a Swiss delivery team and as it happened with agentic AI, with the owner’s hours counted in both." }
   };

@@ -125,6 +125,7 @@ const PAGES = [
   // `npm run test:cost` holds; this holds what the page does with it: no slot left empty in
   // either language, the defaults shown, and a failed load said rather than shown blank.
   { path: "/talks/deciding-well/cost/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /would have cost/i, lang: "en", sourceLang: "en", card: true,
+    translates: { lang: "de", shows: ["Kämen beide Wege zum selben Ergebnis?", "Agentisch vorne"], hides: ["Would both approaches produce the same result?", "Agentic ahead"] },
     contains: ["What a team", "Would both approaches produce the same result?"],
     slotsFilled: { en: ["CHF 1,235,443", "CHF 57,216", "22"], de: ["CHF 1’235’443", "CHF 57’216"] },
     sameOrigin: true,
