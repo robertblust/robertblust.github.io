@@ -1,5 +1,5 @@
 {
-  "commit": "f3353a54f8aa900a9ee2e5ed5abd4d483f7e028c",
+  "commit": "324b0d870a07a303caaff3963265ead6d1cd9bf1",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -3144,6 +3144,11 @@
                   "Governance as data"
                 ],
                 [
+                  "Context engineering",
+                  "Generated a podcast episode on the deciding-well talk from the model's own export and a story naming the file and entity each section rests on, then read the transcript against both.",
+                  "Deciding well"
+                ],
+                [
                   "Conversational AI",
                   "Opened LIKE MAGIC's API to conversational AI providers rather than running language models in the platform, so d3x, ailean and onsai integrated themselves into the staff solution, unified multi-channel guest messaging with AI agents answering, guest insights and staff collaboration.",
                   "Co-Founder & Head of Technology"
@@ -3989,6 +3994,11 @@
                   "Building fast is solved. Deciding well is not."
                 ],
                 [
+                  "Storytelling",
+                  "Wrote the story for a debate episode on the deciding-well talk, three challenges each with its answer in the sources and a list of what the hosts must not say, then named the two places the hosts strayed.",
+                  "Deciding well"
+                ],
+                [
                   "Technical writing",
                   "Wrote the Analysis & Design methodology and guidance a UBS division worked to.",
                   "Solution Manager, Software Engineering — Analysis & Design"
@@ -4303,6 +4313,11 @@
                 "Context engineering",
                 "Wrote the film Governance as data from this model's own files and published it under a description carrying no count, naming instead where the model states its own size.",
                 "Governance as data"
+              ],
+              [
+                "Context engineering",
+                "Generated a podcast episode on the deciding-well talk from the model's own export and a story naming the file and entity each section rests on, then read the transcript against both.",
+                "Deciding well"
               ],
               [
                 "Conversational AI",
@@ -5148,6 +5163,11 @@
                 "Storytelling",
                 "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
                 "Building fast is solved. Deciding well is not."
+              ],
+              [
+                "Storytelling",
+                "Wrote the story for a debate episode on the deciding-well talk, three challenges each with its answer in the sources and a list of what the hosts must not say, then named the two places the hosts strayed.",
+                "Deciding well"
               ],
               [
                 "Technical writing",
@@ -7552,6 +7572,69 @@
         "kind": "Community",
         "start": "2026-07",
         "end": null
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "type": "experience",
+      "name": "Deciding well",
+      "tagline": "A podcast episode in which two hosts argue out the talk that closed the career break, generated from the model's own export and a story written for it, and read against both before it went out under the talk's title.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-25",
+        "end": "2026-09-25",
+        "url": "https://robertblust.substack.com/p/building-fast-is-solved-deciding",
+        "skills": [
+          "Context engineering",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Ways of working\n\n- Wrote the episode's story before anything was generated, as the one source beside the model's export: an opening line put straight to the listener, nine sections each naming the export file and entity it rests on, the three challenges one host puts to the other with the answer each finds in the sources, and two binding lists at its foot, what the episode may state and what it must not say: no employer, colleague or school, no salary figure, no figure the sources do not give, not that developers are obsolete, not that the proposal is proven on anyone but me, and not that the agents decided anything.\n- Chose the Debate format over a narration, so that the fast half is taken at face value by one host and pushed back on hard and fair by the other, and the claim is argued rather than announced.\n- Read the transcript against the story and the export before publishing: every figure spoken is in the sources and nothing on the must-not list is said. Recorded the two places where the hosts stray, to be named before anyone else names them: they say the model is read from local files, where it is Markdown in git served over MCP to any model, and they say the agents handled only the implement phase, where the model gives the plan phase to an agent seat as well and keeps every gate and every merge with the Owner.\n\n### Sharing\n\n- Published it on Sep 25, 2026 as four and a half minutes that open on the line \"your team isn't slow, it's undecided\", take the fast half from the talk's snapshot, answer the three challenges from the sources, whether the commits are padding, who did the work when an agent co-wrote nine in ten of them, and what happens if a few providers change their prices or terms, and end on the talk's proposal handed to the listener: test it with your team, and tell me where it breaks.\n- Wrote the published description to carry what the hosts leave unspoken, the 272 releases, the cost against list price and the architect role from October, and to state how the episode was made: generated by Gemini Notebook from the model's own sources and the story, and checked against them before it went out.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The talk",
+                  "https://blust.ch/talks/deciding-well/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The talk",
+                "https://blust.ch/talks/deciding-well/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-podcast-deciding-well.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-25",
+        "end": "2026-09-25"
       }
     },
     {
@@ -15486,6 +15569,42 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
       "to": "achievement-kinds/sharing",
       "via": "Achievements.Kind",
@@ -16227,6 +16346,15 @@
       "attrs": {
         "What it shows": "Wrote the film Governance as data from this model's own files and published it under a description carrying no count, naming instead where the model states its own size.",
         "Experience": "profiles/robert-blust/experiences/2026-film-governance-as-data"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/context-engineering",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Generated a podcast episode on the deciding-well talk from the model's own export and a story naming the file and entity each section rests on, then read the transcript against both.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-deciding-well"
       }
     },
     {
@@ -17748,6 +17876,15 @@
       "attrs": {
         "What it shows": "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
         "Experience": "profiles/robert-blust/experiences/2026-talk-deciding-well"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Wrote the story for a debate episode on the deciding-well talk, three challenges each with its answer in the sources and a list of what the hosts must not say, then named the two places the hosts strayed.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-deciding-well"
       }
     },
     {
