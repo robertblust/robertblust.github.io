@@ -259,7 +259,6 @@
   .lean.tm::before{background:var(--c-weak)}
   .lean.ev::before{border:1.5px solid var(--dim); border-radius:50%; width:.4rem; height:.4rem}
   .caveat{color:var(--dim); font-size:.9rem; max-width:62ch; margin-block:1rem}
-  p.rule{border-left:3px solid var(--c-firm); padding-left:1rem; margin-block:1rem; max-width:62ch}
 </style>
 <link rel="stylesheet" href="../../../chat.css">
 </head>
@@ -412,7 +411,7 @@
         </tbody>
         <tfoot><tr><td data-de="Total mit agentischer KI">Agentic total</td><td></td><td class="n" data-v="aTotal"></td></tr></tfoot>
       </table></div>
-      <p class="rule" data-de="Die KI war der kleinste Posten: <span data-v='toolsShare'></span> des Totals. Zum Listenpreis der API von USD <span data-v='listUsd'></span> statt im Abonnement läge das Total bei <span data-v='listAg'></span>, immer noch <span data-v='listRatio'></span>× günstiger. Die Kosten verlagerten sich auf die Stunden des Owners, also dorthin, wo entschieden wird.">The AI was the smallest line: <span data-v="toolsShare"></span> of the total. At the API’s list price instead of the subscription, USD <span data-v="listUsd"></span>, the total would be <span data-v="listAg"></span>, still <span data-v="listRatio"></span>× cheaper. The cost moved to the owner’s hours, which is where the deciding is.</p>
+      <p class="conclusion" data-de="Die KI war der kleinste Posten: <span data-v='toolsShare'></span> des Totals. Zum Listenpreis der API von USD <span data-v='listUsd'></span> statt im Abonnement läge das Total bei <span data-v='listAg'></span>, immer noch <span data-v='listRatio'></span>× günstiger. Die Kosten verlagerten sich auf die Stunden des Owners, also dorthin, wo entschieden wird.">The AI was the smallest line: <span data-v="toolsShare"></span> of the total. At the API’s list price instead of the subscription, USD <span data-v="listUsd"></span>, the total would be <span data-v="listAg"></span>, still <span data-v="listRatio"></span>× cheaper. The cost moved to the owner’s hours, which is where the deciding is.</p>
     </section>
 
     <section>
@@ -433,7 +432,7 @@
           <tr><td data-de="Betrieb">Operations</td><td data-de="Jeder Host wird über CI deployt; es gibt keinen Pikettdienst und kein Service-Level.">Every host deploys through CI; there is no on-call and no service level.</td><td data-de="Besser mit einem DevOps Engineer. Die Betriebskosten sind auf keiner Seite gezählt.">Better with a DevOps engineer. Neither side’s running costs are counted.</td><td><span class="lean tm" data-de="Team vorne">Team ahead</span></td></tr>
         </tbody>
       </table></div>
-      <p class="rule" data-de="Wo das Team vorne liegt, lassen sich die Lücken schliessen: mit einem externen Code- und Security-Review, einer Studie zu Usability und Barrierefreiheit und einem Monat, um einen zweiten Maintainer einzuarbeiten. Das kostet rund <span data-v='gaps'></span> zusätzlich. Das agentische Total läge dann bei <span data-v='gapAg'></span>, immer noch <span data-v='gapRatio'></span>× günstiger.">Closing the gaps where the team is ahead — an external code and security review, a usability and accessibility study, a month to bring in a second maintainer — adds about <span data-v="gaps"></span>. The agentic total would then be <span data-v="gapAg"></span>, still <span data-v="gapRatio"></span>× cheaper.</p>
+      <p class="conclusion" data-de="Wo das Team vorne liegt, lassen sich die Lücken schliessen: mit einem externen Code- und Security-Review, einer Studie zu Usability und Barrierefreiheit und einem Monat, um einen zweiten Maintainer einzuarbeiten. Das kostet rund <span data-v='gaps'></span> zusätzlich. Das agentische Total läge dann bei <span data-v='gapAg'></span>, immer noch <span data-v='gapRatio'></span>× günstiger.">Closing the gaps where the team is ahead — an external code and security review, a usability and accessibility study, a month to bring in a second maintainer — adds about <span data-v="gaps"></span>. The agentic total would then be <span data-v="gapAg"></span>, still <span data-v="gapRatio"></span>× cheaper.</p>
       <p class="caveat" data-de="Das sind Zählungen aus git, kein Audit. Niemand ausserhalb des Projekts hat den Code geprüft. Die Zeile «Implementierung» vergleicht deshalb Fähigkeiten, kein gemessenes Ergebnis.">These are counts from git, not an audit. Nobody outside the project has reviewed the code, so the implementation row compares capability, not a measured outcome.</p>
     </section>
 
