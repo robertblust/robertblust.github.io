@@ -1,5 +1,5 @@
 {
-  "commit": "8b8dacf2dc0d5c634a20bdb3e91d5e56718a5710",
+  "commit": "f3353a54f8aa900a9ee2e5ed5abd4d483f7e028c",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -3765,13 +3765,28 @@
                 ],
                 [
                   "Public speaking",
+                  "Gave a narrated talk on describing a problem in its essential complexity, the standard held for fifteen years and what AI changed about the cost of meeting it.",
+                  "Essential Complexity"
+                ],
+                [
+                  "Public speaking",
+                  "Gave a narrated talk on the Mental Model, a company's knowledge as one graph that its people and its agents both rely on.",
+                  "The Mental Model"
+                ],
+                [
+                  "Public speaking",
                   "Published a narrated introduction talk on GuestGraph, deck, PDF and audio in German and English.",
-                  "GuestGraph"
+                  "GuestGraph — an introduction"
                 ],
                 [
                   "Public speaking",
                   "Published a narrated introduction talk on CompanyGraph, deck, PDF and audio in German and English.",
-                  "CompanyGraph"
+                  "CompanyGraph — an introduction"
+                ],
+                [
+                  "Public speaking",
+                  "Gave a narrated talk that sums up the career break, every figure counted to a fixed cutoff and read from a file beside the deck.",
+                  "Building fast is solved. Deciding well is not."
                 ],
                 [
                   "Requirements engineering",
@@ -3962,6 +3977,16 @@
                   "Storytelling",
                   "Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description.",
                   "Governance as data"
+                ],
+                [
+                  "Storytelling",
+                  "Held the resolution of the Essential Complexity talk back on purpose, the tension first and the punchline late, and said the punchline without the claim that hallucinations disappear.",
+                  "Essential Complexity"
+                ],
+                [
+                  "Storytelling",
+                  "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
+                  "Building fast is solved. Deciding well is not."
                 ],
                 [
                   "Technical writing",
@@ -4901,13 +4926,28 @@
               ],
               [
                 "Public speaking",
+                "Gave a narrated talk on describing a problem in its essential complexity, the standard held for fifteen years and what AI changed about the cost of meeting it.",
+                "Essential Complexity"
+              ],
+              [
+                "Public speaking",
+                "Gave a narrated talk on the Mental Model, a company's knowledge as one graph that its people and its agents both rely on.",
+                "The Mental Model"
+              ],
+              [
+                "Public speaking",
                 "Published a narrated introduction talk on GuestGraph, deck, PDF and audio in German and English.",
-                "GuestGraph"
+                "GuestGraph — an introduction"
               ],
               [
                 "Public speaking",
                 "Published a narrated introduction talk on CompanyGraph, deck, PDF and audio in German and English.",
-                "CompanyGraph"
+                "CompanyGraph — an introduction"
+              ],
+              [
+                "Public speaking",
+                "Gave a narrated talk that sums up the career break, every figure counted to a fixed cutoff and read from a file beside the deck.",
+                "Building fast is solved. Deciding well is not."
               ],
               [
                 "Requirements engineering",
@@ -5098,6 +5138,16 @@
                 "Storytelling",
                 "Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description.",
                 "Governance as data"
+              ],
+              [
+                "Storytelling",
+                "Held the resolution of the Essential Complexity talk back on purpose, the tension first and the punchline late, and said the punchline without the claim that hallucinations disappear.",
+                "Essential Complexity"
+              ],
+              [
+                "Storytelling",
+                "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
+                "Building fast is solved. Deciding well is not."
               ],
               [
                 "Technical writing",
@@ -7191,7 +7241,7 @@
       "id": "profiles/robert-blust/experiences/2026-blust-ch",
       "type": "experience",
       "name": "blust.ch",
-      "tagline": "Ongoing. A profile page built from the model, and two talks that say what the model is for.",
+      "tagline": "Ongoing. A profile page built from the model, and the talks that say what the model is for.",
       "fields": {
         "source": "Local",
         "kind": "Community",
@@ -7209,7 +7259,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Published the profile page, a principles page, an ideas page and two narrated talks, The Mental Model and Essential Complexity — each bilingual with a PDF, self-contained and presentable from a file with no server running.\n\n### Architecture\n\n- Built the model and timeline pages from the mental-model repository at a pinned commit, so the page shows what the model says and a corrected fact is one commit in one place.\n- Conceived and designed the pages of all three sites and the design system they share, from layout and typography to the graph view, and had the agent seats build them to that design.\n- Shared its typography, chrome and page checks with guestgraph.io and companygraph.io through one design system, released over 50 times in its first week and taken by every site by pin.\n\n### Engineering\n\n- Held every page to a rendered check rather than a diff: browser assertions on every page, share cards compared against the pages they were rendered from, and a pin guard that fails the build when a dependency is behind its release.\n- Required one shared conventions check beside each repository's own suite on every default branch in the family, called from one reusable workflow at a pinned tag.\n- Generated the narration from the speaker notes on a content hash, so editing one note regenerates one clip.\n\n### Ways of working\n\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n- Set the family's written voice and rules in `WRITING.md`, and briefed and reviewed every page the Writer seat drafted to those rules.",
+          "text": "### Context\n\n- Published the profile page, a principles page, an ideas page and the narrated talks, each an entry of its own here, bilingual with a PDF, self-contained and presentable from a file with no server running.\n\n### Architecture\n\n- Built the model and timeline pages from the mental-model repository at a pinned commit, so the page shows what the model says and a corrected fact is one commit in one place.\n- Conceived and designed the pages of all three sites and the design system they share, from layout and typography to the graph view, and had the agent seats build them to that design.\n- Shared its typography, chrome and page checks with guestgraph.io and companygraph.io through one design system, released over 50 times in its first week and taken by every site by pin.\n\n### Engineering\n\n- Held every page to a rendered check rather than a diff: browser assertions on every page, share cards compared against the pages they were rendered from, and a pin guard that fails the build when a dependency is behind its release.\n- Required one shared conventions check beside each repository's own suite on every default branch in the family, called from one reusable workflow at a pinned tag.\n- Generated the narration from the speaker notes on a content hash, so editing one note regenerates one clip.\n\n### Ways of working\n\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n- Set the family's written voice and rules in `WRITING.md`, and briefed and reviewed every page the Writer seat drafted to those rules.",
           "tables": []
         }
       ],
@@ -7533,6 +7583,395 @@
         "kind": "Community",
         "start": "2026-09-06",
         "end": "2026-09-06"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "type": "experience",
+      "name": "CompanyGraph — an introduction",
+      "tagline": "A narrated talk that puts CompanyGraph up for scrutiny: a meta-model for operating a company, the structure its knowledge takes so people and AI can both rely on it, open source and not finished.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08",
+        "url": "https://companygraph.io/talks/intro/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Knowledge management"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it as the talk on companygraph.io, in August 2026: an idea presented for pushback rather than applause, and then four questions.\n\n### Ways of working\n\n- Fixed the tone and the limits in the speaker notes before the deck was built: what exists is stated as intent and never as status, the roadmap says which parts exist rather than the slide, no count is recited, and the provenance is one sentence, built inside a company with a payroll and then needed in the same shape by a company of one, with no names.\n\n### Sharing\n\n- Opened on the tax every company pays: its knowledge is written down somewhere, no two people would look in the same place, nobody knows which version is true today, and so people ask a person instead of reading.\n- Set CompanyGraph against that: one structured knowledge base, the facts as Markdown structured by a meta-model and versioned like code, a projection of how the company runs rather than documentation that gathers dust, where every box is a page a person reads, its title is its name and anything with parts of its own keeps them with it.\n- Named the difference from a wiki: pages refer to each other by the name of the thing and not by a link, so a rule with nobody accountable, a role nobody holds or a metric without a target shows up at once and nothing is quietly lost; and the gate from a proposal to work that gets built is data, who signs it off, what has to be true and which rule sits behind it, so that nothing gets built before the sign-off is checkable rather than culture.\n- Stated the thesis the model ships under: the schemas are Markdown themselves, an agent reads the same table a checker reads and there is no second format kept for the program, so with the right meta-model the prose is the schema; and said what it does for an AI without overclaiming, that it shrinks what the AI has to guess and holds it inside the rules a person wrote.\n- Closed on four questions where a no is worth more than a polite yes: where a company does not fit the shape, whether Markdown checked by agents is trusted or a schema language is needed first, whether an instance would be set up with a tool or by copying a folder of schemas, and whether anyone would pay for help building one, time and material and nothing hosted.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://companygraph.io/talks/intro/companygraph-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://companygraph.io/talks/intro/companygraph-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://companygraph.io/talks/intro/companygraph-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://companygraph.io/talks/intro/companygraph-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "type": "experience",
+      "name": "Building fast is solved. Deciding well is not.",
+      "tagline": "A narrated talk that sums up the career break under the line blust.ch opens with: building with agentic AI turned out fast and cheap, shown in figures git recorded, and deciding well stayed the work.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-24",
+        "end": "2026-09-24",
+        "url": "https://blust.ch/talks/deciding-well/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Agentic AI development"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it on Sep 24, 2026 as the third talk on blust.ch, in three parts, the claim, the proof and the answer, with every figure on a slide read from a snapshot counted to a fixed cutoff, Sep 24, 2026 at 22:21 Swiss time, so a later run gives the same numbers.\n\n### Ways of working\n\n- Fixed what the talk may say before it was drafted: no employer named, a figure from git or not at all, and every claim placed where a listener can check it, the values quoted as they stand in the model and the counts in a file beside the deck with the script that wrote them.\n- Read the slides against the model's own entries and corrected the one line the application record did not carry, on what the architect's role was chosen over, in the deck and in the career-break entry at once.\n\n### Sharing\n\n- Stated the claim as the value the model holds: AI moved the constraint from building quickly to deciding correctly, so the decision is written down before the code with the alternatives that lost and why, and the time fast building saves goes into choosing well.\n- Showed the fast half in what git recorded across three organizations by the cutoff: 23 public repositories, 5,065 commits on their default branches, 1,640 merged pull requests and 272 releases from one person in four months, nine hosts that answer, 91 percent of the non-merge commits carrying an agent's co-author trailer matched over every message, and a subscription of about 650 francs against about 9,000 francs the same tokens would have cost at list price.\n- Showed the deciding half by how far the same work can be counted: 95 specs and 105 plans, every change through five phases with a gate the Owner approves before the next begins, an agent opening and reporting and the Owner merging, and 1,360 decisions read out of the specs by agents and kept only where the quote is found in its spec, because the model has no type for a decision yet and the slide says so.\n- Offered CompanyGraph as the answer to the gap: agents build fast and lack what was decided and why, so a company writes its knowledge down once as one graph, read by people and agents alike, and three instances each in git and each served three ways, as a site, an MCP server and a chat.\n- Closed on a proposal rather than a result: decide well with a mental model and agentic AI, offered for validation and not yet proven, with the risk named that all of it rests on a few providers and their prices and terms.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each, and a cost page beside it that prices the same result as a Swiss delivery team and as it happened, the owner's hours counted in both.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Cost page",
+                  "https://blust.ch/talks/deciding-well/cost/"
+                ],
+                [
+                  "Deck as PDF, English",
+                  "https://blust.ch/talks/deciding-well/deciding-well-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://blust.ch/talks/deciding-well/deciding-well-de.pdf"
+                ],
+                [
+                  "Decisions file",
+                  "https://blust.ch/talks/deciding-well/decisions.json"
+                ],
+                [
+                  "Figures file",
+                  "https://blust.ch/talks/deciding-well/stats.json"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Cost page",
+                "https://blust.ch/talks/deciding-well/cost/"
+              ],
+              [
+                "Deck as PDF, English",
+                "https://blust.ch/talks/deciding-well/deciding-well-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://blust.ch/talks/deciding-well/deciding-well-de.pdf"
+              ],
+              [
+                "Decisions file",
+                "https://blust.ch/talks/deciding-well/decisions.json"
+              ],
+              [
+                "Figures file",
+                "https://blust.ch/talks/deciding-well/stats.json"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-deciding-well.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-24",
+        "end": "2026-09-24"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "type": "experience",
+      "name": "Essential Complexity",
+      "tagline": "A narrated talk on describing a problem in its essential complexity, no more and no less: the standard has held for fifteen years, and what changed is the cost of meeting it.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08",
+        "url": "https://blust.ch/talks/essential-complexity/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Model-driven engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it as a talk on blust.ch, in August 2026, in German first and then in English: one standard for a model, held across four fields of a career, software development, methodology, IT architecture and business architecture, and what AI changed about reaching it.\n\n### Ways of working\n\n- Held the resolution back on purpose: the opener sets the tension, one continuous trace from business architecture down to implementation that was long expensive and hard to reach, and the pivot and the punchline come only later, so the room meets the standard before it hears that the path to it is now open, and the punchline says a model gives AI the right context and shrinks the space where it has to guess, without the claim that hallucinations disappear.\n\n### Sharing\n\n- Set the standard first: a good model captures a problem in its essential complexity, no more and no less, the measure held for every model over about fifteen years.\n- Traced why the standard was expensive to meet, UML, SysML or a DSL of one's own, done for real as canonical data models at UBS and custom DSLs at 3AP and LIKE MAGIC, and why it no longer is: AI reads natural language, so with the right meta-model the facts are written as Markdown at the same precision with far less friction.\n- Showed it on LIKE MAGIC's Finance domain, where I led the IT architecture, the business architecture and the production platform: every term defined in one sentence, Folio as the financial account of a reservation attached to a Debitor, collecting order items and payments and ending in an invoice; requirements written only in the glossary's terms, the implementation checked against the glossary and the architecture decisions, and a new term landing in the glossary before anything merges, which is the check an AI can now run.\n- Placed it in the industry: agile dropped upfront modeling as too slow and too expensive, and with AI making a specification cheap to capture the pendulum swings back to spec-driven development, which is how I still build, close to the code and with the model in mind.\n- Published it as a self-contained bilingual deck with hand-drawn journey panels as a side motif, a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://blust.ch/talks/essential-complexity/essential-complexity-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://blust.ch/talks/essential-complexity/essential-complexity-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://blust.ch/talks/essential-complexity/essential-complexity-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://blust.ch/talks/essential-complexity/essential-complexity-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-essential-complexity.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "type": "experience",
+      "name": "GuestGraph — an introduction",
+      "tagline": "A narrated talk that puts GuestGraph up for scrutiny: why a returning guest looks like five strangers, what a wrong merge costs, and how layered confidence keeps every decision explainable and reversible.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08",
+        "url": "https://guestgraph.io/talks/intro/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Data governance"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it as the talk on guestgraph.io, in August 2026: an idea presented for pushback rather than applause, to people who run hotels and the systems inside them, ending on four questions.\n\n### Ways of working\n\n- Kept the talk honest about what exists, in the speaker notes before the deck was built: the engine and one connector are there, nothing runs in production, there are no customers, and the slide says it shows a foundation and not a product.\n\n### Sharing\n\n- Opened on one guest: she books through a booking platform, checks in through the property system, eats in the restaurant, logs into the wifi and writes a review, five systems with five records and five keys, so the hotel has five strangers and nobody in the building notices.\n- Pre-empted the obvious answer, matching on email, with where it breaks, a family sharing an address, a relay address from the booking platform, a changed provider, and named what a wrong merge is: one guest seeing another's invoices and stays, a data protection incident, which is why most do not dare try.\n- Set out the design: the raw records from every system are left untouched, a correction arrives as a new record and never as an overwrite, and the golden profile is computed rather than stored, so it can be re-derived at any time; each layer decides only what it is entitled to decide, shared strong identifiers merge outright, probabilistic scoring merges only at a threshold the operator set, everything else goes to a person, and automatic probabilistic merging is off out of the box.\n- Made trust the argument rather than technology: for every decision the full chain can be asked for, which matcher, how confident, on what evidence, when and by whom, and every merge can be undone with the correction sticking; an agent acting on guest data passes the same gates, thresholds, a review queue and reversibility, and the audit trail records whether a person or a named agent decided.\n- Closed on the open core, Apache 2.0 for the engine and hosting, a console and MCP access as what could ever earn, with the reason stated: a black box that merges guests is not something I would deploy myself.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://guestgraph.io/talks/intro/guestgraph-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://guestgraph.io/talks/intro/guestgraph-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://guestgraph.io/talks/intro/guestgraph-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://guestgraph.io/talks/intro/guestgraph-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "type": "experience",
+      "name": "The Mental Model",
+      "tagline": "A narrated talk on the Mental Model: a company's knowledge as one structured, machine-readable base, versioned like code, that its people and its AI agents can both rely on.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08",
+        "url": "https://blust.ch/talks/mental-model/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Context engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it as a talk on blust.ch, in August 2026: a concept explained for a room that runs a company and has never seen its knowledge in one place.\n\n### Ways of working\n\n- Built the talk backward from one point, that the right context makes AI far more reliable, and fixed in the speaker notes what may not be claimed: the model does not remove hallucinations, it shrinks the space in which an agent has to guess and keeps it inside the guardrails of vision, strategy, process and rules, with a person overseeing and an agent's comment taken as input and never as verdict.\n\n### Sharing\n\n- Opened on where a company's knowledge lives, its vision, strategy, roles, processes, metrics, rules and decisions scattered across heads, wiki pages, sheets and tickets, so that neither people nor AI can rely on it, and asked what changes when all of it is a graph a machine can read.\n- Showed what makes the files a graph rather than a wiki: filenames are the canonical ids, references are exact names rather than links, and a consistency check on every change surfaces a person without a role, a rule without an owner or a feature without a parent at once, so many files stay one whole without contradiction.\n- Made governance concrete as data: a process gate from concept to delivery with who is accountable, what has to be true and which rule stands behind each criterion, and a rule, a metric and an architecture decision each named, justified and owned, the rejected alternative recorded beside the decision.\n- Closed on why the model pays off twice: people get onboarding by role, an answer to who owns what and one place where the answer is the same for everyone, and agents get the same pages as their context layer, reached through MCP tools, and act inside the rules a person wrote rather than the ones they would invent.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each, playable from a file with no server running.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://blust.ch/talks/mental-model/mental-model-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://blust.ch/talks/mental-model/mental-model-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://blust.ch/talks/mental-model/mental-model-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://blust.ch/talks/mental-model/mental-model-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-the-mental-model.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-08",
+        "end": "2026-08"
       }
     },
     {
@@ -11027,7 +11466,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks the blust.ch experience names, each in both languages with a PDF.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks this site serves, each an experience of the profile, in both languages with a PDF.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
           "tables": []
         },
         {
@@ -15083,6 +15522,246 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "skills/knowledge-management",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "skills/public-speaking",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "skills/agentic-ai-development",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "skills/public-speaking",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "skills/model-driven-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "skills/public-speaking",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "skills/data-governance",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "skills/public-speaking",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "skills/public-speaking",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust",
       "to": "skills/agentic-ai-development",
       "via": "Evidence.Skill",
@@ -16671,8 +17350,26 @@
       "to": "skills/public-speaking",
       "via": "Evidence.Skill",
       "attrs": {
+        "What it shows": "Gave a narrated talk on describing a problem in its essential complexity, the standard held for fifteen years and what AI changed about the cost of meeting it.",
+        "Experience": "profiles/robert-blust/experiences/2026-talk-essential-complexity"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/public-speaking",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Gave a narrated talk on the Mental Model, a company's knowledge as one graph that its people and its agents both rely on.",
+        "Experience": "profiles/robert-blust/experiences/2026-talk-the-mental-model"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/public-speaking",
+      "via": "Evidence.Skill",
+      "attrs": {
         "What it shows": "Published a narrated introduction talk on GuestGraph, deck, PDF and audio in German and English.",
-        "Experience": "profiles/robert-blust/experiences/2026-guestgraph"
+        "Experience": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction"
       }
     },
     {
@@ -16681,7 +17378,16 @@
       "via": "Evidence.Skill",
       "attrs": {
         "What it shows": "Published a narrated introduction talk on CompanyGraph, deck, PDF and audio in German and English.",
-        "Experience": "profiles/robert-blust/experiences/2026-companygraph"
+        "Experience": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/public-speaking",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Gave a narrated talk that sums up the career break, every figure counted to a fixed cutoff and read from a file beside the deck.",
+        "Experience": "profiles/robert-blust/experiences/2026-talk-deciding-well"
       }
     },
     {
@@ -17024,6 +17730,24 @@
       "attrs": {
         "What it shows": "Wrote the story for the film Governance as data before anything was generated, naming what the film may state and what it must not, then held the narration to it and kept all four departures out of the published description.",
         "Experience": "profiles/robert-blust/experiences/2026-film-governance-as-data"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Held the resolution of the Essential Complexity talk back on purpose, the tension first and the punchline late, and said the punchline without the claim that hallucinations disappear.",
+        "Experience": "profiles/robert-blust/experiences/2026-talk-essential-complexity"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
+        "Experience": "profiles/robert-blust/experiences/2026-talk-deciding-well"
       }
     },
     {
