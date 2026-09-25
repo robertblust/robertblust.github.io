@@ -55,6 +55,21 @@ export function num(n, lang, digits = 0) {
   return s.replace(/'/g, "’").replace(".", ",");
 }
 
+// Months as WRITING.md abbreviates them: three letters without a period in English, and the
+// German forms with their period where German abbreviates, none where it writes the word out.
+const MONTHS = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  de: ["Jan.", "Febr.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."],
+};
+
+// The calendar day an ISO date names, read from its own digits so no time zone can move it.
+export function day(iso, lang, withYear = false) {
+  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+  const mon = MONTHS[lang][m - 1];
+  if (lang === "de") return `${d}. ${mon}` + (withYear ? ` ${y}` : "");
+  return `${mon} ${d}` + (withYear ? `, ${y}` : "");
+}
+
 export function money(n, lang) {
   return "CHF " + num(Math.round(n), lang);
 }
@@ -83,6 +98,8 @@ export function render(state, data, lang) {
     aEarlyDays: n0(data.stats.activeDays.early), aEarlyH: n0(data.cost.owner.earlyHours), aEarly: m(c.agEarly * c.ownerHourly),
     aSub: m(c.subscription), aVoice: m(c.voice), aChat: m(c.chatApi), aHosting: m(c.hosting), aDomains: m(c.domains),
     aTotal: m(c.ag), listUsd: n0(data.stats.tokens.listPriceUsd), listAg: m(c.listAg), listRatio: n0(c.listRatio),
+    dPeak: day(data.stats.activeDays.peakFrom, lang), dStart: day(data.stats.start, lang),
+    dEnd: day(data.stats.cutoff, lang), dCutoff: day(data.stats.cutoff, lang, true),
     toolsShare: pct(n1(100 * c.agTools / c.ag)), gapAg: m(c.gapAg), gapRatio: n0(c.gapRatio), gaps: m(c.gaps),
     qSpecs: n0(t.specs), qPlans: n0(t.plans), qDecisions: n0(data.decisions.counts.total),
     qRevised: n0(data.decisions.counts.revised), qDropped: n0(data.decisions.counts.dropped),
@@ -110,6 +127,9 @@ export function render(state, data, lang) {
   }
   document.getElementById("peakOut").textContent = n0(state.peakHours) + " h";
   document.getElementById("shareOut").textContent = pct(n0(100 * state.share));
+  // A slider announces what the reader sees beside it, not the fraction the input holds.
+  document.getElementById("peak").setAttribute("aria-valuetext", n0(state.peakHours) + " h");
+  document.getElementById("share").setAttribute("aria-valuetext", pct(n0(100 * state.share)));
 }
 
 async function boot() {
@@ -138,6 +158,9 @@ async function boot() {
     for (const x of document.querySelectorAll(`#${id} button`)) x.setAttribute("aria-pressed", String(x === b));
     draw();
   });
+  // The pressed buttons follow the state cost.json set, so a changed default needs no edit here.
+  for (const b of document.querySelectorAll("#lens button")) b.setAttribute("aria-pressed", String(b.getAttribute("data-v-lens") === state.lens));
+  for (const b of document.querySelectorAll("#scen button")) b.setAttribute("aria-pressed", String(b.getAttribute("data-v-scen") === state.scenario));
   seg("lens", "lens", "data-v-lens");
   seg("scen", "scenario", "data-v-scen");
   const peak = document.getElementById("peak"), share = document.getElementById("share");

@@ -127,7 +127,7 @@ const PAGES = [
   { path: "/talks/deciding-well/cost/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /would have cost/i, lang: "en", sourceLang: "en", card: true,
     translates: { lang: "de", shows: ["Kämen beide Wege zum selben Ergebnis?", "Agentisch vorne"], hides: ["Would both approaches produce the same result?", "Agentic ahead"] },
     contains: ["What a team", "Would both approaches produce the same result?"],
-    slotsFilled: { en: ["CHF 1,235,443", "CHF 57,216", "22"], de: ["CHF 1’235’443", "CHF 57’216"] },
+    slotsFilled: { en: ["CHF 1,235,443", "CHF 57,216", "22× cheaper", "from Aug 17"], de: ["CHF 1’235’443", "CHF 57’216", "ab 17. Aug."] },
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
@@ -263,6 +263,9 @@ const CHECKS = {
       .filter(g => !(g.getAttribute("aria-label") || (document.getElementById(g.getAttribute("aria-labelledby") || "") || {}).textContent || "").trim())
       .map(g => g.id || g.className));
     if (unnamed.length) return `button groups without a name: ${unnamed.join(", ")}`;
+    // A slider's value is announced as the reader sees it, not as the fraction the input holds.
+    const spoken = await page.$eval("#share", e => e.getAttribute("aria-valuetext"));
+    if (spoken !== "60%") return `the share slider announces ${JSON.stringify(spoken)}, not "60%"`;
     let r = await read();
     if (r.empty.length) return `empty slots in English: ${r.empty.join(", ")}`;
     for (const f of spec.slotsFilled.en) if (!r.text.includes(f)) return `the English page does not show ${f}`;
@@ -282,6 +285,20 @@ const CHECKS = {
     await page.unroute("**/cost.json");
     // A snapshot from before the page existed, which a browser cache can still hold after a
     // deploy: readable JSON without the figures the page needs is a failed load too.
+    // The page reads its dates and its default scenario from the files, never from its markup:
+    // a moved peak date and another default must show without an edit to the page.
+    const real = async (url) => JSON.parse(await (await fetch(url)).text());
+    const stats = await real(BASE + spec.path + "../stats.json"), cost = await real(BASE + spec.path + "../cost.json");
+    stats.activeDays.peakFrom = "2026-08-10"; cost.scenarios.default = "lean";
+    await page.route("**/stats.json", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(stats) }));
+    await page.route("**/cost.json", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(cost) }));
+    await page.goto(BASE + spec.path);
+    await page.waitForFunction(() => document.querySelector('[data-v="ag"]').textContent.trim() !== "");
+    const moved = await page.evaluate(() => ({ text: document.querySelector("main").innerText,
+      lean: document.querySelector('[data-v-scen="lean"]').getAttribute("aria-pressed") }));
+    if (!moved.text.includes("from Aug 10")) return "the peak date is typed into the page, not read from stats.json";
+    if (moved.lean !== "true") return "the pressed scenario is typed into the page, not read from cost.json";
+    await page.unroute("**/stats.json"); await page.unroute("**/cost.json");
     await page.route("**/stats.json", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ totals: {} }) }));
     await page.goto(BASE + spec.path);
     try { await page.waitForFunction(() => !document.getElementById("costerr").hidden, null, { timeout: 5000 }); }

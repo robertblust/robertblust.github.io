@@ -120,8 +120,8 @@
 }
 </script>
 
-<!-- Publisher and page, nothing about the product. The same rule the other two pages
-     follow: structured data is not a back door for claims the prose does not make. -->
+<!-- Publisher and page, nothing about the product. The same rule every page here follows:
+     structured data is not a back door for claims the prose does not make. -->
 <script>
   /* ─── theme boot · v3 · page ────────────────────────────────────
      Set the theme before anything paints. Generated from @robertblust/design —
@@ -153,8 +153,8 @@
 <link rel="stylesheet" href="../../../tokens.css">
 <link rel="stylesheet" href="../../../page.css">
 <style>
-/* Self-hosted, same origin — which is the subject of this page as well as a rule of it.
-   Relative, because a root-absolute path breaks under file://. */
+/* Self-hosted, same origin, as on every page here. Relative, because a root-absolute path
+   breaks under file://. */
 @font-face{font-family:"Instrument Sans";src:url(../../../fonts/InstrumentSans-var.woff2) format("woff2-variations"),url(../../../fonts/InstrumentSans-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../../../fonts/PlexMono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Plex Mono";src:url(../../../fonts/PlexMono-600.woff2) format("woff2");font-weight:600;font-display:swap}
@@ -197,7 +197,6 @@
   .lede{margin-top:1.2rem; font-size:clamp(1rem,1.3vw,1.1rem); color:var(--dim); max-width:64ch}
   .lede a{color:var(--c-mid)}
 
-  /* the .never card (declined options): terms use plain --ink like any other card, no separate treatment needed */
 
   .rules{margin-top:2rem; display:grid; gap:1.6rem; max-width:68ch}
   .rules p{color:var(--dim); font-size:1rem}
@@ -294,7 +293,7 @@
     <div class="title">
       <h1 data-de="<span class='r70'>Was ein Team</span><span class='rcl'><em>gekostet</em> hätte.</span>"><span class="r70">What a team</span><span class="rcl">would have <em>cost</em>.</span></h1>
       <p class="tagline" data-de="Die Arbeit hinter dem Vortrag, zweimal durchgerechnet: einmal mit einem Schweizer Umsetzungsteam, einmal so, wie sie tatsächlich entstand – mit agentischer KI. Die Stunden des Owners zählen in beiden Rechnungen.">The talk’s result priced twice: as a Swiss delivery team, and as it happened with agentic AI. The owner’s hours count in both.</p>
-      <p class="note" data-de="Die Zählungen stammen aus git, Stand 24. September 2026, wie jede Zahl im <a href='../'>Vortrag</a>. Schätzungen sind gekennzeichnet, nennen ihre Grundlage und lassen sich unten ändern.">Counts are from git as of Sep 24, 2026, like every figure in <a href="../">the talk</a>. Estimates are marked, stated with their basis, and can be changed below.</p>
+      <p class="note" data-de="Die Zählungen stammen aus git, Stand <span data-v='dCutoff'></span>, wie jede Zahl im <a href='../'>Vortrag</a>. Schätzungen sind gekennzeichnet, nennen ihre Grundlage und lassen sich unten ändern.">Counts are from git as of <span data-v="dCutoff"></span>, like every figure in <a href="../">the talk</a>. Estimates are marked, stated with their basis, and can be changed below.</p>
     </div>
 
     <p class="costerr" id="costerr" hidden data-de="Die Zahlen wurden nicht geladen, deshalb zeigt diese Seite keine. Laden Sie die Seite neu, oder lesen Sie die Zahlen in stats.json und cost.json beim Vortrag nach.">The figures did not load, so this page shows none. Reload it, or read them in stats.json and cost.json beside the talk.</p>
@@ -304,7 +303,7 @@
         <div class="seg" role="group" id="lens" aria-labelledby="lensLbl"><button type="button" data-v-lens="inhouse" aria-pressed="true" data-de="Arbeitgeberkosten">Employer cost</button><button type="button" data-v-lens="contract" aria-pressed="false" data-de="Freelancer-Ansätze">Contractor rates</button></div></div>
       <div class="ctl"><span class="lbl" id="scenLbl" data-de="Schätzung für das Team">Team estimate</span>
         <div class="seg" role="group" id="scen" aria-labelledby="scenLbl"><button type="button" data-v-scen="lean" aria-pressed="false" data-de="Schlank">Lean</button><button type="button" data-v-scen="expected" aria-pressed="true" data-de="Erwartet">Expected</button><button type="button" data-v-scen="conservative" aria-pressed="false" data-de="Konservativ">Conservative</button></div></div>
-      <div class="ctl"><label class="lbl" for="peak" data-de="Stunden des Owners pro Tag, ab 17. Aug.">Owner’s hours a day, from Aug 17</label>
+      <div class="ctl"><label class="lbl" for="peak" data-de="Stunden des Owners pro Tag, ab <span data-v='dPeak'></span>">Owner’s hours a day, from <span data-v="dPeak"></span></label>
         <span class="rng"><input type="range" id="peak" min="6" max="14" step="1" value="8"><output for="peak" id="peakOut"></output></span></div>
       <div class="ctl"><label class="lbl" for="share" data-de="Pensum des Owners">Owner’s share of the team’s months</label>
         <span class="rng"><input type="range" id="share" min="0.3" max="1" step="0.1" value="0.6"><output for="share" id="shareOut"></output></span></div>
@@ -397,12 +396,12 @@
 
     <section>
       <h2 data-de="Was es tatsächlich brauchte">What it actually took</h2>
-      <p class="lede" data-de="Eine Person mit Claude Code, vom ersten Commit am 9. Juni bis zum 24. September. Gezählt sind die Tage, an denen git Arbeit zeigt, multipliziert mit den Stunden pro Tag, die der Owner angibt.">One person with Claude Code, from the first commit on Jun 9 to Sep 24. The hours are the days git shows work, times the hours a day the owner gives.</p>
+      <p class="lede" data-de="Eine Person mit Claude Code, vom ersten Commit am <span data-v='dStart'></span> bis zum <span data-v='dEnd'></span>. Gezählt sind die Tage, an denen git Arbeit zeigt, multipliziert mit den Stunden pro Tag, die der Owner angibt.">One person with Claude Code, from the first commit on <span data-v="dStart"></span> to <span data-v="dEnd"></span>. The hours are the days git shows work, times the hours a day the owner gives.</p>
       <div class="tbl"><table>
         <thead><tr><th data-de="Posten">Line</th><th data-de="Grundlage">Basis</th><th class="n">CHF</th></tr></thead>
         <tbody>
-          <tr><td data-de="Der Owner, ab 17. Aug.">The owner, from Aug 17</td><td data-de="<span data-v='aPeakDays'></span> Tage mit Commits × <span data-v='aPeakH'></span> h"><span data-v="aPeakDays"></span> days with commits × <span data-v="aPeakH"></span> h</td><td class="n" data-v="aPeak"></td></tr>
-          <tr><td data-de="Der Owner, vor dem 17. Aug.">The owner, before Aug 17</td><td data-de="<span data-v='aEarlyDays'></span> Tage mit Commits × <span data-v='aEarlyH'></span> h"><span data-v="aEarlyDays"></span> days with commits × <span data-v="aEarlyH"></span> h</td><td class="n" data-v="aEarly"></td></tr>
+          <tr><td data-de="Der Owner, ab <span data-v='dPeak'></span>">The owner, from <span data-v="dPeak"></span></td><td data-de="<span data-v='aPeakDays'></span> Tage mit Commits × <span data-v='aPeakH'></span> h"><span data-v="aPeakDays"></span> days with commits × <span data-v="aPeakH"></span> h</td><td class="n" data-v="aPeak"></td></tr>
+          <tr><td data-de="Der Owner, vor dem <span data-v='dPeak'></span>">The owner, before <span data-v="dPeak"></span></td><td data-de="<span data-v='aEarlyDays'></span> Tage mit Commits × <span data-v='aEarlyH'></span> h"><span data-v="aEarlyDays"></span> days with commits × <span data-v="aEarlyH"></span> h</td><td class="n" data-v="aEarly"></td></tr>
           <tr><td data-de="Claude-Abonnement <i class='kind'>effektiv bezahlt</i>">Claude subscription <i class="kind">as paid</i></td><td data-de="Max 5x bis Mitte Juni, danach Max 20x: USD <span data-v='uSub'></span>, zuzüglich <span data-v='vat'></span> Schweizer MWST">Max 5x until mid-June, then Max 20x: USD <span data-v="uSub"></span>, plus <span data-v="vat"></span> Swiss VAT</td><td class="n" data-v="aSub"></td></tr>
           <tr><td data-de="Sprecherstimme <i class='kind'>effektiv bezahlt</i>">Narration voice <i class="kind">as paid</i></td><td data-de="USD <span data-v='uVoice'></span> Guthaben bei ElevenLabs">USD <span data-v="uVoice"></span> of ElevenLabs credit</td><td class="n" data-v="aVoice"></td></tr>
           <tr><td data-de="Chat-API <i class='kind'>effektiv bezahlt</i>">The chats’ API <i class="kind">as paid</i></td><td data-de="USD <span data-v='uChat'></span> Guthaben bei Anthropic für Sonnet 5, zuzüglich MWST">USD <span data-v="uChat"></span> of Anthropic credit for Sonnet 5, plus VAT</td><td class="n" data-v="aChat"></td></tr>
@@ -462,9 +461,8 @@
 </div>
 
 <script>
-// Same mechanism as the other two pages: English is the markup so the page says the right
-// thing before any JS runs, and the choice is remembered per origin. This page describes
-// that key, which is the only reason it is worth pointing at the code from here.
+// As on every page here: English is the markup, so the page says the right thing before any
+// JS runs, and the language chosen is remembered per origin.
 (function(){
 
   // page.js reads and writes lang/theme for its own purposes (link decoration, nav-fit,

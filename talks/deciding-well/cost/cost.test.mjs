@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { compute, money, num } from "./cost.mjs";
+import { compute, money, num, day } from "./cost.mjs";
 
 const cost = JSON.parse(readFileSync(new URL("../cost.json", import.meta.url)));
 const stats = JSON.parse(readFileSync(new URL("../stats.json", import.meta.url)));
@@ -66,4 +66,14 @@ test("the list-price alternative carries VAT like every other Anthropic line", (
   const c = compute(cost, stats, DEF);
   const want = c.ag - c.subscription + stats.tokens.listPriceUsd * (1 + cost.vat) * cost.usdChf;
   assert.ok(Math.abs(c.listAg - want) < 1e-6, `${c.listAg} vs ${want}`);
+});
+
+test("dates follow WRITING.md in each language", () => {
+  assert.equal(day("2026-08-17", "en"), "Aug 17");
+  assert.equal(day("2026-06-09", "en"), "Jun 9");
+  assert.equal(day("2026-09-24T22:21:00+02:00", "en", true), "Sep 24, 2026");
+  assert.equal(day("2026-08-17", "de"), "17. Aug.");
+  assert.equal(day("2026-06-09", "de"), "9. Juni");
+  assert.equal(day("2026-09-24T22:21:00+02:00", "de", true), "24. Sept. 2026");
+  assert.equal(day("2026-05-04", "de"), "4. Mai");
 });

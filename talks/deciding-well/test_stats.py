@@ -74,5 +74,19 @@ class Stats(unittest.TestCase):
         self.assertEqual(new["activeDays"]["peak"], 1)
         self.assertEqual(new["code"]["totals"]["code"], 1)
 
+    def test_tree_texts_reads_a_path_git_would_quote(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as d:
+            env = dict(os.environ, GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@t", GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@t")
+            run = lambda *a: subprocess.run(["git", "-C", d, *a], check=True, capture_output=True, env=env)
+            run("init", "-q", "-b", "main")
+            with open(os.path.join(d, "Übersicht.md"), "w") as f:
+                f.write("# Titel\n\nText\n")
+            with open(os.path.join(d, "a.py"), "w") as f:
+                f.write("x = 1\n")
+            run("add", "-A"); run("commit", "-q", "-m", "c")
+            counts = stats.line_counts(stats.tree_texts(os.path.join(d, ".git"), "HEAD"))
+        self.assertEqual(counts, {"code": 1, "test": 0, "markdown": 2})
+
 if __name__ == "__main__":
     unittest.main()
