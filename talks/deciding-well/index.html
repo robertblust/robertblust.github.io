@@ -225,8 +225,16 @@
   .reads a{display:block; color:inherit; text-decoration:none}
   .reads a:hover b{text-decoration:underline; text-underline-offset:.2em}
   .reads a span{display:block; margin-top:.6cqmin; font-size:clamp(.8rem,1.45cqmin,1.05rem); color:var(--c-mid)}
-  /* The proof column holds a third reading; the other two keep two. */
+  /* The proof and the answer hold a third reading each; the argument keeps two. */
   .reads .below{grid-column:2; grid-row:3}
+  .reads .answer3{grid-column:3; grid-row:3}
+  /* Slide 09 names the three sites; each name opens its site in a new tab, as a link inside a slide does. */
+  /* A line beside a note means what it means on every page: green is a conclusion. A note that
+     only describes or captions carries no line, because the family has no meaning for a blue one. */
+  .note.conclusion{padding-left:1.4cqmin; border-left:3px solid var(--c-sum)}
+  .cell a.site{color:inherit; text-decoration:none}
+  .cell a.site b{display:block}
+  .cell a.site:hover b{text-decoration:underline; text-underline-offset:.2em}
 
   .slide{
     position:absolute; inset:0;
@@ -274,7 +282,7 @@
   }
   .note{
     margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
-    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+    max-width:54ch; line-height:1.45;
   }
 
   /* people / agents split */
@@ -432,8 +440,8 @@
   <!-- 00 · Title -->
   <section class="slide title-slide" data-say-title="no"
     data-time="0:30"
-    data-notes="<em class='cue'>The title stays up while I greet the room and say my name, then → to the first slide.</em> Building fast is solved. Deciding well is not. I spent a career break, from June to September 2026, testing that line by building in the open. Everything in this talk can be checked: the figures come from git and were counted on September 24, 2026."
-    data-notes-de="<em class='cue'>Der Titel bleibt stehen, während ich das Publikum begrüsse und meinen Namen nenne, dann gehe ich mit → zur ersten Folie.</em> Schnell bauen ist gelöst. Gut entscheiden nicht. In einer Auszeit von Juni bis September 2026 habe ich diesen Satz geprüft, indem ich öffentlich Software entwickelt habe. Alles in diesem Vortrag lässt sich nachprüfen: Die Zahlen stammen aus git und wurden am 24. September 2026 gezählt.">
+    data-notes="<em class='cue'>The title stays up while I greet the room and say my name, then → to the first slide.</em> Building fast is solved. Deciding well is not. I spent a career break, from June to September 2026, testing that line by building in the open. Everything in this talk can be checked: the figures come from git."
+    data-notes-de="<em class='cue'>Der Titel bleibt stehen, während ich das Publikum begrüsse und meinen Namen nenne, dann gehe ich mit → zur ersten Folie.</em> Schnell bauen ist gelöst. Gut entscheiden nicht. In einer Auszeit von Juni bis September 2026 habe ich diesen Satz geprüft, indem ich öffentlich Software entwickelt habe. Alles in diesem Vortrag lässt sich nachprüfen: Die Zahlen stammen aus git.">
     <div class="kicker mono" data-n="00" data-de="Ein Vortrag">A talk</div>
     <h1 data-de="Schnell bauen ist gelöst. <em>Gut entscheiden nicht.</em>">Building fast is solved. <em>Deciding well is not.</em></h1>
     <p class="sub" data-de="Ein Vortrag über eine Auszeit, 2026.">A talk on a career break, 2026.</p>
@@ -459,14 +467,14 @@
     <div class="kicker mono" data-n="02" data-de="Die Auszeit">The break</div>
     <h1 data-de="Eine Frage, <em>vier Monate</em>.">One question, <em>four months</em>.</h1>
     <p class="sub" data-de="Juni bis September 2026: die Frage, was als Nächstes kommt – geprüft an zwei Produkten, öffentlich entwickelt.">June to September 2026: what to do next, tested by building in the open.</p>
-    <p class="note" data-de="Die Auszeit endete mit einem Entscheid, nicht nur mit einem Angebot.">It ended with a decision, not only an offer.</p>
+    <p class="note conclusion" data-de="Die Auszeit endete mit einem Entscheid, nicht nur mit einem Angebot.">It ended with a decision, not only an offer.</p>
   </section>
 
   <!-- 03 · Building fast, measured -->
   <section class="slide"
     data-time="1:00"
-    data-notes="<em class='cue'>Let the numbers stand; read two or three, not all six.</em> Twenty-three public repositories in three organizations, and one person. Five thousand and sixty-five commits on their default branches, sixteen hundred and forty merged pull requests, two hundred and seventy-two releases, and nine hosts that answer: blust.ch, companygraph.io and guestgraph.io, each with an MCP server and a chat. <em class='cue'>For the engineers:</em> ninety-one percent of the commits that are not merges carry a co-author trailer naming Claude, matched over every message, not sampled. Twenty-two of the merged pull requests are Dependabot’s. Every figure is as of September 24, 2026."
-    data-notes-de="<em class='cue'>Die Zahlen wirken lassen; zwei oder drei vorlesen, nicht alle sechs.</em> Dreiundzwanzig öffentliche Repositories in drei Organisationen, und eine Person. Fünftausendfünfundsechzig Commits auf ihren Standard-Branches, sechzehnhundertvierzig gemergte Pull-Requests, zweihundertzweiundsiebzig Releases und neun Hosts, die antworten: blust.ch, companygraph.io und guestgraph.io, jeweils mit einem MCP-Server und einem Chat. <em class='cue'>Für die Entwickler:</em> Einundneunzig Prozent der Commits, die keine Merges sind, enthalten einen Co-Author-Trailer, der Claude nennt – geprüft an jeder einzelnen Nachricht, nicht an einer Stichprobe. Zweiundzwanzig der gemergten Pull-Requests stammen von Dependabot. Alle Zahlen haben den Stand vom 24. September 2026.">
+    data-notes="<em class='cue'>Let the numbers stand; read two or three, not all six.</em> Twenty-three public repositories in three organizations, and one person. Five thousand and sixty-five commits on their default branches, sixteen hundred and forty merged pull requests, two hundred and seventy-two releases, and nine hosts that answer: blust.ch, companygraph.io and guestgraph.io, each with an MCP server and a chat. <em class='cue'>For the engineers:</em> ninety-one percent of the commits that are not merges carry a co-author trailer naming Claude, matched over every message, not sampled. Twenty-two of the merged pull requests are Dependabot’s."
+    data-notes-de="<em class='cue'>Die Zahlen wirken lassen; zwei oder drei vorlesen, nicht alle sechs.</em> Dreiundzwanzig öffentliche Repositories in drei Organisationen – und eine einzige Person. Fünftausendfünfundsechzig Commits auf ihren Standard-Branches, sechzehnhundertvierzig gemergte Pull-Requests, zweihundertzweiundsiebzig Releases und neun erreichbare Hosts: blust.ch, companygraph.io und guestgraph.io, jeweils mit einem MCP-Server und einem Chat. <em class='cue'>Für die Entwickler:</em> Einundneunzig Prozent der Commits, die keine Merges sind, enthalten einen Co-Author-Trailer, der Claude nennt – geprüft an jeder einzelnen Nachricht, nicht an einer Stichprobe. Zweiundzwanzig der gemergten Pull-Requests stammen von Dependabot.">
     <div class="kicker mono" data-n="03" data-de="Die erste Hälfte">The first half</div>
     <h1 data-de="Schnell bauen, <em>gemessen</em>.">Building fast, <em>measured</em>.</h1>
     <div class="grid">
@@ -494,13 +502,13 @@
   <!-- 05 · The cost -->
   <section class="slide"
     data-time="1:10"
-    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about two hundred dollars a month. The same work, priced at the API’s list price, would have been about ten thousand dollars of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window is August 18 to September 24, 2026, and Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027. What a Swiss team would have cost for the same result, with my own hours counted in both bills, is on the page for this talk."
-    data-notes-de="<em class='cue'>Zuerst das Geld, dann das Risiko.</em> Bezahlt habe ich das Abonnement, rund zweihundert Dollar im Monat. Dieselbe Arbeit hätte zum Listenpreis der API etwa zehntausend Dollar an Rechenleistung gekostet: rund sechzehn Milliarden Tokens, die meisten davon Kontext, der erneut aus dem Cache gelesen wurde. <em class='cue'>Für die Entwickler:</em> Der Zeitraum reicht vom 18. August bis zum 24. September 2026 und umfasst nur Claude Code. Seine Logs werden nach dreissig Tagen gelöscht, deshalb ist nichts Früheres erhalten, und Chats ausserhalb von Claude Code waren nie darin. <em class='cue'>Jetzt langsamer.</em> Das ist das Risiko. All das hängt an einigen wenigen Anbietern – Anthropic, Google und OpenAI – und an ihren Preisen und Bedingungen. Das Wissen ist portabel: reines Markdown in git, bereitgestellt über MCP, ein offenes Protokoll, das jedes Modell lesen kann. Die Geschwindigkeit ist es nicht, jedenfalls noch nicht. Die Auswege sind ein Forschungsthema für 2027. Was ein Schweizer Team für dasselbe Ergebnis gekostet hätte, meine eigenen Stunden in beiden Rechnungen eingerechnet, steht auf der Seite zu diesem Vortrag.">
+    data-notes="<em class='cue'>The money first, then the risk.</em> What I paid was the subscription, about six hundred and fifty francs in four months. The same work, priced at the API’s list price, would have been about nine thousand francs of compute: some sixteen billion tokens, most of them context read again from the cache. <em class='cue'>For the engineers:</em> the window starts on August 18, and it covers Claude Code only. Its logs are deleted after thirty days, so nothing earlier survives, and chats outside Claude Code were never in them. <em class='cue'>Slower now.</em> That is the risk. All of this rests on a few providers, Anthropic, Google and OpenAI, and on their prices and terms. The knowledge is portable: plain Markdown in git, served over MCP, an open protocol any model can read. The speed is not, not yet. The ways out are research for 2027. What a Swiss team would have cost for the same result, with my own hours counted in both bills, is on the page for this talk."
+    data-notes-de="<em class='cue'>Zuerst das Geld, dann das Risiko.</em> Bezahlt habe ich das Abonnement, rund sechshundertfünfzig Franken in vier Monaten. Dieselbe Arbeit hätte zum Listenpreis der API etwa neuntausend Franken an Rechenleistung gekostet: rund sechzehn Milliarden Tokens, die meisten davon Kontext, der erneut aus dem Cache gelesen wurde. <em class='cue'>Für die Entwickler:</em> Der Zeitraum beginnt am 18. August und umfasst nur Claude Code. Seine Logs werden nach dreissig Tagen gelöscht, deshalb ist nichts Früheres erhalten, und Chats ausserhalb von Claude Code waren nie darin. <em class='cue'>Jetzt langsamer.</em> Nun zum Risiko. All das hängt an einigen wenigen Anbietern – Anthropic, Google und OpenAI – und an ihren Preisen und Bedingungen. Das Wissen ist portabel: reines Markdown in git, bereitgestellt über MCP, ein offenes Protokoll, das jedes Modell lesen kann. Die Geschwindigkeit ist es nicht, jedenfalls noch nicht. Die Auswege sind ein Forschungsthema für 2027. Was ein Schweizer Team für dasselbe Ergebnis gekostet hätte, meine eigenen Stunden in beiden Rechnungen eingerechnet, steht auf der Seite zu diesem Vortrag.">
     <div class="kicker mono" data-n="05" data-de="Die Kosten">The cost</div>
     <h1 data-de="Bauen ist nicht mehr <em>das Teure</em>.">Building is not <em>the expensive part</em> any more.</h1>
     <div class="grid">
-      <div class="cell"><b data-de="rund 200 Dollar">about $200</b><span data-de="im Monat, bezahlt">a month, paid</span></div>
-      <div class="cell"><b data-de="rund 10’000 Dollar">about $10,000</b><span data-de="Rechenleistung zum Listenpreis der API">of compute at API list price</span></div>
+      <div class="cell"><b data-de="rund CHF 650">about CHF 650</b><span data-de="für vier Monate Abonnement bezahlt">for the subscription in four months, paid</span></div>
+      <div class="cell"><b data-de="rund CHF 9’000">about CHF 9,000</b><span data-de="Rechenleistung zum Listenpreis der API">of compute at API list price</span></div>
       <div class="cell"><b data-de="rund 16 Milliarden">about 16 billion</b><span data-de="Tokens, die meisten davon erneut gelesener Kontext">tokens, most of them context read again</span></div>
     </div>
     <p class="stamp" data-de="Das alles hängt an den Preisen und Bedingungen einiger weniger Anbieter. Das Wissen ist portabel; <b>die Geschwindigkeit noch nicht.</b>">It rests on a few providers’ prices and terms. The knowledge is portable; <b>the speed is not yet.</b></p>
@@ -537,7 +545,7 @@
       <div class="cell"><b data-de="1">1</b><span data-de="Revert in 5’065 Commits">revert in 5,065 commits</span></div>
       <div class="cell"><b data-de="12">12</b><span data-de="Repositories in einer Release-Welle, am selben Tag ersetzt">repositories in one release wave, replaced the same day</span></div>
     </div>
-    <p class="note" data-de="Ein Agent musste die Entscheide aus Fliesstext herauslesen. Als Nächstes werden sie Teil des Modells.">An agent had to read them out of prose. Next, decisions become part of the model.</p>
+    <p class="note conclusion" data-de="Ein Agent musste die Entscheide aus Fliesstext herauslesen. Als Nächstes werden sie Teil des Modells.">An agent had to read them out of prose. Next, decisions become part of the model.</p>
   </section>
 
   <!-- 08 · One graph -->
@@ -554,35 +562,37 @@
   <!-- 09 · It runs -->
   <section class="slide"
     data-time="0:45"
-    data-notes="<em class='cue'>Short. Point at the three addresses.</em> There are three instances, and each runs on a mental model of its own: blust.ch on mine, a company of one; companygraph.io on CompanyGraph’s, the product describing itself; guestgraph.io on GuestGraph’s, and beside that model sits the product itself in code: the engine, which is the open core, and the connector to Apaleo. Each model is a repository of Markdown in git, and each is served three ways: as a site, as an MCP server and as a chat. <em class='cue'>The invitation:</em> open one of the chats and ask it a question the model can answer."
-    data-notes-de="<em class='cue'>Kurz. Ich zeige auf die drei Adressen.</em> Es gibt drei Instanzen, und jede läuft auf einem eigenen Mental Model: blust.ch auf meinem, dem einer Ein-Personen-Firma; companygraph.io auf dem von CompanyGraph, mit dem das Produkt sich selbst beschreibt; guestgraph.io auf dem von GuestGraph, und neben diesem Modell steht das Produkt selbst als Code: die Engine, also der Open Core, und der Apaleo-Connector. Jedes Modell ist ein Repository aus Markdown in git, und jedes wird auf drei Wegen bereitgestellt: als Website, als MCP-Server und als Chat. <em class='cue'>Die Einladung:</em> Öffnen Sie einen der Chats und stellen Sie ihm eine Frage, die das Modell beantworten kann.">
+    data-notes="<em class='cue'>Short. Point at the three addresses.</em> There are three instances, and each runs on a mental model of its own: blust.ch on mine, a company of one; companygraph.io on CompanyGraph’s, the product describing itself; guestgraph.io on GuestGraph’s, and beside that model sits the product itself in code: the engine, which is the open core, and the connector to Apaleo. Each model is a repository of Markdown in git, and each is served three ways: as a site, as an MCP server and as a chat. Both products are now ready for scrutiny. Each is open core: the substance is open source, and exactly one part of each could ever earn money. Whether it will is the experiment, and the questions validation has to answer are on blust.ch/ideas. Honest feedback is the point: a no is worth more to me than a polite yes. <em class='cue'>The invitation:</em> open one of the chats and ask it a question the model can answer."
+    data-notes-de="<em class='cue'>Kurz. Ich zeige auf die drei Adressen.</em> Es gibt drei Instanzen, und jede läuft auf einem eigenen Mental Model: blust.ch auf meinem, dem einer Ein-Personen-Firma; companygraph.io auf dem von CompanyGraph, mit dem das Produkt sich selbst beschreibt; guestgraph.io auf dem von GuestGraph, und neben diesem Modell steht das Produkt selbst als Code: die Engine, also der Open Core, und der Apaleo-Connector. Jedes Modell ist ein Repository aus Markdown in git, und jedes wird auf drei Wegen bereitgestellt: als Website, als MCP-Server und als Chat. Beide Produkte sind jetzt zur Prüfung gestellt. Beide sind Open Core: Die Substanz ist quelloffen, und bei jedem könnte genau ein Teil eines Tages Geld einbringen. Ob das gelingt, ist das Experiment, und die Fragen, die die Validierung beantworten muss, stehen auf blust.ch/ideas. Es geht um ehrliches Feedback: Ein Nein ist mir mehr wert als ein höfliches Ja. <em class='cue'>Die Einladung:</em> Öffnen Sie einen der Chats und stellen Sie ihm eine Frage, die das Modell beantworten kann.">
     <div class="kicker mono" data-n="09" data-de="Es läuft">It runs</div>
     <h1 data-de="Es <em>läuft</em>.">It <em>runs</em>.</h1>
     <div class="grid">
-      <div class="cell"><b data-de="blust.ch">blust.ch</b><span data-de="das Mental Model von Robert Blust, einer Ein-Personen-Firma<br>Website · MCP-Server · Chat">the mental model of Robert Blust, a company of one<br>site · MCP server · chat</span></div>
-      <div class="cell"><b data-de="companygraph.io">companygraph.io</b><span data-de="das Mental Model von CompanyGraph, das sich selbst beschreibt<br>Website · MCP-Server · Chat">the mental model of CompanyGraph, describing itself<br>site · MCP server · chat</span></div>
-      <div class="cell"><b data-de="guestgraph.io">guestgraph.io</b><span data-de="das Mental Model von GuestGraph<br>Website · MCP-Server · Chat<br>und das Produkt als Code: die Open-Core-Engine und der Apaleo-Connector">the mental model of GuestGraph<br>site · MCP server · chat<br>and the product in code: the open-core engine and the Apaleo connector</span></div>
+      <div class="cell"><a class="site" href="https://blust.ch/" target="_blank" rel="noopener"><b>blust.ch</b></a><span data-de="das Mental Model von Robert Blust, einer Ein-Personen-Firma<br>Website · MCP-Server · Chat">the mental model of Robert Blust, a company of one<br>site · MCP server · chat</span></div>
+      <div class="cell"><a class="site" href="https://companygraph.io/" target="_blank" rel="noopener"><b>companygraph.io</b></a><span data-de="das Mental Model von CompanyGraph, das sich selbst beschreibt<br>Website · MCP-Server · Chat">the mental model of CompanyGraph, describing itself<br>site · MCP server · chat</span></div>
+      <div class="cell"><a class="site" href="https://guestgraph.io/" target="_blank" rel="noopener"><b>guestgraph.io</b></a><span data-de="das Mental Model von GuestGraph<br>Website · MCP-Server · Chat<br>und das Produkt als Code: die Open-Core-Engine und der Apaleo-Connector">the mental model of GuestGraph<br>site · MCP server · chat<br>and the product in code: the open-core engine and the Apaleo connector</span></div>
     </div>
     <p class="note" data-de="Drei Mental Models, jedes in git, jedes auf drei Wegen bereitgestellt. Stellen Sie einem Chat eine Frage, die sein Modell beantworten kann.">Three mental models, each in git, each served three ways. Ask a chat a question its model can answer.</p>
+    <p class="stamp" data-de="CompanyGraph und GuestGraph sind <b>zur Prüfung gestellt</b>: Open Core, öffentlich zu validieren.">CompanyGraph and GuestGraph are <b>ready for scrutiny</b>: open core, validated in the open.</p>
   </section>
 
   <!-- 10 · Deciding well is the work -->
   <section class="slide"
     data-time="0:45"
-    data-notes="<em class='cue'>Slow down for the close.</em> Building fast is solved; the numbers show it. Deciding well is not, and the same numbers show that too. What comes next: from October, an IT architect role, and from 2027, education in how AI is led and governed in an organization, with the provider question in it. <em class='cue'>Short pause, then the thanks.</em> Thank you."
-    data-notes-de="<em class='cue'>Langsamer werden für den Schluss.</em> Schnell bauen ist gelöst; die Zahlen zeigen es. Gut entscheiden nicht, und dieselben Zahlen zeigen auch das. Was als Nächstes kommt: ab Oktober eine Rolle als IT-Architekt und ab 2027 Weiterbildung darin, wie KI in einer Organisation geführt und gesteuert wird – die Frage nach den Anbietern eingeschlossen. <em class='cue'>Kurze Pause, dann der Dank.</em> Danke.">
+    data-notes="<em class='cue'>Slow down for the close.</em> For me, building fast is solved: the approach is defined, and these four months proved it. Deciding well is not solved. What I propose is a way to decide well: write down in a mental model what is decided and why, and let agentic AI work inside it. That proposal is one of the outcomes of the experiment, and it is not proven yet. Validate it with me, and tell me whether it works. What comes next: from October, an IT architect role. I had offers as a lead engineer, some of them better paid, and I turned them down. The break asked what I like doing, not what I am used to being hired for, and the answer was never the salary: it is the culture, the values and what motivates me. And with the right guardrails, an agent writes code faster than any team, so pure development will change; deciding what gets built, and within which boundaries, will not. That is the conclusion of this talk, applied to my own career, and I believe it is the more lasting one. From 2027, education in how AI is led and governed in an organization, with the provider question in it. <em class='cue'>Short pause, then the thanks.</em> Thank you."
+    data-notes-de="<em class='cue'>Langsamer werden für den Schluss.</em> Schnell bauen ist für mich gelöst: Der Ansatz ist definiert, und diese vier Monate haben es bewiesen. Gut entscheiden ist nicht gelöst. Was ich vorschlage, ist ein Weg, gut zu entscheiden: In einem Mental Model festhalten, was entschieden wird und warum, und agentische KI darin arbeiten lassen. Dieser Vorschlag ist eines der Ergebnisse des Experiments, und er ist noch nicht bewiesen. Validieren Sie ihn mit mir, und sagen Sie mir, ob er funktioniert. Was als Nächstes kommt: ab Oktober eine Rolle als IT-Architekt. Ich hatte Angebote als Lead Engineer, einige davon besser bezahlt, und ich habe sie abgelehnt. In der Auszeit ging es darum, was ich gern mache – nicht darum, wofür man mich üblicherweise einstellt. Und die Antwort war nie das Gehalt: Es sind die Kultur, die Werte und das, was mich motiviert. Dazu kommt: Mit den richtigen Leitplanken schreibt ein Agent Code schneller als jedes Team. Die reine Entwicklung wird sich deshalb verändern. Zu entscheiden, was gebaut wird und innerhalb welcher Grenzen, wird sich nicht ändern. Das ist die Schlussfolgerung dieses Vortrags, angewandt auf meine eigene Laufbahn, und ich glaube, diese Wahl hat länger Bestand. Ab 2027 dann Weiterbildung darin, wie KI in einer Organisation geführt und gesteuert wird – die Frage nach den Anbietern eingeschlossen. <em class='cue'>Kurze Pause, dann der Dank.</em> Danke.">
     <div class="kicker mono" data-n="10" data-de="Was als Nächstes kommt">What comes next</div>
     <h1 class="big-punch" data-de="Gut entscheiden ist <em>die Arbeit</em>.">Deciding well is <em>the work</em>.</h1>
     <p class="sub" data-de="Schnell bauen ist gelöst. Gut entscheiden nicht.">Building fast is solved. Deciding well is not.</p>
-    <p class="stamp" data-de="blust.ch · companygraph.io · guestgraph.io – ab Oktober eine Rolle als IT-Architekt; ab 2027 <b>Weiterbildung darin, wie KI geführt und gesteuert wird.</b>">blust.ch · companygraph.io · guestgraph.io — from October, an IT architect role; from 2027, <b>education in how AI is led and governed.</b></p>
+    <p class="note conclusion" data-de="Mein Vorschlag: gut entscheiden mit einem Mental Model und agentischer KI. <b>Validieren&nbsp;Sie&nbsp;ihn&nbsp;mit&nbsp;mir.</b>">My proposal: decide well with a mental model and agentic AI. <b>Validate&nbsp;it&nbsp;with&nbsp;me.</b></p>
+    <p class="stamp" data-de="<a href='https://blust.ch/' target='_blank' rel='noopener'>blust.ch</a> · <a href='https://companygraph.io/' target='_blank' rel='noopener'>companygraph.io</a> · <a href='https://guestgraph.io/' target='_blank' rel='noopener'>guestgraph.io</a> – ab Oktober eine Rolle als IT-Architekt statt als Lead Engineer; ab 2027 <b>Weiterbildung darin, wie KI geführt und gesteuert wird.</b>"><a href="https://blust.ch/" target="_blank" rel="noopener">blust.ch</a> · <a href="https://companygraph.io/" target="_blank" rel="noopener">companygraph.io</a> · <a href="https://guestgraph.io/" target="_blank" rel="noopener">guestgraph.io</a> — from October, an IT architect role, chosen over lead-engineer offers; from 2027, <b>education in how AI is led and governed.</b></p>
   </section>
 
 
   <!-- 11 · Read more -->
   <section class="slide"
     data-time="0:30"
-    data-notes="<em class='cue'>Leave this up while questions come.</em> Seven places to start reading, in the order of the talk: the argument, the proof and the answer."
-    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Sieben Orte, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
+    data-notes="<em class='cue'>Leave this up while questions come.</em> Eight places to start reading, in the order of the talk: the argument, the proof and the answer."
+    data-notes-de="<em class='cue'>Stehen lassen, während die Fragen kommen.</em> Acht Orte, an denen Sie weiterlesen können, in der Reihenfolge des Vortrags: die These, die Belege und die Antwort.">
     <div class="kicker mono" data-n="11" data-de="Weiterlesen">Read more</div>
     <h1 data-de="Wo Sie <em>weiterlesen</em> können.">Where to <em>start reading</em>.</h1>
     <div class="grid reads">
@@ -593,6 +603,7 @@
       <div class="cell"><a href="https://blust.ch/timeline/" target="_blank" rel="noopener"><b data-de="Die Laufbahn, Eintrag für Eintrag">The career as a ledger</b><span class="mono">blust.ch/timeline</span></a></div>
       <div class="cell below"><a href="https://blust.ch/talks/deciding-well/cost/" target="_blank" rel="noopener"><b data-de="Was ein Team gekostet hätte">What a team would have cost</b><span class="mono">blust.ch/talks/deciding-well/cost</span></a></div>
       <div class="cell"><a href="https://companygraph.io/surfaces/" target="_blank" rel="noopener"><b data-de="Wo das Modell veröffentlicht ist">Where the model is published</b><span class="mono">companygraph.io/surfaces</span></a></div>
+      <div class="cell answer3"><a href="https://blust.ch/ideas/" target="_blank" rel="noopener"><b data-de="Zwei Ideen, zur Prüfung gestellt">Two ideas, put up for scrutiny</b><span class="mono">blust.ch/ideas</span></a></div>
     </div>
   </section>
 </div>
