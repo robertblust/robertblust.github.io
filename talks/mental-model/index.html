@@ -254,8 +254,11 @@
   }
   .note{
     margin-top:4.4cqmin; font-size:clamp(1.05rem,2.3cqmin,1.7rem); color:var(--ink);
-    padding-left:1.4cqmin; border-left:3px solid var(--c-mid); max-width:54ch; line-height:1.45;
+    max-width:54ch; line-height:1.45;
   }
+  /* A line beside a note means what it means on every page of the family: green is a conclusion.
+     A note that only frames or captions carries no line, because the family has no meaning for a blue one. */
+  .note.conclusion{padding-left:1.4cqmin; border-left:3px solid var(--c-sum)}
 
   /* people / agents split */
   .thennow{display:grid; grid-template-columns:1fr 1fr; gap:6cqmin; margin-top:3cqmin}
@@ -577,7 +580,7 @@
     data-notes="<em class='cue'>My punchline — short pause before it. ONE point, clearly:</em> the right context makes AI far more reliable. Without context an AI knows neither your decisions nor your rules — it guesses. <em class='cue'>Important: don't claim 'without hallucinations'.</em> The Mental Model shrinks the space where it has to guess and keeps agents inside the guardrails — vision, strategy, process, rules. <em class='cue'>And always stress:</em> with human oversight; AI comments are input, not verdict.">
     <div class="kicker mono" data-n="08" data-de="Warum das wichtig ist">Why it matters</div>
     <h1 class="big-punch" data-de="Der richtige Kontext macht KI <em>deutlich verlässlicher</em>.">The right context makes AI <em>far more reliable</em>.</h1>
-    <p class="note" data-de="Ohne Kontext kennt KI weder Ihre Entscheide noch Ihre Regeln – sie rät. Das Mental Model verkleinert den Raum, in dem sie raten muss, und hält Agenten innerhalb der Leitplanken. Immer mit menschlicher Kontrolle.">Without context, AI knows neither your decisions nor your rules — it guesses. The Mental Model shrinks that space and keeps agents inside the guardrails. Always with human oversight.</p>
+    <p class="note conclusion" data-de="Ohne Kontext kennt KI weder Ihre Entscheide noch Ihre Regeln – sie rät. Das Mental Model verkleinert den Raum, in dem sie raten muss, und hält Agenten innerhalb der Leitplanken. Immer mit menschlicher Kontrolle.">Without context, AI knows neither your decisions nor your rules — it guesses. The Mental Model shrinks that space and keeps agents inside the guardrails. Always with human oversight.</p>
   </section>
 
   <!-- 09 · Takeaway -->
