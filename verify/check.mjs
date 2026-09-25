@@ -258,6 +258,11 @@ const CHECKS = {
       empty: [...document.querySelectorAll("[data-v]")].filter(e => !e.textContent.trim()).map(e => e.dataset.v),
       text: document.querySelector("main").innerText }));
     await page.waitForFunction(() => document.querySelector('[data-v="ag"]').textContent.trim() !== "");
+    // A group of buttons is a choice of something; a screen reader has to hear what.
+    const unnamed = await page.evaluate(() => [...document.querySelectorAll("main [role=group]")]
+      .filter(g => !(g.getAttribute("aria-label") || (document.getElementById(g.getAttribute("aria-labelledby") || "") || {}).textContent || "").trim())
+      .map(g => g.id || g.className));
+    if (unnamed.length) return `button groups without a name: ${unnamed.join(", ")}`;
     let r = await read();
     if (r.empty.length) return `empty slots in English: ${r.empty.join(", ")}`;
     for (const f of spec.slotsFilled.en) if (!r.text.includes(f)) return `the English page does not show ${f}`;
@@ -275,6 +280,13 @@ const CHECKS = {
     try { await page.waitForFunction(() => !document.getElementById("costerr").hidden, null, { timeout: 5000 }); }
     catch { return "with cost.json unavailable the page did not say so"; }
     await page.unroute("**/cost.json");
+    // A snapshot from before the page existed, which a browser cache can still hold after a
+    // deploy: readable JSON without the figures the page needs is a failed load too.
+    await page.route("**/stats.json", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ totals: {} }) }));
+    await page.goto(BASE + spec.path);
+    try { await page.waitForFunction(() => !document.getElementById("costerr").hidden, null, { timeout: 5000 }); }
+    catch { return "with a stats.json that lacks the page's figures the page did not say so"; }
+    await page.unroute("**/stats.json");
     await page.goto(BASE + spec.path);
     return null;
   },

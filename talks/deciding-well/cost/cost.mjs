@@ -27,14 +27,18 @@ export function compute(cost, stats, { lens, scenario, peakHours, share }) {
   const agTools = subscription + voice + chatApi + hosting + domains;
   const ag = agOwner + agTools;
 
-  const listAg = ag - subscription + stats.tokens.listPriceUsd * cost.usdChf;
+  // The list price is billed by the same company as the subscription, so it carries the same VAT.
+  const listAg = ag - subscription + stats.tokens.listPriceUsd * (1 + cost.vat) * cost.usdChf;
   const gaps = cost.gaps.reduce((a, g) => a + g.chf, 0);
+  // What the conservative case asks of each person-month, over the code and tests measured.
+  const basePm = cost.roles.reduce((a, r) => a + r.pm, 0);
+  const locPerPm = (stats.code.totals.code + stats.code.totals.test) / (basePm * cost.scenarios.conservative.factor);
   return {
     months: sc.months, factor: sc.factor, roles, team, teamPm, teamFte: teamPm / sc.months,
     ownerHourly, convOwnerHours, convOwner, convTools, conv,
     agHours, agEarly, agPeak, agOwner, subscription, voice, chatApi, hosting, domains, agTools, ag,
     ratio: conv / ag, saved: conv - ag, faster: sc.months / cost.agenticMonths,
-    listAg, listRatio: conv / listAg, gaps, gapAg: ag + gaps, gapRatio: conv / (ag + gaps),
+    listAg, listRatio: conv / listAg, locPerPm, gaps, gapAg: ag + gaps, gapRatio: conv / (ag + gaps),
     workstreams: cost.workstreams.map(w => ({ id: w.id, pm: w.pm * sc.factor })),
   };
 }
@@ -89,7 +93,7 @@ export function render(state, data, lang) {
     mSenior: m(data.cost.roles.find(r => r.id === "backend").salary),
     mRateLo: n0(Math.min(...data.cost.roles.map(r => r.rate))), mRateHi: n0(Math.max(...data.cost.roles.map(r => r.rate))),
     mOwnerSalary: m(data.cost.owner.salary), mOwnerRate: n0(data.cost.owner.rate), mFx: num(data.cost.usdChf, lang, 2),
-    locPerPm: n0((code.code + code.test) / (c.teamPm / c.factor * 1.3)),
+    locPerPm: n0(c.locPerPm),
   };
   for (const el of $$("[data-v]")) if (el.dataset.v in v) el.textContent = v[el.dataset.v];
   for (const r of c.roles) for (const el of $$(`[data-role="${r.id}"]`)) {
@@ -114,6 +118,10 @@ async function boot() {
   try {
     const get = u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
     const [cost, stats, decisions] = await Promise.all([get("../cost.json"), get("../stats.json"), get("../decisions.json")]);
+    // A browser can hold a snapshot from before this page existed for a while after a deploy:
+    // readable, and without the figures below. That is a failed load, said as one.
+    if (!stats.activeDays || !stats.code || !stats.code.totals || !stats.tokens || !stats.totals.commits
+        || !cost.scenarios || !cost.tools || !decisions.counts) throw new Error("a file lacks the page's figures");
     data = { cost, stats, decisions };
     state.scenario = cost.scenarios.default;
     state.peakHours = cost.owner.peakHours;

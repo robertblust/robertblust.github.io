@@ -52,3 +52,18 @@ test("money and numbers group the way each language writes them", () => {
   assert.equal(num(8.4, "en", 1), "8.4");
   assert.equal(num(8.4, "de", 1), "8,4");
 });
+
+test("the conservative case's lines per person-month follow cost.json's factor", () => {
+  const c = compute(cost, stats, DEF);
+  const lines = stats.code.totals.code + stats.code.totals.test;
+  const basePm = cost.roles.reduce((a, r) => a + r.pm, 0);
+  assert.equal(Math.round(c.locPerPm), Math.round(lines / (basePm * cost.scenarios.conservative.factor)));
+  const other = { ...cost, scenarios: { ...cost.scenarios, conservative: { factor: 1.4, months: 12 } } };
+  assert.equal(Math.round(compute(other, stats, DEF).locPerPm), Math.round(lines / (basePm * 1.4)));
+});
+
+test("the list-price alternative carries VAT like every other Anthropic line", () => {
+  const c = compute(cost, stats, DEF);
+  const want = c.ag - c.subscription + stats.tokens.listPriceUsd * (1 + cost.vat) * cost.usdChf;
+  assert.ok(Math.abs(c.listAg - want) < 1e-6, `${c.listAg} vs ${want}`);
+});

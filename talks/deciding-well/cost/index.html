@@ -300,10 +300,10 @@
     <p class="costerr" id="costerr" hidden data-de="Die Zahlen wurden nicht geladen, deshalb zeigt diese Seite keine. Laden Sie die Seite neu, oder lesen Sie die Zahlen in stats.json und cost.json beim Vortrag nach.">The figures did not load, so this page shows none. Reload it, or read them in stats.json and cost.json beside the talk.</p>
 
     <section class="assume" aria-label="Assumptions" data-de-aria="Annahmen">
-      <div class="ctl"><span class="lbl" data-de="Arbeit bewerten nach">Price labor as</span>
-        <div class="seg" role="group" id="lens"><button type="button" data-v-lens="inhouse" aria-pressed="true" data-de="Arbeitgeberkosten">Employer cost</button><button type="button" data-v-lens="contract" aria-pressed="false" data-de="Freelancer-Ansätze">Contractor rates</button></div></div>
-      <div class="ctl"><span class="lbl" data-de="Schätzung für das Team">Team estimate</span>
-        <div class="seg" role="group" id="scen"><button type="button" data-v-scen="lean" aria-pressed="false" data-de="Schlank">Lean</button><button type="button" data-v-scen="expected" aria-pressed="true" data-de="Erwartet">Expected</button><button type="button" data-v-scen="conservative" aria-pressed="false" data-de="Konservativ">Conservative</button></div></div>
+      <div class="ctl"><span class="lbl" id="lensLbl" data-de="Arbeit bewerten nach">Price labor as</span>
+        <div class="seg" role="group" id="lens" aria-labelledby="lensLbl"><button type="button" data-v-lens="inhouse" aria-pressed="true" data-de="Arbeitgeberkosten">Employer cost</button><button type="button" data-v-lens="contract" aria-pressed="false" data-de="Freelancer-Ansätze">Contractor rates</button></div></div>
+      <div class="ctl"><span class="lbl" id="scenLbl" data-de="Schätzung für das Team">Team estimate</span>
+        <div class="seg" role="group" id="scen" aria-labelledby="scenLbl"><button type="button" data-v-scen="lean" aria-pressed="false" data-de="Schlank">Lean</button><button type="button" data-v-scen="expected" aria-pressed="true" data-de="Erwartet">Expected</button><button type="button" data-v-scen="conservative" aria-pressed="false" data-de="Konservativ">Conservative</button></div></div>
       <div class="ctl"><label class="lbl" for="peak" data-de="Stunden des Owners pro Tag, ab 17. Aug.">Owner’s hours a day, from Aug 17</label>
         <span class="rng"><input type="range" id="peak" min="6" max="14" step="1" value="8"><output for="peak" id="peakOut"></output></span></div>
       <div class="ctl"><label class="lbl" for="share" data-de="Pensum des Owners">Owner’s share of the team’s months</label>
