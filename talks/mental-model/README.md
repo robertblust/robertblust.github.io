@@ -1,6 +1,6 @@
 # The Mental Model
 
-A short (10-minute) talk by **Robert Blust** on the **Mental Model** — a structured, machine-readable knowledge base that acts as the *brain* of a company: one source of truth for vision, strategy, processes, roles, KPIs, rules and decisions, serving both **human company management** and **agentic AI**.
+A short talk, six minutes played, by **Robert Blust** on the **Mental Model** — a structured, machine-readable knowledge base that acts as the *brain* of a company: one source of truth for vision, strategy, processes, roles, KPIs, rules and decisions, serving both **human company management** and **agentic AI**.
 
 Same approach as the companion talk [essential-complexity](https://blust.ch/talks/essential-complexity/).
 
