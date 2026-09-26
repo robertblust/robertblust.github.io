@@ -1,5 +1,5 @@
 {
-  "commit": "03217d9b53244f5bb786b7f98f31a76894550d00",
+  "commit": "86b64d3f5b0bc1651d2ed40c59aea73ccea79626",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -10608,6 +10608,162 @@
       "path": "model/questions/how-well-does-this-chat-answer.md"
     },
     {
+      "id": "questions/is-deciding-well-solved-for-robert",
+      "type": "question",
+      "name": "Is deciding well solved for Robert?",
+      "tagline": "For Robert himself, yes: a blog post walks one of his own decisions in the order it happened, so a reader can check each step against the record. For a team it is not, because one person and one decision prove nothing about a team, and there the talk's claim stays an open proposal.",
+      "fields": {
+        "source": "Local",
+        "kind": "Ideas"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Deciding well is solved. For me.",
+                  "Robert Blust",
+                  "why it is solved for Robert"
+                ],
+                [
+                  "decision",
+                  "An 80% architect role in a product company, chosen over pay",
+                  "",
+                  "the decision the post walks"
+                ],
+                [
+                  "experience",
+                  "Building fast is solved. Deciding well is not.",
+                  "Robert Blust",
+                  "why it stays open for a team"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Deciding well is solved. For me.",
+                "Robert Blust",
+                "why it is solved for Robert"
+              ],
+              [
+                "decision",
+                "An 80% architect role in a product company, chosen over pay",
+                "",
+                "the decision the post walks"
+              ],
+              [
+                "experience",
+                "Building fast is solved. Deciding well is not.",
+                "Robert Blust",
+                "why it stays open for a team"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-deciding-well-solved-for-robert.md"
+    },
+    {
+      "id": "questions/is-robert-studying-anything-now",
+      "type": "question",
+      "name": "Is Robert studying anything now?",
+      "tagline": "The objective says what he is working toward and by when, the decision on the first CAS says where the study starts and whether that call is made yet, and the decision on the education says who carries its days and fees.",
+      "fields": {
+        "source": "Local",
+        "kind": "Career"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "A continuing-education master's in AI leadership",
+                  "",
+                  "what he is working toward"
+                ],
+                [
+                  "decision",
+                  "The first CAS is AI Innovation at HWZ",
+                  "",
+                  "where it starts"
+                ],
+                [
+                  "decision",
+                  "The education is on my own account, and the fifth day stays mine",
+                  "",
+                  "who carries it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "A continuing-education master's in AI leadership",
+                "",
+                "what he is working toward"
+              ],
+              [
+                "decision",
+                "The first CAS is AI Innovation at HWZ",
+                "",
+                "where it starts"
+              ],
+              [
+                "decision",
+                "The education is on my own account, and the fifth day stays mine",
+                "",
+                "who carries it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/is-robert-studying-anything-now.md"
+    },
+    {
       "id": "questions/is-what-i-type-here-stored",
       "type": "question",
       "name": "Is what I type here stored?",
@@ -10797,7 +10953,7 @@
       "id": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
       "type": "question",
       "name": "What does \"Building fast is solved. Deciding well is not.\" mean?",
-      "tagline": "It is the tagline on Robert's profile, a claim rather than a slogan because a value and a talk stand behind it and say what it means, and a blog post closes the one case the talk leaves open; the company's own tagline, on the identity, is a different line and says what the company is.",
+      "tagline": "It is the tagline on Robert's profile, a claim rather than a slogan because a value and a talk stand behind it and say what it means; for Robert himself deciding well is solved, which a blog post shows on one decision a reader can check, and for a team it stays the proposal the talk leaves open; the company's own tagline, on the identity, is a different line and says what the company is.",
       "fields": {
         "source": "Local",
         "kind": "Ideas"
@@ -10838,7 +10994,7 @@
                   "experience",
                   "Deciding well is solved. For me.",
                   "Robert Blust",
-                  "the one case the author closes"
+                  "why it is solved for Robert and still open for a team"
                 ],
                 [
                   "identity",
@@ -10880,7 +11036,7 @@
                 "experience",
                 "Deciding well is solved. For me.",
                 "Robert Blust",
-                "the one case the author closes"
+                "why it is solved for Robert and still open for a team"
               ],
               [
                 "identity",
@@ -11568,10 +11724,142 @@
       "path": "model/questions/who-answers-this-chat.md"
     },
     {
+      "id": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "type": "question",
+      "name": "Why are CompanyGraph and GuestGraph built in public?",
+      "tagline": "The decision says why the two products are built in public repositories rather than shown when finished, and the value it upholds says why something has to work before the point is made.",
+      "fields": {
+        "source": "Local",
+        "kind": "Ideas"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "The two products are built in the open",
+                  "",
+                  "why in public"
+                ],
+                [
+                  "value",
+                  "Build the alternative before making the point",
+                  "",
+                  "the value behind it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "The two products are built in the open",
+                "",
+                "why in public"
+              ],
+              [
+                "value",
+                "Build the alternative before making the point",
+                "",
+                "the value behind it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/why-are-companygraph-and-guestgraph-built-in-public.md"
+    },
+    {
+      "id": "questions/why-does-robert-work-part-time",
+      "type": "question",
+      "name": "Why does Robert work part-time?",
+      "tagline": "The decision to take the architect role says why it is at 80% and what the fifth day is for, and a later decision says why the 80% stays rather than a full workload with days released for school.",
+      "fields": {
+        "source": "Local",
+        "kind": "Career"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "An 80% architect role in a product company, chosen over pay",
+                  "",
+                  "why 80%, and the fifth day"
+                ],
+                [
+                  "decision",
+                  "The education is on my own account, and the fifth day stays mine",
+                  "",
+                  "why it stays 80%"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "decision",
+                "An 80% architect role in a product company, chosen over pay",
+                "",
+                "why 80%, and the fifth day"
+              ],
+              [
+                "decision",
+                "The education is on my own account, and the fifth day stays mine",
+                "",
+                "why it stays 80%"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/why-does-robert-work-part-time.md"
+    },
+    {
       "id": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "type": "question",
       "name": "Why is there a career break, and what happened in it?",
-      "tagline": "The career break says why it was taken and what it found, CompanyGraph and GuestGraph are the two products it built in the open, and a blog post walks the decision that ended it.",
+      "tagline": "The career break says why it was taken and what it found, the decisions that opened it say what it was given to find out and how the next role was looked for, CompanyGraph and GuestGraph are the two products it built in the open, and a blog post walks the decision that ended it.",
       "fields": {
         "source": "Local",
         "kind": "Career"
@@ -11595,6 +11883,18 @@
                   "Career break",
                   "Robert Blust",
                   "why, and what it found"
+                ],
+                [
+                  "decision",
+                  "Four months to find out what I want to do next",
+                  "",
+                  "what it was given to find out"
+                ],
+                [
+                  "decision",
+                  "Two tracks at once, and the market answers",
+                  "",
+                  "how the next role was looked for"
                 ],
                 [
                   "experience",
@@ -11637,6 +11937,18 @@
                 "Career break",
                 "Robert Blust",
                 "why, and what it found"
+              ],
+              [
+                "decision",
+                "Four months to find out what I want to do next",
+                "",
+                "what it was given to find out"
+              ],
+              [
+                "decision",
+                "Two tracks at once, and the market answers",
+                "",
+                "how the next role was looked for"
               ],
               [
                 "experience",
@@ -21886,6 +22198,90 @@
       "attrs": {}
     },
     {
+      "from": "questions/is-deciding-well-solved-for-robert",
+      "to": "decisions/2026-architect-role",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the decision the post walks"
+      }
+    },
+    {
+      "from": "questions/is-deciding-well-solved-for-robert",
+      "to": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "why it is solved for Robert"
+      }
+    },
+    {
+      "from": "questions/is-deciding-well-solved-for-robert",
+      "to": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "why it stays open for a team"
+      }
+    },
+    {
+      "from": "questions/is-deciding-well-solved-for-robert",
+      "to": "question-kinds/ideas",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-deciding-well-solved-for-robert",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-robert-studying-anything-now",
+      "to": "decisions/2026-education-on-my-own-account",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "who carries it"
+      }
+    },
+    {
+      "from": "questions/is-robert-studying-anything-now",
+      "to": "decisions/2026-first-cas",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "where it starts"
+      }
+    },
+    {
+      "from": "questions/is-robert-studying-anything-now",
+      "to": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what he is working toward"
+      }
+    },
+    {
+      "from": "questions/is-robert-studying-anything-now",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/is-robert-studying-anything-now",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/is-what-i-type-here-stored",
       "to": "roles/answerer",
       "via": "Rests on.Entity",
@@ -21998,7 +22394,7 @@
       "attrs": {
         "Type": "experience",
         "Owner": "Robert Blust",
-        "For": "the one case the author closes"
+        "For": "why it is solved for Robert and still open for a team"
       }
     },
     {
@@ -22410,6 +22806,70 @@
       "attrs": {}
     },
     {
+      "from": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "to": "decisions/2026-in-the-open",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why in public"
+      }
+    },
+    {
+      "from": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "to": "values/build-the-alternative-before-making-the-point",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "the value behind it"
+      }
+    },
+    {
+      "from": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "to": "question-kinds/ideas",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-does-robert-work-part-time",
+      "to": "decisions/2026-architect-role",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why 80%, and the fifth day"
+      }
+    },
+    {
+      "from": "questions/why-does-robert-work-part-time",
+      "to": "decisions/2026-education-on-my-own-account",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "why it stays 80%"
+      }
+    },
+    {
+      "from": "questions/why-does-robert-work-part-time",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/why-does-robert-work-part-time",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "to": "decisions/2026-architect-role",
       "via": "Rests on.Entity",
@@ -22417,6 +22877,26 @@
         "Type": "decision",
         "Owner": "",
         "For": "the decision that ended it"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "decisions/2026-four-months",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "what it was given to find out"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "decisions/2026-two-tracks",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "how the next role was looked for"
       }
     },
     {
