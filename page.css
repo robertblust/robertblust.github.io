@@ -1,5 +1,6 @@
-/* @robertblust/design — page.css, assembled from the shared blocks: reset v2 · header v16 ·
-   title v1 · lines v1 · footer v1 · principles v1 · team v2 · surfaces v1 · index v1.
+/* @robertblust/design — page.css, assembled from the shared blocks: reset v3 · link v1 ·
+   header v16 · title v1 · lines v1 · footer v2 · principles v1 · team v2 · surfaces v1 ·
+   index v2.
    Editing this file in a site does nothing: the next npm run design overwrites it. */
 
 *{box-sizing:border-box; margin:0; padding:0}
@@ -11,7 +12,6 @@ body{
   display:flex; flex-direction:column;
 }
 .mono{font-family:"Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
-a{color:inherit}
 /* The gutter is proportional until it has enough, and then it stops. `box-sizing` is
    border-box here, so the padding comes out of the max-width rather than sitting outside it:
    with a bare `7vw` the column got narrower the wider the screen got — 1001px at 1280,
@@ -23,6 +23,10 @@ a{color:inherit}
    so every width below the widest laptop is unchanged to the pixel and only the screens
    where this was broken move. */
 .shell{width:100%; max-width:1180px; margin:0 auto; padding:0 min(7vw, 80px)}
+
+:where(a){color:inherit}
+:where(a:not([class])){color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
+:where(a:not([class]):hover, a:not([class]):focus-visible){border-bottom-color:var(--c-mid)}
 
 /* `align-items:center`, not the default `stretch`: a stretched link is a box the height of
    the whole row with its text at the top, which put the words above the language control
@@ -213,8 +217,6 @@ nav a[aria-current="page"]{color:var(--c-firm)}
 
 footer{padding:0 0 2rem; display:flex; flex-wrap:wrap; gap:.9rem 2.6rem; align-items:center;
        font-family:"Plex Mono",monospace; font-size:.76rem; letter-spacing:.08em; color:var(--dim)}
-footer a{color:var(--c-mid); text-decoration:none}
-footer a:hover, footer a:focus-visible{text-decoration:underline}
 footer a[aria-current="page"]{color:var(--c-firm)}
 
 .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
@@ -419,8 +421,6 @@ footer a[aria-current="page"]{color:var(--c-firm)}
              color:var(--dim); letter-spacing:.1em; white-space:nowrap; text-align:right}
 .index .meta b{color:var(--ink); font-weight:600}
 .index .dl{margin:0 0 clamp(1.6rem,3vh,2.4rem); font-size:.78rem; letter-spacing:.06em}
-.index .dl a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
-.index .dl a:hover, .index .dl a:focus-visible{border-color:var(--c-mid)}
 .index .sep{color:var(--dim); margin:0 .7em}
 @media (max-width:900px){
   .index .entry{grid-template-columns:minmax(0,1fr); gap:.5rem}
