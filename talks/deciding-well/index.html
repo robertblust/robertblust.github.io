@@ -222,7 +222,7 @@
   /* Slide 11's reading list: a cell is one link, its title in the slide's ink and its address
      in mono, because the address is data. The group names head the first row only. */
   .reads .grp{display:block; font-style:normal; font-size:clamp(.8rem,1.4cqmin,1rem); letter-spacing:.14em; text-transform:uppercase; color:var(--c-mid); margin-bottom:1.2cqmin}
-  .reads a{display:block; color:inherit; text-decoration:none}
+  .reads a{display:block; color:inherit; text-decoration:none; border:0}
   .reads a:hover b{text-decoration:underline; text-underline-offset:.2em}
   .reads a span{display:block; margin-top:.6cqmin; font-size:clamp(.8rem,1.45cqmin,1.05rem); color:var(--c-mid)}
   /* The proof and the answer hold a third reading each; the argument keeps two. */
@@ -312,8 +312,6 @@
     color:var(--dim); letter-spacing:.02em;
   }
   .stamp b{color:var(--c-mid); font-weight:600}
-  .stamp a{color:var(--c-mid); text-decoration:none}
-  .stamp a:hover{text-decoration:underline; text-underline-offset:.2em}
 
   /* breadth grid (domains overview) */
   .grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2.4cqmin 5cqmin; margin-top:4.4cqmin}

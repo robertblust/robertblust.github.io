@@ -174,9 +174,6 @@
   h2 em{font-style:normal; color:var(--c-mid)}
   .lede{margin-top:1.5rem; font-size:clamp(1rem,1.35vw,1.18rem); color:var(--dim);
         max-width:52ch}
-  .lede a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule);
-          transition:color .18s ease, border-color .18s ease}
-  .lede a:hover, .lede a:focus-visible{color:var(--c-mid); border-color:var(--c-mid)}
 
   /* A project name, inline in prose: mark, then the wordmark with Graph in the accent.
      Baseline-aligned so it sits in the line rather than on top of it. */
@@ -206,7 +203,7 @@
     main{padding:1vh 0 4vh}
   }
   @media (prefers-reduced-motion:reduce){
-    .btn, .lede a, nav a{transition:none}
+    .btn, nav a{transition:none}
   }
 </style>
 <link rel="stylesheet" href="chat.css">
