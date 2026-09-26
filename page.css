@@ -1,4 +1,4 @@
-/* @robertblust/design — page.css, assembled from the shared blocks: reset v2 · header v15 ·
+/* @robertblust/design — page.css, assembled from the shared blocks: reset v2 · header v16 ·
    title v1 · lines v1 · footer v1 · principles v1 · team v2 · surfaces v1 · index v1.
    Editing this file in a site does nothing: the next npm run design overwrites it. */
 
@@ -89,6 +89,12 @@ nav a[aria-current="page"]{color:var(--c-firm)}
   nav{gap:1.4rem}
   .navlinks{gap:1.4rem}
 }
+/* The tight row: what `nav fit` tries before the button, when the wide row does not fit.
+   The same links, closer and with less letter-spacing, so a long row in German reads as a
+   row on a desktop instead of collapsing. Nothing else changes: a row that fits wide never
+   carries this attribute. */
+:root[data-nav="tight"] nav{gap:1.2rem; letter-spacing:.11em}
+:root[data-nav="tight"] .navlinks{gap:1.2rem}
 /* One mobile behavior for the whole family. Below this width the links do not fit beside
    the wordmark, and every page in the three sites used to answer that differently — some
    wrapped the bar, some wrapped the nav, and the two whose `.bar` had no `flex-wrap` at
