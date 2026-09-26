@@ -198,6 +198,10 @@
 
   main{flex:1; display:flex; align-items:center; padding:2vh 0 6vh}
 
+  /* the date and the length under the tagline, where a reader decides whether to read: data, so mono */
+  .stamp{margin-top:1.2rem; font-size:.78rem; letter-spacing:.1em; color:var(--dim)}
+  .stamp time{color:var(--ink)}
+
   /* the post: a column of sections, each one point, in the measure a reader will give it */
   .post{margin-top:clamp(2.6rem,5vh,4rem); max-width:70ch}
   .post section{border-top:2px solid var(--rule); padding-top:1.4rem; margin-top:2.2rem}
@@ -208,8 +212,7 @@
   .post p b{font-weight:600; color:var(--ink)}
   .post p a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .post p a:hover, .post p a:focus-visible{border-color:var(--c-mid)}
-  .post .stamp{margin-top:2.4rem; font-size:.78rem; letter-spacing:.1em; color:var(--dim)}
-  .post .rests{margin-top:.8rem; font-size:.78rem; letter-spacing:.06em; color:var(--dim); line-height:1.9}
+  .post .rests{margin-top:2.4rem; font-size:.78rem; letter-spacing:.06em; color:var(--dim); line-height:1.9}
   .post .rests a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .post .rests a:hover, .post .rests a:focus-visible{border-color:var(--c-mid)}
   @media (max-width:900px){ .post{max-width:100%} }
@@ -252,6 +255,7 @@
     <div class="title">
       <h1 id="p1" data-de="<span class='r70'>Gut entscheiden ist gelöst.</span><span class='rcl'>Für <em>mich</em>.</span>"><span class="r70">Deciding well is solved.</span><span class="rcl">For <em>me</em>.</span></h1>
       <p class="tagline" id="p2" data-de="Der Vortrag liess die Behauptung für alle anderen offen. Dies ist der eine Fall, den ich schliessen kann, denn der Entscheid ist festgehalten, und Sie können ihn nachlesen.">The talk kept the claim open for everyone else. This is the one case I can close, because the decision is written down and you can read it.</p>
+      <p class="stamp mono" id="p25" data-de="<time datetime='2026-09-26'>26. Sept. 2026</time> · 5 min"><time datetime="2026-09-26">Sep 26, 2026</time> · 5 min</p>
     </div>
 
     <div class="post">
@@ -298,7 +302,6 @@
         <p id="p24" data-de="Die Behauptung bleibt also, wie der Vortrag sie aufgestellt hat: Gut entscheiden ist nicht gelöst. Für mich schon. Wenn Sie anders entscheiden und es funktioniert, will ich wissen, wo das hier nicht mehr funktioniert.">So the claim stands as the talk made it. Deciding well is not solved. Mine was. If you decide differently and it works, I want to know where this breaks.</p>
       </section>
 
-      <p class="stamp mono" id="p25" data-de="Robert Blust · 26. Sept. 2026">Robert Blust · Sep 26, 2026</p>
       <!-- What the post rests on, each an entry of the model opened on the stage; the entries carry
            the outward links, the podcast's and the talk's, so this page names no third address. The
            names are the model's own and stay English in both views, as the timeline shows them. -->
