@@ -1,5 +1,5 @@
 {
-  "commit": "d616c0561b0160910bc6316fc81dfb61e3e2b859",
+  "commit": "d07d72e5544968ae06722fb9158642d441f5c127",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -8,6 +8,12 @@
       "folder": "achievement-kinds",
       "owner": null,
       "singular": false
+    },
+    {
+      "type": "brand",
+      "folder": null,
+      "owner": null,
+      "singular": true
     },
     {
       "type": "concept",
@@ -275,6 +281,290 @@
       ],
       "owner": null,
       "path": "model/achievement-kinds/ways-of-working.md"
+    },
+    {
+      "id": "brand",
+      "type": "brand",
+      "name": "blust.ch",
+      "tagline": "One person's work, under one address: what appears here was built before it was claimed, and what cannot be shown is not written.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Mark",
+          "text": "The mark is the two letters `rb`, set in Plex Mono on the ground color, and its master is `favicon.svg` in the site's repository; every other render, a tile a host is handed, the lockup on the profile photo, is made from that file and never drawn again. The mark's colors are the design tokens' ground and accent.\n\n- A tile is a full-bleed square with no rounded corner, because the host rounds it and a transparent corner shows as a checkerboard.\n- The mark fills about 60% of the tile, so it survives a circular crop.\n- A change to the mark is made in the favicon first and rendered everywhere else after.\n- Where a render carries values other than the tokens', the favicon included, the tokens are the master and the render follows.",
+          "tables": []
+        },
+        {
+          "heading": "Color",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Name",
+                "Means",
+                "Never"
+              ],
+              "rows": [
+                [
+                  "`--c-weak`",
+                  "A candidate: considered, not accepted",
+                  "Text, a border or an outline on its own, in either theme"
+                ],
+                [
+                  "`--c-mid`",
+                  "Anything interactive: a link, a control, the brand accent",
+                  "The resolved thing, which would then read as still open"
+                ],
+                [
+                  "`--c-firm`",
+                  "The resolved thing: the thesis, the current page",
+                  "A link, which would then read as settled"
+                ],
+                [
+                  "`--c-flag`",
+                  "A reversal, at most once per page",
+                  "Decoration"
+                ],
+                [
+                  "`--c-sum`",
+                  "A conclusion, what a section's figures add up to, as the line of a conclusion and at most once per section",
+                  "Text"
+                ],
+                [
+                  "`--c-path`",
+                  "Where you are and how you got here: the ancestors of the focused node and the line through them",
+                  "The resolved thing, which only happens to look alike"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Name",
+              "Means",
+              "Never"
+            ],
+            "rows": [
+              [
+                "`--c-weak`",
+                "A candidate: considered, not accepted",
+                "Text, a border or an outline on its own, in either theme"
+              ],
+              [
+                "`--c-mid`",
+                "Anything interactive: a link, a control, the brand accent",
+                "The resolved thing, which would then read as still open"
+              ],
+              [
+                "`--c-firm`",
+                "The resolved thing: the thesis, the current page",
+                "A link, which would then read as settled"
+              ],
+              [
+                "`--c-flag`",
+                "A reversal, at most once per page",
+                "Decoration"
+              ],
+              [
+                "`--c-sum`",
+                "A conclusion, what a section's figures add up to, as the line of a conclusion and at most once per section",
+                "Text"
+              ],
+              [
+                "`--c-path`",
+                "Where you are and how you got here: the ancestors of the focused node and the line through them",
+                "The resolved thing, which only happens to look alike"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Typography",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Face",
+                "Job"
+              ],
+              "rows": [
+                [
+                  "Instrument Sans",
+                  "Prose: the body of every page and every deck"
+                ],
+                [
+                  "Plex Mono",
+                  "The ledger and the chrome: the footer, the stage, a deck's transport, and the mark"
+                ],
+                [
+                  "Bricolage Grotesque",
+                  "A section's mark: the small heading that names a principle, a seat or a surface"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Face",
+              "Job"
+            ],
+            "rows": [
+              [
+                "Instrument Sans",
+                "Prose: the body of every page and every deck"
+              ],
+              [
+                "Plex Mono",
+                "The ledger and the chrome: the footer, the stage, a deck's transport, and the mark"
+              ],
+              [
+                "Bricolage Grotesque",
+                "A section's mark: the small heading that names a principle, a seat or a surface"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Voice",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Trait",
+                "Means",
+                "Never"
+              ],
+              "rows": [
+                [
+                  "Plain",
+                  "I say what happened in the words the reader would use for it",
+                  "An adjective that sells: nothing here is seamless, robust or elegant"
+                ],
+                [
+                  "Shown",
+                  "I claim what I can show, and I say where it is shown",
+                  "A number I did not count, or one that still moves, or a behavior I inferred rather than observed"
+                ],
+                [
+                  "Cause first",
+                  "I say why before how, so a reader can tell whether the how still applies",
+                  "A mechanism with no reason beside it"
+                ],
+                [
+                  "Forward",
+                  "I say how things are, in the present, and leave how they came to be to git",
+                  "A page that narrates its own history"
+                ],
+                [
+                  "Read twice",
+                  "I would rather be read twice than skimmed once: one idea per sentence, the point in the first",
+                  "A header that segments a text which fits on a screen"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Trait",
+              "Means",
+              "Never"
+            ],
+            "rows": [
+              [
+                "Plain",
+                "I say what happened in the words the reader would use for it",
+                "An adjective that sells: nothing here is seamless, robust or elegant"
+              ],
+              [
+                "Shown",
+                "I claim what I can show, and I say where it is shown",
+                "A number I did not count, or one that still moves, or a behavior I inferred rather than observed"
+              ],
+              [
+                "Cause first",
+                "I say why before how, so a reader can tell whether the how still applies",
+                "A mechanism with no reason beside it"
+              ],
+              [
+                "Forward",
+                "I say how things are, in the present, and leave how they came to be to git",
+                "A page that narrates its own history"
+              ],
+              [
+                "Read twice",
+                "I would rather be read twice than skimmed once: one idea per sentence, the point in the first",
+                "A header that segments a text which fits on a screen"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Design tokens",
+                  "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
+                ],
+                [
+                  "Mark",
+                  "https://github.com/robertblust/robertblust.github.io/blob/main/favicon.svg"
+                ],
+                [
+                  "Rulebook of the voice",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+                ],
+                [
+                  "Typefaces, as the pages set them",
+                  "https://github.com/robertblust/design/blob/main/blocks/reset.css"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Design tokens",
+                "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
+              ],
+              [
+                "Mark",
+                "https://github.com/robertblust/robertblust.github.io/blob/main/favicon.svg"
+              ],
+              [
+                "Rulebook of the voice",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WRITING.md"
+              ],
+              [
+                "Typefaces, as the pages set them",
+                "https://github.com/robertblust/design/blob/main/blocks/reset.css"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/brand.md"
     },
     {
       "id": "concepts/claim",
@@ -8509,6 +8799,71 @@
       "path": "model/questions/can-i-build-a-model-like-this-of-myself.md"
     },
     {
+      "id": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "type": "question",
+      "name": "Can I use Robert's colors and fonts for my own site?",
+      "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "brand",
+                  "blust.ch",
+                  "",
+                  "the roles, the faces, and where the values are"
+                ],
+                [
+                  "surface",
+                  "blust.ch website",
+                  "",
+                  "where the design is seen whole"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "brand",
+                "blust.ch",
+                "",
+                "the roles, the faces, and where the values are"
+              ],
+              [
+                "surface",
+                "blust.ch website",
+                "",
+                "where the design is seen whole"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site.md"
+    },
+    {
       "id": "questions/can-robert-still-write-code-himself",
       "type": "question",
       "name": "Can Robert still write code himself?",
@@ -9084,6 +9439,71 @@
       "path": "model/questions/how-does-robert-measure-delivery.md"
     },
     {
+      "id": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "type": "question",
+      "name": "How should a text in Robert's voice sound?",
+      "tagline": "The brand's Voice table names the traits a sentence can fail and what a sentence without each one does, and the Writer seat's rulebook holds the rest of the rules a text is held to.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "brand",
+                  "blust.ch",
+                  "",
+                  "the traits and what a sentence without each one does"
+                ],
+                [
+                  "role",
+                  "Writer",
+                  "",
+                  "the rulebook and the brief a text starts from"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "brand",
+                "blust.ch",
+                "",
+                "the traits and what a sentence without each one does"
+              ],
+              [
+                "role",
+                "Writer",
+                "",
+                "the rulebook and the brief a text starts from"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-should-a-text-in-robert-s-voice-sound.md"
+    },
+    {
       "id": "questions/how-well-does-this-chat-answer",
       "type": "question",
       "name": "How well does this chat answer?",
@@ -9277,6 +9697,148 @@
       ],
       "owner": null,
       "path": "model/questions/what-did-robert-study.md"
+    },
+    {
+      "id": "questions/what-do-the-colors-on-this-site-mean",
+      "type": "question",
+      "name": "What do the colors on this site mean?",
+      "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "brand",
+                  "blust.ch",
+                  "",
+                  "what each color role means and never does"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "brand",
+                "blust.ch",
+                "",
+                "what each color role means and never does"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-do-the-colors-on-this-site-mean.md"
+    },
+    {
+      "id": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "type": "question",
+      "name": "What does \"Building fast is solved. Deciding well is not.\" mean?",
+      "tagline": "It is the tagline on Robert's profile, a claim rather than a slogan because a value and a talk stand behind it and say what it means; the company's own tagline, on the identity, is a different line and says what the company is.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "profile",
+                  "Robert Blust",
+                  "",
+                  "whose tagline it is"
+                ],
+                [
+                  "value",
+                  "Decide well over build fast",
+                  "",
+                  "what the claim means"
+                ],
+                [
+                  "experience",
+                  "Building fast is solved. Deciding well is not.",
+                  "Robert Blust",
+                  "the talk that argues it"
+                ],
+                [
+                  "identity",
+                  "Robert Blust",
+                  "",
+                  "the company's own tagline"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "profile",
+                "Robert Blust",
+                "",
+                "whose tagline it is"
+              ],
+              [
+                "value",
+                "Decide well over build fast",
+                "",
+                "what the claim means"
+              ],
+              [
+                "experience",
+                "Building fast is solved. Deciding well is not.",
+                "Robert Blust",
+                "the talk that argues it"
+              ],
+              [
+                "identity",
+                "Robert Blust",
+                "",
+                "the company's own tagline"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-does-building-fast-is-solved-deciding-well-is-not-mean.md"
     },
     {
       "id": "questions/what-does-over-twenty-five-years-in-order-mean",
@@ -12366,6 +12928,12 @@
     },
     {
       "from": "achievement-kinds/ways-of-working",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "brand",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -19283,6 +19851,32 @@
       "attrs": {}
     },
     {
+      "from": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "to": "brand",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "brand",
+        "Owner": "",
+        "For": "the roles, the faces, and where the values are"
+      }
+    },
+    {
+      "from": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "to": "surfaces/blust-ch-website",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "For": "where the design is seen whole"
+      }
+    },
+    {
+      "from": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/can-robert-still-write-code-himself",
       "to": "profiles/robert-blust",
       "via": "Rests on.Entity",
@@ -19565,6 +20159,32 @@
       "attrs": {}
     },
     {
+      "from": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "to": "brand",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "brand",
+        "Owner": "",
+        "For": "the traits and what a sentence without each one does"
+      }
+    },
+    {
+      "from": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "to": "roles/writer",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "For": "the rulebook and the brief a text starts from"
+      }
+    },
+    {
+      "from": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/how-well-does-this-chat-answer",
       "to": "kpis/grounded-answer-rate",
       "via": "Rests on.Entity",
@@ -19638,6 +20258,68 @@
     },
     {
       "from": "questions/what-did-robert-study",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-do-the-colors-on-this-site-mean",
+      "to": "brand",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "brand",
+        "Owner": "",
+        "For": "what each color role means and never does"
+      }
+    },
+    {
+      "from": "questions/what-do-the-colors-on-this-site-mean",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "identity",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "identity",
+        "Owner": "",
+        "For": "the company's own tagline"
+      }
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "profiles/robert-blust",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "profile",
+        "Owner": "",
+        "For": "whose tagline it is"
+      }
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "the talk that argues it"
+      }
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "values/decide-well-over-build-fast",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "value",
+        "Owner": "",
+        "For": "what the claim means"
+      }
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
