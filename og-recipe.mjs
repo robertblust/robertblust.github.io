@@ -47,6 +47,7 @@ export const cards = [
   { dir: ".", ...FRAME, hide: HIDE, titleSlide: false },
   { dir: "talks", ...FRAME, hide: HIDE, titleSlide: false },
   { dir: "blog", ...FRAME, hide: HIDE, titleSlide: false },
+  { dir: "blog/deciding-well-solved", ...FRAME, hide: HIDE, titleSlide: false },
   // The ideas page advertised the landing page's card until 2026-08-25: it was the one
   // page with a share link and no picture of its own, which is exactly what this list exists
   // to prevent.

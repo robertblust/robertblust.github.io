@@ -153,6 +153,13 @@ const PAGES = [
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
+  { path: "/blog/deciding-well-solved/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Deciding well is solved/, lang: "en", sourceLang: "en",
+    contains: ["The question came first", "25 applications", "architect role at 80%", "where this breaks"], card: true,
+    sameTab: ["../../talks/deciding-well/", "../../timeline/", "../"], brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
+    internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
   { path: "/privacy/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
