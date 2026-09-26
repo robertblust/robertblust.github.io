@@ -156,7 +156,7 @@ const PAGES = [
   { path: "/blog/deciding-well-solved/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Deciding well is solved/, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Für mich", "Die Frage kam zuerst", "Für mich schon"], hides: ["Deciding well is solved", "The question came first", "where this breaks"] },
     contains: ["The question came first", "25 applications", "architect role at 80%", "where this breaks"], card: true,
-    sameTab: ["../../talks/deciding-well/", "../../timeline/", "../"], brandMark: true,
+    sameTab: ["../../talks/deciding-well/", "../../timeline/", "../", "../../model/?stage=expanded#profiles/robert-blust/experiences/2026-career-break"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
