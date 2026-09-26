@@ -211,7 +211,13 @@
   /* dim, as every prose page sets its paragraphs; ink is for the title, a note and a bold word */
   .post p{margin-top:1rem; color:var(--dim); line-height:1.6; max-width:70ch}
   .post p b{font-weight:600; color:var(--ink)}
-  .post .rests{margin-top:2.4rem; font-size:.78rem; letter-spacing:.06em; color:var(--dim); line-height:1.9}
+  /* the foot: what the post rests on, a group per model type, and per entry its name
+     and the entry's own tagline, dim as the prose is; the list reads as data, so the labels are mono */
+  .post .rests h3{margin-top:1.6rem; font-size:.78rem; font-weight:600; letter-spacing:.06em; color:var(--ink)}
+  .post .rests ul{list-style:none; margin:.4rem 0 0; padding:0}
+  .post .rests li{border-top:1px solid var(--rule); padding:.8rem 0}
+  .post .rests li a{font-weight:600}
+  .post .rests li p{margin-top:.3rem; font-size:.94rem; line-height:1.55}
   @media (max-width:900px){ .post p{max-width:100%} }
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
@@ -299,11 +305,30 @@
         <p id="p24" data-de="Die Behauptung bleibt also, wie der Vortrag sie aufgestellt hat: Gut entscheiden ist nicht gelöst. Für mich schon. Wenn Sie anders entscheiden und es funktioniert, will ich wissen, wo das hier nicht mehr funktioniert.">So the claim stands as the talk made it. Deciding well is not solved. Mine was. If you decide differently and it works, I want to know where this breaks.</p>
       </section>
 
-      <!-- What the post rests on, each an experience opened on the timeline, in its place among the
-           others; the entries carry the outward links, the podcast's and the talk's, so this page
-           names no third address. The names are the model's own and stay English in both views,
-           as the timeline shows them. -->
-      <p class="rests mono"><span data-de="Beruht auf">Rests on</span> · <a href="../../timeline/#2026-career-break">Career break</a> · <a href="../../timeline/#2026-application-tooling">Application tooling</a> · <a href="../../timeline/#2026-talk-deciding-well">Building fast is solved. Deciding well is not.</a> · <a href="../../timeline/#2026-podcast-turn-your-work-history-into-code">Turn your work history into code</a> · <a href="../../timeline/#2026-podcast-deciding-well">Deciding well</a></p>
+      <!-- What the post rests on, grouped by the model's own types: the decisions it walks, each
+           opened on the model stage because no page lists decisions, and the experiences, each
+           opened on the timeline in its place among the others, where the entries carry the
+           outward links, the podcast's and the talk's, so this page names no third address. A
+           name is the model's own and stays English in both views, as the timeline and the stage
+           show it; the line under it is the entry's tagline, which German translates. -->
+      <section class="rests" aria-labelledby="rests">
+        <h2 id="rests" data-de="Beruht auf">Rests on</h2>
+        <h3 class="mono" id="rests-decisions" data-de="Entscheide">Decisions</h3>
+        <ul aria-labelledby="rests-decisions">
+          <li><a href="../../model/?stage=expanded#decisions/2026-four-months">Four months to find out what I want to do next</a><p data-de="Ich nehme mir eine Auszeit von vier Monaten, Juni bis September 2026, und gebe ihr eine einzige Frage: Was mache ich gern – und nicht: Wofür werde ich üblicherweise eingestellt?">I take a break of four months, June to September 2026, and give it one question: what I like doing, rather than what I am used to being hired for.</p></li>
+          <li><a href="../../model/?stage=expanded#decisions/2026-two-tracks">Two tracks at once, and the market answers</a><p data-de="Ich bewerbe mich in zwei Richtungen zugleich, Engineering nah am Code und Architektur, und lasse den Markt sagen, welche passt, statt es am Schreibtisch zu entscheiden.">I apply on two tracks at the same time, hands-on engineering and architecture, and let the market say which one fits, rather than deciding it at the desk.</p></li>
+          <li><a href="../../model/?stage=expanded#decisions/2026-architect-role">An 80% architect role in a product company, chosen over pay</a><p data-de="Ich übernehme ab Oktober 2026 eine Rolle als IT-Architekt zu 80 % in einer Produktfirma ausserhalb der Finanzbranche, deren Kultur das Kriterium war, und halte den fünften Tag frei für eine formale Weiterbildung darin, wie KI in einer Organisation geführt und gesteuert wird.">I take an IT Architect role at 80% from October 2026 in a product company outside finance, whose culture was the criterion, and keep the fifth day for formal education in how AI is led and governed in an organization.</p></li>
+          <li><a href="../../model/?stage=expanded#decisions/2026-education-on-my-own-account">The education is on my own account, and the fifth day stays mine</a><p data-de="Ich behalte das Pensum von 80 % dauerhaft und trage die Weiterbildung selbst, ihre Tage und ihre Gebühren, statt ein volles Pensum anzunehmen, für das Tage für die Schule freigegeben werden.">I keep the 80% workload permanently and carry the education myself, its days and its fees, rather than take a full workload with days released for the school.</p></li>
+        </ul>
+        <h3 class="mono" id="rests-experiences" data-de="Erfahrungen">Experiences</h3>
+        <ul aria-labelledby="rests-experiences">
+          <li><a href="../../timeline/#2026-career-break">Career break</a><p data-de="Vier Monate, um herauszufinden, was ich als Nächstes tun will – verbracht damit, zwei Produkte öffentlich zu bauen und mich auf die Rollen zu bewerben, die die Antwort prüfen würden.">Four months to find out what I want to do next — spent building two products in the open and applying for the roles that would test the answer.</p></li>
+          <li><a href="../../timeline/#2026-application-tooling">Application tooling</a><p data-de="Ein einziger Lebenslauf in Markdown, jede Bewerbung ein Overlay darauf, und die ganze Suche in git festgehalten.">One CV in Markdown, every application an overlay on it, and the whole search tracked in git.</p></li>
+          <li><a href="../../timeline/#2026-talk-deciding-well">Building fast is solved. Deciding well is not.</a><p data-de="Ein vertonter Vortrag, der die Auszeit unter der Zeile zusammenfasst, mit der blust.ch beginnt: Mit agentischer KI zu bauen erwies sich als schnell und günstig, belegt mit Zahlen, die git festgehalten hat, und gut entscheiden blieb die Arbeit.">A narrated talk that sums up the career break under the line blust.ch opens with: building with agentic AI turned out fast and cheap, shown in figures git recorded, and deciding well stayed the work.</p></li>
+          <li><a href="../../timeline/#2026-podcast-turn-your-work-history-into-code">Turn your work history into code</a><p data-de="Eine fünfminütige Podcast-Folge über die Auszeit, erzeugt aus den Dateien des Modells nach einem schriftlichen Auftrag und vor der Veröffentlichung an ihren Quellen geprüft.">A five-minute podcast episode on the career break, generated from the model's own files under a written brief and held to its sources before it went out.</p></li>
+          <li><a href="../../timeline/#2026-podcast-deciding-well">Deciding well</a><p data-de="Eine Podcast-Folge, in der zwei Stimmen den Vortrag ausdiskutieren, der die Auszeit abschloss, erzeugt aus dem Export des Modells und einer eigens dafür geschriebenen Geschichte, und an beiden geprüft, bevor sie unter dem Titel des Vortrags erschien.">A podcast episode in which two hosts argue out the talk that closed the career break, generated from the model's own export and a story written for it, and read against both before it went out under the talk's title.</p></li>
+        </ul>
+      </section>
     </div>
 
   </div>
