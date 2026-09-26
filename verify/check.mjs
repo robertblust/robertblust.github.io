@@ -145,6 +145,14 @@ const PAGES = [
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
+  { path: "/blog/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /blog/i, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Texte über", "Beitrag lesen", "Für mich"], hides: ["Read the post", "Writing on"] },
+    contains: ["Deciding well is solved. For me.", "Read the post"], card: true,
+    sameTab: ["deciding-well-solved/", "./"], brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
+    internalLinks: true },
   // The privacy page. Its claims are checkable, so verify checks them rather than trusting
   // the prose: a page that says it makes no third-party request must make none.
   { path: "/privacy/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Blust/, lang: "en", sourceLang: "en", card: true,
