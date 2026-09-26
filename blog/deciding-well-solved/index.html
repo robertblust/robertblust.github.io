@@ -203,7 +203,9 @@
   .post section{border-top:2px solid var(--rule); padding-top:1.4rem; margin-top:2.2rem}
   .post h2{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.25rem,2.2vw,1.6rem); font-weight:700;
            letter-spacing:-.02em; line-height:1.2}
-  .post p{margin-top:1rem; color:var(--ink); line-height:1.6}
+  /* dim, as every prose page sets its paragraphs; ink is for the title, a note and a bold word */
+  .post p{margin-top:1rem; color:var(--dim); line-height:1.6}
+  .post p b{font-weight:600; color:var(--ink)}
   .post p a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .post p a:hover, .post p a:focus-visible{border-color:var(--c-mid)}
   .post .stamp{margin-top:2.4rem; font-size:.78rem; letter-spacing:.1em; color:var(--dim)}
