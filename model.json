@@ -1,5 +1,5 @@
 {
-  "commit": "d07d72e5544968ae06722fb9158642d441f5c127",
+  "commit": "dc092aca16262c4181677002bdc4c35d3de367d7",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -18,6 +18,24 @@
     {
       "type": "concept",
       "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision",
+      "folder": "decisions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-kind",
+      "folder": "decision-kinds",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "decision-status",
+      "folder": "decision-statuses",
       "owner": null,
       "singular": false
     },
@@ -975,6 +993,902 @@
       ],
       "owner": null,
       "path": "model/concepts/own-account.md"
+    },
+    {
+      "id": "decision-kinds/career",
+      "type": "decision-kind",
+      "name": "Career",
+      "tagline": "A call about my own path: what to do next, for whom, on what terms.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the person the company is: which role to take or leave, which track to pursue, what a period of my life is for. It is this kind even when it decides what gets built, because what was decided is where I go.\n\nA call about what I build and publish in my own name is Portfolio. A call made inside an engagement about a client's system belongs to the client and is not recorded here.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/career.md"
+    },
+    {
+      "id": "decision-kinds/portfolio",
+      "type": "decision-kind",
+      "name": "Portfolio",
+      "tagline": "A call about what I build and publish in my own name: which products, in what form, in the open or not.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is the work itself rather than my path through it: a product started or stopped, a form chosen for it, a way of building it. It is this kind even when it was made during a period a Career decision opened, because what was decided is the work.\n\nA call about which role to take or which track to pursue is Career. How a product is built inside its own repositories is decided there, in its specs, and recorded in its own model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/portfolio.md"
+    },
+    {
+      "id": "decision-statuses/dropped",
+      "type": "decision-status",
+      "name": "Dropped",
+      "tagline": "The call is no longer pursued, and nothing replaced it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Dropped when the call was given up without another decision taking its place: a proposed call declined, or a standing call abandoned because what it depended on went away. The file stays as written, and one dated sentence closing `## Consequences` says when and why it was dropped, since no later decision exists to say so. A reader treats the question as open again. A Dropped decision never returns to Standing: taking the call up again is a new decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/dropped.md"
+    },
+    {
+      "id": "decision-statuses/proposed",
+      "type": "decision-status",
+      "name": "Proposed",
+      "tagline": "The call is put forward with its alternatives and not yet made; nothing acts on it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Proposed from the day it is written until the seat named in `by` makes the call. It is written in full, the question, the alternatives and the reasons, so that it can be argued before it binds, and `decided` holds the date it was put forward. Nothing acts on a Proposed decision, and a reader treats the question as open. It leaves this state when the call is made, becoming Standing with `decided` set to the day of the call, or when it is declined, becoming Dropped.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/proposed.md"
+    },
+    {
+      "id": "decision-statuses/revised",
+      "type": "decision-status",
+      "name": "Revised",
+      "tagline": "A later decision replaced this call, and the call is read through that decision.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Revised when another decision names it in `supersedes`. Its file stays as it was written, because what was decided on that date does not stop having happened; what holds now is the decision that replaced it, and a reader who arrives here follows the reference forward. A Revised decision never returns to Standing: a change of mind is a third decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/revised.md"
+    },
+    {
+      "id": "decision-statuses/standing",
+      "type": "decision-status",
+      "name": "Standing",
+      "tagline": "The call holds as written, and the work follows it.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision is Standing from the day it was made until a later decision replaces it or the call is given up. While it stands, a reader acts on it as written and re-opens it only by making a decision that names it in `supersedes`. It leaves this state the day that later decision is made, becoming Revised, or the day the call is given up with nothing in its place, becoming Dropped.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-statuses/standing.md"
+    },
+    {
+      "id": "decisions/2026-architect-role",
+      "type": "decision",
+      "name": "An 80% architect role in a product company, chosen over pay",
+      "tagline": "I take an IT Architect role at 80% from October 2026 in a product company outside finance, whose culture was the criterion, and keep the fifth day for formal education in how AI is led and governed in an organization.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-02",
+        "kind": "Career",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Which offer to take, with one in hand and three processes in finance still open, and whether the answer the break had produced would hold against a higher salary range. It had to be decided in September 2026, because the offer had a date and the open processes had rounds that would not wait.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Two senior engineering roles in finance, one past its second round and one a day from an offer",
+                  "Hands-on work, in the industry most of my career was spent in, on the track agents change fastest; either would have been chosen for its range and not for the question."
+                ],
+                [
+                  "A hands-on lead role at a higher salary range",
+                  "Pay over values, and the role would have been the last one again under another name."
+                ],
+                [
+                  "The pure development track",
+                  "With the right guardrails an agent writes code faster than any team, so pure development will change, while deciding what gets built, and within which boundaries, will not."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Two senior engineering roles in finance, one past its second round and one a day from an offer",
+                "Hands-on work, in the industry most of my career was spent in, on the track agents change fastest; either would have been chosen for its range and not for the question."
+              ],
+              [
+                "A hands-on lead role at a higher salary range",
+                "Pay over values, and the role would have been the last one again under another name."
+              ],
+              [
+                "The pure development track",
+                "With the right guardrails an agent writes code faster than any team, so pure development will change, while deciding what gets built, and within which boundaries, will not."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The break had answered its question: what I like doing is modeling, and AI used with responsibility inside a company rather than merely used, and the role that fits that is an architect's, the more lasting one. Of the offers, the architect role in a product company was the one where the interviews showed a culture I would choose, and choosing on values over pay is the whole of what deciding well means when the two disagree.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Three processes withdrawn, each at an interview stage, one the week before a final round of five people. Four days a week from October 2026 as an architect, the fifth kept for education that starts in 2027, and the two products staying published with their history. What has to stay true is that the company's culture is what the interviews showed; that is the one thing the decision rests on that only the role itself can confirm.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Career break",
+                  "Robert Blust",
+                  "ended it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Career break",
+                "Robert Blust",
+                "ended it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-architect-role.md"
+    },
+    {
+      "id": "decisions/2026-education-on-my-own-account",
+      "type": "decision",
+      "name": "The education is on my own account, and the fifth day stays mine",
+      "tagline": "I keep the 80% workload permanently and carry the education myself, its days and its fees, rather than take a full workload with days released for the school.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-08",
+        "kind": "Career",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the fifth day is bought with my own pay or granted by the employer with conditions attached. It had to be decided on September 8, 2026, when the company offered a full workload with fifteen days a year released for the school, in place of the 80% agreed on September 2.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "A full workload with fifteen days a year released for the school",
+                  "Fifteen days cover the attendance and not the work: the path from a CAS through a DAS to a MAS is 60 ECTS, 1,500 to 1,800 hours over several years, around 400 a year, which is fifty days and not fifteen."
+                ],
+                [
+                  "The employer carrying the course fees",
+                  "Paid education means a training agreement with a repayment clause, which binds the choice of seminars, the pace, and whether the CAS becomes a MAS at all."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "A full workload with fifteen days a year released for the school",
+                "Fifteen days cover the attendance and not the work: the path from a CAS through a DAS to a MAS is 60 ECTS, 1,500 to 1,800 hours over several years, around 400 a year, which is fifty days and not fifteen."
+              ],
+              [
+                "The employer carrying the course fees",
+                "Paid education means a training agreement with a repayment clause, which binds the choice of seminars, the pace, and whether the CAS becomes a MAS at all."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The workload has to match the hours, and the hours are the program's, not the employer's to grant. And the education is worth more unbound: which seminars, at what pace, and whether it goes all the way to a master's are calls I want to keep, which a repayment clause would take. Money for independence, knowingly.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A fifth of the pay and the course fees carried privately for as long as the education runs. The path, a CAS first, then a DAS, then a MAS, runs beside the role and on my own clock. What has to stay true is that the fifth day stays free of the role's work; the day it fills with it, the trade was made for nothing.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "decision",
+                  "An 80% architect role in a product company, chosen over pay",
+                  "",
+                  "settled its workload model"
+                ],
+                [
+                  "strategic-objective",
+                  "A continuing-education master's in AI leadership",
+                  "",
+                  "made it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "decision",
+                "An 80% architect role in a product company, chosen over pay",
+                "",
+                "settled its workload model"
+              ],
+              [
+                "strategic-objective",
+                "A continuing-education master's in AI leadership",
+                "",
+                "made it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-education-on-my-own-account.md"
+    },
+    {
+      "id": "decisions/2026-first-cas",
+      "type": "decision",
+      "name": "The first CAS is AI Innovation at HWZ",
+      "tagline": "I put forward, and have not yet made, the call that the path starts with the HWZ CAS AI Innovation in 2027, 15 ECTS over at most two years, counting toward the MAS AI Leadership at HWZ, and not with a machine-learning CAS on the developer track.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-02",
+        "kind": "Career",
+        "status": "Proposed",
+        "by": "Owner",
+        "serves": [
+          "A continuing-education master's in AI leadership"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Which CAS opens the path to the MAS, and with it which track the master's takes: the hands-on machine-learning one, or the one on how AI is led and governed in an organization. It was put forward on September 2, 2026, the day the education was raised with the employer and the program was verified on the school's site, and it is made when I enroll, before the 2027 start.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "The OST CAS Machine Learning for Software Engineers in Rapperswil, about 15 ECTS over a year",
+                  "It is the developer track, and the profile's claim is the other one: the break's finding was modeling and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
+                ],
+                [
+                  "The ZHAW CAS Machine Intelligence in Winterthur, 12 ECTS over five months",
+                  "The same track, shorter; it settles nothing the OST option does not, and counts toward a different MAS."
+                ],
+                [
+                  "A CAS in enterprise or data architecture",
+                  "I can do both already; naming either as further education would show a need to catch up in exactly what I was hired for."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "The OST CAS Machine Learning for Software Engineers in Rapperswil, about 15 ECTS over a year",
+                "It is the developer track, and the profile's claim is the other one: the break's finding was modeling and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
+              ],
+              [
+                "The ZHAW CAS Machine Intelligence in Winterthur, 12 ECTS over five months",
+                "The same track, shorter; it settles nothing the OST option does not, and counts toward a different MAS."
+              ],
+              [
+                "A CAS in enterprise or data architecture",
+                "I can do both already; naming either as further education would show a need to catch up in exactly what I was hired for."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The question the education answers is how AI is led and governed in an organization, which is what the career break found the work to be and what the model's own sentence on the fifth day says. The HWZ program is built around that question, AI management, AI governance, agentic AI, GenAI at scale, digital ethics, in seminars I choose and start at any time in Zürich, and it counts toward the MAS AI Leadership, so nothing taken here is lost if the path goes all the way. It uses the leadership side of the career on purpose: the role tests being near the code again, and the education is where the other half of the profile keeps growing.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Once made, at least sixteen study days over at most two years, on the fifth day, and the fees carried privately, the CAS fee and the eight required seminar days first. The model's sentences that say the education is in how AI is led and governed stand as they are. What has to stay true is that the seminars keep answering that question rather than drifting toward tooling; the day they do, the developer track would have been the honest choice. Nothing is committed until enrollment; a proposed call is not acted on.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The HWZ CAS program page",
+                  "https://fh-hwz.ch/de/weiterbildung/cas/cas-ai-innovation-hwz"
+                ],
+                [
+                  "The HWZ MAS AI Leadership page",
+                  "https://fh-hwz.ch/de/weiterbildung/mas/mas-ai-leadership-hwz"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The HWZ CAS program page",
+                "https://fh-hwz.ch/de/weiterbildung/cas/cas-ai-innovation-hwz"
+              ],
+              [
+                "The HWZ MAS AI Leadership page",
+                "https://fh-hwz.ch/de/weiterbildung/mas/mas-ai-leadership-hwz"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-first-cas.md"
+    },
+    {
+      "id": "decisions/2026-four-months",
+      "type": "decision",
+      "name": "Four months to find out what I want to do next",
+      "tagline": "I take a break of four months, June to September 2026, and give it one question: what I like doing, rather than what I am used to being hired for.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-06",
+        "kind": "Career",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What to do next, after a career that had run through engineering, methodology, architecture and leadership, and whether to decide it at a desk or find it out. It had to be decided in June 2026, because a search that starts without the question answers whatever the first offer asks.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Apply straight from the last role, without the question",
+                  "I would have been hired for what I was used to being hired for, and the question would have come back in the next role with less time to answer it."
+                ],
+                [
+                  "Consult while looking",
+                  "Client work fills the hours the question needs, and a search run beside it is run half."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Apply straight from the last role, without the question",
+                "I would have been hired for what I was used to being hired for, and the question would have come back in the next role with less time to answer it."
+              ],
+              [
+                "Consult while looking",
+                "Client work fills the hours the question needs, and a search run beside it is run half."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The constraint moved. With the right guardrails an agent writes code faster than any team, so pure development will change, while deciding what gets built, and within which boundaries, will not. Which of those I like doing could only be found out by doing both for a while, on my own account, with nobody's brief but mine.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Four months without an employer, two products built in the open and a search run in parallel, with the answer stated in the model: the role that fits is an architect's. What has to stay true is that the answer was reached from the question and not from the offers, which the decision that closed the break records.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Career break",
+                  "Robert Blust",
+                  "made it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Career break",
+                "Robert Blust",
+                "made it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The talk that closed the break",
+                  "https://blust.ch/talks/deciding-well/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The talk that closed the break",
+                "https://blust.ch/talks/deciding-well/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-four-months.md"
+    },
+    {
+      "id": "decisions/2026-in-the-open",
+      "type": "decision",
+      "name": "The two products are built in the open",
+      "tagline": "I build CompanyGraph and GuestGraph in public repositories, every spec, commit and release visible, and publish what their validation finds as it arrives, a clean no included.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-07",
+        "kind": "Portfolio",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Build the alternative before making the point"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether to build the two ideas the break produced privately and show a result, or in public and show the work. It had to be decided before the first repository existed, in July 2026, because a repository that starts private carries its history into the open only by decision.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Build privately and show a result",
+                  "A result shown at the end cannot be checked by anyone, and the figures the closing talk rests on would not exist."
+                ],
+                [
+                  "Apply only, and build nothing",
+                  "The question of what I like doing would have been answered by whoever hired me."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Build privately and show a result",
+                "A result shown at the end cannot be checked by anyone, and the figures the closing talk rests on would not exist."
+              ],
+              [
+                "Apply only, and build nothing",
+                "The question of what I like doing would have been answered by whoever hired me."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Naming what is broken is free, so a position is not a position until something works differently, and something that works differently is only an argument when someone else can read it. The validation had two questions, how much of an idea must exist before it can be validated and what a realistic outcome is, and both are answered in public or not at all, because a no is worth more than a polite yes.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Two products with their history in the open, instances of one meta-model each served as a site, an MCP server and a chat, and a talk whose every figure was read from what git recorded. What it gave up was the option to be wrong quietly. It stays right for as long as the products keep their history public, which they do after the break.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "CompanyGraph",
+                  "Robert Blust",
+                  "made it"
+                ],
+                [
+                  "experience",
+                  "GuestGraph",
+                  "Robert Blust",
+                  "made it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "experience",
+                "CompanyGraph",
+                "Robert Blust",
+                "made it"
+              ],
+              [
+                "experience",
+                "GuestGraph",
+                "Robert Blust",
+                "made it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The talk that counts the work",
+                  "https://blust.ch/talks/deciding-well/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The talk that counts the work",
+                "https://blust.ch/talks/deciding-well/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-in-the-open.md"
+    },
+    {
+      "id": "decisions/2026-two-tracks",
+      "type": "decision",
+      "name": "Two tracks at once, and the market answers",
+      "tagline": "I apply on two tracks at the same time, hands-on engineering and architecture, and let the market say which one fits, rather than deciding it at the desk.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-06",
+        "kind": "Career",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the next role is an engineer's or an architect's, and who gets to answer that. It had to be decided when the search began in June 2026, because the first applications fix the story every later one has to tell.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Architect roles only",
+                  "It would have decided the question before it was asked, and left the claim that I still write code untested."
+                ],
+                [
+                  "Leadership roles only, where the last years were",
+                  "It would have answered what I am used to being hired for, which was the question's premise and not its answer."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Architect roles only",
+                "It would have decided the question before it was asked, and left the claim that I still write code untested."
+              ],
+              [
+                "Leadership roles only, where the last years were",
+                "It would have answered what I am used to being hired for, which was the question's premise and not its answer."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "A question held open by one person is answered by that person's habits. Held open across two tracks and put to employers, it gets answered by who calls back, what the rounds ask and which offer arrives, and that answer can be read afterward by track.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Twenty-five applications between June 9 and August 20, 2026, and an outcome that could be read by track: every leadership application led to an interview, fewer than half of the engineering ones did, two of the five architect ones did, and the offer taken was one of those two. What it cost was the story: a former CTO applying for an engineering role is read as a flight risk unless the stay is stated first, and going back near the code had to be told as a choice and not a step down.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "experience",
+                  "Career break",
+                  "Robert Blust",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "experience",
+                "Career break",
+                "Robert Blust",
+                "changed it"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-two-tracks.md"
     },
     {
       "id": "domains/portfolio",
@@ -7934,6 +8848,38 @@
       }
     },
     {
+      "id": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "type": "experience",
+      "name": "Deciding well is solved. For me.",
+      "tagline": "The talk kept the claim open for everyone else. This is the one case I can close, because the decision is written down and you can read it.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-26",
+        "end": "2026-09-26",
+        "url": "https://blust.ch/blog/deciding-well-solved/",
+        "role": "Author",
+        "skills": [
+          "Agentic AI development",
+          "Spec-driven development"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Opened the blog on blust.ch with the one case the talk of Sep 24 leaves closed: the author's own October decision, walked in the order it happened so that a reader can check each step against the record.\n\n### Ways of working\n\n- Built the section the way the family builds anything: a reviewed specification and a plan before the pages, the index list lifted into the design package as a block rather than copied, and the German made by the four roles the conventions define, translator, editor, back-reader and fidelity, each an agent seat under its written file and none of them deciding; the owner picked among the flagged sentences.\n\n### Results\n\n- Showed the talk's method run once on one decision: the question written before the first application, the facts kept in one record, three agents rating, writing and checking under written files and never choosing, the evidence read by track, and the choice made against a criterion that existed before the offers did.\n- Kept the claim as the talk made it: one person and one decision prove nothing about a team, so the proposal stays a proposal, and the post closes by asking where it breaks.\n- Named at the post's foot what it rests on, each an entry of this model opened on the site's stage: the career break, the application tooling, the talk and the two podcasts, so the post carries no address of its own beyond theirs.",
+          "tables": []
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-blog-deciding-well-solved.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-26",
+        "end": "2026-09-26"
+      }
+    },
+    {
       "id": "profiles/robert-blust/experiences/2026-blust-ch",
       "type": "experience",
       "name": "blust.ch",
@@ -10382,6 +11328,12 @@
                   "GuestGraph",
                   "Robert Blust",
                   "the second product"
+                ],
+                [
+                  "decision",
+                  "An 80% architect role in a product company, chosen over pay",
+                  "",
+                  "the decision that ended it"
                 ]
               ]
             }
@@ -10412,6 +11364,12 @@
                 "GuestGraph",
                 "Robert Blust",
                 "the second product"
+              ],
+              [
+                "decision",
+                "An 80% architect role in a product company, chosen over pay",
+                "",
+                "the decision that ended it"
               ]
             ]
           }
@@ -12607,6 +13565,26 @@
       "path": "model/sources/local.md"
     },
     {
+      "id": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "type": "strategic-objective",
+      "name": "A continuing-education master's in AI leadership",
+      "tagline": "By the horizon I hold a MAS, a continuing-education master's, in AI leadership, earned beside the architect role and on my own account.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-08",
+        "horizon": "2029"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "The claim that AI is used with responsibility inside a company, which my profile makes, rests on a qualification and not only on work done: a CAS, a DAS and a MAS in how AI is led and governed in an organization, each an entry of the Education kind in the model with its diploma behind it. It holds when the MAS diploma exists; it fails if the path stops at the CAS or the DAS, which the education decision keeps as my call to make. It does not make me a data scientist, and it is not a consecutive MSc; what falls outside it is any qualification the role itself would have to grant.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/a-continuing-education-master-s-in-ai-leadership.md"
+    },
+    {
       "id": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
       "type": "strategic-objective",
       "name": "Whoever decides about me decided from the model",
@@ -12675,7 +13653,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks this site serves, each an experience of the profile, in both languages with a PDF.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks this site serves, each an experience of the profile, in both languages with a PDF.\n- **Blog** — the posts this site serves, each an experience of the profile, in both languages.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Chat** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
           "tables": []
         },
         {
@@ -13068,6 +14046,280 @@
       "from": "concepts/own-account",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/career",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-kinds/portfolio",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/dropped",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/proposed",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/revised",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decision-statuses/standing",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "profiles/robert-blust/experiences/2026-career-break",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "How": "ended it"
+      }
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "decision-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-architect-role",
+      "to": "values/decide-well-over-build-fast",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "decisions/2026-architect-role",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "How": "settled its workload model"
+      }
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "decision-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-education-on-my-own-account",
+      "to": "values/decide-well-over-build-fast",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-first-cas",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-first-cas",
+      "to": "decision-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-first-cas",
+      "to": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-first-cas",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-first-cas",
+      "to": "decision-statuses/proposed",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-four-months",
+      "to": "profiles/robert-blust/experiences/2026-career-break",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-four-months",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-four-months",
+      "to": "decision-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-four-months",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-four-months",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "profiles/robert-blust/experiences/2026-companygraph",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "profiles/robert-blust/experiences/2026-guestgraph",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "How": "made it"
+      }
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "decision-kinds/portfolio",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-in-the-open",
+      "to": "values/build-the-alternative-before-making-the-point",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-two-tracks",
+      "to": "profiles/robert-blust/experiences/2026-career-break",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-two-tracks",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-two-tracks",
+      "to": "decision-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-two-tracks",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-two-tracks",
+      "to": "decision-statuses/standing",
+      "via": "status",
       "attrs": {}
     },
     {
@@ -16420,6 +17672,48 @@
     },
     {
       "from": "profiles/robert-blust/experiences/2026-application-tooling",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "achievement-kinds/context",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "achievement-kinds/results",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "skills/agentic-ai-development",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "to": "skills/spec-driven-development",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -20548,6 +21842,16 @@
     },
     {
       "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "decisions/2026-architect-role",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the decision that ended it"
+      }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "to": "profiles/robert-blust/experiences/2026-career-break",
       "via": "Rests on.Entity",
       "attrs": {
@@ -21196,6 +22500,12 @@
     },
     {
       "from": "skills/vendor-management",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
