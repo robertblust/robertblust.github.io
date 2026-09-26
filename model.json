@@ -1,5 +1,5 @@
 {
-  "commit": "c3949a7e67bdaa22be9c211b28f041d60467413f",
+  "commit": "d616c0561b0160910bc6316fc81dfb61e3e2b859",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -8969,6 +8969,184 @@
       ],
       "owner": null,
       "path": "model/questions/how-do-i-know-a-claim-here-is-true.md"
+    },
+    {
+      "id": "questions/how-does-robert-measure-delivery",
+      "type": "question",
+      "name": "How does Robert measure delivery?",
+      "tagline": "The DORA KPIs define what is watched in how a change reaches production, and none of them is measured yet, so the model makes no claim about how fast anything ships. The Delivery process says how the work itself is done.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "kpi",
+                  "Deployment Frequency",
+                  "",
+                  "how often a change ships"
+                ],
+                [
+                  "kpi",
+                  "Change Lead Time",
+                  "",
+                  "how long a change takes to ship"
+                ],
+                [
+                  "kpi",
+                  "Change Fail Rate",
+                  "",
+                  "how often a deployment fails"
+                ],
+                [
+                  "kpi",
+                  "Failed Deployment Recovery Time",
+                  "",
+                  "how soon a failed deployment is recovered"
+                ],
+                [
+                  "kpi",
+                  "Deployment Rework Rate",
+                  "",
+                  "how much shipping is unplanned rework"
+                ],
+                [
+                  "process",
+                  "Delivery",
+                  "",
+                  "how the work is done"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "kpi",
+                "Deployment Frequency",
+                "",
+                "how often a change ships"
+              ],
+              [
+                "kpi",
+                "Change Lead Time",
+                "",
+                "how long a change takes to ship"
+              ],
+              [
+                "kpi",
+                "Change Fail Rate",
+                "",
+                "how often a deployment fails"
+              ],
+              [
+                "kpi",
+                "Failed Deployment Recovery Time",
+                "",
+                "how soon a failed deployment is recovered"
+              ],
+              [
+                "kpi",
+                "Deployment Rework Rate",
+                "",
+                "how much shipping is unplanned rework"
+              ],
+              [
+                "process",
+                "Delivery",
+                "",
+                "how the work is done"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-does-robert-measure-delivery.md"
+    },
+    {
+      "id": "questions/how-well-does-this-chat-answer",
+      "type": "question",
+      "name": "How well does this chat answer?",
+      "tagline": "Grounded Answer Rate says what is watched: whether an answer rested on what the model returned, not whether it was true, and its value is kept outside the model, in the chat's report the KPI links. The Answering process says how an answer is made.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "kpi",
+                  "Grounded Answer Rate",
+                  "",
+                  "what is watched, and where its value is kept"
+                ],
+                [
+                  "process",
+                  "Answering",
+                  "",
+                  "how an answer is made"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "kpi",
+                "Grounded Answer Rate",
+                "",
+                "what is watched, and where its value is kept"
+              ],
+              [
+                "process",
+                "Answering",
+                "",
+                "how an answer is made"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-well-does-this-chat-answer.md"
     },
     {
       "id": "questions/is-what-i-type-here-stored",
@@ -19316,6 +19494,98 @@
     },
     {
       "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "kpis/change-fail-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how often a deployment fails"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "kpis/change-lead-time",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how long a change takes to ship"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "kpis/deployment-frequency",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how often a change ships"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "kpis/deployment-rework-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how much shipping is unplanned rework"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "kpis/failed-deployment-recovery-time",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how soon a failed deployment is recovered"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "processes/delivery",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "how the work is done"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-well-does-this-chat-answer",
+      "to": "kpis/grounded-answer-rate",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "what is watched, and where its value is kept"
+      }
+    },
+    {
+      "from": "questions/how-well-does-this-chat-answer",
+      "to": "processes/answering",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "process",
+        "Owner": "",
+        "For": "how an answer is made"
+      }
+    },
+    {
+      "from": "questions/how-well-does-this-chat-answer",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
