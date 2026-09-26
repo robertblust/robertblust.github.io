@@ -203,19 +203,20 @@
   .stamp time{color:var(--ink)}
 
   /* the post: a column of sections, each one point, in the measure a reader will give it */
-  .post{margin-top:clamp(2.6rem,5vh,4rem); max-width:70ch}
+  /* the rules run the shell's width, as the principles page draws them; the measure is the paragraph's */
+  .post{margin-top:clamp(2.6rem,5vh,4rem)}
   .post section{border-top:2px solid var(--rule); padding-top:1.4rem; margin-top:2.2rem}
   .post h2{font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.25rem,2.2vw,1.6rem); font-weight:700;
            letter-spacing:-.02em; line-height:1.2}
   /* dim, as every prose page sets its paragraphs; ink is for the title, a note and a bold word */
-  .post p{margin-top:1rem; color:var(--dim); line-height:1.6}
+  .post p{margin-top:1rem; color:var(--dim); line-height:1.6; max-width:70ch}
   .post p b{font-weight:600; color:var(--ink)}
   .post p a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .post p a:hover, .post p a:focus-visible{border-color:var(--c-mid)}
   .post .rests{margin-top:2.4rem; font-size:.78rem; letter-spacing:.06em; color:var(--dim); line-height:1.9}
   .post .rests a{color:var(--c-mid); text-decoration:none; border-bottom:1px solid transparent}
   .post .rests a:hover, .post .rests a:focus-visible{border-color:var(--c-mid)}
-  @media (max-width:900px){ .post{max-width:100%} }
+  @media (max-width:900px){ .post p{max-width:100%} }
 
   :focus-visible{outline:2px solid var(--c-mid); outline-offset:3px; border-radius:3px}
 </style>
