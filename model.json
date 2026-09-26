@@ -1,5 +1,5 @@
 {
-  "commit": "2df032689bb2db46d23c9884587416e7cf8df2ea",
+  "commit": "03217d9b53244f5bb786b7f98f31a76894550d00",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -108,6 +108,12 @@
     {
       "type": "question",
       "folder": "questions",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "question-kind",
+      "folder": "question-kinds",
       "owner": null,
       "singular": false
     },
@@ -9680,12 +9686,89 @@
       }
     },
     {
+      "id": "question-kinds/brand",
+      "type": "question-kind",
+      "name": "Brand",
+      "tagline": "Questions about how the site looks and how its texts sound, and what a visitor may reuse.",
+      "fields": {
+        "source": "Local",
+        "rank": "30"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the colors, the faces, the mark and the voice, and whether a visitor may use them for their own site or text.\n\nWhat a sentence says is Ideas; how it is set or how it sounds is Brand.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/brand.md"
+    },
+    {
+      "id": "question-kinds/career",
+      "type": "question-kind",
+      "name": "Career",
+      "tagline": "Questions about what Robert has done: the roles and industries, what he led and studied, where he spoke, and the break between the last role and the next.",
+      "fields": {
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question whose answer is a period of his working life or what it showed: where he worked, what he led, what he is strongest at, how he measures delivery, whether he still writes code, and why there is a break. It is this kind even when the answer also rests on a skill or a KPI, because the visitor is asking about the career.\n\nA question about what a line on the site means is Ideas, even where the line sums the career up. A question about this model or its chat is Model and chat.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/career.md"
+    },
+    {
+      "id": "question-kinds/ideas",
+      "type": "question-kind",
+      "name": "Ideas",
+      "tagline": "Questions about what the lines on the site mean and the thinking behind the work.",
+      "fields": {
+        "source": "Local",
+        "rank": "20"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question from a visitor who has read a line, a tagline, a title, a claim about modeling a company, and asks what it means or why it holds.\n\nHow a line looks or sounds is Brand. What Robert did is Career, even where the idea came out of that work.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/ideas.md"
+    },
+    {
+      "id": "question-kinds/model-and-chat",
+      "type": "question-kind",
+      "name": "Model and chat",
+      "tagline": "Questions about this model and the chat that answers from it: who answers, how well, what is kept, how a claim holds, and how to use or copy the model.",
+      "fields": {
+        "source": "Local",
+        "rank": "40"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question about the tool rather than the person: the chat, its seat and its measure, what happens to what a visitor types, how a claim is evidenced, and how a person or an agent can use the model or build one like it.\n\nA question about Robert that the chat happens to answer is the kind of what it asks about, not this one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/model-and-chat.md"
+    },
+    {
       "id": "questions/can-i-build-a-model-like-this-of-myself",
       "type": "question",
       "name": "Can I build a model like this of myself?",
       "tagline": "CompanyGraph is the open meta-model this one is written in, and the Mental Model product is the worked example.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -9750,7 +9833,8 @@
       "name": "Can I use Robert's colors and fonts for my own site?",
       "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Brand"
       },
       "sections": [
         {
@@ -9815,7 +9899,8 @@
       "name": "Can Robert still write code himself?",
       "tagline": "The Software engineering and Java claims on his profile say how deep his code goes, and CompanyGraph and the career break's agentic work say what he has built with his own hands lately.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -9892,7 +9977,8 @@
       "name": "Has Robert built AI into a real business?",
       "tagline": "His last role says how AI was rolled out across a company under governance he wrote, Conperi says where applied machine learning came first, and his profile's AI claims say at what level.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -9969,7 +10055,8 @@
       "name": "Has Robert worked in banking?",
       "tagline": "His roles at UBS say what he did inside a bank, from the developer program to the architect's role, and two later projects say what he built for Swisscard and Credit Suisse.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -10058,7 +10145,8 @@
       "name": "Has Robert worked in insurance?",
       "tagline": "Two projects at 3AP say it: the AXA Health platform for complementary health insurance, and Conperi, which read health-insurance invoices into claims.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -10123,7 +10211,8 @@
       "name": "How can I use this model from my own AI agent?",
       "tagline": "The MCP server is where an agent connects, the registry listing is how a client finds it, and the feature says how to load the whole model into an assistant without a server.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -10200,7 +10289,8 @@
       "name": "How do I know a claim here is true?",
       "tagline": "The concepts say what a claim is and what must stand under it, and the feature says how a reader checks one against the other.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -10277,7 +10367,8 @@
       "name": "How does Robert measure delivery?",
       "tagline": "The DORA KPIs define what is watched in how a change reaches production, and none of them is measured yet, so the model makes no claim about how fast anything ships. The Delivery process says how the work itself is done.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -10390,7 +10481,8 @@
       "name": "How should a text in Robert's voice sound?",
       "tagline": "The brand's Voice table names the traits a sentence can fail and what a sentence without each one does, and the Writer seat's rulebook holds the rest of the rules a text is held to.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Brand"
       },
       "sections": [
         {
@@ -10455,7 +10547,8 @@
       "name": "How well does this chat answer?",
       "tagline": "Grounded Answer Rate says what is watched: whether an answer rested on what the model returned, not whether it was true, and its value is kept outside the model, in the chat's report the KPI links. The Answering process says how an answer is made.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -10520,7 +10613,8 @@
       "name": "Is what I type here stored?",
       "tagline": "The Answerer keeps no conversation, and the website's privacy page lists in full what leaves a visitor's browser and what happens to it.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -10585,7 +10679,8 @@
       "name": "What did Robert study?",
       "tagline": "The degree entry says what he studied and where, and the other education entries name the trainings and certifications that followed.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -10650,7 +10745,8 @@
       "name": "What do the colors on this site mean?",
       "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Brand"
       },
       "sections": [
         {
@@ -10703,7 +10799,8 @@
       "name": "What does \"Building fast is solved. Deciding well is not.\" mean?",
       "tagline": "It is the tagline on Robert's profile, a claim rather than a slogan because a value and a talk stand behind it and say what it means, and a blog post closes the one case the talk leaves open; the company's own tagline, on the identity, is a different line and says what the company is.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Ideas"
       },
       "sections": [
         {
@@ -10804,7 +10901,8 @@
       "name": "What does \"over twenty-five years, in order\" mean?",
       "tagline": "It is the timeline's heading: the feature it names says what a reader follows there, and the website says where the timeline is drawn from.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Ideas"
       },
       "sections": [
         {
@@ -10869,7 +10967,8 @@
       "name": "What does Robert do?",
       "tagline": "The identity says what he does in one line, and the company of one says what kind of company does it.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -10934,7 +11033,8 @@
       "name": "What has Robert led?",
       "tagline": "The leadership achievements of his two co-founder roles say what he decided and owned for other people, and the earlier roles say where it started.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -11023,7 +11123,8 @@
       "name": "What is Robert's history with Eclipse and modeling?",
       "tagline": "The working group and the user group's board say where he took part, and the CDO server says what he built and kept running.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -11100,7 +11201,8 @@
       "name": "What is Robert strongest at?",
       "tagline": "The skills his profile claims at Expert are his strongest, each with the evidence it rests on, and the Expert level says what that claim means.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -11165,7 +11267,8 @@
       "name": "What problem does modeling a company solve?",
       "tagline": "The value says why a business is modeled before it is built, and the film on governance as data shows what the model makes possible.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Ideas"
       },
       "sections": [
         {
@@ -11230,7 +11333,8 @@
       "name": "Where has Robert spoken?",
       "tagline": "His talks are experiences of the profile, the conference talks of the Eclipse years and at CamundaCon and the narrated talks on his own sites; each says what it argued and where to watch it, and Public speaking is the skill they evidence.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -11391,7 +11495,8 @@
       "name": "Who answers this chat?",
       "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says what it reads from.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Model and chat"
       },
       "sections": [
         {
@@ -11468,7 +11573,8 @@
       "name": "Why is there a career break, and what happened in it?",
       "tagline": "The career break says why it was taken and what it found, CompanyGraph and GuestGraph are the two products it built in the open, and a blog post walks the decision that ended it.",
       "fields": {
-        "source": "Local"
+        "source": "Local",
+        "kind": "Career"
       },
       "sections": [
         {
@@ -21304,6 +21410,30 @@
       "attrs": {}
     },
     {
+      "from": "question-kinds/brand",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/career",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/ideas",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "question-kinds/model-and-chat",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "questions/can-i-build-a-model-like-this-of-myself",
       "to": "products/mental-model",
       "via": "Rests on.Entity",
@@ -21322,6 +21452,12 @@
         "Owner": "Robert Blust",
         "For": "the meta-model to write it in"
       }
+    },
+    {
+      "from": "questions/can-i-build-a-model-like-this-of-myself",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/can-i-build-a-model-like-this-of-myself",
@@ -21348,6 +21484,12 @@
         "Owner": "",
         "For": "where the design is seen whole"
       }
+    },
+    {
+      "from": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "to": "question-kinds/brand",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
@@ -21387,6 +21529,12 @@
     },
     {
       "from": "questions/can-robert-still-write-code-himself",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/can-robert-still-write-code-himself",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21420,6 +21568,12 @@
         "Owner": "Robert Blust",
         "For": "the company-wide AI rollout"
       }
+    },
+    {
+      "from": "questions/has-robert-built-ai-into-a-real-business",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/has-robert-built-ai-into-a-real-business",
@@ -21469,6 +21623,12 @@
     },
     {
       "from": "questions/has-robert-worked-in-banking",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/has-robert-worked-in-banking",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21492,6 +21652,12 @@
         "Owner": "Robert Blust",
         "For": "the claims proof of concept"
       }
+    },
+    {
+      "from": "questions/has-robert-worked-in-insurance",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/has-robert-worked-in-insurance",
@@ -21531,6 +21697,12 @@
     },
     {
       "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21564,6 +21736,12 @@
         "Owner": "",
         "For": "how a reader checks it"
       }
+    },
+    {
+      "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/how-do-i-know-a-claim-here-is-true",
@@ -21633,6 +21811,12 @@
     },
     {
       "from": "questions/how-does-robert-measure-delivery",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-does-robert-measure-delivery",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21656,6 +21840,12 @@
         "Owner": "",
         "For": "the rulebook and the brief a text starts from"
       }
+    },
+    {
+      "from": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "to": "question-kinds/brand",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/how-should-a-text-in-robert-s-voice-sound",
@@ -21685,6 +21875,12 @@
     },
     {
       "from": "questions/how-well-does-this-chat-answer",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-well-does-this-chat-answer",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21708,6 +21904,12 @@
         "Owner": "",
         "For": "where the privacy page lists the rest"
       }
+    },
+    {
+      "from": "questions/is-what-i-type-here-stored",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/is-what-i-type-here-stored",
@@ -21737,6 +21939,12 @@
     },
     {
       "from": "questions/what-did-robert-study",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-did-robert-study",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21750,6 +21958,12 @@
         "Owner": "",
         "For": "what each color role means and never does"
       }
+    },
+    {
+      "from": "questions/what-do-the-colors-on-this-site-mean",
+      "to": "question-kinds/brand",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/what-do-the-colors-on-this-site-mean",
@@ -21809,6 +22023,12 @@
     },
     {
       "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "question-kinds/ideas",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21835,6 +22055,12 @@
     },
     {
       "from": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "to": "question-kinds/ideas",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-over-twenty-five-years-in-order-mean",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21858,6 +22084,12 @@
         "Owner": "",
         "For": "what he does"
       }
+    },
+    {
+      "from": "questions/what-does-robert-do",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/what-does-robert-do",
@@ -21907,6 +22139,12 @@
     },
     {
       "from": "questions/what-has-robert-led",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-has-robert-led",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21943,6 +22181,12 @@
     },
     {
       "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21969,6 +22213,12 @@
     },
     {
       "from": "questions/what-is-robert-strongest-at",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-is-robert-strongest-at",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21992,6 +22242,12 @@
         "Owner": "",
         "For": "why model first"
       }
+    },
+    {
+      "from": "questions/what-problem-does-modeling-a-company-solve",
+      "to": "question-kinds/ideas",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/what-problem-does-modeling-a-company-solve",
@@ -22101,6 +22357,12 @@
     },
     {
       "from": "questions/where-has-robert-spoken",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/where-has-robert-spoken",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -22134,6 +22396,12 @@
         "Owner": "",
         "For": "what it reads from"
       }
+    },
+    {
+      "from": "questions/who-answers-this-chat",
+      "to": "question-kinds/model-and-chat",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/who-answers-this-chat",
@@ -22190,6 +22458,12 @@
         "Owner": "Robert Blust",
         "For": "the second product"
       }
+    },
+    {
+      "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "to": "question-kinds/career",
+      "via": "kind",
+      "attrs": {}
     },
     {
       "from": "questions/why-is-there-a-career-break-and-what-happened-in-it",
