@@ -1,5 +1,5 @@
 {
-  "commit": "d011d81f5df07afc46c208d6ce3abd9bafebdaa8",
+  "commit": "bdbd6c993fa5dd597cba1addd3c4abfeb757ffe7",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -5629,6 +5629,11 @@
                   "Deciding well"
                 ],
                 [
+                  "Context engineering",
+                  "Generated a German podcast episode from the model's own files and read the transcript against the model, answering the hosts' claim that the agent does not hallucinate with the model's own KPI in the published description.",
+                  "Wer wurde eingestellt? Ich oder mein Modell?"
+                ],
+                [
                   "Conversational AI",
                   "Opened LIKE MAGIC's API to conversational AI providers rather than running language models in the platform, so d3x, ailean and onsai integrated themselves into the staff solution, unified multi-channel guest messaging with AI agents answering, guest insights and staff collaboration.",
                   "Co-Founder & Head of Technology"
@@ -6479,6 +6484,11 @@
                   "Deciding well"
                 ],
                 [
+                  "Storytelling",
+                  "Titled a German episode with the question its hosts close on and wrote its description to build to the provocation the episode leaves open, why a company cannot say what one person can.",
+                  "Wer wurde eingestellt? Ich oder mein Modell?"
+                ],
+                [
                   "Technical writing",
                   "Wrote the Analysis & Design methodology and guidance a UBS division worked to.",
                   "Solution Manager, Software Engineering — Analysis & Design"
@@ -6798,6 +6808,11 @@
                 "Context engineering",
                 "Generated a podcast episode on the deciding-well talk from the model's own export and a story naming the file and entity each section rests on, then read the transcript against both.",
                 "Deciding well"
+              ],
+              [
+                "Context engineering",
+                "Generated a German podcast episode from the model's own files and read the transcript against the model, answering the hosts' claim that the agent does not hallucinate with the model's own KPI in the published description.",
+                "Wer wurde eingestellt? Ich oder mein Modell?"
               ],
               [
                 "Conversational AI",
@@ -7648,6 +7663,11 @@
                 "Storytelling",
                 "Wrote the story for a debate episode on the deciding-well talk, three challenges each with its answer in the sources and a list of what the hosts must not say, then named the two places the hosts strayed.",
                 "Deciding well"
+              ],
+              [
+                "Storytelling",
+                "Titled a German episode with the question its hosts close on and wrote its description to build to the provocation the episode leaves open, why a company cannot say what one person can.",
+                "Wer wurde eingestellt? Ich oder mein Modell?"
               ],
               [
                 "Technical writing",
@@ -10178,6 +10198,69 @@
         "kind": "Community",
         "start": "2026-09-06",
         "end": "2026-09-06"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "type": "experience",
+      "name": "Wer wurde eingestellt? Ich oder mein Modell?",
+      "tagline": "A podcast episode in German in which two hosts read the model as a company of one and argue about it, ending on whether the person or the model he built was hired, published with a description that names what the hosts get wrong.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-27",
+        "end": "2026-09-27",
+        "url": "https://robertblust.substack.com/p/wer-wurde-eingestellt-ich-oder-mein",
+        "skills": [
+          "Context engineering",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Ways of working\n\n- Generated the episode with Gemini Notebook from the model's own files and the rulebooks beside them, so the hosts argue from its rules, its decisions and its KPIs rather than from a summary of them: that an unresolvable reference is an error and not a warning, that a decision keeps the alternatives that lost and why, and that each KPI names what it can hide.\n- Read the transcript against the model before publishing and kept every place where the hosts stray, to be named before anyone else names them. The two that would mislead a listener are named in the published description, each answered by the model itself: the hosts say the agent does not hallucinate, where the Grounded Answer Rate says it measures whether an answer rested on the model and not whether it was true; and they call the model an operating system for a life, where the concept Company of one keeps private life outside it by design.\n\n### Sharing\n\n- Published it on Sep 27, 2026 as the first episode in German, about sixteen minutes, under the question the hosts close on, with a description in Swiss Standard German that calls the company of one a fictional company, sets CompanyGraph against it as the structure that describes any company, and hands the listener the provocation the episode builds to: if one person can say why they decided what they decided, why a company with a thousand people cannot.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "CompanyGraph and the chat that answers only from the model",
+                  "https://companygraph.io"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "CompanyGraph and the chat that answers only from the model",
+                "https://companygraph.io"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-27",
+        "end": "2026-09-27"
       }
     },
     {
@@ -20322,6 +20405,42 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
       "to": "achievement-kinds/context",
       "via": "Achievements.Kind",
@@ -21036,6 +21155,15 @@
       "attrs": {
         "What it shows": "Generated a podcast episode on the deciding-well talk from the model's own export and a story naming the file and entity each section rests on, then read the transcript against both.",
         "Experience": "profiles/robert-blust/experiences/2026-podcast-deciding-well"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/context-engineering",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Generated a German podcast episode from the model's own files and read the transcript against the model, answering the hosts' claim that the agent does not hallucinate with the model's own KPI in the published description.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt"
       }
     },
     {
@@ -22566,6 +22694,15 @@
       "attrs": {
         "What it shows": "Wrote the story for a debate episode on the deciding-well talk, three challenges each with its answer in the sources and a list of what the hosts must not say, then named the two places the hosts strayed.",
         "Experience": "profiles/robert-blust/experiences/2026-podcast-deciding-well"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Titled a German episode with the question its hosts close on and wrote its description to build to the provocation the episode leaves open, why a company cannot say what one person can.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt"
       }
     },
     {
