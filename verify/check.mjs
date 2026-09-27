@@ -24,9 +24,9 @@ const SITE = "https://blust.ch";
 const FOOTER = ["GitHub", "License", "Privacy", "model.json"];
 
 const PAGES = [
-  { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
-                  hides: ["See the ideas"] },
+  { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en", home: true,
+    translates: { lang: "de", shows: ["Zu den Ideen", "DIE VISION", "Fünf Werte – und zu jedem", "Alle Beiträge", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
+                  hides: ["See the ideas", "THE VISION", "All posts"] },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
     // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
     // anchors, so keeping it here would fail on a link the page no longer renders.
@@ -519,6 +519,37 @@ const CHECKS = {
     // check runs next.
     await page.evaluate(() => { try { localStorage.removeItem("timeline-kinds"); } catch (e) {} });
     await page.goto(BASE + spec.path);
+    return null;
+  },
+  // The home page's derived parts, against their sources: the values against the model and each
+  // link against an id /principles/ carries, the newest post against the blog index. Then the
+  // Ask tile opens the chat, and at a phone's width the tiles stack.
+  async home(page) {
+    const model = await (await fetch(BASE + "/model.json")).json();
+    const values = model.entities.filter(e => e.type === "value");
+    const rows = await page.$$eval("#values .values a", as => as.map(a => ({ href: a.getAttribute("href"), name: a.querySelector("b").textContent })));
+    if (rows.length !== values.length) return `${rows.length} value rows for ${values.length} values in the model`;
+    const princ = await (await fetch(BASE + "/principles/")).text();
+    for (const r of rows) {
+      const id = r.href.split("#")[1];
+      if (!princ.includes(`id="${id}"`)) return `${r.href} names no value on /principles/`;
+    }
+    const vision = model.entities.find(e => e.type === "vision");
+    const h2 = await page.$eval("#vision h2", e => e.textContent);
+    if (h2 !== vision.name + ".") return `the vision reads ${JSON.stringify(h2)}, the model ${JSON.stringify(vision.name)}`;
+    const blog = await (await fetch(BASE + "/blog/")).text();
+    const first = /<span class="t"[^>]*>([^<]+)</.exec(blog)[1];
+    const latest = await page.$eval("#latest .t", e => e.textContent);
+    if (latest !== first) return `the newest post reads ${JSON.stringify(latest)}, the blog index ${JSON.stringify(first)}`;
+    await page.click("[data-chat-open]");
+    try { await page.waitForSelector("section.rbchat:not([hidden])", { timeout: 3000 }); }
+    catch { return "the Ask tile did not open the chat"; }
+    await page.keyboard.press("Escape");
+    await page.setViewportSize({ width: 390, height: 844 });
+    const lefts = await page.$$eval("#vision .tile", ts => new Set(ts.map(t => Math.round(t.getBoundingClientRect().left))).size);
+    if (lefts !== 1) return "the tiles do not stack at 390px";
+    const rowsSplit = await page.$$eval("#values .values a", as => as.some(a => a.querySelector("span").getBoundingClientRect().top <= a.querySelector("b").getBoundingClientRect().top));
+    if (rowsSplit) return "a value row does not stack at 390px";
     return null;
   },
 };

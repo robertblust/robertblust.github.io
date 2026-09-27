@@ -42,7 +42,7 @@ const RENDERERS = [
   (d, o) => writePrinciples(d, { ...o, de: german.de }),
   (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering", "Narrating"] }),
   writeSurfaces,
-  (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>." } }),
+  (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
   writeLatest,
   writeJsonLd,
 ];
