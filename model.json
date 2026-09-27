@@ -1,5 +1,5 @@
 {
-  "commit": "4aef3385c04b20557f2724ea4615e436bfe558b1",
+  "commit": "6ab127123c79ad6f80f1ad5716302f9e37ba5e59",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1849,7 +1849,7 @@
         },
         {
           "heading": "Consequences",
-          "text": "Twenty-five applications between June 9 and August 20, 2026, and an outcome that could be read by track: every leadership application led to an interview, fewer than half of the engineering ones did, two of the five architect ones did, and the offer taken was one of those two. What it cost was the story: a former CTO applying for an engineering role is read as a flight risk unless the stay is stated first, and going back near the code had to be told as a choice and not a step down.",
+          "text": "Twenty-five applications between June 9 and August 20, 2026, and an outcome that could be read by track: every leadership application led to an interview, fewer than half of the engineering ones did, two of the five architect ones did, and the offer taken was one of those two. The three leadership applications were a check on the premise, whether what I was used to being hired for still held, and not a third track; the one business engineer application sat between the two tracks. What it cost was the story: a former CTO applying for an engineering role is read as a flight risk unless the stay is stated first, and going back near the code had to be told as a choice and not a step down.",
           "tables": []
         },
         {
@@ -8836,7 +8836,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Architecture\n\n- Kept the CV as one source of truth in Markdown and YAML and made each application a small overlay that selects, reorders and overrides, never a copy — so a correction reached every dossier, and git recorded exactly what was sent where.\n\n### Engineering\n\n- Rendered the web page and the PDF from the same HTML and one stylesheet, and generated the full dossier per application with one command: CV, cover letter, diplomas and references.\n\n### Ways of working\n\n- Worked it with an AI coding agent under a written agent file: the honesty line it may not cross, the two trackers it must keep in step, and the traps in the template it must not fall into.\n- Defined agents for each step of an application: one analyzed a posting against the experience and the feedback from colleagues and rated the match; another wrote the application when the rating was a go; a third checked the process and the correspondence.\n- Held the same honesty line in every dossier: no certification claimed that was not held, no cloud named that had not been run, a gap stated rather than covered.\n\n### Results\n\n- Prepared 28 tailored applications in German or English, one per posting, of which 25 were submitted, and kept every interview note, salary figure and reply beside the overlay that produced it.\n- Became the seed of the model. The experience files, the skills and the references were written here first, then generalized into CompanyGraph and moved into the mental-model repository, which has mastered them since Sep 4, 2026.",
+          "text": "### Architecture\n\n- Kept the CV as one source of truth in Markdown and YAML and made each application a small overlay that selects, reorders and overrides, never a copy — so a correction reached every dossier, and git recorded exactly what was sent where.\n\n### Engineering\n\n- Rendered the web page and the PDF from the same HTML and one stylesheet, and generated the full dossier per application with one command: CV, cover letter, diplomas and references.\n\n### Ways of working\n\n- Worked it with an AI coding agent under a written agent file: the honesty line it may not cross, the two trackers it must keep in step, and the traps in the template it must not fall into.\n- Defined agents for each step of an application: one analyzed a posting against the experience and the feedback from colleagues and rated the match; another wrote the application when the rating was a go; a third checked the process and the correspondence.\n- Gave every go myself, after reading the rating, and sent every application myself, so no agent decided where or whether to apply.\n- Held the same honesty line in every dossier: no certification claimed that was not held, no cloud named that had not been run, a gap stated rather than covered.\n\n### Results\n\n- Prepared 28 tailored applications in German or English, one per posting, of which 25 were submitted, and kept every interview note, salary figure and reply beside the overlay that produced it.\n- Became the seed of the model. The experience files, the skills and the references were written here first, then generalized into CompanyGraph and moved into the mental-model repository, which has mastered them since Sep 4, 2026.",
           "tables": []
         },
         {
