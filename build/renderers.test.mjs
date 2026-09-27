@@ -18,6 +18,7 @@ const FIXTURE = {
 };
 
 import { writeJsonLd, alsoAt, imageOf } from "./jsonld.mjs";
+import { writeLatest } from "./latest.mjs";
 
 const PROFILE_FIXTURE = {
   ...FIXTURE,
@@ -279,4 +280,39 @@ test("strings lists what the two pages translate, once each", () => {
     { id: "values/a", type: "value", name: "A", tagline: "At.", path: "model/values/a.md", sections: [{ heading: "In practice", text: "B.\n\nI never x." }] },
   ] };
   assert.deepEqual(strings(data), ["V, w", "T.", "H", "P1.", "P2.", "A", "At.", "B.", "I never x."]);
+});
+
+const latestSite = (blogRows) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-latest-"));
+  fs.mkdirSync(path.join(dir, "blog"));
+  fs.writeFileSync(path.join(dir, "blog", "index.html"), `<div class="index">${blogRows}</div>`);
+  fs.writeFileSync(path.join(dir, "index.html"), "<div>\n        <!-- latest:start -->\n        old\n        <!-- latest:end -->\n</div>\n");
+  return dir;
+};
+const row = (slug, t) => `<div class="row">\n      <a class="entry" href="${slug}/">\n        <span class="t" data-de="DE ${t}">${t}</span>\n      </a>\n      <p class="dl mono"><a href="${slug}/">Read</a></p>\n      </div>`;
+
+test("the home page carries the blog index's first entry, its link rebased under blog/", () => {
+  const dir = latestSite(row("newest", "Newest") + row("older", "Older"));
+  writeLatest({}, { root: dir });
+  const page = fs.readFileSync(path.join(dir, "index.html"), "utf8");
+  assert.ok(page.includes('<a class="entry" href="blog/newest/">'), page);
+  assert.ok(page.includes('data-de="DE Newest">Newest'), "the German comes along");
+  assert.ok(!page.includes("Older") && !page.includes(">Read<"), "one entry, without the blog's own action line");
+});
+
+test("an absolute link is left as it is", () => {
+  const dir = latestSite(row("https://example.org/post", "Away"));
+  writeLatest({}, { root: dir });
+  assert.ok(fs.readFileSync(path.join(dir, "index.html"), "utf8").includes('href="https://example.org/post/"'));
+});
+
+test("check mode reports a home page behind the blog index", () => {
+  const dir = latestSite(row("newest", "Newest"));
+  assert.deepEqual(writeLatest({}, { root: dir, check: true }), ["index.html"]);
+  writeLatest({}, { root: dir });
+  assert.deepEqual(writeLatest({}, { root: dir, check: true }), []);
+});
+
+test("a blog index with no entry is an error, not an empty section", () => {
+  assert.throws(() => writeLatest({}, { root: latestSite("") }), /no entry/);
 });
