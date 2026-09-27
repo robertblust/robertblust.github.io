@@ -1,5 +1,5 @@
 {
-  "commit": "6ab127123c79ad6f80f1ad5716302f9e37ba5e59",
+  "commit": "1d18827cb15d4b3587bb20120b33296df0f140a0",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1029,12 +1029,30 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A decision whose subject is the work itself rather than my path through it: a product started or stopped, a form chosen for it, a way of building it. It is this kind even when it was made during a period a Career decision opened, because what was decided is the work.\n\nA call about which role to take or which track to pursue is Career. How a product is built inside its own repositories is decided there, in its specs, and recorded in its own model.",
+          "text": "A decision whose subject is the work itself rather than my path through it: a product started or stopped, a form chosen for it, a way of building it. It is this kind even when it was made during a period a Career decision opened, because what was decided is the work.\n\nA call about which role to take or which track to pursue is Career, and a call about what a service may cost is Spending. How a product is built inside its own repositories is decided there, in its specs, and recorded in its own model.",
           "tables": []
         }
       ],
       "owner": null,
       "path": "model/decision-kinds/portfolio.md"
+    },
+    {
+      "id": "decision-kinds/spending",
+      "type": "decision-kind",
+      "name": "Spending",
+      "tagline": "A call about what I pay for a service: which plan, and how much a month it may cost.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is money going out to a provider: a cap set on a metered service, an exception that raises it for a while, a subscription taken, kept, moved to another tier or ended. It is this kind even when the service runs a product, because what was decided is what it may cost.\n\nWhat a product is and how it is built is Portfolio, even when the call makes it cost more; the cap that follows is Spending. A call about which role to take is Career.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/spending.md"
     },
     {
       "id": "decision-statuses/dropped",
@@ -1109,6 +1127,156 @@
       "path": "model/decision-statuses/standing.md"
     },
     {
+      "id": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "type": "decision",
+      "name": "The Anthropic API cap is raised to USD 50 until October 31, 2026",
+      "tagline": "Until October 31, 2026 the Anthropic API may cost up to USD 50 a month, and the workspace limit is set there; from November it returns to USD 20.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the cap holds during a period of heavy development on the chats, in which each change is measured against the API before it ships. It had to be decided the day the workspace limit stopped the chats, with that development still under way.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Keep USD 20 through the development",
+                  "The measurements that decide a chat change would stop the live chats each time they ran against the same workspace."
+                ],
+                [
+                  "Raise the cap with no end date",
+                  "An exception without an end is the new cap under another name, and nothing would bring it back."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Keep USD 20 through the development",
+                "The measurements that decide a chat change would stop the live chats each time they ran against the same workspace."
+              ],
+              [
+                "Raise the cap with no end date",
+                "An exception without an end is the new cap under another name, and nothing would bring it back."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The extra spend comes from building, not from visitors, and it ends when the building does; an end date makes that claim checkable, because a November reading over USD 20 would break the cap and not the exception.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Cap Use reads over the whole in October against the USD 20 cap, and this decision is what says so on purpose. On November 1, 2026 the workspace limit goes back to USD 20; extending past that date is a new decision that names this one in `supersedes`.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-anthropic-api-cap-raised-until-october.md"
+    },
+    {
+      "id": "decisions/2026-anthropic-api-capped",
+      "type": "decision",
+      "name": "The Anthropic API is capped at USD 20 a month",
+      "tagline": "The Anthropic API, which the three chats answer through, may cost at most USD 20 in a calendar month, and the workspace's monthly limit is set to that amount so the provider stops it there.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What the API that answers every chat question may cost. It had to be decided on the day the workspace's monthly limit was reached and all three chats stopped answering, because the limit then in place had been set with no amount decided behind it.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "No limit, and read the bill",
+                  "A question asked in a loop would cost whatever it cost, and I would learn of it a month later."
+                ],
+                [
+                  "A limit set high enough never to be reached",
+                  "A cap that cannot bite decides nothing, and the amount would say what I fear rather than what I mean to spend."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "No limit, and read the bill",
+                "A question asked in a loop would cost whatever it cost, and I would learn of it a month later."
+              ],
+              [
+                "A limit set high enough never to be reached",
+                "A cap that cannot bite decides nothing, and the amount would say what I fear rather than what I mean to spend."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "USD 20 a month is what the chats cost in the priced account of the Deciding well talk, which is the chats answering visitors and not me building them. A limit the provider enforces is the only kind that stops spending rather than reporting it.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "When the month's spend reaches the cap, every chat stops answering until the month turns, so the chat meter's daily share has to sit below a thirtieth of the cap, where it refuses a visitor politely before the workspace refuses everyone. It stays right while the chats cost about what they cost now; a chat that answers more questions, or answers them at more length, raises it by a new decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-anthropic-api-capped.md"
+    },
+    {
       "id": "decisions/2026-architect-role",
       "type": "decision",
       "name": "An 80% architect role in a product company, chosen over pay",
@@ -1179,7 +1347,7 @@
         },
         {
           "heading": "Why",
-          "text": "The break had answered its question: what I like doing is modeling, and AI used with responsibility inside a company rather than merely used, and the role that fits that is an architect's, the more lasting one. Of the offers, the architect role in a product company was the one where the interviews showed a culture I would choose, and choosing on values over pay is the whole of what deciding well means when the two disagree.",
+          "text": "The break had answered its question: what I like doing is modeling how a business works, and AI used with responsibility inside a company rather than merely used, and the role that fits that is an architect's, the more lasting one. Of the offers, the architect role in a product company was the one where the interviews showed a culture I would choose, and choosing on values over pay is the whole of what deciding well means when the two disagree.",
           "tables": []
         },
         {
@@ -1230,6 +1398,156 @@
       ],
       "owner": null,
       "path": "model/decisions/2026-architect-role.md"
+    },
+    {
+      "id": "decisions/2026-chatgpt-plus-kept-while-used",
+      "type": "decision",
+      "name": "ChatGPT Plus is kept only in months it is used",
+      "tagline": "I keep ChatGPT Plus for as long as a month uses something only the plan provides, and end it when months pass without that.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether a subscription outside the work, used privately and not in anything the model describes, earns its place. Its only smaller tier is free and it shows no meter, so its fit is a question of whether it was used at all. It was decided with the caps, when every paid service was first read against what it carries.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "End it now",
+                  "Whether it is used is what Plan Fit reads, and ending it before the first reading would decide without one."
+                ],
+                [
+                  "Leave it out as private",
+                  "A subscription paid every month is a service I pay for, whatever it is used for."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "End it now",
+                "Whether it is used is what Plan Fit reads, and ending it before the first reading would decide without one."
+              ],
+              [
+                "Leave it out as private",
+                "A subscription paid every month is a service I pay for, whatever it is used for."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Plus has no smaller paid tier, so the only fit in question is the plan or none, and that is read from use and not from price.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Plan Fit reads it by whether the month used what only Plus provides. Months without that make ending it a new decision; it is billed through Google Play and ended there.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-chatgpt-plus-kept-while-used.md"
+    },
+    {
+      "id": "decisions/2026-claude-max-kept-while-used",
+      "type": "decision",
+      "name": "Claude Max 20x is kept while my use needs it",
+      "tagline": "I keep the Max 20x plan of Claude, which the agents that build the work run on, for as long as my use needs its allowance, and move to Max 5x or Pro the months it does not.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether the plan the work runs on is the right size. Anthropic sells Max 5x and Max 20x as five and twenty times the use of Pro, so a month whose peak used under a quarter of Max 20x would have fit Max 5x, and under a twentieth would have fit Pro. It was decided with the caps, when every paid service was first read against what it carries.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Move to Max 5x now",
+                  "During heavy development the smaller allowance runs out before the week does, and the work stops."
+                ],
+                [
+                  "Keep Max 20x without reading its use",
+                  "The plan would stay at its largest long after the building that needed it ended."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Move to Max 5x now",
+                "During heavy development the smaller allowance runs out before the week does, and the work stops."
+              ],
+              [
+                "Keep Max 20x without reading its use",
+                "The plan would stay at its largest long after the building that needed it ended."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The plan is sized to the heaviest weeks of building, and whether those weeks continue is read in Plan Fit month by month rather than assumed.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Each month's peak use is read by hand from the plan's usage page, since the plan offers no other reading. Several months under the smaller tier's share make a move to it a new decision that names this one.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-claude-max-kept-while-used.md"
     },
     {
       "id": "decisions/2026-education-on-my-own-account",
@@ -1359,6 +1677,81 @@
       "path": "model/decisions/2026-education-on-my-own-account.md"
     },
     {
+      "id": "decisions/2026-elevenlabs-capped",
+      "type": "decision",
+      "name": "ElevenLabs is capped at USD 20 a month in top-ups",
+      "tagline": "ElevenLabs, which gives the talks their recorded voice, is paid by credits bought as they run out, and in a calendar month I buy at most USD 20 of them.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What the recorded voice may cost, on a service with no plan to cap it: credits are topped up, and every clip re-recorded after an edit spends them. It was decided with the other caps, when what each paid service may cost was written down for the first time.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Top up whenever credits run out",
+                  "A month of re-recorded talks would cost what it cost, with nothing to say it was too much."
+                ],
+                [
+                  "A monthly plan in place of top-ups",
+                  "A plan is paid in the months that record nothing."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Top up whenever credits run out",
+                "A month of re-recorded talks would cost what it cost, with nothing to say it was too much."
+              ],
+              [
+                "A monthly plan in place of top-ups",
+                "A plan is paid in the months that record nothing."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "Recording follows writing, so what it costs follows what I publish, and a month that needs more than USD 20 is a month to ask whether the recordings are worth it before paying for them.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The cap is kept by me, not by the provider: a top-up is a purchase I make, and the month's total is read from the provider's billing. A month that needs more is a new decision before the top-up, not a finding after it.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-elevenlabs-capped.md"
+    },
+    {
       "id": "decisions/2026-first-cas",
       "type": "decision",
       "name": "The first CAS is AI Innovation at HWZ",
@@ -1392,7 +1785,7 @@
               "rows": [
                 [
                   "The OST CAS Machine Learning for Software Engineers in Rapperswil, about 15 ECTS over a year",
-                  "It is the developer track, and the profile's claim is the other one: the break's finding was modeling and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
+                  "It is the developer track, and the profile's claim is the other one: the break's finding was modeling how a business works and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
                 ],
                 [
                   "The ZHAW CAS Machine Intelligence in Winterthur, 12 ECTS over five months",
@@ -1414,7 +1807,7 @@
             "rows": [
               [
                 "The OST CAS Machine Learning for Software Engineers in Rapperswil, about 15 ECTS over a year",
-                "It is the developer track, and the profile's claim is the other one: the break's finding was modeling and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
+                "It is the developer track, and the profile's claim is the other one: the break's finding was modeling how a business works and AI used with responsibility inside a company, and a CAS in machine learning would picture a gap in the competence the role hires me for."
               ],
               [
                 "The ZHAW CAS Machine Intelligence in Winterthur, 12 ECTS over five months",
@@ -1624,6 +2017,156 @@
       ],
       "owner": null,
       "path": "model/decisions/2026-four-months.md"
+    },
+    {
+      "id": "decisions/2026-google-cloud-capped",
+      "type": "decision",
+      "name": "Google Cloud is capped at CHF 10 a month",
+      "tagline": "Google Cloud, which runs the MCP and chat hosts, may cost at most CHF 10 in a calendar month, watched by a budget that alerts at the cap.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "What the hosting may cost, when so far it has cost nothing inside the free tier and would cost something the first month the traffic or a mistake took it past. It was decided with the other caps, when what each paid service may cost was written down for the first time.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "No budget, since the free tier covers it",
+                  "The first month past the free tier would be found on the invoice."
+                ],
+                [
+                  "A cap enforced by turning billing off",
+                  "Turning billing off stops every host at once, which is a larger failure than the cost it prevents."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "No budget, since the free tier covers it",
+                "The first month past the free tier would be found on the invoice."
+              ],
+              [
+                "A cap enforced by turning billing off",
+                "Turning billing off stops every host at once, which is a larger failure than the cost it prevents."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The free tier makes the expected cost zero, so the cap is there for the unexpected month, and CHF 10 is low enough that an alert at it means something went wrong and high enough that a busy month does not raise it.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A Google Cloud budget alerts at the cap and does not stop spending, so the cap can be passed and Cap Use can read over the whole without an exception behind it; that reading is a finding to act on. The budget has to exist on the billing account for this call to be kept.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-google-cloud-capped.md"
+    },
+    {
+      "id": "decisions/2026-google-workspace-on-business-standard",
+      "type": "decision",
+      "name": "Google Workspace stays on Business Standard for two seats",
+      "tagline": "I keep Google Workspace on Business Standard with two seats, because Gemini and Gemini Notebook, which the work uses, come with that tier.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-27",
+        "kind": "Spending",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whether Workspace needs Business Standard, with its pooled storage and its advanced AI models, or would be carried by Business Starter, and whether both seats are used. It was decided with the caps, before the trial discount ends in October 2026 and the full price starts.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Business Starter",
+                  "It does not carry the Gemini features the work uses."
+                ],
+                [
+                  "One seat",
+                  "The second seat is the one Gemini and Gemini Notebook are used from."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Business Starter",
+                "It does not carry the Gemini features the work uses."
+              ],
+              [
+                "One seat",
+                "The second seat is the one Gemini and Gemini Notebook are used from."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The tier is chosen for its AI features and not for its storage, so Plan Fit reads it by whether the month used what only this tier provides, and the storage share alone would argue for Starter wrongly.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "A month that used no Gemini feature is a month the smaller tier would have carried, and several such months make a move to Starter a new decision.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-google-workspace-on-business-standard.md"
     },
     {
       "id": "decisions/2026-in-the-open",
@@ -2179,6 +2722,38 @@
       "path": "model/identity.md"
     },
     {
+      "id": "kpis/cap-use",
+      "type": "kpi",
+      "name": "Cap Use",
+      "tagline": "The highest share of its monthly cap that any metered cloud service spent in a calendar month.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ],
+        "unit": "percent of cap per month",
+        "direction": "lower",
+        "read-with": [
+          "Grounded Answer Rate"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "A metered service is one billed for what it used: an API billed per token, a platform billed per request, credits bought as they run out. Each has a cap, set by a decision of the Spending kind, and for each the month's spend is read from the provider's own billing page once the calendar month has closed. The service's share is that spend divided by its cap, and the value is the highest share among them, so one service over its cap shows even when the others are well under.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "A value over the whole means one of two things, a cap broken or a cap raised for a while by a decision, and the number cannot tell them apart; the decision that raised it can, and a reading over the whole is checked against the decisions standing that month. A cap enforced by the provider stops the service at the cap, so the value never passes the whole there, while the service itself stopped answering; reading it beside Grounded Answer Rate shows that, because a chat whose cap bit refuses questions and the rate falls. A cap only watched, by an alert that does not stop spending, can be passed, and a service running inside a free tier reads nothing until the month it leaves it. Taking the highest share hides a second service close to its cap behind the first.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/kpis/cap-use.md"
+    },
+    {
       "id": "kpis/change-fail-rate",
       "type": "kpi",
       "name": "Change Fail Rate",
@@ -2557,6 +3132,35 @@
       ],
       "owner": null,
       "path": "model/kpis/grounded-answer-rate.md"
+    },
+    {
+      "id": "kpis/plan-fit",
+      "type": "kpi",
+      "name": "Plan Fit",
+      "tagline": "The peak share of its plan's allowance that a subscription used in a calendar month, read against the share the next tier down would have carried.",
+      "fields": {
+        "source": "Local",
+        "owner": "Owner",
+        "serves": [
+          "Every service I pay for is sized to what I use"
+        ],
+        "unit": "percent of plan allowance per month",
+        "direction": "target"
+      },
+      "sections": [
+        {
+          "heading": "How it is measured",
+          "text": "A subscription is a service billed the same whatever it carries: a plan with an allowance of use, storage or features. For each, the month's peak use is read by hand from the provider's own usage page and taken as a share of the plan's allowance. The band is a subscription's own: its top is the plan's limit, where use is being refused and the plan is too small, and its bottom is the share of this plan that the next tier down allows, under which the smaller tier would have carried the month. A plan whose smaller tier is free, or that shows no meter, is read as whether the month used anything only the plan provides.",
+          "tables": []
+        },
+        {
+          "heading": "What it can hide",
+          "text": "One month's peak can be a month of unusual work, so a reading under the band argues for a smaller tier only when it repeats; a change of plan rests on several months, and is a decision. A tier sells features as well as allowance, and a month that used little of the allowance may still have needed a feature only this tier has, which the share does not show. The reading is taken by hand, so a month nobody read is missing rather than zero.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/kpis/plan-fit.md"
     },
     {
       "id": "processes/answering",
@@ -8857,7 +9461,7 @@
       "id": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
       "type": "experience",
       "name": "Deciding well is solved. For me.",
-      "tagline": "The talk kept the claim open for everyone else. This is the one case I can close, because the decision is written down and you can read it.",
+      "tagline": "I took a four-month career break to answer one question, then chose an architect role at 80%. How I decided is the one case I can call solved.",
       "fields": {
         "source": "Local",
         "kind": "Community",
@@ -8873,7 +9477,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Opened the blog on blust.ch with the one case the talk of Sep 24 leaves closed: the author's own October decision, walked in the order it happened so that a reader can check each step against the record.\n\n### Ways of working\n\n- Built the section the way the family builds anything: a reviewed specification and a plan before the pages, the index list lifted into the design package as a block rather than copied, and the German made by the four roles the conventions define, translator, editor, back-reader and fidelity, each an agent seat under its written file and none of them deciding; the owner picked among the flagged sentences.\n\n### Results\n\n- Showed the talk's method run once on one decision: the question written before the first application, the facts kept in one record, three agents rating, writing and checking under written files and never choosing, the evidence read by track, and the choice made against a criterion that existed before the offers did.\n- Kept the claim as the talk made it: one person and one decision prove nothing about a team, so the proposal stays a proposal, and the post closes by asking where it breaks.\n- Named at the post's foot what it rests on, each an experience of this model opened on the site's timeline, in its place among the others: the career break, the application tooling, the talk and the two podcasts, so the post carries no address of its own beyond theirs.",
+          "text": "### Context\n\n- Opened the blog on blust.ch with the one case the talk of Sep 24 leaves closed: the author's own October decision, walked in the order it happened so that a reader can check each step against the record.\n\n### Ways of working\n\n- Built the section the way the family builds anything: a reviewed specification and a plan before the pages, the index list lifted into the design package as a block rather than copied, and the German made by the four roles the conventions define, translator, editor, back-reader and fidelity, each an agent seat under its written file and none of them deciding; the owner picked among the flagged sentences.\n\n### Results\n\n- Showed the talk's method run once on one decision: the question written before the first application, the facts kept in one record, three agents rating, writing and checking under written files and never choosing, the evidence read by track, and the choice made against a criterion that existed before the offer did.\n- Kept the claim as the talk made it: one person and one decision prove nothing about a team, so the proposal stays a proposal, and the post closes by asking where it breaks.\n- Named at the post's foot what it rests on, each an experience of this model opened on the site's timeline, in its place among the others: the career break, the application tooling, the talk and the two podcasts, so the post carries no address of its own beyond theirs.",
           "tables": []
         }
       ],
@@ -8937,7 +9541,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's, and it is the more lasting one: with the right guardrails an agent writes code faster than any team, so pure development will change, while deciding what gets built, and within which boundaries, will not.\n\n### Ways of working\n\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Set the two questions the ideas' validation has to answer before either was put in front of anyone: how much of an idea must exist before it can be validated, and what that costs in hours and focus; and what a realistic outcome is, revenue, learning or a clean no. The answers are published in the open as they arrive, and a no is worth more than a polite yes.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open — two senior engineering roles, one past its second round and one a day from an offer, and a hands-on lead role at a higher salary range — and all three withdrawn. The fifth day is kept for formal education in how AI is led and governed in an organization.",
+          "text": "### Context\n\n- Gave the break one question: what I like doing, rather than what I am used to being hired for. The answer came out as modeling how a business works, and AI used with responsibility inside a company rather than merely used; the role that fits it is an architect's, and it is the more lasting one: with the right guardrails an agent writes code faster than any team, so pure development will change, while deciding what gets built, and within which boundaries, will not.\n\n### Ways of working\n\n- Built the products and the applications through the agent seats the model defines, each under a rulebook I wrote for it and none of them deciding.\n- Set the two questions the ideas' validation has to answer before either was put in front of anyone: how much of an idea must exist before it can be validated, and what that costs in hours and focus; and what a realistic outcome is, revenue, learning or a clean no. The answers are published in the open as they arrive, and a no is worth more than a polite yes.\n- Worked spec-driven, a reviewed specification before every plan and build, under written conventions vendored into every repository in the family and a design system every site pins like any other dependency.\n\n### Results\n\n- Held the question open across two tracks at once, hands-on engineering and architecture, and let the market answer it: 25 applications between Jun 9 and Aug 20, 2026 — 16 for senior engineering roles, 5 for architect roles, 3 for leadership roles and 1 for a business engineer.\n- Reached an interview or an invitation to one in 12 of the 25, and an offer in one, accepted. Withdrew from 7 processes myself, each at an interview stage, one of them the week before a final round of five people. Was declined by 10 — 7 on the dossier alone, 3 after an interview, 2 of the 10 because the position was filled meanwhile. 6 never answered.\n- Read the outcome by track: all 3 leadership applications led to an interview, 7 of the 16 engineering ones did, 2 of the 5 architect ones did, and the offer taken was one of those two.\n- Learned what the declines and the rounds said. An employer reads a former CTO applying for an engineering role as a flight risk unless the stay is stated first — three employers in 27 years. The story of going back near the code has to be told as a choice and not as a step down. And an honest line on what I do not have, no TOGAF, no AWS, no Kotlin, costs fit on paper and buys credibility in the room.\n- Decided on values over pay: an 80% architect role in a product company outside finance, chosen while three processes in finance were still open — two senior engineering roles, one past its second round and one a day from an offer, and a hands-on lead role at a higher salary range — and all three withdrawn. The fifth day is kept for formal education in how AI is led and governed in an organization.",
           "tables": []
         },
         {
@@ -9724,6 +10328,25 @@
       "path": "model/question-kinds/career.md"
     },
     {
+      "id": "question-kinds/cost",
+      "type": "question-kind",
+      "name": "Cost",
+      "tagline": "Questions about what the work costs and how that cost is kept in check: what running it costs, and how Robert keeps cloud spend under control.",
+      "fields": {
+        "source": "Local",
+        "rank": "50"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A question whose subject is money going out: what a service may cost, how its cap or plan is decided and read, and what building the work cost. It is this kind even when it asks about Robert's practice, because what it asks is what things cost.\n\nA question about the chat or the model that does not ask what it costs is Model and chat.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/question-kinds/cost.md"
+    },
+    {
       "id": "question-kinds/ideas",
       "type": "question-kind",
       "name": "Ideas",
@@ -9754,7 +10377,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A question about the tool rather than the person: the chat, its seat and its measure, what happens to what a visitor types, how a claim is evidenced, and how a person or an agent can use the model or build one like it.\n\nA question about Robert that the chat happens to answer is the kind of what it asks about, not this one.",
+          "text": "A question about the tool rather than the person: the chat, its seat and its measure, what happens to what a visitor types, how a claim is evidenced, and how a person or an agent can use the model or build one like it.\n\nA question about Robert that the chat happens to answer is the kind of what it asks about, not this one, and a question about what the chat costs to run is Cost.",
           "tables": []
         }
       ],
@@ -10360,6 +10983,96 @@
       ],
       "owner": null,
       "path": "model/questions/how-do-i-know-a-claim-here-is-true.md"
+    },
+    {
+      "id": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "type": "question",
+      "name": "How does Robert keep cloud costs under control?",
+      "tagline": "By deciding what each service may cost before it is spent: a cap on every metered service, enforced by the provider where it can be, and every subscription read against the tier below it. The FinOps skill is where that practice is claimed and evidenced.",
+      "fields": {
+        "source": "Local",
+        "kind": "Cost"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "Every service I pay for is sized to what I use",
+                  "",
+                  "what is kept small, and what falls outside"
+                ],
+                [
+                  "kpi",
+                  "Cap Use",
+                  "",
+                  "how the metered services are read against their caps"
+                ],
+                [
+                  "kpi",
+                  "Plan Fit",
+                  "",
+                  "how each subscription is read against the tier below"
+                ],
+                [
+                  "skill",
+                  "FinOps",
+                  "",
+                  "the practice, claimed and evidenced in the profile"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "Every service I pay for is sized to what I use",
+                "",
+                "what is kept small, and what falls outside"
+              ],
+              [
+                "kpi",
+                "Cap Use",
+                "",
+                "how the metered services are read against their caps"
+              ],
+              [
+                "kpi",
+                "Plan Fit",
+                "",
+                "how each subscription is read against the tier below"
+              ],
+              [
+                "skill",
+                "FinOps",
+                "",
+                "the practice, claimed and evidenced in the profile"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/how-does-robert-keep-cloud-costs-under-control.md"
     },
     {
       "id": "questions/how-does-robert-measure-delivery",
@@ -11050,6 +11763,180 @@
       ],
       "owner": null,
       "path": "model/questions/what-does-building-fast-is-solved-deciding-well-is-not-mean.md"
+    },
+    {
+      "id": "questions/what-does-it-cost-to-run-this",
+      "type": "question",
+      "name": "What does it cost to run this?",
+      "tagline": "Each paid cloud service has a monthly cap and each subscription a tier, set in the Spending decisions and read by two KPIs; what was actually spent is not kept in the model. What building all of it cost is priced in the talk \"Building fast is solved. Deciding well is not.\"",
+      "fields": {
+        "source": "Local",
+        "kind": "Cost"
+      },
+      "sections": [
+        {
+          "heading": "Rests on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "For"
+              ],
+              "rows": [
+                [
+                  "strategic-objective",
+                  "Every service I pay for is sized to what I use",
+                  "",
+                  "what is kept small, and what falls outside"
+                ],
+                [
+                  "kpi",
+                  "Cap Use",
+                  "",
+                  "how the metered services are read against their caps"
+                ],
+                [
+                  "kpi",
+                  "Plan Fit",
+                  "",
+                  "how each subscription is read against the tier below"
+                ],
+                [
+                  "decision",
+                  "The Anthropic API is capped at USD 20 a month",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "The Anthropic API cap is raised to USD 50 until October 31, 2026",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "ElevenLabs is capped at USD 20 a month in top-ups",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "Google Cloud is capped at CHF 10 a month",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "Claude Max 20x is kept while my use needs it",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "Google Workspace stays on Business Standard for two seats",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "decision",
+                  "ChatGPT Plus is kept only in months it is used",
+                  "",
+                  "the cap or plan it sets"
+                ],
+                [
+                  "experience",
+                  "Building fast is solved. Deciding well is not.",
+                  "Robert Blust",
+                  "what building it cost"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "For"
+            ],
+            "rows": [
+              [
+                "strategic-objective",
+                "Every service I pay for is sized to what I use",
+                "",
+                "what is kept small, and what falls outside"
+              ],
+              [
+                "kpi",
+                "Cap Use",
+                "",
+                "how the metered services are read against their caps"
+              ],
+              [
+                "kpi",
+                "Plan Fit",
+                "",
+                "how each subscription is read against the tier below"
+              ],
+              [
+                "decision",
+                "The Anthropic API is capped at USD 20 a month",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "The Anthropic API cap is raised to USD 50 until October 31, 2026",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "ElevenLabs is capped at USD 20 a month in top-ups",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "Google Cloud is capped at CHF 10 a month",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "Claude Max 20x is kept while my use needs it",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "Google Workspace stays on Business Standard for two seats",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "decision",
+                "ChatGPT Plus is kept only in months it is used",
+                "",
+                "the cap or plan it sets"
+              ],
+              [
+                "experience",
+                "Building fast is solved. Deciding well is not.",
+                "Robert Blust",
+                "what building it cost"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/questions/what-does-it-cost-to-run-this.md"
     },
     {
       "id": "questions/what-does-over-twenty-five-years-in-order-mean",
@@ -14188,6 +15075,25 @@
       "path": "model/strategic-objectives/a-continuing-education-master-s-in-ai-leadership.md"
     },
     {
+      "id": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "type": "strategic-objective",
+      "name": "Every service I pay for is sized to what I use",
+      "tagline": "No cloud service costs more in a month than I decided it may, and no subscription sits on a tier my use does not need.",
+      "fields": {
+        "source": "Local",
+        "adopted": "2026-09-27"
+      },
+      "sections": [
+        {
+          "heading": "What it makes true",
+          "text": "Two ways of paying for a service fail in opposite directions. A metered service, billed for what it used, fails by running past what I meant to spend, and I learn of it from the bill or from the service stopping. A subscription, billed the same whatever it carries, fails by paying for room I never use. When this holds, each metered service has a cap written down as a decision and no month goes past it except under a decided exception, and each subscription's tier is one my use in the month actually needed.\n\nIt fails when a month's spend on a metered service passes its cap with no decision allowing it, and when a subscription stays on its tier through months in which a smaller one would have carried the same work.\n\nWhat falls outside: whether the money is well spent against what it produced, which the cost page of the Deciding well talk answers; my own hours, which no plan or cap sizes; and any service that costs nothing.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use.md"
+    },
+    {
       "id": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
       "type": "strategic-objective",
       "name": "Whoever decides about me decided from the model",
@@ -14664,6 +15570,12 @@
       "attrs": {}
     },
     {
+      "from": "decision-kinds/spending",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "decision-statuses/dropped",
       "to": "sources/local",
       "via": "source",
@@ -14685,6 +15597,66 @@
       "from": "decision-statuses/standing",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-capped",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-capped",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-capped",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-capped",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-anthropic-api-capped",
+      "to": "decision-statuses/standing",
+      "via": "status",
       "attrs": {}
     },
     {
@@ -14725,6 +15697,66 @@
       "from": "decisions/2026-architect-role",
       "to": "values/decide-well-over-build-fast",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-chatgpt-plus-kept-while-used",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-chatgpt-plus-kept-while-used",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-chatgpt-plus-kept-while-used",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-chatgpt-plus-kept-while-used",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-chatgpt-plus-kept-while-used",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-max-kept-while-used",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-max-kept-while-used",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-max-kept-while-used",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-max-kept-while-used",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-claude-max-kept-while-used",
+      "to": "decision-statuses/standing",
+      "via": "status",
       "attrs": {}
     },
     {
@@ -14775,6 +15807,36 @@
       "from": "decisions/2026-education-on-my-own-account",
       "to": "values/decide-well-over-build-fast",
       "via": "upholds",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-elevenlabs-capped",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-elevenlabs-capped",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-elevenlabs-capped",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-elevenlabs-capped",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-elevenlabs-capped",
+      "to": "decision-statuses/standing",
+      "via": "status",
       "attrs": {}
     },
     {
@@ -14837,6 +15899,66 @@
     },
     {
       "from": "decisions/2026-four-months",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-cloud-capped",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-cloud-capped",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-cloud-capped",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-cloud-capped",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-cloud-capped",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-workspace-on-business-standard",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-workspace-on-business-standard",
+      "to": "decision-kinds/spending",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-workspace-on-business-standard",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-workspace-on-business-standard",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-google-workspace-on-business-standard",
       "to": "decision-statuses/standing",
       "via": "status",
       "attrs": {}
@@ -15100,6 +16222,30 @@
       "attrs": {}
     },
     {
+      "from": "kpis/cap-use",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/cap-use",
+      "to": "kpis/grounded-answer-rate",
+      "via": "read-with",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/cap-use",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/cap-use",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "kpis/change-fail-rate",
       "to": "processes/delivery",
       "via": "measures",
@@ -15239,6 +16385,24 @@
     },
     {
       "from": "kpis/grounded-answer-rate",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/plan-fit",
+      "to": "roles/owner",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/plan-fit",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/plan-fit",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -21734,6 +22898,12 @@
       "attrs": {}
     },
     {
+      "from": "question-kinds/cost",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "question-kinds/ideas",
       "to": "sources/local",
       "via": "source",
@@ -22057,6 +23227,58 @@
     },
     {
       "from": "questions/how-do-i-know-a-claim-here-is-true",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "to": "kpis/cap-use",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how the metered services are read against their caps"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "to": "kpis/plan-fit",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how each subscription is read against the tier below"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "to": "skills/finops",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "skill",
+        "Owner": "",
+        "For": "the practice, claimed and evidenced in the profile"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what is kept small, and what falls outside"
+      }
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "to": "question-kinds/cost",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/how-does-robert-keep-cloud-costs-under-control",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -22425,6 +23647,128 @@
     },
     {
       "from": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-anthropic-api-capped",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-chatgpt-plus-kept-while-used",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-claude-max-kept-while-used",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-elevenlabs-capped",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-google-cloud-capped",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "decisions/2026-google-workspace-on-business-standard",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "For": "the cap or plan it sets"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "kpis/cap-use",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how the metered services are read against their caps"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "kpis/plan-fit",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "kpi",
+        "Owner": "",
+        "For": "how each subscription is read against the tier below"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "experience",
+        "Owner": "Robert Blust",
+        "For": "what building it cost"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "via": "Rests on.Entity",
+      "attrs": {
+        "Type": "strategic-objective",
+        "Owner": "",
+        "For": "what is kept small, and what falls outside"
+      }
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
+      "to": "question-kinds/cost",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "questions/what-does-it-cost-to-run-this",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
@@ -23571,6 +24915,12 @@
     },
     {
       "from": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
       "to": "sources/local",
       "via": "source",
       "attrs": {}
