@@ -25,8 +25,8 @@ const FOOTER = ["GitHub", "License", "Privacy", "model.json"];
 
 const PAGES = [
   { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Zu den Vorträgen", "Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
-                  hides: ["See the talks", "See the ideas"] },
+    translates: { lang: "de", shows: ["Zu den Ideen", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
+                  hides: ["See the ideas"] },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
     // the page's JSON-LD `sameAs`, which is what that link was for; this check only ever saw
     // anchors, so keeping it here would fail on a link the page no longer renders.
