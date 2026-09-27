@@ -313,6 +313,11 @@
       <section class="proc" id="delivery">
         <h3 class="procname">Delivery</h3>
         <p class="proctag">How anything the company ships is shaped, specified, planned, made and merged, in code and in prose.</p>
+      <figure class="rbchat-diagram" data-diagram data-model="../model/">
+        <figcaption><span>Process · Delivery</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"process","title":"Delivery","mermaid":"flowchart LR\n  n0[\"\u003cb>Shape\u003c/b>\u003cbr/>\u003csmall>Owner\u003c/small>\"]\n  n1[\"\u003cb>Spec\u003c/b>\u003cbr/>\u003csmall>Specifier\u003c/small>\"]\n  n2[\"\u003cb>Plan\u003c/b>\u003cbr/>\u003csmall>Planner\u003c/small>\"]\n  n3[\"\u003cb>Implement\u003c/b>\u003cbr/>\u003csmall>Controller, Implementer, Reviewer, Writer, Translator, Owner\u003c/small>\"]\n  n4[\"\u003cb>Integrate\u003c/b>\u003cbr/>\u003csmall>Controller, Reviewer, Owner\u003c/small>\"]\n  n0 -->|\"Owner\"| n1\n  n1 -->|\"Owner\"| n2\n  n2 -->|\"Owner\"| n3\n  n3 -->|\"Owner\"| n4\n  n0 -.->|\"Owner: reshaped\"| n0\n  n1 -.->|\"Owner: reshaped\"| n0\n  n1 -.->|\"Owner: narrowed\"| n1\n  n2 -.->|\"Owner: recut\"| n2\n  n2 -.->|\"Owner: specification reopened\"| n1\n  n3 -.->|\"Owner: reworked\"| n3\n  n4 -.->|\"Owner: release held\"| n4\n  stop((Stop))\n  n0 -.->|\"Owner: dropped\"| stop\n  n1 -.->|\"Owner: dropped\"| stop\n  n3 -.->|\"Owner: abandoned\"| stop\n  n4 -.->|\"Owner: reverted\"| stop\n  classDef stop fill:none,stroke-dasharray:3 3\n  class stop stop","nodes":[{"node":"n0","id":"processes/delivery/phases/shape","title":"Shape"},{"node":"n1","id":"processes/delivery/phases/spec","title":"Spec"},{"node":"n2","id":"processes/delivery/phases/plan","title":"Plan"},{"node":"n3","id":"processes/delivery/phases/implement","title":"Implement"},{"node":"n4","id":"processes/delivery/phases/integrate","title":"Integrate"}]}</script>
+      </figure>
       <div class="hdrail"><div class="whos">
         <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 8</div></div></div>
         <div class="hw"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><div><div class="nm">AI Agent</div><div class="lbl">agent · holds 7 of 8</div></div></div>
@@ -369,6 +374,11 @@
       <section class="proc" id="answering">
         <h3 class="procname">Answering</h3>
         <p class="proctag">How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.</p>
+      <figure class="rbchat-diagram" data-diagram data-model="../model/">
+        <figcaption><span>Process · Answering</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"process","title":"Answering","mermaid":"flowchart LR\n  n0[\"\u003cb>Answer\u003c/b>\u003cbr/>\u003csmall>Answerer\u003c/small>\"]\n  stop((Stop))\n  n0 -.->|\"Owner: chat closed\"| stop\n  classDef stop fill:none,stroke-dasharray:3 3\n  class stop stop","nodes":[{"node":"n0","id":"processes/answering/phases/answer","title":"Answer"}]}</script>
+      </figure>
       <div class="hdrail"><div class="whos">
         <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 3</div></div></div>
         <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="lbl">human · holds 1 of 3</div></div></div>
@@ -398,6 +408,11 @@
       <section class="proc" id="narrating">
         <h3 class="procname">Narrating</h3>
         <p class="proctag">How a talk's reviewed speaker notes become the clips a visitor hears, in English and in German, with every clip heard by the Owner before it ships.</p>
+      <figure class="rbchat-diagram" data-diagram data-model="../model/">
+        <figcaption><span>Process · Narrating</span><button class="rbchat-diagram-full" type="button" aria-label="Open full screen">⤢</button></figcaption>
+        <div class="rbchat-diagram-box"></div>
+        <script type="application/json">{"shape":"process","title":"Narrating","mermaid":"flowchart LR\n  n0[\"\u003cb>Narrate\u003c/b>\u003cbr/>\u003csmall>Narrator\u003c/small>\"]\n  n0 -.->|\"Owner: voice changes\"| n0\n  stop((Stop))\n  n0 -.->|\"Owner: note changes\"| stop\n  classDef stop fill:none,stroke-dasharray:3 3\n  class stop stop","nodes":[{"node":"n0","id":"processes/narrating/phases/narrate","title":"Narrate"}]}</script>
+      </figure>
       <div class="hdrail"><div class="whos">
         <div class="hw"><svg class="mk human" aria-hidden="true"><use href="#m-human"/></svg><div><div class="nm">Robert Blust</div><div class="lbl">human · holds 1 of 2</div></div></div>
         <div class="hw"><span class="stack"><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg><svg class="mk agent" aria-hidden="true"><use href="#m-agent"/></svg></span><div><div class="nm">English Voice, German Voice</div><div class="lbl">agents · share 1 of 2</div></div></div>
