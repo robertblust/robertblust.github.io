@@ -18,6 +18,7 @@
     "pages": "node build/pages.mjs",
     "pages:check": "node build/pages.mjs --check",
     "test:build": "node --test build/renderers.test.mjs",
+    "german:strings": "node build/german-strings.mjs",
     "dupes": "node tools/dupes.mjs",
     "test:dupes": "node --test tools/dupes.test.mjs",
     "test:cost": "node --test talks/deciding-well/cost/cost.test.mjs",
