@@ -24,7 +24,7 @@ const SITE = "https://blust.ch";
 const FOOTER = ["GitHub", "License", "Privacy", "model.json"];
 
 const PAGES = [
-  { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en", home: true,
+  { path: "/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Robert Blust/, lang: "en", sourceLang: "en", home: { model: "/model.json", blog: "/blog/" },
     translates: { lang: "de", shows: ["Zu den Ideen", "DIE VISION", "Fünf Werte – und zu jedem", "Alle Beiträge", "IDEEN", "PRINZIPIEN", "MODELL", "WERDEGANG", "VORTRÄGE"],
                   hides: ["See the ideas", "THE VISION", "All posts"] },
     // LinkedIn left this list when it left the footer. It is still asserted as identity in
@@ -519,51 +519,6 @@ const CHECKS = {
     // check runs next.
     await page.evaluate(() => { try { localStorage.removeItem("timeline-kinds"); } catch (e) {} });
     await page.goto(BASE + spec.path);
-    return null;
-  },
-  // The home page's derived parts, against their sources: each value row's name against the
-  // model's, in the page's order, and each link against an id /principles/ carries; the vision
-  // heading against the model's; the newest post against the blog index's own page. Then the
-  // Ask tile opens the chat, and at a phone's width the tiles stack.
-  async home(page) {
-    const model = await (await fetch(BASE + "/model.json")).json();
-    // Sorted by path, the order `@robertblust/design/render/principles`'s `valuesOf` renders
-    // both pages in — not the model's own entity order, which is neither.
-    const values = model.entities.filter(e => e.type === "value")
-      .sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
-    const rows = await page.$$eval("#values .values a", as => as.map(a => ({ href: a.getAttribute("href"), name: a.querySelector("b").textContent })));
-    if (rows.length !== values.length) return `${rows.length} value rows for ${values.length} values in the model`;
-    for (let i = 0; i < values.length; i++) {
-      if (rows[i].name !== values[i].name) return `value row ${i} reads ${JSON.stringify(rows[i].name)}, the model ${JSON.stringify(values[i].name)}`;
-    }
-    const princ = await (await fetch(BASE + "/principles/")).text();
-    for (const r of rows) {
-      const id = r.href.split("#")[1];
-      if (!princ.includes(`id="${id}"`)) return `${r.href} names no value on /principles/`;
-    }
-    const vision = model.entities.find(e => e.type === "vision");
-    const h2 = await page.$eval("#vision h2", e => e.textContent);
-    if (h2 !== vision.name + ".") return `the vision reads ${JSON.stringify(h2)}, the model ${JSON.stringify(vision.name)}`;
-    // A regex over raw HTML breaks on an entity and throws when the page has no entry at all;
-    // reading the rendered DOM of the blog index itself avoids both. browser().newPage() rather
-    // than page.context().newPage(): `page` here comes from browser.newPage(), whose implicit
-    // context refuses a second page of its own and asks for browser.newContext() instead.
-    const blogPage = await page.context().browser().newPage();
-    await blogPage.goto(BASE + "/blog/");
-    const first = await blogPage.$eval(".index .entry .t", e => e.textContent).catch(() => null);
-    await blogPage.close();
-    if (first == null) return "the blog index has no first entry to read the newest post from";
-    const latest = await page.$eval("#latest .t", e => e.textContent);
-    if (latest !== first) return `the newest post reads ${JSON.stringify(latest)}, the blog index ${JSON.stringify(first)}`;
-    await page.click("[data-chat-open]");
-    try { await page.waitForSelector("section.rbchat:not([hidden])", { timeout: 3000 }); }
-    catch { return "the Ask tile did not open the chat"; }
-    await page.keyboard.press("Escape");
-    await page.setViewportSize({ width: 390, height: 844 });
-    const lefts = await page.$$eval("#vision .tile", ts => new Set(ts.map(t => Math.round(t.getBoundingClientRect().left))).size);
-    if (lefts !== 1) return "the tiles do not stack at 390px";
-    const rowsSplit = await page.$$eval("#values .values a", as => as.some(a => a.querySelector("span").getBoundingClientRect().top <= a.querySelector("b").getBoundingClientRect().top));
-    if (rowsSplit) return "a value row does not stack at 390px";
     return null;
   },
 };

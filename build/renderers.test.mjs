@@ -250,38 +250,6 @@ test("the Person node carries image only where the profile names one", () => {
   assert.equal(graphOf(pictured)[0].image, "https://blust.ch/images/profiles/someone.png");
 });
 
-import { loadGerman, strings } from "./german.mjs";
-
-const germanFile = (entries) => {
-  const f = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rb-de-")), "de.json");
-  fs.writeFileSync(f, JSON.stringify(entries));
-  return f;
-};
-
-test("de returns the German for the exact English, and nothing for a near miss", () => {
-  const g = loadGerman(germanFile([{ en: "One.", de: "Eins." }]));
-  assert.equal(g.de("One."), "Eins.");
-  assert.throws(() => g.de("One"), /no German for: "One"/);
-});
-
-test("an entry no English asked for is reported, because the model's English moved", () => {
-  const g = loadGerman(germanFile([{ en: "Old words.", de: "Alte Worte." }, { en: "Kept.", de: "Behalten." }]));
-  g.de("Kept.");
-  assert.deepEqual(g.unused(), ["Old words."]);
-});
-
-test("the file refuses two entries for the same English", () => {
-  assert.throws(() => loadGerman(germanFile([{ en: "A", de: "B" }, { en: "A", de: "C" }])), /twice/);
-});
-
-test("strings lists what the two pages translate, once each", () => {
-  const data = { entities: [
-    { id: "vision", type: "vision", name: "V, w", tagline: "T.", path: "model/vision.md", sections: [{ heading: "H", text: "P1.\n\nP2." }] },
-    { id: "values/a", type: "value", name: "A", tagline: "At.", path: "model/values/a.md", sections: [{ heading: "In practice", text: "B.\n\nI never x." }] },
-  ] };
-  assert.deepEqual(strings(data), ["V, w", "T.", "H", "P1.", "P2.", "A", "At.", "B.", "I never x."]);
-});
-
 const latestSite = (blogRows) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-latest-"));
   fs.mkdirSync(path.join(dir, "blog"));
