@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { strings } from "./german.mjs";
+import { strings } from "@robertblust/design/render/german";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, "model.json"), "utf8"));

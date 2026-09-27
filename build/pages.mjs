@@ -16,7 +16,7 @@ import { writeTeam } from "@robertblust/design/render/team";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeHome } from "@robertblust/design/render/home";
 import { writeJsonLd } from "./jsonld.mjs";
-import { loadGerman } from "./german.mjs";
+import { loadGerman } from "@robertblust/design/render/german";
 import { writeLatest } from "./latest.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
