@@ -50,4 +50,4 @@ Narration is generated from the speaker notes themselves and cached on a content
 
 ## License
 
-[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, the picture, and the scripts that build and check them. Use it, quote it, build on it; credit it. Three kinds of file are not written here and keep their own licenses, each in a text beside it: the faces under `fonts/`, `d3.v7.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: the rb mark and the name stay mine.
+[CC BY 4.0](LICENSE) for everything written here: the pages, the talks and their narration, the share cards, the picture, and the scripts that build and check them. Use it, quote it, build on it; credit it. Four kinds of file are not written here and keep their own licenses, each in a text beside it: the faces under `fonts/`, `d3.v7.min.js`, `mermaid.min.js` and the GitHub mark inlined in `chat.js` come from `@robertblust/design`, whose NOTICE names each one. The license grants no right to a name or a mark: the rb mark and the name stay mine.
