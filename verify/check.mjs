@@ -197,9 +197,11 @@ const PAGES = [
   // content — the words themselves are `npm run pages:check`'s business, and asserting
   // them twice would mean editing this file every time a value is written.
   { path: "/principles/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Principles/, lang: "en", sourceLang: "en",
-    // The page's own words swap; the model's stay English, which its note says. `shows` names
-    // the note, `hides` the English note — never a principle, which is the same in both views.
-    translates: { lang: "de", shows: ["Aus dem Modell erzeugt", "Werte"], hides: ["Generated from the model, so"] },
+    // The page's own words swap, and so does the model's: the German of every model string
+    // lives in build/principles.de.json, looked up by the exact English. `shows` names the
+    // translated note and a value's German; `hides` names the English note and that value's
+    // English, which the German view must not still carry.
+    translates: { lang: "de", shows: ["Werte", "übersetzt aus dem Englischen"], hides: ["Generated from the model, so", "Decide well over build fast"] },
     contains: ["One model,", "everywhere", "Values", "Generated from"],
     links: ["https://github.com/robertblust/mental-model", "https://companygraph.io/"],
     sameOrigin: true,
