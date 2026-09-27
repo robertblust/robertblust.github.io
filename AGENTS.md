@@ -34,21 +34,16 @@ npm run pdf            # every deck's PDFs
   another name, loses `blust.ch` — Pages falls back to `<user>.github.io/<repo>/`, which
   is a different site at a different URL, silently.
 - **At Hostpoint, only `A`, `AAAA` and the `www` record belong to this site.** Leave the
-  rest of the zone alone while chasing a Pages problem — but know what is actually in it.
-  The `MX` records point at Hostpoint's shared mail servers and the `TXT` carries their
-  SPF, and both are the default template that comes with domain management. There is no
-  mail package on this domain, so nothing is behind them: no mailbox receives, and
-  nothing is lost by replacing them.
-
-  This note used to say they were the domain's live mail, which was read off the DNS and
-  never checked. It cost a wrong answer — the records look exactly like a working mail
-  setup — and a convention that is wrong is worse than none, because it makes a safe
-  change look dangerous.
-
-  **It becomes true the day mail moves to Google Workspace.** From then on the `MX` and
-  the SPF `TXT` are live mail, and touching them stops delivery with no error and no
+  rest of the zone alone while chasing a Pages problem: it is the domain's mail, and mail
+  fails where nobody looks. The `MX` points at Google Workspace, `SMTP.GOOGLE.COM`, and
+  three `TXT` records carry its SPF, its DKIM key at `google._domainkey` and a DMARC policy
+  whose reports go to `info@blust.ch`. Mail to `robert@blust.ch`, the address the model's
+  identity card publishes, arrives through the `MX`, and mail sent from the domain is
+  trusted through the other three. Touching any of them breaks mail with no error and no
   bounce anyone would notice — the failure shows up as mail that never arrived, days
-  later, from someone who gave up asking. Restore the warning then.
+  later, from someone who gave up asking. Two more `TXT` records at the apex are not the
+  site's either: one verifies the domain to Google, and the `v=MCPv1` key is how the MCP
+  registry verifies the MCP server's name under this domain.
 - **A deck links shared files, and is no longer required to open from `file://`.** It used
   to be a single file with no bundler and no shared JS, because a deck had to present from
   a folder with no server running. That requirement is dropped: `deck.css` and `deck.js`,
