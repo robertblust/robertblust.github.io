@@ -14,7 +14,10 @@ import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
 import { writeTeam } from "@robertblust/design/render/team";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
+import { writeHome } from "@robertblust/design/render/home";
 import { writeJsonLd } from "./jsonld.mjs";
+import { loadGerman } from "./german.mjs";
+import { writeLatest } from "./latest.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { repo, commit } = JSON.parse(fs.readFileSync(path.join(ROOT, "source.json"), "utf8"));
@@ -31,17 +34,26 @@ if (data.commit !== commit) {
 }
 
 const check = process.argv.includes("--check");
+const german = loadGerman(path.join(ROOT, "build", "principles.de.json"));
 // The order the boards argue in: the work first, then how a stranger is answered. Core gives a
 // process no rank, so the site names the order, and the renderer refuses the build if a name
 // leaves the model.
 const RENDERERS = [
-  writePrinciples,
+  (d, o) => writePrinciples(d, { ...o, de: german.de }),
   (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering", "Narrating"] }),
   writeSurfaces,
+  (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
+  writeLatest,
   writeJsonLd,
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check, root: ROOT }));
+
+const unused = german.unused();
+if (unused.length) {
+  console.error(`  ✗ build/principles.de.json holds German for English the model no longer says:\n${unused.map((en) => `    "${en}"`).join("\n")}`);
+  process.exit(1);
+}
 
 if (check) {
   if (stale.length) {
