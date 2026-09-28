@@ -1,5 +1,6 @@
 {
   "commit": "6d9b5839b9cb6f817b1ba0db9b9662b9f8307438",
+  "core": "0.46.0",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
