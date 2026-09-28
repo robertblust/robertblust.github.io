@@ -1,6 +1,6 @@
 {
-  "commit": "6d9b5839b9cb6f817b1ba0db9b9662b9f8307438",
-  "core": "0.46.0",
+  "commit": "553e951614c6522de9073434a6938e597b2e2835",
+  "core": "0.47.0",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1002,6 +1002,24 @@
       "path": "model/concepts/own-account.md"
     },
     {
+      "id": "decision-kinds/architecture",
+      "type": "decision-kind",
+      "name": "Architecture",
+      "tagline": "A call about the machinery my repositories share: the tooling, the checks, and how the work people and agents do reaches the history.",
+      "fields": {
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is how the work is carried out across my repositories rather than what the work is: a check every repository runs, a rule a hook enforces, whose name a commit carries. It is this kind even when it changes what a seat does, because what was decided is the machinery the seats work inside.\n\nWhich product I build and in what form is Portfolio, and what a service may cost is Spending. How one product's own components are built is decided in its own repositories and recorded in its own model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/architecture.md"
+    },
+    {
       "id": "decision-kinds/career",
       "type": "decision-kind",
       "name": "Career",
@@ -1030,7 +1048,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A decision whose subject is the work itself rather than my path through it: a product started or stopped, a form chosen for it, a way of building it. It is this kind even when it was made during a period a Career decision opened, because what was decided is the work.\n\nA call about which role to take or which track to pursue is Career, and a call about what a service may cost is Spending. How a product is built inside its own repositories is decided there, in its specs, and recorded in its own model.",
+          "text": "A decision whose subject is the work itself rather than my path through it: a product started or stopped, a form chosen for it, a way of building it. It is this kind even when it was made during a period a Career decision opened, because what was decided is the work.\n\nA call about which role to take or which track to pursue is Career, a call about what a service may cost is Spending, and a call about the machinery all my repositories share, whatever the product, is Architecture. How a product is built inside its own repositories is decided there, in its specs, and recorded in its own model.",
           "tables": []
         }
       ],
@@ -1549,6 +1567,245 @@
       ],
       "owner": null,
       "path": "model/decisions/2026-claude-max-kept-while-used.md"
+    },
+    {
+      "id": "decisions/2026-commits-by-seat",
+      "type": "decision",
+      "name": "An agent's commit is authored by the seat it held",
+      "tagline": "A commit an agent makes in my repositories is authored by the seat it held, at the domain of the instance that governs the repository, as `Implementer <implementer@blust.ch>`, and names the process, phase and track it was made in; my own commits stay mine, and a check refuses a seat the named phase does not list.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-28",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "upholds": [
+          "Model it before you build it"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Whose name an agent's commit carries. My processes name the seats that execute each phase and agents do most of the Delivery work, yet every commit carried my name. It had to be decided before the hook and the report were specified, on September 28, 2026, because the tooling writes and checks whatever the call says.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "My name on every commit, as before",
+                  "The history could not say which seat did the work, or in which process."
+                ],
+                [
+                  "My name as the author, and the seat only in a trailer",
+                  "GitHub and `git shortlog` group by author, so every report by seat would need tooling to read a trailer, and my own commits could not be told from an agent's at a glance."
+                ],
+                [
+                  "An email field on each seat",
+                  "A second copy of what the model already derives from the role's name and the identity's `url`, free to drift from it."
+                ],
+                [
+                  "An `owner@` address for my own commits",
+                  "My name already means me, and a report tells people from agents by exactly that difference."
+                ],
+                [
+                  "A Claude Code hook refusing a commit made without `--author`",
+                  "It would guard one agent and be a rule no other agent sees, where the `commit-msg` hook is the one every agent meets."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "My name on every commit, as before",
+                "The history could not say which seat did the work, or in which process."
+              ],
+              [
+                "My name as the author, and the seat only in a trailer",
+                "GitHub and `git shortlog` group by author, so every report by seat would need tooling to read a trailer, and my own commits could not be told from an agent's at a glance."
+              ],
+              [
+                "An email field on each seat",
+                "A second copy of what the model already derives from the role's name and the identity's `url`, free to drift from it."
+              ],
+              [
+                "An `owner@` address for my own commits",
+                "My name already means me, and a report tells people from agents by exactly that difference."
+              ],
+              [
+                "A Claude Code hook refusing a commit made without `--author`",
+                "It would guard one agent and be a rule no other agent sees, where the `commit-msg` hook is the one every agent meets."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The model is where people and agents both read who does what, and a history that names only me leaves its seats unchecked in the one place every change is recorded. Authoring by seat puts the model's own vocabulary on each commit, checked against the phase that lists the seat, so a report by seat is read from git rather than reconstructed from memory, and with each seat's address verified on my GitHub account every commit still links to me.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Every seat that commits needs an address on the domain, a mail alias onto my mailbox verified on my GitHub account. The Owner, the Controller, the Reviewer, the Answerer and the Visitor get none, because they never commit: my own commits are authored as robert@blust.ch, the identity's address, where they were robert.blust@flatland.ch before, the Controller writes nothing, the Reviewer returns findings, the Answerer answers at runtime and a Visitor commits under their own name. The hook stays off in an organization until its domain receives mail. Commits made before the rule keep the author they have, because rewriting published history would force-push every repository. The call stays right for as long as agents do the work under seats the processes name, and the processes stay what the check reads.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Specifier",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Planner",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Implementer",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Writer",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Translator",
+                  "",
+                  "changed it"
+                ],
+                [
+                  "role",
+                  "Narrator",
+                  "",
+                  "changed it"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "role",
+                "Specifier",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Planner",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Implementer",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Writer",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Translator",
+                "",
+                "changed it"
+              ],
+              [
+                "role",
+                "Narrator",
+                "",
+                "changed it"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Specification",
+                  "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-28-a-commit-names-its-seat-design.md"
+                ],
+                [
+                  "Pull request of the specification",
+                  "https://github.com/companygraph/meta-model/pull/179"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Specification",
+                "https://github.com/companygraph/meta-model/blob/main/docs/superpowers/specs/2026-09-28-a-commit-names-its-seat-design.md"
+              ],
+              [
+                "Pull request of the specification",
+                "https://github.com/companygraph/meta-model/pull/179"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-commits-by-seat.md"
     },
     {
       "id": "decisions/2026-education-on-my-own-account",
@@ -16088,6 +16345,12 @@
       "attrs": {}
     },
     {
+      "from": "decision-kinds/architecture",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "decision-kinds/career",
       "to": "sources/local",
       "via": "source",
@@ -16287,6 +16550,96 @@
       "from": "decisions/2026-claude-max-kept-while-used",
       "to": "decision-statuses/standing",
       "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/implementer",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/narrator",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/planner",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/specifier",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/translator",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/writer",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": "",
+        "How": "changed it"
+      }
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-commits-by-seat",
+      "to": "values/model-it-before-you-build-it",
+      "via": "upholds",
       "attrs": {}
     },
     {
