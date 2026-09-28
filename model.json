@@ -1,5 +1,5 @@
 {
-  "commit": "1d1b4e646fe21686bf854e6b464cf94c9a34d3dd",
+  "commit": "6d9b5839b9cb6f817b1ba0db9b9662b9f8307438",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -5639,6 +5639,11 @@
                   "Your company doesn't compile"
                 ],
                 [
+                  "Context engineering",
+                  "Generated a German podcast episode from CompanyGraph's own model, the meta-model's conventions and the chat server's instructions, and read the transcript against all three before publishing, answering the hosts' forked company in the published description.",
+                  "Dein Unternehmen kompiliert nicht"
+                ],
+                [
                   "Conversational AI",
                   "Opened LIKE MAGIC's API to conversational AI providers rather than running language models in the platform, so d3x, ailean and onsai integrated themselves into the staff solution, unified multi-channel guest messaging with AI agents answering, guest insights and staff collaboration.",
                   "Co-Founder & Head of Technology"
@@ -6499,6 +6504,11 @@
                   "Your company doesn't compile"
                 ],
                 [
+                  "Storytelling",
+                  "Wrote the German sibling of an English episode as its own story rather than a translation, leaning on what the English one left out and ending on whether an agent reading a company's wiki would say what its people say.",
+                  "Dein Unternehmen kompiliert nicht"
+                ],
+                [
                   "Technical writing",
                   "Wrote the Analysis & Design methodology and guidance a UBS division worked to.",
                   "Solution Manager, Software Engineering — Analysis & Design"
@@ -6828,6 +6838,11 @@
                 "Context engineering",
                 "Generated a podcast episode from CompanyGraph's own model and the meta-model's conventions and read the transcript against the vendored core, answering in the published description the hosts' reading of R17 as mastery over the company.",
                 "Your company doesn't compile"
+              ],
+              [
+                "Context engineering",
+                "Generated a German podcast episode from CompanyGraph's own model, the meta-model's conventions and the chat server's instructions, and read the transcript against all three before publishing, answering the hosts' forked company in the published description.",
+                "Dein Unternehmen kompiliert nicht"
               ],
               [
                 "Conversational AI",
@@ -7688,6 +7703,11 @@
                 "Storytelling",
                 "Titled an episode on the meta-model's rules as a provocation and wrote its description to end on one question for the listener, how many errors their company would throw if it had to compile tonight.",
                 "Your company doesn't compile"
+              ],
+              [
+                "Storytelling",
+                "Wrote the German sibling of an English episode as its own story rather than a translation, leaning on what the English one left out and ending on whether an agent reading a company's wiki would say what its people say.",
+                "Dein Unternehmen kompiliert nicht"
               ],
               [
                 "Technical writing",
@@ -10187,6 +10207,69 @@
         "kind": "Community",
         "start": "2026-09-25",
         "end": "2026-09-25"
+      }
+    },
+    {
+      "id": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "type": "experience",
+      "name": "Dein Unternehmen kompiliert nicht",
+      "tagline": "A podcast episode in German in which two hosts read CompanyGraph's own model and argue that a company's knowledge can be held to the standard of source code, published with a description that answers where the hosts overreach.",
+      "fields": {
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-28",
+        "end": "2026-09-28",
+        "url": "https://robertblust.substack.com/p/dein-unternehmen-kompiliert-nicht",
+        "skills": [
+          "Context engineering",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Ways of working\n\n- Generated the episode with Gemini Notebook from CompanyGraph's own model, the meta-model's conventions and the chat server's instructions, so the hosts argue from what the files say: that an unresolvable reference fails the check, that a reference resolves by the type its schema declares, that a decision is never rewritten but superseded, and that the chat, where the model says nothing, says exactly that.\n- Read the transcript against the model, the vendored core and the chat server's prompt before publishing and kept every place where the hosts stray, to be named before anyone else names them. The one that would mislead a listener is answered in the published description: the hosts close on forking a whole company on GitHub and pressing Run, where the model describes a company and runs nothing.\n\n### Sharing\n\n- Published it on Sep 28, 2026 as about twenty-five minutes, the German sibling of Your company doesn't compile under the same title in German, with a description in Swiss Standard German that leans on what the English episode left out, the decision kept with the options that lost and the chat that admits what the model does not say, and hands the listener one question: could an agent read your wiki and then say what your people say.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "CompanyGraph, with its chat open",
+                  "https://companygraph.io/?chat=open"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "CompanyGraph, with its chat open",
+                "https://companygraph.io/?chat=open"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "profiles/robert-blust",
+      "path": "model/profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-28",
+        "end": "2026-09-28"
       }
     },
     {
@@ -20452,6 +20535,42 @@
       "attrs": {}
     },
     {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "achievement-kinds/sharing",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "achievement-kinds/ways-of-working",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "experience-kinds/community",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "skills/context-engineering",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "skills/storytelling",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
       "from": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
       "to": "achievement-kinds/sharing",
       "via": "Achievements.Kind",
@@ -21292,6 +21411,15 @@
       "attrs": {
         "What it shows": "Generated a podcast episode from CompanyGraph's own model and the meta-model's conventions and read the transcript against the vendored core, answering in the published description the hosts' reading of R17 as mastery over the company.",
         "Experience": "profiles/robert-blust/experiences/2026-podcast-your-company-doesnt-compile"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/context-engineering",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Generated a German podcast episode from CompanyGraph's own model, the meta-model's conventions and the chat server's instructions, and read the transcript against all three before publishing, answering the hosts' forked company in the published description.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht"
       }
     },
     {
@@ -22840,6 +22968,15 @@
       "attrs": {
         "What it shows": "Titled an episode on the meta-model's rules as a provocation and wrote its description to end on one question for the listener, how many errors their company would throw if it had to compile tonight.",
         "Experience": "profiles/robert-blust/experiences/2026-podcast-your-company-doesnt-compile"
+      }
+    },
+    {
+      "from": "profiles/robert-blust",
+      "to": "skills/storytelling",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Wrote the German sibling of an English episode as its own story rather than a translation, leaning on what the English one left out and ending on whether an agent reading a company's wiki would say what its people say.",
+        "Experience": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht"
       }
     },
     {
