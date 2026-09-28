@@ -1,0 +1,25 @@
+{
+  "pins": [
+    { "kind": "conventions", "file": "conventions.json", "repo": "robertblust/conventions" },
+    { "kind": "npm-tag", "file": "package.json", "repo": "robertblust/design", "after": ["npm run design", "npm run og"] },
+    { "kind": "npm-tag", "file": "package.json", "repo": "companygraph/meta-model", "after": ["npm run model", "npm run pages"] },
+    { "kind": "npm-tag", "file": "package.json", "repo": "companygraph/mcp-server", "after": ["npm run pages"] },
+    { "kind": "source-commit", "file": "source.json", "repo": "robertblust/mental-model", "after": ["npm run model", "npm run pages"] }
+  ],
+  "verify": [
+    "./tts/generate.py --dry-run",
+    "python3 -m unittest discover -s talks/deciding-well -p 'test_*.py'",
+    "npm run test:dupes",
+    "npm run test:cost",
+    "npm run test:build",
+    "npm run pages:check",
+    "npm run pin:check",
+    "npm run design:check",
+    "npm run sitemap:check",
+    "npm run test:og",
+    "npm run og:check",
+    "npm run model:check",
+    "npm run verify",
+    "npx design links"
+  ]
+}
