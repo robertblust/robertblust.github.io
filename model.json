@@ -1,5 +1,5 @@
 {
-  "commit": "8f562253a9bfc37346c91b1fff04f765fd15bde1",
+  "commit": "577d2c7f141be849bb02683c3870c3f42e112043",
   "core": "0.48.0",
   "root": "Robert Blust",
   "rootId": "identity",
@@ -543,6 +543,10 @@
               ],
               "rows": [
                 [
+                  "Design system",
+                  "https://github.com/robertblust/design/tree/main/docs/design-system"
+                ],
+                [
                   "Design tokens",
                   "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
                 ],
@@ -568,6 +572,10 @@
               "URL"
             ],
             "rows": [
+              [
+                "Design system",
+                "https://github.com/robertblust/design/tree/main/docs/design-system"
+              ],
               [
                 "Design tokens",
                 "https://github.com/robertblust/design/blob/main/blocks/tokens.css"
