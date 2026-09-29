@@ -310,7 +310,7 @@ To change one of them:
 
 **Not everything is generated.** The `<head>` contract is a copy with no fence at all — see below.
 
-Every page loads its faces from the **one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites.
+Every page loads its faces from the **one `fonts/` directory at the root** — `../../fonts/` from a deck, as on both sibling sites. Each page also preloads the faces its own `@font-face` rules name, `<link rel="preload" as="font" type="font/woff2" href="…" crossorigin>` in its head, and declares them `font-display: fallback`: a page painted before its font file was ready showed one frame in the fallback font and then swapped, on every page change, and with the preload the first frame is already in the right font. A new page copies both from its neighbor.
 
 **Do not give a deck its own `fonts/`.** Nobody is sent a deck folder; what ships is the PDF, which has the outlines baked in. A per-deck copy buys nothing and has to be kept in step with the root by hand, with nothing checking that it is.
 
