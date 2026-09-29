@@ -1,6 +1,6 @@
 {
-  "commit": "e815fd309578759e6e9e3d40a2d01a43a6911533",
-  "core": "0.47.0",
+  "commit": "8f562253a9bfc37346c91b1fff04f765fd15bde1",
+  "core": "0.48.0",
   "root": "Robert Blust",
   "rootId": "identity",
   "types": [
@@ -1146,6 +1146,116 @@
       "path": "model/decision-statuses/standing.md"
     },
     {
+      "id": "decisions/2026-agents-write-a-person-approves",
+      "type": "decision",
+      "name": "Agents write the model, and I approve every change to it",
+      "tagline": "The pages of my model are written by agents, on my request or in a workflow that runs on its own, and no change enters the model until I have approved it; the checks prove a change has the right shape, and only I say it is true.",
+      "fields": {
+        "source": "Local",
+        "decided": "2026-09-29",
+        "kind": "Architecture",
+        "status": "Standing",
+        "by": "Owner",
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ],
+        "upholds": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Who writes my model, and who lets a change into it. Agents already draft and implement under the seats my processes name, and CompanyGraph decided on September 29, 2026 that a company's model is written this way. It had to be decided for my model then too, because the model is what a client or an employer reads about me, and a claim that entered unread would be read as mine.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "I write the pages myself",
+                  "The format costs me time the agents spend without effort, and that time is better spent on whether a page is true."
+                ],
+                [
+                  "A change from a workflow that runs on its own merges once the checks pass",
+                  "A check proves a page has the right shape, not that it is true, and the model would then claim things about me that I never read."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "I write the pages myself",
+                "The format costs me time the agents spend without effort, and that time is better spent on whether a page is true."
+              ],
+              [
+                "A change from a workflow that runs on its own merges once the checks pass",
+                "A check proves a page has the right shape, not that it is true, and the model would then claim things about me that I never read."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The one thing an agent cannot supply about me is whether a claim is true, and it is the one thing a decider reading my model relies on. So the agents write and I approve: my time goes to the judgment, not the typing.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "Every change reaches the model through my approval, whether I asked for it or a workflow made it, and nothing merges on the checks alone. Answers on the chat change nothing and still go out unread. I may still edit a page by hand. The call stays right for as long as I actually read each change before approving it; an approval given without reading leaves a claim about me that nobody checked.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "CompanyGraph's decision",
+                  "https://github.com/companygraph/mental-model/blob/main/model/decisions/2026-agents-write-a-person-approves.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "CompanyGraph's decision",
+                "https://github.com/companygraph/mental-model/blob/main/model/decisions/2026-agents-write-a-person-approves.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-agents-write-a-person-approves.md"
+    },
+    {
       "id": "decisions/2026-anthropic-api-cap-raised-until-october",
       "type": "decision",
       "name": "The Anthropic API cap is raised to USD 50 until October 31, 2026",
@@ -1660,7 +1770,7 @@
         },
         {
           "heading": "Consequences",
-          "text": "Every seat that commits needs an address on the domain, a mail alias onto my mailbox verified on my GitHub account. The Owner, the Controller, the Reviewer, the Answerer and the Visitor get none, because they never commit: my own commits are authored as robert@blust.ch, the identity's address, where they were robert.blust@flatland.ch before, the Controller writes nothing, the Reviewer returns findings, the Answerer answers at runtime and a Visitor commits under their own name. The hook stays off in an organization until its domain receives mail. Commits made before the rule keep the author they have, because rewriting published history would force-push every repository. The call stays right for as long as agents do the work under seats the processes name, and the processes stay what the check reads.",
+          "text": "Every seat that commits needs an address on the domain, a mail alias onto my mailbox verified on my GitHub account. The Owner, the Controller, the Reviewer, the Answerer and the Visitor get none, because they never commit: my own commits are authored as robert@blust.ch, the address my profile carries, where they were robert.blust@flatland.ch before, the Controller writes nothing, the Reviewer returns findings, the Answerer answers at runtime and a Visitor commits under their own name. blust.ch, companygraph.io and guestgraph.io all receive mail, so the hook is on in every organization, in every clone that has run `conventions-sync`. Commits made before the rule keep the author they have, because rewriting published history would force-push every repository. The call stays right for as long as agents do the work under seats the processes name, and the processes stay what the check reads.",
           "tables": []
         },
         {
@@ -3086,6 +3196,9 @@
         "direction": "lower",
         "read-with": [
           "Change Fail Rate"
+        ],
+        "can-cost": [
+          "Decide well over build fast"
         ]
       },
       "sections": [
@@ -3148,6 +3261,9 @@
         "direction": "higher",
         "read-with": [
           "Change Fail Rate"
+        ],
+        "can-cost": [
+          "Decide well over build fast"
         ]
       },
       "sections": [
@@ -5014,6 +5130,7 @@
         "roles": [
           "Owner"
         ],
+        "email": "robert@blust.ch",
         "image": "robert-blust.jpg"
       },
       "sections": [
@@ -16393,6 +16510,42 @@
       "attrs": {}
     },
     {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "roles/owner",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "decision-kinds/architecture",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "sources/local",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "decision-statuses/standing",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "decisions/2026-agents-write-a-person-approves",
+      "to": "values/decide-well-over-build-fast",
+      "via": "upholds",
+      "attrs": {}
+    },
+    {
       "from": "decisions/2026-anthropic-api-cap-raised-until-october",
       "to": "roles/owner",
       "via": "by",
@@ -17154,6 +17307,12 @@
     },
     {
       "from": "kpis/change-lead-time",
+      "to": "values/decide-well-over-build-fast",
+      "via": "can-cost",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/change-lead-time",
       "to": "processes/delivery",
       "via": "measures",
       "attrs": {}
@@ -17174,6 +17333,12 @@
       "from": "kpis/change-lead-time",
       "to": "sources/local",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "kpis/deployment-frequency",
+      "to": "values/decide-well-over-build-fast",
+      "via": "can-cost",
       "attrs": {}
     },
     {
