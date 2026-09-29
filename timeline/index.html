@@ -231,6 +231,7 @@
 
 </style>
 <script>/* Start the fonts before the first layout needs them, so the first frame has them. */try{document.fonts.forEach(function(f){f.load()})}catch(e){}</script>
+<script type="module" blocking="render">/* Hold the first paint until the fonts have loaded, for at most 300ms: a page painted before them shows its text in another face and then moves it. */try{await Promise.race([Promise.all([...document.fonts].map(function(f){return f.load()})),new Promise(function(r){setTimeout(r,300)})])}catch(e){}</script>
 <style>
   .value{border-top:2px solid var(--rule); padding-top:1.1rem; margin-top:1.9rem}
   .value h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
