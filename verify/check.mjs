@@ -147,8 +147,8 @@ const PAGES = [
     internalLinks: true },
   { path: "/blog/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /blog/i, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Texte über", "Beitrag lesen", "Für mich"], hides: ["Read the post", "Writing on"] },
-    contains: ["Deciding well is solved. For me.", "Read the post"], card: true,
-    sameTab: ["deciding-well-solved/", "./"], brandMark: true,
+    contains: ["One question answered. One still open.", "Deciding well is solved. For me.", "Read the post"], card: true,
+    sameTab: ["one-question-answered/", "deciding-well-solved/", "./"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
@@ -157,6 +157,14 @@ const PAGES = [
     translates: { lang: "de", shows: ["Für mich", "Die Frage kam zuerst", "Für mich schon"], hides: ["Deciding well is solved", "The question came first", "where this breaks"] },
     contains: ["The question came first", "25 applications", "architect role at 80%", "where this breaks"], card: true,
     sameTab: ["../../talks/deciding-well/", "../../timeline/#2026-career-break", "../", "../../model/?stage=expanded#profiles/robert-blust/experiences/2026-career-break"], brandMark: true,
+    fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
+    // See the note on /privacy/'s entry.
+    tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
+    internalLinks: true },
+  { path: "/blog/one-question-answered/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /One question answered/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Eine Frage beantwortet", "So viel, dass es ohne mich Antworten gibt", "rund 434 Stunden", "Was ein Team gekostet hätte", "Das KI-Abonnement kostete rund 650 Franken"], hides: ["One question answered", "Enough that it answers without me", "about 434 hours"] },
+    contains: ["One question answered.", "Enough that it answers without me", "about 434 hours", "a no is worth more than a polite yes", "What a team would have cost", "The AI subscription came to about 650 francs"], card: true,
+    sameTab: ["../../ideas/", "../../talks/deciding-well/cost/", "../../timeline/#2026-career-break", "../"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
@@ -188,6 +196,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["öffentlich geprüft", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"] },
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
+    sameTab: ["../blog/one-question-answered/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
