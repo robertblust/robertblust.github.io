@@ -26,7 +26,7 @@ const PROFILE_FIXTURE = {
   rootId: "identity",
   entities: [
     { id: "identity", type: "identity", name: "Someone", tagline: "", sections: [] },
-    { id: "profiles/someone", type: "profile", name: "Someone", tagline: "",
+    { id: "0b8e7c52-3f0a-4d61-9a2e-5c1f7d93a410", address: "profiles/someone", type: "profile", name: "Someone", tagline: "",
       sections: [{ heading: "Also at", tables: [
         { columns: ["What", "URL"], rows: [["GitHub", "https://example.com/a"], ["Elsewhere", "https://example.com/b"]] }] }] },
   ],
@@ -223,12 +223,21 @@ test("the surfaces page missing either marker is an error, not a page half-gener
 });
 
 // The person's picture is this site's own copy, addressed as `npm run model` writes it: the
-// profile's id and the extension the profile's `image` names.
+// profile's address, never its id, and the extension the profile's `image` names.
 test("imageOf is the address of the site's copy, and null where the profile names no image", () => {
   assert.equal(imageOf(PROFILE_FIXTURE), null);
   const pictured = { ...PROFILE_FIXTURE, entities: PROFILE_FIXTURE.entities.map((e) =>
     e.type === "profile" ? { ...e, fields: { image: "someone.jpg" } } : e) };
   assert.equal(imageOf(pictured), "https://blust.ch/images/profiles/someone.jpg");
+});
+
+// A model written before entities carried an address has the path as the id, and the picture
+// is named by it.
+test("imageOf names the picture by the id where the profile carries no address", () => {
+  const unaddressed = { ...PROFILE_FIXTURE, entities: PROFILE_FIXTURE.entities.map((e) =>
+    e.type === "profile" ? { id: "profiles/someone", type: e.type, name: e.name, tagline: e.tagline,
+      sections: e.sections, fields: { image: "someone.jpg" } } : e) };
+  assert.equal(imageOf(unaddressed), "https://blust.ch/images/profiles/someone.jpg");
 });
 
 test("the Person node carries image only where the profile names one", () => {
