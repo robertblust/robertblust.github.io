@@ -147,8 +147,8 @@ const PAGES = [
     internalLinks: true },
   { path: "/blog/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /blog/i, lang: "en", sourceLang: "en",
     translates: { lang: "de", shows: ["Texte über", "Beitrag lesen", "Für mich"], hides: ["Read the post", "Writing on"] },
-    contains: ["Deciding well is solved. For me.", "Read the post"], card: true,
-    sameTab: ["deciding-well-solved/", "./"], brandMark: true,
+    contains: ["One question answered. One still open.", "Deciding well is solved. For me.", "Read the post"], card: true,
+    sameTab: ["one-question-answered/", "deciding-well-solved/", "./"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
@@ -195,6 +195,7 @@ const PAGES = [
     translates: { lang: "de", shows: ["öffentlich geprüft", "DIE FRAGEN, DIE DIE VALIDIERUNG BEANTWORTEN MUSS"], hides: ["Two ideas", "THE QUESTIONS VALIDATION HAS TO ANSWER"] },
     contains: ["Two ideas", "Open core", "COMMERCIAL", "OPEN SOURCE"],
     links: ["https://github.com/guestgraph", "https://github.com/companygraph"],
+    sameTab: ["../blog/one-question-answered/"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
