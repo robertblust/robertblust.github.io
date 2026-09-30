@@ -404,9 +404,14 @@ const CHECKS = {
     const ids = await page.evaluate(() => [...document.querySelectorAll("#ledger details")].map(d => d.id));
     if (ids.length !== exps.length) return `${ids.length} rows for ${exps.length} experiences`;
     const day = (v) => { const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(v || ""); return m ? Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1) : 0; };
-    const want = exps.slice().sort((a, b) => day(a.stamp.start) - day(b.stamp.start)).map(e => e.id.slice(e.id.lastIndexOf("/") + 1));
+    // A row is anchored by the last segment of the entity's address, where it sits; a model
+    // written before entities carried one has its path as its id.
+    const where = (e) => e.address ?? e.id;
+    const stem = (e) => where(e).slice(where(e).lastIndexOf("/") + 1);
+    const byStem = (s) => exps.find(e => where(e).endsWith("/" + s));
+    const want = exps.slice().sort((a, b) => day(a.stamp.start) - day(b.stamp.start)).map(stem);
     for (let i = 0; i < ids.length; i++)
-      if (ids[i] !== want[i] && day(exps.find(e => e.id.endsWith("/" + ids[i])).stamp.start) !== day(exps.find(e => e.id.endsWith("/" + want[i])).stamp.start))
+      if (ids[i] !== want[i] && day(byStem(ids[i]).stamp.start) !== day(byStem(want[i]).stamp.start))
         return `row ${i + 1} is ${ids[i]}, expected ${want[i]}`;
     const srcSub = await page.evaluate(() => document.getElementById("srclink").getAttribute("data-src"));
     const srcHref = await page.evaluate(() => document.getElementById("srclink").getAttribute("href"));
@@ -421,7 +426,7 @@ const CHECKS = {
       return m[3] ? Date.UTC(+m[1], +m[2] - 1, +m[3] + 1) : m[2] ? Date.UTC(+m[1], +m[2], 1) : Date.UTC(+m[1] + 1, 0, 1); };
     const tracks = exps.filter(e => e.stamp.kind === "Role" || e.stamp.kind === "Independent");
     const wantUnder = new Set(exps.filter(e => !tracks.includes(e) && tracks.some(t => day(t.stamp.start) <= day(e.stamp.start) && day(e.stamp.start) < dayEnd(t.stamp.end)))
-      .map(e => e.id.slice(e.id.lastIndexOf("/") + 1)));
+      .map(stem));
     const rowsLvl = await page.evaluate(() => [...document.querySelectorAll("#ledger li:has(details)")]
       .map(li => ({ id: li.querySelector("details").id, lvl: li.style.getPropertyValue("--lvl").trim(), under: li.classList.contains("under") })));
     for (const r of rowsLvl) {
@@ -432,7 +437,7 @@ const CHECKS = {
     // Open the first row and read its card against the entity.
     // The toggle event a details fires is queued, not synchronous: the card and the hash
     // arrive a tick after `open` is set, so the page is given that tick before it is read.
-    const first = exps.find(e => e.id.endsWith("/" + ids[0]));
+    const first = byStem(ids[0]);
     await page.evaluate((id) => { document.getElementById(id).open = true; }, ids[0]);
     await page.waitForFunction((id) => location.hash === "#" + id, ids[0], { timeout: 2000 }).catch(() => null);
     const card = await page.evaluate((id) => {
@@ -451,8 +456,11 @@ const CHECKS = {
     // A skill in a card leaves for the model page with the stage expanded and the node in the hash.
     const skillLink = await page.evaluate((id) => (document.getElementById(id).querySelector(".cbody .grp .chips a") || {}).getAttribute?.("href") || null, ids[0]);
     if (skillLink !== null && !/^\.\.\/model\/\?stage=expanded#skills\//.test(skillLink)) return `a skill link reads ${JSON.stringify(skillLink)}`;
+    // The hash is the skill's address, never a stable id: the link reads as where the skill sits.
+    if (skillLink !== null && !data.entities.some(e => e.type === "skill" && skillLink === "../model/?stage=expanded#" + where(e)))
+      return `a skill link reads ${JSON.stringify(skillLink)}, which is no skill's address`;
     if (!card.foot.endsWith(`/blob/${data.commit}/${first.path}`)) return `first card's foot link is ${card.foot}`;
-    if (card.hash !== "#" + ids[0]) return `opening a row wrote ${JSON.stringify(card.hash)} to the address`;
+    if (card.hash !== "#" + stem(first)) return `opening a row wrote ${JSON.stringify(card.hash)} to the address`;
     // Every skill the file names is in exactly one group's chips.
     const claimed = Array.isArray(first.fields.skills) ? first.fields.skills.length : 0;
     const chipped = card.groups.reduce((n, k) => n + k, 0);
@@ -466,6 +474,16 @@ const CHECKS = {
       pressed: document.getElementById("openall").getAttribute("aria-pressed") }));
     if (after.open !== ids.length) return `Open all opened ${after.open} of ${ids.length}`;
     if (after.label !== "Close all" || after.pressed !== "true") return `after Open all the control reads ${JSON.stringify(after.label)}, pressed ${after.pressed}`;
+    // With every card drawn, every skill chip is a link to the model page whose hash is that
+    // skill's address. The first card may name no skill, so this is where the rule is held.
+    const withSkills = exps.filter(e => Array.isArray(e.fields.skills) && e.fields.skills.length).length;
+    await page.waitForFunction((n) => new Set([...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.closest("details"))).size >= n,
+      withSkills, { timeout: 2000 }).catch(() => null);
+    const chipLinks = await page.evaluate(() => [...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.getAttribute("href")));
+    if (withSkills && !chipLinks.length) return `Open all drew no skill chip; ${withSkills} experiences name skills`;
+    const skillAt = new Set(data.entities.filter(e => e.type === "skill").map(e => "../model/?stage=expanded#" + where(e)));
+    const stray = chipLinks.find(href => !/^\.\.\/model\/\?stage=expanded#skills\//.test(href) || !skillAt.has(href));
+    if (stray !== undefined) return `a skill link reads ${JSON.stringify(stray)}, which is no skill's address`;
     // The kind filter: a kind off takes its rows out of the ledger and the path line counts
     // what is left; Show all kinds brings every row back and the plain count with it. The
     // kinds are the block's, so the first box is whichever kind sorts first.
