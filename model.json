@@ -176,6 +176,7 @@
   "entities": [
     {
       "id": "achievement-kinds/architecture",
+      "address": "achievement-kinds/architecture",
       "type": "achievement-kind",
       "name": "Architecture",
       "tagline": "What was designed: the structure a thing took and why.",
@@ -195,6 +196,7 @@
     },
     {
       "id": "achievement-kinds/context",
+      "address": "achievement-kinds/context",
       "type": "achievement-kind",
       "name": "Context",
       "tagline": "What the entry is, for whom, and the part held in it.",
@@ -214,6 +216,7 @@
     },
     {
       "id": "achievement-kinds/engineering",
+      "address": "achievement-kinds/engineering",
       "type": "achievement-kind",
       "name": "Engineering",
       "tagline": "What was built, shipped and run.",
@@ -233,6 +236,7 @@
     },
     {
       "id": "achievement-kinds/leadership",
+      "address": "achievement-kinds/leadership",
       "type": "achievement-kind",
       "name": "Leadership",
       "tagline": "What was decided or owned for other people.",
@@ -252,6 +256,7 @@
     },
     {
       "id": "achievement-kinds/results",
+      "address": "achievement-kinds/results",
       "type": "achievement-kind",
       "name": "Results",
       "tagline": "What came of the work.",
@@ -271,6 +276,7 @@
     },
     {
       "id": "achievement-kinds/sharing",
+      "address": "achievement-kinds/sharing",
       "type": "achievement-kind",
       "name": "Sharing",
       "tagline": "What was said, written or taught to other people.",
@@ -290,6 +296,7 @@
     },
     {
       "id": "achievement-kinds/ways-of-working",
+      "address": "achievement-kinds/ways-of-working",
       "type": "achievement-kind",
       "name": "Ways of working",
       "tagline": "The method the work ran under.",
@@ -309,6 +316,7 @@
     },
     {
       "id": "brand",
+      "address": "brand",
       "type": "brand",
       "name": "blust.ch",
       "tagline": "One person's work, under one address: what appears here was built before it was claimed, and what cannot be shown is not written.",
@@ -601,6 +609,7 @@
     },
     {
       "id": "concepts/claim",
+      "address": "concepts/claim",
       "type": "concept",
       "name": "Claim",
       "tagline": "A skill at a level that a profile asserts of its holder, written as one row, which stands in the model only with something concrete under it.",
@@ -683,6 +692,7 @@
     },
     {
       "id": "concepts/company-of-one",
+      "address": "concepts/company-of-one",
       "type": "concept",
       "name": "Company of one",
       "tagline": "One person described as a company would be, with an identity, a vision, a strategy, roles and processes, where the work is the whole scope and private life is outside it by design.",
@@ -696,6 +706,7 @@
     },
     {
       "id": "concepts/decider",
+      "address": "concepts/decider",
       "type": "concept",
       "name": "Decider",
       "tagline": "Someone deciding whether to work with me, a client buying help or an employer hiring, who needs what I have done established before the conversation and not during it.",
@@ -709,6 +720,7 @@
     },
     {
       "id": "concepts/document",
+      "address": "concepts/document",
       "type": "concept",
       "name": "Document",
       "tagline": "Something written or recorded outside the model that a fact in it rests on — a recording, a deck, a published page, an employment reference, a diploma — linked where it is public and kept out of the model where it is private.",
@@ -755,6 +767,7 @@
     },
     {
       "id": "concepts/evidence",
+      "address": "concepts/evidence",
       "type": "concept",
       "name": "Evidence",
       "tagline": "One sentence naming a thing done, concrete enough that a reader could check it, and the period of work it comes from where there is one.",
@@ -801,6 +814,7 @@
     },
     {
       "id": "concepts/master",
+      "address": "concepts/master",
       "type": "concept",
       "name": "Master",
       "tagline": "The one place a fact is corrected, so that every other place showing it is rebuilt from there and never edited on its own.",
@@ -855,6 +869,7 @@
     },
     {
       "id": "concepts/mental-model",
+      "address": "concepts/mental-model",
       "type": "concept",
       "name": "Mental Model",
       "tagline": "The written model of a company that the people who run it and the agents beside them both read: its facts as Markdown files, structured by a meta-model and versioned like code. Mine describes a company of one.",
@@ -965,6 +980,7 @@
     },
     {
       "id": "concepts/own-account",
+      "address": "concepts/own-account",
       "type": "concept",
       "name": "Own account",
       "tagline": "What I say of my own work from having done it, which enters the model as a fact and not as a claim awaiting a source, because in a model of one person the person is where the measurement comes from.",
@@ -1011,6 +1027,7 @@
     },
     {
       "id": "decision-kinds/architecture",
+      "address": "decision-kinds/architecture",
       "type": "decision-kind",
       "name": "Architecture",
       "tagline": "A call about the machinery my repositories share: the tooling, the checks, and how the work people and agents do reaches the history.",
@@ -1029,6 +1046,7 @@
     },
     {
       "id": "decision-kinds/career",
+      "address": "decision-kinds/career",
       "type": "decision-kind",
       "name": "Career",
       "tagline": "A call about my own path: what to do next, for whom, on what terms.",
@@ -1047,6 +1065,7 @@
     },
     {
       "id": "decision-kinds/portfolio",
+      "address": "decision-kinds/portfolio",
       "type": "decision-kind",
       "name": "Portfolio",
       "tagline": "A call about what I build and publish in my own name: which products, in what form, in the open or not.",
@@ -1065,6 +1084,7 @@
     },
     {
       "id": "decision-kinds/spending",
+      "address": "decision-kinds/spending",
       "type": "decision-kind",
       "name": "Spending",
       "tagline": "A call about what I pay for a service: which plan, and how much a month it may cost.",
@@ -1083,6 +1103,7 @@
     },
     {
       "id": "decision-statuses/dropped",
+      "address": "decision-statuses/dropped",
       "type": "decision-status",
       "name": "Dropped",
       "tagline": "The call is no longer pursued, and nothing replaced it.",
@@ -1101,6 +1122,7 @@
     },
     {
       "id": "decision-statuses/proposed",
+      "address": "decision-statuses/proposed",
       "type": "decision-status",
       "name": "Proposed",
       "tagline": "The call is put forward with its alternatives and not yet made; nothing acts on it.",
@@ -1119,6 +1141,7 @@
     },
     {
       "id": "decision-statuses/revised",
+      "address": "decision-statuses/revised",
       "type": "decision-status",
       "name": "Revised",
       "tagline": "A later decision replaced this call, and the call is read through that decision.",
@@ -1137,6 +1160,7 @@
     },
     {
       "id": "decision-statuses/standing",
+      "address": "decision-statuses/standing",
       "type": "decision-status",
       "name": "Standing",
       "tagline": "The call holds as written, and the work follows it.",
@@ -1155,6 +1179,7 @@
     },
     {
       "id": "decisions/2026-agents-write-a-person-approves",
+      "address": "decisions/2026-agents-write-a-person-approves",
       "type": "decision",
       "name": "Agents write the model, and I approve every change to it",
       "tagline": "The pages of my model are written by agents, on my request or in a workflow that runs on its own, and no change enters the model until I have approved it; the checks prove a change has the right shape, and only I say it is true.",
@@ -1265,6 +1290,7 @@
     },
     {
       "id": "decisions/2026-anthropic-api-cap-raised-until-october",
+      "address": "decisions/2026-anthropic-api-cap-raised-until-october",
       "type": "decision",
       "name": "The Anthropic API cap is raised to USD 50 until October 31, 2026",
       "tagline": "Until October 31, 2026 the Anthropic API may cost up to USD 50 a month, and the workspace limit is set there; from November it returns to USD 20.",
@@ -1340,6 +1366,7 @@
     },
     {
       "id": "decisions/2026-anthropic-api-capped",
+      "address": "decisions/2026-anthropic-api-capped",
       "type": "decision",
       "name": "The Anthropic API is capped at USD 20 a month",
       "tagline": "The Anthropic API, which the three chats answer through, may cost at most USD 20 in a calendar month, and the workspace's monthly limit is set to that amount so the provider stops it there.",
@@ -1415,6 +1442,7 @@
     },
     {
       "id": "decisions/2026-architect-role",
+      "address": "decisions/2026-architect-role",
       "type": "decision",
       "name": "An 80% architect role in a product company, chosen over pay",
       "tagline": "I take an IT Architect role at 80% from October 2026 in a product company outside finance, whose culture was the criterion, and keep the fifth day for formal education in how AI is led and governed in an organization.",
@@ -1538,6 +1566,7 @@
     },
     {
       "id": "decisions/2026-chatgpt-plus-kept-while-used",
+      "address": "decisions/2026-chatgpt-plus-kept-while-used",
       "type": "decision",
       "name": "ChatGPT Plus is kept only in months it is used",
       "tagline": "I keep ChatGPT Plus for as long as a month uses something only the plan provides, and end it when months pass without that.",
@@ -1613,6 +1642,7 @@
     },
     {
       "id": "decisions/2026-claude-max-kept-while-used",
+      "address": "decisions/2026-claude-max-kept-while-used",
       "type": "decision",
       "name": "Claude Max 20x is kept while my use needs it",
       "tagline": "I keep the Max 20x plan of Claude, which the agents that build the work run on, for as long as my use needs its allowance, and move to Max 5x or Pro the months it does not.",
@@ -1688,6 +1718,7 @@
     },
     {
       "id": "decisions/2026-commits-by-seat",
+      "address": "decisions/2026-commits-by-seat",
       "type": "decision",
       "name": "An agent's commit is authored by the seat it held",
       "tagline": "A commit an agent makes in my repositories is authored by the seat it held, at the domain of the instance that governs the repository, as `Implementer <implementer@blust.ch>`, and names the process, phase and track it was made in; my own commits stay mine, and a check refuses a seat the named phase does not list.",
@@ -1927,6 +1958,7 @@
     },
     {
       "id": "decisions/2026-education-on-my-own-account",
+      "address": "decisions/2026-education-on-my-own-account",
       "type": "decision",
       "name": "The education is on my own account, and the fifth day stays mine",
       "tagline": "I keep the 80% workload permanently and carry the education myself, its days and its fees, rather than take a full workload with days released for the school.",
@@ -2054,6 +2086,7 @@
     },
     {
       "id": "decisions/2026-elevenlabs-capped",
+      "address": "decisions/2026-elevenlabs-capped",
       "type": "decision",
       "name": "ElevenLabs is capped at USD 20 a month in top-ups",
       "tagline": "ElevenLabs, which gives the talks their recorded voice, is paid by credits bought as they run out, and in a calendar month I buy at most USD 20 of them.",
@@ -2129,6 +2162,7 @@
     },
     {
       "id": "decisions/2026-first-cas",
+      "address": "decisions/2026-first-cas",
       "type": "decision",
       "name": "The first CAS is AI Innovation at HWZ",
       "tagline": "I put forward, and have not yet made, the call that the path starts with the HWZ CAS AI Innovation in 2027, 15 ECTS over at most two years, counting toward the MAS AI Leadership at HWZ, and not with a machine-learning CAS on the developer track.",
@@ -2252,6 +2286,7 @@
     },
     {
       "id": "decisions/2026-four-months",
+      "address": "decisions/2026-four-months",
       "type": "decision",
       "name": "Four months to find out what I want to do next",
       "tagline": "I take a break of four months, June to September 2026, and give it one question: what I like doing, rather than what I am used to being hired for.",
@@ -2396,6 +2431,7 @@
     },
     {
       "id": "decisions/2026-google-cloud-capped",
+      "address": "decisions/2026-google-cloud-capped",
       "type": "decision",
       "name": "Google Cloud is capped at CHF 10 a month",
       "tagline": "Google Cloud, which runs the MCP and chat hosts, may cost at most CHF 10 in a calendar month, watched by a budget that alerts at the cap.",
@@ -2471,6 +2507,7 @@
     },
     {
       "id": "decisions/2026-google-workspace-on-business-standard",
+      "address": "decisions/2026-google-workspace-on-business-standard",
       "type": "decision",
       "name": "Google Workspace stays on Business Standard for two seats",
       "tagline": "I keep Google Workspace on Business Standard with two seats, because Gemini and Gemini Notebook, which the work uses, come with that tier.",
@@ -2546,6 +2583,7 @@
     },
     {
       "id": "decisions/2026-in-the-open",
+      "address": "decisions/2026-in-the-open",
       "type": "decision",
       "name": "The two products are built in the open",
       "tagline": "I build CompanyGraph and GuestGraph in public repositories, every spec, commit and release visible, and publish what their validation finds as it arrives, a clean no included.",
@@ -2705,6 +2743,7 @@
     },
     {
       "id": "decisions/2026-two-tracks",
+      "address": "decisions/2026-two-tracks",
       "type": "decision",
       "name": "Two tracks at once, and the market answers",
       "tagline": "I apply on two tracks at the same time, hands-on engineering and architecture, and let the market say which one fits, rather than deciding it at the desk.",
@@ -2817,6 +2856,7 @@
     },
     {
       "id": "domains/portfolio",
+      "address": "domains/portfolio",
       "type": "domain",
       "name": "Portfolio",
       "tagline": "The account of my work, and the words I mean something exact by when I give it: what is claimed, what a claim rests on, where a fact is kept and who reads it. What a model is made of — entity, type, reference, pin — is CompanyGraph's vocabulary and is left to its Core domain, and how the work gets made is left to the conventions the Delivery process names.",
@@ -2829,6 +2869,7 @@
     },
     {
       "id": "experience-kinds/community",
+      "address": "experience-kinds/community",
       "type": "experience-kind",
       "name": "Community",
       "tagline": "Work done in public — a talk, a seat, a working group, a published case.",
@@ -2847,6 +2888,7 @@
     },
     {
       "id": "experience-kinds/education",
+      "address": "experience-kinds/education",
       "type": "experience-kind",
       "name": "Education",
       "tagline": "A degree, a certification, a course.",
@@ -2865,6 +2907,7 @@
     },
     {
       "id": "experience-kinds/independent",
+      "address": "experience-kinds/independent",
       "type": "experience-kind",
       "name": "Independent",
       "tagline": "A self-directed period with no employer and no client.",
@@ -2883,6 +2926,7 @@
     },
     {
       "id": "experience-kinds/project",
+      "address": "experience-kinds/project",
       "type": "experience-kind",
       "name": "Project",
       "tagline": "A delivery worth naming on its own, inside a role or beside one.",
@@ -2901,6 +2945,7 @@
     },
     {
       "id": "experience-kinds/role",
+      "address": "experience-kinds/role",
       "type": "experience-kind",
       "name": "Role",
       "tagline": "A position held in an organization — the employment history.",
@@ -2919,6 +2964,7 @@
     },
     {
       "id": "features/a-career-is-read-in-order",
+      "address": "features/a-career-is-read-in-order",
       "type": "feature",
       "name": "A career is read in order",
       "tagline": "A reader follows over twenty-five years of work period by period: what was done in each, in what kind of engagement, and why it ended.",
@@ -2944,6 +2990,7 @@
     },
     {
       "id": "features/a-claim-is-checked-against-its-evidence",
+      "address": "features/a-claim-is-checked-against-its-evidence",
       "type": "feature",
       "name": "A claim is checked against its evidence",
       "tagline": "Someone deciding about me reads what I say I can do, and at which level, and finds under each claim the work it rests on, without asking me.",
@@ -2971,6 +3018,7 @@
     },
     {
       "id": "features/an-agent-answers-from-the-model",
+      "address": "features/an-agent-answers-from-the-model",
       "type": "feature",
       "name": "An agent answers from the model",
       "tagline": "Someone asks their own agent about my work and gets what the model says at one commit, named in the answer, instead of what the agent recalls.",
@@ -2997,6 +3045,7 @@
     },
     {
       "id": "features/the-model-is-carried-into-a-conversation",
+      "address": "features/the-model-is-carried-into-a-conversation",
       "type": "feature",
       "name": "The model is carried into a conversation",
       "tagline": "Someone loads the whole model into the assistant they already use and asks it there, with no server in between.",
@@ -3021,6 +3070,7 @@
     },
     {
       "id": "features/the-model-is-read-on-the-web",
+      "address": "features/the-model-is-read-on-the-web",
       "type": "feature",
       "name": "The model is read on the web",
       "tagline": "Anyone reads my work in a browser, in English or Swiss Standard German, without cloning a repository and without asking me.",
@@ -3046,6 +3096,7 @@
     },
     {
       "id": "identity",
+      "address": "identity",
       "type": "identity",
       "name": "Robert Blust",
       "tagline": "A company of one: technology leadership and business architecture, and the models that let people and agents both work inside a business.",
@@ -3099,6 +3150,7 @@
     },
     {
       "id": "kpis/cap-use",
+      "address": "kpis/cap-use",
       "type": "kpi",
       "name": "Cap Use",
       "tagline": "The highest share of its monthly cap that any metered cloud service spent in a calendar month.",
@@ -3131,6 +3183,7 @@
     },
     {
       "id": "kpis/change-fail-rate",
+      "address": "kpis/change-fail-rate",
       "type": "kpi",
       "name": "Change Fail Rate",
       "tagline": "The share of deployments that need immediate intervention once they are in production.",
@@ -3193,6 +3246,7 @@
     },
     {
       "id": "kpis/change-lead-time",
+      "address": "kpis/change-lead-time",
       "type": "kpi",
       "name": "Change Lead Time",
       "tagline": "The time a change takes from being committed to version control to running in production.",
@@ -3258,6 +3312,7 @@
     },
     {
       "id": "kpis/deployment-frequency",
+      "address": "kpis/deployment-frequency",
       "type": "kpi",
       "name": "Deployment Frequency",
       "tagline": "How often a change reaches production.",
@@ -3323,6 +3378,7 @@
     },
     {
       "id": "kpis/deployment-rework-rate",
+      "address": "kpis/deployment-rework-rate",
       "type": "kpi",
       "name": "Deployment Rework Rate",
       "tagline": "The share of deployments that were not planned and happened because of an incident in production.",
@@ -3385,6 +3441,7 @@
     },
     {
       "id": "kpis/failed-deployment-recovery-time",
+      "address": "kpis/failed-deployment-recovery-time",
       "type": "kpi",
       "name": "Failed Deployment Recovery Time",
       "tagline": "The time it takes to recover from a deployment that fails and needs immediate intervention.",
@@ -3447,6 +3504,7 @@
     },
     {
       "id": "kpis/grounded-answer-rate",
+      "address": "kpis/grounded-answer-rate",
       "type": "kpi",
       "name": "Grounded Answer Rate",
       "tagline": "The share of a week's questions, asked at any chat that answers from the model, whose answer rested on what the model's tools returned.",
@@ -3517,6 +3575,7 @@
     },
     {
       "id": "kpis/plan-fit",
+      "address": "kpis/plan-fit",
       "type": "kpi",
       "name": "Plan Fit",
       "tagline": "The peak share of its plan's allowance that a subscription used in a calendar month, read against the share the next tier down would have carried.",
@@ -3546,6 +3605,7 @@
     },
     {
       "id": "processes/answering",
+      "address": "processes/answering",
       "type": "process",
       "name": "Answering",
       "tagline": "How a visitor's question about the company is answered from the model, by an agent, with nothing added and nobody reading the answer before it goes out.",
@@ -3661,6 +3721,7 @@
     },
     {
       "id": "processes/answering/phases/answer",
+      "address": "processes/answering/phases/answer",
       "type": "phase",
       "name": "Answer",
       "tagline": "Give the visitor what the model says, in their words, and not a claim more.",
@@ -3769,6 +3830,7 @@
     },
     {
       "id": "processes/answering/tracks/reply",
+      "address": "processes/answering/tracks/reply",
       "type": "track",
       "name": "Reply",
       "tagline": "One answer in a visitor's tab, in their language, read from the model at the host's commit and kept nowhere.",
@@ -3781,6 +3843,7 @@
     },
     {
       "id": "processes/delivery",
+      "address": "processes/delivery",
       "type": "process",
       "name": "Delivery",
       "tagline": "How anything the company ships is shaped, specified, planned, made and merged, in code and in prose.",
@@ -3934,6 +3997,7 @@
     },
     {
       "id": "processes/delivery/phases/implement",
+      "address": "processes/delivery/phases/implement",
       "type": "phase",
       "name": "Implement",
       "tagline": "Make the thing, and let nothing go forward unread.",
@@ -4072,6 +4136,7 @@
     },
     {
       "id": "processes/delivery/phases/integrate",
+      "address": "processes/delivery/phases/integrate",
       "type": "phase",
       "name": "Integrate",
       "tagline": "Put the change where it binds, and move everything that names it.",
@@ -4195,6 +4260,7 @@
     },
     {
       "id": "processes/delivery/phases/plan",
+      "address": "processes/delivery/phases/plan",
       "type": "phase",
       "name": "Plan",
       "tagline": "Cut the approved specification into pieces that can be worked one at a time.",
@@ -4312,6 +4378,7 @@
     },
     {
       "id": "processes/delivery/phases/shape",
+      "address": "processes/delivery/phases/shape",
       "type": "phase",
       "name": "Shape",
       "tagline": "Decide what kind of change this is, and how much of it gets written down.",
@@ -4442,6 +4509,7 @@
     },
     {
       "id": "processes/delivery/phases/spec",
+      "address": "processes/delivery/phases/spec",
       "type": "phase",
       "name": "Spec",
       "tagline": "Write what the change must do, completely enough that nobody downstream has to guess.",
@@ -4575,6 +4643,7 @@
     },
     {
       "id": "processes/delivery/tracks/code",
+      "address": "processes/delivery/tracks/code",
       "type": "track",
       "name": "Code",
       "tagline": "A merged change to a repository of the family, with its checks green.",
@@ -4587,6 +4656,7 @@
     },
     {
       "id": "processes/delivery/tracks/prose",
+      "address": "processes/delivery/tracks/prose",
       "type": "track",
       "name": "Prose",
       "tagline": "A published page or post in reviewed English, and the Swiss Standard German where the place carries it.",
@@ -4599,6 +4669,7 @@
     },
     {
       "id": "processes/narrating",
+      "address": "processes/narrating",
       "type": "process",
       "name": "Narrating",
       "tagline": "How a talk's reviewed speaker notes become the clips a visitor hears, in English and in German, with every clip heard by the Owner before it ships.",
@@ -4714,6 +4785,7 @@
     },
     {
       "id": "processes/narrating/phases/narrate",
+      "address": "processes/narrating/phases/narrate",
       "type": "phase",
       "name": "Narrate",
       "tagline": "Turn each changed note into a clip in its language, and let none of them out unheard.",
@@ -4827,6 +4899,7 @@
     },
     {
       "id": "processes/narrating/tracks/clip",
+      "address": "processes/narrating/tracks/clip",
       "type": "track",
       "name": "Clip",
       "tagline": "One slide's note, spoken in one language, beside the deck it belongs to and stamped with what it was spoken from.",
@@ -4839,6 +4912,7 @@
     },
     {
       "id": "products/mental-model",
+      "address": "products/mental-model",
       "type": "product",
       "name": "Mental Model",
       "tagline": "My work written down once, as a graph of Markdown files — what I have built, the capabilities I claim with their evidence and what I hold to — opened by whoever is deciding whether to work with me, and by the search engine or the agent they ask instead.",
@@ -4852,6 +4926,7 @@
     },
     {
       "id": "proficiency-levels/competent",
+      "address": "proficiency-levels/competent",
       "type": "proficiency-level",
       "name": "Competent",
       "tagline": "Reliable alone. Unsupervised work with a predictable result.",
@@ -4871,6 +4946,7 @@
     },
     {
       "id": "proficiency-levels/expert",
+      "address": "proficiency-levels/expert",
       "type": "proficiency-level",
       "name": "Expert",
       "tagline": "Knows the limits. Has worked below the surface, shaped it, or taught it.",
@@ -4890,6 +4966,7 @@
     },
     {
       "id": "proficiency-levels/familiar",
+      "address": "proficiency-levels/familiar",
       "type": "proficiency-level",
       "name": "Familiar",
       "tagline": "Needs support. Real use, with guidance or frequent reference.",
@@ -4909,6 +4986,7 @@
     },
     {
       "id": "proficiency-levels/proficient",
+      "address": "proficiency-levels/proficient",
       "type": "proficiency-level",
       "name": "Proficient",
       "tagline": "Exercises judgment. Chooses between alternatives and can say why.",
@@ -4928,6 +5006,7 @@
     },
     {
       "id": "profiles/ai-agent",
+      "address": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
       "tagline": "Specifies, plans, runs, implements, reviews, drafts, translates and answers visitors across the family, under a rulebook for each, and decides nothing.",
@@ -4957,6 +5036,7 @@
     },
     {
       "id": "profiles/english-voice",
+      "address": "profiles/english-voice",
       "type": "profile",
       "name": "English Voice",
       "tagline": "Speaks the English of every talk, from the reviewed notes, under the rulebook, and decides nothing.",
@@ -5043,6 +5123,7 @@
     },
     {
       "id": "profiles/german-voice",
+      "address": "profiles/german-voice",
       "type": "profile",
       "name": "German Voice",
       "tagline": "Speaks the German of every talk, from the reviewed notes, under the rulebook, and decides nothing.",
@@ -5129,6 +5210,7 @@
     },
     {
       "id": "profiles/robert-blust",
+      "address": "profiles/robert-blust",
       "type": "profile",
       "name": "Robert Blust",
       "tagline": "Building fast is solved. Deciding well is not.",
@@ -8227,6 +8309,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/1999-ubs-trainee",
+      "address": "profiles/robert-blust/experiences/1999-ubs-trainee",
       "type": "experience",
       "name": "UBS IT-Developer Program",
       "tagline": "Completed UBS's internal software-engineering program, the start of 15 years at UBS.",
@@ -8254,6 +8337,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2001-ubs-engineer",
+      "address": "profiles/robert-blust/experiences/2001-ubs-engineer",
       "type": "experience",
       "name": "Application Engineer",
       "tagline": "Built UBS's intranet and internet web portals on IBM Portal Server, and led delivery of the WPS Portal application.",
@@ -8286,6 +8370,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2002-wirtschaftsinformatik-fh",
+      "address": "profiles/robert-blust/experiences/2002-wirtschaftsinformatik-fh",
       "type": "experience",
       "name": "Business Information Systems UAS",
       "tagline": "Studied business information systems part-time over four years, majoring in Technology Engineering.",
@@ -8316,6 +8401,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2004-ubs-solution-manager",
+      "address": "profiles/robert-blust/experiences/2004-ubs-solution-manager",
       "type": "experience",
       "name": "Solution Manager, Software Engineering — Analysis & Design",
       "tagline": "Owned the Analysis & Design discipline in the software development life cycle rollout for UBS Wealth Management & Business Banking — RUP and EUP based — and architected DynaRep, the model-driven repository behind the division's mainframe service interfaces.",
@@ -8361,6 +8447,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2008-ubs-project-management",
+      "address": "profiles/robert-blust/experiences/2008-ubs-project-management",
       "type": "experience",
       "name": "Project Management Advanced Skills",
       "tagline": "UBS's eight-day program for leaders of projects of medium complexity, part of its 2008 training series.",
@@ -8388,6 +8475,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
+      "address": "profiles/robert-blust/experiences/2009-eclipse-code-camp",
       "type": "experience",
       "name": "Eclipse Code Camp Modeling",
       "tagline": "Four days in Munich on the Eclipse Modeling Framework, trained by Eike Stepper and Ed Merks.",
@@ -8415,6 +8503,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2009-ubs-architect",
+      "address": "profiles/robert-blust/experiences/2009-ubs-architect",
       "type": "experience",
       "name": "IT Architect — Software Development Lifecycle Toolchain",
       "tagline": "Architected the integration and SDLC toolchains for UBS Wealth Management & Swiss Bank, and drove the division's business architecture and capability modeling on EMF/Ecore.",
@@ -8465,6 +8554,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2010-eclipse-mdd-day",
+      "address": "profiles/robert-blust/experiences/2010-eclipse-mdd-day",
       "type": "experience",
       "name": "Eclipse MDD Day 2010",
       "tagline": "Co-organized Eclipse MDD Day, brought it to UBS in Zürich-Altstetten and spoke on models as the enterprise's first-class artifacts.",
@@ -8547,6 +8637,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2010-eclipse-modeling-platform",
+      "address": "profiles/robert-blust/experiences/2010-eclipse-modeling-platform",
       "type": "experience",
       "name": "Eclipse Modeling Platform Working Group",
       "tagline": "Represented UBS in the Eclipse Foundation's cross-industry initiative to build an open-source modeling toolchain.",
@@ -8628,6 +8719,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2011-jugs-board",
+      "address": "profiles/robert-blust/experiences/2011-jugs-board",
       "type": "experience",
       "name": "Swiss Eclipse User Group board",
       "tagline": "Served on the board of the Swiss Eclipse User Group within JUG Switzerland.",
@@ -8700,6 +8792,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2012-talk-eclipse-day-florence",
+      "address": "profiles/robert-blust/experiences/2012-talk-eclipse-day-florence",
       "type": "experience",
       "name": "Eclipse Day Florence 2012",
       "tagline": "Spoke at Eclipse Day Florence in May 2012 on data modeling at enterprise scale.",
@@ -8734,6 +8827,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2012-talk-eclipse-finance-day",
+      "address": "profiles/robert-blust/experiences/2012-talk-eclipse-finance-day",
       "type": "experience",
       "name": "Eclipse Finance Day 2012",
       "tagline": "Spoke at Eclipse Finance Day in October 2012 on interface management in a large enterprise.",
@@ -8809,6 +8903,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2013-talk-eclipse-finance-day",
+      "address": "profiles/robert-blust/experiences/2013-talk-eclipse-finance-day",
       "type": "experience",
       "name": "Eclipse Finance Day 2013",
       "tagline": "Spoke at Eclipse Finance Day in November 2013 on the UBS Integration Architecture Tool Chain.",
@@ -8883,6 +8978,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2014-eclipse-finance-day-organizer",
+      "address": "profiles/robert-blust/experiences/2014-eclipse-finance-day-organizer",
       "type": "experience",
       "name": "Eclipse Finance Day 2014",
       "tagline": "Co-organized Eclipse Finance Day 2014 for the JUG Swiss Eclipse User Group and hosted it at UBS.",
@@ -8915,6 +9011,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2014-flatland-cdo-server",
+      "address": "profiles/robert-blust/experiences/2014-flatland-cdo-server",
       "type": "experience",
       "name": "Flatland CDO Server",
       "tagline": "A model repository anyone can run: an Eclipse CDO server published in the open that serves any model over REST without code written for that model, and the company described on it.",
@@ -8990,6 +9087,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2015-3ap",
+      "address": "profiles/robert-blust/experiences/2015-3ap",
       "type": "experience",
       "name": "Co-Founder & CTO",
       "tagline": "Co-founded 3AP AG and owned technology strategy and delivery governance as CTO while the company scaled from 5 to about 70 people.",
@@ -9087,6 +9185,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2015-swisscard-data-integration",
+      "address": "profiles/robert-blust/experiences/2015-swisscard-data-integration",
       "type": "experience",
       "name": "Swisscard data integration rewrite",
       "tagline": "3AP · Backend Engineer — replaced the proprietary SOAP layer in front of Swisscard's core platform with Spring Boot behind the same WSDL contract, so no consumer had to change.",
@@ -9119,6 +9218,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2015-swisscom-agile-cockpit",
+      "address": "profiles/robert-blust/experiences/2015-swisscom-agile-cockpit",
       "type": "experience",
       "name": "Swisscom agile delivery cockpit",
       "tagline": "3AP · Integration Architect & Engineer — a real-time cockpit that put the agile release train and its test coverage on a wall screen, fed from Rally and Quality Center through MuleSoft.",
@@ -9153,6 +9253,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2016-credit-suisse-mdr",
+      "address": "profiles/robert-blust/experiences/2016-credit-suisse-mdr",
       "type": "experience",
       "name": "Credit Suisse Master Data Repository",
       "tagline": "3AP · Lead Architect & Developer — the Master Data Repository for Client Data Management, built on the Flatland CDO Server so data stewards and golden sources could be assigned and mapped for a FINMA requirement.",
@@ -9232,6 +9333,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2016-lost-tag-digibonum",
+      "address": "profiles/robert-blust/experiences/2016-lost-tag-digibonum",
       "type": "experience",
       "name": "Lost-Tag",
       "tagline": "3AP · Architect and hands-on lead of Digibonum's lost-and-found platform across the whole stack, from the model to the app in the store.",
@@ -9276,6 +9378,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2016-safe-practitioner",
+      "address": "profiles/robert-blust/experiences/2016-safe-practitioner",
       "type": "experience",
       "name": "Certified SAFe 4 Practitioner",
       "tagline": "Certified SAFe 4 Practitioner and SAFe 4 for Teams, Scaled Agile, Inc.",
@@ -9306,6 +9409,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2017-axa-health-platform",
+      "address": "profiles/robert-blust/experiences/2017-axa-health-platform",
       "type": "experience",
       "name": "AXA Health digital insurance platform",
       "tagline": "3AP · Lead Architect & Backend Engineer, about two years hands-on — a digital-first platform for complementary health insurance, its integration into Adcubum Syrius and the automated insurer-switching service.",
@@ -9393,6 +9497,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2018-conperi-automated-claims",
+      "address": "profiles/robert-blust/experiences/2018-conperi-automated-claims",
       "type": "experience",
       "name": "Conperi",
       "tagline": "3AP · Architect — the platform, the labeling tool and the serving path of an applied-research proof of concept with ZHAW for reading health-insurance invoices into claims.",
@@ -9433,6 +9538,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2018-flawa-iq",
+      "address": "profiles/robert-blust/experiences/2018-flawa-iq",
       "type": "experience",
       "name": "Flawa iQ",
       "tagline": "3AP · Solution Architect — a networked first-aid kit that detects missing or expired modules over LoRaWAN and reorders them, from the sensing research to 10 working prototypes.",
@@ -9514,6 +9620,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2019-3ap-platform",
+      "address": "profiles/robert-blust/experiences/2019-3ap-platform",
       "type": "experience",
       "name": "3AP Platform",
       "tagline": "3AP · Built the platform 3AP's own projects and internal systems ran on, and ran part of it on two clouds at once to show it depended on neither.",
@@ -9556,6 +9663,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2019-aroov-realestate",
+      "address": "profiles/robert-blust/experiences/2019-aroov-realestate",
       "type": "experience",
       "name": "Aroov digital rental platform",
       "tagline": "3AP · Backend & Integration Architect — a digital rental platform on the reference architecture in its event-driven form, the first of them on PostgreSQL, integrated with Garaio REM.",
@@ -9634,6 +9742,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2020-stay-koook",
+      "address": "profiles/robert-blust/experiences/2020-stay-koook",
       "type": "experience",
       "name": "Stay KooooK",
       "tagline": "3AP · Lead Architect, front to back, and integrations — a digital hospitality platform putting the whole guest journey in one app, and the platform that became LIKE MAGIC.",
@@ -9749,6 +9858,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2020-ursina-fault-labeling",
+      "address": "profiles/robert-blust/experiences/2020-ursina-fault-labeling",
       "type": "experience",
       "name": "Ursina",
       "tagline": "3AP · Architect — the software architecture, the path into a broadband operator's network and the authentication boundary of a tool that turns network faults into a labeled training set.",
@@ -9787,6 +9897,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2021-post-process-monitoring-bpmn",
+      "address": "profiles/robert-blust/experiences/2021-post-process-monitoring-bpmn",
       "type": "experience",
       "name": "Process Monitoring with BPMN",
       "tagline": "3AP · Wrote the article and built the sample it runs on: finding a stalled guest journey by the message that never arrives.",
@@ -9855,6 +9966,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2022-likemagic",
+      "address": "profiles/robert-blust/experiences/2022-likemagic",
       "type": "experience",
       "name": "Co-Founder & Head of Technology",
       "tagline": "Built and ran the SaaS hospitality platform behind 90+ customers and 16,000+ units across DACH.",
@@ -10039,6 +10151,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2022-talk-camundacon",
+      "address": "profiles/robert-blust/experiences/2022-talk-camundacon",
       "type": "experience",
       "name": "CamundaCon 2022",
       "tagline": "Co-presented at CamundaCon 2022 in Berlin on how SV Group became a SaaS business in six months on Camunda.",
@@ -10104,6 +10217,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2023-camunda-case-study",
+      "address": "profiles/robert-blust/experiences/2023-camunda-case-study",
       "type": "experience",
       "name": "Camunda case study on LIKE MAGIC",
       "tagline": "Featured in Camunda's published case study on the SV Group hospitality platform behind Stay KooooK and LIKE MAGIC.",
@@ -10167,6 +10281,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-application-tooling",
+      "address": "profiles/robert-blust/experiences/2026-application-tooling",
       "type": "experience",
       "name": "Application tooling",
       "tagline": "One CV in Markdown, every application an overlay on it, and the whole search tracked in git.",
@@ -10202,6 +10317,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
+      "address": "profiles/robert-blust/experiences/2026-blog-deciding-well-solved",
       "type": "experience",
       "name": "Deciding well is solved. For me.",
       "tagline": "I took a four-month career break to answer one question, then chose an architect role at 80%. How I decided is the one case I can call solved.",
@@ -10234,6 +10350,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-blust-ch",
+      "address": "profiles/robert-blust/experiences/2026-blust-ch",
       "type": "experience",
       "name": "blust.ch",
       "tagline": "Ongoing. A profile page built from the model, and the talks that say what the model is for.",
@@ -10268,6 +10385,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-career-break",
+      "address": "profiles/robert-blust/experiences/2026-career-break",
       "type": "experience",
       "name": "Career break",
       "tagline": "Four months to find out what I want to do next — spent building two products in the open and applying for the roles that would test the answer.",
@@ -10303,6 +10421,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-career-break-experiment-on-linkedin",
+      "address": "profiles/robert-blust/experiences/2026-career-break-experiment-on-linkedin",
       "type": "experience",
       "name": "The career break experiment on LinkedIn",
       "tagline": "Ongoing. A sequence of posts that tells the career break experiment and what it built, from the question it started with to the answer, each post making one point and pointing to one episode, film or talk that shows it.",
@@ -10397,6 +10516,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-companygraph",
+      "address": "profiles/robert-blust/experiences/2026-companygraph",
       "type": "experience",
       "name": "CompanyGraph",
       "tagline": "Ongoing. A meta-model for describing a company as a graph of Markdown files, so people and AI agents can both rely on it.",
@@ -10503,6 +10623,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
+      "address": "profiles/robert-blust/experiences/2026-film-build-the-model-first",
       "type": "experience",
       "name": "Build the model first",
       "tagline": "A five-minute film on twenty-five years of building from a model, generated from the model's own files under a written brief and read against its sources before it went out.",
@@ -10534,6 +10655,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-film-governance-as-data",
+      "address": "profiles/robert-blust/experiences/2026-film-governance-as-data",
       "type": "experience",
       "name": "Governance as data",
       "tagline": "A five-minute film on a company's knowledge as Markdown, written as a story before anything was generated and published under a description that says where the model reports its own size rather than repeating a number.",
@@ -10565,6 +10687,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-guestgraph",
+      "address": "profiles/robert-blust/experiences/2026-guestgraph",
       "type": "experience",
       "name": "GuestGraph",
       "tagline": "Ongoing. An open-source guest identity graph for hospitality: one guest out of every system's version of them, every merge explained and reversible.",
@@ -10645,6 +10768,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
+      "address": "profiles/robert-blust/experiences/2026-podcast-deciding-well",
       "type": "experience",
       "name": "Deciding well",
       "tagline": "A podcast episode in which two hosts argue out the talk that closed the career break, generated from the model's own export and a story written for it, and read against both before it went out under the talk's title.",
@@ -10708,6 +10832,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
+      "address": "profiles/robert-blust/experiences/2026-podcast-dein-unternehmen-kompiliert-nicht",
       "type": "experience",
       "name": "Dein Unternehmen kompiliert nicht",
       "tagline": "A podcast episode in German in which two hosts read CompanyGraph's own model and argue that a company's knowledge can be held to the standard of source code, published with a description that answers where the hosts overreach.",
@@ -10771,6 +10896,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
+      "address": "profiles/robert-blust/experiences/2026-podcast-turn-your-work-history-into-code",
       "type": "experience",
       "name": "Turn your work history into code",
       "tagline": "A five-minute podcast episode on the career break, generated from the model's own files under a written brief and held to its sources before it went out.",
@@ -10802,6 +10928,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
+      "address": "profiles/robert-blust/experiences/2026-podcast-wer-wurde-eingestellt",
       "type": "experience",
       "name": "Wer wurde eingestellt? Ich oder mein Modell?",
       "tagline": "A podcast episode in German in which two hosts read the model as a company of one and argue about it, ending on whether the person or the model he built was hired, published with a description that names what the hosts get wrong.",
@@ -10865,6 +10992,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-podcast-your-company-doesnt-compile",
+      "address": "profiles/robert-blust/experiences/2026-podcast-your-company-doesnt-compile",
       "type": "experience",
       "name": "Your company doesn't compile",
       "tagline": "A podcast episode in which two hosts read CompanyGraph's own model and argue that a company's knowledge can be held to the standard of source code, published with a description that answers where the hosts overreach.",
@@ -10928,6 +11056,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
+      "address": "profiles/robert-blust/experiences/2026-talk-companygraph-an-introduction",
       "type": "experience",
       "name": "CompanyGraph — an introduction",
       "tagline": "A narrated talk that puts CompanyGraph up for scrutiny: a meta-model for operating a company, the structure its knowledge takes so people and AI can both rely on it, open source and not finished.",
@@ -11001,6 +11130,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-talk-deciding-well",
+      "address": "profiles/robert-blust/experiences/2026-talk-deciding-well",
       "type": "experience",
       "name": "Building fast is solved. Deciding well is not.",
       "tagline": "A narrated talk that sums up the career break under the line blust.ch opens with: building with agentic AI turned out fast and cheap, shown in figures git recorded, and deciding well stayed the work.",
@@ -11098,6 +11228,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
+      "address": "profiles/robert-blust/experiences/2026-talk-essential-complexity",
       "type": "experience",
       "name": "Essential Complexity",
       "tagline": "A narrated talk on describing a problem in its essential complexity, no more and no less: the standard has held for fifteen years, and what changed is the cost of meeting it.",
@@ -11171,6 +11302,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
+      "address": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
       "type": "experience",
       "name": "GuestGraph — an introduction",
       "tagline": "A narrated talk that puts GuestGraph up for scrutiny: why a returning guest looks like five strangers, what a wrong merge costs, and how layered confidence keeps every decision explainable and reversible.",
@@ -11244,6 +11376,7 @@
     },
     {
       "id": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
+      "address": "profiles/robert-blust/experiences/2026-talk-the-mental-model",
       "type": "experience",
       "name": "The Mental Model",
       "tagline": "A narrated talk on the Mental Model: a company's knowledge as one structured, machine-readable base, versioned like code, that its people and its AI agents can both rely on.",
@@ -11317,6 +11450,7 @@
     },
     {
       "id": "question-kinds/brand",
+      "address": "question-kinds/brand",
       "type": "question-kind",
       "name": "Brand",
       "tagline": "Questions about how the site looks and how its texts sound, and what a visitor may reuse.",
@@ -11336,6 +11470,7 @@
     },
     {
       "id": "question-kinds/career",
+      "address": "question-kinds/career",
       "type": "question-kind",
       "name": "Career",
       "tagline": "Questions about what Robert has done: the roles and industries, what he led and studied, where he spoke, and the break between the last role and the next.",
@@ -11355,6 +11490,7 @@
     },
     {
       "id": "question-kinds/cost",
+      "address": "question-kinds/cost",
       "type": "question-kind",
       "name": "Cost",
       "tagline": "Questions about what the work costs and how that cost is kept in check: what running it costs, and how Robert keeps cloud spend under control.",
@@ -11374,6 +11510,7 @@
     },
     {
       "id": "question-kinds/ideas",
+      "address": "question-kinds/ideas",
       "type": "question-kind",
       "name": "Ideas",
       "tagline": "Questions about what the lines on the site mean and the thinking behind the work.",
@@ -11393,6 +11530,7 @@
     },
     {
       "id": "question-kinds/model-and-chat",
+      "address": "question-kinds/model-and-chat",
       "type": "question-kind",
       "name": "Model and chat",
       "tagline": "Questions about this model and the chat that answers from it: who answers, how well, what is kept, how a claim holds, and how to use or copy the model.",
@@ -11412,6 +11550,7 @@
     },
     {
       "id": "questions/can-i-build-a-model-like-this-of-myself",
+      "address": "questions/can-i-build-a-model-like-this-of-myself",
       "type": "question",
       "name": "Can I build a model like this of myself?",
       "tagline": "CompanyGraph is the open meta-model this one is written in, and the Mental Model product is the worked example.",
@@ -11478,6 +11617,7 @@
     },
     {
       "id": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
+      "address": "questions/can-i-use-robert-s-colors-and-fonts-for-my-own-site",
       "type": "question",
       "name": "Can I use Robert's colors and fonts for my own site?",
       "tagline": "The brand says what each color and typeface is for and points at the design repository that masters the values, and that repository's own license says what may be reused; the website is where the design is seen whole.",
@@ -11544,6 +11684,7 @@
     },
     {
       "id": "questions/can-robert-still-write-code-himself",
+      "address": "questions/can-robert-still-write-code-himself",
       "type": "question",
       "name": "Can Robert still write code himself?",
       "tagline": "The Software engineering and Java claims on his profile say how deep his code goes, and CompanyGraph and the career break's agentic work say what he has built with his own hands lately.",
@@ -11622,6 +11763,7 @@
     },
     {
       "id": "questions/has-robert-built-ai-into-a-real-business",
+      "address": "questions/has-robert-built-ai-into-a-real-business",
       "type": "question",
       "name": "Has Robert built AI into a real business?",
       "tagline": "His last role says how AI was rolled out across a company under governance he wrote, Conperi says where applied machine learning came first, and his profile's AI claims say at what level.",
@@ -11700,6 +11842,7 @@
     },
     {
       "id": "questions/has-robert-worked-in-banking",
+      "address": "questions/has-robert-worked-in-banking",
       "type": "question",
       "name": "Has Robert worked in banking?",
       "tagline": "His roles at UBS say what he did inside a bank, from the developer program to the architect's role, and two later projects say what he built for Swisscard and Credit Suisse.",
@@ -11790,6 +11933,7 @@
     },
     {
       "id": "questions/has-robert-worked-in-insurance",
+      "address": "questions/has-robert-worked-in-insurance",
       "type": "question",
       "name": "Has Robert worked in insurance?",
       "tagline": "Two projects at 3AP say it: the AXA Health platform for complementary health insurance, and Conperi, which read health-insurance invoices into claims.",
@@ -11856,6 +12000,7 @@
     },
     {
       "id": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
+      "address": "questions/how-can-i-use-this-model-from-my-own-ai-agent",
       "type": "question",
       "name": "How can I use this model from my own AI agent?",
       "tagline": "The MCP server is where an agent connects, the registry listing is how a client finds it, and the feature says how to load the whole model into an assistant without a server.",
@@ -11934,6 +12079,7 @@
     },
     {
       "id": "questions/how-do-i-know-a-claim-here-is-true",
+      "address": "questions/how-do-i-know-a-claim-here-is-true",
       "type": "question",
       "name": "How do I know a claim here is true?",
       "tagline": "The concepts say what a claim is and what must stand under it, and the feature says how a reader checks one against the other.",
@@ -12012,6 +12158,7 @@
     },
     {
       "id": "questions/how-does-robert-keep-cloud-costs-under-control",
+      "address": "questions/how-does-robert-keep-cloud-costs-under-control",
       "type": "question",
       "name": "How does Robert keep cloud costs under control?",
       "tagline": "By deciding what each service may cost before it is spent: a cap on every metered service, enforced by the provider where it can be, and every subscription read against the tier below it. The FinOps skill is where that practice is claimed and evidenced.",
@@ -12102,6 +12249,7 @@
     },
     {
       "id": "questions/how-does-robert-measure-delivery",
+      "address": "questions/how-does-robert-measure-delivery",
       "type": "question",
       "name": "How does Robert measure delivery?",
       "tagline": "The DORA KPIs define what is watched in how a change reaches production, and none of them is measured yet, so the model makes no claim about how fast anything ships. The Delivery process says how the work itself is done.",
@@ -12216,6 +12364,7 @@
     },
     {
       "id": "questions/how-should-a-text-in-robert-s-voice-sound",
+      "address": "questions/how-should-a-text-in-robert-s-voice-sound",
       "type": "question",
       "name": "How should a text in Robert's voice sound?",
       "tagline": "The brand's Voice table names the traits a sentence can fail and what a sentence without each one does, and the Writer seat's rulebook holds the rest of the rules a text is held to.",
@@ -12282,6 +12431,7 @@
     },
     {
       "id": "questions/how-well-does-this-chat-answer",
+      "address": "questions/how-well-does-this-chat-answer",
       "type": "question",
       "name": "How well does this chat answer?",
       "tagline": "Grounded Answer Rate says what is watched: whether an answer rested on what the model returned, not whether it was true, and its value is kept outside the model, in the chat's report the KPI links. The Answering process says how an answer is made.",
@@ -12348,6 +12498,7 @@
     },
     {
       "id": "questions/is-deciding-well-solved-for-robert",
+      "address": "questions/is-deciding-well-solved-for-robert",
       "type": "question",
       "name": "Is deciding well solved for Robert?",
       "tagline": "For Robert himself, yes: a blog post walks one of his own decisions in the order it happened, so a reader can check each step against the record. For a team it is not, because one person and one decision prove nothing about a team, and there the talk's claim stays an open proposal.",
@@ -12426,6 +12577,7 @@
     },
     {
       "id": "questions/is-robert-studying-anything-now",
+      "address": "questions/is-robert-studying-anything-now",
       "type": "question",
       "name": "Is Robert studying anything now?",
       "tagline": "The objective says what he is working toward and by when, the decision on the first CAS says where the study starts and whether that call is made yet, and the decision on the education says who carries its days and fees.",
@@ -12504,6 +12656,7 @@
     },
     {
       "id": "questions/is-what-i-type-here-stored",
+      "address": "questions/is-what-i-type-here-stored",
       "type": "question",
       "name": "Is what I type here stored?",
       "tagline": "The Answerer keeps no conversation, and the website's privacy page lists in full what leaves a visitor's browser and what happens to it.",
@@ -12570,6 +12723,7 @@
     },
     {
       "id": "questions/what-did-robert-study",
+      "address": "questions/what-did-robert-study",
       "type": "question",
       "name": "What did Robert study?",
       "tagline": "The degree entry says what he studied and where, and the other education entries name the trainings and certifications that followed.",
@@ -12636,6 +12790,7 @@
     },
     {
       "id": "questions/what-do-the-colors-on-this-site-mean",
+      "address": "questions/what-do-the-colors-on-this-site-mean",
       "type": "question",
       "name": "What do the colors on this site mean?",
       "tagline": "Each color is a role, and the brand's Color table says what a thing painted in it is saying and what it is never used for; the values themselves live where the brand's References point.",
@@ -12690,6 +12845,7 @@
     },
     {
       "id": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
+      "address": "questions/what-does-building-fast-is-solved-deciding-well-is-not-mean",
       "type": "question",
       "name": "What does \"Building fast is solved. Deciding well is not.\" mean?",
       "tagline": "It is the tagline on Robert's profile, a claim rather than a slogan because a value and a talk stand behind it and say what it means; for Robert himself deciding well is solved, which a blog post shows on one decision a reader can check, and for a team it stays the proposal the talk leaves open; the company's own tagline, on the identity, is a different line and says what the company is.",
@@ -12792,6 +12948,7 @@
     },
     {
       "id": "questions/what-does-it-cost-to-run-this",
+      "address": "questions/what-does-it-cost-to-run-this",
       "type": "question",
       "name": "What does it cost to run this?",
       "tagline": "Each paid cloud service has a monthly cap and each subscription a tier, set in the Spending decisions and read by two KPIs; what was actually spent is not kept in the model. What building all of it cost is priced in the talk \"Building fast is solved. Deciding well is not.\"",
@@ -12966,6 +13123,7 @@
     },
     {
       "id": "questions/what-does-over-twenty-five-years-in-order-mean",
+      "address": "questions/what-does-over-twenty-five-years-in-order-mean",
       "type": "question",
       "name": "What does \"over twenty-five years, in order\" mean?",
       "tagline": "It is the timeline's heading: the feature it names says what a reader follows there, and the website says where the timeline is drawn from.",
@@ -13032,6 +13190,7 @@
     },
     {
       "id": "questions/what-does-robert-do",
+      "address": "questions/what-does-robert-do",
       "type": "question",
       "name": "What does Robert do?",
       "tagline": "The identity says what he does in one line, and the company of one says what kind of company does it.",
@@ -13098,6 +13257,7 @@
     },
     {
       "id": "questions/what-has-robert-led",
+      "address": "questions/what-has-robert-led",
       "type": "question",
       "name": "What has Robert led?",
       "tagline": "The leadership achievements of his two co-founder roles say what he decided and owned for other people, and the earlier roles say where it started.",
@@ -13188,6 +13348,7 @@
     },
     {
       "id": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
+      "address": "questions/what-is-robert-s-history-with-eclipse-and-modeling",
       "type": "question",
       "name": "What is Robert's history with Eclipse and modeling?",
       "tagline": "The working group and the user group's board say where he took part, and the CDO server says what he built and kept running.",
@@ -13266,6 +13427,7 @@
     },
     {
       "id": "questions/what-is-robert-strongest-at",
+      "address": "questions/what-is-robert-strongest-at",
       "type": "question",
       "name": "What is Robert strongest at?",
       "tagline": "The skills his profile claims at Expert are his strongest, each with the evidence it rests on, and the Expert level says what that claim means.",
@@ -13332,6 +13494,7 @@
     },
     {
       "id": "questions/what-problem-does-modeling-a-company-solve",
+      "address": "questions/what-problem-does-modeling-a-company-solve",
       "type": "question",
       "name": "What problem does modeling a company solve?",
       "tagline": "The value says why a business is modeled before it is built, and the film on governance as data shows what the model makes possible.",
@@ -13398,6 +13561,7 @@
     },
     {
       "id": "questions/where-has-robert-spoken",
+      "address": "questions/where-has-robert-spoken",
       "type": "question",
       "name": "Where has Robert spoken?",
       "tagline": "His talks are experiences of the profile, the conference talks of the Eclipse years and at CamundaCon and the narrated talks on his own sites; each says what it argued and where to watch it, and Public speaking is the skill they evidence.",
@@ -13560,6 +13724,7 @@
     },
     {
       "id": "questions/who-answers-this-chat",
+      "address": "questions/who-answers-this-chat",
       "type": "question",
       "name": "Who answers this chat?",
       "tagline": "The Answerer is the seat that answers, and says what it may never do; the Answering process says how an answer is made; and the chat says what it reads from.",
@@ -13638,6 +13803,7 @@
     },
     {
       "id": "questions/why-are-companygraph-and-guestgraph-built-in-public",
+      "address": "questions/why-are-companygraph-and-guestgraph-built-in-public",
       "type": "question",
       "name": "Why are CompanyGraph and GuestGraph built in public?",
       "tagline": "The decision says why the two products are built in public repositories rather than shown when finished, and the value it upholds says why something has to work before the point is made.",
@@ -13704,6 +13870,7 @@
     },
     {
       "id": "questions/why-does-robert-work-part-time",
+      "address": "questions/why-does-robert-work-part-time",
       "type": "question",
       "name": "Why does Robert work part-time?",
       "tagline": "The decision to take the architect role says why it is at 80% and what the fifth day is for, and a later decision says why the 80% stays rather than a full workload with days released for school.",
@@ -13770,6 +13937,7 @@
     },
     {
       "id": "questions/why-is-there-a-career-break-and-what-happened-in-it",
+      "address": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "type": "question",
       "name": "Why is there a career break, and what happened in it?",
       "tagline": "The career break says why it was taken and what it found, the decisions that opened it say what it was given to find out and how the next role was looked for, CompanyGraph and GuestGraph are the two products it built in the open, and a blog post walks the decision that ended it.",
@@ -13896,6 +14064,7 @@
     },
     {
       "id": "roles/answerer",
+      "address": "roles/answerer",
       "type": "role",
       "name": "Answerer",
       "tagline": "The seat that answers a visitor's question from what the model's tools return, names the entity each claim rests on, and says that the model does not say where it does not.",
@@ -13964,6 +14133,7 @@
     },
     {
       "id": "roles/controller",
+      "address": "roles/controller",
       "type": "role",
       "name": "Controller",
       "tagline": "The seat that runs a plan one brief at a time, reads every report as a claim, and writes nothing itself.",
@@ -14045,6 +14215,7 @@
     },
     {
       "id": "roles/implementer",
+      "address": "roles/implementer",
       "type": "role",
       "name": "Implementer",
       "tagline": "The seat that turns one task brief into a tested commit and a report, and nothing beyond the brief.",
@@ -14126,6 +14297,7 @@
     },
     {
       "id": "roles/narrator",
+      "address": "roles/narrator",
       "type": "role",
       "name": "Narrator",
       "tagline": "The seat that speaks a talk's reviewed speaker notes, one clip per slide in each language, so the talk can be heard without its presenter.",
@@ -14194,6 +14366,7 @@
     },
     {
       "id": "roles/owner",
+      "address": "roles/owner",
       "type": "role",
       "name": "Owner",
       "tagline": "The seat that decides what the company is for, takes the money and the liability, and says the last word on every page.",
@@ -14260,6 +14433,7 @@
     },
     {
       "id": "roles/planner",
+      "address": "roles/planner",
       "type": "role",
       "name": "Planner",
       "tagline": "The seat that cuts an approved specification into task briefs, each whole on its own, and writes none of them.",
@@ -14349,6 +14523,7 @@
     },
     {
       "id": "roles/reviewer",
+      "address": "roles/reviewer",
       "type": "role",
       "name": "Reviewer",
       "tagline": "The seat that reads one diff against its brief, returns findings with a severity and changes nothing.",
@@ -14445,6 +14620,7 @@
     },
     {
       "id": "roles/specifier",
+      "address": "roles/specifier",
       "type": "role",
       "name": "Specifier",
       "tagline": "The seat that turns a shaped request into a specification nobody has to guess at, and builds nothing.",
@@ -14534,6 +14710,7 @@
     },
     {
       "id": "roles/translator",
+      "address": "roles/translator",
       "type": "role",
       "name": "Translator",
       "tagline": "The seat that makes the Swiss Standard German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
@@ -14613,6 +14790,7 @@
     },
     {
       "id": "roles/visitor",
+      "address": "roles/visitor",
       "type": "role",
       "name": "Visitor",
       "tagline": "Someone who asks about the company in their own words, on its site or through an agent of their own, and is owed what the model says and nothing else.",
@@ -14641,6 +14819,7 @@
     },
     {
       "id": "roles/writer",
+      "address": "roles/writer",
       "type": "role",
       "name": "Writer",
       "tagline": "The seat that drafts English in the family voice from a brief, so the Owner reviews a draft instead of writing one.",
@@ -14721,6 +14900,7 @@
     },
     {
       "id": "skills/agentic-ai-development",
+      "address": "skills/agentic-ai-development",
       "type": "skill",
       "name": "Agentic AI development",
       "tagline": "Building software systems in which an AI model plans and takes multi-step actions toward a goal, often using tools, with limited step-by-step human direction.",
@@ -14740,6 +14920,7 @@
     },
     {
       "id": "skills/agile-delivery",
+      "address": "skills/agile-delivery",
       "type": "skill",
       "name": "Agile delivery",
       "tagline": "Running iterative, incremental delivery using frameworks such as Scrum, Kanban or SAFe to organize team work.",
@@ -14759,6 +14940,7 @@
     },
     {
       "id": "skills/ai-governance",
+      "address": "skills/ai-governance",
       "type": "skill",
       "name": "AI governance",
       "tagline": "The decision rights, policies and oversight under which a company uses AI.",
@@ -14778,6 +14960,7 @@
     },
     {
       "id": "skills/ai-strategy",
+      "address": "skills/ai-strategy",
       "type": "skill",
       "name": "AI strategy",
       "tagline": "Deciding where and how a company adopts AI, and the sequence, investment and capabilities that get it there.",
@@ -14797,6 +14980,7 @@
     },
     {
       "id": "skills/ai-tool-integration-mcp",
+      "address": "skills/ai-tool-integration-mcp",
       "type": "skill",
       "name": "AI tool integration (MCP)",
       "tagline": "Connecting AI models and agents to external tools, data sources and systems through a standardized protocol so the AI can take real actions.",
@@ -14816,6 +15000,7 @@
     },
     {
       "id": "skills/api-design",
+      "address": "skills/api-design",
       "type": "skill",
       "name": "API design",
       "tagline": "Designing the interfaces that let software systems and services exchange data and functionality.",
@@ -14835,6 +15020,7 @@
     },
     {
       "id": "skills/business-architecture",
+      "address": "skills/business-architecture",
       "type": "skill",
       "name": "Business architecture",
       "tagline": "Modeling an organization's capabilities, value streams and operating structures independent of the technology that supports them.",
@@ -14854,6 +15040,7 @@
     },
     {
       "id": "skills/business-process-modeling-bpmn-dmn",
+      "address": "skills/business-process-modeling-bpmn-dmn",
       "type": "skill",
       "name": "Business process modeling (BPMN, DMN)",
       "tagline": "Diagramming business processes and decision logic using standardized notations so they can be analyzed, communicated and automated.",
@@ -14873,6 +15060,7 @@
     },
     {
       "id": "skills/change-management",
+      "address": "skills/change-management",
       "type": "skill",
       "name": "Change management",
       "tagline": "Planning and guiding an organization through the human side of a transition so new ways of working actually take hold.",
@@ -14892,6 +15080,7 @@
     },
     {
       "id": "skills/ci-cd",
+      "address": "skills/ci-cd",
       "type": "skill",
       "name": "CI/CD",
       "tagline": "Automating the build, test and release steps that take a code change from commit to running in an environment.",
@@ -14911,6 +15100,7 @@
     },
     {
       "id": "skills/cloud-architecture",
+      "address": "skills/cloud-architecture",
       "type": "skill",
       "name": "Cloud architecture",
       "tagline": "Designing systems that run on cloud infrastructure, using its services and elasticity rather than fixed, self-managed hardware.",
@@ -14930,6 +15120,7 @@
     },
     {
       "id": "skills/community-building",
+      "address": "skills/community-building",
       "type": "skill",
       "name": "Community building",
       "tagline": "Making a place where practitioners teach each other, and keeping it alive after the founding energy is gone.",
@@ -14949,6 +15140,7 @@
     },
     {
       "id": "skills/company-vision-and-strategy",
+      "address": "skills/company-vision-and-strategy",
       "type": "skill",
       "name": "Company vision and strategy",
       "tagline": "Where a company is going and why, and the few bets that get it there.",
@@ -14968,6 +15160,7 @@
     },
     {
       "id": "skills/consulting",
+      "address": "skills/consulting",
       "type": "skill",
       "name": "Consulting",
       "tagline": "Advising clients or internal stakeholders on how to address a problem, drawing on structured analysis and outside perspective.",
@@ -14987,6 +15180,7 @@
     },
     {
       "id": "skills/container-orchestration-kubernetes",
+      "address": "skills/container-orchestration-kubernetes",
       "type": "skill",
       "name": "Container orchestration (Kubernetes)",
       "tagline": "Managing the deployment, scaling and healing of containerized applications across a cluster of machines.",
@@ -15006,6 +15200,7 @@
     },
     {
       "id": "skills/context-engineering",
+      "address": "skills/context-engineering",
       "type": "skill",
       "name": "Context engineering",
       "tagline": "Structuring what an AI model or agent is given to work with — the documents, definitions and rules in its context — so its output is grounded in how the organization actually works.",
@@ -15025,6 +15220,7 @@
     },
     {
       "id": "skills/conversational-ai",
+      "address": "skills/conversational-ai",
       "type": "skill",
       "name": "Conversational AI",
       "tagline": "Systems that hold a dialogue with customers or staff across several channels, increasingly with an AI agent answering rather than a person.",
@@ -15044,6 +15240,7 @@
     },
     {
       "id": "skills/data-engineering",
+      "address": "skills/data-engineering",
       "type": "skill",
       "name": "Data engineering",
       "tagline": "Building the pipelines and infrastructure that move and transform data so it is reliably available for analysis or downstream systems.",
@@ -15063,6 +15260,7 @@
     },
     {
       "id": "skills/data-governance",
+      "address": "skills/data-governance",
       "type": "skill",
       "name": "Data governance",
       "tagline": "Defining ownership, quality standards and policies for data so it stays trustworthy and consistent across an organization.",
@@ -15082,6 +15280,7 @@
     },
     {
       "id": "skills/data-modeling",
+      "address": "skills/data-modeling",
       "type": "skill",
       "name": "Data modeling",
       "tagline": "Representing the structure and meaning of an organization's data through conceptual, logical or physical models.",
@@ -15101,6 +15300,7 @@
     },
     {
       "id": "skills/data-protection-gdpr",
+      "address": "skills/data-protection-gdpr",
       "type": "skill",
       "name": "Data protection (GDPR)",
       "tagline": "Ensuring an organization's handling of personal data complies with data protection law and respects individuals' privacy rights.",
@@ -15120,6 +15320,7 @@
     },
     {
       "id": "skills/database-design",
+      "address": "skills/database-design",
       "type": "skill",
       "name": "Database design",
       "tagline": "Structuring how data is organized, related and constrained within a database so it supports an application's needs efficiently and correctly.",
@@ -15139,6 +15340,7 @@
     },
     {
       "id": "skills/devops",
+      "address": "skills/devops",
       "type": "skill",
       "name": "DevOps",
       "tagline": "Bringing development and operations work together so software is built, tested, released and run as one continuous flow.",
@@ -15158,6 +15360,7 @@
     },
     {
       "id": "skills/domain-driven-design",
+      "address": "skills/domain-driven-design",
       "type": "skill",
       "name": "Domain-driven design",
       "tagline": "Structuring software around the business domain's own concepts and language rather than around technical layers.",
@@ -15177,6 +15380,7 @@
     },
     {
       "id": "skills/domain-specific-language-design",
+      "address": "skills/domain-specific-language-design",
       "type": "skill",
       "name": "Domain-specific language design",
       "tagline": "A language built for one domain — its metamodel, syntax and semantics — so that experts can state their intent directly and tools can act on it.",
@@ -15196,6 +15400,7 @@
     },
     {
       "id": "skills/engineering-leadership",
+      "address": "skills/engineering-leadership",
       "type": "skill",
       "name": "Engineering leadership",
       "tagline": "Leading and growing software engineering organizations, balancing technical direction with people and delivery outcomes.",
@@ -15215,6 +15420,7 @@
     },
     {
       "id": "skills/enterprise-architecture",
+      "address": "skills/enterprise-architecture",
       "type": "skill",
       "name": "Enterprise architecture",
       "tagline": "Designing the structure of an organization's business capabilities, information and technology so they work together as one coherent system.",
@@ -15234,6 +15440,7 @@
     },
     {
       "id": "skills/event-driven-architecture",
+      "address": "skills/event-driven-architecture",
       "type": "skill",
       "name": "Event-driven architecture",
       "tagline": "Designing systems where components communicate by producing and reacting to events rather than through direct calls.",
@@ -15253,6 +15460,7 @@
     },
     {
       "id": "skills/event-streaming",
+      "address": "skills/event-streaming",
       "type": "skill",
       "name": "Event streaming",
       "tagline": "Building systems that publish, transport and consume continuous streams of events in near real time.",
@@ -15272,6 +15480,7 @@
     },
     {
       "id": "skills/finops",
+      "address": "skills/finops",
       "type": "skill",
       "name": "FinOps",
       "tagline": "Managing cloud and technology spend so cost stays visible, accountable and aligned with the value delivered.",
@@ -15291,6 +15500,7 @@
     },
     {
       "id": "skills/frontend-development",
+      "address": "skills/frontend-development",
       "type": "skill",
       "name": "Frontend development",
       "tagline": "Building user-facing web applications out of components, in whatever the browser platform has settled on at the time.",
@@ -15310,6 +15520,7 @@
     },
     {
       "id": "skills/identity-and-access-management",
+      "address": "skills/identity-and-access-management",
       "type": "skill",
       "name": "Identity and access management",
       "tagline": "Controlling who can authenticate to systems and what they are authorized to do once inside.",
@@ -15329,6 +15540,7 @@
     },
     {
       "id": "skills/incident-management",
+      "address": "skills/incident-management",
       "type": "skill",
       "name": "Incident management",
       "tagline": "Detecting, responding to and resolving disruptions to a service so normal operation is restored as quickly as possible.",
@@ -15348,6 +15560,7 @@
     },
     {
       "id": "skills/information-security-management",
+      "address": "skills/information-security-management",
       "type": "skill",
       "name": "Information security management",
       "tagline": "Establishing and operating a management system that identifies, treats and monitors information security risk across an organization.",
@@ -15367,6 +15580,7 @@
     },
     {
       "id": "skills/infrastructure-as-code",
+      "address": "skills/infrastructure-as-code",
       "type": "skill",
       "name": "Infrastructure as code",
       "tagline": "Defining and provisioning infrastructure through versioned, executable configuration rather than manual setup.",
@@ -15386,6 +15600,7 @@
     },
     {
       "id": "skills/integration-architecture",
+      "address": "skills/integration-architecture",
       "type": "skill",
       "name": "Integration architecture",
       "tagline": "Designing how disparate systems and applications connect and exchange data across an organization.",
@@ -15405,6 +15620,7 @@
     },
     {
       "id": "skills/iot-architecture",
+      "address": "skills/iot-architecture",
       "type": "skill",
       "name": "IoT architecture",
       "tagline": "Designing the path from a physical device to a business system: sensing, connectivity, ingestion, use.",
@@ -15424,6 +15640,7 @@
     },
     {
       "id": "skills/it-governance",
+      "address": "skills/it-governance",
       "type": "skill",
       "name": "IT governance",
       "tagline": "Establishing decision rights, policies and oversight structures that keep IT activity accountable and aligned with organizational objectives.",
@@ -15443,6 +15660,7 @@
     },
     {
       "id": "skills/it-strategy",
+      "address": "skills/it-strategy",
       "type": "skill",
       "name": "IT strategy",
       "tagline": "Setting a multi-year direction for IT investment and architecture that aligns with business goals.",
@@ -15462,6 +15680,7 @@
     },
     {
       "id": "skills/java",
+      "address": "skills/java",
       "type": "skill",
       "name": "Java",
       "tagline": "Building software using the Java programming language and its surrounding ecosystem of libraries and runtime.",
@@ -15481,6 +15700,7 @@
     },
     {
       "id": "skills/knowledge-management",
+      "address": "skills/knowledge-management",
       "type": "skill",
       "name": "Knowledge management",
       "tagline": "Capturing, organizing and sharing an organization's knowledge so it remains accessible and useful beyond the individuals who created it.",
@@ -15500,6 +15720,7 @@
     },
     {
       "id": "skills/legacy-modernization",
+      "address": "skills/legacy-modernization",
       "type": "skill",
       "name": "Legacy modernization",
       "tagline": "Bringing a system built for another era forward without stopping the business that runs on it.",
@@ -15519,6 +15740,7 @@
     },
     {
       "id": "skills/machine-learning",
+      "address": "skills/machine-learning",
       "type": "skill",
       "name": "Machine learning",
       "tagline": "Building models that learn patterns from data and use them to make predictions or decisions on new data.",
@@ -15538,6 +15760,7 @@
     },
     {
       "id": "skills/mentoring-and-coaching",
+      "address": "skills/mentoring-and-coaching",
       "type": "skill",
       "name": "Mentoring and coaching",
       "tagline": "Growing other people's judgment and skill on purpose, one conversation and one review at a time.",
@@ -15557,6 +15780,7 @@
     },
     {
       "id": "skills/microservices-architecture",
+      "address": "skills/microservices-architecture",
       "type": "skill",
       "name": "Microservices architecture",
       "tagline": "Designing a system as a set of independently deployable services organized around business capabilities.",
@@ -15576,6 +15800,7 @@
     },
     {
       "id": "skills/mlops",
+      "address": "skills/mlops",
       "type": "skill",
       "name": "MLOps",
       "tagline": "Operating the pipelines and infrastructure that take machine learning models from training into reliable production use.",
@@ -15595,6 +15820,7 @@
     },
     {
       "id": "skills/model-driven-engineering",
+      "address": "skills/model-driven-engineering",
       "type": "skill",
       "name": "Model-driven engineering",
       "tagline": "Using formal models as the primary artifact of software development, generating code or other artifacts from them rather than writing them by hand.",
@@ -15614,6 +15840,7 @@
     },
     {
       "id": "skills/multi-tenant-saas-architecture",
+      "address": "skills/multi-tenant-saas-architecture",
       "type": "skill",
       "name": "Multi-tenant SaaS architecture",
       "tagline": "Designing a software system so a single deployment serves many customers securely and efficiently while keeping their data and usage isolated.",
@@ -15633,6 +15860,7 @@
     },
     {
       "id": "skills/observability",
+      "address": "skills/observability",
       "type": "skill",
       "name": "Observability",
       "tagline": "Instrumenting systems so their internal state can be understood from the data they produce, and using that data to detect and diagnose issues.",
@@ -15652,6 +15880,7 @@
     },
     {
       "id": "skills/open-source-stewardship",
+      "address": "skills/open-source-stewardship",
       "type": "skill",
       "name": "Open-source stewardship",
       "tagline": "Running a public project so that strangers can adopt it, contribute to it and trust it to stay.",
@@ -15671,6 +15900,7 @@
     },
     {
       "id": "skills/organization-design",
+      "address": "skills/organization-design",
       "type": "skill",
       "name": "Organization design",
       "tagline": "Deciding how a growing company divides its work, its decisions and its people.",
@@ -15690,6 +15920,7 @@
     },
     {
       "id": "skills/platform-engineering",
+      "address": "skills/platform-engineering",
       "type": "skill",
       "name": "Platform engineering",
       "tagline": "Building internal platforms and tooling that let product teams self-service infrastructure and common capabilities without depending on a central operations team.",
@@ -15709,6 +15940,7 @@
     },
     {
       "id": "skills/process-orchestration",
+      "address": "skills/process-orchestration",
       "type": "skill",
       "name": "Process orchestration",
       "tagline": "Coordinating the execution of multi-step business processes across systems and services using a dedicated orchestration engine.",
@@ -15728,6 +15960,7 @@
     },
     {
       "id": "skills/product-discovery",
+      "address": "skills/product-discovery",
       "type": "skill",
       "name": "Product discovery",
       "tagline": "Finding out whether a product should exist before building it — the problem, the buyer, the price, the no.",
@@ -15747,6 +15980,7 @@
     },
     {
       "id": "skills/product-management",
+      "address": "skills/product-management",
       "type": "skill",
       "name": "Product management",
       "tagline": "Defining what a product should do and why, and steering its development to deliver value to users and the business.",
@@ -15766,6 +16000,7 @@
     },
     {
       "id": "skills/public-speaking",
+      "address": "skills/public-speaking",
       "type": "skill",
       "name": "Public speaking",
       "tagline": "Explaining technical work to a room so that people leave able to act on it.",
@@ -15785,6 +16020,7 @@
     },
     {
       "id": "skills/requirements-engineering",
+      "address": "skills/requirements-engineering",
       "type": "skill",
       "name": "Requirements engineering",
       "tagline": "Eliciting, documenting and managing what a system or change needs to do so that stakeholders and delivery teams share the same understanding.",
@@ -15804,6 +16040,7 @@
     },
     {
       "id": "skills/site-reliability-engineering",
+      "address": "skills/site-reliability-engineering",
       "type": "skill",
       "name": "Site reliability engineering",
       "tagline": "Applying engineering methods to operations so that systems meet defined reliability targets at scale.",
@@ -15823,6 +16060,7 @@
     },
     {
       "id": "skills/software-architecture",
+      "address": "skills/software-architecture",
       "type": "skill",
       "name": "Software architecture",
       "tagline": "Defining the high-level structure of a software system, including its components, their responsibilities and how they interact.",
@@ -15842,6 +16080,7 @@
     },
     {
       "id": "skills/software-engineering",
+      "address": "skills/software-engineering",
       "type": "skill",
       "name": "Software engineering",
       "tagline": "Designing, writing, testing and maintaining software that meets defined requirements and can be operated reliably over time.",
@@ -15861,6 +16100,7 @@
     },
     {
       "id": "skills/software-modeling-uml-sysml-c4",
+      "address": "skills/software-modeling-uml-sysml-c4",
       "type": "skill",
       "name": "Software modeling (UML, SysML, C4)",
       "tagline": "Using standardized diagram notations to represent a system's structure and behavior so it can be communicated and reasoned about before or alongside implementation.",
@@ -15880,6 +16120,7 @@
     },
     {
       "id": "skills/software-process-engineering",
+      "address": "skills/software-process-engineering",
       "type": "skill",
       "name": "Software process engineering",
       "tagline": "Designing how an organization builds software — the method, the disciplines, the toolchain — and getting it adopted.",
@@ -15899,6 +16140,7 @@
     },
     {
       "id": "skills/software-testing",
+      "address": "skills/software-testing",
       "type": "skill",
       "name": "Software testing",
       "tagline": "Verifying that software behaves as intended and catching defects before they reach production.",
@@ -15918,6 +16160,7 @@
     },
     {
       "id": "skills/solution-architecture",
+      "address": "skills/solution-architecture",
       "type": "skill",
       "name": "Solution architecture",
       "tagline": "Designing the technical solution for a specific initiative so it meets functional and non-functional requirements within the wider technology landscape.",
@@ -15937,6 +16180,7 @@
     },
     {
       "id": "skills/solution-selling",
+      "address": "skills/solution-selling",
       "type": "skill",
       "name": "Solution selling",
       "tagline": "Winning work by showing a client the solution to their problem before they have paid for it.",
@@ -15956,6 +16200,7 @@
     },
     {
       "id": "skills/spec-driven-development",
+      "address": "skills/spec-driven-development",
       "type": "skill",
       "name": "Spec-driven development",
       "tagline": "Writing down what a system must do, and why, before any of it is built — and building only against that text.",
@@ -15975,6 +16220,7 @@
     },
     {
       "id": "skills/stakeholder-management",
+      "address": "skills/stakeholder-management",
       "type": "skill",
       "name": "Stakeholder management",
       "tagline": "Identifying, engaging and maintaining productive working relationships with the people who have an interest in or influence over an initiative.",
@@ -15994,6 +16240,7 @@
     },
     {
       "id": "skills/storytelling",
+      "address": "skills/storytelling",
       "type": "skill",
       "name": "Storytelling",
       "tagline": "Ordering facts into a story an audience will follow, and holding it together across every piece that tells it.",
@@ -16013,6 +16260,7 @@
     },
     {
       "id": "skills/technical-writing",
+      "address": "skills/technical-writing",
       "type": "skill",
       "name": "Technical writing",
       "tagline": "Writing that lets a reader understand and act on a technical thing without asking the author.",
@@ -16032,6 +16280,7 @@
     },
     {
       "id": "skills/ux-design",
+      "address": "skills/ux-design",
       "type": "skill",
       "name": "UX design",
       "tagline": "Designing how people use a product: what they see, in what order, and what they can do next.",
@@ -16051,6 +16300,7 @@
     },
     {
       "id": "skills/vendor-management",
+      "address": "skills/vendor-management",
       "type": "skill",
       "name": "Vendor management",
       "tagline": "Selecting, contracting and overseeing external suppliers so their delivery meets agreed commitments.",
@@ -16070,6 +16320,7 @@
     },
     {
       "id": "sources/local",
+      "address": "sources/local",
       "type": "source",
       "name": "Local",
       "tagline": "Written and kept in this repository, which masters every page in the model. Nothing syncs it, and it issues no identifiers, so no page carries a `source-id`.",
@@ -16082,6 +16333,7 @@
     },
     {
       "id": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
+      "address": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
       "type": "strategic-objective",
       "name": "A continuing-education master's in AI leadership",
       "tagline": "By the horizon I hold a MAS, a continuing-education master's, in AI leadership, earned beside the architect role and on my own account.",
@@ -16102,6 +16354,7 @@
     },
     {
       "id": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
+      "address": "strategic-objectives/every-service-i-pay-for-is-sized-to-what-i-use",
       "type": "strategic-objective",
       "name": "Every service I pay for is sized to what I use",
       "tagline": "No cloud service costs more in a month than I decided it may, and no subscription sits on a tier my use does not need.",
@@ -16121,6 +16374,7 @@
     },
     {
       "id": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
+      "address": "strategic-objectives/whoever-decides-about-me-decided-from-the-model",
       "type": "strategic-objective",
       "name": "Whoever decides about me decided from the model",
       "tagline": "A client or an employer arrives having read it, and the decision rests on what the model says rather than on what I said in a room.",
@@ -16140,6 +16394,7 @@
     },
     {
       "id": "strategies/model-first-strategy",
+      "address": "strategies/model-first-strategy",
       "type": "strategy",
       "name": "Model-First Strategy",
       "tagline": "Agents draft everything, inside conventions written down first, and I spend my time on the decisions they cannot make.",
@@ -16176,6 +16431,7 @@
     },
     {
       "id": "surfaces/blust-ch-website",
+      "address": "surfaces/blust-ch-website",
       "type": "surface",
       "name": "blust.ch website",
       "tagline": "The owner's own site, in English and Swiss Standard German, that a visitor, a search engine or an agent reaches at the owner's address, rebuilt from a pinned commit of the model.",
@@ -16202,6 +16458,7 @@
     },
     {
       "id": "surfaces/chat-blust-ch-chat",
+      "address": "surfaces/chat-blust-ch-chat",
       "type": "surface",
       "name": "chat.blust.ch chat",
       "tagline": "The chat a visitor opens on blust.ch to ask about the owner's work, answered from what the mcp.blust.ch MCP server says at its pinned commit, and the page a person reaches at the same address.",
@@ -16223,6 +16480,7 @@
     },
     {
       "id": "surfaces/linkedin-profile",
+      "address": "surfaces/linkedin-profile",
       "type": "surface",
       "name": "LinkedIn profile",
       "tagline": "The professional network profile a recruiter, a client or a former colleague reaches first, kept by hand.",
@@ -16253,6 +16511,7 @@
     },
     {
       "id": "surfaces/mcp-blust-ch-mcp-server",
+      "address": "surfaces/mcp-blust-ch-mcp-server",
       "type": "surface",
       "name": "mcp.blust.ch MCP server",
       "tagline": "The server an agent connects to for answers about the owner's work, and the page a person reaches at the same address, reading a pinned commit of the model and adding nothing to it.",
@@ -16274,6 +16533,7 @@
     },
     {
       "id": "surfaces/mcp-registry-listing",
+      "address": "surfaces/mcp-registry-listing",
       "type": "surface",
       "name": "MCP Registry listing",
       "tagline": "The entry an agent client finds when it searches the public MCP Registry, pointing it at the MCP server.",
@@ -16295,6 +16555,7 @@
     },
     {
       "id": "values/build-the-alternative-before-making-the-point",
+      "address": "values/build-the-alternative-before-making-the-point",
       "type": "value",
       "name": "Build the alternative before making the point",
       "tagline": "Naming what is broken is free, so it is not a position until something works differently.",
@@ -16313,6 +16574,7 @@
     },
     {
       "id": "values/decide-well-over-build-fast",
+      "address": "values/decide-well-over-build-fast",
       "type": "value",
       "name": "Decide well over build fast",
       "tagline": "AI moved the constraint from building quickly to deciding correctly; the decision is the work.",
@@ -16331,6 +16593,7 @@
     },
     {
       "id": "values/grow-the-people-with-the-platform",
+      "address": "values/grow-the-people-with-the-platform",
       "type": "value",
       "name": "Grow the people with the platform",
       "tagline": "A platform that outgrows the team that runs it is a liability with good uptime.",
@@ -16349,6 +16612,7 @@
     },
     {
       "id": "values/model-it-before-you-build-it",
+      "address": "values/model-it-before-you-build-it",
       "type": "value",
       "name": "Model it before you build it",
       "tagline": "A business described as concepts and capabilities is one that people and AI can both act inside of.",
@@ -16367,6 +16631,7 @@
     },
     {
       "id": "values/production-is-the-finish-line",
+      "address": "values/production-is-the-finish-line",
       "type": "value",
       "name": "Production is the finish line",
       "tagline": "A platform counts when it runs for customers under real security and compliance obligations, not when the demo works.",
@@ -16385,6 +16650,7 @@
     },
     {
       "id": "vision",
+      "address": "vision",
       "type": "vision",
       "name": "One model, true everywhere",
       "tagline": "Whoever asks about my work — a person, a search engine, an agent — reaches the same answer, because every surface they can reach derives from one model I keep, and no claim in it stands without its evidence.",
