@@ -2,7 +2,7 @@
 
 > The blog's second post, at `/blog/one-question-answered/`, answers in writing the two questions the ideas page asks of its two ideas. The first has an answer with a number: enough must exist that the idea answers without its author, and that took about 434 hours. The second has a test that has not been passed: no revenue, no clean no, and learning. The ideas page links the post as its first finding, and the LinkedIn post about the two ideas links the post rather than a podcast episode.
 
-Status: proposed on 2026-09-30, four decisions taken with the owner the same day. The post is the answer and everything else points to it. The workshop of Sep 29 stays in, told without naming who took part or where. The 434 hours stand as an estimate linked to the page that counts them. The title is the one below.
+Status: proposed on 2026-09-30, four decisions taken with the owner the same day. The post is the answer and everything else points to it. The workshop of Sep 29 stays in, told without naming who took part or where. The 434 hours stand as an estimate linked to the page that counts them. The title is the one below. On review of the built English and German, Rob added “yet” to the tagline's last sentence, in both languages.
 
 ---
 
@@ -31,7 +31,7 @@ Nothing else moves. The design package has the index block and every rule the po
 
 **Title**, in the title contract: light “One question answered.” and bold “One still *open*.” German: light «Eine Frage beantwortet.» and bold «Eine noch *offen*.»
 
-**Tagline.** “On the ideas page I asked two questions of my two ideas. Fifteen weeks later, the first has an answer with a number. The second has a test, and the test has not been passed.”
+**Tagline.** “On the ideas page I asked two questions of my two ideas. Fifteen weeks later, the first has an answer with a number. The second has a test, and the test has not been passed yet.”
 
 **Length.** About 1,100 words in English, about six minutes at the blog's 200 words a minute.
 
