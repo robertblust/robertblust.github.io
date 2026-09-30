@@ -16,6 +16,7 @@ import { writeTeam } from "@robertblust/design/render/team";
 import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writeHome } from "@robertblust/design/render/home";
+import { writeIdPages } from "@robertblust/design/render/ids";
 import { writeJsonLd } from "./jsonld.mjs";
 import { loadGerman } from "@robertblust/design/render/german";
 import { writeLatest } from "./latest.mjs";
@@ -48,6 +49,9 @@ const RENDERERS = [
   (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
   writeLatest,
   writeJsonLd,
+  // One redirect page per entity with a stable id, at the address build/jsonld.mjs gives the
+  // person as its @id, sending the reader on to the entity's place on /model/'s stage.
+  (d, o) => writeIdPages(d, { ...o, origin: "https://blust.ch", stage: "/model/" }),
 ];
 
 const stale = RENDERERS.flatMap((write) => write(data, { check, root: ROOT }));

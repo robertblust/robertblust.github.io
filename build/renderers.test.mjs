@@ -72,6 +72,35 @@ test("writeJsonLd replaces the leading three nodes and leaves the rest byte-iden
   assert.equal(written["@graph"][1].distribution.contentUrl, "https://blust.ch/model.json");
 });
 
+// A profile with a stable id is the person at <site>/id/<uuid>, the page render/ids writes for it,
+// and the page's own nodes that pointed at the old fragment follow it.
+test("writeJsonLd gives the person the profile's stable id, and the page's pointers follow it", () => {
+  const uuid = "01a03d9b-e108-7712-830f-6e315eeab5c9";
+  const stable = { ...PROFILE_FIXTURE, entities: PROFILE_FIXTURE.entities.map((e) =>
+    e.type === "profile" ? { ...e, id: uuid } : e) };
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
+  const doc = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
+      { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
+      { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
+      { "@type": "WebPage", "@id": "https://blust.ch/#webpage", name: "Kept", about: { "@id": "https://blust.ch/#person" } },
+    ],
+  };
+  fs.writeFileSync(path.join(dir, "index.html"),
+    `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
+  writeJsonLd(stable, { check: false, root: dir, pages: ["index.html"] });
+  const graph = JSON.parse(fs.readFileSync(path.join(dir, "index.html"), "utf8")
+    .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1])["@graph"];
+  const id = `https://blust.ch/id/${uuid}`;
+  assert.equal(graph[0]["@id"], id);
+  assert.equal(graph[1].creator["@id"], id);
+  assert.equal(graph[2].publisher["@id"], id);
+  assert.equal(graph[3].about["@id"], id, "the page's own pointer follows the person");
+  assert.equal(graph[3]["@id"], "https://blust.ch/#webpage", "the page's own @id is left alone");
+});
+
 test("writeJsonLd refuses to write a graph that does not lead with Person, Dataset, WebSite", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
   const doc = {
