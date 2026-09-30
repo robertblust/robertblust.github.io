@@ -162,8 +162,8 @@ const PAGES = [
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
     internalLinks: true },
   { path: "/blog/one-question-answered/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /One question answered/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Eine Frage beantwortet", "So viel, dass es ohne mich Antworten gibt", "rund 434 Stunden"], hides: ["One question answered", "Enough that it answers without me", "about 434 hours"] },
-    contains: ["One question answered.", "Enough that it answers without me", "about 434 hours", "a no is worth more than a polite yes"], card: true,
+    translates: { lang: "de", shows: ["Eine Frage beantwortet", "So viel, dass es ohne mich Antworten gibt", "rund 434 Stunden", "Was ein Team gekostet hätte", "Das KI-Abonnement kostete rund 650 Franken"], hides: ["One question answered", "Enough that it answers without me", "about 434 hours"] },
+    contains: ["One question answered.", "Enough that it answers without me", "about 434 hours", "a no is worth more than a polite yes", "What a team would have cost", "The AI subscription came to about 650 francs"], card: true,
     sameTab: ["../../ideas/", "../../talks/deciding-well/cost/", "../../timeline/#2026-career-break", "../"], brandMark: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     // See the note on /privacy/'s entry.
