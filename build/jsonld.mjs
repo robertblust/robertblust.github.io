@@ -17,6 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { idUrl } from "@robertblust/design/render/ids";
 
 const HERE = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://blust.ch";
@@ -58,6 +59,15 @@ export function imageOf(data) {
   return typeof name === "string" && name ? `${SITE}/images/${at}.${name.split(".").pop()}` : null;
 }
 
+// The person's @id is the profile's stable id as `npm run pages` publishes it, <site>/id/<uuid>,
+// a page that sends its reader on to the profile on /model/'s stage, so the @id a crawler keeps
+// outlives a rename. A profile the instance has not given a stable id keeps the fragment the site
+// used before, since no page would stand behind an /id/ address for it.
+const LEGACY_PERSON = `${SITE}/#person`;
+export function personId(data) {
+  return idUrl(personOf(data), SITE) ?? LEGACY_PERSON;
+}
+
 export function alsoAt(data) {
   const profile = personOf(data);
   const urls = (profile.sections || [])
@@ -71,10 +81,11 @@ export function alsoAt(data) {
 }
 
 function invariant(data) {
+  const person = personId(data);
   return [
     {
       "@type": "Person",
-      "@id": `${SITE}/#person`,
+      "@id": person,
       name: "Robert Blust",
       url: `${SITE}/`,
       jobTitle: "Software Engineer & Architect",
@@ -91,8 +102,8 @@ function invariant(data) {
       // repository, which sent every reader off-site rather than to the page that draws it.
       url: `${SITE}/model/`,
       license: "https://creativecommons.org/licenses/by/4.0/",
-      creator: { "@id": `${SITE}/#person` },
-      about: { "@id": `${SITE}/#person` },
+      creator: { "@id": person },
+      about: { "@id": person },
       // The Markdown is what the model is; model.json is what this site serves. Two claims.
       isBasedOn: `https://github.com/${data.repo}`,
       distribution: {
@@ -107,7 +118,7 @@ function invariant(data) {
       name: "Robert Blust",
       url: `${SITE}/`,
       inLanguage: "en",
-      publisher: { "@id": `${SITE}/#person` },
+      publisher: { "@id": person },
     },
   ];
 }
@@ -118,8 +129,9 @@ const RE = /(<script type="application\/ld\+json">\n)([\s\S]*?)(\n<\/script>)/;
 // node and left off it would reproduce the very drift this renderer ends, and nothing would say
 // so, so every HTML file under the root is read before any page is written. Naming the person's
 // @id is enough to be caught: a page that names it and does not define it publishes a reference
-// that resolves nowhere, so there is no honest reason for the string to appear off the list.
-const PERSON = `"${SITE}/#person"`;
+// that resolves nowhere, so there is no honest reason for the string to appear off the list. The
+// fragment the person carried before its stable id counts too, since a page copied from an older
+// one still names it.
 
 function htmlFiles(dir) {
   const out = [];
@@ -132,19 +144,21 @@ function htmlFiles(dir) {
   return out;
 }
 
-function refuseUnlisted(root, pages) {
+function refuseUnlisted(root, pages, person) {
+  const names = [...new Set([person, LEGACY_PERSON])].map((id) => `"${id}"`);
   const listed = new Set(pages.map((rel) => path.join(root, rel)));
   const found = htmlFiles(root)
-    .filter((file) => !listed.has(file) && fs.readFileSync(file, "utf8").includes(PERSON))
+    .filter((file) => !listed.has(file) && names.some((n) => fs.readFileSync(file, "utf8").includes(n)))
     .map((file) => path.relative(root, file));
   if (found.length) {
-    throw new Error(`off this renderer's list and naming ${PERSON}: ${found.join(", ")} — ` +
+    throw new Error(`off this renderer's list and naming ${names.join(" or ")}: ${found.join(", ")} — ` +
       "add each to PAGES in build/jsonld.mjs, so the node it carries is written rather than typed");
   }
 }
 
 export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } = {}) {
-  refuseUnlisted(root, pages);
+  const person = personId(data);
+  refuseUnlisted(root, pages, person);
   const nodes = invariant(data);
   const stale = [];
   for (const rel of pages) {
@@ -179,7 +193,14 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
           "a page's own nodes were copied from another page");
       }
     }
-    doc["@graph"] = [...nodes, ...doc["@graph"].slice(nodes.length)];
+    // A page's own nodes point at the person by @id — WebPage's about, a post's author — and
+    // those pointers follow the person's @id, so a page never names a person node its graph does
+    // not define. Only a whole `{ "@id": … }` value equal to the old fragment is rewritten.
+    const follow = (v) => Array.isArray(v) ? v.map(follow)
+      : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) =>
+        [k, k === "@id" && x === LEGACY_PERSON ? person : follow(x)]))
+      : v;
+    doc["@graph"] = [...nodes, ...doc["@graph"].slice(nodes.length).map(follow)];
     const text = JSON.stringify(doc, null, 2);
     const next = page.replace(RE, (all, open, _body, close) => open + text + close);
     // It has to parse after the write as well as before it: this rewrites a region inside a
