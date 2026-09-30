@@ -477,10 +477,13 @@ const CHECKS = {
     // With every card drawn, every skill chip is a link to the model page whose hash is that
     // skill's address. The first card may name no skill, so this is where the rule is held.
     const withSkills = exps.filter(e => Array.isArray(e.fields.skills) && e.fields.skills.length).length;
-    await page.waitForFunction((n) => new Set([...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.closest("details"))).size >= n,
+    await page.waitForFunction((n) => new Set([...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.closest("#ledger > li"))).size >= n,
       withSkills, { timeout: 2000 }).catch(() => null);
-    const chipLinks = await page.evaluate(() => [...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.getAttribute("href")));
-    if (withSkills && !chipLinks.length) return `Open all drew no skill chip; ${withSkills} experiences name skills`;
+    const drawn = await page.evaluate(() => ({
+      cards: new Set([...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.closest("#ledger > li"))).size,
+      links: [...document.querySelectorAll("#ledger .cbody .grp .chips a")].map(a => a.getAttribute("href")) }));
+    if (drawn.cards !== withSkills) return `Open all drew skill chips in ${drawn.cards} cards; ${withSkills} experiences name skills`;
+    const chipLinks = drawn.links;
     const skillAt = new Set(data.entities.filter(e => e.type === "skill").map(e => "../model/?stage=expanded#" + where(e)));
     const stray = chipLinks.find(href => !/^\.\.\/model\/\?stage=expanded#skills\//.test(href) || !skillAt.has(href));
     if (stray !== undefined) return `a skill link reads ${JSON.stringify(stray)}, which is no skill's address`;
