@@ -533,7 +533,11 @@ function rbLedger(data) {
     for (var i = 0; i < tracks.length; i++) if (tracks[i].s <= r.s && r.s < tracks[i].t) return 1;
     return 0;
   }
-  function stem(e){ return e.id.slice(e.id.lastIndexOf("/") + 1); }
+  // A row's anchor is the last segment of where the entity sits, its address, which stays readable
+  // when the id becomes a stable UUID; a model written before entities carried one has its path
+  // as its id.
+  function where(e){ return e.address != null ? e.address : e.id; }
+  function stem(e){ var a = where(e); return a.slice(a.lastIndexOf("/") + 1); }
   function yearsOf(st){
     // The gutter is years only; rbCard writes the dash and the word for an open end, so the
     // gutter reads the way the stamp does, in the page's language.
@@ -546,7 +550,8 @@ function rbLedger(data) {
   // A resolved reference in a card — a skill — leaves for the model page, which reads the
   // hash on load and focuses that node, and opens the stage expanded because the address
   // asks it to: a visitor who clicked a skill wants to read it with its references around it.
-  function goLink(id){ var a = h("a", byId[id].name, "go"); a.href = "../model/?stage=expanded#" + id; return a; }
+  // The hash is the skill's address, the one the stage writes itself, so the link reads #skills/….
+  function goLink(id){ var a = h("a", byId[id].name, "go"); a.href = "../model/?stage=expanded#" + where(byId[id]); return a; }
 
   var ol = document.getElementById("ledger"), pathLine = document.getElementById("path"),
       openAll = document.getElementById("openall");

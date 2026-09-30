@@ -45,13 +45,16 @@ function personOf(data) {
 }
 
 // The person's picture, where the profile carries one: the address of this site's own copy,
-// which `npm run model` writes at `images/<entity id>.<extension>`. Absent where the profile
-// names none, since a node that claimed a picture the site does not serve would be a claim
-// with nothing behind it.
+// which `npm run model` writes at `images/<entity address>.<extension>`. The address is where
+// the profile sits in the model, and a picture keeps that name when the profile's id becomes a
+// stable UUID; a model written before entities carried an address has the path as the id.
+// Absent where the profile names none, since a node that claimed a picture the site does not
+// serve would be a claim with nothing behind it.
 export function imageOf(data) {
   const profile = personOf(data);
   const name = profile.fields?.image;
-  return typeof name === "string" && name ? `${SITE}/images/${profile.id}.${name.split(".").pop()}` : null;
+  const at = profile.address ?? profile.id;
+  return typeof name === "string" && name ? `${SITE}/images/${at}.${name.split(".").pop()}` : null;
 }
 
 export function alsoAt(data) {
