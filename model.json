@@ -1,6 +1,6 @@
 {
-  "commit": "61bde0aa170f682cd3657e6bfe994025cdcbfd5b",
-  "core": "0.49.0",
+  "commit": "6f080bc1b5175e94b00deb20596da42acced220f",
+  "core": "0.50.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -81,6 +81,12 @@
       "folder": "kpis",
       "owner": null,
       "singular": false
+    },
+    {
+      "type": "localization",
+      "folder": null,
+      "owner": null,
+      "singular": true
     },
     {
       "type": "phase",
@@ -3684,6 +3690,53 @@
       "path": "model/kpis/plan-fit.md"
     },
     {
+      "id": "01a0f340-6fac-7717-9a16-9f0314f9f117",
+      "address": "localization",
+      "type": "localization",
+      "name": "Languages",
+      "tagline": "This model is written in American English; the German its site and chat offer is translated from it and is not yet part of the model.",
+      "fields": {
+        "id": "01a0f340-6fac-7717-9a16-9f0314f9f117",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "Locales",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Locale",
+                "Role"
+              ],
+              "rows": [
+                [
+                  "en-US",
+                  "primary"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Locale",
+              "Role"
+            ],
+            "rows": [
+              [
+                "en-US",
+                "primary"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/localization.md"
+    },
+    {
       "id": "01a0ccd4-b070-7ae5-9228-5189a9306e5a",
       "address": "processes/answering",
       "type": "process",
@@ -7082,6 +7135,11 @@
                   "The career break experiment on LinkedIn"
                 ],
                 [
+                  "Storytelling",
+                  "Told a validation not yet decided as one question answered and one still open, closing on what would settle it and an ask.",
+                  "One question answered. One still open."
+                ],
+                [
                   "Technical writing",
                   "Wrote the Analysis & Design methodology and guidance a UBS division worked to.",
                   "Solution Manager, Software Engineering — Analysis & Design"
@@ -7105,6 +7163,11 @@
                   "Technical writing",
                   "Wrote a brief before every post naming its reader, its one point and where each claim is shown, and kept the text as posted beside the draft.",
                   "The career break experiment on LinkedIn"
+                ],
+                [
+                  "Technical writing",
+                  "Wrote a blog post that answers the ideas page's two questions with every figure checked against its source and every claim linked where it stands.",
+                  "One question answered. One still open."
                 ],
                 [
                   "UX design",
@@ -8293,6 +8356,11 @@
                 "The career break experiment on LinkedIn"
               ],
               [
+                "Storytelling",
+                "Told a validation not yet decided as one question answered and one still open, closing on what would settle it and an ask.",
+                "One question answered. One still open."
+              ],
+              [
                 "Technical writing",
                 "Wrote the Analysis & Design methodology and guidance a UBS division worked to.",
                 "Solution Manager, Software Engineering — Analysis & Design"
@@ -8316,6 +8384,11 @@
                 "Technical writing",
                 "Wrote a brief before every post naming its reader, its one point and where each claim is shown, and kept the text as posted beside the draft.",
                 "The career break experiment on LinkedIn"
+              ],
+              [
+                "Technical writing",
+                "Wrote a blog post that answers the ideas page's two questions with every figure checked against its source and every claim linked where it stands.",
+                "One question answered. One still open."
               ],
               [
                 "UX design",
@@ -10486,6 +10559,80 @@
       }
     },
     {
+      "id": "01a0f296-04db-7340-8139-ee8a21744339",
+      "address": "profiles/robert-blust/experiences/2026-blog-one-question-answered",
+      "type": "experience",
+      "name": "One question answered. One still open.",
+      "tagline": "The ideas page asked two questions of its two ideas. The first has an answer with a number, enough that an idea answers without its author, and the second has a test that has not been passed yet.",
+      "fields": {
+        "id": "01a0f296-04db-7340-8139-ee8a21744339",
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "url": "https://blust.ch/blog/one-question-answered/",
+        "role": "Author",
+        "skills": [
+          "Technical writing",
+          "Storytelling"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Published the first finding the ideas page promised, answering in writing the two questions it asks of GuestGraph and CompanyGraph: how much of an idea must exist before it can be validated, and what a realistic outcome is.\n\n### Ways of working\n\n- Wrote the post from a reviewed specification and a plan, the English reviewed by the owner on the rendered page before any German was made, and the German made by the translator, read without the English by the editor and rendered back by the back-reader, with the owner picking among the flagged sentences.\n- Checked every figure against where it stands before it went out: the hours against the talk's own figures, the cost of the subscription against the talk, and GuestGraph's objective quoted word for word.\n\n### Results\n\n- Answered the first question with a threshold and a cost: an idea is validated only when someone who owes it nothing can try it without its author in the room, and reaching that took an estimated 434 hours between Jun 9 and Sep 24, 2026, spent mostly on deciding rather than building.\n- Answered the second without rounding it up: no revenue, because nothing is sold; no clean no yet, though both models carry the question as an objective a no settles as completely as a yes; and learning, with the first test named as adoption by a company never met rather than revenue.\n- Closed on what would settle it and an ask, one company, one engagement and one hotel, and the chat on companygraph.io to ask before asking the author.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Ideas page",
+                  "https://blust.ch/ideas/"
+                ],
+                [
+                  "What a team would have cost, where the hours are counted",
+                  "https://blust.ch/talks/deciding-well/cost/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Ideas page",
+                "https://blust.ch/ideas/"
+              ],
+              [
+                "What a team would have cost, where the hours are counted",
+                "https://blust.ch/talks/deciding-well/cost/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "path": "model/profiles/robert-blust/experiences/2026-blog-one-question-answered.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-30",
+        "end": "2026-09-30"
+      }
+    },
+    {
       "id": "01a077ab-1d50-716a-919b-a0715f1f1c27",
       "address": "profiles/robert-blust/experiences/2026-blust-ch",
       "type": "experience",
@@ -10546,7 +10693,7 @@
         },
         {
           "heading": "Ending",
-          "text": "Ended in September 2026 with a decision, not only an offer: an IT Architect role at 80% from October, in a company whose culture was the criterion. The two products stay published and keep their history, and the education starts in 2027.",
+          "text": "Ended in September 2026 with a decision, not only an offer: an IT Architect role at 80% at Läderach from October, a company whose culture was the criterion. The two products stay published and keep their history, and the education starts in 2027.",
           "tables": []
         }
       ],
@@ -10907,6 +11054,61 @@
       "stamp": {
         "kind": "Community",
         "start": "2026-07",
+        "end": null
+      }
+    },
+    {
+      "id": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "address": "profiles/robert-blust/experiences/2026-laderach",
+      "type": "experience",
+      "name": "IT Architect",
+      "tagline": "Ongoing. An IT Architect role at 80% at Läderach from October 2026, chosen for a culture the interviews showed rather than for pay, with the fifth day kept for formal education in how AI is led and governed in an organization.",
+      "fields": {
+        "id": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+        "source": "Local",
+        "kind": "Role",
+        "start": "2026-10",
+        "organization": "Läderach (Schweiz) AG"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Läderach",
+                  "https://laderach.com/"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Läderach",
+                "https://laderach.com/"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "path": "model/profiles/robert-blust/experiences/2026-laderach.md",
+      "stamp": {
+        "kind": "Role",
+        "start": "2026-10",
         "end": null
       }
     },
@@ -18938,6 +19140,15 @@
     },
     {
       "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a04556-7890-7c09-9c28-a5f593f4266b",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Wrote a blog post that answers the ideas page's two questions with every figure checked against its source and every claim linked where it stands.",
+        "Experience": "01a0f296-04db-7340-8139-ee8a21744339"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
       "to": "01a04556-7890-7f5f-816f-1c0f87a27791",
       "via": "Evidence.Skill",
       "attrs": {
@@ -19195,6 +19406,15 @@
       "attrs": {
         "What it shows": "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
         "Experience": "01a0ef1d-3198-7312-b9b3-40f2328abefd"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Told a validation not yet decided as one question answered and one still open, closing on what would settle it and an ask.",
+        "Experience": "01a0f296-04db-7340-8139-ee8a21744339"
       }
     },
     {
@@ -27026,6 +27246,66 @@
     },
     {
       "from": "01a0f1f8-a055-70d1-932f-0f72fb8061ad",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a0b158-7700-72a4-b6a0-0e82b3128c77",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a0b158-7700-7486-89aa-fea53a6808ef",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a0b158-7700-7bd4-864e-18279f02efd6",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a0638c-9240-7ca2-a03b-09262d9aec18",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a04556-7890-7c09-9c28-a5f593f4266b",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f296-04db-7340-8139-ee8a21744339",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a0638c-9240-7d1e-8446-19654d19f88a",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f340-6fac-7717-9a16-9f0314f9f117",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
