@@ -44,7 +44,7 @@ const RENDERERS = [
   (d, o) => writePrinciples(d, { ...o, de: german.de }),
   // Each board shows its process as the chat draws it, from the same drawer, over the
   // artifact at the commit source.json pins, so the picture moves only when the pin does.
-  (d, o) => writeTeam(d, { ...o, order: ["Delivery", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id) }),
+  (d, o) => writeTeam(d, { ...o, order: ["Deciding", "Delivery", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id) }),
   writeSurfaces,
   (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
   writeLatest,
