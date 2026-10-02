@@ -1,6 +1,6 @@
 {
-  "commit": "6f080bc1b5175e94b00deb20596da42acced220f",
-  "core": "0.50.0",
+  "commit": "f70637edbaf69346da49156f40ef7d781ec56898",
+  "core": "0.51.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -3978,6 +3978,478 @@
       "path": "model/processes/answering/tracks/reply.md"
     },
     {
+      "id": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "address": "processes/deciding",
+      "type": "process",
+      "name": "Deciding",
+      "tagline": "How the Owner decides what comes next, from an overview of all open work checked at the moment of asking, because building fast is solved and deciding well is not.",
+      "fields": {
+        "id": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+        "source": "Local",
+        "owner": "Owner",
+        "supported-by": [
+          "Surveyor"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Tracks",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Track"
+              ],
+              "rows": [
+                [
+                  "Decision"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Track"
+            ],
+            "rows": [
+              [
+                "Decision"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Phases",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Phase"
+              ],
+              "rows": [
+                [
+                  "Survey"
+                ],
+                [
+                  "Propose"
+                ],
+                [
+                  "Carry"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Phase"
+            ],
+            "rows": [
+              [
+                "Survey"
+              ],
+              [
+                "Propose"
+              ],
+              [
+                "Carry"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never decides on a state that was not checked in the conversation the decision is made in.\n- Never puts more than one decision to the Owner at a time.\n- Never carries out more than the Owner's word covers.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/processes/deciding/deciding.md"
+    },
+    {
+      "id": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "address": "processes/deciding/phases/carry",
+      "type": "phase",
+      "name": "Carry",
+      "tagline": "Do what the Owner's word covers, tell whoever it touches, and report what happened.",
+      "fields": {
+        "id": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Surveyor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The Owner's word from Propose. Where an action the word covers is refused by the seat's permissions, the seat stops there and hands the Owner what is left.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Surveyor checks the state the action touches once more, right before acting on it.\n2. The Surveyor carries out what the word covers; a commit it makes is made in the seat whose work it carries.\n3. The Surveyor tells the sessions the change touches what changed.\n4. The Surveyor reports to the Owner what was done, with the commits and pull requests it made, and any mistake it made on the way.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Carried decision",
+                  "What the Owner's word covered, done; finished when the state it changed has been read back"
+                ],
+                [
+                  "Report",
+                  "What was done and what went wrong, each linked to where it can be read"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Carried decision",
+                "What the Owner's word covered, done; finished when the state it changed has been read back"
+              ],
+              [
+                "Report",
+                "What was done and what went wrong, each linked to where it can be read"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never does more than the word covered, however small the step beyond it.\n- Never does what another session was refused.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "- What the word covered is done and read back from where it is held.\n- The sessions it touches were told.\n- The Owner has the report.",
+          "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "An action the seat's permissions refuse is handed to the Owner with the commands that would do it.",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "proposed again",
+                  "Propose"
+                ],
+                [
+                  "handed to the Owner",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "proposed again",
+                "Propose"
+              ],
+              [
+                "handed to the Owner",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "path": "model/processes/deciding/phases/carry.md"
+    },
+    {
+      "id": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "address": "processes/deciding/phases/propose",
+      "type": "phase",
+      "name": "Propose",
+      "tagline": "Put one decision to the Owner with a recommendation, and take the Owner's word on it.",
+      "fields": {
+        "id": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Surveyor"
+        ],
+        "supported-by": [
+          "Owner"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Carry"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "An overview that has passed Survey. Where the overview is older than the question now asked, it goes back to Survey first.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Surveyor names the one decision that comes next and what it changes.\n2. The Surveyor recommends one answer and says why, and names the other answers it set aside.\n3. The Owner decides: yes, no, wait, or an answer of their own.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Proposal",
+                  "One decision with one recommended answer and the reason for it"
+                ],
+                [
+                  "Owner's word",
+                  "The answer the Owner gave, in their words; finished when it says what may be done"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Proposal",
+                "One decision with one recommended answer and the reason for it"
+              ],
+              [
+                "Owner's word",
+                "The answer the Owner gave, in their words; finished when it says what may be done"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never puts a second decision to the Owner before the first is answered.\n- Never takes an earlier word of the Owner's as the answer to this decision.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "- The Owner has answered the decision put to them.",
+          "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "A wait is a decision too, and the process ends with nothing carried out.",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "surveyed again",
+                  "Survey"
+                ],
+                [
+                  "waits",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "surveyed again",
+                "Survey"
+              ],
+              [
+                "waits",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "path": "model/processes/deciding/phases/propose.md"
+    },
+    {
+      "id": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "address": "processes/deciding/phases/survey",
+      "type": "phase",
+      "name": "Survey",
+      "tagline": "Find out where the open work stands now, not where it stood when it was last looked at.",
+      "fields": {
+        "id": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+        "source": "Local",
+        "owner": "Owner",
+        "executed-by": [
+          "Surveyor"
+        ],
+        "gate-approvers": [
+          "Owner"
+        ],
+        "escalation-authority": "Owner",
+        "gate-to": "Propose"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The Owner's question, and read access to the repositories, pull requests, branches, worktrees and sessions it touches. Where the seat cannot read one of them, it starts anyway and names what it could not see.",
+          "tables": []
+        },
+        {
+          "heading": "Activities",
+          "text": "1. The Surveyor reads the state the question touches where it is held: the pull request on GitHub, the branch in its worktree, the session in its own words.\n2. The Surveyor reads the memory for what was settled before, and checks each settled thing it relies on against its current state.\n3. The Surveyor sets out the overview: what is open, in what state, who is working on it, each claim linked to where it was read.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Deliverable",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Overview",
+                  "What is open, its state and who is working on it, each claim linked to where it was read; finished when nothing in it was taken from an earlier check"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Deliverable",
+              "Description"
+            ],
+            "rows": [
+              [
+                "Overview",
+                "What is open, its state and who is working on it, each claim linked to where it was read; finished when nothing in it was taken from an earlier check"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never relies on a state it read earlier in the conversation without reading it again.\n- Never takes a session's transcript for what the session did, where the session can be asked.",
+          "tables": []
+        },
+        {
+          "heading": "Gate",
+          "text": "- Every claim in the overview was checked in this conversation and links to where it was read.\n- What the seat could not see is named.",
+          "tables": []
+        },
+        {
+          "heading": "If not met",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Outcome",
+                "Leads to"
+              ],
+              "rows": [
+                [
+                  "checked again",
+                  "Survey"
+                ],
+                [
+                  "dropped",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Outcome",
+              "Leads to"
+            ],
+            "rows": [
+              [
+                "checked again",
+                "Survey"
+              ],
+              [
+                "dropped",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "path": "model/processes/deciding/phases/survey.md"
+    },
+    {
+      "id": "01a0fadb-2afe-75a6-beb0-7a218bba5caa",
+      "address": "processes/deciding/tracks/decision",
+      "type": "track",
+      "name": "Decision",
+      "tagline": "One choice the Owner made, with the overview it was made on and what was done because of it.",
+      "fields": {
+        "id": "01a0fadb-2afe-75a6-beb0-7a218bba5caa",
+        "source": "Local"
+      },
+      "sections": [],
+      "owner": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "path": "model/processes/deciding/tracks/decision.md"
+    },
+    {
       "id": "01a0a902-0cd8-7360-b4a4-ac5eef340c3c",
       "address": "processes/delivery",
       "type": "process",
@@ -5161,7 +5633,7 @@
       "address": "profiles/ai-agent",
       "type": "profile",
       "name": "AI Agent",
-      "tagline": "Specifies, plans, runs, implements, reviews, drafts, translates and answers visitors across the family, under a rulebook for each, and decides nothing.",
+      "tagline": "Surveys the open work for the Owner, and specifies, plans, runs, implements, reviews, drafts, translates and answers visitors across the family, under a rulebook for each, and decides nothing.",
       "fields": {
         "id": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
         "source": "Local",
@@ -5174,13 +5646,14 @@
           "Reviewer",
           "Writer",
           "Translator",
-          "Answerer"
+          "Answerer",
+          "Surveyor"
         ]
       },
       "sections": [
         {
           "heading": "Summary",
-          "text": "Its seats, one session: the specification a request is shaped into, the plan it is cut into, the dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the English of every page and the Swiss Standard German of every reviewed element. Whichever model runs it, the rulebooks are the same and the Owner's word ends every question it parks.",
+          "text": "Its seats, one session: the overview the Owner decides on, the specification a request is shaped into, the plan it is cut into, the dispatch of one brief at a time, the commit a brief specifies, the findings on a diff, the English of every page and the Swiss Standard German of every reviewed element. Whichever model runs it, the rulebooks are the same and the Owner's word ends every question it parks.",
           "tables": []
         }
       ],
@@ -15108,6 +15581,36 @@
       "path": "model/roles/specifier.md"
     },
     {
+      "id": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "address": "roles/surveyor",
+      "type": "role",
+      "name": "Surveyor",
+      "tagline": "The seat that finds out where all the open work stands at the moment the Owner asks, sets it out with one proposal for what comes next, and carries out only what the Owner then decides.",
+      "fields": {
+        "id": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it takes",
+          "text": "The Owner's question, read access to every repository, pull request, branch and worktree of the company, the list of the other sessions at work and what each is doing, and the memory of what was settled before. Where it cannot read something, the seat says what it could not see instead of filling the gap.",
+          "tables": []
+        },
+        {
+          "heading": "What it produces",
+          "text": "An overview checked at the moment of asking: what is open, in what state, and who is working on it, with each claim linked to where it was read. One proposal for what comes next and one decision put to the Owner at a time. On the Owner's word, that decision carried out, the other sessions told what changed, and a report of what happened, mistakes included.",
+          "tables": []
+        },
+        {
+          "heading": "What it never does",
+          "text": "- Never reports a state it did not check in that conversation; a state checked earlier is checked again before it is relied on.\n- Never says what another session did on the strength of its transcript alone; where the two disagree, the session's own word is taken.\n- Never does what another session was refused, whatever that session asks.\n- Never merges, deletes, publishes or writes to the model without the Owner's word in that conversation, and does no more than that word covers.\n- Never commits in its own name; a commit it makes on the Owner's word is made in the seat whose work it carries, under that seat's author and trailers.\n- Never decides; where a choice is open, it proposes and the Owner decides.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/roles/surveyor.md"
+    },
+    {
       "id": "01a0a6f1-f188-73fe-a861-a8798d66f219",
       "address": "roles/translator",
       "type": "role",
@@ -23464,6 +23967,12 @@
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "roles",
+      "attrs": {}
+    },
+    {
+      "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
@@ -27306,6 +27815,192 @@
     },
     {
       "from": "01a0f340-6fac-7717-9a16-9f0314f9f117",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "via": "Phases.Phase",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0fadb-2afe-75a6-beb0-7a218bba5caa",
+      "via": "Tracks.Track",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2ac4-7e9c-b4fe-b2537ee2be06",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2afe-75a6-beb0-7a218bba5caa",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "checked again"
+      }
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0fadb-2b4e-76d1-b644-52a80480aaae",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "surveyed again"
+      }
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "via": "gate-to",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "supported-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "to": "01a0fadb-2b8b-7ae8-a0a7-b54412395dc8",
+      "via": "If not met.Leads to",
+      "attrs": {
+        "Outcome": "proposed again"
+      }
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "escalation-authority",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "executed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "gate-approvers",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fadb-2bd8-75b7-b226-6de786c2544d",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
