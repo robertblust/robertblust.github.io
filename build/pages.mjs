@@ -19,6 +19,7 @@ import { writeHome } from "@robertblust/design/render/home";
 import { writeIdPages } from "@robertblust/design/render/ids";
 import { writeJsonLd } from "./jsonld.mjs";
 import { loadGerman } from "@robertblust/design/render/german";
+import { writeQuestionsDe } from "@robertblust/design/render/questions";
 import { writeLatest } from "./latest.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -37,6 +38,10 @@ if (data.commit !== commit) {
 
 const check = process.argv.includes("--check");
 const german = loadGerman(path.join(ROOT, "build", "principles.de.json"));
+// The model's question titles in German, which the chat offers on a German page: made by the
+// German pipeline in build/questions.de.json, held to the exact English as the principles are,
+// and written to the questions.de.json the chat's tag names.
+const questionsGerman = loadGerman(path.join(ROOT, "build", "questions.de.json"));
 // The order the boards argue in: the work first, then how a stranger is answered. Core gives a
 // process no rank, so the site names the order, and the renderer refuses the build if a name
 // leaves the model.
@@ -48,6 +53,7 @@ const RENDERERS = [
   writeSurfaces,
   (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
   writeLatest,
+  (d, o) => writeQuestionsDe(d, { ...o, de: questionsGerman.de }),
   writeJsonLd,
   // One redirect page per entity with a stable id, at the address build/jsonld.mjs gives the
   // person as its @id, sending the reader on to the entity's place on /model/'s stage.
@@ -59,6 +65,11 @@ const stale = RENDERERS.flatMap((write) => write(data, { check, root: ROOT }));
 const unused = german.unused();
 if (unused.length) {
   console.error(`  ✗ build/principles.de.json holds German for English the model no longer says:\n${unused.map((en) => `    "${en}"`).join("\n")}`);
+  process.exit(1);
+}
+const unusedQuestions = questionsGerman.unused();
+if (unusedQuestions.length) {
+  console.error(`  ✗ build/questions.de.json holds German for a question the model no longer asks:\n${unusedQuestions.map((en) => `    "${en}"`).join("\n")}`);
   process.exit(1);
 }
 
