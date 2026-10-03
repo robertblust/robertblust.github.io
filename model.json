@@ -1,5 +1,5 @@
 {
-  "commit": "b34abd7da909602817e04d3774c57fe6191919da",
+  "commit": "fc2b6db4a39d968ae3a9e8decd8071e1540f81b4",
   "core": "0.53.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -19,6 +19,12 @@
     {
       "type": "concept",
       "folder": "concepts",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "control",
+      "folder": "controls",
       "owner": null,
       "singular": false
     },
@@ -1058,6 +1064,489 @@
       ],
       "owner": null,
       "path": "model/concepts/own-account.md"
+    },
+    {
+      "id": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+      "address": "controls/a-reviewer-reads-the-output-not-the-report",
+      "type": "control",
+      "name": "A reviewer reads the output, not the report",
+      "tagline": "Each task's change is reviewed against its diff and the checks' output, and the implementer's report is read as a claim to verify.",
+      "fields": {
+        "id": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "manual",
+        "enforces": [
+          "A check counts only when its output was seen"
+        ],
+        "performed-by": "Reviewer"
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The Reviewer, after each task in Implement and once over the whole branch before Integrate: it reads the diff and the output of the checks the task ran, verifies each claim of the report against them, and names a gap as a finding; a check whose output it cannot see does not count as passed.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Reviewer",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Implement",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "role",
+                "Reviewer",
+                ""
+              ],
+              [
+                "phase",
+                "Implement",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Rulebook, superpowers",
+                  "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Rulebook, superpowers",
+                "https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/a-reviewer-reads-the-output-not-the-report.md"
+    },
+    {
+      "id": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "address": "controls/an-agent-s-permissions-refuse-a-merge-it-was-not-given",
+      "type": "control",
+      "name": "An agent's permissions refuse a merge it was not given",
+      "tagline": "The permission layer an agent runs under refuses a merge the agent attempts without the Owner's word for it in that conversation.",
+      "fields": {
+        "id": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "The Owner's word merges"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "Claude Code's permission layer, before the agent's command runs: it judges the action against the conversation, and a merge without a review it can see is refused, so the agent stops and the merge waits for the Owner. On October 2, 2026 it refused the merge of meta-model #223, which the Owner then gave in another session.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "role",
+                  "Controller",
+                  ""
+                ],
+                [
+                  "role",
+                  "Implementer",
+                  ""
+                ],
+                [
+                  "role",
+                  "Surveyor",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "role",
+                "Controller",
+                ""
+              ],
+              [
+                "role",
+                "Implementer",
+                ""
+              ],
+              [
+                "role",
+                "Surveyor",
+                ""
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/an-agent-s-permissions-refuse-a-merge-it-was-not-given.md"
+    },
+    {
+      "id": "01a0fe74-e6af-76a7-a319-db623e7edf44",
+      "address": "controls/german-left-behind-is-found",
+      "type": "control",
+      "name": "German left behind is found",
+      "tagline": "A site's pull request fails where an English edit left its German unchanged, unless a commit says the German is right on purpose.",
+      "fields": {
+        "id": "01a0fe74-e6af-76a7-a319-db623e7edf44",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "automated",
+        "enforces": [
+          "German follows reviewed English"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The site's CI, on every pull request: `design german stale` compares the change with its base and fails for each element whose English moved while its German did not; a commit that names the element in a `German-unchanged:` trailer releases it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "blust.ch's CI",
+                  "https://github.com/robertblust/robertblust.github.io/blob/main/.github/workflows/ci.yml"
+                ],
+                [
+                  "The German stale check",
+                  "https://github.com/robertblust/design#readme"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "blust.ch's CI",
+                "https://github.com/robertblust/robertblust.github.io/blob/main/.github/workflows/ci.yml"
+              ],
+              [
+                "The German stale check",
+                "https://github.com/robertblust/design#readme"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/german-left-behind-is-found.md"
+    },
+    {
+      "id": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+      "address": "controls/main-takes-a-change-only-through-a-green-current-pull-request",
+      "type": "control",
+      "name": "Main takes a change only through a green, current pull request",
+      "tagline": "The default branch of each of my repositories refuses a push, and takes a change only through a pull request whose named checks pass on a branch that is up to date with it.",
+      "fields": {
+        "id": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+        "source": "Local",
+        "kind": "preventive",
+        "mode": "automated",
+        "enforces": [
+          "A check counts only when its output was seen",
+          "A state is read again before it is relied on"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "GitHub's ruleset on each repository's default branch, on every attempt to change it: it refuses a direct push, a force push and a deletion, allows a pull request to be merged only with a merge commit where the repository says so, requires the named checks to pass, and requires the branch to be up to date with the default branch, so a pull request whose base has moved shows as behind until main is merged into it. The ruleset lets a repository admin bypass it.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub rulesets",
+                  "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub rulesets",
+                "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/main-takes-a-change-only-through-a-green-current-pull-request.md"
+    },
+    {
+      "id": "01a0fe74-d886-7d67-9f52-b610af38f5e3",
+      "address": "controls/pages-drawn-from-the-model-are-held-to-it",
+      "type": "control",
+      "name": "Pages drawn from the model are held to it",
+      "tagline": "A site's pull request fails where a page drawn from the model differs from what the model, at the commit the site pins, would draw.",
+      "fields": {
+        "id": "01a0fe74-d886-7d67-9f52-b610af38f5e3",
+        "source": "Local",
+        "kind": "detective",
+        "mode": "automated",
+        "enforces": [
+          "The model is corrected first"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "How it is carried out",
+          "text": "The site's CI, on every pull request: `model:check`, `pages:check` and `build:check` run each writer that draws from the pinned model and fail where the committed output differs, so a page edited by hand, or one the model no longer produces, cannot merge until the model is corrected and the page drawn again.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "blust.ch's CI",
+                  "https://github.com/robertblust/robertblust.github.io/blob/main/.github/workflows/ci.yml"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "blust.ch's CI",
+                "https://github.com/robertblust/robertblust.github.io/blob/main/.github/workflows/ci.yml"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/controls/pages-drawn-from-the-model-are-held-to-it.md"
     },
     {
       "id": "01a0e82c-00a8-7628-b40b-3895b42fc979",
@@ -29007,6 +29496,159 @@
     },
     {
       "from": "01a0fd58-710e-7377-95c2-50e69639f91c",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+      "to": "01a0a902-0cd8-728f-87dc-03847908879e",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+      "to": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+      "to": "01a0fd58-52d1-7c40-8ffc-388462da9aaf",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-ba7f-71c8-bb56-9f4d558f8393",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a0a902-0cd8-728f-87dc-03847908879e",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a0fd39-b1c0-780b-82a4-bc5cd01cda42",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-d886-7d67-9f52-b610af38f5e3",
+      "to": "01a0a902-0cd8-728f-87dc-03847908879e",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fe74-d886-7d67-9f52-b610af38f5e3",
+      "to": "01a0fd4c-f5ca-7af2-b3e4-47abaaaa9882",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-d886-7d67-9f52-b610af38f5e3",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-e6af-76a7-a319-db623e7edf44",
+      "to": "01a0a902-0cd8-728f-87dc-03847908879e",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fe74-e6af-76a7-a319-db623e7edf44",
+      "to": "01a0fd50-9c9f-7add-9123-19c7fb9a57b9",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-e6af-76a7-a319-db623e7edf44",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+      "to": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "role",
+        "Owner": ""
+      }
+    },
+    {
+      "from": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+      "to": "01a0a902-0cd8-71a9-8b97-7de6b40455bf",
+      "via": "Applies to.Entity",
+      "attrs": {
+        "Type": "phase",
+        "Owner": "Delivery"
+      }
+    },
+    {
+      "from": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+      "to": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
+      "via": "enforces",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
+      "to": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
+      "via": "performed-by",
+      "attrs": {}
+    },
+    {
+      "from": "01a0fe74-f5a5-7c70-9371-76a6ea40c295",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
