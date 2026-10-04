@@ -1,6 +1,6 @@
 {
-  "commit": "eeb1dedfd0d252d7c28389abb39ab0073a7a997a",
-  "core": "0.56.0",
+  "commit": "cb7c524ab5387d773edcebbc8df34df106de366e",
+  "core": "0.57.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -358,7 +358,7 @@
       "sections": [
         {
           "heading": "Mark",
-          "text": "The mark is the two letters `rb`, set in Plex Mono on the ground color, and its master is `favicon.svg` in the site's repository; every other render, a tile a host is handed, the lockup on the profile photo, is made from that file and never drawn again. The mark's colors are the design tokens' ground and accent.\n\n- A tile is a full-bleed square with no rounded corner, because the host rounds it and a transparent corner shows as a checkerboard.\n- The mark fills about 60% of the tile, so it survives a circular crop.\n- A change to the mark is made in the favicon first and rendered everywhere else after.\n- Where a render carries values other than the tokens', the favicon included, the tokens are the master and the render follows.",
+          "text": "The mark is the two letters `rb`, set in Plex Mono on the ground color, and its master is `favicon.svg` in the site's repository; every other render, a tile a host is handed, the lockup on the profile photo, is made from that file and never drawn again. The mark's colors are the design tokens' ground and accent.\n\n- A tile is a full-bleed square with no rounded corner, because the host rounds it and a transparent corner shows as a checkerboard.\n- The mark keeps clear of the tile's edges, so it survives a circular crop.\n- A change to the mark is made in the favicon first and rendered everywhere else after.\n- Where a render carries values other than the tokens', the favicon included, the tokens are the master and the render follows.",
           "tables": []
         },
         {
@@ -758,7 +758,7 @@
       "address": "concepts/document",
       "type": "concept",
       "name": "Document",
-      "tagline": "Something written or recorded outside the model that a fact in it rests on — a recording, a deck, a published page, an employment reference, a diploma — linked where it is public and kept out of the model where it is private.",
+      "tagline": "Something written or recorded outside the model that a fact in it rests on — a recording, a deck, a published page, an employment reference, a diploma.",
       "fields": {
         "id": "01a0c5d1-a530-7002-9c88-0542e873d000",
         "source": "Local",
@@ -1022,7 +1022,7 @@
       "address": "concepts/own-account",
       "type": "concept",
       "name": "Own account",
-      "tagline": "What I say of my own work from having done it, which enters the model as a fact and not as a claim awaiting a source, because in a model of one person the person is where the measurement comes from.",
+      "tagline": "What I say of my own work from having done it, rather than what someone else reports of it or a document shows.",
       "fields": {
         "id": "01a0c5d1-a530-70e2-8507-fdf70e84088b",
         "source": "Local",
@@ -3456,7 +3456,7 @@
       "sections": [
         {
           "heading": "What it means",
-          "text": "A period whose output is addressed to a public rather than to one organization: a conference talk, a board or committee seat, a user group, a case study published under someone else's name, a tool put out in the open. Who paid for the time does not decide the kind; an employer can host a talk or publish an article and the period is still this kind, because the audience is. `organization` names the host where there is one — the conference, the group, the publisher, the employer when it published the work itself — and is absent when nobody hosted it.\n\nA talk writes `end` equal to `start`; a board seat held for years does not. Both are this kind: what makes it community work is the audience, not the duration.",
+          "text": "A period whose output is addressed to a public rather than to one organization: a conference talk, a board or committee seat, a user group, a case study published under someone else's name, a tool put out in the open. Who paid for the time does not decide the kind; an employer can host a talk or publish an article and the period is still this kind, because the audience is. `organization` names the host where there is one — the conference, the group, the publisher, the employer when it published the work itself — and is absent when nobody hosted it. It excludes work whose audience is the organization it was done for, such as a talk to colleagues or a tool built for a client: that belongs to the role or project it was done in.",
           "tables": []
         }
       ],
@@ -3604,7 +3604,7 @@
       "address": "features/an-agent-answers-from-the-model",
       "type": "feature",
       "name": "An agent answers from the model",
-      "tagline": "Someone asks their own agent about my work and gets what the model says at one commit, named in the answer, instead of what the agent recalls.",
+      "tagline": "Someone asks their own agent about my work and gets what the model says, with the version it read named in the answer, instead of what the agent recalls.",
       "fields": {
         "id": "01a0c5d1-a530-774f-8dae-e2ab4e50d3fe",
         "source": "Local",
@@ -3685,7 +3685,7 @@
       "address": "identifier",
       "type": "identifier",
       "name": "Entity id",
-      "tagline": "An entity keeps this id through every rename and every language it is written in, so whatever holds one outside the model still finds the entity.",
+      "tagline": "An entity keeps this id through every rename and every language it is written in, so an agent asking the MCP server, or a link somebody wrote down, still finds the entity.",
       "fields": {
         "id": "01a0f1f8-a055-70d1-932f-0f72fb8061ad",
         "source": "Local",
@@ -4283,7 +4283,7 @@
       "sections": [
         {
           "heading": "How it is measured",
-          "text": "A subscription is a service billed the same whatever it carries: a plan with an allowance of use, storage or features. For each, the month's peak use is read by hand from the provider's own usage page and taken as a share of the plan's allowance. The band is a subscription's own: its top is the plan's limit, where use is being refused and the plan is too small, and its bottom is the share of this plan that the next tier down allows, under which the smaller tier would have carried the month. A plan whose smaller tier is free, or that shows no meter, is read as whether the month used anything only the plan provides.",
+          "text": "A subscription is a service billed the same whatever it carries: a plan with an allowance of use, storage or features. For each, the month's peak use is read by hand from the provider's own usage page and taken as a share of the plan's allowance. Where a plan has several allowances, the share is the highest of them that month, since that is the one that would refuse use first. The band is a subscription's own: its top is the plan's limit, where use is being refused and the plan is too small, and its bottom is the share of this plan that the next tier down allows, under which the smaller tier would have carried the month. A plan whose smaller tier is free, or that shows no meter, is read as whether the month used anything only the plan provides.",
           "tables": []
         },
         {
@@ -4851,7 +4851,7 @@
         },
         {
           "heading": "If not met",
-          "text": "Deferring is a decision too, and the process ends with nothing carried out.",
+          "text": "Deferring is a decision too.",
           "tables": [
             {
               "caption": null,
@@ -6495,7 +6495,7 @@
                   "Proficient"
                 ],
                 [
-                  "Container orchestration (Kubernetes)",
+                  "Container orchestration",
                   "Proficient"
                 ],
                 [
@@ -6789,7 +6789,7 @@
                 "Proficient"
               ],
               [
-                "Container orchestration (Kubernetes)",
+                "Container orchestration",
                 "Proficient"
               ],
               [
@@ -7242,17 +7242,17 @@
                   "Co-Founder & CTO"
                 ],
                 [
-                  "Container orchestration (Kubernetes)",
+                  "Container orchestration",
                   "Engineered the reference deployment of 3AP's architecture on Google Kubernetes Engine.",
                   "Co-Founder & CTO"
                 ],
                 [
-                  "Container orchestration (Kubernetes)",
+                  "Container orchestration",
                   "Built Conperi's platform on Google Kubernetes Engine from cluster creation up, GPU nodes included.",
                   "Conperi"
                 ],
                 [
-                  "Container orchestration (Kubernetes)",
+                  "Container orchestration",
                   "Ran the LIKE MAGIC platform on Google Kubernetes Engine.",
                   "Co-Founder & Head of Technology"
                 ],
@@ -7398,7 +7398,7 @@
                 ],
                 [
                   "DevOps",
-                  "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the company's delivery process and stack approvals.",
+                  "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the stack approval a client engagement had to pass.",
                   "Co-Founder & CTO"
                 ],
                 [
@@ -7718,7 +7718,7 @@
                 ],
                 [
                   "Microservices architecture",
-                  "Designed the microservice cut of Aroov's backend.",
+                  "Built Aroov's backend on 3AP's microservice reference architecture in its event-driven form.",
                   "Aroov digital rental platform"
                 ],
                 [
@@ -8123,6 +8123,11 @@
                 ],
                 [
                   "Storytelling",
+                  "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
+                  "The career break experiment on LinkedIn"
+                ],
+                [
+                  "Storytelling",
                   "Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays.",
                   "Build the model first"
                 ],
@@ -8155,11 +8160,6 @@
                   "Storytelling",
                   "Wrote the German sibling of an English episode as its own story, not a translation, leaning on what the English one left out and ending on whether an agent reading a wiki would say what the people say.",
                   "Dein Unternehmen kompiliert nicht"
-                ],
-                [
-                  "Storytelling",
-                  "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
-                  "The career break experiment on LinkedIn"
                 ],
                 [
                   "Storytelling",
@@ -8433,17 +8433,17 @@
                 "Co-Founder & CTO"
               ],
               [
-                "Container orchestration (Kubernetes)",
+                "Container orchestration",
                 "Engineered the reference deployment of 3AP's architecture on Google Kubernetes Engine.",
                 "Co-Founder & CTO"
               ],
               [
-                "Container orchestration (Kubernetes)",
+                "Container orchestration",
                 "Built Conperi's platform on Google Kubernetes Engine from cluster creation up, GPU nodes included.",
                 "Conperi"
               ],
               [
-                "Container orchestration (Kubernetes)",
+                "Container orchestration",
                 "Ran the LIKE MAGIC platform on Google Kubernetes Engine.",
                 "Co-Founder & Head of Technology"
               ],
@@ -8589,7 +8589,7 @@
               ],
               [
                 "DevOps",
-                "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the company's delivery process and stack approvals.",
+                "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the stack approval a client engagement had to pass.",
                 "Co-Founder & CTO"
               ],
               [
@@ -8909,7 +8909,7 @@
               ],
               [
                 "Microservices architecture",
-                "Designed the microservice cut of Aroov's backend.",
+                "Built Aroov's backend on 3AP's microservice reference architecture in its event-driven form.",
                 "Aroov digital rental platform"
               ],
               [
@@ -9314,6 +9314,11 @@
               ],
               [
                 "Storytelling",
+                "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
+                "The career break experiment on LinkedIn"
+              ],
+              [
+                "Storytelling",
                 "Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays.",
                 "Build the model first"
               ],
@@ -9346,11 +9351,6 @@
                 "Storytelling",
                 "Wrote the German sibling of an English episode as its own story, not a translation, leaning on what the English one left out and ending on whether an agent reading a wiki would say what the people say.",
                 "Dein Unternehmen kompiliert nicht"
-              ],
-              [
-                "Storytelling",
-                "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
-                "The career break experiment on LinkedIn"
               ],
               [
                 "Storytelling",
@@ -9522,7 +9522,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Developed intranet and internet web portals on IBM Portal Server (Java Portlets, JSP, XML).\n\n### Leadership\n\n- Led the WPS Portal's development and delivery as the portal every business domain, financial instruments, partner management and reference data among them, put its end-user interface on, and onboarded each domain team's Java developers to build on it.\n\n### Architecture\n\n- Created the software architecture of the WPS Portal application, so domain-specific applications developed by other departments could be integrated into it.\n\n### Engineering\n\n- Developed features of the ACE Foundation, the base that UBS Quotes and the Client Advisor Workbench were built on.",
+          "text": "### Context\n\n- Developed intranet and internet web portals on IBM Portal Server (Java Portlets, JSP, XML).\n\n### Leadership\n\n- Led the WPS Portal's development and delivery as the portal every business domain, financial instruments, partner management and reference data among them, put its end-user interface on.\n- Onboarded each domain team's Java developers to build on the portal.\n\n### Architecture\n\n- Created the software architecture of the WPS Portal application, so domain-specific applications developed by other departments could be integrated into it.\n\n### Engineering\n\n- Developed features of the ACE Foundation, the base that UBS Quotes and the Client Advisor Workbench were built on.",
           "tables": []
         }
       ],
@@ -9600,7 +9600,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Owned the Analysis & Design discipline in the rollout of a software development life cycle based on the Rational Unified Process and the Enterprise Unified Process for UBS Wealth Management & Business Banking (WM&BB), replacing the proprietary engineering process with a market-standard one that the division's project teams then worked to.\n\n### Leadership\n\n- Led DynaRep's project team of ten as its architect and project manager.\n- Defined the department-wide role model — each role with its tasks and the competencies it carried — and put it through a formal consultation before it took effect.\n- Joined the division's Java Chief Developer committee and led it for two years.\n- Coached project teams in applying the methodology.\n\n### Architecture\n\n- Architected and built “DynaRep – Dynamic Repository”, a repository-based modeling tool for managing UBS mainframe service interfaces — Eclipse plugins, web services and code generators producing the COBOL/Java service implementations.\n- Designed the domain-specific language DynaRep's interfaces were modeled in, implemented in Java as an Eclipse plugin with a graphical editor.\n\n### Ways of working\n\n- Developed methodology and guidance for service and data modeling (Rational Method Composer, UML) — how a requirement was elicited, written and carried into a design the delivery teams worked from.\n- Kept that guidance in Rational Method Composer and published it as the division's SDLC instance, the one place project teams looked up how a discipline was done.\n\n### Sharing\n\n- Built internal communities of practice around the methodology.\n\n### Results\n\n- Worked with the Eclipse Modeling project from inside the methodology work — bringing requirements to it, reviewing concepts and building prototypes — and the cross-industry working group grew out of that cooperation.",
+          "text": "### Context\n\n- Owned the Analysis & Design discipline in the rollout of a software development life cycle based on the Rational Unified Process and the Enterprise Unified Process for UBS Wealth Management & Business Banking (WM&BB), replacing the proprietary engineering process with a market-standard one that the division's project teams then worked to.\n\n### Leadership\n\n- Joined the division's Java Chief Developer committee and led it for two years.\n- Defined the department-wide role model — each role with its tasks and the competencies it carried — and put it through a formal consultation before it took effect.\n- Led DynaRep's project team of ten as its architect and project manager.\n\n### Architecture\n\n- Architected and built “DynaRep – Dynamic Repository”, a repository-based modeling tool for managing UBS mainframe service interfaces — Eclipse plugins, web services and code generators producing the COBOL/Java service implementations.\n- Designed the domain-specific language DynaRep's interfaces were modeled in, implemented in Java as an Eclipse plugin with a graphical editor.\n\n### Ways of working\n\n- Developed methodology and guidance for service and data modeling (Rational Method Composer, UML) — how a requirement was elicited, written and carried into a design the delivery teams worked from.\n- Kept that guidance in Rational Method Composer and published it as the division's SDLC instance, the one place project teams looked up how a discipline was done.\n\n### Sharing\n\n- Built internal communities of practice around the methodology.\n\n### Results\n\n- Worked with the Eclipse Modeling project from inside the methodology work — bringing requirements to it, reviewing concepts and building prototypes — and the cross-industry working group grew out of that cooperation.",
           "tables": []
         }
       ],
@@ -9704,7 +9704,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Leadership\n\n- Continued on the division's Java Chief Developer committee, co-leading it for five years — the forum in which its lead engineers set common practice.\n- Led the team that implemented the tooling platform, an integrated Eclipse Modeling Framework stack built for model-based engineering, scalability and collaboration.\n\n### Architecture\n\n- Architected the SDLC toolchain for UBS Wealth Management & Swiss Bank, the environment several hundred engineers across the division planned, built and released in.\n- Designed its offshore-capable setup for decentralized agile development, with the security and network design for external partner access.\n- Created the application architecture of the Integration Architecture Tool Chain for the division, built to reduce large numbers of point-to-point connections to an integration bus over defined concepts and open interface standards.\n- Cut it into three parts along the roles that used it: the canonical data model and the conformance measurement, both for the business domain architects who governed that model, and interface design for the developers and software architects who specified their interfaces against it.\n- Generated the XML-Schema and WSDL artifacts from the canonical data model's platform-independent definitions of data types, interfaces and service contracts.\n- Ran the role-based review every team's interfaces had to pass, against a central API and interface-portfolio repository.\n- Made the conformance part analyze source code across the estate, the mainframe included, into EMF graphs held in the CDO model repository.\n- Derived from those graphs an automated metric for the technical coupling of software components and applications, which identified interactions between subsystems not conforming to the architecture's specifications.\n- Designed the textual language, built on Xtext, that projects defined their data types, interfaces and components in.\n- Modeled the division's business capabilities, concepts, processes and actors on EMF/Ecore as parts of one enterprise model, which architects used to steer new projects toward decisions that fit the enterprise model.\n- Partitioned the application architecture into application domains, which classified each application system template and fixed the principles that delineated one from another.\n- Represented UBS internationally in the Eclipse Modeling Platform Working Group, alongside Airbus, Ericsson, Alcatel-Lucent, SBB and SWIFT among others.\n\n### Engineering\n\n- Built the Integration Architecture Tool Chain on Eclipse EMF, Xcore, Xtext and Xtend with a CDO model repository, drawing on outcomes from the Eclipse Modeling Platform Working Group.\n- Generated each project's build and continuous integration from its design and the reference architecture, on the Jenkins and Sonar the toolchain provided.\n\n### Sharing\n\n- Co-organized the Eclipse events that brought the open-source modeling community to UBS in Zürich — MDD Day in 2010, then the Eclipse Finance Days, the Swiss forum for cross-company exchange on open source in financial services, in 2012 and 2014.\n- Built UBS's network into open-source communities and their standards, assessing where the firm could adopt them.\n- Spoke at UBS-internal brown-bag sessions on modeling, toolchain and architecture.\n- Ran workshops with the engineering teams on the concepts behind the Integration Architecture Tool Chain.\n- Helped build the UBS Academy's education on the software development lifecycle, integration architecture one part of it.",
+          "text": "### Leadership\n\n- Continued on the division's Java Chief Developer committee, co-leading it for five years — the forum in which its lead engineers set common practice.\n- Led the team that implemented the tooling platform, an integrated Eclipse Modeling Framework stack built for model-based engineering, scalability and collaboration.\n\n### Architecture\n\n- Architected the SDLC toolchain for UBS Wealth Management & Swiss Bank, the environment several hundred engineers across the division planned, built and released in.\n- Designed its offshore-capable setup for decentralized agile development, with the security and network design for external partner access.\n- Created the application architecture of the Integration Architecture Tool Chain for the division, built to reduce large numbers of point-to-point connections to an integration bus over defined concepts and open interface standards.\n- Cut it into three parts along the roles that used it: the canonical data model and the conformance measurement, both for the business domain architects who governed that model, and interface design for the developers and software architects who specified their interfaces against it.\n- Generated the XML-Schema and WSDL artifacts from the canonical data model's platform-independent definitions of data types, interfaces and service contracts.\n- Ran the role-based review every team's interfaces had to pass, against a central API and interface-portfolio repository.\n- Made the conformance part analyze source code across the estate, the mainframe included, into EMF graphs held in the CDO model repository.\n- Derived from those graphs an automated metric for the technical coupling of software components and applications, which identified interactions between subsystems not conforming to the architecture's specifications.\n- Designed the textual language, built on Xtext, that projects defined their data types, interfaces and components in.\n- Modeled the division's business capabilities, concepts, processes and actors on EMF/Ecore as parts of one enterprise model, which architects used to steer new projects toward decisions that fit the enterprise model.\n- Partitioned the application architecture into application domains, which classified each application system template and fixed the principles that delineated one from another.\n- Represented UBS internationally in the Eclipse Modeling Platform Working Group, alongside Airbus, Ericsson, Alcatel-Lucent, SBB and SWIFT among others.\n\n### Engineering\n\n- Built the Integration Architecture Tool Chain on Eclipse EMF, Xcore, Xtext and Xtend with a CDO model repository, drawing on outcomes from the Eclipse Modeling Platform Working Group.\n- Generated each project's build and continuous integration from its design and the reference architecture, on the Jenkins and Sonar the toolchain provided.\n\n### Sharing\n\n- Co-organized the Eclipse events that brought the open-source modeling community to UBS in Zürich — MDD Day in 2010, then the Eclipse Finance Days, the Swiss forum for cross-company exchange on open source in financial services, in 2012 and 2014.\n- Built UBS's network into open-source communities and their standards, assessing where the firm could adopt them.\n- Ran workshops with the engineering teams on the concepts behind the Integration Architecture Tool Chain.\n- Helped build the UBS Academy's education on the software development lifecycle, integration architecture one part of it.",
           "tables": []
         },
         {
@@ -10023,7 +10023,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Presented “Interface Management in a Large Enterprise” at Eclipse Finance Day on October 16, 2012 in Zürich, on UBS's Integration Architecture initiative: an end-to-end process and tooling to identify, specify, design and govern the interfaces between parts of the IT system.\n- The published abstract describes what the toolchain did: capture actual communication patterns through source-code analysis, produce EMF-based graphs that identify non-conformant interactions, hold platform-independent data types and interface specifications with policies, check conformance to architectural rules, generate XML-Schema and WSDL and run governance through a central repository with role-based reviews.\n\n### Sharing\n\n- Demonstrated the toolchain live: the textual language projects wrote their data types and components in, built on Xtext, and the enterprise repository on CDO holding the UBS component model at about 25,000 objects and 50,000 references, around 1% of them changing daily.",
+          "text": "### Context\n\n- Presented “Interface Management in a Large Enterprise” at Eclipse Finance Day on October 16, 2012 in Zürich, on UBS's Integration Architecture initiative: an end-to-end process and tooling to identify, specify, design and govern the interfaces between parts of the IT system.\n- Showed a toolchain that checked a system's actual communication against its architectural rules, from source-code analysis to governed interface specifications.\n\n### Sharing\n\n- Demonstrated the toolchain live: the textual language projects wrote their data types and components in, built on Xtext, and the enterprise repository on CDO holding the UBS component model at about 25,000 objects and 50,000 references, around 1% of them changing daily.",
           "tables": []
         },
         {
@@ -10198,6 +10198,7 @@
         "start": "2014-08",
         "end": "2022-03",
         "url": "https://github.com/robertblust/cdo-server",
+        "role": "Architect and Engineer",
         "skills": [
           "Open-source stewardship",
           "Model-driven engineering",
@@ -10213,7 +10214,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Published the server in August 2014 and kept it public since, under the Eclipse Public License, starred and forked by strangers building on it.\n\n### Architecture\n\n- Made the REST interface generic by going through EMF's reflective API rather than generated accessors, so a model added to the repository is readable and writable the same day without an endpoint written for its types.\n- Designed a base vocabulary every model on top inherits — identity, naming, description, comments, hyperlinks, free-form properties, ratings and a global search marker — so the models above it describe their own domain and nothing else.\n- Wrote the base vocabulary and the organization metamodel in Xcore, so a derived figure such as free capacity is a feature of the language rather than code beside it.\n- Described 3AP's own organization in that vocabulary: circles nested inside circles, roles carrying responsibilities and an assignment joining a person to a role in a circle with a capacity and a validity window, which is what makes the structure answerable by date rather than only as it stands today, and worked with through the client published beside the repository.\n- Derived the questions a management team actually asks from that model instead of maintaining answers by hand — a circle's capacity including everything nested under it, who leads or deputizes where, which roles are assigned but unmatched and which are defined and unfilled.\n- Kept two kinds of time apart, which is what makes the model answerable rather than merely current. A role assignment carries the dates it was in force, and every derived figure has a by-date twin, so the organization can be asked what it looked like on a given day. Underneath, the repository keeps every revision and the interface takes a point in time, so it can also be asked what it said on a given day — and refuses a write against a past one, because history is not a thing to correct.\n- Published a client beside it, in AngularJS, that browses any model the server holds rather than one model in particular, so a new metamodel is explorable without a screen built for it.\n\n### Engineering\n\n- Shipped it as something to run rather than assemble — an OSGi product in Java with its own target platform, build and product tests, packaged as a container image — because a model repository that takes a week to stand up is one nobody tries.\n- Wrote a plugin authenticating CDO sessions against LDAP, so the repository could sit behind the same identity as everything around it.\n- Later took bearer tokens at the REST boundary, so the REST interface sat behind that identity too.\n\n### Results\n\n- Ran it in a bank. Credit Suisse's Master Data Repository was built on this server in 2016, which is a heavier kind of adoption than a fork: a regulated institution depending on it, and the same person answering for both the product and the delivery.",
+          "text": "### Context\n\n- Published the server in August 2014 and kept it public since, under the Eclipse Public License, starred and forked by strangers building on it.\n\n### Architecture\n\n- Made the REST interface generic by going through EMF's reflective API rather than generated accessors, so a model added to the repository is readable and writable the same day without an endpoint written for its types.\n- Designed a base vocabulary every model on top inherits — identity, naming, description, comments, hyperlinks, free-form properties, ratings and a global search marker — so the models above it describe their own domain and nothing else.\n- Wrote the base vocabulary and the organization metamodel in Xcore, so a derived figure such as free capacity is a feature of the language rather than code beside it.\n- Described 3AP's own organization in that vocabulary: circles nested inside circles, roles carrying responsibilities and an assignment joining a person to a role in a circle with a capacity and a validity window, which is what makes the structure answerable by date rather than only as it stands today, and worked with through the client published beside the repository.\n- Derived the questions a management team actually asks from that model instead of maintaining answers by hand — a circle's capacity including everything nested under it, who leads or deputizes where, which roles are assigned but unmatched and which are defined and unfilled.\n- Kept two kinds of time apart, which is what makes the model answerable rather than merely current. A role assignment carries the dates it was in force, and every derived figure has a by-date twin, so the organization can be asked what it looked like on a given day. Underneath, the repository keeps every revision and the interface takes a point in time, so it can also be asked what it said on a given day — and refuses a write against a past one, because history is not a thing to correct.\n- Designed and published a client beside it, in AngularJS, that browses any model the server holds rather than one model in particular, so a new metamodel is explorable without a screen built for it.\n\n### Engineering\n\n- Shipped it as something to run rather than assemble — an OSGi product in Java with its own target platform, build and product tests, packaged as a container image — because a model repository that takes a week to stand up is one nobody tries.\n- Wrote a plugin authenticating CDO sessions against LDAP, so the repository could sit behind the same identity as everything around it.\n- Later took bearer tokens at the REST boundary, so the REST interface sat behind that identity too.\n\n### Results\n\n- Ran it in a bank. Credit Suisse's Master Data Repository was built on this server in 2016, which is a heavier kind of adoption than a fork: a regulated institution depending on it, and the same person answering for both the product and the delivery.",
           "tables": []
         },
         {
@@ -10284,7 +10285,7 @@
           "Consulting",
           "Solution architecture",
           "Cloud architecture",
-          "Container orchestration (Kubernetes)",
+          "Container orchestration",
           "Microservices architecture",
           "API design",
           "DevOps",
@@ -10303,7 +10304,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Co-founded 3AP AG in November 2014 and went operative in February 2015 after leaving UBS; member of the management team.\n\n### Leadership\n\n- Designed the company's structure of circles and roles as it grew, kept as a model on the Flatland CDO Server so capacity and gaps could be read from it rather than kept by hand.\n- Set the reference architecture and technology stack every client engagement had to fit.\n- Joined the ramp-up of each new project to negotiate with the client's security and platform organizations so the delivery fit their environment.\n- Delivered the flagship client platforms, AXA Health, Flawa iQ, Conperi, Aroov and Stay KooooK, as lead architect and hands-on engineer.\n- Advised clients including Credit Suisse, Swisscard, AXA and Mobiliar (the driver behind Aroov), diagnosing the client's current system before recommending anything.\n- Led 3AP's client bids on solution architecture, from technical concept to proposal and pitch, for public and private clients, public tenders under Swiss procurement law and WTO rules included; the technical proposal was a driver in winning AXA Health, Flawa iQ and Stay KooooK.\n- Mentored the engineers through the reference architecture as the company grew from 5 to about 70, the near-shore team in Serbia included, by developing its reference sample in Java and Spring Boot, explaining it to each team and guiding the developers building on it.\n\n### Architecture\n\n- Wrote that reference architecture as an event-driven, 12-factor microservice design on Java and Spring Boot, with the service cut driven by business capability, its delivery pipeline part of the definition rather than a thing each project arranged for itself — the shape AXA Health, Flawa iQ, Conperi, Aroov and Stay KooooK were each built to, and the one that platform carried into LIKE MAGIC.\n- Fixed how every service in it exposed itself: REST specified contract-first in OpenAPI, with OAuth 2.0 at the boundary.\n- Put the reference architecture on MongoDB and later moved it to PostgreSQL. The first choice followed the momentum document stores had at the time rather than the shape of the data AXA Health, Flawa iQ and Conperi actually held; from Aroov onward the default was relational, and it has stayed relational through Stay KooooK and LIKE MAGIC.\n- Targeted Kubernetes and no cloud in particular, which is why the same architecture ran on Google Cloud at Aroov and Stay KooooK and on AXA's own on-premise OpenShift: a client's platform was a deployment decision rather than an architectural one.\n\n### Engineering\n\n- Moved the reference architecture's delivery pipeline as the tooling moved, from Jenkins at Flawa iQ and Lost-Tag to CircleCI at Conperi and Ursina and then to GitHub Actions.\n- Engineered the reference deployment of that architecture on Google Kubernetes Engine, so the target platform was a running cluster and not a diagram.\n\n### Ways of working\n\n- Established 3AP's delivery process.\n- Established the approval a technology stack had to pass before a client engagement used it.\n- Ran every project in Scrum, agile delivery being what the company's name stood for: As Agile As Possible.\n- Made unit and integration tests part of how a feature was finished rather than a phase after it — new behavior covered at the level that catches its regression the next time the code is touched, which is where the coverage earns its keep.\n\n### Results\n\n- The company scaled from 5 to about 70 people, including a near-shore team in Serbia.\n- One of the flagship client platforms, the SV Group hospitality platform, became LIKE MAGIC — a spin-off from SV Group.",
+          "text": "### Context\n\n- Co-founded 3AP AG in November 2014 and went operative in February 2015 after leaving UBS; member of the management team.\n\n### Leadership\n\n- Designed the company's structure of circles and roles as it grew, kept as a model on the Flatland CDO Server so capacity and gaps could be read from it rather than kept by hand.\n- Set the reference architecture and technology stack every client engagement had to fit.\n- Joined the ramp-up of each new project to negotiate with the client's security and platform organizations so the delivery fit their environment.\n- Delivered the flagship client platforms, AXA Health, Flawa iQ, Conperi, Aroov and Stay KooooK, as lead architect and hands-on engineer.\n- Advised clients including Credit Suisse, Swisscard, AXA and Mobiliar (the driver behind Aroov), diagnosing the client's current system before recommending anything.\n- Led 3AP's client bids on solution architecture, from technical concept to proposal and pitch, for public and private clients, public tenders under Swiss procurement law and WTO rules included; the technical proposal was a driver in winning AXA Health, Flawa iQ and Stay KooooK.\n- Mentored the engineers through the reference architecture as the company grew from 5 to about 70, the near-shore team in Serbia included, by developing its reference sample in Java and Spring Boot, explaining it to each team and guiding the developers building on it.\n\n### Architecture\n\n- Wrote that reference architecture as an event-driven, 12-factor microservice design on Java and Spring Boot, with the service cut driven by business capability, its delivery pipeline part of the definition rather than a thing each project arranged for itself — the shape AXA Health, Flawa iQ, Conperi, Aroov and Stay KooooK were each built to, and the one that platform carried into LIKE MAGIC.\n- Fixed how every service in it exposed itself: REST specified contract-first in OpenAPI, with OAuth 2.0 at the boundary.\n- Put the reference architecture on MongoDB and later moved it to PostgreSQL. The first choice followed the momentum document stores had at the time rather than the shape of the data AXA Health, Flawa iQ and Conperi actually held; from Aroov onward the default was relational, and it has stayed relational through Stay KooooK and LIKE MAGIC.\n- Targeted Kubernetes and no cloud in particular, which is why the same architecture ran on Google Cloud at Aroov and Stay KooooK and on AXA's own on-premise OpenShift: a client's platform was a deployment decision rather than an architectural one.\n\n### Engineering\n\n- Moved the reference architecture's delivery pipeline as the tooling moved, from Jenkins at Flawa iQ and Lost-Tag to CircleCI at Conperi and Ursina and then to GitHub Actions.\n- Engineered the reference deployment of that architecture on Google Kubernetes Engine, so the target platform was a running cluster and not a diagram.\n\n### Ways of working\n\n- Established the approval a technology stack had to pass before a client engagement used it.\n- Ran every project in Scrum, agile delivery being what the company's name stood for: As Agile As Possible.\n- Made unit and integration tests part of how a feature was finished rather than a phase after it — new behavior covered at the level that catches its regression the next time the code is touched, which is where the coverage earns its keep.\n\n### Results\n\n- The company scaled from 5 to about 70 people, including a near-shore team in Serbia.\n- One of the flagship client platforms, the SV Group hospitality platform, became LIKE MAGIC — a spin-off from SV Group.",
           "tables": []
         },
         {
@@ -10539,7 +10540,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- A consumer lost-and-found service for Digibonum AG that is still running: an owner registers a tagged valuable, a finder scans the tag or types its identifier on the website and the owner is notified without either side seeing the other's details until they agree to meet.\n\n### Architecture\n\n- Modeled the system before building it and kept the model with it — the two actors, the use cases each of them has, the domain classes and a component view naming every service and the interface it offers, in UML alongside the code rather than in a document beside it.\n- Cut the platform into Spring Boot services behind a gateway with service discovery and wrote them in Java, each generated from JHipster so that a new service arrived with its build, its tests and its security already wired.\n- Designed the service interfaces so the finder and the owner reached each other through them without either one's contact details reaching the other.\n\n### Engineering\n\n- Carried the same product, in AngularJS, into a browser, a hybrid mobile application and a native iOS app with a barcode scanner, all against one set of service interfaces.\n- Released the iOS app to the store from a scripted pipeline.\n- Delivered it in five languages, Georgian among them.\n- Integrated the shop the tags are sold through rather than building a second one.\n- Ran it on Cloud Foundry for the first years and saw it through to Kubernetes on Google Cloud, a platform outliving two runtimes underneath it.\n\n### Results\n\n- Stayed with it for five years and 621 commits, from the first setup to the last rebrand, which is the part a proof of concept never tests.",
+          "text": "### Context\n\n- A consumer lost-and-found service for Digibonum AG that is still running: an owner registers a tagged valuable, a finder scans the tag or types its identifier on the website and the owner is notified without either side seeing the other's details until they agree to meet.\n\n### Architecture\n\n- Modeled the system before building it and kept the model with it — the two actors, the use cases each of them has, the domain classes and a component view naming every service and the interface it offers, in UML alongside the code rather than in a document beside it.\n- Cut the platform into Spring Boot services behind a gateway with service discovery.\n- Generated every service from JHipster, so a new one arrived with its build, its tests and its security already wired.\n- Designed the service interfaces so the finder and the owner reached each other through them without either one's contact details reaching the other.\n\n### Engineering\n\n- Carried the same product, in AngularJS, into a browser, a hybrid mobile application and a native iOS app with a barcode scanner, all against one set of service interfaces.\n- Released the iOS app to the store from a scripted pipeline.\n- Delivered it in five languages, Georgian among them.\n- Integrated the shop the tags are sold through rather than building a second one.\n- Ran it on Cloud Foundry for the first years and saw it through to Kubernetes on Google Cloud, a platform outliving two runtimes underneath it.\n\n### Results\n\n- Stayed with it for five years and 621 commits, from the first setup to the last rebrand, which is the part a proof of concept never tests.",
           "tables": []
         },
         {
@@ -10696,7 +10697,7 @@
           "Microservices architecture",
           "Cloud architecture",
           "Database design",
-          "Container orchestration (Kubernetes)",
+          "Container orchestration",
           "Platform engineering",
           "MLOps",
           "Machine learning",
@@ -10750,7 +10751,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- An IoT first-aid kit for FLAWA AG that keeps itself stocked and compliant — Swiss firms are legally required to maintain first-aid supplies, so the kit detects missing or expired modules in real time and automatically triggers reordering, removing manual checks.\n\n### Architecture\n\n- Ran the initial sensing research — how to detect the absence of an item within a defined volume — and selected RFID-tagged modules as the approach.\n- Evaluated the connectivity options (LoRaWAN vs. GSM); built the MVP on Swisscom's LoRaWAN network, with GSM selected for the later production version.\n- Designed the microservice cut of the backend, separating the telemetry ingestion from the communication with the ERP.\n- Designed the MongoDB data model the device uplinks and configuration events were held in.\n- Designed the backend's deployment on Swisscom Application Cloud, Swisscom's Cloud Foundry: each service pushed with a manifest, with the message broker and the database bound to it as managed services rather than run beside it.\n\n### Engineering\n\n- Together with comtac AG (a canton-Zürich LoRaWAN electronics specialist), delivered an MVP of 10 working prototypes (RFID modules + LoRaWAN, backend on Swisscom Application Cloud).\n- Built the backend to 3AP's microservice reference architecture on Spring and Java 11, released through a Jenkins pipeline.\n- Closed the reorder loop: device uplinks consumed over AMQP from Swisscom's LoRaWAN broker, held in a reactive MongoDB repository, pushed to the client as server-sent events and transformed into the data the ERP needed, so a consumed or expired module triggers its reorder.\n\n### Results\n\n- Won the work in a competitive pitch, presenting the solution architecture for a problem the client had described rather than specified.\n- Won the “smart IoT” Award 2021, University of St. Gallen.",
+          "text": "### Context\n\n- An IoT first-aid kit for FLAWA AG that keeps itself stocked and compliant — Swiss firms are legally required to maintain first-aid supplies, so the kit detects missing or expired modules in real time and automatically triggers reordering, removing manual checks.\n\n### Architecture\n\n- Ran the initial sensing research — how to detect the absence of an item within a defined volume — and selected RFID-tagged modules as the approach.\n- Evaluated LoRaWAN against GSM for the sensors' connectivity.\n- Built the MVP on Swisscom's LoRaWAN network, with GSM selected for the later production version.\n- Designed the microservice cut of the backend, separating the telemetry ingestion from the communication with the ERP.\n- Designed the MongoDB data model the device uplinks and configuration events were held in.\n- Designed the backend's deployment on Swisscom Application Cloud, Swisscom's Cloud Foundry: each service pushed with a manifest, with the message broker and the database bound to it as managed services rather than run beside it.\n\n### Engineering\n\n- Together with comtac AG (a canton-Zürich LoRaWAN electronics specialist), delivered an MVP of 10 working prototypes (RFID modules + LoRaWAN, backend on Swisscom Application Cloud).\n- Built the backend to 3AP's microservice reference architecture on Spring and Java 11, released through a Jenkins pipeline.\n- Closed the reorder loop: device uplinks consumed over AMQP from Swisscom's LoRaWAN broker, held in a reactive MongoDB repository, pushed to the client as server-sent events and transformed into the data the ERP needed, so a consumed or expired module triggers its reorder.\n\n### Results\n\n- Won the work in a competitive pitch, presenting the solution architecture for a problem the client had described rather than specified.\n- Won the “smart IoT” Award 2021, University of St. Gallen.",
           "tables": []
         },
         {
@@ -10825,7 +10826,7 @@
           "Event-driven architecture",
           "Integration architecture",
           "API design",
-          "Container orchestration (Kubernetes)",
+          "Container orchestration",
           "CI/CD",
           "Observability",
           "Software modeling (UML, SysML, C4)",
@@ -10835,7 +10836,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- A platform of the company's own, so that a project or an internal system started from a running gateway, a running identity provider and shared capabilities rather than from an empty cluster — one architecture, drawn in the repository, with everything reaching the internet through a single reverse proxy that terminates TLS and enforces strict transport security.\n\n### Architecture\n\n- Made identity the platform's job rather than each service's: Keycloak issuing the tokens, social sign-in trusted into it and the gateway verifying the token before routing, so a service behind it receives requests already authenticated and no service holds a login of its own.\n- Gave the organization model an interface a normal application can use: a GraphQL service reading the CDO repository through its client, which is what turned circles, roles and assignments from something only a modeling tool could open into something a front end could ask questions of.\n- Gave the platform a notification service any project could call instead of integrating messaging vendors of its own: one authenticated POST, delivered as e-mail, SMS or a Slack message, with the vendor behind each channel a detail of the platform rather than of the project.\n- Separated accepting a message from delivering one — the receiving service publishes to a queue for each channel and a service per channel consumes it — so a vendor that is slow or down delays delivery instead of failing the caller.\n- Modeled both platforms' own vocabularies, Cloud Foundry's and Kubernetes', side by side in PlantUML beside the code — organization, space, application and a bound service on one; project, cluster, pod and an exposing service on the other — so that what the two call the same thing, and where they genuinely differ, could be read rather than argued about.\n\n### Engineering\n\n- Put the company's own administration on it — a directory service reading from Google Directory, time tracking pulling from the system the company billed through and a scheduler running the jobs that keep both current — because internal work justifies a platform the same way client work does, and it was the first thing to prove it.\n- Made those jobs more than copies: they transformed what each source delivered, matched people across the directory and the billing system, reconciled a record that had changed in both and checked the result before it replaced what the platform held.\n- Wrote the services in Java and Spring Boot and ran them on two clouds at once, which was the point of building them in the open like this: pushed to Swisscom's Cloud Foundry with a manifest and a bound message broker, and deployed to Google Kubernetes Engine as containers with the broker running beside them. Only the deployment descriptor and a Spring profile differed, so what a project depended on was the service and not the cloud under it.\n- Traced a message across the queue hand-off with Spring Cloud Sleuth, so a message that never arrived can be followed past the queue rather than lost at it.\n- Wired each service's health endpoint to its readiness and liveness probes, with a request and a limit set for every container.\n- Made the build the gate: every branch and every pull request analyzed on SonarCloud with test coverage attached, container images built without a Dockerfile to write and a green build on the mainline deploying itself to the cluster.\n\n### Results\n\n- Retired the Cloud Foundry half in November 2019 once 3AP settled on its own Google Cloud platform, having established what it was built to establish.",
+          "text": "### Context\n\n- A platform of the company's own, so that a project or an internal system started from a running gateway, a running identity provider and shared capabilities rather than from an empty cluster — one architecture, drawn in the repository, with everything reaching the internet through a single reverse proxy that terminates TLS and enforces strict transport security.\n\n### Architecture\n\n- Made identity the platform's job rather than each service's: Keycloak issuing the tokens, social sign-in trusted into it and the gateway verifying the token before routing, so a service behind it receives requests already authenticated and no service holds a login of its own.\n- Gave the organization model an interface a normal application can use: a GraphQL service reading the CDO repository through its client, which is what turned circles, roles and assignments from something only a modeling tool could open into something a front end could ask questions of.\n- Gave the platform a notification service any project could call instead of integrating messaging vendors of its own: one authenticated POST, delivered as e-mail, SMS or a Slack message, with the vendor behind each channel a detail of the platform rather than of the project.\n- Separated accepting a message from delivering one — the receiving service publishes to a queue for each channel and a service per channel consumes it — so a vendor that is slow or down delays delivery instead of failing the caller.\n- Modeled both platforms' own vocabularies, Cloud Foundry's and Kubernetes', side by side in PlantUML beside the code — organization, space, application and a bound service on one; project, cluster, pod and an exposing service on the other — so that what the two call the same thing, and where they genuinely differ, could be read rather than argued about.\n\n### Engineering\n\n- Ran the Java and Spring Boot services on two clouds at once, which was the point of building them in the open like this: pushed to Swisscom's Cloud Foundry with a manifest and a bound message broker, and deployed to Google Kubernetes Engine as containers with the broker running beside them. Only the deployment descriptor and a Spring profile differed, so what a project depended on was the service and not the cloud under it.\n- Put the company's own administration on it — a directory service reading from Google Directory, time tracking pulling from the system the company billed through and a scheduler running the jobs that keep both current — because internal work justifies a platform the same way client work does, and it was the first thing to prove it.\n- Made those jobs more than copies: they transformed what each source delivered, matched people across the directory and the billing system, reconciled a record that had changed in both and checked the result before it replaced what the platform held.\n- Traced a message across the queue hand-off with Spring Cloud Sleuth, so a message that never arrived can be followed past the queue rather than lost at it.\n- Wired each service's health endpoint to its readiness and liveness probes, with a request and a limit set for every container.\n- Made the build the gate: a green build on the mainline deployed itself to the cluster.\n- Analyzed every branch and pull request on SonarCloud, with test coverage attached.\n- Built the container images without a Dockerfile to write.\n\n### Results\n\n- Retired the Cloud Foundry half in November 2019 once 3AP settled on its own Google Cloud platform, having established what it was built to establish.",
           "tables": []
         }
       ],
@@ -10875,7 +10876,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Digital rental platform — applicants apply for apartments in a few clicks; property managers get automated workflows and radically simpler applicant communication.\n- Founded by Mobiliar and Garaio REM (2019), merged with market leader flatfox.ch (2021).\n\n### Leadership\n\n- Presented the solution architecture in the winning sales pitch.\n\n### Architecture\n\n- Created the backend architecture as 3AP's microservice reference architecture in its event-driven form, delivery pipeline included, on Google Cloud with Spring Boot, Kubernetes/GKE and Cloud Pub/Sub.\n- Designed Aroov's PostgreSQL schema, the first of the platforms to hold its data in PostgreSQL rather than a document store.\n- Designed Aroov's own microservice cut.\n- Designed the integration architecture connecting Aroov to Garaio REM, a Swiss property-management system and an Aroov co-founder, after first diagnosing what Garaio REM offered for integration.\n- Designed the event flow behind that integration: Garaio REM's data fetched over SFTP on a schedule, transformed into events and published to Google Cloud Pub/Sub through Spring Cloud Stream.\n- Designed the REST API the Aroov front end was built against.\n\n### Results\n\n- One of four winners of the Digital Top 10 2021, voted by over 5,000 participants ahead of the Digital Real Estate Summit.",
+          "text": "### Context\n\n- Digital rental platform — applicants apply for apartments in a few clicks; property managers get automated workflows and radically simpler applicant communication.\n- Founded by Mobiliar and Garaio REM (2019), merged with market leader flatfox.ch (2021).\n\n### Leadership\n\n- Presented the solution architecture in the winning sales pitch.\n\n### Architecture\n\n- Created the backend architecture as 3AP's microservice reference architecture in its event-driven form, delivery pipeline included, on Google Cloud with Spring Boot, Kubernetes/GKE and Cloud Pub/Sub.\n- Designed Aroov's PostgreSQL schema, the first of the platforms to hold its data in PostgreSQL rather than a document store.\n- Designed the integration architecture connecting Aroov to Garaio REM, a Swiss property-management system and an Aroov co-founder, after first diagnosing what Garaio REM offered for integration.\n- Designed the event flow behind that integration: Garaio REM's data fetched over SFTP on a schedule, transformed into events and published to Google Cloud Pub/Sub through Spring Cloud Stream.\n- Designed the REST API the Aroov front end was built against.\n\n### Results\n\n- One of four winners of the Digital Top 10 2021, voted by over 5,000 participants ahead of the Digital Real Estate Summit.",
           "tables": []
         },
         {
@@ -10960,7 +10961,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- A digital hospitality platform for SV Group (“Stay KooooK”) putting the entire guest journey in one app — book, pay, check in, open the room, check out — replacing manual reception and paper processes (a 63-room hotel runs on just 2.4 FTE, ex-housekeeping).\n\n### Leadership\n\n- Owned the complete architecture, front to back, a React and TypeScript front end over a reactive Spring Boot backend, on the last project built to 3AP's microservice reference architecture.\n- Presented the solution architecture at the winning pitch.\n\n### Architecture\n\n- Designed the software architecture and the microservice cut, each microservice holding its own schema in PostgreSQL.\n- Modeled the guest journey from booking to check-out in Camunda BPMN, the model the Zeebe engine ran and LIKE MAGIC later carried over.\n- Designed the event-driven architecture: integration services took external events in over webhooks and WebSockets, transformed them into internal events and published them to Google Cloud Pub/Sub.\n- Designed the event streams themselves on Spring Cloud Stream, bindings declared per service so the transport underneath could be swapped: the topic layout, redelivery handling and consumers that processed each event once.\n- Gave the platform its own API surface from the first commit — REST specified contract-first in OpenAPI, secured by OAuth 2.0 — which is the one LIKE MAGIC later published.\n\n### Engineering\n\n- Wrote the integration and security parts of the reactive Spring Boot WebFlux backend in Java.\n- Ran it on a delivery pipeline from the first week, three days after the repository opened.\n- Built the integrations into Apaleo PMS and Salto KS smart-door access.\n\n### Results\n\n- Won Best Use of Technology at the Serviced Apartment Awards 2021; was nominated for the Best Swiss Web Award 2021 (Innovation).\n- The platform became LIKE MAGIC, a spin-off from SV Group.\n- As likeMagic, the platform won gold for Best Digital Transformation and silver for Customer Driven Business Change and Transformation at the European Customer Experience Awards 2022.",
+          "text": "### Context\n\n- A digital hospitality platform for SV Group (“Stay KooooK”) putting the entire guest journey in one app — book, pay, check in, open the room, check out — replacing manual reception and paper processes (a 63-room hotel runs on just 2.4 FTE, ex-housekeeping).\n\n### Leadership\n\n- Built the whole application, a React and TypeScript front end over a reactive Spring Boot backend, as the last project on 3AP's microservice reference architecture.\n- Presented the solution architecture at the winning pitch.\n\n### Architecture\n\n- Designed the software architecture and the microservice cut, each microservice holding its own schema in PostgreSQL.\n- Modeled the guest journey from booking to check-out in Camunda BPMN, the model the Zeebe engine ran and LIKE MAGIC later carried over.\n- Designed the event-driven architecture: integration services took external events in over webhooks and WebSockets, transformed them into internal events and published them to Google Cloud Pub/Sub.\n- Designed the event streams themselves on Spring Cloud Stream, bindings declared per service so the transport underneath could be swapped: the topic layout, redelivery handling and consumers that processed each event once.\n- Gave the platform its own API surface from the first commit — REST specified contract-first in OpenAPI, secured by OAuth 2.0 — which is the one LIKE MAGIC later published.\n\n### Engineering\n\n- Wrote the integration and security parts of the reactive Spring Boot WebFlux backend in Java.\n- Ran it on a delivery pipeline from the first week, three days after the repository opened.\n- Built the integrations into Apaleo PMS and Salto KS smart-door access.\n\n### Results\n\n- Won Best Use of Technology at the Serviced Apartment Awards 2021.\n- Was nominated for the Best Swiss Web Award 2021 (Innovation).\n- The platform became LIKE MAGIC, a spin-off from SV Group.\n- As likeMagic, the platform won gold for Best Digital Transformation and silver for Customer Driven Business Change and Transformation at the European Customer Experience Awards 2022.",
           "tables": []
         },
         {
@@ -11181,7 +11182,7 @@
           "Multi-tenant SaaS architecture",
           "Microservices architecture",
           "Cloud architecture",
-          "Container orchestration (Kubernetes)",
+          "Container orchestration",
           "Platform engineering",
           "Database design",
           "Integration architecture",
@@ -11218,7 +11219,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Co-founder and Head of Technology of LIKE MAGIC AG.\n\n### Leadership\n\n- Developed the technical leadership as the company grew from 5 to 25 people.\n- Held the technology gate at intake, discovery and delivery of the product cycle, arguing in each review what had to change for a decision to fit the architecture.\n- Led the Change Advisory Board that ISO 27001 requires, arguing in each review what had to change for a decision to stay compliant.\n- Used each gate and board review to coach the engineers who brought the decision.\n- Recorded the platform's architecture decisions, each with its status.\n- Defined the technology roles, technical architect, business architect and site reliability engineer.\n- Led the functional team those roles formed.\n- Developed and executed the company-wide AI strategy across plan, change and run: governance under a Human Oversight principle, organizational knowledge management and the productive rollout of AI assistants.\n- Set the data-privacy guardrail that no internal context is used to train external LLMs.\n- Took the teams through the AI rollout rather than only switching it on: trained them, worked through the resistance with their leads and tracked adoption after go-live.\n- Managed the AI and automation tooling as a portfolio: Claude Code team licenses, multi-provider tooling across Claude, Gemini and Copilot and self-hosting n8n on the platform's own Kubernetes rather than taking the hosted service.\n- Defined and executed the product and platform strategy across 12 business domains (L0 concepts, L1 capabilities) — API-first, with a managed public API and event/data hub, evolving toward an MCP-server layer so AI agents consume the platform directly.\n- Led the reassessment when the Camunda contract came up for renewal: the platform used a fraction of what the engine offered, so the choice was to build on it properly or take it out. Recommended building on it; the decision went to removal, and the orchestration was replaced with the platform's own in April 2023.\n- Held the budget for the cloud platform and AI tooling, forecasting and governing spend across dev, test and production.\n- Generated weekly actuals automatically from the Google Cloud billing API against consumption KPIs defined in the Mental Model, routed to owners by role when a threshold was breached.\n- Built information-security management toward ISO 27001 (in progress) and GDPR compliance.\n- Set up the escalation board for critical, security-relevant incidents inside the information-security management.\n- Set LIKE MAGIC up as processor, with the hotels as controllers and a data processing agreement in every customer contract.\n\n### Architecture\n\n- Put every customer on one shared infrastructure rather than a stack per customer, for lower operating cost and a single deployment, and paid for it up front: each tenant isolated by a discriminator built into the platform's framework and again by row-level security in the shared PostgreSQL, reached reactively through R2DBC and jOOQ.\n- Specified the public API in OpenAPI 3.1 over property, reservation, guest, messaging, door access and task resources, with webhook subscriptions and OAuth 2.0 scopes.\n- Cut the platform into services along its 12 business domains and the capabilities under each — booking, guest, profile, payment, door access, messaging, operation and analytics among them — each stateless, self-contained, horizontally scalable and contract-first.\n- Reached every integrated vendor through its own connector, with a fallback path behind the realtime one.\n- Kept the language models out of the platform and opened its API to conversational AI providers instead, so each provider integrated itself rather than being integrated by LIKE MAGIC — d3x, ailean and onsai came into the staff solution that way, with unified multi-channel guest messaging, AI agents answering, guest insights and staff collaboration.\n- Published and consumed the platform's events through Spring Cloud Stream over a Pub/Sub binder, so a service declared its bindings and the transport stayed swappable underneath them.\n\n### Engineering\n\n- Owned the production cloud platform, built as infrastructure as code on Google Cloud and run on Google Kubernetes Engine, through site reliability engineering, incident management and performance work.\n- Set its DevOps and CI/CD standards on GitHub Actions, unit and integration tests required on every pipeline.\n- Instrumented it on Cloud Monitoring and Cloud Trace with alerting driven by defined SLOs, end-to-end traceability and continuous monitoring being architecture principles the services were built to rather than instrumentation added afterward.\n- Automated production monitoring and alerting by severity under site reliability engineering, notifying the people responsible by email, SMS and Slack.\n- Wrote Java on the platform's Spring Boot WebFlux services, including the reference implementation of each pattern the architecture used, so a team built a new service from working code rather than from a description.\n- Drove process orchestration with Camunda for the end-to-end guest journey (Booking → Check-in → Stay → Check-out), carried over from Stay KooooK and run until 2023, its BPMN model extended as the platform grew.\n- Built the LIKE MAGIC Mental Model — a structured organizational knowledge base (roles, processes, features, strategies, architecture decisions) that serves as the shared context layer for AI-assisted operations.\n- Shipped the Mental Model as a skill into the company's Claude environment, so every assistant worked from the same context.\n- Kept it in step with the systems it described through MCP rather than bespoke integrations — Atlassian, Google Drive and Slack servers wired into the agent that maintained it, reading and writing Confluence pages, Jira issues, Google Docs and Sheets, each command scoped to a named allowlist of the tools it was allowed to call.\n- Built an internal AI marketplace on Claude (Claude Cowork) — giving teams governed access to AI assistants and agents, grounded in the Mental Model.\n- Made every API boundary check its caller: partners on the public API held OAuth 2.0 tokens scoped to the resources they were granted, and guests and employees held role-based tokens.\n- Built the event and data hub every service published its business events to — ingesting them into BigQuery for analytics, idempotent on the event id so a redelivery cannot double-count and serving them back as a queryable event log with webhook subscriptions for systems that needed them pushed.\n\n### Ways of working\n\n- Made the platform self-service for the teams building on it: a team added a new service, or new schemas and tables, on its own, carried to production by the platform's CI/CD and infrastructure as code rather than by a request to a central team.\n- Had the team that built a service also operate it in production.\n- Answered data subject requests for access and erasure through a defined procedure under an SLA.\n\n### Sharing\n\n- Wrote the developer documentation for the public API, the reference partners integrated against on their own.\n\n### Results\n\n- Built and scaled a multi-tenant hospitality SaaS platform serving 90+ customers, 430+ properties and 16,000+ units across the DACH region — processing 1.5M+ reservations, 8.1M+ guest communications and 89M+ platform events annually, integrating 3 PMS (Mews, Apaleo, Oracle OHIP) and 15+ smart-lock systems into a unified guest experience.\n- Held platform cost flat as volume grew to 89M+ events annually, through continuous database and code optimization.",
+          "text": "### Context\n\n- Co-founder and Head of Technology of LIKE MAGIC AG.\n\n### Leadership\n\n- Defined and executed the product and platform strategy across 12 business domains (L0 concepts, L1 capabilities) — API-first, with a managed public API and event/data hub, evolving toward an MCP-server layer so AI agents consume the platform directly.\n- Led the reassessment when the Camunda contract came up for renewal: the platform used a fraction of what the engine offered, so the choice was to build on it properly or take it out. Recommended building on it; the decision went to removal, and the orchestration was replaced with the platform's own in April 2023.\n- Developed the technical leadership as the company grew from 5 to 25 people.\n- Held the technology gate at intake, discovery and delivery of the product cycle, arguing in each review what had to change for a decision to fit the architecture.\n- Led the Change Advisory Board that ISO 27001 requires, arguing in each review what had to change for a decision to stay compliant.\n- Used each gate and board review to coach the engineers who brought the decision.\n- Recorded the platform's architecture decisions, each with its status.\n- Defined the technology roles, technical architect, business architect and site reliability engineer.\n- Led the functional team those roles formed.\n- Developed and executed the company-wide AI strategy across plan, change and run: governance under a Human Oversight principle, organizational knowledge management and the productive rollout of AI assistants.\n- Set the data-privacy guardrail that no internal context is used to train external LLMs.\n- Took the teams through the AI rollout rather than only switching it on: trained them, worked through the resistance with their leads and tracked adoption after go-live.\n- Managed the AI and automation tooling as a portfolio: Claude Code team licenses, multi-provider tooling across Claude, Gemini and Copilot and self-hosting n8n on the platform's own Kubernetes rather than taking the hosted service.\n- Held the budget for the cloud platform and AI tooling, forecasting and governing spend across dev, test and production.\n- Generated weekly actuals automatically from the Google Cloud billing API against consumption KPIs defined in the Mental Model, routed to owners by role when a threshold was breached.\n- Built information-security management toward ISO 27001 (in progress) and GDPR compliance.\n- Set up the escalation board for critical, security-relevant incidents inside the information-security management.\n- Set LIKE MAGIC up as processor, with the hotels as controllers and a data processing agreement in every customer contract.\n\n### Architecture\n\n- Put every customer on one shared infrastructure rather than a stack per customer, for lower operating cost and a single deployment, and paid for it up front: each tenant isolated by a discriminator built into the platform's framework and again by row-level security in the shared PostgreSQL, reached reactively through R2DBC and jOOQ.\n- Specified the public API in OpenAPI 3.1 over property, reservation, guest, messaging, door access and task resources, with webhook subscriptions and OAuth 2.0 scopes.\n- Cut the platform into services along its 12 business domains and the capabilities under each — booking, guest, profile, payment, door access, messaging, operation and analytics among them — each stateless, self-contained, horizontally scalable and contract-first.\n- Reached every integrated vendor through its own connector, with a fallback path behind the realtime one.\n- Kept the language models out of the platform and opened its API to conversational AI providers instead, so each provider integrated itself rather than being integrated by LIKE MAGIC — d3x, ailean and onsai came into the staff solution that way, with unified multi-channel guest messaging, AI agents answering, guest insights and staff collaboration.\n- Published and consumed the platform's events through Spring Cloud Stream over a Pub/Sub binder, so a service declared its bindings and the transport stayed swappable underneath them.\n\n### Engineering\n\n- Ran the production cloud platform as infrastructure as code on Google Cloud and Google Kubernetes Engine, carrying its reliability, incidents and performance.\n- Set its DevOps and CI/CD standards on GitHub Actions, unit and integration tests required on every pipeline.\n- Instrumented it on Cloud Monitoring and Cloud Trace with alerting driven by defined SLOs, end-to-end traceability and continuous monitoring being architecture principles the services were built to rather than instrumentation added afterward.\n- Automated production monitoring and alerting by severity under site reliability engineering, notifying the people responsible by email, SMS and Slack.\n- Wrote Java on the platform's Spring Boot WebFlux services, including the reference implementation of each pattern the architecture used, so a team built a new service from working code rather than from a description.\n- Drove process orchestration with Camunda for the end-to-end guest journey (Booking → Check-in → Stay → Check-out), carried over from Stay KooooK and run until 2023, its BPMN model extended as the platform grew.\n- Built the LIKE MAGIC Mental Model — a structured organizational knowledge base (roles, processes, features, strategies, architecture decisions) that serves as the shared context layer for AI-assisted operations.\n- Shipped the Mental Model as a skill into the company's Claude environment, so every assistant worked from the same context.\n- Kept it in step with the systems it described through MCP rather than bespoke integrations — Atlassian, Google Drive and Slack servers wired into the agent that maintained it, reading and writing Confluence pages, Jira issues, Google Docs and Sheets, each command scoped to a named allowlist of the tools it was allowed to call.\n- Built an internal AI marketplace on Claude (Claude Cowork) — giving teams governed access to AI assistants and agents, grounded in the Mental Model.\n- Made every API boundary check its caller: partners on the public API held OAuth 2.0 tokens scoped to the resources they were granted, and guests and employees held role-based tokens.\n- Built the event and data hub every service published its business events to — ingesting them into BigQuery for analytics, idempotent on the event id so a redelivery cannot double-count and serving them back as a queryable event log with webhook subscriptions for systems that needed them pushed.\n\n### Ways of working\n\n- Made the platform self-service for the teams building on it: a team added a new service, or new schemas and tables, on its own, carried to production by the platform's CI/CD and infrastructure as code rather than by a request to a central team.\n- Had the team that built a service also operate it in production.\n- Answered data subject requests for access and erasure through a defined procedure under an SLA.\n\n### Sharing\n\n- Wrote the developer documentation for the public API, the reference partners integrated against on their own.\n\n### Results\n\n- Built and scaled a multi-tenant hospitality SaaS platform serving 90+ customers, 430+ properties and 16,000+ units across the DACH region — processing 1.5M+ reservations, 8.1M+ guest communications and 89M+ platform events annually, integrating 3 PMS (Mews, Apaleo, Oracle OHIP) and 15+ smart-lock systems into a unified guest experience.\n- Held platform cost flat as volume grew to 89M+ events annually, through continuous database and code optimization.",
           "tables": []
         },
         {
@@ -11420,6 +11421,7 @@
         "end": "2023-04",
         "url": "https://camunda.com/case-studies/likemagic",
         "organization": "Camunda",
+        "role": "Featured architect",
         "skills": [
           "Process orchestration"
         ]
@@ -11483,6 +11485,7 @@
         "kind": "Project",
         "start": "2026-06-09",
         "end": "2026-09-04",
+        "role": "Architect and Engineer",
         "skills": [
           "Agentic AI development",
           "Context engineering"
@@ -11628,6 +11631,7 @@
         "kind": "Community",
         "start": "2026-08",
         "url": "https://blust.ch",
+        "role": "Architect and Engineer",
         "skills": [
           "Agentic AI development",
           "Technical writing",
@@ -11639,7 +11643,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Published the profile page, a principles page, an ideas page and the narrated talks, each an entry of its own here, bilingual with a PDF, self-contained and presentable from a file with no server running.\n\n### Architecture\n\n- Built the model and timeline pages from the mental-model repository at a pinned commit, so the page shows what the model says and a corrected fact is one commit in one place.\n- Conceived and designed the pages of all three sites and the design system they share, from layout and typography to the graph view, and had the agent seats build them to that design.\n- Shared its typography, chrome and page checks with guestgraph.io and companygraph.io through one design system, released over 50 times in its first week and taken by every site by pin.\n\n### Engineering\n\n- Held every page to a rendered check rather than a diff: browser assertions on every page, share cards compared against the pages they were rendered from, and a pin guard that fails the build when a dependency is behind its release.\n- Required one shared conventions check beside each repository's own suite on every default branch in the family, called from one reusable workflow at a pinned tag.\n- Generated the narration from the speaker notes on a content hash, so editing one note regenerates one clip.\n\n### Ways of working\n\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n- Set the family's written voice and rules in `WRITING.md`, and briefed and reviewed every page the Writer seat drafted to those rules.",
+          "text": "### Context\n\n- Published the profile page, a principles page, an ideas page and the narrated talks, each an entry of its own here, bilingual with a PDF, self-contained and presentable from a file with no server running.\n\n### Architecture\n\n- Conceived and designed the pages of all three sites and the design system they share, from layout and typography to the graph view, and had the agent seats build them to that design.\n- Shared its typography, chrome and page checks with guestgraph.io and companygraph.io through one design system, released over 50 times in its first week and taken by every site by pin.\n- Built the model and timeline pages from the mental-model repository at a pinned commit, so the page shows what the model says and a corrected fact is one commit in one place.\n\n### Engineering\n\n- Held every page to a rendered check rather than a diff: browser assertions on every page, share cards compared against the pages they were rendered from, and a pin guard that fails the build when a dependency is behind its release.\n- Required one shared conventions check beside each repository's own suite on every default branch in the family, called from one reusable workflow at a pinned tag.\n- Generated the narration from the speaker notes on a content hash, so editing one note regenerates one clip.\n\n### Ways of working\n\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n- Set the family's written voice and rules in `WRITING.md`, and briefed and reviewed every page the Writer seat drafted to those rules.",
           "tables": []
         }
       ],
@@ -11693,13 +11697,14 @@
       "address": "profiles/robert-blust/experiences/2026-career-break-experiment-on-linkedin",
       "type": "experience",
       "name": "The career break experiment on LinkedIn",
-      "tagline": "Ongoing. A sequence of posts that tells the career break experiment and what it built, from the question it started with to the answer, each post making one point and pointing to one episode, film or talk that shows it.",
+      "tagline": "A sequence of posts that told the career break experiment and what it built, from the question it started with to the answer, each post making one point and pointing to one episode, film or talk that shows it.",
       "fields": {
         "id": "01a0ef1d-3198-7312-b9b3-40f2328abefd",
         "source": "Local",
         "kind": "Community",
-        "start": "2026-09",
-        "url": "https://www.linkedin.com/in/robertblust/recent-activity/all",
+        "start": "2026-09-09",
+        "end": "2026-10-03",
+        "role": "Author",
         "skills": [
           "Storytelling"
         ]
@@ -11707,7 +11712,12 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Ways of working\n\n- Planned the posts as one sequence before the first went out, the question, what was built and the answer in that order, and gave each post one point, one asset and one link, so a reader meets a claim and the work that shows it in the same place.\n- Wrote a brief before every draft, naming the reader, the one point, what the post may claim and where each claim is shown, and kept the text as posted beside the draft, so an edit made at the last minute stays visible.\n- Answered in a post's first comment where the generated episode it carries overreaches, in words a reader who has not heard the episode can follow, before anyone else names it.\n\n### Sharing\n\n- Posted the career break's question on Sep 9, 2026, what I like doing rather than what I am used to being hired for, with the episode Turn your work history into code.\n- Posted One model, true everywhere on Sep 15, 2026, a profile as a list of claims a stranger can check, with the film Build the model first.\n- Posted CompanyGraph on Sep 18, 2026 by asking my own model to finish the sentence \"whoever asks about my work\", its answer shown as a recording and the film Governance as data in the comment.\n- Posted the closing talk's claim on Sep 25, 2026, building fast is solved and deciding well is not, with the October decision in one line and a thanks by name to the former colleagues whose feedback every application was read against.\n- Posted Your company doesn't compile on Sep 28, 2026 with its episode, a first comment that sets the hosts' closing question right and opens the chat on companygraph.io, and a second that invites the reader to try the command line.\n- Posted the decision on Oct 3, 2026, the architect role the career break ended in named as Läderach and chosen for the culture the interviews showed, as the text of LinkedIn's new-position share.",
+          "text": "### Ways of working\n\n- Planned the posts as one sequence before the first went out, the question, what was built and the answer in that order, and gave each post one point, one asset and one link, so a reader meets a claim and the work that shows it in the same place.\n- Wrote a brief before every draft, naming the reader, the one point, what the post may claim and where each claim is shown.\n- Kept the text as posted beside the draft, so an edit made at the last minute stays visible.\n- Answered in a post's first comment where the generated episode it carries overreaches, in words a reader who has not heard the episode can follow, before anyone else names it.\n\n### Sharing\n\n- Posted the career break's question on Sep 9, 2026, what I like doing rather than what I am used to being hired for, with the episode Turn your work history into code.\n- Posted One model, true everywhere on Sep 15, 2026, a profile as a list of claims a stranger can check, with the film Build the model first.\n- Posted CompanyGraph on Sep 18, 2026 by asking my own model to finish the sentence \"whoever asks about my work\", its answer shown as a recording and the film Governance as data in the comment.\n- Posted the closing talk's claim on Sep 25, 2026, building fast is solved and deciding well is not, with the October decision in one line and a thanks by name to the former colleagues whose feedback every application was read against.\n- Posted Your company doesn't compile on Sep 28, 2026 with its episode, a first comment that sets the hosts' closing question right and opens the chat on companygraph.io, and a second that invites the reader to try the command line.\n- Posted the decision on Oct 3, 2026, the architect role the career break ended in named as Läderach and chosen for the culture the interviews showed, as the text of LinkedIn's new-position share.",
+          "tables": []
+        },
+        {
+          "heading": "Ending",
+          "text": "Ended in October 2026 with the post that named the role the career break ended in, at Läderach. The posts stay up as the record of how the answer was reached.",
           "tables": []
         },
         {
@@ -11787,8 +11797,8 @@
       "path": "model/profiles/robert-blust/experiences/2026-career-break-experiment-on-linkedin.md",
       "stamp": {
         "kind": "Community",
-        "start": "2026-09",
-        "end": null
+        "start": "2026-09-09",
+        "end": "2026-10-03"
       }
     },
     {
@@ -11803,6 +11813,7 @@
         "kind": "Community",
         "start": "2026-08",
         "url": "https://companygraph.io",
+        "role": "Founder and Architect",
         "skills": [
           "Agentic AI development",
           "Context engineering",
@@ -11911,6 +11922,7 @@
         "start": "2026-09-15",
         "end": "2026-09-15",
         "url": "https://robertblust.substack.com/p/build-the-model-first",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -11944,6 +11956,7 @@
         "start": "2026-09-18",
         "end": "2026-09-18",
         "url": "https://robertblust.substack.com/p/governance-as-data",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -11976,6 +11989,7 @@
         "kind": "Community",
         "start": "2026-07",
         "url": "https://guestgraph.io",
+        "role": "Founder and Architect",
         "skills": [
           "Agentic AI development",
           "Software architecture",
@@ -11993,7 +12007,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Leadership\n\n- Published it under Apache 2.0 as open core, with a billing model on one meter, arrivals, and a narrated introduction talk in German and English with a deck and a PDF in each.\n- Put it up for validation in the open as one of two ideas: the engine, the guest graph with its API, the explain-and-undo and the connectors are the open substance, and the hosted service is the one part that could ever earn; whether it will is the experiment.\n\n### Architecture\n\n- Designed the identity graph's data model: guests, their source records and the merge decisions between them.\n- Built it as a layered confidence model: strong identifiers merge deterministically with transitive closure, everything else is scored against a threshold the tenant chose, and what falls between goes to a human steward, whose split becomes a do-not-merge rule that new evidence cannot cross.\n- Split probabilistic matching into blocking and scoring, because a database index answers only equality: phonetic keys find candidates that share no identifier, then a weighted feature vector grades them, damped when few signals were observed and penalized when birthdates conflict.\n- Kept every source record immutable and every merge explainable, so a guest can be asked why two records are one person and the answer is the decision chain.\n- Designed and implemented the engine's and the connector's REST APIs contract-first in OpenAPI, the engine's exposing a merge's explanation, its undoing and the review of uncertain matches as resources of their own.\n\n### Engineering\n\n- Shipped it as a Spring Boot service on PostgreSQL with Flyway migrations and a REST API, runnable from one compose file, designed for managed platform services and agnostic of which cloud runs them — so adopting it is not also adopting a provider.\n- Held the engine and the connector to the same gates on every change: the Maven build with its tests, a check that each service carries every item of the service conventions at their pinned release and a job that regenerates the entity-relationship diagram from the Flyway migrations and fails when the committed one is stale.\n- Described GuestGraph in CompanyGraph's vocabulary as the first instance whose product is not about modeling, drawn on guestgraph.io's model pages and served to agents at mcp.guestgraph.io and to visitors through its chat.\n\n### Ways of working\n\n- Designed the engine and the connector slice by slice, each from a written specification reviewed before its plan and its build, beginning with core identity resolution, probabilistic matching and the guest timeline.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n\n### Results\n\n- Put it in front of a professional network with a stated outcome each way, a clean no included.",
+          "text": "### Leadership\n\n- Published it under Apache 2.0 as open core.\n- Set its billing model on one meter, arrivals.\n- Put it up for validation in the open as one of two ideas: the engine, the guest graph with its API, the explain-and-undo and the connectors are the open substance, and the hosted service is the one part that could ever earn; whether it will is the experiment.\n\n### Architecture\n\n- Designed the identity graph's data model: guests, their source records and the merge decisions between them.\n- Built it as a layered confidence model: strong identifiers merge deterministically with transitive closure, everything else is scored against a threshold the tenant chose, and what falls between goes to a human steward, whose split becomes a do-not-merge rule that new evidence cannot cross.\n- Split probabilistic matching into blocking and scoring, because a database index answers only equality: phonetic keys find candidates that share no identifier, then a weighted feature vector grades them, damped when few signals were observed and penalized when birthdates conflict.\n- Kept every source record immutable and every merge explainable, so a guest can be asked why two records are one person and the answer is the decision chain.\n- Designed and implemented the engine's and the connector's REST APIs contract-first in OpenAPI, the engine's exposing a merge's explanation, its undoing and the review of uncertain matches as resources of their own.\n\n### Engineering\n\n- Shipped it as a Spring Boot service on PostgreSQL with Flyway migrations and a REST API, runnable from one compose file, designed for managed platform services and agnostic of which cloud runs them — so adopting it is not also adopting a provider.\n- Held the engine and the connector to the same gates on every change: the Maven build with its tests, a check that each service carries every item of the service conventions at their pinned release and a job that regenerates the entity-relationship diagram from the Flyway migrations and fails when the committed one is stale.\n- Described GuestGraph in CompanyGraph's vocabulary as the first instance whose product is not about modeling, drawn on guestgraph.io's model pages and served to agents at mcp.guestgraph.io and to visitors through its chat.\n\n### Ways of working\n\n- Designed the engine and the connector slice by slice, each from a written specification reviewed before its plan and its build, beginning with core identity resolution, probabilistic matching and the guest timeline.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.\n\n### Results\n\n- Put it in front of a professional network with a stated outcome each way, a clean no included.",
           "tables": []
         },
         {
@@ -12113,6 +12127,7 @@
         "start": "2026-09-25",
         "end": "2026-09-25",
         "url": "https://robertblust.substack.com/p/building-fast-is-solved-deciding",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -12178,6 +12193,7 @@
         "start": "2026-09-28",
         "end": "2026-09-28",
         "url": "https://robertblust.substack.com/p/dein-unternehmen-kompiliert-nicht",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -12243,6 +12259,7 @@
         "start": "2026-09-06",
         "end": "2026-09-06",
         "url": "https://robertblust.substack.com/p/turn-your-work-history-into-code",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -12276,6 +12293,7 @@
         "start": "2026-09-27",
         "end": "2026-09-27",
         "url": "https://robertblust.substack.com/p/wer-wurde-eingestellt-ich-oder-mein",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -12341,6 +12359,7 @@
         "start": "2026-09-28",
         "end": "2026-09-28",
         "url": "https://robertblust.substack.com/p/your-company-doesnt-compile",
+        "role": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -15318,7 +15337,7 @@
       "address": "questions/why-is-there-a-career-break-and-what-happened-in-it",
       "type": "question",
       "name": "Why is there a career break, and what happened in it?",
-      "tagline": "The career break says why it was taken and what it found, the decisions that opened it say what it was given to find out and how the next role was looked for, CompanyGraph and GuestGraph are the two products it built in the open, and a blog post walks the decision that ended it.",
+      "tagline": "The career break says why it was taken and what it found, the decisions that opened it say what it was given to find out and how the next role was looked for, CompanyGraph and GuestGraph are the two products it built, and a blog post walks the decision that ended it.",
       "fields": {
         "id": "01a0d3cd-e428-7cc3-86a6-bafa03d25dd2",
         "source": "Local",
@@ -17292,9 +17311,9 @@
     },
     {
       "id": "01a043c7-35a0-733e-8770-ebb7166f11e5",
-      "address": "skills/container-orchestration-kubernetes",
+      "address": "skills/container-orchestration",
       "type": "skill",
-      "name": "Container orchestration (Kubernetes)",
+      "name": "Container orchestration",
       "tagline": "Managing the deployment, scaling and healing of containerized applications across a cluster of machines.",
       "fields": {
         "id": "01a043c7-35a0-733e-8770-ebb7166f11e5",
@@ -17309,7 +17328,7 @@
         }
       ],
       "owner": null,
-      "path": "model/skills/container-orchestration-kubernetes.md"
+      "path": "model/skills/container-orchestration.md"
     },
     {
       "id": "01a046ed-4918-70ee-abab-42dfc04b9437",
@@ -18506,12 +18525,11 @@
       "address": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
       "type": "strategic-objective",
       "name": "A continuing-education master's in AI leadership",
-      "tagline": "By the horizon I hold a MAS, a continuing-education master's, in AI leadership.",
+      "tagline": "I hold a MAS, a continuing-education master's, in AI leadership.",
       "fields": {
         "id": "01a0dda0-8e10-7d01-a25b-a3cc16e69728",
         "source": "Local",
-        "adopted": "2026-09-08",
-        "horizon": "2029"
+        "adopted": "2026-09-08"
       },
       "sections": [
         {
@@ -18702,7 +18720,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying\n  that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — listing the types, describing a schema, what the types declare about each other\n  and what they constrain, the rules the model is held to and the checks that hold it, listing\n  and returning entities, finding evidence, searching and fetching, over every entity in the\n  model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
+          "text": "- **Endpoint** — `/mcp` on this address, the only path that speaks the protocol and the one a\n  client is given. The registry listing's remote is this.\n- **Title** — the identity's name.\n- **Instructions** — the vision's tagline and the identity's tagline, then one sentence saying\n  that every answer names the commit it was read from, and no commit of their own.\n- **Tools** — what an agent can ask of the model, each tool named and described by the server\n  itself, over every entity in the model.\n- **Page** — what a browser gets at the server's own address, for a reader who arrived at a\n  protocol endpoint without a client: the identity's name, the vision's and the identity's\n  taglines, the address to give a client, every tool with what it returns, and the commit the\n  answers are read from.\n- **Structured data** — the person and the endpoint that the page describes to a crawler, with\n  the person's addresses from the profile's `## Also at`.",
           "tables": []
         }
       ],
@@ -19399,7 +19417,7 @@
       "to": "01a043c7-35a0-71d5-942c-b56fd96a3ec5",
       "via": "Evidence.Skill",
       "attrs": {
-        "What it shows": "Designed the microservice cut of Aroov's backend.",
+        "What it shows": "Built Aroov's backend on 3AP's microservice reference architecture in its event-driven form.",
         "Experience": "01a03da5-1868-73f2-a230-1a895d40401e"
       }
     },
@@ -19813,7 +19831,7 @@
       "to": "01a043c7-35a0-7860-9e2f-2cb27882a8a5",
       "via": "Evidence.Skill",
       "attrs": {
-        "What it shows": "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the company's delivery process and stack approvals.",
+        "What it shows": "Wrote the delivery pipeline into 3AP's reference architecture so a project inherited it rather than arranging its own, and established the stack approval a client engagement had to pass.",
         "Experience": "01a03da5-1868-7d05-abaf-7c2c8ee015b0"
       }
     },
@@ -20992,6 +21010,15 @@
       "to": "01a080bd-3658-709d-8585-5b561d8a6156",
       "via": "Evidence.Skill",
       "attrs": {
+        "What it shows": "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
+        "Experience": "01a0ef1d-3198-7312-b9b3-40f2328abefd"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "Evidence.Skill",
+      "attrs": {
         "What it shows": "Briefed the film Build the model first as one story across three organizations and one person, five threads each tied to a source, then wrote its published description to avoid the two places the narration strays.",
         "Experience": "01a0a3ee-6db8-73c9-a6c1-63958453ee7d"
       }
@@ -21048,15 +21075,6 @@
       "attrs": {
         "What it shows": "Wrote the German sibling of an English episode as its own story, not a translation, leaning on what the English one left out and ending on whether an agent reading a wiki would say what the people say.",
         "Experience": "01a0e717-e510-7425-bb20-f6a30fe69220"
-      }
-    },
-    {
-      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
-      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
-      "via": "Evidence.Skill",
-      "attrs": {
-        "What it shows": "Planned a sequence of posts as one story, the question, what was built and the answer, each post making one point with one asset and one link to the work that shows it.",
-        "Experience": "01a0ef1d-3198-7312-b9b3-40f2328abefd"
       }
     },
     {
