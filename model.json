@@ -1,6 +1,6 @@
 {
-  "commit": "68de9c0167dedd7d2c8ea6b32a332ae77f7a52e1",
-  "core": "0.58.0",
+  "commit": "6611698c200bdb2aca0b17dfd10a68d648927186",
+  "core": "0.60.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -25,6 +25,12 @@
     {
       "type": "control",
       "folder": "controls",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "data-processor",
+      "folder": "data-processors",
       "owner": null,
       "singular": false
     },
@@ -107,6 +113,12 @@
       "singular": false
     },
     {
+      "type": "processing-activity",
+      "folder": "processing-activities",
+      "owner": null,
+      "singular": false
+    },
+    {
       "type": "product",
       "folder": "products",
       "owner": null,
@@ -157,6 +169,12 @@
     {
       "type": "source",
       "folder": "sources",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "stored-item",
+      "folder": "stored-items",
       "owner": null,
       "singular": false
     },
@@ -1581,6 +1599,188 @@
       "path": "model/controls/pages-drawn-from-the-model-are-held-to-it.md"
     },
     {
+      "id": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+      "address": "data-processors/anthropic",
+      "type": "data-processor",
+      "name": "Anthropic",
+      "tagline": "Writes the chat's answers with Claude, through Anthropic's API, from the visitor's messages and what the model's tools returned; it may process a request in any country it chooses, and stores what it keeps in the United States.",
+      "fields": {
+        "id": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+        "source": "Local",
+        "legal-name": "Anthropic Ireland, Limited",
+        "countries": [
+          "US"
+        ],
+        "retention": "Within 30 days of receipt or generation, under its own terms",
+        "sub-processor-authorization": "general"
+      },
+      "sections": [
+        {
+          "heading": "Own purposes",
+          "text": "- Keeps the inputs and outputs of a conversation it flags under its Usage Policy for up to two years, and its trust and safety classification scores for up to seven.",
+          "tables": []
+        },
+        {
+          "heading": "Transfers",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Jurisdiction",
+                "Safeguard"
+              ],
+              "rows": [
+                [
+                  "ch",
+                  "Standard contractual clauses, module two, as the DPA's Swiss addendum amends them for Swiss law, with the FDPIC as authority and Swiss courts"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Jurisdiction",
+              "Safeguard"
+            ],
+            "rows": [
+              [
+                "ch",
+                "Standard contractual clauses, module two, as the DPA's Swiss addendum amends them for Swiss law, with the FDPIC as authority and Swiss courts"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Data processing addendum",
+                  "https://www.anthropic.com/legal/data-processing-addendum"
+                ],
+                [
+                  "Commercial terms",
+                  "https://www.anthropic.com/legal/commercial-terms"
+                ],
+                [
+                  "Sub-processor list",
+                  "https://trust.anthropic.com/subprocessors"
+                ],
+                [
+                  "Retention terms",
+                  "https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Data processing addendum",
+                "https://www.anthropic.com/legal/data-processing-addendum"
+              ],
+              [
+                "Commercial terms",
+                "https://www.anthropic.com/legal/commercial-terms"
+              ],
+              [
+                "Sub-processor list",
+                "https://trust.anthropic.com/subprocessors"
+              ],
+              [
+                "Retention terms",
+                "https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-processors/anthropic.md"
+    },
+    {
+      "id": "01a108dc-de29-78aa-9804-a6150ebfabad",
+      "address": "data-processors/google-cloud",
+      "type": "data-processor",
+      "name": "Google Cloud",
+      "tagline": "Runs the chat service and the MCP server in its Zürich region, and keeps the chat's log of questions there.",
+      "fields": {
+        "id": "01a108dc-de29-78aa-9804-a6150ebfabad",
+        "source": "Local",
+        "legal-name": "Google Cloud EMEA Limited",
+        "countries": [
+          "CH"
+        ],
+        "sub-processor-authorization": "general"
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Cloud data processing addendum",
+                  "https://cloud.google.com/terms/data-processing-addendum"
+                ],
+                [
+                  "Contracting entity by region",
+                  "https://cloud.google.com/terms/google-entity"
+                ],
+                [
+                  "Sub-processor list",
+                  "https://cloud.google.com/terms/subprocessors"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Cloud data processing addendum",
+                "https://cloud.google.com/terms/data-processing-addendum"
+              ],
+              [
+                "Contracting entity by region",
+                "https://cloud.google.com/terms/google-entity"
+              ],
+              [
+                "Sub-processor list",
+                "https://cloud.google.com/terms/subprocessors"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-processors/google-cloud.md"
+    },
+    {
       "id": "01a0e82c-00a8-7628-b40b-3895b42fc979",
       "address": "decision-kinds/architecture",
       "type": "decision-kind",
@@ -1619,6 +1819,26 @@
       ],
       "owner": null,
       "path": "model/decision-kinds/career.md"
+    },
+    {
+      "id": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "address": "decision-kinds/data-protection",
+      "type": "decision-kind",
+      "name": "Data protection",
+      "tagline": "A call about whose personal data the company handles, what it does with it, and who else receives it.",
+      "fields": {
+        "id": "01a108dd-94e2-733a-b228-6dff758dc82e",
+        "source": "Local"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A decision whose subject is personal data: what a visitor or a customer gives up, what the company does with it and for how long, which parties receive it and on what terms, and what the privacy page says about it. It is this kind even when it shapes what gets built, because what was decided is what happens to someone's data.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/decision-kinds/data-protection.md"
     },
     {
       "id": "01a0dd50-37a8-735d-a539-fd3755ec8f85",
@@ -3001,6 +3221,160 @@
       "path": "model/decisions/2026-four-months.md"
     },
     {
+      "id": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "address": "decisions/2026-github-is-not-a-data-processor",
+      "type": "decision",
+      "name": "GitHub is not one of our data processors",
+      "tagline": "GitHub serves blust.ch's pages and sees the request that fetches each one, and we do not write it as a data processor: no processing agreement covers our account, and what GitHub keeps of a visit it keeps for its own purposes, so it is a recipient in its own right and not a party processing data on our behalf.",
+      "fields": {
+        "id": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+        "source": "Local",
+        "decided": "2026-10-04",
+        "kind": "Data protection",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Core 0.60.0 gave this model the data-processor type, in the narrow meaning of GDPR Art. 4(8) and the Swiss DSG Art. 5 lit. k: a party that processes personal data on the company's behalf. The privacy page names GitHub as the host that sees each request, and the question was whether it is a data processor in that meaning.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Write GitHub as a data processor, citing its data protection agreement",
+                  "blust.ch is served by GitHub Pages from a personal account, which GitHub's Terms of Service govern and not the GitHub Customer Agreement the data protection agreement forms part of, so the page would cite a contract that does not cover it and claim a relation that does not exist."
+                ],
+                [
+                  "Widen the data-processor type to every recipient",
+                  "The type was decided narrow on purpose, and a type that holds both processors and independent controllers stops answering the one question the law asks of it: who acts on our instructions."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Write GitHub as a data processor, citing its data protection agreement",
+                "blust.ch is served by GitHub Pages from a personal account, which GitHub's Terms of Service govern and not the GitHub Customer Agreement the data protection agreement forms part of, so the page would cite a contract that does not cover it and claim a relation that does not exist."
+              ],
+              [
+                "Widen the data-processor type to every recipient",
+                "The type was decided narrow on purpose, and a type that holds both processors and independent controllers stops answering the one question the law asks of it: who acts on our instructions."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "GitHub logs every Pages visitor's IP address for security purposes, whether or not the visitor is signed in. That purpose is GitHub's, not ours, so for what it keeps of a visit GitHub is a controller in its own right, which is the kind of recipient the narrow type leaves out. Without an agreement that makes it our processor, writing it as one would be the model saying more than is true.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The model names no host for blust.ch's pages, and the privacy page keeps saying in its own words that GitHub serves them and sees each request. The call stays right for as long as the account holds no GitHub agreement that makes GitHub its processor; if it takes one, GitHub gets a data-processor page and this call is revised.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "surface",
+                  "blust.ch website",
+                  "",
+                  "keeps naming GitHub in its own prose"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "surface",
+                "blust.ch website",
+                "",
+                "keeps naming GitHub in its own prose"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "GitHub Pages and the visitor data it logs",
+                  "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+                ],
+                [
+                  "GitHub data protection agreement",
+                  "https://github.com/customer-terms/github-data-protection-agreement"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "GitHub Pages and the visitor data it logs",
+                "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+              ],
+              [
+                "GitHub data protection agreement",
+                "https://github.com/customer-terms/github-data-protection-agreement"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-github-is-not-a-data-processor.md"
+    },
+    {
       "id": "01a0e179-0968-7cbd-8af3-527a65dc2202",
       "address": "decisions/2026-google-cloud-capped",
       "type": "decision",
@@ -3314,6 +3688,314 @@
       ],
       "owner": null,
       "path": "model/decisions/2026-in-the-open.md"
+    },
+    {
+      "id": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "address": "decisions/2026-privacy-page-built-from-the-model",
+      "type": "decision",
+      "name": "blust.ch's privacy page is built from the model",
+      "tagline": "The privacy page on blust.ch is built from this model's data processors, processing activities and stored items, at the pinned commit the site draws, so what the page names is what the model holds and a correction is made once, in the model.",
+      "fields": {
+        "id": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+        "source": "Local",
+        "decided": "2026-10-04",
+        "kind": "Data protection",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Core 0.60.0 gave the model types for what a privacy page discloses, and the page had drifted from what the site and the chat do: it named neither Google Cloud, which runs the chat and keeps its questions, nor the chat-facts key, and still said that everything stored was listed. Either the page is corrected by hand and kept in step by hand, or it is built from the model.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Correct the page by hand now and keep it in step by hand",
+                  "That is how it drifted: the facts were written in the page and in the code, and nothing compared them. The model would be a third copy to keep in step."
+                ],
+                [
+                  "Leave the page as it is and keep the model as the record",
+                  "A visitor reads the page and not the model, so the page would go on telling them less than the company knows."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Correct the page by hand now and keep it in step by hand",
+                "That is how it drifted: the facts were written in the page and in the code, and nothing compared them. The model would be a third copy to keep in step."
+              ],
+              [
+                "Leave the page as it is and keep the model as the record",
+                "A visitor reads the page and not the model, so the page would go on telling them less than the company knows."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The model is the master: a page built from it cannot name less than the model holds, and a fact corrected in the model reaches the page on the next build. The site already builds its model pages from a pinned commit of this model, so the privacy page joins a build that exists rather than starting one.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The site gains a build for the privacy page from the processors, activities and stored items at its pinned commit; the prose around them stays written by hand. Until that build exists the page stays out of step with the model, without Google Cloud and the chat-facts key. The call stays right for as long as every key a surface sets and every party that receives a visitor's data has a page in the model.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "surface",
+                  "blust.ch website",
+                  "",
+                  "its Privacy page is built from the model"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "surface",
+                "blust.ch website",
+                "",
+                "its Privacy page is built from the model"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The privacy page",
+                  "https://blust.ch/privacy/"
+                ],
+                [
+                  "The rule that the model is the master, R17",
+                  "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The privacy page",
+                "https://blust.ch/privacy/"
+              ],
+              [
+                "The rule that the model is the master, R17",
+                "https://github.com/companygraph/meta-model/blob/main/core/CONVENTIONS.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-privacy-page-built-from-the-model.md"
+    },
+    {
+      "id": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "address": "decisions/2026-the-chat-runs-where-anthropic-chooses",
+      "type": "decision",
+      "name": "The chat's requests run where Anthropic chooses",
+      "tagline": "The chat lets the Anthropic API run each request in any geography it chooses, at the standard rate, and says so: a visitor's message may be processed outside the United States, and what Anthropic keeps of it is stored there.",
+      "fields": {
+        "id": "01a108dd-b337-75af-a13b-6676d83aca7f",
+        "source": "Local",
+        "decided": "2026-10-04",
+        "kind": "Data protection",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Anthropic runs a request in any geography it chooses unless the request names the United States, which costs 1.1 times the standard rate. Naming it would make the country a visitor's message goes to exact; the question was whether that is worth the price.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Name the United States on every request",
+                  "It makes the country exact for a tenth more on every answer, and the chat's answers are not worth more because of it."
+                ],
+                [
+                  "Claude on Vertex AI in a European region, beside the chat in Zürich",
+                  "The project holds no Vertex quota for it, so it could not be run."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Name the United States on every request",
+                "It makes the country exact for a tenth more on every answer, and the chat's answers are not worth more because of it."
+              ],
+              [
+                "Claude on Vertex AI in a European region, beside the chat in Zürich",
+                "The project holds no Vertex quota for it, so it could not be run."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "The standard rate wins, and what is given up is said rather than hidden: the privacy page and the model name the United States as where Anthropic stores what it keeps, and say that the processing itself may happen elsewhere.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The deployment's chat.json names no region, so the Anthropic workspace's default, any geography, applies. The privacy page and the model's Anthropic page must not say that processing happens in the United States. The call is weighed again if the price of naming a region changes, if Anthropic offers a region closer to Switzerland, or if a visitor's data ever needs more than the chat holds today.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "data-processor",
+                  "Anthropic",
+                  "",
+                  "says its processing may happen anywhere"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "data-processor",
+                "Anthropic",
+                "",
+                "says its processing may happen anywhere"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The deployment's chat configuration",
+                  "https://github.com/robertblust/mcp-blust-ch/blob/main/chat/chat.json"
+                ],
+                [
+                  "Anthropic's data residency",
+                  "https://platform.claude.com/docs/en/manage-claude/data-residency"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The deployment's chat configuration",
+                "https://github.com/robertblust/mcp-blust-ch/blob/main/chat/chat.json"
+              ],
+              [
+                "Anthropic's data residency",
+                "https://platform.claude.com/docs/en/manage-claude/data-residency"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-the-chat-runs-where-anthropic-chooses.md"
     },
     {
       "id": "01a0dd50-37a8-72d9-96d5-554cc76a5bb3",
@@ -6104,6 +6786,138 @@
       "path": "model/processes/narrating/tracks/clip.md"
     },
     {
+      "id": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "address": "processing-activities/answering-in-the-chat",
+      "type": "processing-activity",
+      "name": "Answering in the chat",
+      "tagline": "Answering the question a visitor sends in the chat, from what the model says.",
+      "fields": {
+        "id": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+        "source": "Local",
+        "legal-basis": "legitimate-interests",
+        "retention": "The conversation is kept only in the visitor's browser tab and ends when the tab closes",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Data subjects",
+          "text": "- Visitors who open the chat and send a message",
+          "tables": []
+        },
+        {
+          "heading": "Personal data",
+          "text": "- What the visitor writes in a message, and the earlier messages of the same conversation\n- The visitor's address, to refuse an address that sends too many messages in an hour",
+          "tables": []
+        },
+        {
+          "heading": "Processors",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Processor",
+                "Receives"
+              ],
+              "rows": [
+                [
+                  "Google Cloud",
+                  "The messages and the visitor's address, on the way to the answer"
+                ],
+                [
+                  "Anthropic",
+                  "The message and the earlier messages of the same conversation"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Processor",
+              "Receives"
+            ],
+            "rows": [
+              [
+                "Google Cloud",
+                "The messages and the visitor's address, on the way to the answer"
+              ],
+              [
+                "Anthropic",
+                "The message and the earlier messages of the same conversation"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processing-activities/answering-in-the-chat.md"
+    },
+    {
+      "id": "01a108dc-fd15-708e-b4a7-735d8fc5592e",
+      "address": "processing-activities/keeping-the-chat-s-questions",
+      "type": "processing-activity",
+      "name": "Keeping the chat's questions",
+      "tagline": "Keeping each question the chat was asked, and whether the model could answer it, so that the person who runs the site sees what the model cannot yet say.",
+      "fields": {
+        "id": "01a108dc-fd15-708e-b4a7-735d8fc5592e",
+        "source": "Local",
+        "legal-basis": "legitimate-interests",
+        "retention": "Ninety days, and the weekly report made from the questions is gone before any question it holds",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Data subjects",
+          "text": "- Visitors who open the chat and send a message",
+          "tables": []
+        },
+        {
+          "heading": "Personal data",
+          "text": "- The question a visitor sent, kept without their address and without the answer",
+          "tables": []
+        },
+        {
+          "heading": "Processors",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Processor",
+                "Receives"
+              ],
+              "rows": [
+                [
+                  "Google Cloud",
+                  "The question and whether the model could answer it, kept in its Zürich region with the weekly report made from them"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Processor",
+              "Receives"
+            ],
+            "rows": [
+              [
+                "Google Cloud",
+                "The question and whether the model could answer it, kept in its Zürich region with the weekly report made from them"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/processing-activities/keeping-the-chat-s-questions.md"
+    },
+    {
       "id": "01a0c5d1-a530-7cf0-a47d-80e069b18bf0",
       "address": "products/mental-model",
       "type": "product",
@@ -7932,6 +8746,21 @@
                   "Building fast is solved. Deciding well is not."
                 ],
                 [
+                  "Public speaking",
+                  "Gave a narrated talk in which CompanyGraph describes its own Obsidian plugin from the pages its model holds about it, in German and English with a PDF of each.",
+                  "CompanyGraph explains its own Obsidian plugin"
+                ],
+                [
+                  "Public speaking",
+                  "Gave a narrated talk on how far a company's model reaches, five levels from one command to a model the checks, an agent and a website are drawn from, in German and English with a PDF of each.",
+                  "From one command to fully integrated"
+                ],
+                [
+                  "Public speaking",
+                  "Gave a narrated talk on which of the five things called a model a company keeps and which it can replace, in German and English with a PDF of each.",
+                  "What stays when the model changes"
+                ],
+                [
                   "Requirements engineering",
                   "Owned the Analysis & Design discipline in UBS Wealth Management & Business Banking's RUP rollout, replacing the proprietary process with a market-standard one, writing its modeling methodology in Rational Method Composer and coaching the division's teams into it.",
                   "Solution Manager, Software Engineering — Analysis & Design"
@@ -8135,6 +8964,21 @@
                   "Storytelling",
                   "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
                   "Building fast is solved. Deciding well is not."
+                ],
+                [
+                  "Storytelling",
+                  "Let the product describe its own feature, every claim taken from the plugin's page or a page it names and the pages named on each slide, with the windows said to be reconstructions.",
+                  "CompanyGraph explains its own Obsidian plugin"
+                ],
+                [
+                  "Storytelling",
+                  "Told five levels through one change that climbs them all, the first pack released that day, and closed on where the listener stands rather than on a pitch.",
+                  "From one command to fully integrated"
+                ],
+                [
+                  "Storytelling",
+                  "Told five meanings of one word as four layers under one rule, fixed one decision at a time before the deck, and closed on the line the talk is named for.",
+                  "What stays when the model changes"
                 ],
                 [
                   "Storytelling",
@@ -9118,6 +9962,21 @@
                 "Building fast is solved. Deciding well is not."
               ],
               [
+                "Public speaking",
+                "Gave a narrated talk in which CompanyGraph describes its own Obsidian plugin from the pages its model holds about it, in German and English with a PDF of each.",
+                "CompanyGraph explains its own Obsidian plugin"
+              ],
+              [
+                "Public speaking",
+                "Gave a narrated talk on how far a company's model reaches, five levels from one command to a model the checks, an agent and a website are drawn from, in German and English with a PDF of each.",
+                "From one command to fully integrated"
+              ],
+              [
+                "Public speaking",
+                "Gave a narrated talk on which of the five things called a model a company keeps and which it can replace, in German and English with a PDF of each.",
+                "What stays when the model changes"
+              ],
+              [
                 "Requirements engineering",
                 "Owned the Analysis & Design discipline in UBS Wealth Management & Business Banking's RUP rollout, replacing the proprietary process with a market-standard one, writing its modeling methodology in Rational Method Composer and coaching the division's teams into it.",
                 "Solution Manager, Software Engineering — Analysis & Design"
@@ -9321,6 +10180,21 @@
                 "Storytelling",
                 "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
                 "Building fast is solved. Deciding well is not."
+              ],
+              [
+                "Storytelling",
+                "Let the product describe its own feature, every claim taken from the plugin's page or a page it names and the pages named on each slide, with the windows said to be reconstructions.",
+                "CompanyGraph explains its own Obsidian plugin"
+              ],
+              [
+                "Storytelling",
+                "Told five levels through one change that climbs them all, the first pack released that day, and closed on where the listener stands rather than on a pitch.",
+                "From one command to fully integrated"
+              ],
+              [
+                "Storytelling",
+                "Told five meanings of one word as four layers under one rule, fixed one decision at a time before the deck, and closed on the line the talk is named for.",
+                "What stays when the model changes"
               ],
               [
                 "Storytelling",
@@ -11828,7 +12702,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Context\n\n- Extracted the meta-model from two instances that never knew about each other, a company of 25 people and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n\n### Leadership\n\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English with a deck and a PDF in each, and put it in front of a professional network with a stated outcome each way.\n- Put it up for validation in the open as one of two ideas: the meta-model, the graph of Markdown, the tooling with the server and the talks with the example are the open substance, and consulting is the one part that could ever earn; whether it will is the experiment.\n\n### Engineering\n\n- Published the core as one shipped unit — a schema per type and numbered conventions that make the graph checkable — with a worked example company and an instance parser, released by tag with a manifest per release.\n- Built the reference instance from it: this profile, its experiences, its skills on a proficiency ladder and its values, every claim traced to an experience that shows it.\n- Gated the instance on the checks the meta-model ships as a reusable workflow, so a change that breaks a rule cannot merge.\n- Wrote an MCP server that serves any instance to an agent through read-only tools, every answer naming the model commit it was read from, and deployed it for the reference instance at mcp.blust.ch, listed in the MCP Registry, its name, description and instructions written from the model rather than by hand.\n- Defined that deployment on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand.\n- Made the deployment prove itself by calling a tool over the live endpoint, since the platform answers a health path on its own.\n- Added a test that fails the build when the lockfile resolves an older release than the pin names, after a stale one had built green.\n- Shipped the tooling inside the meta-model as one command that, run bare, opens a menu: it makes an instance that passes the checks on its first day, checks it, moves its vendored core to a newer release and installs the Obsidian plugin.\n- Wrote the Obsidian plugin, which bundles the meta-model's own checker, so a page shows what breaks while it is edited and a new rule in core reaches the editor without code of its own.\n- Described CompanyGraph in its own vocabulary as a second instance, the first with no person in it, drawn on companygraph.io and served at mcp.companygraph.io.\n- Wrote a chat over any instance's MCP host that answers a visitor from what the tools return, naming and linking the entity each claim rests on, and put it on every prose page of blust.ch, companygraph.io and guestgraph.io.\n\n### Ways of working\n\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Wrote a reviewed specification before every plan and every build, for the meta-model, its tooling and this instance, so what was asked for was settled before an agent built it.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.",
+          "text": "### Context\n\n- Extracted the meta-model from two instances that never knew about each other, a multi-person company and a company of one, which had arrived at the same shape: one Markdown file per entity, YAML frontmatter and a body, in a folder named for its type, with a folder of schemas beside it.\n- Came to it the second time. The Flatland CDO Server carried a model of a company from 2014, served over an API and true for as long as the server ran; this one is Markdown a person reads and edits, in a repository with a history, true for as long as the files exist.\n\n### Leadership\n\n- Published it under Apache 2.0 as open core with a billing model and a narrated introduction talk in German and English with a deck and a PDF in each, and put it in front of a professional network with a stated outcome each way.\n- Put it up for validation in the open as one of two ideas: the meta-model, the graph of Markdown, the tooling with the server and the talks with the example are the open substance, and consulting is the one part that could ever earn; whether it will is the experiment.\n\n### Engineering\n\n- Published the core as one shipped unit — a schema per type and numbered conventions that make the graph checkable — with a worked example company and an instance parser, released by tag with a manifest per release.\n- Built the reference instance from it: this profile, its experiences, its skills on a proficiency ladder and its values, every claim traced to an experience that shows it.\n- Gated the instance on the checks the meta-model ships as a reusable workflow, so a change that breaks a rule cannot merge.\n- Wrote an MCP server that serves any instance to an agent through read-only tools, every answer naming the model commit it was read from, and deployed it for the reference instance at mcp.blust.ch, listed in the MCP Registry, its name, description and instructions written from the model rather than by hand.\n- Defined that deployment on Google Cloud in Terraform, planned on every pull request and applied by GitHub Actions on merge, with only a one-time bootstrap applied by hand.\n- Made the deployment prove itself by calling a tool over the live endpoint, since the platform answers a health path on its own.\n- Added a test that fails the build when the lockfile resolves an older release than the pin names, after a stale one had built green.\n- Shipped the tooling inside the meta-model as one command that, run bare, opens a menu: it makes an instance that passes the checks on its first day, checks it, moves its vendored core to a newer release and installs the Obsidian plugin.\n- Wrote the Obsidian plugin, which bundles the meta-model's own checker, so a page shows what breaks while it is edited and a new rule in core reaches the editor without code of its own.\n- Described CompanyGraph in its own vocabulary as a second instance, whose subject is a company rather than a person, drawn on companygraph.io and served at mcp.companygraph.io.\n- Wrote a chat over any instance's MCP host that answers a visitor from what the tools return, naming and linking the entity each claim rests on, and put it on every prose page of blust.ch, companygraph.io and guestgraph.io.\n\n### Ways of working\n\n- Wrote the conventions for the agents that would work in an instance, encoding the failure modes seen before: an unresolvable reference is an error rather than a warning, and every validation pass names what it did not check.\n- Wrote a reviewed specification before every plan and every build, for the meta-model, its tooling and this instance, so what was asked for was settled before an agent built it.\n- Built it through the agent seats the model defines, each under its own rulebook and none of them deciding, with the Owner reviewing and merging.",
           "tables": []
         },
         {
@@ -12657,6 +13531,81 @@
       }
     },
     {
+      "id": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "address": "profiles/robert-blust/experiences/2026-talk-from-one-command-to-fully-integrated",
+      "type": "experience",
+      "name": "From one command to fully integrated",
+      "tagline": "A narrated talk that walks how far a company's model reaches, level by level, from the first command to a model that the checks, an agent and a website are all drawn from.",
+      "fields": {
+        "id": "01a107f1-8d8b-70ef-aa69-569544af9433",
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-10-02",
+        "end": "2026-10-02",
+        "url": "https://companygraph.io/talks/levels/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Platform engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it on Oct 2, 2026 as a talk on companygraph.io, the day the first pack was released, on five levels that each read the one model and keep no second copy of it.\n\n### Ways of working\n\n- Held every level to what is real that day and named under each slide the pages of the model it rests on.\n- Told the release of the first pack as the case that climbs the whole ladder, from the one command that took it to the site, the server and the editor each moving one pin, so the levels are shown working on the company that ships them.\n\n### Sharing\n\n- Set out the five levels: model, one command that writes an instance; gated, the same check on every pull request at the release the manifest names; governed, the repositories around the model in one form with what each takes from another declared; served, a read-only server and a chat that answer at a named commit; published, pages drawn from the same files.\n- Showed governance as pages of the model too: a rule says what must happen and binds roles, a risk names its cause, consequence and owner, and a control mitigates the one or enforces the other, carried out by a person or pointing at the hook or workflow that does it.\n- Named pins as what holds the levels together, each level taking the one below at a tag or a commit and moving only when someone decides, and told the day an unmoved pin turned every pull request red and one moved line fixed them all.\n- Closed on where a listener stands rather than on a pitch: a model with a check is already worth having, each level pays for itself before the next, and a level that does not fit is worth being told.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://companygraph.io/talks/levels/levels-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://companygraph.io/talks/levels/levels-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://companygraph.io/talks/levels/levels-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://companygraph.io/talks/levels/levels-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-from-one-command-to-fully-integrated.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-10-02",
+        "end": "2026-10-02"
+      }
+    },
+    {
       "id": "01a0d734-ec88-76d9-a733-f735586f00f5",
       "address": "profiles/robert-blust/experiences/2026-talk-guestgraph-an-introduction",
       "type": "experience",
@@ -12804,6 +13753,156 @@
         "kind": "Community",
         "start": "2026-08",
         "end": "2026-08"
+      }
+    },
+    {
+      "id": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "address": "profiles/robert-blust/experiences/2026-talk-the-obsidian-plugin",
+      "type": "experience",
+      "name": "CompanyGraph explains its own Obsidian plugin",
+      "tagline": "A narrated talk in which CompanyGraph describes its own Obsidian plugin, pane by pane and feature by feature, from the pages its own model holds about it.",
+      "fields": {
+        "id": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-09-30",
+        "end": "2026-09-30",
+        "url": "https://companygraph.io/talks/obsidian-plugin/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "Model-driven engineering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it on Sep 30, 2026 as a talk on companygraph.io, opening on the plugin's own page in the model it edits and ending on where the plugin stops.\n\n### Ways of working\n\n- Built every claim from the plugin's page in the model or a page that page names, a concept, a decision or a role, and named those pages at the foot of each slide, so a listener checks the talk against the model rather than the speaker.\n- Showed the plugin at work in drawn reconstructions rather than recordings, said so in the opening, and took the names in them from the real model; the one rename it shows is said to be a demonstration, with nothing in the model renamed.\n\n### Sharing\n\n- Opened on why an instance opens as a vault with no file changed, and on what Obsidian does not know, the schemas: the plugin runs the checks of the meta-model release it bundles against the core the vault vendored, and refuses a vendored core newer than that.\n- Walked the plugin through its three panes and the editor: a failure marked on the line it is written, the references that name an entity and the ones it names, and the schema's writing rules beside the cursor, moving with it.\n- Showed the editor offering what the schema declares and only that, a declared name read as a link, a missing declared section drawn where it belongs, a rename that follows every reference, and an id set once and locked.\n- Tied each behavior to the decision behind it: a reference resolves by its declared type and never by name alone, a frontmatter field is closed while a section is open, and core is vendored at a release the manifest names.\n- Closed on what the plugin deliberately does not claim: it reports compliance with the meta-model and nothing about the writing rules, because a check that pretended to judge prose would be believed and wrong, so the editor tells early, the CI decides and a person approves.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://companygraph.io/talks/obsidian-plugin/obsidian-plugin-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://companygraph.io/talks/obsidian-plugin/obsidian-plugin-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://companygraph.io/talks/obsidian-plugin/obsidian-plugin-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://companygraph.io/talks/obsidian-plugin/obsidian-plugin-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-the-obsidian-plugin.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-09-30",
+        "end": "2026-09-30"
+      }
+    },
+    {
+      "id": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "address": "profiles/robert-blust/experiences/2026-talk-what-stays",
+      "type": "experience",
+      "name": "What stays when the model changes",
+      "tagline": "A narrated talk that sorts the five things CompanyGraph calls a model into what a company keeps and what it can replace, and ends on the practices that follow.",
+      "fields": {
+        "id": "01a107e9-01a8-79f7-be52-ad3396698f44",
+        "source": "Local",
+        "kind": "Community",
+        "start": "2026-10-04",
+        "end": "2026-10-04",
+        "url": "https://companygraph.io/talks/what-stays/",
+        "role": "Speaker",
+        "skills": [
+          "Public speaking",
+          "Storytelling",
+          "AI governance"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Achievements",
+          "text": "### Context\n\n- Gave it on Oct 4, 2026 as a talk on companygraph.io, built on four layers and one rule: each decision goes to the lowest layer that can make it, code first, then System One, then System Two, then a person.\n\n### Ways of working\n\n- Fixed the frame one decision at a time before the deck was drafted, and dropped a third frame of maturity levels that had been considered, so the talk carries one rule and not two.\n- Credited the ideas it borrows on a slide of their own: TypeSafe, who call their decision model Jev a System One model, and System One and System Two as Stanovich and West first named them and Kahneman made them known.\n- Put the page the talk rests on into the model before the deck: the feature on a decision model asking each page its schema's writing rules, named for the capability and not the vendor that supplies it.\n\n### Sharing\n\n- Opened on the word itself: around CompanyGraph a model names five things, two of them models that learned and three of them files a company keeps, the meta-model, its own mental model and the graph drawn from it.\n- Gave each layer its job: the check decides what code can prove, the System One judge turns each writing rule into a typed question and advises without changing anything, the System Two models draft and read, and the Owner's word merges, because a pass that finds nothing approves nothing.\n- Marked each replaceable part as replaceable today or by design, the agent over MCP and the editor today, the System One and System Two models and the graph database by design, against what stays fixed: the meta-model, the mental model, the check, the rules and decisions and a person's approval.\n- Showed why a model is pinned and measured against the same company before a newer one is named, from the one file where the tooling names its judge.\n- Closed on six practices and one line: the model you will change most often is the one you should depend on least, so the next one is a pin you move and not a project you start.\n- Named on every slide the pages of the model it rests on, so a listener can check each claim against the source.\n- Published it as a self-contained bilingual deck with a transport bar, narration recorded from the speaker notes in each language and a PDF of each.",
+          "tables": []
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Deck as PDF, English",
+                  "https://companygraph.io/talks/what-stays/what-stays-en.pdf"
+                ],
+                [
+                  "Deck as PDF, German",
+                  "https://companygraph.io/talks/what-stays/what-stays-de.pdf"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Deck as PDF, English",
+                "https://companygraph.io/talks/what-stays/what-stays-en.pdf"
+              ],
+              [
+                "Deck as PDF, German",
+                "https://companygraph.io/talks/what-stays/what-stays-de.pdf"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "path": "model/profiles/robert-blust/experiences/2026-talk-what-stays.md",
+      "stamp": {
+        "kind": "Community",
+        "start": "2026-10-04",
+        "end": "2026-10-04"
       }
     },
     {
@@ -18516,6 +19615,183 @@
       "path": "model/sources/local.md"
     },
     {
+      "id": "01a108dd-57ad-70ae-b4ef-65a0a7e66708",
+      "address": "stored-items/chat",
+      "type": "stored-item",
+      "name": "chat",
+      "tagline": "The conversation in this tab, so following a link does not lose it.",
+      "fields": {
+        "id": "01a108dd-57ad-70ae-b4ef-65a0a7e66708",
+        "source": "Local",
+        "mechanism": "session-storage",
+        "necessity": "strictly-necessary",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ],
+        "activity": "Answering in the chat"
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat.md"
+    },
+    {
+      "id": "01a108dd-85a4-7a5b-8055-872abe683db8",
+      "address": "stored-items/chat-facts",
+      "type": "stored-item",
+      "name": "chat-facts",
+      "tagline": "What the chat read from the model's file to offer its questions, so the next page draws them at once.",
+      "fields": {
+        "id": "01a108dd-85a4-7a5b-8055-872abe683db8",
+        "source": "Local",
+        "mechanism": "session-storage",
+        "necessity": "optional",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-facts.md"
+    },
+    {
+      "id": "01a108dd-7686-73f5-bffd-e044b4dde4f2",
+      "address": "stored-items/chat-pictures",
+      "type": "stored-item",
+      "name": "chat-pictures",
+      "tagline": "The figures the chat drew in its answers in this tab.",
+      "fields": {
+        "id": "01a108dd-7686-73f5-bffd-e044b4dde4f2",
+        "source": "Local",
+        "mechanism": "session-storage",
+        "necessity": "optional",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-pictures.md"
+    },
+    {
+      "id": "01a108dd-6751-7040-bd3c-4bb5ecf70bc6",
+      "address": "stored-items/chat-size",
+      "type": "stored-item",
+      "name": "chat-size",
+      "tagline": "How big the visitor made the chat panel, in pixels.",
+      "fields": {
+        "id": "01a108dd-6751-7040-bd3c-4bb5ecf70bc6",
+        "source": "Local",
+        "mechanism": "session-storage",
+        "necessity": "optional",
+        "surfaces": [
+          "chat.blust.ch chat"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/chat-size.md"
+    },
+    {
+      "id": "01a108dd-0bb2-7a6b-a92b-8c6de9602908",
+      "address": "stored-items/lang",
+      "type": "stored-item",
+      "name": "lang",
+      "tagline": "The language the visitor chose, `de` or `en`, so the next page opens in it.",
+      "fields": {
+        "id": "01a108dd-0bb2-7a6b-a92b-8c6de9602908",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "blust.ch website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/lang.md"
+    },
+    {
+      "id": "01a108dd-29bb-723d-9a2c-fe0910a7b464",
+      "address": "stored-items/stage-card",
+      "type": "stored-item",
+      "name": "stage-card",
+      "tagline": "How wide the visitor left the details panel on the model pages, in pixels.",
+      "fields": {
+        "id": "01a108dd-29bb-723d-9a2c-fe0910a7b464",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "blust.ch website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/stage-card.md"
+    },
+    {
+      "id": "01a108dd-38e2-7844-ac0c-00ab3e326e58",
+      "address": "stored-items/stage-card-modal",
+      "type": "stored-item",
+      "name": "stage-card-modal",
+      "tagline": "How wide the visitor left the details panel in the expanded view, in pixels.",
+      "fields": {
+        "id": "01a108dd-38e2-7844-ac0c-00ab3e326e58",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "blust.ch website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/stage-card-modal.md"
+    },
+    {
+      "id": "01a108dd-1aa3-7441-856c-4867aba66019",
+      "address": "stored-items/theme",
+      "type": "stored-item",
+      "name": "theme",
+      "tagline": "The appearance the visitor chose, light or dark, so the next page opens in it.",
+      "fields": {
+        "id": "01a108dd-1aa3-7441-856c-4867aba66019",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "blust.ch website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/theme.md"
+    },
+    {
+      "id": "01a108dd-4881-7bcb-9da5-d9d317141d29",
+      "address": "stored-items/timeline-kinds",
+      "type": "stored-item",
+      "name": "timeline-kinds",
+      "tagline": "Which kinds of experience the visitor chose to show or hide on the timeline.",
+      "fields": {
+        "id": "01a108dd-4881-7bcb-9da5-d9d317141d29",
+        "source": "Local",
+        "mechanism": "local-storage",
+        "necessity": "optional",
+        "duration": "Until the visitor clears it",
+        "surfaces": [
+          "blust.ch website"
+        ]
+      },
+      "sections": [],
+      "owner": null,
+      "path": "model/stored-items/timeline-kinds.md"
+    },
+    {
       "id": "01a0dda0-8e10-7d01-a25b-a3cc16e69728",
       "address": "strategic-objectives/a-continuing-education-master-s-in-ai-leadership",
       "type": "strategic-objective",
@@ -18632,7 +19908,7 @@
       "sections": [
         {
           "heading": "What it shows",
-          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks this site serves, each an experience of the profile, in both languages with a PDF.\n- **Blog** — the blog: longer writing, posts in both languages, each post also an experience of the profile.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Ask the model** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
+          "text": "- **Home** — the profile's tagline, the identity's name, and the way into the talks and the ideas.\n- **Team** — the process's phases as a board of the roles that own, execute, support and\n  approve each, and the profiles that hold those roles.\n- **Principles** — the vision and the values.\n- **Surfaces** — every surface the model records and how each is made, by hand or by a build\n  that reads a pinned commit.\n- **Ideas** — the profile's ongoing community experiences that are open core, each with what it has shipped, which part is open and which one part could earn, and the questions their validation has to answer.\n- **Model** — the company of one, drawn: the model's entities and edges as a graph from `model.json`.\n- **Timeline** — the profile's experiences, drawn from `model.json`.\n- **Talks** — the narrated talks this site serves, each an experience of the profile, in both languages with a PDF.\n- **Blog** — the blog: longer writing, posts in both languages, each post also an experience of the profile.\n- **Privacy** — what leaves a visitor's browser and what stays in it, listed in full from the model's data processors, processing activities and stored items.\n- **model.json** — the parsed model at the pinned commit, published as a dataset.\n- **Ask the model** — the button at the foot of every prose page and the panel it opens, answered by the chat.blust.ch chat.\n- **Structured data** — the person, the dataset and the site that every page describes to a\n  crawler, with the person's addresses from the profile's `## Also at`.",
           "tables": []
         },
         {
@@ -20669,6 +21945,33 @@
     },
     {
       "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Gave a narrated talk in which CompanyGraph describes its own Obsidian plugin from the pages its model holds about it, in German and English with a PDF of each.",
+        "Experience": "01a107f1-8d4f-73c0-a860-6331fe24c625"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Gave a narrated talk on how far a company's model reaches, five levels from one command to a model the checks, an agent and a website are drawn from, in German and English with a PDF of each.",
+        "Experience": "01a107f1-8d8b-70ef-aa69-569544af9433"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Gave a narrated talk on which of the five things called a model a company keeps and which it can replace, in German and English with a PDF of each.",
+        "Experience": "01a107e9-01a8-79f7-be52-ad3396698f44"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
       "to": "01a04545-8c88-7da8-8092-3a9b020ed7ca",
       "via": "Evidence.Skill",
       "attrs": {
@@ -21025,6 +22328,33 @@
       "attrs": {
         "What it shows": "Told the career break as claim, proof and answer, fixed before drafting what the talk may say, and put every figure where a listener can check it.",
         "Experience": "01a0d734-ec88-7651-ae39-a4cd5f425855"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Let the product describe its own feature, every claim taken from the plugin's page or a page it names and the pages named on each slide, with the windows said to be reconstructions.",
+        "Experience": "01a107f1-8d4f-73c0-a860-6331fe24c625"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Told five levels through one change that climbs them all, the first pack released that day, and closed on where the listener stands rather than on a pitch.",
+        "Experience": "01a107f1-8d8b-70ef-aa69-569544af9433"
+      }
+    },
+    {
+      "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "Evidence.Skill",
+      "attrs": {
+        "What it shows": "Told five meanings of one word as four layers under one rule, fixed one decision at a time before the deck, and closed on the line the talk is named for.",
+        "Experience": "01a107e9-01a8-79f7-be52-ad3396698f44"
       }
     },
     {
@@ -29587,6 +30917,432 @@
       "from": "01a101e9-6374-7d23-8ab4-d3605dda358b",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a0b158-7700-7486-89aa-fea53a6808ef",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a0b158-7700-766e-be0d-ebef4b52ccfe",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a0b158-7700-7bd4-864e-18279f02efd6",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a0638c-9240-7ca2-a03b-09262d9aec18",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a043c7-35a0-74b8-a4e3-5bcf1db6a7b7",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107e9-01a8-79f7-be52-ad3396698f44",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a0b158-7700-7486-89aa-fea53a6808ef",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a0b158-7700-766e-be0d-ebef4b52ccfe",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a0b158-7700-7bd4-864e-18279f02efd6",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a0638c-9240-7ca2-a03b-09262d9aec18",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a03d94-6310-7058-a08a-a1ee07b25c0a",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d4f-73c0-a860-6331fe24c625",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a0b158-7700-7486-89aa-fea53a6808ef",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a0b158-7700-766e-be0d-ebef4b52ccfe",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a0b158-7700-7bd4-864e-18279f02efd6",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a0638c-9240-7ca2-a03b-09262d9aec18",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a043c7-35a0-798d-9f25-5682a1969449",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a04545-8c88-7af1-8712-82def4131167",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a080bd-3658-709d-8585-5b561d8a6156",
+      "via": "skills",
+      "attrs": {}
+    },
+    {
+      "from": "01a107f1-8d8b-70ef-aa69-569544af9433",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-de29-78aa-9804-a6150ebfabad",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "to": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The message and the earlier messages of the same conversation"
+      }
+    },
+    {
+      "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "to": "01a108dc-de29-78aa-9804-a6150ebfabad",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The messages and the visitor's address, on the way to the answer"
+      }
+    },
+    {
+      "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-fd15-708e-b4a7-735d8fc5592e",
+      "to": "01a108dc-de29-78aa-9804-a6150ebfabad",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The question and whether the model could answer it, kept in its Zürich region with the weekly report made from them"
+      }
+    },
+    {
+      "from": "01a108dc-fd15-708e-b4a7-735d8fc5592e",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dc-fd15-708e-b4a7-735d8fc5592e",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-0bb2-7a6b-a92b-8c6de9602908",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-0bb2-7a6b-a92b-8c6de9602908",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-1aa3-7441-856c-4867aba66019",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-1aa3-7441-856c-4867aba66019",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-29bb-723d-9a2c-fe0910a7b464",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-29bb-723d-9a2c-fe0910a7b464",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-38e2-7844-ac0c-00ab3e326e58",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-38e2-7844-ac0c-00ab3e326e58",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-4881-7bcb-9da5-d9d317141d29",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-4881-7bcb-9da5-d9d317141d29",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-57ad-70ae-b4ef-65a0a7e66708",
+      "to": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "via": "activity",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-57ad-70ae-b4ef-65a0a7e66708",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-57ad-70ae-b4ef-65a0a7e66708",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-6751-7040-bd3c-4bb5ecf70bc6",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-6751-7040-bd3c-4bb5ecf70bc6",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-7686-73f5-bffd-e044b4dde4f2",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-7686-73f5-bffd-e044b4dde4f2",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-85a4-7a5b-8055-872abe683db8",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-85a4-7a5b-8055-872abe683db8",
+      "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
+      "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "How": "keeps naming GitHub in its own prose"
+      }
+    },
+    {
+      "from": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "to": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-a3f6-7a7c-a759-4b923c201e9d",
+      "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "to": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "How": "says its processing may happen anywhere"
+      }
+    },
+    {
+      "from": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "to": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-b337-75af-a13b-6676d83aca7f",
+      "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "to": "01a0ae1c-fb10-70c2-9785-4f89efdedc9f",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "surface",
+        "Owner": "",
+        "How": "its Privacy page is built from the model"
+      }
+    },
+    {
+      "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "to": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
+      "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
+      "via": "status",
       "attrs": {}
     }
   ],

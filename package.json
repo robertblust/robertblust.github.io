@@ -30,11 +30,11 @@
   },
   "devDependencies": {
     "@robertblust/design": "github:robertblust/design#v0.140.0",
-    "companygraph-mcp-server": "github:companygraph/mcp-server#v0.56.0",
+    "companygraph-mcp-server": "github:companygraph/mcp-server#v0.57.0",
     "pdf-lib": "^1.17.1",
     "playwright": "^1.63.0"
   },
   "dependencies": {
-    "companygraph-meta-model": "github:companygraph/meta-model#v0.78.0"
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.80.0"
   }
 }
