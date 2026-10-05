@@ -176,7 +176,8 @@ const PAGES = [
     contains: ["This site collects", "There is no imprint yet"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
-    // fences reads the served HTML for named marker comments, and this page carries none:
+    // fences reads the served HTML for named marker comments, and this page carries none of the
+    // stylesheet fences (its surfaces lineage block is the script design:check holds byte for byte):
     // design tokens, header contract, title contract, prose reset and prose footer are
     // what tokens.css and page.css supply instead. An empty list satisfies the per-page
     // check (nothing named is missing) and runSuite's own gate, which only asks that every
@@ -188,7 +189,7 @@ const PAGES = [
     // read computed style, which a linked stylesheet satisfies exactly as a fenced one did,
     // and stay declared.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: [],
-    internalLinks: true },
+    internalLinks: true, privacyPath: true },
   // The ideas page. Two claims make it worth reading and both are checkable: that each
   // idea has exactly one commercial part, and that nothing on the page reaches off-origin —
   // the privacy note promises the second for the whole site.
