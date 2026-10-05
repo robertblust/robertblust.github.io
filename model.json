@@ -1,5 +1,5 @@
 {
-  "commit": "6611698c200bdb2aca0b17dfd10a68d648927186",
+  "commit": "ea5d067b88ebf4546616d80720aef51a60583c8a",
   "core": "0.60.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -1779,6 +1779,107 @@
       ],
       "owner": null,
       "path": "model/data-processors/google-cloud.md"
+    },
+    {
+      "id": "01a109b7-913b-70d1-bfd2-06622f194382",
+      "address": "data-processors/typesafe",
+      "type": "data-processor",
+      "name": "TypeSafe",
+      "tagline": "Judges whether the model's public pages carry each sentence of a chat answer, from those sentences and the parts of the pages they rest on.",
+      "fields": {
+        "id": "01a109b7-913b-70d1-bfd2-06622f194382",
+        "source": "Local",
+        "legal-name": "TypeSafe AI, Inc.",
+        "countries": [
+          "US"
+        ],
+        "retention": "For as long as necessary for the purpose of the processing, under its own terms",
+        "sub-processor-authorization": "general"
+      },
+      "sections": [
+        {
+          "heading": "Transfers",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Jurisdiction",
+                "Safeguard"
+              ],
+              "rows": [
+                [
+                  "ch",
+                  "Standard contractual clauses, module two, with Swiss courts and the FDPIC for transfers from Switzerland, under Irish governing law"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Jurisdiction",
+              "Safeguard"
+            ],
+            "rows": [
+              [
+                "ch",
+                "Standard contractual clauses, module two, with Swiss courts and the FDPIC for transfers from Switzerland, under Irish governing law"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Data processing addendum",
+                  "https://typesafe.ai/legal/data-processing"
+                ],
+                [
+                  "Privacy policy",
+                  "https://typesafe.ai/legal/privacy-policy"
+                ],
+                [
+                  "Sub-processor list",
+                  "https://trust.typesafe.ai/subprocessors"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Data processing addendum",
+                "https://typesafe.ai/legal/data-processing"
+              ],
+              [
+                "Privacy policy",
+                "https://typesafe.ai/legal/privacy-policy"
+              ],
+              [
+                "Sub-processor list",
+                "https://trust.typesafe.ai/subprocessors"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/data-processors/typesafe.md"
     },
     {
       "id": "01a0e82c-00a8-7628-b40b-3895b42fc979",
@@ -6829,6 +6930,10 @@
                 [
                   "Anthropic",
                   "The message and the earlier messages of the same conversation"
+                ],
+                [
+                  "TypeSafe",
+                  "The answer's sentences and the parts of the model's pages they rest on"
                 ]
               ]
             }
@@ -6847,6 +6952,10 @@
               [
                 "Anthropic",
                 "The message and the earlier messages of the same conversation"
+              ],
+              [
+                "TypeSafe",
+                "The answer's sentences and the parts of the model's pages they rest on"
               ]
             ]
           }
@@ -31093,6 +31202,14 @@
     },
     {
       "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
+      "to": "01a109b7-913b-70d1-bfd2-06622f194382",
+      "via": "Processors.Processor",
+      "attrs": {
+        "Receives": "The answer's sentences and the parts of the model's pages they rest on"
+      }
+    },
+    {
+      "from": "01a108dc-ed94-72eb-8a72-044c73dafdd7",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
@@ -31343,6 +31460,12 @@
       "from": "01a108dd-c2b7-7d88-b4b4-352c9a1e84b4",
       "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
       "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a109b7-913b-70d1-bfd2-06622f194382",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
       "attrs": {}
     }
   ],
