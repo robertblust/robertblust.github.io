@@ -254,7 +254,7 @@ const PAGES = [
   // prose: a page that says every gate is approved by the only human in the company must show
   // exactly that, and must still show it the day the model changes.
   { path: "/processes/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Processes/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE PROCESSES", "A seat is not a person"] },
+    translates: { lang: "de", shows: ["Wie man es liest", "DIE PROZESSE", "Ein Sitz ist kein Mensch"], hides: ["How to read it", "THE PROCESSES", "A seat is not a person"] },
     contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
