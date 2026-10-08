@@ -1,6 +1,6 @@
 {
-  "commit": "1d9b6ffb788d7a4330d6fc315de298ab8435d3eb",
-  "core": "0.61.0",
+  "commit": "3b300167fef22c8c0fbf9a5694bcec139ee869b0",
+  "core": "0.63.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -149,14 +149,14 @@
       "singular": false
     },
     {
-      "type": "role",
-      "folder": "roles",
+      "type": "rule",
+      "folder": "rules",
       "owner": null,
       "singular": false
     },
     {
-      "type": "rule",
-      "folder": "rules",
+      "type": "seat",
+      "folder": "seats",
       "owner": null,
       "singular": false
     },
@@ -1118,7 +1118,7 @@
               ],
               "rows": [
                 [
-                  "role",
+                  "seat",
                   "Reviewer",
                   ""
                 ],
@@ -1139,7 +1139,7 @@
             ],
             "rows": [
               [
-                "role",
+                "seat",
                 "Reviewer",
                 ""
               ],
@@ -1221,17 +1221,17 @@
               ],
               "rows": [
                 [
-                  "role",
+                  "seat",
                   "Controller",
                   ""
                 ],
                 [
-                  "role",
+                  "seat",
                   "Implementer",
                   ""
                 ],
                 [
-                  "role",
+                  "seat",
                   "Surveyor",
                   ""
                 ],
@@ -1252,17 +1252,17 @@
             ],
             "rows": [
               [
-                "role",
+                "seat",
                 "Controller",
                 ""
               ],
               [
-                "role",
+                "seat",
                 "Implementer",
                 ""
               ],
               [
-                "role",
+                "seat",
                 "Surveyor",
                 ""
               ],
@@ -2608,6 +2608,172 @@
       "path": "model/decisions/2026-claude-max-kept-while-used.md"
     },
     {
+      "id": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "address": "decisions/2026-claude-sessions-train-no-model",
+      "type": "decision",
+      "name": "My Claude sessions do not train Anthropic's models",
+      "tagline": "The Claude account I work with, the one the agents that build the work run on, has “Help improve our AI models” switched off, so Anthropic does not use its chats and coding sessions to train and improve its models: not the sessions in which this model, my sites and my products are built, and not the work I do for others.",
+      "fields": {
+        "id": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+        "source": "Local",
+        "decided": "2026-10-06",
+        "kind": "Data protection",
+        "status": "Standing",
+        "by": "Owner"
+      },
+      "sections": [
+        {
+          "heading": "The question",
+          "text": "Anthropic offers the account a setting, “Help improve our AI models”, that allows it to use the account's chats and coding sessions to train and improve its models. One account carries all my work with Claude, my own and the work I do for others, so the setting decides for both at once. It had to be decided before work that is not only mine went through the account.",
+          "tables": []
+        },
+        {
+          "heading": "Alternatives",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Option",
+                "Why not"
+              ],
+              "rows": [
+                [
+                  "Leave the setting on",
+                  "Work I do for others would become material for training a model others use, and that is a call about their information which is not mine to make."
+                ],
+                [
+                  "Leave it on and use a separate account for confidential work",
+                  "The line between the two accounts would be drawn by hand in every session, and one session started in the wrong account puts confidential work where it trains a model; the allowance the plan is sized for would also be split in two."
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Option",
+              "Why not"
+            ],
+            "rows": [
+              [
+                "Leave the setting on",
+                "Work I do for others would become material for training a model others use, and that is a call about their information which is not mine to make."
+              ],
+              [
+                "Leave it on and use a separate account for confidential work",
+                "The line between the two accounts would be drawn by hand in every session, and one session started in the wrong account puts confidential work where it trains a model; the allowance the plan is sized for would also be split in two."
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Why",
+          "text": "One switch covers every session, so nothing depends on my judging, session by session, what a piece of work may be used for. What I give up is a contribution to Anthropic's models that my work does not need; what it protects is work that is partly not mine to give.",
+          "tables": []
+        },
+        {
+          "heading": "Consequences",
+          "text": "The setting stays off for as long as the account carries work that is not mine to give, which gives up whatever my sessions would have added to Anthropic's models, and I read it again whenever Anthropic changes its consumer terms or the setting. What the call does not change is that Anthropic still receives and processes every request the account sends, and keeps what it keeps under its own terms and for its own purposes, as the Anthropic page says. Whether a piece of work I do for others may be given to Claude at all is not mine to decide here. The call stays right for as long as this setting is what decides whether the account's sessions are used to train a model.",
+          "tables": []
+        },
+        {
+          "heading": "Bears on",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner",
+                "How"
+              ],
+              "rows": [
+                [
+                  "data-processor",
+                  "Anthropic",
+                  "",
+                  "may not train its models on the account's sessions"
+                ],
+                [
+                  "decision",
+                  "Claude Max 20x is kept while my use needs it",
+                  "",
+                  "the plan it keeps trains no model on my sessions"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner",
+              "How"
+            ],
+            "rows": [
+              [
+                "data-processor",
+                "Anthropic",
+                "",
+                "may not train its models on the account's sessions"
+              ],
+              [
+                "decision",
+                "Claude Max 20x is kept while my use needs it",
+                "",
+                "the plan it keeps trains no model on my sessions"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Anthropic's consumer terms",
+                  "https://www.anthropic.com/legal/consumer-terms"
+                ],
+                [
+                  "Anthropic's privacy policy",
+                  "https://www.anthropic.com/legal/privacy"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Anthropic's consumer terms",
+                "https://www.anthropic.com/legal/consumer-terms"
+              ],
+              [
+                "Anthropic's privacy policy",
+                "https://www.anthropic.com/legal/privacy"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/decisions/2026-claude-sessions-train-no-model.md"
+    },
+    {
       "id": "01a0e822-4c48-7662-899c-02fa79190451",
       "address": "decisions/2026-commits-by-seat",
       "type": "decision",
@@ -2718,37 +2884,37 @@
               ],
               "rows": [
                 [
-                  "role",
+                  "seat",
                   "Specifier",
                   "",
                   "changed it"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Planner",
                   "",
                   "changed it"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Implementer",
                   "",
                   "changed it"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Writer",
                   "",
                   "changed it"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Translator",
                   "",
                   "changed it"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Narrator",
                   "",
                   "changed it"
@@ -2766,37 +2932,37 @@
             ],
             "rows": [
               [
-                "role",
+                "seat",
                 "Specifier",
                 "",
                 "changed it"
               ],
               [
-                "role",
+                "seat",
                 "Planner",
                 "",
                 "changed it"
               ],
               [
-                "role",
+                "seat",
                 "Implementer",
                 "",
                 "changed it"
               ],
               [
-                "role",
+                "seat",
                 "Writer",
                 "",
                 "changed it"
               ],
               [
-                "role",
+                "seat",
                 "Translator",
                 "",
                 "changed it"
               ],
               [
-                "role",
+                "seat",
                 "Narrator",
                 "",
                 "changed it"
@@ -7221,7 +7387,7 @@
         "id": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
         "source": "Local",
         "nature": "agent",
-        "roles": [
+        "seats": [
           "Specifier",
           "Planner",
           "Controller",
@@ -7253,7 +7419,7 @@
         "id": "01a0d4d8-08f8-79b5-95ca-3a9a9d7a9a61",
         "source": "Local",
         "nature": "agent",
-        "roles": [
+        "seats": [
           "Narrator"
         ]
       },
@@ -7341,7 +7507,7 @@
         "id": "01a0d4d8-08f8-733b-92de-5654fbd0e4d6",
         "source": "Local",
         "nature": "agent",
-        "roles": [
+        "seats": [
           "Narrator"
         ]
       },
@@ -7429,7 +7595,7 @@
         "id": "01a03d9b-e108-7712-830f-6e315eeab5c9",
         "source": "Local",
         "nature": "human",
-        "roles": [
+        "seats": [
           "Owner"
         ],
         "email": "robert@blust.ch",
@@ -10542,7 +10708,7 @@
         "start": "1999-10",
         "end": "2001-03",
         "organization": "UBS AG",
-        "role": "Trainee"
+        "capacity": "Trainee"
       },
       "sections": [
         {
@@ -10793,7 +10959,7 @@
         "end": "2010-10-28",
         "url": "https://wiki.eclipse.org/Eclipse_MDD_Day",
         "organization": "Eclipse Foundation",
-        "role": "Co-Organizer & Speaker",
+        "capacity": "Co-Organizer & Speaker",
         "skills": [
           "Model-driven engineering",
           "Public speaking",
@@ -10959,7 +11125,7 @@
         "start": "2011-08",
         "end": "2014-12",
         "organization": "JUG Switzerland",
-        "role": "Board member",
+        "capacity": "Board member",
         "skills": [
           "Community building"
         ]
@@ -11041,7 +11207,7 @@
         "end": "2012-05-04",
         "url": "https://www.youtube.com/watch?v=53jrNcbd5N0",
         "organization": "Eclipse Foundation",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Data modeling",
           "Model-driven engineering",
@@ -11077,7 +11243,7 @@
         "end": "2012-10-16",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2012/",
         "organization": "Eclipse Foundation",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Integration architecture",
           "Model-driven engineering",
@@ -11154,7 +11320,7 @@
         "end": "2013-11-05",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2013/",
         "organization": "Eclipse Foundation",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Integration architecture",
           "Enterprise architecture",
@@ -11230,7 +11396,7 @@
         "end": "2014-10-31",
         "url": "https://wiki.eclipse.org/Eclipse_Finance_Day_2014/",
         "organization": "JUG Switzerland",
-        "role": "Co-Organizer",
+        "capacity": "Co-Organizer",
         "skills": [
           "Community building"
         ]
@@ -11263,7 +11429,7 @@
         "start": "2014-08",
         "end": "2022-03",
         "url": "https://github.com/robertblust/cdo-server",
-        "role": "Architect and Engineer",
+        "capacity": "Architect and Engineer",
         "skills": [
           "Open-source stewardship",
           "Model-driven engineering",
@@ -11439,7 +11605,7 @@
         "start": "2015-12",
         "end": "2016-09",
         "organization": "Swisscard",
-        "role": "Backend Engineer",
+        "capacity": "Backend Engineer",
         "skills": [
           "Java",
           "Legacy modernization"
@@ -11473,7 +11639,7 @@
         "start": "2015-09",
         "end": "2015-11",
         "organization": "Swisscom",
-        "role": "Integration Architect & Engineer",
+        "capacity": "Integration Architect & Engineer",
         "skills": [
           "Integration architecture",
           "Java",
@@ -11509,7 +11675,7 @@
         "start": "2016-02",
         "end": "2016-09",
         "organization": "Credit Suisse",
-        "role": "Lead Architect & Developer",
+        "capacity": "Lead Architect & Developer",
         "skills": [
           "Model-driven engineering",
           "Data governance",
@@ -11590,7 +11756,7 @@
         "end": "2021-11",
         "url": "https://www.lost-tag.com",
         "organization": "Digibonum AG",
-        "role": "Architect and hands-on lead",
+        "capacity": "Architect and hands-on lead",
         "skills": [
           "Solution architecture",
           "Software modeling (UML, SysML, C4)",
@@ -11668,7 +11834,7 @@
         "end": "2019-05",
         "url": "https://3ap.ch/case_studies/digitale-gesundheitsplattform/",
         "organization": "AXA Health",
-        "role": "Lead Architect & Backend Engineer",
+        "capacity": "Lead Architect & Backend Engineer",
         "skills": [
           "API design",
           "Database design",
@@ -11756,7 +11922,7 @@
         "start": "2018-11",
         "end": "2020-10",
         "organization": "3AP AG",
-        "role": "Architect",
+        "capacity": "Architect",
         "skills": [
           "Solution architecture",
           "Microservices architecture",
@@ -11799,7 +11965,7 @@
         "end": "2019-02",
         "url": "https://3ap.ch/case_studies/networked-first-aid-kit/",
         "organization": "Flawa",
-        "role": "Solution Architect",
+        "capacity": "Solution Architect",
         "skills": [
           "Integration architecture",
           "Solution architecture",
@@ -11881,7 +12047,7 @@
         "start": "2019-04",
         "end": "2021-10",
         "organization": "3AP AG",
-        "role": "Architect and Engineer",
+        "capacity": "Architect and Engineer",
         "skills": [
           "Platform engineering",
           "Cloud architecture",
@@ -11927,7 +12093,7 @@
         "end": "2020-09",
         "url": "https://3ap.ch/case_studies/platform-for-digital-rental/",
         "organization": "Aroov",
-        "role": "Backend & Integration Architect",
+        "capacity": "Backend & Integration Architect",
         "skills": [
           "Database design",
           "Event-driven architecture",
@@ -12007,7 +12173,7 @@
         "end": "2022-03",
         "url": "https://3ap.ch/case_studies/hospitality-platform/",
         "organization": "SV Group",
-        "role": "Lead Architect",
+        "capacity": "Lead Architect",
         "skills": [
           "Process orchestration",
           "Business process modeling (BPMN, DMN)",
@@ -12123,7 +12289,7 @@
         "start": "2020-04",
         "end": "2020-07",
         "organization": "3AP AG",
-        "role": "Architect",
+        "capacity": "Architect",
         "skills": [
           "Solution architecture",
           "Integration architecture",
@@ -12163,7 +12329,7 @@
         "end": "2021-06-03",
         "url": "https://engineering.3ap.ch/post/process-monitoring-with-bpmn/",
         "organization": "3AP AG",
-        "role": "Author",
+        "capacity": "Author",
         "skills": [
           "Business process modeling (BPMN, DMN)",
           "Process orchestration",
@@ -12418,7 +12584,7 @@
         "end": "2022-10-06",
         "url": "https://page.camunda.com/camundacon-2022-on-demand",
         "organization": "Camunda",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Process orchestration",
           "Public speaking"
@@ -12485,7 +12651,7 @@
         "end": "2023-04",
         "url": "https://camunda.com/case-studies/likemagic",
         "organization": "Camunda",
-        "role": "Featured architect",
+        "capacity": "Featured architect",
         "skills": [
           "Process orchestration"
         ]
@@ -12549,7 +12715,7 @@
         "kind": "Project",
         "start": "2026-06-09",
         "end": "2026-09-04",
-        "role": "Architect and Engineer",
+        "capacity": "Architect and Engineer",
         "skills": [
           "Agentic AI development",
           "Context engineering"
@@ -12588,7 +12754,7 @@
         "start": "2026-09-26",
         "end": "2026-09-26",
         "url": "https://blust.ch/blog/deciding-well-solved/",
-        "role": "Author",
+        "capacity": "Author",
         "skills": [
           "Agentic AI development",
           "Spec-driven development"
@@ -12622,7 +12788,7 @@
         "start": "2026-09-30",
         "end": "2026-09-30",
         "url": "https://blust.ch/blog/one-question-answered/",
-        "role": "Author",
+        "capacity": "Author",
         "skills": [
           "Technical writing",
           "Storytelling"
@@ -12695,7 +12861,7 @@
         "kind": "Community",
         "start": "2026-08",
         "url": "https://blust.ch",
-        "role": "Architect and Engineer",
+        "capacity": "Architect and Engineer",
         "skills": [
           "Agentic AI development",
           "Technical writing",
@@ -12768,7 +12934,7 @@
         "kind": "Community",
         "start": "2026-09-09",
         "end": "2026-10-03",
-        "role": "Author",
+        "capacity": "Author",
         "skills": [
           "Storytelling"
         ]
@@ -12877,7 +13043,7 @@
         "kind": "Community",
         "start": "2026-08",
         "url": "https://companygraph.io",
-        "role": "Founder and Architect",
+        "capacity": "Founder and Architect",
         "skills": [
           "Agentic AI development",
           "Context engineering",
@@ -12986,7 +13152,7 @@
         "start": "2026-09-15",
         "end": "2026-09-15",
         "url": "https://robertblust.substack.com/p/build-the-model-first",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13020,7 +13186,7 @@
         "start": "2026-09-18",
         "end": "2026-09-18",
         "url": "https://robertblust.substack.com/p/governance-as-data",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13053,7 +13219,7 @@
         "kind": "Community",
         "start": "2026-07",
         "url": "https://guestgraph.io",
-        "role": "Founder and Architect",
+        "capacity": "Founder and Architect",
         "skills": [
           "Agentic AI development",
           "Software architecture",
@@ -13191,7 +13357,7 @@
         "start": "2026-09-25",
         "end": "2026-09-25",
         "url": "https://robertblust.substack.com/p/building-fast-is-solved-deciding",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13257,7 +13423,7 @@
         "start": "2026-09-28",
         "end": "2026-09-28",
         "url": "https://robertblust.substack.com/p/dein-unternehmen-kompiliert-nicht",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13323,7 +13489,7 @@
         "start": "2026-09-06",
         "end": "2026-09-06",
         "url": "https://robertblust.substack.com/p/turn-your-work-history-into-code",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13357,7 +13523,7 @@
         "start": "2026-09-27",
         "end": "2026-09-27",
         "url": "https://robertblust.substack.com/p/wer-wurde-eingestellt-ich-oder-mein",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13423,7 +13589,7 @@
         "start": "2026-09-28",
         "end": "2026-09-28",
         "url": "https://robertblust.substack.com/p/your-company-doesnt-compile",
-        "role": "Producer",
+        "capacity": "Producer",
         "skills": [
           "Context engineering",
           "Storytelling"
@@ -13489,7 +13655,7 @@
         "start": "2026-08",
         "end": "2026-08",
         "url": "https://companygraph.io/talks/intro/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13564,7 +13730,7 @@
         "start": "2026-09-24",
         "end": "2026-09-24",
         "url": "https://blust.ch/talks/deciding-well/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13663,7 +13829,7 @@
         "start": "2026-08",
         "end": "2026-08",
         "url": "https://blust.ch/talks/essential-complexity/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13738,7 +13904,7 @@
         "start": "2026-10-02",
         "end": "2026-10-02",
         "url": "https://companygraph.io/talks/levels/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13813,7 +13979,7 @@
         "start": "2026-08",
         "end": "2026-08",
         "url": "https://guestgraph.io/talks/intro/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13888,7 +14054,7 @@
         "start": "2026-08",
         "end": "2026-08",
         "url": "https://blust.ch/talks/mental-model/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -13963,7 +14129,7 @@
         "start": "2026-09-30",
         "end": "2026-09-30",
         "url": "https://companygraph.io/talks/obsidian-plugin/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -14038,7 +14204,7 @@
         "start": "2026-10-04",
         "end": "2026-10-04",
         "url": "https://companygraph.io/talks/what-stays/",
-        "role": "Speaker",
+        "capacity": "Speaker",
         "skills": [
           "Public speaking",
           "Storytelling",
@@ -15061,7 +15227,7 @@
                   "the traits and what a sentence without each one does"
                 ],
                 [
-                  "role",
+                  "seat",
                   "Writer",
                   "",
                   "the rulebook and the brief a text starts from"
@@ -15085,7 +15251,7 @@
                 "the traits and what a sentence without each one does"
               ],
               [
-                "role",
+                "seat",
                 "Writer",
                 "",
                 "the rulebook and the brief a text starts from"
@@ -15351,7 +15517,7 @@
               ],
               "rows": [
                 [
-                  "role",
+                  "seat",
                   "Answerer",
                   "",
                   "that the seat keeps nothing"
@@ -15375,7 +15541,7 @@
             ],
             "rows": [
               [
-                "role",
+                "seat",
                 "Answerer",
                 "",
                 "that the seat keeps nothing"
@@ -16431,7 +16597,7 @@
               ],
               "rows": [
                 [
-                  "role",
+                  "seat",
                   "Answerer",
                   "",
                   "who answers, and what it may never do"
@@ -16461,7 +16627,7 @@
             ],
             "rows": [
               [
-                "role",
+                "seat",
                 "Answerer",
                 "",
                 "who answers, and what it may never do"
@@ -16750,9 +16916,687 @@
       "path": "model/questions/why-is-there-a-career-break-and-what-happened-in-it.md"
     },
     {
+      "id": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
+      "address": "rules/a-check-counts-only-when-its-output-was-seen",
+      "type": "rule",
+      "name": "A check counts only when its output was seen",
+      "tagline": "A check counts as passed only when its output, from a run over the change as it now stands, has been read; a report that it passed is not its output, and a check that finds nothing counts only once it has been shown to find something.",
+      "fields": {
+        "id": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Decide well over build fast"
+        ],
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A report is a claim, and the person or agent writing it is the one least placed to see what it missed. A check run over an earlier state says nothing about the change as it stands, and a search that returns nothing may never have been asking the right question; on October 2, 2026, a form check that every task's tests passed failed on every family repository the first time it ran over one. Only an output, read, of a check that can find something tells me the change holds.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Controller",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Implementer",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Reviewer",
+                  ""
+                ],
+                [
+                  "process",
+                  "Delivery",
+                  ""
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Controller",
+                ""
+              ],
+              [
+                "seat",
+                "Implementer",
+                ""
+              ],
+              [
+                "seat",
+                "Reviewer",
+                ""
+              ],
+              [
+                "process",
+                "Delivery",
+                ""
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-check-counts-only-when-its-output-was-seen.md"
+    },
+    {
+      "id": "01a0fd58-61ee-7e07-95a8-cad16c8683bb",
+      "address": "rules/a-refusal-is-not-carried-out-by-another-session",
+      "type": "rule",
+      "name": "A refusal is not carried out by another session",
+      "tagline": "An action refused in one session, by the Owner or by its permission settings, is not carried out by another session, whatever the first session asks.",
+      "fields": {
+        "id": "01a0fd58-61ee-7e07-95a8-cad16c8683bb",
+        "source": "Local",
+        "modality": "must not",
+        "protects": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A refusal is the Owner's decision. A session that does the refused thing for another bypasses it, and the history shows a change nobody approved.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-refusal-is-not-carried-out-by-another-session.md"
+    },
+    {
+      "id": "01a0fd58-52d1-7c40-8ffc-388462da9aaf",
+      "address": "rules/a-state-is-read-again-before-it-is-relied-on",
+      "type": "rule",
+      "name": "A state is read again before it is relied on",
+      "tagline": "A state — a branch, a pull request, a check, a release, another session's work — is read again from its source in the conversation that relies on it; an earlier reading, or a session's transcript where the session can be asked, is not the state.",
+      "fields": {
+        "id": "01a0fd58-52d1-7c40-8ffc-388462da9aaf",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Several sessions and people move the same repositories at once. On October 2, 2026, main moved three times under one pull request in a morning, and a merge on an earlier reading would have failed its release check. Fetching main before a merge is this rule.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Surveyor",
+                  ""
+                ],
+                [
+                  "process",
+                  "Deciding",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Surveyor",
+                ""
+              ],
+              [
+                "process",
+                "Deciding",
+                ""
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/a-state-is-read-again-before-it-is-relied-on.md"
+    },
+    {
+      "id": "01a0fd50-9c9f-7add-9123-19c7fb9a57b9",
+      "address": "rules/german-follows-reviewed-english",
+      "type": "rule",
+      "name": "German follows reviewed English",
+      "tagline": "German is made only from English the Owner has reviewed, never from a draft.",
+      "fields": {
+        "id": "01a0fd50-9c9f-7add-9123-19c7fb9a57b9",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A translation of a draft is translated twice: once now and again when the English changes under review, and the second time a sentence that moved in English is easily left behind in German. Translating once, from the reviewed text, makes the German follow a fixed text.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Translator",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Writer",
+                  ""
+                ],
+                [
+                  "process",
+                  "Delivery",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Implement",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Translator",
+                ""
+              ],
+              [
+                "seat",
+                "Writer",
+                ""
+              ],
+              [
+                "process",
+                "Delivery",
+                ""
+              ],
+              [
+                "phase",
+                "Implement",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/german-follows-reviewed-english.md"
+    },
+    {
+      "id": "01a0fd50-40bc-7ebf-b390-03f548f1edef",
+      "address": "rules/nothing-claims-what-the-model-does-not-hold",
+      "type": "rule",
+      "name": "Nothing claims what the model does not hold",
+      "tagline": "No spec, page or statement made for me claims a fact or a number about me or my work that the model does not hold; a fact about code, such as a command's flags, is taken from the repository that holds the code.",
+      "fields": {
+        "id": "01a0fd50-40bc-7ebf-b390-03f548f1edef",
+        "source": "Local",
+        "modality": "must not",
+        "protects": [
+          "Model it before you build it"
+        ],
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "The model is where a fact about me is mastered, with its evidence; a claim made anywhere else has neither, and a reader cannot tell it from one that does. Where a fact is missing, it is added to the model first, and then it can be said.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Owner",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Specifier",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Writer",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Spec",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Owner",
+                ""
+              ],
+              [
+                "seat",
+                "Specifier",
+                ""
+              ],
+              [
+                "seat",
+                "Writer",
+                ""
+              ],
+              [
+                "phase",
+                "Spec",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/nothing-claims-what-the-model-does-not-hold.md"
+    },
+    {
+      "id": "01a0fd58-710e-7377-95c2-50e69639f91c",
+      "address": "rules/one-session-holds-a-piece-of-shared-work",
+      "type": "rule",
+      "name": "One session holds a piece of shared work",
+      "tagline": "Before shared work — a release, a re-pin, a re-sync, a change across repositories — a session checks for open pull requests, branches and tags and asks the running sessions; the first to claim it holds it, says so, and tells the others when it is done, and no one else opens a parallel change.",
+      "fields": {
+        "id": "01a0fd58-710e-7377-95c2-50e69639f91c",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Decide well over build fast"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "On October 2, 2026, five sessions released and re-pinned the same repositories in one morning without a duplicate or a conflict, because each asked before acting and handed over with the commit or tag. Without the claim, two sessions cut the same release or overwrite each other's branch.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Surveyor",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Carry",
+                  "Deciding"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Surveyor",
+                ""
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Carry",
+                "Deciding"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/one-session-holds-a-piece-of-shared-work.md"
+    },
+    {
+      "id": "01a0fd4c-f5ca-7af2-b3e4-47abaaaa9882",
+      "address": "rules/the-model-is-corrected-first",
+      "type": "rule",
+      "name": "The model is corrected first",
+      "tagline": "Where a made thing — a page, a site, a release, an answer — disagrees with the model, the model is corrected first and the thing is rebuilt from it; nothing made is released while the disagreement stands.",
+      "fields": {
+        "id": "01a0fd4c-f5ca-7af2-b3e4-47abaaaa9882",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Model it before you build it"
+        ],
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "Everything I publish is drawn from one model, so a thing fixed by hand and left disagreeing with the model is a second source that the next build overwrites or, worse, contradicts. Correcting the model first keeps one place where a fact is true.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Owner",
+                  ""
+                ],
+                [
+                  "process",
+                  "Delivery",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Owner",
+                ""
+              ],
+              [
+                "process",
+                "Delivery",
+                ""
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/the-model-is-corrected-first.md"
+    },
+    {
+      "id": "01a0fd39-b1c0-780b-82a4-bc5cd01cda42",
+      "address": "rules/the-owner-s-word-merges",
+      "type": "rule",
+      "name": "The Owner's word merges",
+      "tagline": "A merge, a tag or a release happens only on the Owner's word, given in the conversation where it is carried out, and goes no further than that word covers.",
+      "fields": {
+        "id": "01a0fd39-b1c0-780b-82a4-bc5cd01cda42",
+        "source": "Local",
+        "modality": "must",
+        "protects": [
+          "Decide well over build fast"
+        ],
+        "serves": [
+          "Whoever decides about me decided from the model"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "Why",
+          "text": "A change binds once it is merged, tagged or released, and it is the one step whose truth an agent cannot supply; I decided on September 29, 2026 that agents write and I approve. A word given in another conversation, or for another change, may rest on a state that has since moved, so it does not carry over, and an agent that asks for the word may carry out the step itself once it is given.",
+          "tables": []
+        },
+        {
+          "heading": "Applies to",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "Type",
+                "Entity",
+                "Owner"
+              ],
+              "rows": [
+                [
+                  "seat",
+                  "Controller",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Implementer",
+                  ""
+                ],
+                [
+                  "seat",
+                  "Surveyor",
+                  ""
+                ],
+                [
+                  "phase",
+                  "Integrate",
+                  "Delivery"
+                ],
+                [
+                  "phase",
+                  "Carry",
+                  "Deciding"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "Type",
+              "Entity",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "seat",
+                "Controller",
+                ""
+              ],
+              [
+                "seat",
+                "Implementer",
+                ""
+              ],
+              [
+                "seat",
+                "Surveyor",
+                ""
+              ],
+              [
+                "phase",
+                "Integrate",
+                "Delivery"
+              ],
+              [
+                "phase",
+                "Carry",
+                "Deciding"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "Working rules",
+                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "Working rules",
+                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/rules/the-owner-s-word-merges.md"
+    },
+    {
       "id": "01a0ccd4-b070-7b55-a9c4-dd4982c98254",
-      "address": "roles/answerer",
-      "type": "role",
+      "address": "seats/answerer",
+      "type": "seat",
       "name": "Answerer",
       "tagline": "The seat that answers a visitor's question from what the model's tools return, names the entity each claim rests on, and says that the model does not say where it does not.",
       "fields": {
@@ -16817,12 +17661,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/answerer.md"
+      "path": "model/seats/answerer.md"
     },
     {
       "id": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
-      "address": "roles/controller",
-      "type": "role",
+      "address": "seats/controller",
+      "type": "seat",
       "name": "Controller",
       "tagline": "The seat that runs a plan one brief at a time, reads every report as a claim, and writes nothing itself.",
       "fields": {
@@ -16900,12 +17744,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/controller.md"
+      "path": "model/seats/controller.md"
     },
     {
       "id": "01a0a6f1-f188-7759-a983-258f939a7b1f",
-      "address": "roles/implementer",
-      "type": "role",
+      "address": "seats/implementer",
+      "type": "seat",
       "name": "Implementer",
       "tagline": "The seat that turns one task brief into a tested commit and a report, and nothing beyond the brief.",
       "fields": {
@@ -16983,12 +17827,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/implementer.md"
+      "path": "model/seats/implementer.md"
     },
     {
       "id": "01a0d4d8-08f8-7911-8046-072b403079b0",
-      "address": "roles/narrator",
-      "type": "role",
+      "address": "seats/narrator",
+      "type": "seat",
       "name": "Narrator",
       "tagline": "The seat that speaks a talk's reviewed speaker notes, one clip per slide in each language, so the talk can be heard without its presenter.",
       "fields": {
@@ -17053,12 +17897,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/narrator.md"
+      "path": "model/seats/narrator.md"
     },
     {
       "id": "01a0a6f1-f188-70b0-9317-126308ad1e41",
-      "address": "roles/owner",
-      "type": "role",
+      "address": "seats/owner",
+      "type": "seat",
       "name": "Owner",
       "tagline": "The seat that decides what the company is for, takes the money and the liability, and says the last word on every page.",
       "fields": {
@@ -17121,12 +17965,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/owner.md"
+      "path": "model/seats/owner.md"
     },
     {
       "id": "01a0a8f4-8018-7091-a006-5acb363d682c",
-      "address": "roles/planner",
-      "type": "role",
+      "address": "seats/planner",
+      "type": "seat",
       "name": "Planner",
       "tagline": "The seat that cuts an approved specification into task briefs, each whole on its own, and writes none of them.",
       "fields": {
@@ -17212,12 +18056,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/planner.md"
+      "path": "model/seats/planner.md"
     },
     {
       "id": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
-      "address": "roles/reviewer",
-      "type": "role",
+      "address": "seats/reviewer",
+      "type": "seat",
       "name": "Reviewer",
       "tagline": "The seat that reads one diff against its brief, returns findings with a severity and changes nothing.",
       "fields": {
@@ -17310,12 +18154,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/reviewer.md"
+      "path": "model/seats/reviewer.md"
     },
     {
       "id": "01a0a8f4-8018-7d42-a7fe-cdeb234b61cb",
-      "address": "roles/specifier",
-      "type": "role",
+      "address": "seats/specifier",
+      "type": "seat",
       "name": "Specifier",
       "tagline": "The seat that turns a shaped request into a specification nobody has to guess at, and builds nothing.",
       "fields": {
@@ -17401,12 +18245,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/specifier.md"
+      "path": "model/seats/specifier.md"
     },
     {
       "id": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
-      "address": "roles/surveyor",
-      "type": "role",
+      "address": "seats/surveyor",
+      "type": "seat",
       "name": "Surveyor",
       "tagline": "The seat that finds out where all the open work stands at the moment the Owner asks, sets it out with one proposal for what comes next, and carries out only what the Owner then decides.",
       "fields": {
@@ -17431,12 +18275,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/surveyor.md"
+      "path": "model/seats/surveyor.md"
     },
     {
       "id": "01a0a6f1-f188-73fe-a861-a8798d66f219",
-      "address": "roles/translator",
-      "type": "role",
+      "address": "seats/translator",
+      "type": "seat",
       "name": "Translator",
       "tagline": "The seat that makes the Swiss Standard German of an element whose English the Owner has reviewed, and hands back a back-translation beside it.",
       "fields": {
@@ -17512,12 +18356,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/translator.md"
+      "path": "model/seats/translator.md"
     },
     {
       "id": "01a0ccd4-b070-73bb-a7f7-e112a019e186",
-      "address": "roles/visitor",
-      "type": "role",
+      "address": "seats/visitor",
+      "type": "seat",
       "name": "Visitor",
       "tagline": "Someone who asks about the company in their own words, on its site or through an agent of their own, and is owed what the model says and nothing else.",
       "fields": {
@@ -17542,12 +18386,12 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/visitor.md"
+      "path": "model/seats/visitor.md"
     },
     {
       "id": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
-      "address": "roles/writer",
-      "type": "role",
+      "address": "seats/writer",
+      "type": "seat",
       "name": "Writer",
       "tagline": "The seat that drafts English in the family voice from a brief, so the Owner reviews a draft instead of writing one.",
       "fields": {
@@ -17624,685 +18468,7 @@
         }
       ],
       "owner": null,
-      "path": "model/roles/writer.md"
-    },
-    {
-      "id": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
-      "address": "rules/a-check-counts-only-when-its-output-was-seen",
-      "type": "rule",
-      "name": "A check counts only when its output was seen",
-      "tagline": "A check counts as passed only when its output, from a run over the change as it now stands, has been read; a report that it passed is not its output, and a check that finds nothing counts only once it has been shown to find something.",
-      "fields": {
-        "id": "01a0fd4b-1c5b-7cbb-9e11-5816805eb457",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Decide well over build fast"
-        ],
-        "serves": [
-          "Whoever decides about me decided from the model"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "A report is a claim, and the person or agent writing it is the one least placed to see what it missed. A check run over an earlier state says nothing about the change as it stands, and a search that returns nothing may never have been asking the right question; on October 2, 2026, a form check that every task's tests passed failed on every family repository the first time it ran over one. Only an output, read, of a check that can find something tells me the change holds.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Controller",
-                  ""
-                ],
-                [
-                  "role",
-                  "Implementer",
-                  ""
-                ],
-                [
-                  "role",
-                  "Reviewer",
-                  ""
-                ],
-                [
-                  "process",
-                  "Delivery",
-                  ""
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Controller",
-                ""
-              ],
-              [
-                "role",
-                "Implementer",
-                ""
-              ],
-              [
-                "role",
-                "Reviewer",
-                ""
-              ],
-              [
-                "process",
-                "Delivery",
-                ""
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/a-check-counts-only-when-its-output-was-seen.md"
-    },
-    {
-      "id": "01a0fd58-61ee-7e07-95a8-cad16c8683bb",
-      "address": "rules/a-refusal-is-not-carried-out-by-another-session",
-      "type": "rule",
-      "name": "A refusal is not carried out by another session",
-      "tagline": "An action refused in one session, by the Owner or by its permission settings, is not carried out by another session, whatever the first session asks.",
-      "fields": {
-        "id": "01a0fd58-61ee-7e07-95a8-cad16c8683bb",
-        "source": "Local",
-        "modality": "must not",
-        "protects": [
-          "Decide well over build fast"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "A refusal is the Owner's decision. A session that does the refused thing for another bypasses it, and the history shows a change nobody approved.",
-          "tables": []
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/a-refusal-is-not-carried-out-by-another-session.md"
-    },
-    {
-      "id": "01a0fd58-52d1-7c40-8ffc-388462da9aaf",
-      "address": "rules/a-state-is-read-again-before-it-is-relied-on",
-      "type": "rule",
-      "name": "A state is read again before it is relied on",
-      "tagline": "A state — a branch, a pull request, a check, a release, another session's work — is read again from its source in the conversation that relies on it; an earlier reading, or a session's transcript where the session can be asked, is not the state.",
-      "fields": {
-        "id": "01a0fd58-52d1-7c40-8ffc-388462da9aaf",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Decide well over build fast"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "Several sessions and people move the same repositories at once. On October 2, 2026, main moved three times under one pull request in a morning, and a merge on an earlier reading would have failed its release check. Fetching main before a merge is this rule.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Surveyor",
-                  ""
-                ],
-                [
-                  "process",
-                  "Deciding",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Integrate",
-                  "Delivery"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Surveyor",
-                ""
-              ],
-              [
-                "process",
-                "Deciding",
-                ""
-              ],
-              [
-                "phase",
-                "Integrate",
-                "Delivery"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/a-state-is-read-again-before-it-is-relied-on.md"
-    },
-    {
-      "id": "01a0fd50-9c9f-7add-9123-19c7fb9a57b9",
-      "address": "rules/german-follows-reviewed-english",
-      "type": "rule",
-      "name": "German follows reviewed English",
-      "tagline": "German is made only from English the Owner has reviewed, never from a draft.",
-      "fields": {
-        "id": "01a0fd50-9c9f-7add-9123-19c7fb9a57b9",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Decide well over build fast"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "A translation of a draft is translated twice: once now and again when the English changes under review, and the second time a sentence that moved in English is easily left behind in German. Translating once, from the reviewed text, makes the German follow a fixed text.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Translator",
-                  ""
-                ],
-                [
-                  "role",
-                  "Writer",
-                  ""
-                ],
-                [
-                  "process",
-                  "Delivery",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Implement",
-                  "Delivery"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Translator",
-                ""
-              ],
-              [
-                "role",
-                "Writer",
-                ""
-              ],
-              [
-                "process",
-                "Delivery",
-                ""
-              ],
-              [
-                "phase",
-                "Implement",
-                "Delivery"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/german-follows-reviewed-english.md"
-    },
-    {
-      "id": "01a0fd50-40bc-7ebf-b390-03f548f1edef",
-      "address": "rules/nothing-claims-what-the-model-does-not-hold",
-      "type": "rule",
-      "name": "Nothing claims what the model does not hold",
-      "tagline": "No spec, page or statement made for me claims a fact or a number about me or my work that the model does not hold; a fact about code, such as a command's flags, is taken from the repository that holds the code.",
-      "fields": {
-        "id": "01a0fd50-40bc-7ebf-b390-03f548f1edef",
-        "source": "Local",
-        "modality": "must not",
-        "protects": [
-          "Model it before you build it"
-        ],
-        "serves": [
-          "Whoever decides about me decided from the model"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "The model is where a fact about me is mastered, with its evidence; a claim made anywhere else has neither, and a reader cannot tell it from one that does. Where a fact is missing, it is added to the model first, and then it can be said.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Owner",
-                  ""
-                ],
-                [
-                  "role",
-                  "Specifier",
-                  ""
-                ],
-                [
-                  "role",
-                  "Writer",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Spec",
-                  "Delivery"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Owner",
-                ""
-              ],
-              [
-                "role",
-                "Specifier",
-                ""
-              ],
-              [
-                "role",
-                "Writer",
-                ""
-              ],
-              [
-                "phase",
-                "Spec",
-                "Delivery"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/nothing-claims-what-the-model-does-not-hold.md"
-    },
-    {
-      "id": "01a0fd58-710e-7377-95c2-50e69639f91c",
-      "address": "rules/one-session-holds-a-piece-of-shared-work",
-      "type": "rule",
-      "name": "One session holds a piece of shared work",
-      "tagline": "Before shared work — a release, a re-pin, a re-sync, a change across repositories — a session checks for open pull requests, branches and tags and asks the running sessions; the first to claim it holds it, says so, and tells the others when it is done, and no one else opens a parallel change.",
-      "fields": {
-        "id": "01a0fd58-710e-7377-95c2-50e69639f91c",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Decide well over build fast"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "On October 2, 2026, five sessions released and re-pinned the same repositories in one morning without a duplicate or a conflict, because each asked before acting and handed over with the commit or tag. Without the claim, two sessions cut the same release or overwrite each other's branch.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Surveyor",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Integrate",
-                  "Delivery"
-                ],
-                [
-                  "phase",
-                  "Carry",
-                  "Deciding"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Surveyor",
-                ""
-              ],
-              [
-                "phase",
-                "Integrate",
-                "Delivery"
-              ],
-              [
-                "phase",
-                "Carry",
-                "Deciding"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/one-session-holds-a-piece-of-shared-work.md"
-    },
-    {
-      "id": "01a0fd4c-f5ca-7af2-b3e4-47abaaaa9882",
-      "address": "rules/the-model-is-corrected-first",
-      "type": "rule",
-      "name": "The model is corrected first",
-      "tagline": "Where a made thing — a page, a site, a release, an answer — disagrees with the model, the model is corrected first and the thing is rebuilt from it; nothing made is released while the disagreement stands.",
-      "fields": {
-        "id": "01a0fd4c-f5ca-7af2-b3e4-47abaaaa9882",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Model it before you build it"
-        ],
-        "serves": [
-          "Whoever decides about me decided from the model"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "Everything I publish is drawn from one model, so a thing fixed by hand and left disagreeing with the model is a second source that the next build overwrites or, worse, contradicts. Correcting the model first keeps one place where a fact is true.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Owner",
-                  ""
-                ],
-                [
-                  "process",
-                  "Delivery",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Integrate",
-                  "Delivery"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Owner",
-                ""
-              ],
-              [
-                "process",
-                "Delivery",
-                ""
-              ],
-              [
-                "phase",
-                "Integrate",
-                "Delivery"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/the-model-is-corrected-first.md"
-    },
-    {
-      "id": "01a0fd39-b1c0-780b-82a4-bc5cd01cda42",
-      "address": "rules/the-owner-s-word-merges",
-      "type": "rule",
-      "name": "The Owner's word merges",
-      "tagline": "A merge, a tag or a release happens only on the Owner's word, given in the conversation where it is carried out, and goes no further than that word covers.",
-      "fields": {
-        "id": "01a0fd39-b1c0-780b-82a4-bc5cd01cda42",
-        "source": "Local",
-        "modality": "must",
-        "protects": [
-          "Decide well over build fast"
-        ],
-        "serves": [
-          "Whoever decides about me decided from the model"
-        ]
-      },
-      "sections": [
-        {
-          "heading": "Why",
-          "text": "A change binds once it is merged, tagged or released, and it is the one step whose truth an agent cannot supply; I decided on September 29, 2026 that agents write and I approve. A word given in another conversation, or for another change, may rest on a state that has since moved, so it does not carry over, and an agent that asks for the word may carry out the step itself once it is given.",
-          "tables": []
-        },
-        {
-          "heading": "Applies to",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "Type",
-                "Entity",
-                "Owner"
-              ],
-              "rows": [
-                [
-                  "role",
-                  "Controller",
-                  ""
-                ],
-                [
-                  "role",
-                  "Implementer",
-                  ""
-                ],
-                [
-                  "role",
-                  "Surveyor",
-                  ""
-                ],
-                [
-                  "phase",
-                  "Integrate",
-                  "Delivery"
-                ],
-                [
-                  "phase",
-                  "Carry",
-                  "Deciding"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "Type",
-              "Entity",
-              "Owner"
-            ],
-            "rows": [
-              [
-                "role",
-                "Controller",
-                ""
-              ],
-              [
-                "role",
-                "Implementer",
-                ""
-              ],
-              [
-                "role",
-                "Surveyor",
-                ""
-              ],
-              [
-                "phase",
-                "Integrate",
-                "Delivery"
-              ],
-              [
-                "phase",
-                "Carry",
-                "Deciding"
-              ]
-            ]
-          }
-        },
-        {
-          "heading": "References",
-          "text": "",
-          "tables": [
-            {
-              "caption": null,
-              "columns": [
-                "What",
-                "URL"
-              ],
-              "rows": [
-                [
-                  "Working rules",
-                  "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
-                ]
-              ]
-            }
-          ],
-          "table": {
-            "caption": null,
-            "columns": [
-              "What",
-              "URL"
-            ],
-            "rows": [
-              [
-                "Working rules",
-                "https://github.com/robertblust/conventions/blob/main/conventions/WORKING.md"
-              ]
-            ]
-          }
-        }
-      ],
-      "owner": null,
-      "path": "model/rules/the-owner-s-word-merges.md"
+      "path": "model/seats/writer.md"
     },
     {
       "id": "01a03d94-6310-784f-b0e4-d88908cd40e2",
@@ -23186,7 +23352,7 @@
     {
       "from": "01a03d9b-e108-7712-830f-6e315eeab5c9",
       "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -26510,55 +26676,55 @@
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a6f1-f188-73fe-a861-a8798d66f219",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a8f4-8018-7091-a006-5acb363d682c",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0a8f4-8018-7d42-a7fe-cdeb234b61cb",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0ccd4-b070-7b55-a9c4-dd4982c98254",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
       "from": "01a0a6fa-f238-72c3-97b1-ca8c3e600c76",
       "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -28024,7 +28190,7 @@
       "to": "01a0ccd4-b070-7b55-a9c4-dd4982c98254",
       "via": "Rests on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "For": "that the seat keeps nothing"
       }
@@ -28180,7 +28346,7 @@
       "to": "01a0ccd4-b070-7b55-a9c4-dd4982c98254",
       "via": "Rests on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "For": "who answers, and what it may never do"
       }
@@ -28232,7 +28398,7 @@
     {
       "from": "01a0d4d8-08f8-733b-92de-5654fbd0e4d6",
       "to": "01a0d4d8-08f8-7911-8046-072b403079b0",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -28250,7 +28416,7 @@
     {
       "from": "01a0d4d8-08f8-79b5-95ca-3a9a9d7a9a61",
       "to": "01a0d4d8-08f8-7911-8046-072b403079b0",
-      "via": "roles",
+      "via": "seats",
       "attrs": {}
     },
     {
@@ -28936,7 +29102,7 @@
       "to": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
       "via": "Rests on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "For": "the rulebook and the brief a text starts from"
       }
@@ -30174,7 +30340,7 @@
       "to": "01a0a6f1-f188-73fe-a861-a8798d66f219",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30184,7 +30350,7 @@
       "to": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30194,7 +30360,7 @@
       "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30204,7 +30370,7 @@
       "to": "01a0a8f4-8018-7091-a006-5acb363d682c",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30214,7 +30380,7 @@
       "to": "01a0a8f4-8018-7d42-a7fe-cdeb234b61cb",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30224,7 +30390,7 @@
       "to": "01a0d4d8-08f8-7911-8046-072b403079b0",
       "via": "Bears on.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": "",
         "How": "changed it"
       }
@@ -30588,7 +30754,7 @@
       "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30597,7 +30763,7 @@
       "to": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30615,7 +30781,7 @@
       "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30651,7 +30817,7 @@
       "to": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30660,7 +30826,7 @@
       "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30669,7 +30835,7 @@
       "to": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30705,7 +30871,7 @@
       "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30750,7 +30916,7 @@
       "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30759,7 +30925,7 @@
       "to": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30768,7 +30934,7 @@
       "to": "01a0a8f4-8018-7d42-a7fe-cdeb234b61cb",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30804,7 +30970,7 @@
       "to": "01a0a6f1-f188-73fe-a861-a8798d66f219",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30813,7 +30979,7 @@
       "to": "01a0a6f1-f188-76d8-ac8b-a19fb96b4d41",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30861,7 +31027,7 @@
       "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30912,7 +31078,7 @@
       "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30969,7 +31135,7 @@
       "to": "01a0a6f1-f188-7759-a983-258f939a7b1f",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30978,7 +31144,7 @@
       "to": "01a0a8f4-8018-75b0-bd3a-62ef2c85e72e",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -30996,7 +31162,7 @@
       "to": "01a0fadb-2a89-734e-85c3-2c8094ed07e6",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -31059,7 +31225,7 @@
       "to": "01a0a6f1-f188-7249-98d0-a66f6e5bbd20",
       "via": "Applies to.Entity",
       "attrs": {
-        "Type": "role",
+        "Type": "seat",
         "Owner": ""
       }
     },
@@ -31580,6 +31746,50 @@
     },
     {
       "from": "01a10f86-dcc4-7975-a987-f0b3b7488f49",
+      "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
+      "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "to": "01a0e179-0968-723a-ad27-ecee74620dc5",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "decision",
+        "Owner": "",
+        "How": "the plan it keeps trains no model on my sessions"
+      }
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "to": "01a108dc-cf85-7dab-887e-2e2ae464c9a3",
+      "via": "Bears on.Entity",
+      "attrs": {
+        "Type": "data-processor",
+        "Owner": "",
+        "How": "may not train its models on the account's sessions"
+      }
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "by",
+      "attrs": {}
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "to": "01a108dd-94e2-733a-b228-6dff758dc82e",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
       "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
       "via": "status",
       "attrs": {}

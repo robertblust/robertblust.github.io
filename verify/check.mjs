@@ -236,7 +236,7 @@ const PAGES = [
     // v0.80.1 reads tokens.css instead of a page marker only when fences is exactly [],
     // the signal that a page has moved to the whole-file shape entirely; a page that still
     // declares any fence, even one of its own that assemble.mjs never touched, falls to the
-    // marker-reading branch instead. So this page, and /timeline/, /team/ and /surfaces/
+    // marker-reading branch instead. So this page, and /timeline/, /processes/ and /surfaces/
     // below, keep the one-line `design tokens · vN` comment that /privacy/'s note explains.
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"], picture: true,
     card: true, internalLinks: true, graph: true, divider: true },  // The timeline lists the experiences out of the same block the model page draws, each row
@@ -250,11 +250,11 @@ const PAGES = [
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
     tokens: true, sky: true, header: true, monoScope: true, monoDefined: true, contrast: true, noFlash: "theme", tokenVersion: true, fences: ["stage contract"],
     card: true, internalLinks: true, ledger: true },
-  // The team page. Its claims are checkable, so verify checks them rather than trusting the
+  // The Processes page. Its claims are checkable, so verify checks them rather than trusting the
   // prose: a page that says every gate is approved by the only human in the company must show
   // exactly that, and must still show it the day the model changes.
-  { path: "/team/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Team/, lang: "en", sourceLang: "en",
-    translates: { lang: "de", shows: ["Wie man es liest", "DAS TEAM", "Ein Sitz ist eine Rolle"], hides: ["How to read it", "THE TEAM", "A seat is a role"] },
+  { path: "/processes/", typography: true, storageKeys: true, mobileNav: true, carriesLang: true, headerBaseline: true, navOrder: true, headerFits: true, footer: FOOTER, seo: true, noNewTab: true, title: /Processes/, lang: "en", sourceLang: "en",
+    translates: { lang: "de", shows: ["Wie man es liest", "DIE PROZESSE", "Ein Sitz ist kein Mensch"], hides: ["How to read it", "THE PROCESSES", "A seat is not a person"] },
     contains: ["A company of one,", "staffed", "How to read it", "Generated from"],
     sameOrigin: true,
     fontsLoaded: ["Bricolage Grotesque", "Instrument Sans"], fontsAvailable: true,
@@ -273,7 +273,7 @@ const PAGES = [
 
 const CHECKS = {
   ...STAGE_CHECKS,
-  // The Team board and the Surfaces lineage, held to the artifact the page names and to where
+  // The Processes board and the Surfaces lineage, held to the artifact the page names and to where
   // STAGE_PAGE sends a card.
   ...MODEL_PAGE_CHECKS,
   ...DESIGN_CHECKS,

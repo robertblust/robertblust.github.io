@@ -138,11 +138,11 @@ test("writeJsonLd refuses to run while a page off its list names the person", ()
 });
 
 test("writeJsonLd refuses a page whose own nodes were copied from another page", () => {
-  // The bug this exists for, reproduced: the team page was generated from the timeline's
-  // markup and carried its @id, name, url and breadcrumb to a different address. Every check
-  // in the suite passed, because nothing else reads JSON-LD closely enough to notice.
+  // The bug this exists for, reproduced: a page generated from the timeline's markup carries
+  // its @id, name, url and breadcrumb to a different address. Every check in the suite
+  // passes, because nothing else reads JSON-LD closely enough to notice.
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
-  fs.mkdirSync(path.join(dir, "team"));
+  fs.mkdirSync(path.join(dir, "processes"));
   const doc = {
     "@context": "https://schema.org",
     "@graph": [
@@ -153,32 +153,32 @@ test("writeJsonLd refuses a page whose own nodes were copied from another page",
         url: "https://blust.ch/timeline/", breadcrumb: { "@id": "https://blust.ch/timeline/#breadcrumb" } },
     ],
   };
-  fs.writeFileSync(path.join(dir, "team/index.html"),
+  fs.writeFileSync(path.join(dir, "processes/index.html"),
     `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
-  assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["team/index.html"] }),
-    (err) => err.message.includes("https://blust.ch/team/") && err.message.includes("WebPage"),
+  assert.throws(() => writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["processes/index.html"] }),
+    (err) => err.message.includes("https://blust.ch/processes/") && err.message.includes("WebPage"),
     "the error does not name the page it should have been about");
 });
 
 test("writeJsonLd accepts a page whose own nodes name its own address", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
-  fs.mkdirSync(path.join(dir, "team"));
+  fs.mkdirSync(path.join(dir, "processes"));
   const doc = {
     "@context": "https://schema.org",
     "@graph": [
       { "@type": "Person", "@id": "https://blust.ch/#person", name: "Stale" },
       { "@type": "Dataset", "@id": "https://blust.ch/#model", name: "Stale" },
       { "@type": "WebSite", "@id": "https://blust.ch/#website", name: "Stale" },
-      { "@type": "WebPage", "@id": "https://blust.ch/team/#webpage", name: "Team",
-        url: "https://blust.ch/team/", breadcrumb: { "@id": "https://blust.ch/team/#breadcrumb" } },
+      { "@type": "WebPage", "@id": "https://blust.ch/processes/#webpage", name: "Processes",
+        url: "https://blust.ch/processes/", breadcrumb: { "@id": "https://blust.ch/processes/#breadcrumb" } },
     ],
   };
-  fs.writeFileSync(path.join(dir, "team/index.html"),
+  fs.writeFileSync(path.join(dir, "processes/index.html"),
     `<head>\n<script type="application/ld+json">\n${JSON.stringify(doc, null, 2)}\n</script>\n</head>\n`);
-  writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["team/index.html"] });
-  const written = JSON.parse(fs.readFileSync(path.join(dir, "team/index.html"), "utf8")
+  writeJsonLd(PROFILE_FIXTURE, { check: false, root: dir, pages: ["processes/index.html"] });
+  const written = JSON.parse(fs.readFileSync(path.join(dir, "processes/index.html"), "utf8")
     .match(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/)[1]);
-  assert.equal(written["@graph"][3].name, "Team", "the page's own node was not left alone");
+  assert.equal(written["@graph"][3].name, "Processes", "the page's own node was not left alone");
 });
 
 // ── the surfaces lineage ──────────────────────────────────────────────────────────────

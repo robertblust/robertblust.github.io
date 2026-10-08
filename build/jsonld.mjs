@@ -24,7 +24,7 @@ const SITE = "https://blust.ch";
 
 // Every page whose graph defines the person, rather than merely pointing at them.
 const PAGES = ["index.html", "ideas/index.html", "model/index.html", "principles/index.html",
-  "privacy/index.html", "surfaces/index.html", "talks/index.html", "team/index.html", "timeline/index.html",
+  "privacy/index.html", "surfaces/index.html", "talks/index.html", "processes/index.html", "timeline/index.html",
   "talks/mental-model/index.html", "talks/essential-complexity/index.html",
   "talks/deciding-well/index.html", "talks/deciding-well/cost/index.html",
   "blog/index.html", "blog/deciding-well-solved/index.html",
@@ -179,10 +179,10 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
     }
     // The tail is the page's own — WebPage and BreadcrumbList are about this page, not about
     // the person, so this renderer does not write them. That makes them the one part of the
-    // graph a new page copies by hand, and the team page proved what that costs: it carried
-    // the timeline's @id, name, url and breadcrumb to a different address, and every check
-    // passed. A page whose own nodes name a different page is refused here rather than
-    // published, because nothing downstream reads JSON-LD closely enough to notice.
+    // graph a new page copies by hand, and a copy carries the original's @id, name, url and
+    // breadcrumb to a different address while every other check passes. A page whose own nodes
+    // name a different page is refused here rather than published, because nothing downstream
+    // reads JSON-LD closely enough to notice.
     const here = `${SITE}/${rel === "index.html" ? "" : rel.replace(/index\.html$/, "")}`;
     for (const node of doc["@graph"].slice(nodes.length)) {
       const named = [node["@id"], node.url, node.breadcrumb && node.breadcrumb["@id"]]
