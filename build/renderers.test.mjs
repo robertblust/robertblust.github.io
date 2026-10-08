@@ -138,9 +138,9 @@ test("writeJsonLd refuses to run while a page off its list names the person", ()
 });
 
 test("writeJsonLd refuses a page whose own nodes were copied from another page", () => {
-  // The bug this exists for, reproduced: the Processes page was generated from the timeline's
-  // markup and carried its @id, name, url and breadcrumb to a different address. Every check
-  // in the suite passed, because nothing else reads JSON-LD closely enough to notice.
+  // The bug this exists for, reproduced: a page generated from the timeline's markup carries
+  // its @id, name, url and breadcrumb to a different address. Every check in the suite
+  // passes, because nothing else reads JSON-LD closely enough to notice.
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rb-ld-"));
   fs.mkdirSync(path.join(dir, "processes"));
   const doc = {

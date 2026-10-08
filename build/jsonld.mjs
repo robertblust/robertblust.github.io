@@ -179,10 +179,10 @@ export function writeJsonLd(data, { check = false, root = HERE, pages = PAGES } 
     }
     // The tail is the page's own — WebPage and BreadcrumbList are about this page, not about
     // the person, so this renderer does not write them. That makes them the one part of the
-    // graph a new page copies by hand, and the Processes page proved what that costs: it carried
-    // the timeline's @id, name, url and breadcrumb to a different address, and every check
-    // passed. A page whose own nodes name a different page is refused here rather than
-    // published, because nothing downstream reads JSON-LD closely enough to notice.
+    // graph a new page copies by hand, and a copy carries the original's @id, name, url and
+    // breadcrumb to a different address while every other check passes. A page whose own nodes
+    // name a different page is refused here rather than published, because nothing downstream
+    // reads JSON-LD closely enough to notice.
     const here = `${SITE}/${rel === "index.html" ? "" : rel.replace(/index\.html$/, "")}`;
     for (const node of doc["@graph"].slice(nodes.length)) {
       const named = [node["@id"], node.url, node.breadcrumb && node.breadcrumb["@id"]]
