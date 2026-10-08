@@ -2,7 +2,7 @@
 // and `npm run pages:check`.
 //
 // No network, and no parser: everything here is a pure function of one committed file. The
-// Principles, Team and Surfaces renderers come from @robertblust/design, which the other sites
+// Principles, Processes and Surfaces renderers come from @robertblust/design, which the other sites
 // that draw a model share, so this runs after `npm ci` has put the package on disk.
 //
 // The pin guard is what used to be a sentence in AGENTS.md saying which command to run first.
@@ -12,7 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writePrinciples } from "@robertblust/design/render/principles";
-import { writeTeam } from "@robertblust/design/render/team";
+import { writeProcesses } from "@robertblust/design/render/processes";
 import { processDiagram } from "companygraph-mcp-server/diagram";
 import { writeSurfaces } from "@robertblust/design/render/surfaces";
 import { writePrivacy } from "@robertblust/design/render/privacy";
@@ -54,7 +54,7 @@ const RENDERERS = [
   (d, o) => writePrinciples(d, { ...o, de: german.de }),
   // Each board shows its process as the chat draws it, from the same drawer, over the
   // artifact at the commit source.json pins, so the picture moves only when the pin does.
-  (d, o) => writeTeam(d, { ...o, order: ["Deciding", "Delivery", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id) }),
+  (d, o) => writeProcesses(d, { ...o, order: ["Deciding", "Delivery", "Answering", "Narrating"], diagram: (data, p) => processDiagram(data, p.id) }),
   writeSurfaces,
   (d, o) => writePrivacy(d, { ...o, site: "blust.ch", de: privacyGerman.de }),
   (d, o) => writeHome(d, { ...o, de: german.de, heading: { en: "{n} values, each with the thing <em>I never do</em>.", de: "{n} Werte – und zu jedem, <em>was ich nie tue</em>." } }),
