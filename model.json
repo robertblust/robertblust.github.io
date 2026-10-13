@@ -1,6 +1,6 @@
 {
-  "commit": "8b29e0a2635c91818c4e1e9518845c7886e2293a",
-  "core": "0.64.0",
+  "commit": "43dfa37bb4fa92ca6fe2a6a311b3f80c1d135158",
+  "core": "0.69.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -121,6 +121,12 @@
     {
       "type": "product",
       "folder": "products",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "product-kind",
+      "folder": "product-kinds",
       "owner": null,
       "singular": false
     },
@@ -7279,6 +7285,27 @@
       "path": "model/processing-activities/keeping-the-chat-s-questions.md"
     },
     {
+      "id": "01a12457-c64f-7a57-97e5-b36e80289743",
+      "address": "product-kinds/model",
+      "type": "product-kind",
+      "name": "Model",
+      "tagline": "A company described once, published as a site, an MCP server and a chat.",
+      "fields": {
+        "id": "01a12457-c64f-7a57-97e5-b36e80289743",
+        "source": "Local",
+        "rank": "10"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A product of this kind is opened by whoever wants to know what the company is and does, a reader on the site, a search engine, an agent over MCP, a visitor asking the chat, and every one of them reads the same model. The Mental Model is this kind. There is no other kind yet; a second arrives with the first product that is not a published model.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/product-kinds/model.md"
+    },
+    {
       "id": "01a0c5d1-a530-7cf0-a47d-80e069b18bf0",
       "address": "products/mental-model",
       "type": "product",
@@ -7287,7 +7314,8 @@
       "fields": {
         "id": "01a0c5d1-a530-7cf0-a47d-80e069b18bf0",
         "source": "Local",
-        "domain": "Portfolio"
+        "domain": "Portfolio",
+        "kind": "Model"
       },
       "sections": [],
       "owner": null,
@@ -27577,6 +27605,12 @@
     },
     {
       "from": "01a0c5d1-a530-7cf0-a47d-80e069b18bf0",
+      "to": "01a12457-c64f-7a57-97e5-b36e80289743",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0c5d1-a530-7cf0-a47d-80e069b18bf0",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
       "attrs": {}
@@ -31792,6 +31826,12 @@
       "from": "01a1128e-7fc7-70c4-ad76-5146e10d414a",
       "to": "01a0dd50-37a8-753d-8ace-143372d9cbac",
       "via": "status",
+      "attrs": {}
+    },
+    {
+      "from": "01a12457-c64f-7a57-97e5-b36e80289743",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
       "attrs": {}
     }
   ],
