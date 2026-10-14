@@ -1,5 +1,5 @@
 {
-  "commit": "43dfa37bb4fa92ca6fe2a6a311b3f80c1d135158",
+  "commit": "de6fa1327af126b53af0c88de385592d8ba1b6a2",
   "core": "0.69.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -20070,8 +20070,9 @@
       "fields": {
         "id": "01a108dd-6751-7040-bd3c-4bb5ecf70bc6",
         "source": "Local",
-        "mechanism": "session-storage",
+        "mechanism": "local-storage",
         "necessity": "optional",
+        "duration": "Until the visitor clears it",
         "surfaces": [
           "chat.blust.ch chat"
         ]
