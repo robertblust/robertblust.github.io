@@ -1,5 +1,5 @@
 {
-  "commit": "c259512efa40734c3fa9102ef718d0641bfcb9e7",
+  "commit": "7fd8db9bc43194bf8c01a6cae0498349de9340f5",
   "core": "0.69.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -199,6 +199,18 @@
     {
       "type": "surface",
       "folder": "surfaces",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system",
+      "folder": "systems",
+      "owner": null,
+      "singular": false
+    },
+    {
+      "type": "system-kind",
+      "folder": "system-kinds",
       "owner": null,
       "singular": false
     },
@@ -21767,6 +21779,81 @@
       "path": "model/surfaces/mcp-registry-listing.md"
     },
     {
+      "id": "01a1713f-850d-7445-bc3b-c9601a117304",
+      "address": "system-kinds/deployment",
+      "type": "system-kind",
+      "name": "Deployment",
+      "tagline": "Software the company deploys from its own repositories to a platform it rents, and runs there.",
+      "fields": {
+        "id": "01a1713f-850d-7445-bc3b-c9601a117304",
+        "source": "Local",
+        "rank": "10",
+        "element": "application-component"
+      },
+      "sections": [
+        {
+          "heading": "What it means",
+          "text": "A deployment is software that one of the company's repositories deploys, by that repository's workflows on a merge, to a platform the company rents, whether the company wrote the software or runs it as its maker publishes it. The company holds what the deployment needs to run: its configuration, its secrets and the project it runs in. It is not software a vendor runs that the company only signs in to, and not the platform a deployment runs on.",
+          "tables": []
+        }
+      ],
+      "owner": null,
+      "path": "model/system-kinds/deployment.md"
+    },
+    {
+      "id": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "address": "systems/id-blust-ch",
+      "type": "system",
+      "name": "id.blust.ch",
+      "tagline": "Signs readers in to the chat on blust.ch, and to the chats on companygraph.io and guestgraph.io, with ZITADEL, the identity service the company runs at https://id.blust.ch in its Google Cloud project blust-ch-mcp in the Zurich region, where accounts are by invitation only, and issues the token from which each chat reads the models a reader may choose.",
+      "fields": {
+        "id": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+        "source": "Local",
+        "kind": "Deployment",
+        "owner": "Owner",
+        "processor": "Google Cloud",
+        "serves": [
+          "Answering"
+        ]
+      },
+      "sections": [
+        {
+          "heading": "References",
+          "text": "",
+          "tables": [
+            {
+              "caption": null,
+              "columns": [
+                "What",
+                "URL"
+              ],
+              "rows": [
+                [
+                  "The service's source, infrastructure and the owner's steps",
+                  "https://github.com/robertblust/id-blust-ch"
+                ]
+              ]
+            }
+          ],
+          "table": {
+            "caption": null,
+            "columns": [
+              "What",
+              "URL"
+            ],
+            "rows": [
+              [
+                "The service's source, infrastructure and the owner's steps",
+                "https://github.com/robertblust/id-blust-ch"
+              ]
+            ]
+          }
+        }
+      ],
+      "owner": null,
+      "path": "model/systems/id-blust-ch.md"
+    },
+    {
       "id": "01a04d2d-0070-7801-8563-bbc8d6eed1d0",
       "address": "values/build-the-alternative-before-making-the-point",
       "type": "value",
@@ -33570,6 +33657,42 @@
       "from": "01a170fb-7c91-7e1b-b5e5-eae3d2ae671c",
       "to": "01a0c9f6-44b8-757d-a3e5-7401751adee7",
       "via": "surfaces",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-850d-7445-bc3b-c9601a117304",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "to": "01a1713f-850d-7445-bc3b-c9601a117304",
+      "via": "kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "to": "01a0a6f1-f188-70b0-9317-126308ad1e41",
+      "via": "owner",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "to": "01a108dc-de29-78aa-9804-a6150ebfabad",
+      "via": "processor",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "to": "01a0ccd4-b070-7ae5-9228-5189a9306e5a",
+      "via": "serves",
+      "attrs": {}
+    },
+    {
+      "from": "01a1713f-93a4-77e2-ae7c-46e9dfe5e912",
+      "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
+      "via": "source",
       "attrs": {}
     }
   ],
