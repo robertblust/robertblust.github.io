@@ -322,3 +322,41 @@ test("check mode reports a home page behind the blog index", () => {
 test("a blog index with no entry is an error, not an empty section", () => {
   assert.throws(() => writeLatest({}, { root: latestSite("") }), /no entry/);
 });
+
+import { readSchemas } from "./schemas.mjs";
+
+// The model's repository as `read(sub, { file })` sees it: a folder read returns the files
+// under the prefix with it stripped, a file read returns the text or undefined.
+function repoReader(tree) {
+  return async (sub, { file } = {}) => {
+    if (file) return tree[sub];
+    return new Map(Object.entries(tree).filter(([k]) => k.startsWith(sub)).map(([k, v]) => [k.slice(sub.length), v]));
+  };
+}
+
+test("readSchemas carries each pack the manifest lists beside core, under <pack>/<file>", async () => {
+  const read = repoReader({
+    ".companygraph/manifest.json": JSON.stringify({ units: "meta", packs: ["landscape"] }),
+    "meta/core/skill-schema.md": "core skill",
+    "meta/landscape/system-schema.md": "pack system",
+    "meta/other/stray-schema.md": "not listed",
+    "model/skill/x.md": "a page",
+  });
+  assert.deepEqual([...(await readSchemas(read)).keys()].sort(), ["landscape/system-schema.md", "skill-schema.md"]);
+});
+
+test("readSchemas on a model without packs is core alone, as before", async () => {
+  for (const manifest of [JSON.stringify({ units: "meta" }), undefined]) {
+    const read = repoReader({
+      ...(manifest ? { ".companygraph/manifest.json": manifest } : {}),
+      "meta/core/a-schema.md": "a",
+      "meta/landscape/b-schema.md": "left on disk, not taken",
+    });
+    assert.deepEqual([...(await readSchemas(read)).keys()], ["a-schema.md"]);
+  }
+});
+
+test("readSchemas names the manifest and the folder when a listed pack has no files", async () => {
+  const read = repoReader({ ".companygraph/manifest.json": JSON.stringify({ packs: ["landscape"] }), "meta/core/a-schema.md": "a" });
+  await assert.rejects(readSchemas(read), /manifest\.json lists the pack "landscape", but meta\/landscape\/ has no files/);
+});
