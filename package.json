@@ -35,6 +35,6 @@
     "playwright": "^1.64.1"
   },
   "dependencies": {
-    "companygraph-meta-model": "github:companygraph/meta-model#v0.94.0"
+    "companygraph-meta-model": "github:companygraph/meta-model#v0.95.0"
   }
 }
