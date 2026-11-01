@@ -1,1 +1,1 @@
-{ "groups": ["fonts", "stage", "chat", "files"], "footer": "plain", "lockup": "one" }
+{"groups":["fonts","stage","chat","files"],"footer":"plain","lockup":"one","csp":true}
