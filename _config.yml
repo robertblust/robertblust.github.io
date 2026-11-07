@@ -1,0 +1,6 @@
+# GitHub Pages builds this site with Jekyll, which leaves out every folder whose name starts with a
+# dot. .well-known/ holds what another service reads at a fixed address: Microsoft Entra ID reads
+# microsoft-identity-association.json there to verify blust.ch as the publisher domain of the
+# application id.blust.ch, robertblust/id-blust-ch's sign-in with Microsoft.
+include:
+  - .well-known
