@@ -1,6 +1,6 @@
 {
-  "commit": "063fdce85deb0451611ef36bf57ae84ca0beda75",
-  "core": "0.70.0",
+  "commit": "17580dd1085944169eccacac0922fa144322aa09",
+  "core": "0.71.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
   "types": [
@@ -2445,12 +2445,15 @@
         "mode": "automated",
         "enforces": [
           "The Owner's word merges"
+        ],
+        "compensated-by": [
+          "An agent's permissions refuse a merge it was not given"
         ]
       },
       "sections": [
         {
           "heading": "How it is carried out",
-          "text": "GitHub's permissions on a repository under a personal account, on every push and every merge into it: such a repository takes a push only from its owner and the collaborators the owner invites, and mine invite none, so anyone else can fork a repository and open a pull request but cannot merge it. A personal account cannot restrict who may push beyond that, as an organization's branch protection can, so the day a collaborator is invited this control no longer holds. An agent working under my account passes it, so what holds an agent to the Owner's word is An agent's permissions refuse a merge it was not given.",
+          "text": "GitHub's permissions on a repository under a personal account, on every push and every merge into it: such a repository takes a push only from its owner and the collaborators the owner invites, and mine invite none, so anyone else can fork a repository and open a pull request but cannot merge it. A personal account cannot restrict who may push beyond that, as an organization's branch protection can, so the day a collaborator is invited this control no longer holds. An agent working under my account passes it, so a merge an agent attempts is held to the Owner's word by the agent's permission layer and not by this control.",
           "tables": []
         },
         {
@@ -33684,6 +33687,12 @@
         "Type": "phase",
         "Owner": "Delivery"
       }
+    },
+    {
+      "from": "01a13c3b-e14f-7b2a-ac60-5ef22adf037f",
+      "to": "01a0fe74-c963-7a42-b821-190fc35cdfae",
+      "via": "compensated-by",
+      "attrs": {}
     },
     {
       "from": "01a13c3b-e14f-7b2a-ac60-5ef22adf037f",
