@@ -1,5 +1,5 @@
 {
-  "commit": "17580dd1085944169eccacac0922fa144322aa09",
+  "commit": "ec6e5ae4bf31eb46873bf08c27f7fb6d55bd0e5a",
   "core": "0.71.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -11938,7 +11938,7 @@
         },
         {
           "heading": "Summary",
-          "text": "Technology executive with over 25 years building digital platforms, scaling engineering organizations and delivering complex transformation. Most recently co-founder and Head of Technology at LIKE MAGIC AG; previously CTO of 3AP AG, after 15 years at UBS AG, where I owned the engineering process and the toolchain several hundred engineers across the division worked inside. One thread runs through all of it: I build from explicit models rather than beside them — service contracts and a canonical data model at UBS, domains and capabilities at LIKE MAGIC. The newest turn is applying that to the company itself: LIKE MAGIC's Mental Model became the shared context layer for AI-assisted operations, and is now published as CompanyGraph. I believe AI is reshaping how we build software — moving the real constraint from “build fast” to “decide well” — and I bring business-critical platforms reliably into production under solid security and compliance standards (ISO 27001 in progress, GDPR / DSGVO).",
+          "text": "Technology executive with over 25 years building digital platforms, scaling engineering organizations and delivering complex transformation. Since October 2026 IT Architect at Läderach. Before that co-founder and Head of Technology at LIKE MAGIC AG, CTO of 3AP AG, and 15 years at UBS AG, where I owned the engineering process and the toolchain several hundred engineers across the division worked inside. One thread runs through all of it: I build from explicit models rather than beside them — service contracts and a canonical data model at UBS, domains and capabilities at LIKE MAGIC. The newest turn is applying that to the company itself: LIKE MAGIC's Mental Model became the shared context layer for AI-assisted operations, and is now published as CompanyGraph. I believe AI is reshaping how we build software — moving the real constraint from “build fast” to “decide well” — and I bring business-critical platforms reliably into production under solid security and compliance standards (ISO 27001 in progress, GDPR / DSGVO).",
           "tables": []
         },
         {
@@ -14912,7 +14912,7 @@
       "sections": [
         {
           "heading": "Achievements",
-          "text": "### Ways of working\n\n- Generated the episode with Gemini Notebook from the model's own files and the rulebooks beside them, so the hosts argue from its rules, its decisions and its KPIs rather than from a summary of them: that an unresolvable reference is an error and not a warning, that a decision keeps the alternatives that lost and why, and that each KPI names what it can hide.\n- Read the transcript against the model before publishing and kept every place where the hosts stray, to be named before anyone else names them. The two that would mislead a listener are named in the published description, each answered by the model itself: the hosts say the agent does not hallucinate, where the Grounded Answer Rate says it measures whether an answer rested on the model and not whether it was true; and they call the model an operating system for a life, where the concept Company of one keeps private life outside it by design.\n\n### Sharing\n\n- Published it on Sep 27, 2026 as the first episode in German, about sixteen minutes, under the question the hosts close on, with a description in Swiss Standard German that calls the company of one a fictional company, sets CompanyGraph against it as the structure that describes any company, and hands the listener the provocation the episode builds to: if one person can say why they decided what they decided, why a company with a thousand people cannot.",
+          "text": "### Ways of working\n\n- Generated the episode with Gemini Notebook from the model's own files and the rulebooks beside them, so the hosts argue from its rules, its decisions and its KPIs rather than from a summary of them: that an unresolvable reference is an error and not a warning, that a decision keeps the alternatives that lost and why, and that each KPI names what it can hide.\n- Read the transcript against the model before publishing and kept every place where the hosts stray, to be named before anyone else names them. The two that would mislead a listener are named in the published description, each answered by the model itself: the hosts say the agent does not hallucinate, where the Grounded Answer Rate says it measures whether an answer rested on the model and not whether it was true; and they call the model an operating system for a life, where the concept Company of one keeps private life outside it by design.\n\n### Sharing\n\n- Published it on Sep 27, 2026 as the first episode in German, about sixteen minutes, under the question the hosts close on, with a description in Swiss Standard German that calls the company of one a fictional company, sets CompanyGraph against it as the structure that describes any company, and hands the listener the provocation the episode builds to: if one person can say why they decided what they decided, why a company with a thousand people cannot.\n- Posted it on LinkedIn on Nov 7, 2026, a month into the new role, opening on the hosts' suspicion that the model was the one hired, and put the chat on blust.ch in the first comment with a question already waiting, so a reader can ask the model rather than take the hosts' word for it.",
           "tables": []
         },
         {
@@ -14929,6 +14929,10 @@
                 [
                   "CompanyGraph and the chat that answers only from the model",
                   "https://companygraph.io"
+                ],
+                [
+                  "Post on LinkedIn of Nov 7, 2026",
+                  "https://www.linkedin.com/posts/robertblust_companygraph-share-7524752980898717696-6juJ"
                 ]
               ]
             }
@@ -14943,6 +14947,10 @@
               [
                 "CompanyGraph and the chat that answers only from the model",
                 "https://companygraph.io"
+              ],
+              [
+                "Post on LinkedIn of Nov 7, 2026",
+                "https://www.linkedin.com/posts/robertblust_companygraph-share-7524752980898717696-6juJ"
               ]
             ]
           }
