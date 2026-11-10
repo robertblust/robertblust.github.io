@@ -10,3 +10,5 @@ _dbg*
 
 # generate.py is imported by ad-hoc inspection scripts, which leaves this behind
 __pycache__/
+# A tool's local settings can hold a secret; conventions-sync keeps the lines below.
+**/.claude/settings.local.json
