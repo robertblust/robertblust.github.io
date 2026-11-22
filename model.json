@@ -1,5 +1,5 @@
 {
-  "commit": "6443a0b006c87fc824da4ccb66d32759612e7c74",
+  "commit": "444ef4f3439a6d2fae876906915b7c56828eb068",
   "core": "0.71.0",
   "root": "Robert Blust",
   "rootId": "01a04c85-bc20-7849-9ec1-d877215d70b4",
@@ -15072,6 +15072,11 @@
       },
       "sections": [
         {
+          "heading": "Achievements",
+          "text": "### Architecture\n\n- Wrote the specification for the digital platform.\n\n### Engineering\n\n- Built a proof of concept of that specification with coding agents, running on real infrastructure with synthesized product data; production is still ahead.\n\n### Ways of working\n\n- Kept what I learn about the company in a company graph, one Markdown file for each role, process, system and decision I learn about, which people read and agents work from.\n\n### Sharing\n\n- Posted “Am I a forward deployed engineer (FDE)?” on LinkedIn on Nov 22, 2026, seven weeks into the role: measured the role against what Palantir, OpenAI, Anthropic, a16z and The Pragmatic Engineer write about the FDE, found it one by much of the work and not by title, and asked the reader where the argument breaks.",
+          "tables": []
+        },
+        {
           "heading": "References",
           "text": "",
           "tables": [
@@ -15085,6 +15090,10 @@
                 [
                   "Läderach",
                   "https://laderach.com/"
+                ],
+                [
+                  "Post of Nov 22, 2026, on the FDE question",
+                  "https://www.linkedin.com/posts/robertblust_companygraph-architecture-forwarddeployedengineer-share-7530265417961971712-ym1O"
                 ]
               ]
             }
@@ -15099,6 +15108,10 @@
               [
                 "Läderach",
                 "https://laderach.com/"
+              ],
+              [
+                "Post of Nov 22, 2026, on the FDE question",
+                "https://www.linkedin.com/posts/robertblust_companygraph-architecture-forwarddeployedengineer-share-7530265417961971712-ym1O"
               ]
             ]
           }
@@ -32857,6 +32870,30 @@
       "from": "01a0f296-04db-7340-8139-ee8a21744339",
       "to": "01a03d8e-dd00-7372-ac62-ba79f12bf81a",
       "via": "source",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a0b158-7700-7486-89aa-fea53a6808ef",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a0b158-7700-7495-b531-b079c6da49af",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a0b158-7700-74d2-b6a2-448954b5a4b7",
+      "via": "Achievements.Kind",
+      "attrs": {}
+    },
+    {
+      "from": "01a0f305-2d9e-759e-93bb-5b71ecdb62af",
+      "to": "01a0b158-7700-766e-be0d-ebef4b52ccfe",
+      "via": "Achievements.Kind",
       "attrs": {}
     },
     {
