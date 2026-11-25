@@ -32,7 +32,7 @@
     "@companygraph/mcp-server": "0.76.0",
     "@robertblust/design": "github:robertblust/design#v0.165.0",
     "pdf-lib": "^1.17.1",
-    "playwright": "^1.65.0"
+    "playwright": "^1.65.1"
   },
   "dependencies": {
     "@companygraph/meta-model": "0.98.0"
