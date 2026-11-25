@@ -110,7 +110,7 @@ jobs:
         run: npm run og:check
       # Whether the artifact is still what the pinned commit parses to. This cannot sit beside
       # the step above, because it is the one part of the build that imports the parser from
-      # companygraph-meta-model, and that is not on disk until npm ci has run. Left up there it
+      # @companygraph/meta-model, and that is not on disk until npm ci has run. Left up there it
       # fails every push with ERR_MODULE_NOT_FOUND, and a local run cannot catch that, because
       # node_modules is already on the machine.
       - name: model.json still matches the pinned commit
