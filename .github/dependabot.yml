@@ -22,8 +22,8 @@ updates:
     # Family pins move with the resync, never with Dependabot: conventions/PINS.md, Dependabot.
     ignore:
       - dependency-name: "@robertblust/design"
-      - dependency-name: "companygraph-mcp-server"
-      - dependency-name: "companygraph-meta-model"
+      - dependency-name: "@companygraph/mcp-server"
+      - dependency-name: "@companygraph/meta-model"
     schedule:
       interval: "weekly"
     # Zero, stated, because Dependabot applies three days when the key is absent. The cooldown
@@ -53,8 +53,8 @@ updates:
       # Same reason as design above, and the same requirement to be read: a meta-model
       # release can change how `build/model.mjs` reads the model, so the pull request that
       # bumps it is the one that has to be checked against the page it draws. It also comes
-      # by tag rather than by version range, which Dependabot reads only because the pin is
-      # a tag — a commit SHA here would be invisible to it entirely.
+      # from npm at an exact version rather than a range, which Dependabot reads — a commit
+      # SHA here would be invisible to it entirely.
       #
       # A pull request from this group proposing a LOWER version is closed, never merged. That
       # happened three times on 2026-09-02 — v0.5.0 down to v0.4.1, a commit predating the
@@ -62,7 +62,7 @@ updates:
       # cooldown block above says why one appears and what stops it.
       meta-model:
         patterns:
-          - "companygraph-meta-model"
+          - "@companygraph/meta-model"
       minor-and-patch:
         update-types:
           - "minor"
